@@ -1,0 +1,59 @@
+package emanondev.itemedit.command.itemedit;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Axolotl;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.AxolotlBucketMeta;
+import emanondev.itemedit.Util;
+import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
+
+public class AxolotlVariant extends SubCmd {
+	
+	public AxolotlVariant(ItemEditCommand cmd) {
+		super("axolotlvariant",
+				cmd,true,true);
+	}
+
+	public void reload() {
+		super.reload();
+	}
+
+	@Override
+	public void onCmd(CommandSender sender, String[] args) {
+		Player p = (Player) sender;
+		ItemStack item = this.getItemInHand(p);
+		if (!(item.getItemMeta() instanceof AxolotlBucketMeta)) {
+			Util.sendMessage(p, this.getConfString("wrong-type"));
+			return;
+		}
+
+		try {
+			if (args.length != 2)
+				throw new IllegalArgumentException("Wrong param number");
+			AxolotlBucketMeta meta = (AxolotlBucketMeta) item.getItemMeta();
+
+			Axolotl.Variant type = Aliases.AXOLOTL_VARIANT.convertAlias(args[1]);
+			if (type == null)
+				throw new IllegalArgumentException();
+			meta.setVariant(type);
+			item.setItemMeta(meta);
+			p.updateInventory();
+		} catch (Exception e) {
+			onFail(p);
+		}
+
+	}
+
+	@Override
+	public List<String> complete(CommandSender sender, String[] args) {
+		if (args.length == 2)
+			return Util.complete(args[1], Aliases.AXOLOTL_VARIANT);
+		return Collections.emptyList();
+	}
+}

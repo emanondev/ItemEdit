@@ -1,0 +1,203 @@
+player-only: "&cCommand for Players only"
+no-item-on-hand: "&cYou need to hold an item in hand"
+lack-permission: "&cYou lack of permission %permission%"
+lack-permission-generic: "&cYou don't have permission to use this command"
+help-header: "&9&lServerItem - Help"
+sub-commands:
+  give:
+    name: "give"
+    #Holders: %id% %nick% %amount%
+    feedback: "&aObtained &e%amount% &aof &e%nick%"
+    #Holders: %id% %nick% %amount% %player_name%
+    log: "[serveritem][give] %player_name% obtained %amount% of %id% (%nick%)"
+    description: 
+      - "&b&lGive selected item to player"
+      - ""
+      - "&e<id> &bId of the item"
+      - "&e[amount] &bamount of items to give, by default 1"
+      - "&e[player] &bwho gets the items, by default you"
+      - "&e[silent] &btrue if no feedback should be send to player"
+    params: "<id> [amount] [player] [silent]"
+  drop:
+    name: "drop"
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: "[serveritem][drop] dropped %amount% of %id% (%nick%) at %world% %x% %y% %z%"
+    description: 
+      - "&b&lDrop selected item at chosen location"
+      - ""
+      - "&e<id> &bId of the item"
+      - "&e<amount> &bamount of items to drop, 1 to 2304"
+      - "&e<world> &bwhich world"
+      - "&e<x> <y> <z> &bcoordinates"
+    params: "<id> <amount> <world> <x> <y> <z>"
+  take:
+    name: "take"
+    #Holders: %id% %nick% %amount%
+    feedback: "&aLost &e%amount% &aof &e%nick%"
+    #Holders: %id% %nick% %amount% %player_name%
+    log: "[serveritem][take] %player_name% gave %amount% of %id% (%nick%)"
+    description: 
+      - "&b&lTake selected item from player"
+      - ""
+      - "&e<id> &bId of the item"
+      - "&e[amount] &bamount of items to give, by default 1"
+      - "&e[player] &bwho gets the items, by default you"
+      - "&e[silent] &btrue if no feedback should be send to player"
+    params: "<id> [amount] [player] [silent]"
+  save:
+    name: "save"
+    #Holders: %id%
+    success: "&aItem &e%id% &aregistered"
+    description: 
+      - "&bRegister the item in your hand"
+      - ""
+      - "&e<id> &bidentify the item, case insensitive and can't"
+      - "&b     contain spaces or dots also you can't select"
+      - "&b     any already used id"
+      - ""
+      - "&b&lTip: &buse &e/serveritem update <id>&b, to change an existing item"
+      - "&b&lTip: &bretrieve saved items with &e/serveritem give <id>"
+    params: "<id>"
+  delete:
+    name: "delete"
+    #Holders: %id%
+    success: "&aItem &e%id% &aunregistered"
+    description:
+      - "&b&lDelete selected item"
+      - ""
+      - "&e<id> &bId of the item"
+    params: "<id>"
+  update:
+    name: "update"
+    #Holders: %id%
+    success: "&aItem &e%id% &ahas been updated"
+    description: 
+      - "&b&lUpdate selected item"
+      - ""
+      - "&bChange the item associated with id with your hand item"
+      - "&e<id> &bId of the item"
+      - ""
+      - "&b&lTip: &buse &e/serveritem save <id>&b, to create a new item"
+      - "&b&lTip: &buse &e/serveritem delete <id>&b, to delete an item"
+    params: "<id>"
+  show:
+    name: "show"
+    description: 
+      - "&b&lOpen a gui with server saved items"
+      - ""
+      - "&e[page] &bpage of the gui, by default 1"
+    params: "[page]"
+  setnick:
+    name: "setnick"
+    #Holders: %id% %nick%
+    success: "&aItem &e%id% &anick has been updated to &e%nick%"
+    description: 
+      - "&bSet display name of selected item"
+      - ""
+      - "&bNick is used for holder &e%nick%&b on buy/sell messages, by"
+      - "&b  default is the name of the item, or item type if has no name"
+      - ""
+      - "&e<id> &bId of the item"
+      - "&e[nick] &bname to set"
+      - ""
+      - "&b&lTip: &bto reset to default just use &e/serveritem setnick <id>"
+    params: "<id> [nick]"
+  sell:
+    name: "sell"
+    #Holders: %id% %nick% %amount% %price%
+    feedback: "&aBought &e%amount% &aof &e%nick% &afor &e%price%"
+    #Holders: %id% %nick% %amount%
+    not-enough-space: "&cYou don't have enough inventory space to buy &6%amount% &cof &6%nick%"
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: "&cYou don't have &6%price% &cto buy &6%amount% &cof &6%nick%"
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: "[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)"
+    description: 
+      - "&b&lSell items to player"
+      - ""
+      - "&bSell differs from SellMax because you sell the whole amount"
+      - "&b  to player or you sell none"
+      - "&e<id> &bid of the item"
+      - "&e<amount> &bamount of items"
+      - "&e<player> &bwho should pay money and get items"
+      - "&e<price> &bprice for the whole amount of items, must be positive"
+      - "&e[silent] &btrue to send feedback to player"
+      - ""
+      - "&bTransaction fails if player has not enough money or enough"
+      - "&b  inventory space for the whole &e<amount>"
+      - "&bNote: balance of the command executor is untouched"
+    params: "<id> <amount> <player> <price> [silent]"
+  buy:
+    name: "buy"
+    #Holders: %id% %nick% %amount% %price%
+    feedback: "&aSold &e%amount% &aof &e%nick% &efor &a%price%"
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: "&cYou don't have &6%amount% &cof &6%nick% &cin your inventory"
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: "[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%"
+    description: 
+      - "&b&lBuy items from player"
+      - ""
+      - "&bBuy differs from BuyMax because you buy the whole amount"
+      - "&b  from player or you buy none"
+      - "&e<id> &bid of the item"
+      - "&e<amount> &bamount of items"
+      - "&e<player> &bwho should pay items and get money"
+      - "&e<price> &bprice for the whole amount of items, must be positive"
+      - "&e[silent] &btrue to send feedback to player"
+      - ""
+      - "&bTransaction fails if player has not at least &e<amount>"
+      - "&b  of &e<id> &bitems"
+      - "&bNote: balance of the command executor is untouched"
+    params: "<id> <amount> <player> <price> [silent]"
+  sellmax:
+    name: "sellmax"
+    #Holders: %id% %nick% %amount% %price%
+    feedback: "&aBought &e%amount% &aof &e%nick% &efor &a%price%"
+    #Holders: %id% %nick%
+    not-enough-space: "&cYou don't have enough inventory space to buy any &6%nick%"
+    #Holders: %id% %nick% %price%
+    not-enough-money: "&cYou don't have enough money to buy any &6%nick% &cfor &6%price% &ceach"
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: "[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)"
+    description: 
+      - "&b&lSell items to player"
+      - ""
+      - "&bSellMax differs from Sell because you may sell the less of amount"
+      - "&b  to player if there are not enough money or space for the whole"
+      - "&e<id> &bid of the item"
+      - "&e<amount> &bamount of items"
+      - "&e<player> &bwho should pay money and get items"
+      - "&e<price> &bprice for the whole amount of items, must be positive"
+      - "&e[silent] &btrue to send feedback to player"
+      - ""
+      - "&bTransaction fails if player has not enough money or enough"
+      - "&b  inventory space at least an item"
+      - "&bIf player buy less than &e<price>&b paid price will be scaled"
+      - "&bNote: balance of the command executor is untouched"
+    params: "<id> <amount> <player> <price> [silent]"
+  buymax:
+    name: "buymax"
+    #Holders: %id% %nick% %amount% %price%
+    feedback: "&aSold &e%amount% &aof &e%nick% &efor &a%price%"
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: "&cYou don't have any &6%nick% &cto sell in your inventory"
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: "[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%"
+    description: 
+      - "&b&lBuy items from player"
+      - ""
+      - "&bBuyMax differs from Buy because you may buy less of amount"
+      - "&b  from player if he has less than amount items in inventory"
+      - "&e<id> &bid of the item"
+      - "&e<amount> &bamount of items"
+      - "&e<player> &bwho should pay items and get money"
+      - "&e<price> &bprice for the whole amount of items, must be positive"
+      - "&e[silent] &btrue to send feedback to player"
+      - ""
+      - "&bTransaction fails if player has not at least an &e<id> &bitem"
+      - "&b  on inventory"
+      - "&bIf player sell less than &e<amount>&b price will be scaled"
+      - "&bNote: balance of the command executor is untouched"
+    params: "<id> <amount> <player> <price> [silent]"
+    

@@ -1,0 +1,194 @@
+serveritem:
+  #if server saved items has placeholders inside displayname or lore should replace it?
+  #default placeholders: %player_name% %player_uuid%
+  #support all placeholders of PlaceHolderAPI
+  #
+  #This affects give/take/sell/sellmax/buy/buymax actions
+  #holders may generate inconsistency if holders values change or if who owns change
+  #this inconsistency may affect only items with placeholders
+  #
+  #inconsistency examples: 
+  #player A buy an item with %player_name% holder, player B take A item, B try to sell the item but he can't because %player_name% for B it's not the same of A
+  #player A buy an item with %player_name% holder, player A change name to B, try to sell the item but he can't because %player_name% now it's B and do not match old name A
+  replace-holders: true
+
+storage:
+  # player should be identified by uuid?
+  # if set to false players will be identified by name
+  # disclaimer: players may change their name, use uuid unless you know what you do
+  store-by-uuid: true
+  #how many item a player may save?
+  #set -1 for unlimited
+  player-item-limit: 45
+log:
+  #log actions on console?
+  console: true
+  #log actions on a log file?
+  file: true
+  #logs files are save on logs folder with a date format that you may edit here
+  #if you wish to store a whole month in a single file instead of a file for each day just remove the ".dd"
+  file-format: "yyyy.MM.dd"
+  #logs may contains a date prefix, you can set the format here
+  log-date-format: "[dd.MM.yyyy HH:mm:ss]"
+  action:
+    #log when a player reiceve items? (/serveritem give [...])
+    give: true
+    #log when removing items from player? (/serveritem take [...])
+    take: true
+    #log when a player buy items? (/serveritem sell/sellmax [...])
+    sell: true
+    #log when a player sell items? (/serveritem buy/buymax [...])
+    buy: true
+gui:
+  playeritems:
+    rows: 5
+    #Holders: %player_name% %page%
+    title: "&9%player_name% items - page &b%page%"
+    previus-page:
+      material: ARROW
+      durability: 0
+      glow: false
+      #Holders: %player_name% %page% %target_page%
+      description:
+        - "&9Go to page &e%target_page%"
+    next-page:
+      material: ARROW
+      durability: 0
+      glow: false
+      #Holders: %player_name% %page% %target_page%
+      description:
+        - "&9Go to page &e%target_page%"
+    page-info:
+      material: NAME_TAG
+      durability: 0
+      glow: false
+      #Holders: %player_name% %page%
+      description:
+      - '&9&lPage &e&l%page%'
+      - '&9Click &ehere &9to &atoggle view of item/ID'
+      - '&eLeft &9Click on items to &egain 1'
+      - '&eShift+Left &9Click on items to &egain 64'
+      - '&eShift+Right &9Click on items to &cdelete &9item'
+  serveritems:
+    rows: 5
+    #Holders: %player_name% %page%
+    title: "&9Server items - page &b%page%"
+    previus-page:
+      material: ARROW
+      durability: 0
+      glow: false
+      #Holders: %player_name% %page% %target_page%
+      description:
+        - "&9Go to page &e%target_page%"
+    next-page:
+      material: ARROW
+      durability: 0
+      glow: false
+      #Holders: %player_name% %page% %target_page%
+      description:
+        - "&9Go to page &e%target_page%"
+    page-info:
+      material: NAME_TAG
+      durability: 0
+      glow: false
+      #Holders: %player_name% %page%
+      description:
+      - '&9&lPage &e&l%page%'
+      - '&9Click &ehere &9to &atoggle view of item/ID'
+      - '&eLeft &9Click on items to &egain 1'
+      - '&eShift+Left &9Click on items to &egain 64'
+      - '&eShift+Right &9Click on items to &cdelete &9item'
+blocked:
+    log:
+        #when text is blocked a message will be displayed on console, reporting the text and the blocked word/regex
+        console: true
+        #when text is blocked a message will be saved on file, reporting the text and the blocked word/regex
+        file: true
+    #Words blocked when editing items unless you have permission to bypass
+    #Affects commands like /ie rename, /ie lore and similar
+    #Any text which contains a subsequence that matches a blocked word is blocked
+    words:
+    - "myblockedworldexample123"
+    #Regex blocked when editing items unless you have permission to bypass
+    #Affects commands like /ie rename, /ie lore and similar
+    #A regex is a sequence of characters that define a search pattern
+    #Any text which contains a subsequence that matches a pattern is blocked
+    #Google 'java regex tester' or go to www.freeformatter.com/java-regex-tester.html to learn more and test new regex
+    regex:
+    - '^[a@][s\$][s\$]$'
+    - '[a@][s\$][s\$]h[o0][l1][e3][s\$]?'
+    - 'b[a@][s\$][t\+][a@]rd '
+    - 'b[e3][a@][s\$][t\+][i1][a@]?[l1]([i1][t\+]y)?'
+    - 'b[e3][a@][s\$][t\+][i1][l1][i1][t\+]y'
+    - 'b[e3][s\$][t\+][i1][a@][l1]([i1][t\+]y)?'
+    - 'b[i1][t\+]ch[s\$]?'
+    - 'b[i1][t\+]ch[e3]r[s\$]?'
+    - 'b[i1][t\+]ch[e3][s\$]'
+    - 'b[i1][t\+]ch[i1]ng?'
+    - 'b[l1][o0]wj[o0]b[s\$]?'
+    - 'c[l1][i1][t\+]'
+    - '^(c|k|ck|q)[o0](c|k|ck|q)[s\$]?$'
+    - '(c|k|ck|q)[o0](c|k|ck|q)[s\$]u'
+    - '(c|k|ck|q)[o0](c|k|ck|q)[s\$]u(c|k|ck|q)[e3]d '
+    - '(c|k|ck|q)[o0](c|k|ck|q)[s\$]u(c|k|ck|q)[e3]r'
+    - '(c|k|ck|q)[o0](c|k|ck|q)[s\$]u(c|k|ck|q)[i1]ng'
+    - '(c|k|ck|q)[o0](c|k|ck|q)[s\$]u(c|k|ck|q)[s\$]'
+    - '^cum[s\$]?$'
+    - 'cumm??[e3]r'
+    - 'cumm?[i1]ngcock'
+    - '(c|k|ck|q)um[s\$]h[o0][t\+]'
+    - '(c|k|ck|q)un[i1][l1][i1]ngu[s\$]'
+    - '(c|k|ck|q)un[i1][l1][l1][i1]ngu[s\$]'
+    - '(c|k|ck|q)unn[i1][l1][i1]ngu[s\$]'
+    - '(c|k|ck|q)un[t\+][s\$]?'
+    - '(c|k|ck|q)un[t\+][l1][i1](c|k|ck|q)'
+    - '(c|k|ck|q)un[t\+][l1][i1](c|k|ck|q)[e3]r'
+    - '(c|k|ck|q)un[t\+][l1][i1](c|k|ck|q)[i1]ng'
+    - 'cyb[e3]r(ph|f)u(c|k|ck|q)'
+    - 'd[a@]mn'
+    - 'd[i1]ck'
+    - 'd[i1][l1]d[o0]'
+    - 'd[i1][l1]d[o0][s\$]'
+    - 'd[i1]n(c|k|ck|q)'
+    - 'd[i1]n(c|k|ck|q)[s\$]'
+    - '[e3]j[a@]cu[l1]'
+    - '(ph|f)[a@]g[s\$]?'
+    - '(ph|f)[a@]gg[i1]ng'
+    - '(ph|f)[a@]gg?[o0][t\+][s\$]?'
+    - '(ph|f)[a@]gg[s\$]'
+    - '(ph|f)[e3][l1][l1]?[a@][t\+][i1][o0]'
+    - '(ph|f)u(c|k|ck|q)'
+    - '(ph|f)u(c|k|ck|q)[s\$]?'
+    - 'g[a@]ngb[a@]ng[s\$]?'
+    - 'g[a@]ngb[a@]ng[e3]d'
+    - 'g[a@]y'
+    - 'h[o0]m?m[o0]'
+    - 'h[o0]rny'
+    - 'j[a@](c|k|ck|q)\-?[o0](ph|f)(ph|f)?'
+    - 'j[e3]rk\-?[o0](ph|f)(ph|f)?'
+    - 'j[i1][s\$z][s\$z]?m?'
+    - '[ck][o0]ndum[s\$]?'
+    - 'mast(e|ur)b(8|ait|ate)'
+    - 'n[i1]gg?[e3]r[s\$]?'
+    - '[o0]rg[a@][s\$][i1]m[s\$]?'
+    - '[o0]rg[a@][s\$]m[s\$]?'
+    - 'p[e3]nn?[i1][s\$]'
+    - 'p[i1][s\$][s\$]'
+    - 'p[i1][s\$][s\$][o0](ph|f)(ph|f) '
+    - 'p[o0]rn'
+    - 'p[o0]rn[o0][s\$]?'
+    - 'p[o0]rn[o0]gr[a@]phy'
+    - 'pr[i1]ck[s\$]?'
+    - 'pu[s\$][s\$][i1][e3][s\$]'
+    - 'pu[s\$][s\$]y[s\$]?'
+    - '[s\$][e3]x'
+    - '[s\$]h[i1][t\+][s\$]?'
+    - '[s\$][l1]u[t\+][s\$]?'
+    - '[s\$]mu[t\+][s\$]?'
+    - '[s\$]punk[s\$]?'
+    - '[t\+]w[a@][t\+][s\$]?'
+    #A list of blocked materials which cannot be renamed unless you have permission to bypass
+    #You may find valid ids here https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+    #or here for versions 1.8-1.12 https://helpch.at/docs/1.12.2/org/bukkit/Material.html
+    #CaPs are not relevant for this config
+    type-blocked-rename: []

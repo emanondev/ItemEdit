@@ -1,0 +1,65 @@
+player-only: "&cCommand for Players only"
+no-item-on-hand: "&cYou need to hold an item in hand"
+lack-permission: "&cYou lack of permission %permission%"
+lack-permission-generic: "&cYou don't have permission to use this command"
+help-header: "&9&lItemStorage - Help"
+sub-commands:
+  get:
+    name: "get"
+    #Holders: %id% %amount%
+    success: "&aObtained &e%amount% &aof &e%id%"
+    no-inventory-space: "&cYou don't have space in your inventory"
+    description: 
+      - "&b&lGet selected item"
+      - ""
+      - "&e<id> &bId of the item"
+      - "&e[amount] &bamount to get, by default 1"
+    params: "<id> [amount]"
+  save:
+    name: "save"
+    #Holders: %id%
+    success: "&aItem &e%id% &aregistered"
+    #Holders: %limit%
+    limit-reached: "&cYou reached the maximus number of savable items (%limit%)"
+    description: 
+      - "&b&lRegister the item in your hand"
+      - ""
+      - "&e<id> &bidentify your item, case insensitive and can't"
+      - "&b     contain spaces or dots also you can't select"
+      - "&b     any already used id"
+      - ""
+      - "&b&lTip: &buse &e/itemstorage update <id>&b, to change an existing item"
+      - "&b&lTip: &bretrieve your saved items with &e/itemstorage get <id>"
+    params: "<id>"
+  delete:
+    name: "delete"
+    #Holders: %id%
+    success: "&aItem &e%id% &aunregistered"
+    description: 
+      - "&b&lDelete selected item"
+      - ""
+      - "&e<id> &bId of the item"
+    params: "<id>"
+  update:
+    name: "update"
+    #Holders: %id%
+    success: "&aItem &e%id% &ahas been updated"
+    description: 
+      - "&b&lUpdate selected item"
+      - ""
+      - "&bChange the item associated with id with your hand item"
+      - "&e<id> &bId of the item"
+      - ""
+      - "&bTip: use &e/itemstorage save <id>&b, to create a new item"
+      - "&bTip: use &e/itemstorage delete <id>&b, to delete an item"
+    params: "<id>"
+  show:
+    name: "show"
+    description: 
+      - "&b&lOpen a gui with your saved items"
+      - ""
+      - "&e[page] &bpage of the gui, by default 1"
+    params: "[page]"
+    
+    
+    

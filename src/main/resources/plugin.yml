@@ -1,0 +1,467 @@
+name: ${project.name}
+main: ${groupId}.${project.name}
+version: ${project.version}
+author: emanon
+api-version: 1.13
+softdepend: [Vault,SuperVanish,PremiumVanish,PlaceHolderAPI,ShopGUIPlus,IridiumSkyblock,ASkyBlock,uSkyBlock,IslandWorld,FabledSkyBlock,SimpleSkyblock,SkyBlock,SuperiorSkyblock2,SuperiorSkyblock]
+
+commands:
+    itemedit:
+        description: allows to edit item in hand
+        usage: /itemedit
+        aliases: [ie]
+    itemeditimport:
+        description: import configurations from other plugins
+        usage: /itemeditimport
+    itemeditreload:
+        description: reload configurations
+        usage: /itemeditreload
+    itemstorage:
+        description: allows to save and retrieve personal items previusly created
+        usage: /itemstorage
+        aliases: [is]
+    serveritem:
+        description: allows to save and retrieve items previusly created and also sell or buy them to players with console commands
+        usage: /serveritem
+        aliases: [si]
+        
+permissions:
+    itemedit.admin:
+        default: op
+        description: Gives full access to the plugin
+        children: 
+            itemedit.itemedit.*: true
+            itemedit.itemstorage.*: true
+            itemedit.serveritem.*: true
+            itemedit.itemeditreload: true
+            itemedit.itemeditimport: true
+            itemedit.bypass.*: true
+    itemedit.creativeuser:
+        default: op
+        description: Gives full access to the plugin
+        children: 
+            itemedit.itemedit.*: true
+            itemedit.itemstorage.*: true
+    itemedit.bypass.*:
+        default: op
+        description: Gives full access to the plugin
+        children: 
+            itemedit.bypass.censure: true
+            itemedit.bypass.rename_type_restriction: true
+    itemedit.bypass.censure:
+        default: op
+        description: Bypass words restrictions when editing items
+    itemedit.bypass.rename_type_restriction:
+        default: op
+        description: Bypass type restrictions when renaming items
+    itemedit.itemeditimport:
+        default: op
+        description: Gives full access to command /itemeditimport
+    itemedit.itemeditreload:
+        default: op
+        description: Gives full access to command /itemeditreload
+    itemedit.serveritem.*:
+        default: op
+        description: Gives full access to command /serveritem
+        children: 
+            itemedit.serveritem.save: true
+            itemedit.serveritem.delete: true
+            itemedit.serveritem.setnick: true
+            itemedit.serveritem.update: true
+            itemedit.serveritem.show: true
+            itemedit.serveritem.give: true
+            itemedit.serveritem.drop: true
+            itemedit.serveritem.take: true
+            itemedit.serveritem.sell: true
+            itemedit.serveritem.buy: true
+            itemedit.serveritem.sellmax: true
+            itemedit.serveritem.buymax: true
+    itemedit.serveritem.save:
+        default: op
+        description: Allow to store items
+    itemedit.serveritem.setnick:
+        default: op
+        description: Allow to set nicks for stored items
+    itemedit.serveritem.delete:
+        default: op
+        description: Allow to delete stored items
+    itemedit.serveritem.update:
+        default: op
+        description: Allow to update stored items
+    itemedit.serveritem.show:
+        default: op
+        description: Allow to show stored items
+    itemedit.serveritem.give:
+        default: op
+        description: Allow to give stored items
+    itemedit.serveritem.drop:
+        default: op
+        description: Allow to drop stored items
+    itemedit.serveritem.take:
+        default: op
+        description: Allow to take stored items
+    itemedit.serveritem.sell:
+        default: op
+        description: Allow to sell fixed amount of stored items
+    itemedit.serveritem.buy:
+        default: op
+        description: Allow to buy fixed amount of stored items
+    itemedit.serveritem.sellmax:
+        default: op
+        description: Allow to sell stored items
+    itemedit.serveritem.buymax:
+        default: op
+        description: Allow to buy stored items
+    itemedit.itemstorage.*:
+        default: op
+        description: Gives full access to command /itemstorage
+        children: 
+            itemedit.itemstorage.save: true
+            itemedit.itemstorage.delete: true
+            itemedit.itemstorage.update: true
+            itemedit.itemstorage.show: true
+            itemedit.itemstorage.get: true
+    itemedit.itemstorage.save:
+        default: op
+        description: Allow to store items
+    itemedit.itemstorage.delete:
+        default: op
+        description: Allow to delete stored items
+    itemedit.itemstorage.update:
+        default: op
+        description: Allow to update stored items
+    itemedit.itemstorage.show:
+        default: op
+        description: Allow to show stored items
+    itemedit.itemstorage.get:
+        default: op
+        description: Allow to get stored items
+    itemedit.itemedit.*:
+        default: op
+        description: Gives full access to command /itemedit
+        children: 
+            itemedit.itemedit.rename: true
+            itemedit.itemedit.lore: true
+            itemedit.itemedit.amount: true
+            itemedit.itemedit.damage: true
+            itemedit.itemedit.hide: true
+            itemedit.itemedit.hideall: true
+            itemedit.itemedit.enchant: true
+            itemedit.itemedit.unbreakable: true
+            itemedit.itemedit.type: true
+            itemedit.itemedit.skullowner: true
+            itemedit.itemedit.potioneffect: true
+            itemedit.itemedit.bookauthor: true
+            itemedit.itemedit.booktype: true
+            itemedit.itemedit.banner: true
+            itemedit.itemedit.color: true
+            itemedit.itemedit.spawnereggtype: true
+            itemedit.itemedit.fireworkpower: true
+            itemedit.itemedit.firework: true
+            itemedit.itemedit.tropicalfish: true
+            itemedit.itemedit.custommodeldata: true
+            itemedit.itemedit.repaircost: true
+            itemedit.itemedit.listaliases: true
+            itemedit.itemedit.compass: true
+            itemedit.itemedit.axolotlvariant: true
+    itemedit.itemedit.rename:
+        default: op
+        description: Allow editing item name
+        children: 
+            itemedit.itemedit.rename.format.*: true
+            itemedit.itemedit.rename.color.*: true
+    itemedit.itemedit.rename.format.*:
+        default: op
+        description: Allow editing item name and use all formats
+        children: 
+            itemedit.itemedit.rename.format.bold: true
+            itemedit.itemedit.rename.format.italic: true
+            itemedit.itemedit.rename.format.magic: true
+            itemedit.itemedit.rename.format.reset: true
+            itemedit.itemedit.rename.format.strikethrough: true
+            itemedit.itemedit.rename.format.underline: true
+    itemedit.itemedit.rename.color.*:
+        default: op
+        description: Allow editing item name and use all colors
+        children: 
+            itemedit.itemedit.rename.color.aqua: true
+            itemedit.itemedit.rename.color.black: true
+            itemedit.itemedit.rename.color.blue: true
+            itemedit.itemedit.rename.color.dark_aqua: true
+            itemedit.itemedit.rename.color.dark_blue: true
+            itemedit.itemedit.rename.color.dark_gray: true
+            itemedit.itemedit.rename.color.dark_green: true
+            itemedit.itemedit.rename.color.dark_purple: true
+            itemedit.itemedit.rename.color.dark_red: true
+            itemedit.itemedit.rename.color.gold: true
+            itemedit.itemedit.rename.color.gray: true
+            itemedit.itemedit.rename.color.green: true
+            itemedit.itemedit.rename.color.light_purple: true
+            itemedit.itemedit.rename.color.red: true
+            itemedit.itemedit.rename.color.white: true
+            itemedit.itemedit.rename.color.yellow: true
+            itemedit.itemedit.rename.color.hexa: true
+    itemedit.itemedit.rename.format.bold:
+        default: op
+        description: Allow editing item name and use bold format
+    itemedit.itemedit.rename.format.italic:
+        default: op
+        description: Allow editing item name and use italic format
+    itemedit.itemedit.rename.format.magic:
+        default: op
+        description: Allow editing item name and use magic format
+    itemedit.itemedit.rename.format.reset:
+        default: op
+        description: Allow editing item name and use reset format
+    itemedit.itemedit.rename.format.strikethrough:
+        default: op
+        description: Allow editing item name and use strikethrough format
+    itemedit.itemedit.rename.format.underline:
+        default: op
+        description: Allow editing item name and use underline format
+    itemedit.itemedit.rename.color.aqua:
+        default: op
+        description: Allow editing item name and use aqua color
+    itemedit.itemedit.rename.color.black:
+        default: op
+        description: Allow editing item name and use black color
+    itemedit.itemedit.rename.color.blue:
+        default: op
+        description: Allow editing item name and use blue color
+    itemedit.itemedit.rename.color.dark_aqua:
+        default: op
+        description: Allow editing item name and use dark_aqua color
+    itemedit.itemedit.rename.color.dark_blue:
+        default: op
+        description: Allow editing item name and use dark_blue color
+    itemedit.itemedit.rename.color.dark_gray:
+        default: op
+        description: Allow editing item name and use dark_gray color
+    itemedit.itemedit.rename.color.dark_green:
+        default: op
+        description: Allow editing item name and use dark_green color
+    itemedit.itemedit.rename.color.dark_purple:
+        default: op
+        description: Allow editing item name and use dark_purple color
+    itemedit.itemedit.rename.color.dark_red:
+        default: op
+        description: Allow editing item name and use dark_red color
+    itemedit.itemedit.rename.color.gold:
+        default: op
+        description: Allow editing item name and use gold color
+    itemedit.itemedit.rename.color.gray:
+        default: op
+        description: Allow editing item name and use gray color
+    itemedit.itemedit.rename.color.green:
+        default: op
+        description: Allow editing item name and use green color
+    itemedit.itemedit.rename.color.light_purple:
+        default: op
+        description: Allow editing item name and use light_purple color
+    itemedit.itemedit.rename.color.red:
+        default: op
+        description: Allow editing item name and use red color
+    itemedit.itemedit.rename.color.white:
+        default: op
+        description: Allow editing item name and use white color
+    itemedit.itemedit.rename.color.yellow:
+        default: op
+        description: Allow editing item name and use yellow color
+    itemedit.itemedit.rename.color.hexa:
+        default: op
+        description: Allow editing item name and use hexa colors
+    itemedit.itemedit.lore:
+        default: op
+        description: Allow editing item lore
+        children: 
+            itemedit.itemedit.lore.format.*: true
+            itemedit.itemedit.lore.color.*: true
+    itemedit.itemedit.lore.format.*:
+        default: op
+        description: Allow editing item lore and use all formats
+        children: 
+            itemedit.itemedit.lore.format.bold: true
+            itemedit.itemedit.lore.format.italic: true
+            itemedit.itemedit.lore.format.magic: true
+            itemedit.itemedit.lore.format.reset: true
+            itemedit.itemedit.lore.format.strikethrough: true
+            itemedit.itemedit.lore.format.underline: true
+    itemedit.itemedit.lore.color.*:
+        default: op
+        description: Allow editing item lore and use all colors
+        children: 
+            itemedit.itemedit.lore.color.aqua: true
+            itemedit.itemedit.lore.color.black: true
+            itemedit.itemedit.lore.color.blue: true
+            itemedit.itemedit.lore.color.dark_aqua: true
+            itemedit.itemedit.lore.color.dark_blue: true
+            itemedit.itemedit.lore.color.dark_gray: true
+            itemedit.itemedit.lore.color.dark_green: true
+            itemedit.itemedit.lore.color.dark_purple: true
+            itemedit.itemedit.lore.color.dark_red: true
+            itemedit.itemedit.lore.color.gold: true
+            itemedit.itemedit.lore.color.gray: true
+            itemedit.itemedit.lore.color.green: true
+            itemedit.itemedit.lore.color.light_purple: true
+            itemedit.itemedit.lore.color.red: true
+            itemedit.itemedit.lore.color.white: true
+            itemedit.itemedit.lore.color.yellow: true
+            itemedit.itemedit.lore.color.hexa: true
+    itemedit.itemedit.lore.format.bold:
+        default: op
+        description: Allow editing item lore and use bold format
+    itemedit.itemedit.lore.format.italic:
+        default: op
+        description: Allow editing item lore and use italic format
+    itemedit.itemedit.lore.format.magic:
+        default: op
+        description: Allow editing item lore and use magic format
+    itemedit.itemedit.lore.format.reset:
+        default: op
+        description: Allow editing item lore and use reset format
+    itemedit.itemedit.lore.format.strikethrough:
+        default: op
+        description: Allow editing item lore and use strikethrough format
+    itemedit.itemedit.lore.format.underline:
+        default: op
+        description: Allow editing item lore and use underline format
+    itemedit.itemedit.lore.color.aqua:
+        default: op
+        description: Allow editing item lore and use aqua color
+    itemedit.itemedit.lore.color.black:
+        default: op
+        description: Allow editing item lore and use black color
+    itemedit.itemedit.lore.color.blue:
+        default: op
+        description: Allow editing item lore and use blue color
+    itemedit.itemedit.lore.color.dark_aqua:
+        default: op
+        description: Allow editing item lore and use dark_aqua color
+    itemedit.itemedit.lore.color.dark_blue:
+        default: op
+        description: Allow editing item lore and use dark_blue color
+    itemedit.itemedit.lore.color.dark_gray:
+        default: op
+        description: Allow editing item lore and use dark_gray color
+    itemedit.itemedit.lore.color.dark_green:
+        default: op
+        description: Allow editing item lore and use dark_green color
+    itemedit.itemedit.lore.color.dark_purple:
+        default: op
+        description: Allow editing item lore and use dark_purple color
+    itemedit.itemedit.lore.color.dark_red:
+        default: op
+        description: Allow editing item lore and use dark_red color
+    itemedit.itemedit.lore.color.gold:
+        default: op
+        description: Allow editing item lore and use gold color
+    itemedit.itemedit.lore.color.gray:
+        default: op
+        description: Allow editing item lore and use gray color
+    itemedit.itemedit.lore.color.green:
+        default: op
+        description: Allow editing item lore and use green color
+    itemedit.itemedit.lore.color.light_purple:
+        default: op
+        description: Allow editing item lore and use light_purple color
+    itemedit.itemedit.lore.color.red:
+        default: op
+        description: Allow editing item lore and use red color
+    itemedit.itemedit.lore.color.white:
+        default: op
+        description: Allow editing item lore and use white color
+    itemedit.itemedit.lore.color.yellow:
+        default: op
+        description: Allow editing item lore and use yellow color
+    itemedit.itemedit.lore.color.hexa:
+        default: op
+        description: Allow editing item lore and use hexa colors
+    itemedit.itemedit.amount:
+        default: op
+        description: Allow editing item amount
+    itemedit.itemedit.damage:
+        default: op
+        description: Allow editing item durability-damage
+    itemedit.itemedit.hide:
+        default: op
+        description: Allow editing item flags
+    itemedit.itemedit.hideall:
+        default: op
+        description: Allow to hide all item flags at once
+    itemedit.itemedit.enchant:
+        default: op
+        description: Allow editing item enchants
+        children: 
+            itemedit.itemedit.enchant.bypass_max_level: true
+    itemedit.itemedit.enchant.bypass_max_level:
+        default: op
+        description: Allow editing item enchants above vanilla limits
+    itemedit.itemedit.unbreakable:
+        default: op
+        description: Allow editing item unbreakablity
+    itemedit.itemedit.type:
+        default: op
+        description: Allow editing item material
+    itemedit.itemedit.skullowner:
+        default: op
+        description: Allow editing skull skin owner
+    itemedit.itemedit.potioneffect:
+        default: op
+        description: Allow editing potion effects
+        children: 
+            itemedit.itemedit.potioneffect.bypass_limits: true
+    itemedit.itemedit.potioneffect.bypass_limits:
+        default: op
+        description: Allow editing potion effects above level 2
+    itemedit.itemedit.color:
+        default: op
+        description: Allow editing items colors
+        children: 
+            itemedit.itemedit.color.leather: true
+            itemedit.itemedit.color.potion: true
+            itemedit.itemedit.color.tipped_arrow: true
+    itemedit.itemedit.color.leather:
+        default: op
+        description: Allow editing leather color
+    itemedit.itemedit.color.potion:
+        default: op
+        description: Allow editing potion color
+    itemedit.itemedit.color.tipped_arrow:
+        default: op
+        description: Allow editing tipped arrow color
+    itemedit.itemedit.bookauthor:
+        default: op
+        description: Allow editing book author
+    itemedit.itemedit.booktype:
+        default: op
+        description: Allow editing book type
+    itemedit.itemedit.banner:
+        default: op
+        description: Allow editing banners
+    itemedit.itemedit.spawnereggtype:
+        default: op
+        description: Allow editing monster's egg
+    itemedit.itemedit.fireworkpower:
+        default: op
+        description: Allow editing fireworks power
+    itemedit.itemedit.firework:
+        default: op
+        description: Allow editing fireworks with a gui
+    itemedit.itemedit.tropicalfish:
+        default: op
+        description: Allow editing tropical fish buckets
+    itemedit.itemedit.custommodeldata:
+        default: op
+        description: Allow editing custom model data of items
+    itemedit.itemedit.repaircost:
+        default: op
+        description: Allow editing repair costs
+    itemedit.itemedit.listaliases:
+        default: op
+        description: Shows aliases
+    itemedit.itemedit.compass:
+        default: op
+        description: Allow editing compass location
+    itemedit.itemedit.axolotlvariant:
+        default: op
+        description: Allow editing axolotl variant on axolotl buckets

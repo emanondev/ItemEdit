@@ -1,0 +1,14 @@
+lack-permission: "&cYou lack of permission %permission%"
+help:
+- "&a/itemeditimport ItemEditor &2- import items from ItemEditor plugin"
+itemeditor:
+    unable-to-get-item: "&9[&fItemEdit&9]&c Unable to load item &6 %id% &c"
+    already-used-id: "&9[&fItemEdit&9]&6 %id% &cis already used, maybe you already did this command before otherwise you may rename the file ItemEditor/items/%id%.yml"
+    invalid-id: "&9[&fItemEdit&9]&6 %id% &cis not an acceptable id, you may rename the file ItemEditor/items/%id%.yml to an alphanumeric name"
+    import-unsuccess: 
+    - "&9[&fItemEdit&9]&c No items of &6%max% &cwere imported, maybe you already did this command before(?)"
+    import-success: 
+    - "&9[&fItemEdit&9]&a Imported &e%done% &aof &e%max% &aitems from ItemEditor"
+    - "&9[&fItemEdit&9]&a Imported items: &e%ids%"
+    import-empty:
+    - "&9[&fItemEdit&9]&c ItemEditor has no items to import"
