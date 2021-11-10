@@ -23,7 +23,9 @@ sub-commands:
       - "&eSet <line> <text> &b- set or replace text on chosen line"
       - "&eRemove <line> &b- remove chosen line"
       - "&eReset &b- remove all lines"
-    params: "<add/insert/set/remove/reset> [...]"
+      - "&eCopy &b- copy current item lore to paste it later"
+      - "&ePaste &b- paste the last copied lore"
+    params: "<add/insert/set/remove/reset/copy/paste> [...]"
     set:
       params: "set <line> <text>"
       description: 
@@ -36,6 +38,11 @@ sub-commands:
       params: "insert <line> <text>"
       description: 
         - "&b&lAdd text on selected line"
+    copy:
+        feedback: "&aLore copied"
+    paste:
+        feedback: "&aLore pasted"
+        no-copy: "&cCopy a lore first"
   hide:
     name: "hide"
     description: 

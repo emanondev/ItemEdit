@@ -3,7 +3,10 @@ package emanondev.itemedit.command.itemedit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -18,10 +21,15 @@ import net.md_5.bungee.api.chat.BaseComponent;
 public class Lore extends SubCmd {
 
 	// private BaseComponent[] helpAdd;
+	private final Map<UUID,List<String>> copies = new HashMap<>();
 	private BaseComponent[] helpSet;
 	private BaseComponent[] helpRemove;
 	private BaseComponent[] helpInsert;
-	private static final String[] loreSub = new String[] { "add", "set", "remove", "reset", "insert" };
+	private String copyFeedback;
+	private String pasteFeedback;
+	private String pasteNoCopyFeedback;
+	
+	private static final String[] loreSub = new String[] { "add", "set", "remove", "reset", "insert","copy","paste" };
 
 	public Lore(ItemEditCommand cmd) {
 		super("lore", cmd, true, true);
@@ -35,6 +43,9 @@ public class Lore extends SubCmd {
 				String.join("\n", getConfStringList("remove.description")));
 		this.helpInsert = this.craftFailFeedback(getConfString("insert.params"),
 				String.join("\n", getConfStringList("insert.description")));
+		copyFeedback = this.getConfString("copy.feedback");
+		pasteFeedback = this.getConfString("paste.feedback");
+		pasteNoCopyFeedback = this.getConfString("paste.no-copy");
 	}
 
 	public void reload() {
@@ -67,9 +78,47 @@ public class Lore extends SubCmd {
 		case "remove":
 			loreRemove(p, item, args);
 			return;
+		case "copy":
+			loreCopy(p, item, args);
+			return;
+		case "paste":
+			lorePaste(p, item, args);
+			return;
 		default:
 			onFail(p);
 		}
+	}
+
+	private void lorePaste(Player p, ItemStack item, String[] args) {
+		if (!copies.containsKey(p.getUniqueId())) {
+			p.sendMessage(pasteNoCopyFeedback);
+			return;
+		}
+		ItemMeta meta = item.getItemMeta();
+		meta.setLore(copies.get(p.getUniqueId()));
+		item.setItemMeta(meta);
+		if (pasteFeedback!=null)
+			p.sendMessage(pasteFeedback);
+		p.updateInventory();
+	}
+
+	private void loreCopy(Player p, ItemStack item, String[] args) {
+		
+		List<String> lore;
+		if (item.hasItemMeta()) {
+			ItemMeta itemMeta = item.getItemMeta();
+			if (itemMeta.hasLore())
+				lore = new ArrayList<String>(itemMeta.getLore());
+			else
+				lore = new ArrayList<String>();
+		}
+		else
+			lore = new ArrayList<String>();
+
+		copies.put(p.getUniqueId(), lore);
+
+		if (copyFeedback!=null)
+			p.sendMessage(copyFeedback);
 	}
 
 	@Override
