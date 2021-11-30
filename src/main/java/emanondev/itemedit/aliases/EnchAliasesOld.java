@@ -47,7 +47,12 @@ public class EnchAliasesOld extends EnchAliases {
 		if (enchNick.containsKey(ench.getName()))
 			return enchNick.get(ench.getName());
 		//Mohist compability
-		return ench.getName().toLowerCase();
+		try {
+			return ench.getName().toLowerCase();
+		} catch (Exception e) {
+			//grappling-hook support https://www.spigotmc.org/resources/55955/
+			return ench.toString().toLowerCase().replace(" ","_");
+		}
 	}
 
 }

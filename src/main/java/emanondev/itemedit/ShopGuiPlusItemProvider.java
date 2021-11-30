@@ -21,14 +21,24 @@ public class ShopGuiPlusItemProvider extends ItemProvider {
 	@Override
 	public ItemStack loadItem(ConfigurationSection section) {
 		String id = section.getString("serverItem");
+		if (id == null) {
+			for (String key : section.getKeys(false))
+				if (key.equalsIgnoreCase("serverItem")) {
+					id = section.getString(key);
+					break;
+				}
+			return null;
+		}
 		try {
 			ItemStack result = ItemEdit.get().getServerStorage().getItem(id);
-			if (result == null) {
-				ItemEdit.get().log("Invalid ServerItem id on ShopGuiPlus config for &e"+id);
-			}
+			if (result == null)
+				ItemEdit.get().log("Invalid ServerItem id on ShopGuiPlus config for &e" + id + " &fon path &e"
+						+ section.getCurrentPath() + ".serverItem");
+
 			return result;
 		} catch (Exception e) {
-			ItemEdit.get().log("Invalid ServerItem id on ShopGuiPlus config for &e"+id);
+			ItemEdit.get().log("Invalid ServerItem id on ShopGuiPlus config for &e" + id + " &fon path &e"
+					+ section.getCurrentPath() + ".serverItem");
 		}
 		return null;
 	}
@@ -36,22 +46,22 @@ public class ShopGuiPlusItemProvider extends ItemProvider {
 	@Override
 	public boolean compare(ItemStack item1, ItemStack item2) {
 		String id1 = getCustomId(item1);
-		if (id1==null)
+		if (id1 == null)
 			return false;
 		return id1.equals(getCustomId(item2));
 	}
 
 	private String getCustomId(ItemStack item) {
-		if (item==null)
+		if (item == null)
 			return null;
-		if (item.getType()==Material.AIR)
+		if (item.getType() == Material.AIR)
 			return null;
-		for (String id:ItemEdit.get().getServerStorage().getIds()) {
-			if (item.isSimilar(ItemEdit.get().getServerStorage().getItem(id)) )
+		for (String id : ItemEdit.get().getServerStorage().getIds()) {
+			if (item.isSimilar(ItemEdit.get().getServerStorage().getItem(id)))
 				return id;
 		}
 		return null;
-	  }
+	}
 
 	public void register() {
 		ShopGuiPlusApi.registerItemProvider(this);
