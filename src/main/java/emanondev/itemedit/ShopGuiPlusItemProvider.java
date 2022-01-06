@@ -52,15 +52,9 @@ public class ShopGuiPlusItemProvider extends ItemProvider {
 	}
 
 	private String getCustomId(ItemStack item) {
-		if (item == null)
+		if (item == null || item.getType() == Material.AIR)
 			return null;
-		if (item.getType() == Material.AIR)
-			return null;
-		for (String id : ItemEdit.get().getServerStorage().getIds()) {
-			if (item.isSimilar(ItemEdit.get().getServerStorage().getItem(id)))
-				return id;
-		}
-		return null;
+		return ItemEdit.get().getServerStorage().getId(item);
 	}
 
 	public void register() {

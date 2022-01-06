@@ -18,8 +18,7 @@ public interface ServerStorage {
 	/**
 	 * Get ItemStack associated with given id.
 	 * 
-	 * @param id
-	 *            unique identifier of the item, case insensitive
+	 * @param id unique identifier of the item, case insensitive
 	 * @return item associated with id
 	 */
 	public @Nullable ItemStack getItem(@NotNull String id);
@@ -27,39 +26,32 @@ public interface ServerStorage {
 	/**
 	 * Get the nick associated with id.
 	 * 
-	 * @param id
-	 *            unique identifier of the item, case insensitive
+	 * @param id unique identifier of the item, case insensitive
 	 * @return nick associated with id, if none is set returns item title, if item
-	 *         has no title@Override
-	 item material name is returned
+	 *         has no title@Override item material name is returned
 	 */
 	public @Nullable String getNick(@NotNull String id);
 
 	/**
 	 * Set association for id and item for player.
 	 * 
-	 * @param id
-	 *            unique identifier of the item, case insensitive
-	 * @param item
-	 *            item to associate to id
+	 * @param id   unique identifier of the item, case insensitive
+	 * @param item item to associate to id
 	 */
 	public void setItem(@NotNull String id, @NotNull ItemStack item);
 
 	/**
 	 * Sets nick value for id.
 	 * 
-	 * @param id
-	 *            unique identifier of the item, case insensitive
-	 * @param nick
-	 *            nick of the item,
+	 * @param id   unique identifier of the item, case insensitive
+	 * @param nick nick of the item,
 	 */
 	public void setNick(@NotNull String id, @Nullable String nick);
 
 	/**
 	 * Remove associations with id.
 	 * 
-	 * @param id
-	 *            unique identifier of the item, case insensitive
+	 * @param id unique identifier of the item, case insensitive
 	 */
 	public void remove(@NotNull String id);
 
@@ -80,19 +72,41 @@ public interface ServerStorage {
 			throw new IllegalArgumentException();
 	}
 
-	public default ItemStack getItem(String id,Player target) {
+	public default ItemStack getItem(String id, Player target) {
 		ItemStack item = getItem(id);
-		if (item==null || target==null)
+		if (item == null || target == null)
 			return item;
 		if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
 			ItemMeta meta = item.getItemMeta();
-			meta.setDisplayName(UtilsString.fix(meta.getDisplayName(), target, true, "%player_name%",
-					target.getName(), "%player_uuid%", target.getUniqueId().toString()));
+			meta.setDisplayName(UtilsString.fix(meta.getDisplayName(), target, true, "%player_name%", target.getName(),
+					"%player_uuid%", target.getUniqueId().toString()));
 			meta.setLore(UtilsString.fix(meta.getLore(), target, true, "%player_name%", target.getName(),
 					"%player_uuid%", target.getUniqueId().toString()));
 			item.setItemMeta(meta);
 		}
 		return item;
 	}
+
+	/**
+	 * Returns true if the storage contains a similar item
+	 * 
+	 * @param item item to check
+	 * @return true if the storage contains a similar item
+	 */
+	public default boolean contains(ItemStack item) {
+		return getId(item)!=null;
+	}
+
+	/**
+	 * Returns the id of the item or null if not contained
+	 * 
+	 * @param item item to check
+	 * @return the id of the item or null if not contained
+	 */
+	public String getId(ItemStack item);
 	
+	/**
+	 * Handle plugin reloads
+	 */
+	public void reload();
 }

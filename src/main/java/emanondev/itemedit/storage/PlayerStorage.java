@@ -70,4 +70,10 @@ public interface PlayerStorage {
 			throw new IllegalArgumentException();
 	}
 
+	/**
+	 * Handle plugin reloads
+	 */
+	public default void reload() {
+	}
+
 }

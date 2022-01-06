@@ -142,6 +142,8 @@ public class ItemEdit extends APlugin {
 		ItemEditCommand.get().reload();
 		ItemStorageCommand.get().reload();
 		ServerItemCommand.get().reload();
+		getPlayerStorage().reload();
+		getServerStorage().reload();
 		log(ChatColor.GREEN, "#", "Reloaded (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
 	}
 

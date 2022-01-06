@@ -24,8 +24,10 @@ sub-commands:
       - "&eRemove <line> &b- remove chosen line"
       - "&eReset &b- remove all lines"
       - "&eCopy &b- copy current item lore to paste it later"
+      - "&eCopyBook &b- same as copy but from pages of a book as lines"
+      - "&eCopyFile <path> &b- same as copy but from loreCopy.yml"
       - "&ePaste &b- paste the last copied lore"
-    params: "<add/insert/set/remove/reset/copy/paste> [...]"
+    params: "<add/set/remove...> [...]"
     set:
       params: "set <line> <text>"
       description: 
@@ -40,6 +42,13 @@ sub-commands:
         - "&b&lAdd text on selected line"
     copy:
         feedback: "&aLore copied"
+    copyBook:
+        wrong-type: "&cItem must be a written book or book and quill"
+        feedback: "&aBook pages copied"
+    copyFile:
+        no-path: "&cSelect a path /ie lore copyfile &6<path>"
+        wrong-path: "&cInvalid path, remember to reload the configuration and check the CaPs"
+        feedback: "&aConfiguration copied"
     paste:
         feedback: "&aLore pasted"
         no-copy: "&cCopy a lore first"
