@@ -19,6 +19,7 @@ public class ServerItemCommand extends AbstractCommand {
 		this.registerSubCommand(new Show(this));
 		this.registerSubCommand(new SetNick(this));
 		this.registerSubCommand(new Give(this));
+		this.registerSubCommand(new GiveAll(this));
 		this.registerSubCommand(new Drop(this));
 		this.registerSubCommand(new Take(this));
 		try {

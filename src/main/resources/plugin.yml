@@ -456,6 +456,11 @@ permissions:
     itemedit.itemedit.repaircost:
         default: op
         description: Allow editing repair costs
+        children: 
+            itemedit.itemedit.repaircost.without_durability: true
+    itemedit.itemedit.repaircost.without_durability:
+        default: op
+        description: Allow to set a repair cost even on items which have no durability
     itemedit.itemedit.listaliases:
         default: op
         description: Shows aliases

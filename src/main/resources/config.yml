@@ -33,6 +33,8 @@ log:
   action:
     #log when a player reiceve items? (/serveritem give [...])
     give: true
+    #log when a player reiceve items? (/serveritem giveall [...])
+    giveall: true
     #log when removing items from player? (/serveritem take [...])
     take: true
     #log when a player buy items? (/serveritem sell/sellmax [...])

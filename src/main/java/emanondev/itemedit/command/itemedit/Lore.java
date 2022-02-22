@@ -39,7 +39,7 @@ public class Lore extends SubCmd {
 	private String pasteNoCopyFeedback;
 
 	private static final String[] loreSub = new String[] { "add", "set", "remove", "reset", "insert", "copy",
-			"copybook", "copyfile", "paste" };
+			"copybook", "copyfile", "paste" ,"replace"};
 
 	public Lore(ItemEditCommand cmd) {
 		super("lore", cmd, true, true);
@@ -105,9 +105,27 @@ public class Lore extends SubCmd {
 		case "paste":
 			lorePaste(p, item, args);
 			return;
+		case "replace":
+			loreReplace(p, item, args);
+			return;
 		default:
 			onFail(p);
 		}
+	}
+
+	private void loreReplace(Player p, ItemStack item, String[] args) {
+		switch (args.length) {
+		case 2:
+		case 3:
+			//not enough args
+		case 4:
+			//ok
+			
+		case 5:
+			//more words, needs []
+			
+		}
+		
 	}
 
 	private void lorePaste(Player p, ItemStack item, String[] args) {

@@ -18,6 +18,19 @@ sub-commands:
       - "&e[player] &bwho gets the items, by default you"
       - "&e[silent] &btrue if no feedback should be send to player"
     params: "<id> [amount] [player] [silent]"
+  giveall:
+    name: "giveall"
+    #Holders: %id% %nick% %amount%
+    feedback: "&aObtained &e%amount% &aof &e%nick%"
+    #Holders: %id% %nick% %amount% %targets%
+    log: "[serveritem][giveall] %targets% obtained %amount% of %id% (%nick%)"
+    description: 
+      - "&b&lGive selected item to all online players"
+      - ""
+      - "&e<id> &bId of the item"
+      - "&e[amount] &bamount of items to give, by default 1"
+      - "&e[silent] &btrue if no feedback should be send to players"
+    params: "<id> [amount] [silent]"
   drop:
     name: "drop"
     #Holders: %id% %nick% %amount% %world% %x% %y% %z%

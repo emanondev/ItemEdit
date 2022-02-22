@@ -26,6 +26,10 @@ public class RepairCost extends SubCmd {
 		try {
 			if (args.length > 2)
 				throw new IllegalArgumentException("Wrong param number");
+			if (!sender.hasPermission(this.getPermission() + ".without_durability") && item.getType().getMaxDurability()<=1) {
+				
+			}
+				
 			Repairable meta = (Repairable) item.getItemMeta();
 			meta.setRepairCost(Integer.parseInt(args[1]));
 			item.setItemMeta((ItemMeta) meta);
