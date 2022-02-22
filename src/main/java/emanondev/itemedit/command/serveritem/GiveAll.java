@@ -93,8 +93,6 @@ public class GiveAll extends SubCmd {
 		case 3:
 			return Util.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
 		case 4:
-			return Util.completePlayers(args[3]);
-		case 5:
 			return Util.complete(args[4], Aliases.BOOLEAN);
 		}
 		return Collections.emptyList();
