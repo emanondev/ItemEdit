@@ -12,7 +12,7 @@ import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.UtilsString;
 
 /**
- * this class allows to interact with server stored items
+ * this class allows interacting with server stored items
  */
 public interface ServerStorage {
 	/**
@@ -21,7 +21,7 @@ public interface ServerStorage {
 	 * @param id unique identifier of the item, case insensitive
 	 * @return item associated with id
 	 */
-	public @Nullable ItemStack getItem(@NotNull String id);
+	@Nullable ItemStack getItem(@NotNull String id);
 
 	/**
 	 * Get the nick associated with id.
@@ -30,7 +30,7 @@ public interface ServerStorage {
 	 * @return nick associated with id, if none is set returns item title, if item
 	 *         has no title@Override item material name is returned
 	 */
-	public @Nullable String getNick(@NotNull String id);
+	@Nullable String getNick(@NotNull String id);
 
 	/**
 	 * Set association for id and item for player.
@@ -38,7 +38,7 @@ public interface ServerStorage {
 	 * @param id   unique identifier of the item, case insensitive
 	 * @param item item to associate to id
 	 */
-	public void setItem(@NotNull String id, @NotNull ItemStack item);
+	void setItem(@NotNull String id, @NotNull ItemStack item);
 
 	/**
 	 * Sets nick value for id.
@@ -46,33 +46,33 @@ public interface ServerStorage {
 	 * @param id   unique identifier of the item, case insensitive
 	 * @param nick nick of the item,
 	 */
-	public void setNick(@NotNull String id, @Nullable String nick);
+	void setNick(@NotNull String id, @Nullable String nick);
 
 	/**
 	 * Remove associations with id.
 	 * 
 	 * @param id unique identifier of the item, case insensitive
 	 */
-	public void remove(@NotNull String id);
+	void remove(@NotNull String id);
 
 	/**
 	 * Remove all ids.
 	 */
-	public void clear();
+	void clear();
 
 	/**
 	 * Get a set of all used ids.
 	 * 
 	 * @return a set of all ids saved
 	 */
-	public @NotNull Set<String> getIds();
+	@NotNull Set<String> getIds();
 
-	public default void validateID(String id) {
+	default void validateID(String id) {
 		if (id == null || id.contains(" ") || id.contains(".") || id.isEmpty())
 			throw new IllegalArgumentException();
 	}
 
-	public default ItemStack getItem(String id, Player target) {
+	default ItemStack getItem(String id, Player target) {
 		ItemStack item = getItem(id);
 		if (item == null || target == null)
 			return item;
@@ -93,7 +93,7 @@ public interface ServerStorage {
 	 * @param item item to check
 	 * @return true if the storage contains a similar item
 	 */
-	public default boolean contains(ItemStack item) {
+	default boolean contains(ItemStack item) {
 		return getId(item)!=null;
 	}
 
@@ -103,10 +103,10 @@ public interface ServerStorage {
 	 * @param item item to check
 	 * @return the id of the item or null if not contained
 	 */
-	public String getId(ItemStack item);
+	String getId(ItemStack item);
 	
 	/**
 	 * Handle plugin reloads
 	 */
-	public void reload();
+	void reload();
 }

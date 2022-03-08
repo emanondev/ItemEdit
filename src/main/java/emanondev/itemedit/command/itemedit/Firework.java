@@ -15,31 +15,31 @@ import emanondev.itemedit.gui.FireworkEditor;
 
 public class Firework extends SubCmd {
 
-	public Firework(ItemEditCommand cmd) {
-		super("firework", cmd, true, true);
-	}
+    public Firework(ItemEditCommand cmd) {
+        super("firework", cmd, true, true);
+    }
 
-	@Override
-	public void onCmd(CommandSender sender, String[] args) {
-		Player p = (Player) sender;
-		ItemStack item = this.getItemInHand(p);
-		if (!(item.getItemMeta() instanceof FireworkMeta)) {
-			Util.sendMessage(p, this.getConfString("wrong-type"));
-			return;
-		}
+    @Override
+    public void onCmd(CommandSender sender, String[] args) {
+        Player p = (Player) sender;
+        ItemStack item = this.getItemInHand(p);
+        if (!(item.getItemMeta() instanceof FireworkMeta)) {
+            Util.sendMessage(p, this.getConfString("wrong-type"));
+            return;
+        }
 
-		try {
-			((Player) sender).openInventory(new FireworkEditor((Player) sender,item).getInventory());
-		} catch (Exception e) {
-			e.printStackTrace();
-			onFail(p);
-		}
-	}
+        try {
+            ((Player) sender).openInventory(new FireworkEditor((Player) sender, item).getInventory());
+        } catch (Exception e) {
+            e.printStackTrace();
+            onFail(p);
+        }
+    }
 
-	// itemedit firework
-	@Override
-	public List<String> complete(CommandSender sender, String[] args) {
-		return Collections.emptyList();
-	}
+    // itemedit firework
+    @Override
+    public List<String> complete(CommandSender sender, String[] args) {
+        return Collections.emptyList();
+    }
 
 }

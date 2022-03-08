@@ -7,20 +7,21 @@ import emanondev.itemedit.command.itemstorage.Save;
 import emanondev.itemedit.command.itemstorage.Show;
 import emanondev.itemedit.command.itemstorage.Update;
 
-public class ItemStorageCommand extends AbstractCommand{
-	public static ItemStorageCommand instance;
-	public static ItemStorageCommand get() {
-		return instance;
-	}
+public class ItemStorageCommand extends AbstractCommand {
+    public static ItemStorageCommand instance;
 
-	public ItemStorageCommand() {
-		super("itemstorage",ItemEdit.get());
-		instance = this;
-		this.registerSubCommand(new Save(this));
-		this.registerSubCommand(new Update(this));
-		this.registerSubCommand(new Delete(this));
-		this.registerSubCommand(new Show(this));
-		this.registerSubCommand(new Get(this));
-	}
+    public static ItemStorageCommand get() {
+        return instance;
+    }
+
+    public ItemStorageCommand() {
+        super("itemstorage", ItemEdit.get());
+        instance = this;
+        this.registerSubCommand(new Save(this));
+        this.registerSubCommand(new Update(this));
+        this.registerSubCommand(new Delete(this));
+        this.registerSubCommand(new Show(this));
+        this.registerSubCommand(new Get(this));
+    }
 
 }

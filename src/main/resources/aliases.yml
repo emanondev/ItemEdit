@@ -197,6 +197,7 @@ flag_type:
   hide_destroys: destroys
   hide_placed_on: placed_on
   hide_potion_effects: potion_effects
+  hide_dye: dye
 boolean:
   'true': 'true'
   'false': 'false'
@@ -244,3 +245,9 @@ axolotl_variant:
   gold: gold
   lucy: leucistic
   wild: wild
+firework_type:
+  ball: ball
+  ball_large: ball_large
+  star: star
+  burst: burst
+  creeper: creeper

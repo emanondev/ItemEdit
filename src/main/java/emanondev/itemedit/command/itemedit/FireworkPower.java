@@ -15,45 +15,45 @@ import emanondev.itemedit.command.SubCmd;
 
 public class FireworkPower extends SubCmd {
 
-	public FireworkPower(ItemEditCommand cmd) {
-		super("fireworkpower", cmd, true, true);
-	}
+    public FireworkPower(ItemEditCommand cmd) {
+        super("fireworkpower", cmd, true, true);
+    }
 
-	@Override
-	public void onCmd(CommandSender sender, String[] args) {
-		Player p = (Player) sender;
-		ItemStack item = this.getItemInHand(p);
-		if (!(item.getItemMeta() instanceof FireworkMeta)) {
-			Util.sendMessage(p, this.getConfString("wrong-type"));
-			return;
-		}
+    @Override
+    public void onCmd(CommandSender sender, String[] args) {
+        Player p = (Player) sender;
+        ItemStack item = this.getItemInHand(p);
+        if (!(item.getItemMeta() instanceof FireworkMeta)) {
+            Util.sendMessage(p, this.getConfString("wrong-type"));
+            return;
+        }
 
-		FireworkMeta itemMeta = (FireworkMeta) item.getItemMeta();
+        FireworkMeta itemMeta = (FireworkMeta) item.getItemMeta();
 
-		try {
-			if (args.length != 2)
-				throw new IllegalArgumentException();
-			int power = Integer.valueOf(args[1]);
-			if (power < 0 || power > 5)
-				throw new IllegalArgumentException();
-			itemMeta.setPower(power);
-			item.setItemMeta(itemMeta);
-			p.updateInventory();
-		} catch (Exception e) {
-			onFail(p);
-		}
-	}
+        try {
+            if (args.length != 2)
+                throw new IllegalArgumentException();
+            int power = Integer.parseInt(args[1]);
+            if (power < 0 || power > 5)
+                throw new IllegalArgumentException();
+            itemMeta.setPower(power);
+            item.setItemMeta(itemMeta);
+            p.updateInventory();
+        } catch (Exception e) {
+            onFail(p);
+        }
+    }
 
-	// itemedit fireworkpower <power>
-	@Override
-	public List<String> complete(CommandSender sender, String[] args) {
-		if (args.length == 2) {
-			ArrayList<String> list = new ArrayList<>();
-			for (int i = 0; i < 6; i++)
-				list.add(String.valueOf(i));
-			return list;
-		}
-		return Collections.emptyList();
-	}
+    // itemedit fireworkpower <power>
+    @Override
+    public List<String> complete(CommandSender sender, String[] args) {
+        if (args.length == 2) {
+            ArrayList<String> list = new ArrayList<>();
+            for (int i = 0; i < 6; i++)
+                list.add(String.valueOf(i));
+            return list;
+        }
+        return Collections.emptyList();
+    }
 
 }

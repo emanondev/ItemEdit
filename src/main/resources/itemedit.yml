@@ -8,14 +8,14 @@ help-header: "&9&lItemEdit - Help"
 sub-commands:
   rename:
     name: "rename"
-    description: 
+    description:
       - "&b&lSet item's name"
       - ""
       - "&b&lTip: &btype &eclear &bto revert name to default"
     params: "<name>"
   lore:
     name: "lore"
-    description: 
+    description:
       - "&b&lEdit lore"
       - ""
       - "&eAdd <text> &b- add text on a new line"
@@ -30,32 +30,32 @@ sub-commands:
     params: "<add/set/remove...> [...]"
     set:
       params: "set <line> <text>"
-      description: 
+      description:
         - "&b&lSet or replace text on selected line"
     remove:
       params: "remove <line>"
-      description: 
+      description:
         - "&b&lRemove selected line"
     insert:
       params: "insert <line> <text>"
-      description: 
+      description:
         - "&b&lAdd text on selected line"
     copy:
-        feedback: "&aLore copied"
+      feedback: "&aLore copied"
     copyBook:
-        wrong-type: "&cItem must be a written book or book and quill"
-        feedback: "&aBook pages copied"
+      wrong-type: "&cItem must be a written book or book and quill"
+      feedback: "&aBook pages copied"
     copyFile:
-        no-path: "&cSelect a path /ie lore copyfile &6<path>"
-        wrong-path: "&cInvalid path, remember to reload the configuration and check the CaPs"
-        feedback: "&aConfiguration copied"
+      no-path: "&cSelect a path /ie lore copyfile &6<path>"
+      wrong-path: "&cInvalid path, remember to reload the configuration and check the CaPs"
+      feedback: "&aConfiguration copied"
     paste:
-        feedback: "&aLore pasted"
-        no-copy: "&cCopy a lore first"
+      feedback: "&aLore pasted"
+      no-copy: "&cCopy a lore first"
   hide:
     name: "hide"
-    description: 
-      - "&b&lHide or unhide components"
+    description:
+      - "&b&lHide or show components"
       - ""
       - "&e<flag> &bitem flag to edit"
       - "&e[true/false] &bset the flag value, by default toggle"
@@ -65,7 +65,7 @@ sub-commands:
     params: "<flag> [true/false]"
   hideall:
     name: "hideall"
-    description: 
+    description:
       - "&b&lHide all components"
       - ""
       - "&bHides: enchants, potion effects, banner layers, attributes ..."
@@ -74,7 +74,7 @@ sub-commands:
     params: ""
   damage:
     name: "durability"
-    description: 
+    description:
       - "&b&lEdit durability"
       - ""
       - "&e<durability> &bdamage to apply"
@@ -82,32 +82,32 @@ sub-commands:
     params: "<durability>"
   type:
     name: "type"
-    description: 
+    description:
       - "&b&lSet item's type"
       - ""
       - "&b&lNote: &ba few types as Air won't work"
     params: "<type>"
   unbreakable:
     name: "unbreakable"
-    description: 
+    description:
       - "&b&lSet unbreakable state"
       - ""
       - "&bUnbreakable tools and armors won't lost durability"
       - "&e[true/false] &bset unbreakable value, by default toggle"
     params: "[true/false]"
-  amount: 
+  amount:
     name: "amount"
-    description: 
+    description:
       - "&b&lSet amount"
       - ""
       - "&e<amount> &bamount to set (up to 127)"
       - "&b&lTip: &bNegative amounts are subtracted"
       - "&b from item current amount"
     params: "<amount>"
-  skullowner:  
+  skullowner:
     name: "skullowner"
     wrong-type: "&cItem must be a player skull"
-    description: 
+    description:
       - "&b&lSet skull owner"
       - ""
       - "&bWorks only on Player's skulls"
@@ -115,10 +115,10 @@ sub-commands:
       - ""
       - "&b&lTip: &bPlace and break the skull to update skins"
     params: "<name>"
-  color: 
+  color:
     name: "color"
     wrong-type: "&cItem must be colorable type like leather armors, potions or tipped arrows"
-    description: 
+    description:
       - "&b&lSet color"
       - ""
       - "&bWorks on leather armor, on servers 1.11+ works on"
@@ -127,9 +127,9 @@ sub-commands:
       - "&bEach color is an int value between 0 and 255"
       - "&bIf you are confused google \"&eRGB color picker&b\""
     params: "<red> <green> <blue>"
-  enchant:  
+  enchant:
     name: "enchant"
-    description: 
+    description:
       - "&b&lSet enchants"
       - ""
       - "&e<enchant> &benchant type"
@@ -140,7 +140,7 @@ sub-commands:
   booktype:
     name: "booktype"
     wrong-type: "&cItem must be a written book"
-    description: 
+    description:
       - "&b&lSet book type"
       - ""
       - "&bWorks only on Written books"
@@ -148,7 +148,7 @@ sub-commands:
   bookauthor:
     name: "bookauthor"
     wrong-type: "&cItem must be a written book"
-    description: 
+    description:
       - "&b&lSet author"
       - ""
       - "&bAuthor name may contains spaces and be colored too"
@@ -157,7 +157,7 @@ sub-commands:
   potioneffect:
     name: "potioneffect"
     wrong-type: "&cItem must be a potion or a tipped arrow or a suspicious stew"
-    description: 
+    description:
       - "&b&lEdit potion's effects"
       - ""
       - "&bWorks on any Potion, Tipped arrows and Suspicious stew!"
@@ -167,7 +167,7 @@ sub-commands:
     params: "<add/remove/reset> [...]"
     add:
       params: "add <effect> <duration> [level]"
-      description: 
+      description:
         - "&b&lAdds/Override selected effect"
         - ""
         - "&e<effect> &beffect type"
@@ -175,12 +175,12 @@ sub-commands:
         - "&e[level] &bUp to 127, by default &e1"
     remove:
       params: "remove <effect>"
-      description: 
+      description:
         - "&b&lRemove selected effect"
   banner:
     name: "banner"
     wrong-type: "&cItem must be a banner"
-    description: 
+    description:
       - "&b&lEdit banner"
     gui:
       title: "&9Banner Editor"
@@ -223,7 +223,7 @@ sub-commands:
   fireworkpower:
     name: "fireworkpower"
     wrong-type: "&cItem must be a firework"
-    description: 
+    description:
       - "&b&lSet firework power"
       - ""
       - "&e<power> &bpower of the firework, a value betwheen &e0 &band &e5"
@@ -231,7 +231,7 @@ sub-commands:
   firework:
     name: "firework"
     wrong-type: "&cItem must be a firework"
-    description: 
+    description:
       - "&b&lEdit firework"
     params: ""
     buttons:
@@ -272,11 +272,11 @@ sub-commands:
         - ""
         - "&bLeft/Right Click to change"
     gui:
-        title: "&9Firework Editor"
+      title: "&9Firework Editor"
   spawnereggtype:
     name: "eggtype"
     wrong-type: "&cItem must be a spawner egg"
-    description: 
+    description:
       - "&b&lSet type of entity spawned by spawner egg"
       - ""
       - "&e<type> &btype of the entity"
@@ -284,7 +284,7 @@ sub-commands:
     params: "<type>"
   attribute:
     name: "attribute"
-    description: 
+    description:
       - "&b&lEdit attribute modifiers"
       - ""
       - "&eAdd <attribute> <amount> [operation] [slot] &b- add new modifiers"
@@ -292,7 +292,7 @@ sub-commands:
     params: "<add/remove> [...]"
     add:
       params: "add <attribute> <amount> [operation] [slot]"
-      description: 
+      description:
         - "&b&lAdd attribute modifier"
         - ""
         - "&e<attribute> &battribute type"
@@ -302,7 +302,7 @@ sub-commands:
         - "&e       equipment slot or any equipment slot if not selected"
     remove:
       params: "remove <attribute/slot>"
-      description: 
+      description:
         - "&b&lRemove modifiers"
         - ""
         - "&e<attribute/slot> &btype to remove, any modifiers with"
@@ -310,7 +310,7 @@ sub-commands:
   tropicalfish:
     name: "tropicalfish"
     wrong-type: "&cItem must be a tropical fish bucket"
-    description: 
+    description:
       - "&b&lSet property of tropical fish bucket"
       - ""
       - "&epattern <pattern type> &b- type of fish"
@@ -319,25 +319,25 @@ sub-commands:
     params: "[...]"
     pattern:
       params: "pattern <type>"
-      description: 
+      description:
         - "&b&lSet tropical fish pattern type"
         - ""
         - "&e<type> &bpattern type of the fish"
     patterncolor:
       params: "patterncolor <color>"
-      description: 
+      description:
         - "&b&lSet tropical fish pattern color"
         - ""
         - "&e<color> &bpattern color of the fish"
     bodycolor:
       params: "bodycolor <color>"
-      description: 
+      description:
         - "&b&lSet tropical fish body color"
         - ""
         - "&e<color> &bbody color of the fish"
   repaircost:
     name: "repaircost"
-    description: 
+    description:
       - "&b&lEdit Anvil Repair Cost"
       - ""
       - "&e<cost> &blevels amount"
@@ -347,7 +347,7 @@ sub-commands:
     params: "<cost>"
   custommodeldata:
     name: "custommodeldata"
-    description: 
+    description:
       - "&b&lEdit custom model data"
       - ""
       - "&bUsed for texture packs"
@@ -356,14 +356,14 @@ sub-commands:
   axolotlvariant:
     name: "axolotltype"
     wrong-type: "&cItem must be a axolotl bucket"
-    description: 
+    description:
       - "&b&lEdit Axolotl Variant on Axolotl bucket"
       - ""
       - "&e<type> &bthe type of axolotl"
     params: "<type>"
   listaliases:
     name: "listaliases"
-    description: 
+    description:
       - "&b&lShows allowed aliases parameters"
       - ""
       - "&e<type> &bthe type of parameter to show"
@@ -374,10 +374,10 @@ sub-commands:
     second_color: "&e"
     hover_info: "&9Original value: &e%default%"
     hover_type: "&6Click to examine"
-  compass:  
+  compass:
     name: "compass"
     wrong-type: "&cItem must be a compass"
-    description: 
+    description:
       - "&b&lSet compass target location"
       - ""
       - "&eSet &b- set your location as compass target"

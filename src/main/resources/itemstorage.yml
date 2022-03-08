@@ -9,7 +9,7 @@ sub-commands:
     #Holders: %id% %amount%
     success: "&aObtained &e%amount% &aof &e%id%"
     no-inventory-space: "&cYou don't have space in your inventory"
-    description: 
+    description:
       - "&b&lGet selected item"
       - ""
       - "&e<id> &bId of the item"
@@ -21,7 +21,7 @@ sub-commands:
     success: "&aItem &e%id% &aregistered"
     #Holders: %limit%
     limit-reached: "&cYou reached the maximus number of savable items (%limit%)"
-    description: 
+    description:
       - "&b&lRegister the item in your hand"
       - ""
       - "&e<id> &bidentify your item, case insensitive and can't"
@@ -35,7 +35,7 @@ sub-commands:
     name: "delete"
     #Holders: %id%
     success: "&aItem &e%id% &aunregistered"
-    description: 
+    description:
       - "&b&lDelete selected item"
       - ""
       - "&e<id> &bId of the item"
@@ -44,7 +44,7 @@ sub-commands:
     name: "update"
     #Holders: %id%
     success: "&aItem &e%id% &ahas been updated"
-    description: 
+    description:
       - "&b&lUpdate selected item"
       - ""
       - "&bChange the item associated with id with your hand item"
@@ -55,7 +55,7 @@ sub-commands:
     params: "<id>"
   show:
     name: "show"
-    description: 
+    description:
       - "&b&lOpen a gui with your saved items"
       - ""
       - "&e[page] &bpage of the gui, by default 1"

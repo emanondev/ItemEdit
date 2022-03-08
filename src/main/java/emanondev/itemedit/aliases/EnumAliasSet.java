@@ -4,25 +4,25 @@ import java.util.Collection;
 import java.util.EnumSet;
 
 public class EnumAliasSet<T extends Enum<T>> extends AliasSet<T> {
-	
-	private Class<T> clazz;
 
-	public EnumAliasSet(Class<T> clazz) {
-		this(clazz.getSimpleName().toLowerCase(),clazz);
-	}
+    private final Class<T> clazz;
 
-	public EnumAliasSet(String path, Class<T> clazz) {
-		super(path);
-		this.clazz = clazz;
-	}
+    public EnumAliasSet(Class<T> clazz) {
+        this(clazz.getSimpleName().toLowerCase(), clazz);
+    }
 
-	@Override
-	public String getName(T type) {
-		return type.name().toLowerCase();
-	}
+    public EnumAliasSet(String path, Class<T> clazz) {
+        super(path);
+        this.clazz = clazz;
+    }
 
-	@Override
-	public Collection<T> getValues() {
-		return EnumSet.allOf(clazz);
-	}
+    @Override
+    public String getName(T type) {
+        return type.name().toLowerCase();
+    }
+
+    @Override
+    public Collection<T> getValues() {
+        return EnumSet.allOf(clazz);
+    }
 }

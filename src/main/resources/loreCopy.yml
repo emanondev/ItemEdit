@@ -12,6 +12,6 @@
 #
 #The following example use 'example_lore' as <path> so '/ie lore copyfile example_lore'
 example_lore:
-    - "&fThis is a configuration example"
-    - "&fYou can add color and formats with & char -> &e for yellow"
-    - "&f1.16+ also supports Hex colors -> &#FF0000 for red"
+  - "&fThis is a configuration example"
+  - "&fYou can add color and formats with & char -> &e for yellow"
+  - "&f1.16+ also supports Hex colors -> &#FF0000 for red"

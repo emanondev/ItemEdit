@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.YMLConfig;
+import org.jetbrains.annotations.NotNull;
 
 public class YmlServerStorage implements ServerStorage {
 
@@ -22,7 +23,7 @@ public class YmlServerStorage implements ServerStorage {
 	}
 
 	@Override
-	public ItemStack getItem(String id) {
+	public ItemStack getItem(@NotNull String id) {
 		validateID(id);
 		id = id.toLowerCase();
 		ItemStack item = database.getItemStack(id + ".item", null);
@@ -30,7 +31,7 @@ public class YmlServerStorage implements ServerStorage {
 	}
 
 	@Override
-	public String getNick(String id) {
+	public String getNick(@NotNull String id) {
 		validateID(id);
 		id = id.toLowerCase();
 		String nick = database.getString(id + ".nick", null, true);
@@ -48,7 +49,7 @@ public class YmlServerStorage implements ServerStorage {
 	}
 
 	@Override
-	public void remove(String id) {
+	public void remove(@NotNull String id) {
 		validateID(id);
 		id = id.toLowerCase();
 		reversedMap.remove(database.get(id));
@@ -65,12 +66,12 @@ public class YmlServerStorage implements ServerStorage {
 	}
 
 	@Override
-	public Set<String> getIds() {
+	public @NotNull Set<String> getIds() {
 		return database.getKeys(false);
 	}
 
 	@Override
-	public void setItem(String id, ItemStack item) {
+	public void setItem(@NotNull String id, @NotNull ItemStack item) {
 		validateID(id);
 		id = id.toLowerCase();
 		if (item == null || item.getType() == Material.AIR)
@@ -82,7 +83,7 @@ public class YmlServerStorage implements ServerStorage {
 	}
 
 	@Override
-	public void setNick(String id, String nick) {
+	public void setNick(@NotNull String id, String nick) {
 		validateID(id);
 		if (!database.contains(id))
 			return;

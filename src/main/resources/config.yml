@@ -25,15 +25,15 @@ log:
   console: true
   #log actions on a log file?
   file: true
-  #logs files are save on logs folder with a date format that you may edit here
+  #logs files are saved on logs folder with a date format that you may edit here
   #if you wish to store a whole month in a single file instead of a file for each day just remove the ".dd"
   file-format: "yyyy.MM.dd"
-  #logs may contains a date prefix, you can set the format here
+  #logs may contain a date prefix, you can set the format here
   log-date-format: "[dd.MM.yyyy HH:mm:ss]"
   action:
-    #log when a player reiceve items? (/serveritem give [...])
+    #log when a player receive items? (/serveritem give [...])
     give: true
-    #log when a player reiceve items? (/serveritem giveall [...])
+    #log when a player receive items? (/serveritem giveall [...])
     giveall: true
     #log when removing items from player? (/serveritem take [...])
     take: true
@@ -66,11 +66,11 @@ gui:
       glow: false
       #Holders: %player_name% %page%
       description:
-      - '&9&lPage &e&l%page%'
-      - '&9Click &ehere &9to &atoggle view of item/ID'
-      - '&eLeft &9Click on items to &egain 1'
-      - '&eShift+Left &9Click on items to &egain 64'
-      - '&eShift+Right &9Click on items to &cdelete &9item'
+        - '&9&lPage &e&l%page%'
+        - '&9Click &ehere &9to &atoggle view of item/ID'
+        - '&eLeft &9Click on items to &egain 1'
+        - '&eShift+Left &9Click on items to &egain 64'
+        - '&eShift+Right &9Click on items to &cdelete &9item'
   serveritems:
     rows: 5
     #Holders: %player_name% %page%
@@ -95,28 +95,28 @@ gui:
       glow: false
       #Holders: %player_name% %page%
       description:
-      - '&9&lPage &e&l%page%'
-      - '&9Click &ehere &9to &atoggle view of item/ID'
-      - '&eLeft &9Click on items to &egain 1'
-      - '&eShift+Left &9Click on items to &egain 64'
-      - '&eShift+Right &9Click on items to &cdelete &9item'
+        - '&9&lPage &e&l%page%'
+        - '&9Click &ehere &9to &atoggle view of item/ID'
+        - '&eLeft &9Click on items to &egain 1'
+        - '&eShift+Left &9Click on items to &egain 64'
+        - '&eShift+Right &9Click on items to &cdelete &9item'
 blocked:
-    log:
-        #when text is blocked a message will be displayed on console, reporting the text and the blocked word/regex
-        console: true
-        #when text is blocked a message will be saved on file, reporting the text and the blocked word/regex
-        file: true
-    #Words blocked when editing items unless you have permission to bypass
-    #Affects commands like /ie rename, /ie lore and similar
-    #Any text which contains a subsequence that matches a blocked word is blocked
-    words:
+  log:
+    #when text is blocked a message will be displayed on console, reporting the text and the blocked word/regex
+    console: true
+    #when text is blocked a message will be saved on file, reporting the text and the blocked word/regex
+    file: true
+  #Words blocked when editing items unless you have permission to bypass
+  #Affects commands like /ie rename, /ie lore and similar
+  #Any text which contains a subsequence that matches a blocked word is blocked
+  words:
     - "myblockedworldexample123"
-    #Regex blocked when editing items unless you have permission to bypass
-    #Affects commands like /ie rename, /ie lore and similar
-    #A regex is a sequence of characters that define a search pattern
-    #Any text which contains a subsequence that matches a pattern is blocked
-    #Google 'java regex tester' or go to www.freeformatter.com/java-regex-tester.html to learn more and test new regex
-    regex:
+  #Regex blocked when editing items unless you have permission to bypass
+  #Affects commands like /ie rename, /ie lore and similar
+  #A regex is a sequence of characters that define a search pattern
+  #Any text which contains a subsequence that matches a pattern is blocked
+  #Google 'java regex tester' or go to www.freeformatter.com/java-regex-tester.html to learn more and test new regex
+  regex:
     - '^[a@][s\$][s\$]$'
     - '[a@][s\$][s\$]h[o0][l1][e3][s\$]?'
     - 'b[a@][s\$][t\+][a@]rd '
@@ -189,8 +189,8 @@ blocked:
     - '[s\$]mu[t\+][s\$]?'
     - '[s\$]punk[s\$]?'
     - '[t\+]w[a@][t\+][s\$]?'
-    #A list of blocked materials which cannot be renamed unless you have permission to bypass
-    #You may find valid ids here https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
-    #or here for versions 1.8-1.12 https://helpch.at/docs/1.12.2/org/bukkit/Material.html
-    #CaPs are not relevant for this config
-    type-blocked-rename: []
+  #A list of blocked materials which cannot be renamed unless you have permission to bypass
+  #You may find valid ids here https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+  #or here for versions 1.8-1.12 https://helpch.at/docs/1.12.2/org/bukkit/Material.html
+  #CaPs are not relevant for this config
+  type-blocked-rename: [ ]

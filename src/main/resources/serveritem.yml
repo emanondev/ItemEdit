@@ -10,7 +10,7 @@ sub-commands:
     feedback: "&aObtained &e%amount% &aof &e%nick%"
     #Holders: %id% %nick% %amount% %player_name%
     log: "[serveritem][give] %player_name% obtained %amount% of %id% (%nick%)"
-    description: 
+    description:
       - "&b&lGive selected item to player"
       - ""
       - "&e<id> &bId of the item"
@@ -24,7 +24,7 @@ sub-commands:
     feedback: "&aObtained &e%amount% &aof &e%nick%"
     #Holders: %id% %nick% %amount% %targets%
     log: "[serveritem][giveall] %targets% obtained %amount% of %id% (%nick%)"
-    description: 
+    description:
       - "&b&lGive selected item to all online players"
       - ""
       - "&e<id> &bId of the item"
@@ -35,7 +35,7 @@ sub-commands:
     name: "drop"
     #Holders: %id% %nick% %amount% %world% %x% %y% %z%
     log: "[serveritem][drop] dropped %amount% of %id% (%nick%) at %world% %x% %y% %z%"
-    description: 
+    description:
       - "&b&lDrop selected item at chosen location"
       - ""
       - "&e<id> &bId of the item"
@@ -49,7 +49,7 @@ sub-commands:
     feedback: "&aLost &e%amount% &aof &e%nick%"
     #Holders: %id% %nick% %amount% %player_name%
     log: "[serveritem][take] %player_name% gave %amount% of %id% (%nick%)"
-    description: 
+    description:
       - "&b&lTake selected item from player"
       - ""
       - "&e<id> &bId of the item"
@@ -61,7 +61,7 @@ sub-commands:
     name: "save"
     #Holders: %id%
     success: "&aItem &e%id% &aregistered"
-    description: 
+    description:
       - "&bRegister the item in your hand"
       - ""
       - "&e<id> &bidentify the item, case insensitive and can't"
@@ -84,7 +84,7 @@ sub-commands:
     name: "update"
     #Holders: %id%
     success: "&aItem &e%id% &ahas been updated"
-    description: 
+    description:
       - "&b&lUpdate selected item"
       - ""
       - "&bChange the item associated with id with your hand item"
@@ -95,7 +95,7 @@ sub-commands:
     params: "<id>"
   show:
     name: "show"
-    description: 
+    description:
       - "&b&lOpen a gui with server saved items"
       - ""
       - "&e[page] &bpage of the gui, by default 1"
@@ -104,7 +104,7 @@ sub-commands:
     name: "setnick"
     #Holders: %id% %nick%
     success: "&aItem &e%id% &anick has been updated to &e%nick%"
-    description: 
+    description:
       - "&bSet display name of selected item"
       - ""
       - "&bNick is used for holder &e%nick%&b on buy/sell messages, by"
@@ -125,7 +125,7 @@ sub-commands:
     not-enough-money: "&cYou don't have &6%price% &cto buy &6%amount% &cof &6%nick%"
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: "[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)"
-    description: 
+    description:
       - "&b&lSell items to player"
       - ""
       - "&bSell differs from SellMax because you sell the whole amount"
@@ -148,7 +148,7 @@ sub-commands:
     not-enough-items: "&cYou don't have &6%amount% &cof &6%nick% &cin your inventory"
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: "[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%"
-    description: 
+    description:
       - "&b&lBuy items from player"
       - ""
       - "&bBuy differs from BuyMax because you buy the whole amount"
@@ -173,7 +173,7 @@ sub-commands:
     not-enough-money: "&cYou don't have enough money to buy any &6%nick% &cfor &6%price% &ceach"
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: "[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)"
-    description: 
+    description:
       - "&b&lSell items to player"
       - ""
       - "&bSellMax differs from Sell because you may sell the less of amount"
@@ -197,7 +197,7 @@ sub-commands:
     not-enough-items: "&cYou don't have any &6%nick% &cto sell in your inventory"
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: "[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%"
-    description: 
+    description:
       - "&b&lBuy items from player"
       - ""
       - "&bBuyMax differs from Buy because you may buy less of amount"

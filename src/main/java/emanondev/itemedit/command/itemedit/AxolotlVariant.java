@@ -14,46 +14,46 @@ import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 
 public class AxolotlVariant extends SubCmd {
-	
-	public AxolotlVariant(ItemEditCommand cmd) {
-		super("axolotlvariant",
-				cmd,true,true);
-	}
 
-	public void reload() {
-		super.reload();
-	}
+    public AxolotlVariant(ItemEditCommand cmd) {
+        super("axolotlvariant",
+                cmd, true, true);
+    }
 
-	@Override
-	public void onCmd(CommandSender sender, String[] args) {
-		Player p = (Player) sender;
-		ItemStack item = this.getItemInHand(p);
-		if (!(item.getItemMeta() instanceof AxolotlBucketMeta)) {
-			Util.sendMessage(p, this.getConfString("wrong-type"));
-			return;
-		}
+    public void reload() {
+        super.reload();
+    }
 
-		try {
-			if (args.length != 2)
-				throw new IllegalArgumentException("Wrong param number");
-			AxolotlBucketMeta meta = (AxolotlBucketMeta) item.getItemMeta();
+    @Override
+    public void onCmd(CommandSender sender, String[] args) {
+        Player p = (Player) sender;
+        ItemStack item = this.getItemInHand(p);
+        if (!(item.getItemMeta() instanceof AxolotlBucketMeta)) {
+            Util.sendMessage(p, this.getConfString("wrong-type"));
+            return;
+        }
 
-			Axolotl.Variant type = Aliases.AXOLOTL_VARIANT.convertAlias(args[1]);
-			if (type == null)
-				throw new IllegalArgumentException();
-			meta.setVariant(type);
-			item.setItemMeta(meta);
-			p.updateInventory();
-		} catch (Exception e) {
-			onFail(p);
-		}
+        try {
+            if (args.length != 2)
+                throw new IllegalArgumentException("Wrong param number");
+            AxolotlBucketMeta meta = (AxolotlBucketMeta) item.getItemMeta();
 
-	}
+            Axolotl.Variant type = Aliases.AXOLOTL_VARIANT.convertAlias(args[1]);
+            if (type == null)
+                throw new IllegalArgumentException();
+            meta.setVariant(type);
+            item.setItemMeta(meta);
+            p.updateInventory();
+        } catch (Exception e) {
+            onFail(p);
+        }
 
-	@Override
-	public List<String> complete(CommandSender sender, String[] args) {
-		if (args.length == 2)
-			return Util.complete(args[1], Aliases.AXOLOTL_VARIANT);
-		return Collections.emptyList();
-	}
+    }
+
+    @Override
+    public List<String> complete(CommandSender sender, String[] args) {
+        if (args.length == 2)
+            return Util.complete(args[1], Aliases.AXOLOTL_VARIANT);
+        return Collections.emptyList();
+    }
 }

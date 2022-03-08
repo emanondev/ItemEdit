@@ -11,53 +11,51 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class UpdateChecker {
-	private int project;
-	private URL checkURL;
-	private String newVersion;
-	private JavaPlugin plugin;
+    private final int project;
+    private URL checkURL;
+    private String newVersion;
+    private final JavaPlugin plugin;
 
-	public UpdateChecker(JavaPlugin plugin, int projectID) {
-		this.plugin = plugin;
-		project = projectID;
-		newVersion = plugin.getDescription().getVersion();
-		try {
-			checkURL = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + projectID);
-		} catch (MalformedURLException e) {
-			Bukkit.getLogger().warning("§4Could not connect to Spigot, plugin disabled!");
-			Bukkit.getPluginManager().disablePlugin(plugin);
-		}
-	}
+    public UpdateChecker(JavaPlugin plugin, int projectID) {
+        this.plugin = plugin;
+        project = projectID;
+        newVersion = plugin.getDescription().getVersion();
+        try {
+            checkURL = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + projectID);
+        } catch (MalformedURLException e) {
+            Bukkit.getLogger().warning("§4Could not connect to Spigot, plugin disabled!");
+            Bukkit.getPluginManager().disablePlugin(plugin);
+        }
+    }
 
-	public String getResourceUrl() {
-		return "https://spigotmc.org/resources/" + project;
-	}
+    public String getResourceUrl() {
+        return "https://spigotmc.org/resources/" + project;
+    }
 
-	/**
-	 * 
-	 */
-	private boolean checkForUpdates() throws Exception {
-		URLConnection con = checkURL.openConnection();
-		newVersion = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
-		return !plugin.getDescription().getVersion().equals(newVersion);
+    /**
+     *
+     */
+    private boolean checkForUpdates() throws Exception {
+        URLConnection con = checkURL.openConnection();
+        newVersion = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
+        return !plugin.getDescription().getVersion().equals(newVersion);
 
-	}
+    }
 
-	public void logUpdates() {
-		Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
-			public void run() {
-				try {
-					if (checkForUpdates()) {
-						Bukkit.getConsoleSender()
-								.sendMessage("[" + plugin.getName() + "] New Update at " + getResourceUrl());
+    public void logUpdates() {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            try {
+                if (checkForUpdates()) {
+                    Bukkit.getConsoleSender()
+                            .sendMessage("[" + plugin.getName() + "] New Update at " + getResourceUrl());
 
-					}
-				} catch (FileNotFoundException e) {
-					Bukkit.getConsoleSender().sendMessage(
-							"[" + plugin.getName() + "] Unable to check for new updates at " + getResourceUrl());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+                }
+            } catch (FileNotFoundException e) {
+                Bukkit.getConsoleSender().sendMessage(
+                        "[" + plugin.getName() + "] Unable to check for new updates at " + getResourceUrl());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }
