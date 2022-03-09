@@ -23,25 +23,25 @@ public abstract class AbstractCommand implements TabExecutor {
     private final APlugin plugin;
     private final YMLConfig config;
 
-    public String getName() {
+    public final @NotNull String getName() {
         return name;
     }
 
     @Deprecated
-    public AbstractCommand(String name) {
+    public AbstractCommand(@NotNull String name) {
         this.name = name.toLowerCase();
         this.plugin = ItemEdit.get();
         config = ItemEdit.get().getConfig(getName() + ".yml");
     }
 
 
-    public AbstractCommand(String name, APlugin plugin) {
+    public AbstractCommand(@NotNull String name,@NotNull APlugin plugin) {
         this.name = name.toLowerCase();
         this.plugin = plugin;
         config = plugin.getConfig(getName() + ".yml");
     }
 
-    public APlugin getPlugin() {
+    public final @NotNull APlugin getPlugin() {
         return plugin;
     }
 
@@ -53,7 +53,7 @@ public abstract class AbstractCommand implements TabExecutor {
             sub.reload();
     }
 
-    public void registerSubCommand(SubCmd sub) {
+    public void registerSubCommand(@NotNull SubCmd sub) {
         cmds.add(sub);
     }
 
@@ -65,13 +65,12 @@ public abstract class AbstractCommand implements TabExecutor {
         return true;
     }
 
-    public String getPermissionLackMessage(String permission) {
+    public String getPermissionLackMessage(@NotNull String permission) {
         return config.loadString("lack-permission", "&cYou lack of permission %permission%", true)
                 .replace("%permission%", permission);
     }
 
-    private boolean validateRequires(SubCmd sub, CommandSender sender) {
-
+    private boolean validateRequires(SubCmd sub,@NotNull CommandSender sender) {
         if (sub == null) {
             help(sender);
             return false;

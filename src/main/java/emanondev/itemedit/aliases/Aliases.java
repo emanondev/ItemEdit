@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import emanondev.itemedit.ItemEdit;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Aliases {
 
@@ -68,34 +69,32 @@ public class Aliases {
 
 
     private static void loadTypesMap() {
-        if (ENCHANT != null)
-            types.put(ENCHANT.getID(), ENCHANT);
-        if (PATTERN_TYPE != null)
-            types.put(PATTERN_TYPE.getID(), PATTERN_TYPE);
-        if (BOOK_TYPE != null)
-            types.put(BOOK_TYPE.getID(), BOOK_TYPE);
-        if (POTION_EFFECT != null)
-            types.put(POTION_EFFECT.getID(), POTION_EFFECT);
-        if (COLOR != null)
-            types.put(COLOR.getID(), COLOR);
-        if (EGG_TYPE != null)
-            types.put(EGG_TYPE.getID(), EGG_TYPE);
-        if (FLAG_TYPE != null)
-            types.put(FLAG_TYPE.getID(), FLAG_TYPE);
-        if (BOOLEAN != null)
-            types.put(BOOLEAN.getID(), BOOLEAN);
-        if (EQUIPMENT_SLOTS != null)
-            types.put(EQUIPMENT_SLOTS.getID(), EQUIPMENT_SLOTS);
-        if (FIREWORK_TYPE != null)
-            types.put(FIREWORK_TYPE.getID(), FIREWORK_TYPE);
-        if (ATTRIBUTE != null)
-            types.put(ATTRIBUTE.getID(), ATTRIBUTE);
-        if (OPERATIONS != null)
-            types.put(OPERATIONS.getID(), OPERATIONS);
-        if (TROPICALPATTERN != null)
-            types.put(TROPICALPATTERN.getID(), TROPICALPATTERN);
-        if (AXOLOTL_VARIANT != null)
-            types.put(AXOLOTL_VARIANT.getID(), AXOLOTL_VARIANT);
+        registerAliasType(ENCHANT);
+        registerAliasType(PATTERN_TYPE);
+        registerAliasType(BOOK_TYPE);
+        registerAliasType(POTION_EFFECT);
+        registerAliasType(COLOR);
+        registerAliasType(EGG_TYPE);
+        registerAliasType(FLAG_TYPE);
+        registerAliasType(BOOLEAN);
+        registerAliasType(EQUIPMENT_SLOTS);
+        registerAliasType(FIREWORK_TYPE);
+        registerAliasType(ATTRIBUTE);
+        registerAliasType(OPERATIONS);
+        registerAliasType(TROPICALPATTERN);
+        registerAliasType(AXOLOTL_VARIANT);
+    }
+
+    public static <T> void registerAliasType(@Nullable AliasSet<T> set){
+        if (set==null)
+            return;
+        if (types.containsKey(set.getID()))
+            throw new IllegalArgumentException("Duplicate id");
+        types.put(set.getID(),set);
+    }
+
+    public static AliasSet<?> getAliasType(@NotNull String id){
+        return types.get(id);
     }
 
     public static void reload() {
@@ -108,8 +107,8 @@ public class Aliases {
         }
     }
 
-    public static final Map<String, AliasSet<?>> getTypes() {
-        return types;
+    public static Map<String, AliasSet<?>> getTypes() {
+        return Collections.unmodifiableMap(types);
     }
 
     private static EggTypeAliases getEggTypeAliases() {
