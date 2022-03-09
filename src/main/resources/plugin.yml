@@ -1,6 +1,6 @@
 name: ${project.name}
 main: ${groupId}.${project.name}
-version: ${project.version}
+version: "${project.version}"
 author: emanon
 api-version: 1.13
 softdepend: [ Vault,SuperVanish,PremiumVanish,PlaceHolderAPI,ShopGUIPlus,IridiumSkyblock,ASkyBlock,uSkyBlock,IslandWorld,FabledSkyBlock,SimpleSkyblock,SkyBlock,SuperiorSkyblock2,SuperiorSkyblock ]
