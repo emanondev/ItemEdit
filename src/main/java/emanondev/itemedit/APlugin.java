@@ -2,8 +2,12 @@ package emanondev.itemedit;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import emanondev.itemedit.command.AbstractCommand;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -96,6 +100,18 @@ public abstract class APlugin extends JavaPlugin {
         if (cooldownApi == null)
             cooldownApi = new CooldownAPI(this);
         return cooldownApi;
+    }
+
+    protected void registerCommand(AbstractCommand executor, List<String> aliases) {
+        registerCommand(executor.getName(), executor, aliases);
+    }
+
+    protected void registerCommand(String commandName, TabExecutor executor, List<String> aliases) {
+        PluginCommand command = getCommand(commandName);
+        command.setExecutor(executor);
+        command.setTabCompleter(executor);
+        if (aliases != null)
+            command.setAliases(aliases);
     }
 
 }

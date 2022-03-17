@@ -12,6 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -44,28 +45,14 @@ public class ItemEdit extends APlugin {
 
             Bukkit.getPluginManager().registerEvents(new GuiHandler(), this);
 
-
             pStorage = new YmlPlayerStorage(); //may implement more type of storage and allow selecting storage type from config
             sStorage = new YmlServerStorage();
 
-            AbstractCommand c = new ItemEditCommand();
-            getCommand(c.getName()).setExecutor(c);
-            getCommand(c.getName()).setTabCompleter(c);
-            getCommand(c.getName()).setAliases(Collections.singletonList("ie"));
-            c = new ItemStorageCommand();
-            getCommand(c.getName()).setExecutor(c);
-            getCommand(c.getName()).setTabCompleter(c);
-            getCommand(c.getName()).setAliases(Collections.singletonList("is"));
-            c = new ServerItemCommand();
-            getCommand(c.getName()).setExecutor(c);
-            getCommand(c.getName()).setTabCompleter(c);
-            getCommand(c.getName()).setAliases(Collections.singletonList("si"));
-            TabExecutor tabExec = new ItemEditReloadCommand();
-            getCommand("itemeditreload").setExecutor(tabExec);
-            getCommand("itemeditreload").setTabCompleter(tabExec);
-            tabExec = new ItemEditImportCommand();
-            getCommand("itemeditimport").setExecutor(tabExec);
-            getCommand("itemeditimport").setTabCompleter(tabExec);
+            registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
+            registerCommand(new ItemStorageCommand(), Collections.singletonList("is"));
+            registerCommand(new ServerItemCommand(), Collections.singletonList("si"));
+            registerCommand("itemeditreload", new ItemEditReloadCommand(), null);
+            registerCommand("itemeditimport", new ItemEditImportCommand(), null);
 
             getConfig(); //force load the config.yml file
 
@@ -83,28 +70,23 @@ public class ItemEdit extends APlugin {
 
         } catch (Throwable e) {
             try {
-                if (Class.forName("org.spigotmc.SpigotConfig") == null)
-                    throw new NullPointerException();
+                Class.forName("org.spigotmc.SpigotConfig");
             } catch (Throwable t) {
                 TabExecutorError exec = new TabExecutorError(
                         ChatColor.RED + "CraftBukkit is not supported!!! use Spigot or Paper");
 
-                for (String command : this.getDescription().getCommands().keySet()) {
-                    getCommand(command).setExecutor(exec);
-                    getCommand(command).setTabCompleter(exec);
-                }
+                for (String command : this.getDescription().getCommands().keySet())
+                    registerCommand(command, exec, null);
+
                 return;
             }
             if (Bukkit.getServer().getBukkitVersion().startsWith("1.7.")) {
                 TabExecutorError exec = new TabExecutorError(ChatColor.RED + "1.7.x is not supported!!! use 1.8+");
-                for (String command : this.getDescription().getCommands().keySet()) {
-                    getCommand(command).setExecutor(exec);
-                    getCommand(command).setTabCompleter(exec);
-                }
+                for (String command : this.getDescription().getCommands().keySet())
+                    registerCommand(command, exec, null);
                 return;
             }
-
-            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Error while loading ItemEdit, disabling it");
+            this.log(ChatColor.RED + "Error while loading ItemEdit, disabling it");
             e.printStackTrace();
             Bukkit.getServer().getPluginManager().disablePlugin(this);
         }
