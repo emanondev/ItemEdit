@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -84,6 +85,7 @@ public class UtilsString {
      *                "to replace#1","replacer#1","to replace#2","replacer#2"....
      * @return a new list with fixed text, or null if list was null
      */
+    @Contract("!null, _, _, _ -> !null")
     public static @Nullable ArrayList<String> fix(@Nullable List<String> list, @Nullable Player player, boolean color, String... holders) {
         if (list == null)
             return null;
@@ -115,6 +117,7 @@ public class UtilsString {
         return itemCopy;
     }
 
+    @Contract("!null, _, _, _ -> !null")
     public static String fix(@Nullable String text, @Nullable Player player, boolean color, String... holders) {
         if (text == null)
             return null;
@@ -141,6 +144,7 @@ public class UtilsString {
      * @param text text to revert
      * @return a string with original colors and formats but with &amp; instead of §
      */
+    @Contract("!null -> !null")
     public static @Nullable String revertColors(@Nullable String text) {
         if (text == null)
             return null;
@@ -151,6 +155,7 @@ public class UtilsString {
      * @param text text clear
      * @return a string with no colors and no formats
      */
+    @Contract("!null -> !null")
     public static @Nullable String clearColors(@Nullable String text) {
         if (text == null)
             return null;
