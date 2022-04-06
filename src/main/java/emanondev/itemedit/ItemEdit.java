@@ -10,15 +10,9 @@ import emanondev.itemedit.storage.YmlPlayerStorage;
 import emanondev.itemedit.storage.YmlServerStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
-import java.util.List;
 
 public class ItemEdit extends APlugin {
     private static ItemEdit plugin = null;
@@ -74,10 +68,8 @@ public class ItemEdit extends APlugin {
             } catch (Throwable t) {
                 TabExecutorError exec = new TabExecutorError(
                         ChatColor.RED + "CraftBukkit is not supported!!! use Spigot or Paper");
-
                 for (String command : this.getDescription().getCommands().keySet())
                     registerCommand(command, exec, null);
-
                 return;
             }
             if (Bukkit.getServer().getBukkitVersion().startsWith("1.7.")) {
@@ -89,28 +81,6 @@ public class ItemEdit extends APlugin {
             this.log(ChatColor.RED + "Error while loading ItemEdit, disabling it");
             e.printStackTrace();
             Bukkit.getServer().getPluginManager().disablePlugin(this);
-        }
-    }
-
-    private class TabExecutorError implements TabExecutor {
-
-        private final String msg;
-
-        public TabExecutorError(String msg) {
-            this.msg = msg;
-            for (int i = 0; i < 20; i++)
-                ItemEdit.this.log(msg);
-        }
-
-        @Override
-        public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
-            return Collections.emptyList();
-        }
-
-        @Override
-        public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-            sender.sendMessage(msg);
-            return true;
         }
     }
 

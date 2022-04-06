@@ -1,17 +1,20 @@
 package emanondev.itemedit;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import emanondev.itemedit.command.AbstractCommand;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
-import org.bukkit.ChatColor;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public abstract class APlugin extends JavaPlugin {
 
@@ -112,6 +115,28 @@ public abstract class APlugin extends JavaPlugin {
         command.setTabCompleter(executor);
         if (aliases != null)
             command.setAliases(aliases);
+    }
+
+    protected class TabExecutorError implements TabExecutor {
+
+        private final String msg;
+
+        public TabExecutorError(String msg) {
+            this.msg = msg;
+            for (int i = 0; i < 20; i++)
+                APlugin.this.log(msg);
+        }
+
+        @Override
+        public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
+            return Collections.emptyList();
+        }
+
+        @Override
+        public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+            sender.sendMessage(msg);
+            return true;
+        }
     }
 
 }
