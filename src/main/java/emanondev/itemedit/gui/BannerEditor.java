@@ -76,7 +76,7 @@ public class BannerEditor implements Gui {
         public ItemStack getColorItem() {
             if (!active)
                 return null;
-            ItemStack item = Util.getItemFromColor(pattern.getColor());
+            ItemStack item = Util.getDyeItemFromColor(pattern.getColor());
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
             meta.setDisplayName(UtilsString.fix("&e" + Aliases.COLOR.getName(pattern.getColor()), null, true));
@@ -87,12 +87,8 @@ public class BannerEditor implements Gui {
         }
 
         public ItemStack getPositionItem() {
-            ItemStack item;
-            try {
-                item = new ItemStack(active ? Material.ITEM_FRAME : Material.GRAY_DYE);
-            } catch (Throwable t) {
-                item = Util.getItemFromColor(DyeColor.GRAY);
-            }
+            ItemStack item = active?new ItemStack(Material.ITEM_FRAME) : Util.getDyeItemFromColor(DyeColor.GRAY);
+
             ItemMeta meta = item.getItemMeta();
 
             meta.addItemFlags(ItemFlag.values());
@@ -227,7 +223,7 @@ public class BannerEditor implements Gui {
         } catch (Exception e) {
             bcolor = meta.getBaseColor();
         }
-        item = Util.getItemFromColor(bcolor);
+        item = Util.getDyeItemFromColor(bcolor);
         ItemMeta bmeta = item.getItemMeta();
         bmeta.addItemFlags(ItemFlag.values());
         bmeta.setDisplayName(UtilsString.fix("&e" + Aliases.COLOR.getName(bcolor), null, true));
@@ -280,7 +276,7 @@ public class BannerEditor implements Gui {
             this.inventory = Bukkit.createInventory(this, (6) * 9, title);
             int i = 0;
             for (DyeColor color : DyeColor.values()) {
-                ItemStack item = Util.getItemFromColor(color);
+                ItemStack item = Util.getDyeItemFromColor(color);
                 ItemMeta meta = item.getItemMeta();
                 meta.setDisplayName(UtilsString.fix(
                         config.loadString(subPath + "buttons.color_selector_info", "&bSelect &6&l%color%", false),

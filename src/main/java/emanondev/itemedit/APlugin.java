@@ -10,6 +10,7 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,15 +49,22 @@ public abstract class APlugin extends JavaPlugin {
         return conf;
     }
 
+    /**
+     * Print on console with '[(PluginName)] (log)' format
+     * @param log log
+     */
     public void log(String log) {
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ChatColor.DARK_BLUE + "["
                 + ChatColor.WHITE + this.getName() + ChatColor.DARK_BLUE + "] " + ChatColor.WHITE + log));
     }
-
+    /**
+     * Print on console with '[(PluginName)] (prefix) (log)' format
+     * @param color prefix color
+     * @param prefix prefix
+     * @param log log
+     */
     public void log(ChatColor color, String prefix, String log) {
-        Bukkit.getConsoleSender()
-                .sendMessage(ChatColor.translateAlternateColorCodes('&', ChatColor.DARK_BLUE + "[" + ChatColor.WHITE
-                        + this.getName() + ChatColor.DARK_BLUE + "] " + color + prefix + " " + ChatColor.WHITE + log));
+        log(color + prefix + " " + ChatColor.WHITE + log);
     }
 
     protected void reloadConfigs() {
@@ -93,7 +101,7 @@ public abstract class APlugin extends JavaPlugin {
      *
      * @param listener Listener to register
      */
-    protected void registerListener(@NotNull Listener listener) {
+    public void registerListener(@NotNull Listener listener) {
         getServer().getPluginManager().registerEvents(listener, this);
     }
 
@@ -105,11 +113,12 @@ public abstract class APlugin extends JavaPlugin {
         return cooldownApi;
     }
 
-    protected void registerCommand(AbstractCommand executor, List<String> aliases) {
+    public void registerCommand(@NotNull AbstractCommand executor, @Nullable List<String> aliases) {
         registerCommand(executor.getName(), executor, aliases);
     }
 
-    protected void registerCommand(String commandName, TabExecutor executor, List<String> aliases) {
+
+    public void registerCommand(@NotNull String commandName, @NotNull TabExecutor executor, @Nullable List<String> aliases) {
         PluginCommand command = getCommand(commandName);
         command.setExecutor(executor);
         command.setTabCompleter(executor);
@@ -117,7 +126,30 @@ public abstract class APlugin extends JavaPlugin {
             command.setAliases(aliases);
     }
 
-    protected class TabExecutorError implements TabExecutor {
+    /**
+     * This call reload configuration files and suggest to the plugin to update/reload his info
+     *
+     * @see #onReload()
+     */
+    public final void reload() {
+        long now = System.currentTimeMillis();
+        reloadConfigs();
+        onReload();
+        log(ChatColor.GREEN, "#", "Reloaded (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
+    }
+
+    /**
+     * Called by reload(), configuration files are already updated
+     * This method should update any variable read from configuration
+     *
+     * @see #reload()
+     */
+    public abstract void onReload();
+
+    /**
+     * Utility class to explain users what when wrong on plugin load/enable and why commands are not working
+     */
+    protected final class TabExecutorError implements TabExecutor {
 
         private final String msg;
 

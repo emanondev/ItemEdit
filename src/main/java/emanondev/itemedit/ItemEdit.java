@@ -45,7 +45,7 @@ public class ItemEdit extends APlugin {
             registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
             registerCommand(new ItemStorageCommand(), Collections.singletonList("is"));
             registerCommand(new ServerItemCommand(), Collections.singletonList("si"));
-            registerCommand("itemeditreload", new ItemEditReloadCommand(), null);
+            new ReloadCommand(this).register();
             registerCommand("itemeditimport", new ItemEditImportCommand(), null);
 
             getConfig(); //force load the config.yml file
@@ -90,16 +90,13 @@ public class ItemEdit extends APlugin {
                 p.closeInventory();
     }
 
-    public void reload() {
-        long now = System.currentTimeMillis();
-        reloadConfigs();
+    public void onReload() {
         Aliases.reload();
         ItemEditCommand.get().reload();
         ItemStorageCommand.get().reload();
         ServerItemCommand.get().reload();
         getPlayerStorage().reload();
         getServerStorage().reload();
-        log(ChatColor.GREEN, "#", "Reloaded (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
     }
 
     private PlayerStorage pStorage;

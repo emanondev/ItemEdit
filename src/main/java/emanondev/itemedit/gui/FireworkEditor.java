@@ -121,7 +121,7 @@ public class FireworkEditor implements Gui {
         public ItemStack getColorsItem() {
             if (!active)
                 return null;
-            ItemStack item = Util.getItemFromColor(selectedColor);
+            ItemStack item = Util.getDyeItemFromColor(selectedColor);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
             List<String> colorNames = new ArrayList<>();
@@ -142,7 +142,7 @@ public class FireworkEditor implements Gui {
         public ItemStack getFadeColorsItem() {
             if (!active)
                 return null;
-            ItemStack item = Util.getItemFromColor(selectedFadeColor);
+            ItemStack item = Util.getDyeItemFromColor(selectedFadeColor);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
             List<String> colorNames = new ArrayList<>();
@@ -163,12 +163,7 @@ public class FireworkEditor implements Gui {
         public ItemStack getTrailFlickerItem() {
             if (!active)
                 return null;
-            ItemStack item;
-            try {
-                item = new ItemStack(trail ? Material.DIAMOND : Material.GRAY_DYE);
-            } catch (Throwable t) {
-                item = Util.getItemFromColor(DyeColor.GRAY);
-            }
+            ItemStack item = trail ?new ItemStack( Material.DIAMOND):Util.getDyeItemFromColor(DyeColor.GRAY);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
             if (flicker)
@@ -189,14 +184,9 @@ public class FireworkEditor implements Gui {
         }
 
         public ItemStack getPositionItem() {
-            ItemStack item;
-            try {
-                item = new ItemStack(
-                        active ? (colors.isEmpty() ? Material.RED_DYE : Material.LIME_DYE) : Material.GRAY_DYE);
-            } catch (Throwable t) {
-                item = Util
-                        .getItemFromColor(active ? (colors.isEmpty() ? DyeColor.RED : DyeColor.LIME) : DyeColor.GRAY);
-            }
+            ItemStack item = Util
+                        .getDyeItemFromColor(active ? (colors.isEmpty() ? DyeColor.RED : DyeColor.LIME) : DyeColor.GRAY);
+
             ItemMeta meta = item.getItemMeta();
 
             meta.addItemFlags(ItemFlag.values());
@@ -430,8 +420,8 @@ public class FireworkEditor implements Gui {
         powerMeta.setLore(list);
         item.setItemMeta(powerMeta);
         this.getInventory().setItem(47, item);
-        item = Util.getItemFromColor(DyeColor.LIGHT_BLUE);
-        /*
+        /*item = Util.getDyeItemFromColor(DyeColor.LIGHT_BLUE);
+
          * ItemMeta confirmMeta = item.getItemMeta();
          * confirmMeta.addItemFlags(ItemFlag.values()); list = new
          * ArrayList<>(config.getStringList(subPath + "buttons.confirm",

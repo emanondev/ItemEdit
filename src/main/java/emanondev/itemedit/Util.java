@@ -213,17 +213,35 @@ public class Util {
         return true;
     }
 
+    /**
+     * for pre 1.13 compatibility
+     * @param color color
+     * @return An ItemStack of selected Dye
+     */
     @SuppressWarnings("deprecation")
-    public static ItemStack getItemFromColor(DyeColor color) {
+    public static ItemStack getDyeItemFromColor(DyeColor color) {
         try {
             return new ItemStack(Material.valueOf(color.name() + "_DYE"));
         } catch (Exception e) {
             return new ItemStack(Material.valueOf("INK_SACK"), 1, (short) 0, getData(color));
         }
     }
+    /**
+     * for pre 1.13 compatibility
+     * @param color color
+     * @return An ItemStack of selected Dyed wool
+     */
+    @SuppressWarnings("deprecation")
+    public static ItemStack getWoolItemFromColor(DyeColor color) {
+        try {
+            return new ItemStack(Material.valueOf(color.name() + "_WOOL"));
+        } catch (Exception e) {
+            return new ItemStack(Material.valueOf("WOOL"), 1, (short) 0, getData(color));
+        }
+    }
 
     private static Byte getData(DyeColor color) {
-        switch (color.name()) {
+        switch (color.name()) { //Silver
             case "BLACK":
                 return 0;
             case "BLUE":
