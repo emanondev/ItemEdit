@@ -7,11 +7,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,6 +22,9 @@ import java.util.List;
 public abstract class APlugin extends JavaPlugin {
 
     private final HashMap<String, YMLConfig> configs = new HashMap<>();
+    private final HashMap<String, YMLConfig> languageConfigs = new HashMap<>();
+    private boolean useMultiLanguage;
+    private String defaultLanguage;
 
     /**
      * Gets plugin Config file.
@@ -51,17 +56,22 @@ public abstract class APlugin extends JavaPlugin {
 
     /**
      * Print on console with '[(PluginName)] (log)' format
+     *
      * @param log log
      */
     public void log(String log) {
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ChatColor.DARK_BLUE + "["
                 + ChatColor.WHITE + this.getName() + ChatColor.DARK_BLUE + "] " + ChatColor.WHITE + log));
     }
+
+    public abstract Integer getProjectId();
+
     /**
      * Print on console with '[(PluginName)] (prefix) (log)' format
-     * @param color prefix color
+     *
+     * @param color  prefix color
      * @param prefix prefix
-     * @param log log
+     * @param log    log
      */
     public void log(ChatColor color, String prefix, String log) {
         log(color + prefix + " " + ChatColor.WHITE + log);
@@ -90,6 +100,8 @@ public abstract class APlugin extends JavaPlugin {
             for (String key : toRemove)
                 configs.remove(key);
         }
+        languageConfigs.clear();
+        getLanguageConfig(null);
     }
 
     /**
@@ -103,6 +115,32 @@ public abstract class APlugin extends JavaPlugin {
      */
     public void registerListener(@NotNull Listener listener) {
         getServer().getPluginManager().registerEvents(listener, this);
+    }
+
+
+    public YMLConfig getLanguageConfig(@Nullable CommandSender sender) {
+        String locale;
+        if (!(sender instanceof Player))
+            locale = this.defaultLanguage;
+        else if (ItemEdit.GAME_VERSION >= 12 && this.useMultiLanguage)
+            locale = ((Player) sender).getLocale().split("_")[0];
+        else
+            locale = this.defaultLanguage;
+
+        if (this.languageConfigs.containsKey(locale))
+            return languageConfigs.get(locale);
+        String fileName = "languages" + File.separator + locale + ".yml";
+        if (locale.equals(this.defaultLanguage) || new File(getDataFolder(), fileName).exists() || this.getResource(fileName) != null) {
+            YMLConfig conf = new YMLConfig(this, fileName);
+            languageConfigs.put(locale, conf);
+            return conf;
+        }
+        if (languageConfigs.containsKey(defaultLanguage))
+            return languageConfigs.get(defaultLanguage);
+        fileName = "languages" + File.separator + defaultLanguage + ".yml";
+        YMLConfig conf = new YMLConfig(this, fileName);
+        languageConfigs.put(locale, conf);
+        return conf;
     }
 
     private CooldownAPI cooldownApi = null;
@@ -127,24 +165,70 @@ public abstract class APlugin extends JavaPlugin {
     }
 
     /**
-     * This call reload configuration files and suggest to the plugin to update/reload his info
+     *
+     */
+    public final void onEnable() {
+        try {
+            long now = System.currentTimeMillis();
+            try {
+                Class.forName("org.spigotmc.SpigotConfig");
+            } catch (Throwable t) {
+                enableWithError("CraftBukkit is not supported!!! use Spigot or Paper");
+                log(ChatColor.GREEN, "#", "Enabled (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
+                return;
+            }
+            if (Bukkit.getServer().getBukkitVersion().startsWith("1.7.")) {
+                enableWithError("1.7.x is not supported!!! use 1.8+");
+                log(ChatColor.GREEN, "#", "Enabled (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
+                return;
+            }
+
+            getConfig(); //force load the config.yml file
+            this.useMultiLanguage = getConfig().getBoolean("language.use_multilanguage", true);
+            this.defaultLanguage = getConfig().getString("language.use_multilanguage", "en");
+            getLanguageConfig(null);
+            if (getProjectId() != null)
+                new UpdateChecker(this, getProjectId()).logUpdates();
+            enable();
+            log(ChatColor.GREEN, "#", "Enabled (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
+
+        } catch (Throwable e) {
+            this.log(ChatColor.RED + "Error while loading " + this.getName() + ", disabling it");
+            e.printStackTrace();
+            Bukkit.getServer().getPluginManager().disablePlugin(this);
+        }
+    }
+
+    private void enableWithError(String error) {
+        TabExecutorError exec = new TabExecutorError(ChatColor.RED + error);
+        for (String command : this.getDescription().getCommands().keySet())
+            registerCommand(command, exec, null);
+        log(ChatColor.RED + error);
+    }
+
+    public abstract void enable();
+
+    /**
+     * Called by onReload(), configuration files are already updated
+     * This method should update any variable read from configuration
      *
      * @see #onReload()
      */
-    public final void reload() {
-        long now = System.currentTimeMillis();
-        reloadConfigs();
-        onReload();
-        log(ChatColor.GREEN, "#", "Reloaded (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
-    }
+    public abstract void reload();
 
     /**
-     * Called by reload(), configuration files are already updated
-     * This method should update any variable read from configuration
+     * This call reload configuration files and suggest to the plugin to update/reload his info
      *
      * @see #reload()
      */
-    public abstract void onReload();
+    public final void onReload() {
+        long now = System.currentTimeMillis();
+        this.useMultiLanguage = getConfig().getBoolean("language.use_multilanguage", true);
+        this.defaultLanguage = getConfig().getString("language.default_language", "en");
+        reloadConfigs();
+        reload();
+        log(ChatColor.GREEN, "#", "Reloaded (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
+    }
 
     /**
      * Utility class to explain users what when wrong on plugin load/enable and why commands are not working
@@ -170,5 +254,11 @@ public abstract class APlugin extends JavaPlugin {
             return true;
         }
     }
+
+    public void onDisable() {
+        disable();
+    }
+
+    public abstract void disable();
 
 }

@@ -1,61 +1,34 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.DyeColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TropicalFish.Pattern;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.TropicalFishBucketMeta;
-import emanondev.itemedit.Util;
-import emanondev.itemedit.aliases.Aliases;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
-import net.md_5.bungee.api.chat.BaseComponent;
+
+import java.util.Collections;
+import java.util.List;
 
 public class TropicalFish extends SubCmd {
 
     private static final String[] subCommands = new String[]{"pattern", "patterncolor", "bodycolor"};
-    private BaseComponent[] helpPattern;
-    private BaseComponent[] helpPatternColor;
-    private BaseComponent[] helpBodyColor;
 
     public TropicalFish(ItemEditCommand cmd) {
         super("tropicalfish",
                 cmd, true, true);
-
-        load();
-
-    }
-
-    private void load() {
-        this.helpPattern = this
-                .craftFailFeedback(getConfString("pattern.params"),
-                        String.join("\n",
-                                getConfStringList("pattern.description")));
-        this.helpPatternColor = this
-                .craftFailFeedback(getConfString("patterncolor.params"),
-                        String.join("\n",
-                                getConfStringList("patterncolor.description")));
-        this.helpBodyColor = this
-                .craftFailFeedback(getConfString("bodycolor.params"),
-                        String.join("\n",
-                                getConfStringList("bodycolor.description")));
-    }
-
-    public void reload() {
-        super.reload();
-        load();
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof TropicalFishBucketMeta)) {
-            Util.sendMessage(p, this.getConfString("wrong-type"));
+            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
 
@@ -77,7 +50,7 @@ public class TropicalFish extends SubCmd {
                     throw new IllegalArgumentException();
             }
         } catch (Exception e) {
-            onFail(p);
+            onFail(p, alias);
         }
 
     }
@@ -96,7 +69,9 @@ public class TropicalFish extends SubCmd {
             item.setItemMeta(meta);
             p.updateInventory();
         } catch (Exception e) {
-            p.spigot().sendMessage(helpBodyColor);
+            Util.sendMessage(p, this
+                    .craftFailFeedback(getLanguageString("bodycolor.params", null, p),
+                            getLanguageStringList("bodycolor.description", null, p)));
         }
     }
 
@@ -114,7 +89,9 @@ public class TropicalFish extends SubCmd {
             item.setItemMeta(meta);
             p.updateInventory();
         } catch (Exception e) {
-            p.spigot().sendMessage(helpPatternColor);
+            Util.sendMessage(p, this
+                    .craftFailFeedback(getLanguageString("bodycolor.params", null, p),
+                            getLanguageStringList("bodycolor.description", null, p)));
         }
     }
 
@@ -132,12 +109,15 @@ public class TropicalFish extends SubCmd {
             item.setItemMeta(meta);
             p.updateInventory();
         } catch (Exception e) {
-            p.spigot().sendMessage(helpPattern);
+            Util.sendMessage(p, this
+                    .craftFailFeedback(getLanguageString("pattern.params", null, p),
+                            getLanguageStringList("pattern.description", null, p))
+            );
         }
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
             return Util.complete(args[1], subCommands);
         if (args.length == 3)

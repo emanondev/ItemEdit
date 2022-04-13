@@ -1,16 +1,15 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import emanondev.itemedit.Util;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
+import java.util.Collections;
+import java.util.List;
 
 public class Rename extends SubCmd {
 
@@ -19,7 +18,7 @@ public class Rename extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!Util.isAllowedRenameItem(sender, item.getType()))
@@ -42,7 +41,7 @@ public class Rename extends SubCmd {
 
         StringBuilder bname = new StringBuilder(args[1]);
         for (int i = 2; i < args.length; i++)
-            bname.append(" " + args[i]);
+            bname.append(" ").append(args[i]);
 
         String name = Util.formatText(p, bname.toString(), getPermission());
         if (Util.hasBannedWords(p, name))
@@ -54,7 +53,7 @@ public class Rename extends SubCmd {
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (!(sender instanceof Player))
             return Collections.emptyList();
         if (args.length != 2)

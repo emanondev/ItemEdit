@@ -1,9 +1,9 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.command.CommandSender;
@@ -12,43 +12,29 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import emanondev.itemedit.Util;
-import emanondev.itemedit.aliases.Aliases;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
-import net.md_5.bungee.api.chat.BaseComponent;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 public class Attribute extends SubCmd {
-    private BaseComponent[] helpAdd;
-    private BaseComponent[] helpRemove;
     private static final String[] attributeSub = new String[]{"add", "remove"};
 
     public Attribute(ItemEditCommand cmd) {
         super("attribute", cmd, true, true);
-        load();
-    }
-
-    private void load() {
-        this.helpAdd = this.craftFailFeedback(getConfString("add.params"),
-                String.join("\n", getConfStringList("add.description")));
-        this.helpRemove = this.craftFailFeedback(getConfString("remove.params"),
-                String.join("\n", getConfStringList("remove.description")));
-
     }
 
     public void reload() {
         super.reload();
-        load();
     }
 
     // add <attribute> amount [operation] [equip]
     // remove [attribute/slot]
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (args.length == 1) {
-            onFail(p);
+            onFail(p, alias);
             return;
         }
 
@@ -60,7 +46,7 @@ public class Attribute extends SubCmd {
                 attributeRemove(p, item, args);
                 return;
             default:
-                onFail(p);
+                onFail(p, alias);
         }
     }
 
@@ -94,7 +80,8 @@ public class Attribute extends SubCmd {
             item.setItemMeta(itemMeta);
             p.updateInventory();
         } catch (Exception e) {
-            p.spigot().sendMessage(helpAdd);
+            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
+                    getLanguageStringList("add.description", null, p)));
         }
     }
 
@@ -117,13 +104,14 @@ public class Attribute extends SubCmd {
             item.setItemMeta(itemMeta);
             p.updateInventory();
         } catch (Exception e) {
-            p.spigot().sendMessage(helpRemove);
+            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("remove.params", null, p),
+                    getLanguageStringList("remove.description", null, p)));
         }
     }
 
     // attribute add/rem attr amount op slot
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
             return Util.complete(args[1], attributeSub);
         if (args[1].equalsIgnoreCase("add")) {

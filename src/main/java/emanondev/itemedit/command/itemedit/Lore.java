@@ -1,32 +1,24 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
+import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.Util;
+import emanondev.itemedit.YMLConfig;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
-import emanondev.itemedit.YMLConfig;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
-import net.md_5.bungee.api.chat.BaseComponent;
+import java.util.*;
 
 public class Lore extends SubCmd {
 
     // private BaseComponent[] helpAdd;
     private final Map<UUID, List<String>> copies = new HashMap<>();
     private final YMLConfig loreCopy = ItemEdit.get().getConfig("loreCopy");
-    private BaseComponent[] helpSet;
+    /*private BaseComponent[] helpSet;
     private BaseComponent[] helpRemove;
     private BaseComponent[] helpInsert;
     private String copyFeedback;
@@ -36,44 +28,21 @@ public class Lore extends SubCmd {
     private String copyFileWrongPath;
     private String copyFileNoPath;
     private String pasteFeedback;
-    private String pasteNoCopyFeedback;
+    private String pasteNoCopyFeedback;*/
 
     private static final String[] loreSub = new String[]{"add", "set", "remove", "reset", "insert", "copy",
             "copybook", "copyfile", "paste", "replace"};
 
     public Lore(ItemEditCommand cmd) {
         super("lore", cmd, true, true);
-        load();
-    }
-
-    private void load() {
-        this.helpSet = this.craftFailFeedback(getConfString("set.params"),
-                String.join("\n", getConfStringList("set.description")));
-        this.helpRemove = this.craftFailFeedback(getConfString("remove.params"),
-                String.join("\n", getConfStringList("remove.description")));
-        this.helpInsert = this.craftFailFeedback(getConfString("insert.params"),
-                String.join("\n", getConfStringList("insert.description")));
-        copyFeedback = this.getConfString("copy.feedback");
-        copyFileFeedback = this.getConfString("copyFile.feedback");
-        copyBookFeedback = this.getConfString("copyBook.feedback");
-        copyBookWrongType = this.getConfString("copyBook.wrong-type");
-        copyFileWrongPath = this.getConfString("copyFile.wrong-path");
-        copyFileNoPath = this.getConfString("copyFile.no-path");
-        pasteFeedback = this.getConfString("paste.feedback");
-        pasteNoCopyFeedback = this.getConfString("paste.no-copy");
-    }
-
-    public void reload() {
-        super.reload();
-        load();
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (args.length == 1) {
-            onFail(p);
+            onFail(p, alias);
             return;
         }
 
@@ -109,7 +78,7 @@ public class Lore extends SubCmd {
                 loreReplace(p, item, args);
                 return;
             default:
-                onFail(p);
+                onFail(p, alias);
         }
     }
 
@@ -130,14 +99,13 @@ public class Lore extends SubCmd {
 
     private void lorePaste(Player p, ItemStack item, String[] args) {
         if (!copies.containsKey(p.getUniqueId())) {
-            p.sendMessage(pasteNoCopyFeedback);
+            Util.sendMessage(p, this.getLanguageString("paste.no-copy", null, p));
             return;
         }
         ItemMeta meta = item.getItemMeta();
         meta.setLore(copies.get(p.getUniqueId()));
         item.setItemMeta(meta);
-        if (pasteFeedback != null)
-            p.sendMessage(pasteFeedback);
+        Util.sendMessage(p, this.getLanguageString("paste.feedback", null, p));
         p.updateInventory();
     }
 
@@ -154,9 +122,7 @@ public class Lore extends SubCmd {
             lore = new ArrayList<>();
 
         copies.put(p.getUniqueId(), lore);
-
-        if (copyFeedback != null)
-            p.sendMessage(copyFeedback);
+        Util.sendMessage(p, this.getLanguageString("copy.feedback", null, p));
     }
 
     private void loreCopyBook(Player p, ItemStack item, String[] args) {
@@ -165,8 +131,7 @@ public class Lore extends SubCmd {
         if (item.hasItemMeta()) {
             ItemMeta itemMeta = item.getItemMeta();
             if (!(itemMeta instanceof BookMeta)) {
-                if (copyBookWrongType != null)
-                    p.sendMessage(copyBookWrongType);
+                Util.sendMessage(p, this.getLanguageString("copyBook.wrong-type", null, p));
                 return;
             }
             BookMeta meta = (BookMeta) itemMeta;
@@ -183,33 +148,27 @@ public class Lore extends SubCmd {
         for (int i = 0; i < lore.size(); i++)
             lore.set(i, Util.formatText(p, lore.get(i), getPermission()));
         copies.put(p.getUniqueId(), lore);
-
-        if (copyBookFeedback != null)
-            p.sendMessage(copyBookFeedback);
+        Util.sendMessage(p, this.getLanguageString("copyBook.feedback", null, p));
     }
 
     private void loreCopyFile(Player p, ItemStack item, String[] args) {
         if (args.length < 2) {
-            if (copyFileNoPath != null)
-                p.sendMessage(copyFileNoPath);
+            Util.sendMessage(p, this.getLanguageString("copyFile.no-path", null, p));
             return;
         }
         if (!loreCopy.contains(args[2])) {
-            if (copyFileWrongPath != null)
-                p.sendMessage(copyFileWrongPath);
+            Util.sendMessage(p, this.getLanguageString("copyFile.wrong-path", null, p));
             return;
         }
-        List<String> lore = new ArrayList<>(loreCopy.getStringList(args[2], null, false));
+        List<String> lore = new ArrayList<>(loreCopy.getStringList(args[2]));
         for (int i = 0; i < lore.size(); i++)
             lore.set(i, Util.formatText(p, lore.get(i), getPermission()));
         copies.put(p.getUniqueId(), lore);
-
-        if (copyFileFeedback != null)
-            p.sendMessage(copyFileFeedback);
+        Util.sendMessage(p, this.getLanguageString("copyFile.feedback", null, p));
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
             return Util.complete(args[1], loreSub);
         if (args.length == 3) {
@@ -311,7 +270,8 @@ public class Lore extends SubCmd {
             item.setItemMeta(itemMeta);
             p.updateInventory();
         } catch (Exception e) {
-            p.spigot().sendMessage(helpInsert);
+            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("insert.params", null, p),
+                    getLanguageStringList("insert.description", null, p)));
         }
     }
 
@@ -353,7 +313,8 @@ public class Lore extends SubCmd {
             item.setItemMeta(itemMeta);
             p.updateInventory();
         } catch (Exception e) {
-            p.spigot().sendMessage(helpSet);
+            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("set.params", null, p),
+                    getLanguageStringList("set.description", null, p)));
         }
     }
 
@@ -383,7 +344,8 @@ public class Lore extends SubCmd {
             item.setItemMeta(itemMeta);
             p.updateInventory();
         } catch (Exception e) {
-            p.spigot().sendMessage(helpRemove);
+            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("remove.params", null, p),
+                    getLanguageStringList("remove.description", null, p)));
         }
     }
 

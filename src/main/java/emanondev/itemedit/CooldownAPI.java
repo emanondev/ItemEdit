@@ -1,9 +1,9 @@
 package emanondev.itemedit;
 
+import org.bukkit.OfflinePlayer;
+
 import java.util.HashMap;
 import java.util.UUID;
-
-import org.bukkit.OfflinePlayer;
 
 public class CooldownAPI {
 
@@ -44,8 +44,7 @@ public class CooldownAPI {
         if (duration <= 0 && cooldowns.containsKey(player))
             cooldowns.get(player).remove(cooldownId);
         else {
-            if (cooldowns.get(player) == null)
-                cooldowns.put(player, new HashMap<>());
+            cooldowns.computeIfAbsent(player, k -> new HashMap<>());
             cooldowns.get(player).put(cooldownId, System.currentTimeMillis() + duration);
         }
     }
@@ -85,8 +84,7 @@ public class CooldownAPI {
     }
 
     public long getCooldownMillis(UUID player, String cooldownId) {
-        return cooldowns.containsKey(player) ? (cooldowns.get(player).containsKey(cooldownId) ?
-                cooldowns.get(player).get(cooldownId) : 0L) : 0L;
+        return cooldowns.containsKey(player) ? (cooldowns.get(player).getOrDefault(cooldownId, 0L)) : 0L;
     }
 
     public long getCooldownSeconds(UUID player, String cooldownId) {

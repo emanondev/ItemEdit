@@ -1,9 +1,14 @@
 package emanondev.itemedit.command.serveritem;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.Util;
+import emanondev.itemedit.UtilsInventory;
+import emanondev.itemedit.UtilsInventory.ExcessManage;
+import emanondev.itemedit.UtilsString;
+import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.command.ServerItemCommand;
+import emanondev.itemedit.command.SubCmd;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -11,15 +16,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
-import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsInventory;
-import emanondev.itemedit.UtilsString;
-import emanondev.itemedit.UtilsInventory.ExcessManage;
-import emanondev.itemedit.aliases.Aliases;
-import emanondev.itemedit.command.ServerItemCommand;
-import emanondev.itemedit.command.SubCmd;
-import net.milkbowl.vault.economy.Economy;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Sell extends SubCmd {
 
@@ -41,7 +40,7 @@ public class Sell extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         try {
             // <id> <amount> <player> <price> [silent]
             if (args.length < 5 || args.length > 6) {
@@ -68,10 +67,9 @@ public class Sell extends SubCmd {
             if (!economy.has(target, price)) {
                 // not enough money, aborting
                 if (!silent)
-                    Util.sendMessage(target,
-                            UtilsString.fix(this.getConfString("not-enough-money"), target, true, "%id%",
-                                    args[1].toLowerCase(), "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
-                                    "%amount%", String.valueOf(amount), "%price%", economy.format(price)));
+                    sendLanguageString("not-enough-money", null, target, "%id%",
+                            args[1].toLowerCase(), "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
+                            "%amount%", String.valueOf(amount), "%price%", economy.format(price));
                 return;
             }
             // subtracting money
@@ -88,10 +86,9 @@ public class Sell extends SubCmd {
             if (given == 0) {
                 // not enough space, aborting
                 if (!silent)
-                    Util.sendMessage(target,
-                            UtilsString.fix(this.getConfString("not-enough-space"), target, true, "%id%",
-                                    args[1].toLowerCase(), "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
-                                    "%amount%", String.valueOf(amount)));
+                    sendLanguageString("not-enough-space", null, target, "%id%",
+                            args[1].toLowerCase(), "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
+                            "%amount%", String.valueOf(amount));
                 if (!economy.depositPlayer(target, price).transactionSuccess()) {
                     // error
                     if (!silent)
@@ -106,13 +103,12 @@ public class Sell extends SubCmd {
 
             // success, giving some feedback
             if (!silent)
-                Util.sendMessage(target,
-                        UtilsString.fix(this.getConfString("feedback"), target, true, "%id%", args[1].toLowerCase(),
-                                "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
-                                String.valueOf(amount), "%price%", economy.format(price)));
+                sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
+                        "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
+                        String.valueOf(amount), "%price%", economy.format(price));
 
             if (ItemEdit.get().getConfig().loadBoolean("log.action.sell", true)) {
-                String msg = UtilsString.fix(this.getConfString("log"), target, true, "%id%", args[1].toLowerCase(),
+                String msg = UtilsString.fix(this.getConfigString("log"), target, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%player_name%", target.getName(), "%price%", economy.format(price));
                 if (ItemEdit.get().getConfig().loadBoolean("log.console", true))
@@ -121,12 +117,12 @@ public class Sell extends SubCmd {
                     Util.logToFile(msg);
             }
         } catch (Exception e) {
-            onFail(sender);
+            onFail(sender, alias);
         }
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (!(sender instanceof Player))
             return Collections.emptyList();
         switch (args.length) {

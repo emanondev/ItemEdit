@@ -1,17 +1,17 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.AxolotlBucketMeta;
-import emanondev.itemedit.Util;
-import emanondev.itemedit.aliases.Aliases;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
+
+import java.util.Collections;
+import java.util.List;
 
 public class AxolotlVariant extends SubCmd {
 
@@ -25,11 +25,11 @@ public class AxolotlVariant extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof AxolotlBucketMeta)) {
-            Util.sendMessage(p, this.getConfString("wrong-type"));
+            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
 
@@ -45,13 +45,13 @@ public class AxolotlVariant extends SubCmd {
             item.setItemMeta(meta);
             p.updateInventory();
         } catch (Exception e) {
-            onFail(p);
+            onFail(p, alias);
         }
 
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
             return Util.complete(args[1], Aliases.AXOLOTL_VARIANT);
         return Collections.emptyList();

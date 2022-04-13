@@ -1,10 +1,19 @@
 package emanondev.itemedit.gui;
 
+import emanondev.itemedit.APlugin;
+import emanondev.itemedit.ItemEdit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.*;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
+import java.util.List;
 
 public interface Gui extends InventoryHolder {
 
@@ -73,4 +82,23 @@ public interface Gui extends InventoryHolder {
     @NotNull Inventory getInventory();
 
     Player getTargetPlayer();
+
+    APlugin getPlugin();
+
+    default String getLanguageMessage(String fullPath, String... holders) {
+        return getPlugin().getLanguageConfig(getTargetPlayer()).loadMessage(fullPath, "", null, true, holders);
+    }
+
+    default List<String> getLanguageMultiMessage(String fullPath, String... holders) {
+        return getPlugin().getLanguageConfig(getTargetPlayer())
+                .loadMultiMessage(fullPath, Collections.emptyList(), null, true, holders);
+    }
+
+    default void loadLanguageDescription(ItemMeta meta, String fullPath, String... holders) {
+        List<String> list = ItemEdit.get().getLanguageConfig(getTargetPlayer()).loadMultiMessage(fullPath,
+                null, getTargetPlayer(), true, holders);
+        meta.setDisplayName(list == null || list.isEmpty() ? " " : list.get(0));
+        if (list != null && !list.isEmpty())
+            meta.setLore(list.subList(1, list.size()));
+    }
 }

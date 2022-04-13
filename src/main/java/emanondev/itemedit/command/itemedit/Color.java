@@ -1,8 +1,8 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -10,9 +10,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 
-import emanondev.itemedit.Util;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
+import java.util.Collections;
+import java.util.List;
 
 public class Color extends SubCmd {
     private final String tippedArrowPerm;
@@ -27,20 +26,18 @@ public class Color extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if ((item.getItemMeta() instanceof PotionMeta)) {
 
             if (item.getType() == Material.TIPPED_ARROW && !sender.hasPermission(tippedArrowPerm)) {
-                Util.sendMessage(sender, this.getCommand().getPermissionLackMessage(tippedArrowPerm)
-                );
+                this.getCommand().sendPermissionLackMessage(tippedArrowPerm, sender);
                 return;
             }
 
             if (item.getType().name().contains("POTION") && !sender.hasPermission(potionPerm)) {
-                Util.sendMessage(sender, this.getCommand().getPermissionLackMessage(potionPerm)
-                );
+                this.getCommand().sendPermissionLackMessage(potionPerm, sender);
                 return;
             }
             PotionMeta potionMeta = (PotionMeta) item.getItemMeta();
@@ -54,14 +51,13 @@ public class Color extends SubCmd {
                 item.setItemMeta(potionMeta);
                 p.updateInventory();
             } catch (Exception e) {
-                onFail(p);
+                onFail(p, alias);
             }
             return;
         }
         if ((item.getItemMeta() instanceof LeatherArmorMeta)) {
             if (!sender.hasPermission(leatherPerm)) {
-                Util.sendMessage(sender, this.getCommand().getPermissionLackMessage(leatherPerm)
-                );
+                this.getCommand().sendPermissionLackMessage(leatherPerm, sender);
                 return;
             }
 
@@ -76,17 +72,17 @@ public class Color extends SubCmd {
                 item.setItemMeta(leatherMeta);
                 p.updateInventory();
             } catch (Exception e) {
-                onFail(p);
+                onFail(p, alias);
             }
             return;
         }
-        Util.sendMessage(p, this.getConfString("wrong-type"));
+        Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
 
     }
 
     // itemedit bookauthor <name>
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         return Collections.emptyList();
     }
 }

@@ -1,21 +1,21 @@
 package emanondev.itemedit.command.serveritem;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.Util;
+import emanondev.itemedit.UtilsString;
+import emanondev.itemedit.command.ServerItemCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsString;
-import emanondev.itemedit.command.ServerItemCommand;
-import emanondev.itemedit.command.SubCmd;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Drop extends SubCmd {
 
@@ -24,7 +24,7 @@ public class Drop extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         try {
             // <id> <amount> <world> <x> <y> <z>
             if (args.length != 7) {
@@ -46,7 +46,7 @@ public class Drop extends SubCmd {
                 toGive -= Math.min(toGive, stackSize);
             }
             if (ItemEdit.get().getConfig().loadBoolean("log.action.drop", true)) {
-                String msg = UtilsString.fix(this.getConfString("log"), null, true, "%id%", args[1].toLowerCase(),
+                String msg = UtilsString.fix(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%world%", world.getName(), "%x%", args[4], "%y%", args[5], "%z%",
                         args[6]);
@@ -56,12 +56,12 @@ public class Drop extends SubCmd {
                     Util.logToFile(msg);
             }
         } catch (Exception e) {
-            onFail(sender);
+            onFail(sender, alias);
         }
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (!(sender instanceof Player))
             return Collections.emptyList();
         switch (args.length) {

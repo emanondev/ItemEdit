@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -90,31 +91,29 @@ public class YMLConfig extends YamlConfiguration {
     public boolean reload() {
         boolean existed = file.exists();
         if (!file.exists()) {
-
-            if (!file.getParentFile().exists()) { // Create parent folders if they don't exist
+            if (!file.getParentFile().exists())  // Create parent folders if they don't exist
                 file.getParentFile().mkdirs();
-            }
-            if (plugin.getResource(file.getName()) != null) {
-                plugin.saveResource(file.getName(), true); // Save the one from the JAR if possible
-            } else {
+
+            if (plugin.getResource(name) != null)
+                plugin.saveResource(name, true); // Save the one from the JAR if possible
+            else
                 try {
                     file.createNewFile();
                 } // Create a blank file if there's not one to copy from the JAR
                 catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
         }
         try {
             this.load(file);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (plugin.getResource(file.getName()) != null) { // Set up defaults in case their config is broken.
-            InputStreamReader defConfigStream = null;
-            defConfigStream = new InputStreamReader(plugin.getResource(name), StandardCharsets.UTF_8);
-            this.setDefaults(YamlConfiguration.loadConfiguration(defConfigStream));
-        }
+        InputStream resource = plugin.getResource(name);
+        if (resource != null)
+            // Set up defaults in case their config is broked.
+            this.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(resource, StandardCharsets.UTF_8)));
+
         return existed;
     }
 
@@ -159,8 +158,8 @@ public class YMLConfig extends YamlConfiguration {
      * Get the object from path, if the object is null or of different class default
      * value is returned and saved on disk else return the object
      *
-     * @param path yaml path on file
-     * @param def default value
+     * @param path  yaml path on file
+     * @param def   default value
      * @param clazz value class
      * @return object or default
      */
@@ -200,8 +199,8 @@ public class YMLConfig extends YamlConfiguration {
      * Gets the object from the config or set the default.<br>
      * Get the object from path, if null or of another class default is returned
      *
-     * @param path yaml path on file
-     * @param def default value
+     * @param path  yaml path on file
+     * @param def   default value
      * @param clazz value class
      * @return object or default
      */
@@ -235,7 +234,7 @@ public class YMLConfig extends YamlConfiguration {
      * Use {@link #loadInteger(String, Integer)}
      *
      * @param path yaml path on file
-     * @param def default value
+     * @param def  default value
      * @return Gets the value from the config<br>
      */
     @Deprecated
@@ -264,47 +263,64 @@ public class YMLConfig extends YamlConfiguration {
 
     /**
      * Load String value.<br>
-     * adds path+_HOLDERS if any exists to notify usable holders<br>
      * target = null
      *
-     * @param path yaml path on file
+     * @param path  yaml path on file
      * @param def   default value
      * @param color convert colors?
      * @param args  holders and replacer
      * @return the value found or default if none
-     * @see #loadString(String, String, Player, boolean, String...) loadString(path,
+     * @see #loadMessage(String, String, Player, boolean, String...) loadString(path,
      * def, null, color, args)
      * @see #load(String, Object, Class)
      */
     @Contract("_, !null, _, _ -> !null")
-    public @Nullable String loadString(@NotNull String path, @Nullable String def, boolean color, String... args) {
-        return loadString(path, def, null, color, args);
+    public @Nullable String loadMessage(@NotNull String path, @Nullable String def, boolean color, String... args) {
+        return loadMessage(path, def, null, color, args);
     }
 
     /**
      * Load String value.<br>
-     * adds path+_HOLDERS if any exists to notify usable holders
+     * target = null
      *
      * @param path yaml path on file
+     * @param def  default value
+     * @param args holders and replacer
+     * @return the value found or default if none
+     * @see #loadMessage(String, String, Player, boolean, String...) loadString(path,
+     * def, null, color, args)
+     * @see #load(String, Object, Class)
+     */
+    @Contract("_, !null, _ -> !null")
+    public @Nullable String loadMessage(@NotNull String path, @Nullable String def, String... args) {
+        return loadMessage(path, def, null, true, args);
+    }
+
+    /**
+     * Load String value.<br>
+     *
+     * @param path   yaml path on file
      * @param def    default value
      * @param target target user for papi support
      * @param color  convert colors?
      * @param args   holders and replacer
      * @return the value found or default if none
-     * @see #loadString(String, String, Player, boolean, String...) loadString(path,
-     * def, null, color, args)
      * @see #load(String, Object, Class)
      */
     @Contract("_, !null, _, _, _ -> !null")
-    public @Nullable String loadString(@NotNull String path, @Nullable String def, @Nullable Player target,
-                                       boolean color, String... args) {
+    public @Nullable String loadMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
+                                        boolean color, String... args) {
         if (args.length > 0) {
-            if (!this.contains(path + "_HOLDERS")) {
-                StringBuilder build = new StringBuilder();
-                for (int i = 0; i < args.length; i += 2)
-                    build.append(args[i]).append(" ");
-                this.set(path + "_HOLDERS", build.substring(0, build.length() - 1));
-                save();
+            if (ItemEdit.GAME_VERSION > 18 || (ItemEdit.GAME_VERSION == 18 && ItemEdit.GAME_SUB_VERSION >= 2)) {
+                if (getComments(path).isEmpty()) {
+                    if (this.contains(path + "_HOLDERS"))
+                        this.set(path + "_HOLDERS", null);
+
+                    StringBuilder build = new StringBuilder();
+                    for (int i = 0; i < args.length; i += 2)
+                        build.append(args[i]).append(" ");
+                    this.setComments(path, Collections.singletonList(build.substring(0, build.length() - 1)));
+                }
             }
         }
         return UtilsString.fix(load(path, def, String.class), target, color, args);
@@ -312,9 +328,8 @@ public class YMLConfig extends YamlConfiguration {
 
     /**
      * Get String value.<br>
-     * adds path+_HOLDERS if any exists to notify usable holders<br>
      *
-     * @param path yaml path on file
+     * @param path   yaml path on file
      * @param def    default value
      * @param target target user for papi support
      * @param color  convert colors?
@@ -323,120 +338,177 @@ public class YMLConfig extends YamlConfiguration {
      * @see #get(String, Object, Class)
      */
     @Contract("_, !null, _, _, _ -> !null")
-    public @Nullable String getString(@NotNull String path, @Nullable String def, @Nullable Player target,
-                                      boolean color, String... args) {
-        if (args.length > 0 && this.contains(path))
-            if (!this.contains(path + "_HOLDERS")) {
-                StringBuilder build = new StringBuilder();
-                for (int i = 0; i < args.length; i += 2)
-                    build.append(args[i]).append(" ");
-                this.set(path + "_HOLDERS", build.substring(0, build.length() - 1));
-                save();
+    public @Nullable String getMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
+                                       boolean color, String... args) {
+        if (args.length > 0) {
+            if (ItemEdit.GAME_VERSION > 18 || (ItemEdit.GAME_VERSION == 18 && ItemEdit.GAME_SUB_VERSION >= 2)) {
+                if (getComments(path).isEmpty()) {
+                    if (this.contains(path + "_HOLDERS"))
+                        this.set(path + "_HOLDERS", null);
+
+                    StringBuilder build = new StringBuilder();
+                    for (int i = 0; i < args.length; i += 2)
+                        build.append(args[i]).append(" ");
+                    this.setComments(path, Collections.singletonList(build.substring(0, build.length() - 1)));
+                }
             }
+        }
         return UtilsString.fix(get(path, def, String.class), target, color, args);
     }
 
     /**
      * Get String value.<br>
-     * adds path+_HOLDERS if any exists to notify usable holders<br>
      * target = null
      *
-     * @param path yaml path on file
+     * @param path  yaml path on file
      * @param def   default value
      * @param color convert colors?
      * @param args  holders and replacer
      * @return the value found or default if none
-     * @see #getString(String, String, Player, boolean, String...) getString(path,
+     * @see #getMessage(String, String, Player, boolean, String...) getString(path,
      * def, null, color, args)
      * @see #get(String, Object, Class)
      */
     @Contract("_, !null, _, _ -> !null")
-    public @Nullable String getString(@NotNull String path, @Nullable String def, boolean color, String... args) {
-        return this.getString(path, def, null, color, args);
+    public @Nullable String getMessage(@NotNull String path, @Nullable String def, boolean color, String... args) {
+        return this.getMessage(path, def, null, color, args);
+    }
+
+    /**
+     * Get String value.<br>
+     * target = null
+     *
+     * @param path yaml path on file
+     * @param def  default value
+     * @param args holders and replacer
+     * @return the value found or default if none
+     * @see #getMessage(String, String, Player, boolean, String...) getString(path,
+     * def, null, color, args)
+     * @see #get(String, Object, Class)
+     */
+    @Contract("_, !null, _ -> !null")
+    public @Nullable String getMessage(@NotNull String path, @Nullable String def, String... args) {
+        return this.getMessage(path, def, null, true, args);
     }
 
     /**
      * target = null
+     * color = true
      *
-     * @param path yaml path on file
-     * @param def   default value
-     * @param color convert colors?
+     * @param path    yaml path on file
+     * @param def     default value
+     * @param holders holders and replacer
      * @return the value found or default if none
      */
     @Contract("_, !null, _ -> !null")
-    public @Nullable List<String> loadStringList(@NotNull String path, @Nullable List<String> def, boolean color) {
-        return loadStringList(path, def, null, color);
+    public @Nullable List<String> loadMultiMessage(@NotNull String path, @Nullable List<String> def, String... holders) {
+        return loadMultiMessage(path, def, null, true, holders);
     }
 
     /**
-     * adds path+_HOLDERS if any exists to notify usable holders
+     * target = null
      *
-     * @param path yaml path on file
-     * @param def    default value
-     * @param target target user for papi support
-     * @param color  convert colors?
-     * @param args   holders and replacer
+     * @param path    yaml path on file
+     * @param def     default value
+     * @param color   convert colors?
+     * @param holders holders and replacer
+     * @return the value found or default if none
+     */
+    @Contract("_, !null, _, _ -> !null")
+    public @Nullable List<String> loadMultiMessage(@NotNull String path, @Nullable List<String> def, boolean color, String... holders) {
+        return loadMultiMessage(path, def, null, color, holders);
+    }
+
+    /**
+     * @param path    yaml path on file
+     * @param def     default value
+     * @param target  target user for papi support
+     * @param color   convert colors?
+     * @param holders holders and replacer
      * @return the value found or default if none
      */
     @SuppressWarnings("unchecked")
     @Contract("_, !null, _, _, _ -> !null")
-    public @Nullable List<String> loadStringList(@NotNull String path, @Nullable List<String> def,
-                                                @Nullable Player target, boolean color, String... args) {
-        if (args.length > 0) {
-            if (!this.contains(path + "_HOLDERS")) {
-                StringBuilder build = new StringBuilder();
-                for (int i = 0; i < args.length; i += 2)
-                    build.append(args[i]).append(" ");
-                this.set(path + "_HOLDERS", build.substring(0, build.length() - 1));
+    public @Nullable List<String> loadMultiMessage(@NotNull String path, @Nullable List<String> def,
+                                                   @Nullable Player target, boolean color, String... holders) {
+        if (holders.length > 0) {
+            if (ItemEdit.GAME_VERSION > 18 || (ItemEdit.GAME_VERSION == 18 && ItemEdit.GAME_SUB_VERSION >= 2)) {
+                if (getComments(path).isEmpty()) {
+                    if (this.contains(path + "_HOLDERS"))
+                        this.set(path + "_HOLDERS", null);
+
+                    StringBuilder build = new StringBuilder();
+                    for (int i = 0; i < holders.length; i += 2)
+                        build.append(holders[i]).append(" ");
+                    this.setComments(path, Collections.singletonList(build.substring(0, build.length() - 1)));
+                }
             }
         }
         try {
-            return UtilsString.fix(load(path, def, List.class), target, color, args);
+            return UtilsString.fix(load(path, def, List.class), target, color, holders);
         } catch (Exception e) {
             e.printStackTrace();
-            return UtilsString.fix(def, target, color, args);
+            return UtilsString.fix(def, target, color, holders);
         }
     }
 
     /**
      * target = null
      *
-     * @param path yaml path on file
-     * @param def   default value
-     * @param color convert colors?
+     * @param path    yaml path on file
+     * @param def     default value
+     * @param holders holders and replacer
      * @return the value found or default if none
      */
-    public @NotNull List<String> getStringList(@NotNull String path, @Nullable List<String> def, boolean color) {
-        return getStringList(path, def, null, color);
+    @Contract("_, !null, _ -> !null")
+    public @Nullable List<String> getMultiMessage(@NotNull String path, @Nullable List<String> def, String... holders) {
+        return getMultiMessage(path, def, null, true, holders);
     }
 
     /**
-     * adds path+_HOLDERS if any exists to notify usable holders
+     * target = null
      *
-     * @param path yaml path on file
-     * @param def    default value
-     * @param target target user for papi support
-     * @param color  convert colors?
-     * @param args   holders and replacer
+     * @param path    yaml path on file
+     * @param def     default value
+     * @param color   convert colors?
+     * @param holders holders and replacer
+     * @return the value found or default if none
+     */
+    @Contract("_, !null, _, _ -> !null")
+    public @Nullable List<String> getMultiMessage(@NotNull String path, @Nullable List<String> def, boolean color, String... holders) {
+        return getMultiMessage(path, def, null, color, holders);
+    }
+
+    /**
+     * @param path    yaml path on file
+     * @param def     default value
+     * @param target  target user for papi support
+     * @param color   convert colors?
+     * @param holders holders and replacer
      * @return the value found or default if none
      */
     @SuppressWarnings("unchecked")
     @Contract("_, !null, _, _, _ -> !null")
-    public @Nullable List<String> getStringList(@NotNull String path, @Nullable List<String> def,
-                                               @Nullable Player target, boolean color, String... args) {
-        if (args.length > 0) {
-            if (!this.contains(path + "_HOLDERS")) {
-                StringBuilder build = new StringBuilder();
-                for (int i = 0; i < args.length; i += 2)
-                    build.append(args[i]).append(" ");
-                this.set(path + "_HOLDERS", build.substring(0, build.length() - 1));
+    public @Nullable List<String> getMultiMessage(@NotNull String path, @Nullable List<String> def,
+                                                  @Nullable Player target, boolean color, String... holders) {
+        if (holders.length > 0) {
+            if (ItemEdit.GAME_VERSION > 18 || (ItemEdit.GAME_VERSION == 18 && ItemEdit.GAME_SUB_VERSION >= 2)) {
+                if (getComments(path).isEmpty()) {
+                    if (this.contains(path + "_HOLDERS"))
+                        this.set(path + "_HOLDERS", null);
+
+                    StringBuilder build = new StringBuilder();
+                    for (int i = 0; i < holders.length; i += 2)
+                        build.append(holders[i]).append(" ");
+                    this.setComments(path, Collections.singletonList(build.substring(0, build.length() - 1)));
+                }
             }
         }
         try {
-            return UtilsString.fix(get(path, def, List.class), target, color, args);
+            return UtilsString.fix(get(path, def, List.class), target, color, holders);
         } catch (Exception e) {
             e.printStackTrace();
-            return UtilsString.fix(def, target, color, args);
+            return UtilsString.fix(def, target, color, holders);
         }
     }
 
@@ -449,7 +521,7 @@ public class YMLConfig extends YamlConfiguration {
      * assumes that enum constants are all uppercase
      *
      * @param <T>   class of enum
-     * @param path yaml path on file
+     * @param path  yaml path on file
      * @param clazz class of enum
      * @param def   default value
      * @return if path lead to a string attempts return the matching Enum value, if
@@ -457,7 +529,7 @@ public class YMLConfig extends YamlConfiguration {
      */
     @Contract("_, !null, _ -> !null")
     public @Nullable <T extends Enum<T>> T loadEnum(@NotNull String path, @Nullable T def, @NotNull Class<T> clazz) {
-        return stringToEnum(loadString(path, def == null ? null : def.name(), false), def, clazz, path);
+        return stringToEnum(loadMessage(path, def == null ? null : def.name(), false), def, clazz, path);
     }
 
     @Contract("_, !null, _ -> !null")
@@ -489,7 +561,7 @@ public class YMLConfig extends YamlConfiguration {
      * def might be lost
      *
      * @param <T>   class of enum
-     * @param path yaml path on file
+     * @param path  yaml path on file
      * @param clazz class of enum
      * @param def   default value
      * @return the value found or default if none
@@ -497,13 +569,13 @@ public class YMLConfig extends YamlConfiguration {
     public @NotNull <T extends Enum<T>> List<T> loadEnumList(@NotNull String path, @Nullable Collection<T> def,
                                                              @NotNull Class<T> clazz) {
         return stringListToEnumCollection(new ArrayList<>(),
-                loadStringList(path, enumCollectionToStringList(def), false), clazz, path);
+                loadMultiMessage(path, enumCollectionToStringList(def), false), clazz, path);
     }
 
     public @NotNull <T extends Enum<T>> EnumSet<T> loadEnumSet(@NotNull String path, @Nullable Collection<T> def,
                                                                @NotNull Class<T> clazz) {
         return stringListToEnumCollection(EnumSet.noneOf(clazz),
-                loadStringList(path, enumCollectionToStringList(def), false), clazz, path);
+                loadMultiMessage(path, enumCollectionToStringList(def), false), clazz, path);
     }
 
     @Contract("!null -> !null; null -> null")

@@ -1,17 +1,16 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.gui.FireworkEditor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-import emanondev.itemedit.Util;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
-import emanondev.itemedit.gui.FireworkEditor;
+import java.util.Collections;
+import java.util.List;
 
 public class Firework extends SubCmd {
 
@@ -20,11 +19,11 @@ public class Firework extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof FireworkMeta)) {
-            Util.sendMessage(p, this.getConfString("wrong-type"));
+            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
 
@@ -32,13 +31,13 @@ public class Firework extends SubCmd {
             ((Player) sender).openInventory(new FireworkEditor((Player) sender, item).getInventory());
         } catch (Exception e) {
             e.printStackTrace();
-            onFail(p);
+            onFail(p, alias);
         }
     }
 
     // itemedit firework
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         return Collections.emptyList();
     }
 

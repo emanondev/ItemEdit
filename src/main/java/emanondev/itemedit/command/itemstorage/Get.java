@@ -1,21 +1,19 @@
 package emanondev.itemedit.command.itemstorage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.UtilsInventory;
 import emanondev.itemedit.UtilsInventory.ExcessManage;
-import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.command.ItemStorageCommand;
 import emanondev.itemedit.command.SubCmd;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Get extends SubCmd {
 
@@ -24,7 +22,7 @@ public class Get extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         try {
             if (args.length != 2 && args.length != 3)
@@ -37,18 +35,17 @@ public class Get extends SubCmd {
             ItemStack item = ItemEdit.get().getPlayerStorage().getItem(p, args[1]);
             int given = UtilsInventory.giveAmount(p, item, amount, ExcessManage.DELETE_EXCESS);
             if (given == 0)
-                Util.sendMessage(p,
-                        this.getConfString("no-inventory-space"));
+                sendLanguageString("no-inventory-space", null, p);
             else
-                Util.sendMessage(p, UtilsString.fix(this.getConfString("success"), p, true, "%id%",
-                        args[1].toLowerCase(), "%amount%", String.valueOf(given)));
+                sendLanguageString("success", null, p, "%id%",
+                        args[1].toLowerCase(), "%amount%", String.valueOf(given));
         } catch (Exception e) {
-            onFail(p);
+            onFail(p, alias);
         }
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (!(sender instanceof Player))
             return new ArrayList<>();
         switch (args.length) {

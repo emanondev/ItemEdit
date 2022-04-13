@@ -41,65 +41,6 @@ log:
     sell: true
     #log when a player sell items? (/serveritem buy/buymax [...])
     buy: true
-gui:
-  playeritems:
-    rows: 5
-    #Holders: %player_name% %page%
-    title: "&9%player_name% items - page &b%page%"
-    previus-page:
-      material: ARROW
-      durability: 0
-      glow: false
-      #Holders: %player_name% %page% %target_page%
-      description:
-        - "&9Go to page &e%target_page%"
-    next-page:
-      material: ARROW
-      durability: 0
-      glow: false
-      #Holders: %player_name% %page% %target_page%
-      description:
-        - "&9Go to page &e%target_page%"
-    page-info:
-      material: NAME_TAG
-      durability: 0
-      glow: false
-      #Holders: %player_name% %page%
-      description:
-        - '&9&lPage &e&l%page%'
-        - '&9Click &ehere &9to &atoggle view of item/ID'
-        - '&eLeft &9Click on items to &egain 1'
-        - '&eShift+Left &9Click on items to &egain 64'
-        - '&eShift+Right &9Click on items to &cdelete &9item'
-  serveritems:
-    rows: 5
-    #Holders: %player_name% %page%
-    title: "&9Server items - page &b%page%"
-    previus-page:
-      material: ARROW
-      durability: 0
-      glow: false
-      #Holders: %player_name% %page% %target_page%
-      description:
-        - "&9Go to page &e%target_page%"
-    next-page:
-      material: ARROW
-      durability: 0
-      glow: false
-      #Holders: %player_name% %page% %target_page%
-      description:
-        - "&9Go to page &e%target_page%"
-    page-info:
-      material: NAME_TAG
-      durability: 0
-      glow: false
-      #Holders: %player_name% %page%
-      description:
-        - '&9&lPage &e&l%page%'
-        - '&9Click &ehere &9to &atoggle view of item/ID'
-        - '&eLeft &9Click on items to &egain 1'
-        - '&eShift+Left &9Click on items to &egain 64'
-        - '&eShift+Right &9Click on items to &cdelete &9item'
 blocked:
   log:
     #when text is blocked a message will be displayed on console, reporting the text and the blocked word/regex

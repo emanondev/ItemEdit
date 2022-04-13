@@ -1,18 +1,17 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
-import emanondev.itemedit.Util;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
-import net.md_5.bungee.api.ChatColor;
+import java.util.Collections;
+import java.util.List;
 
 public class BookAuthor extends SubCmd {
 
@@ -21,11 +20,11 @@ public class BookAuthor extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getType() == Material.WRITTEN_BOOK)) {
-            Util.sendMessage(p, this.getConfString("wrong-type"));
+            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
 
@@ -47,14 +46,14 @@ public class BookAuthor extends SubCmd {
             item.setItemMeta(itemMeta);
             p.updateInventory();
         } catch (Exception e) {
-            onFail(p);
+            onFail(p, alias);
         }
 
     }
 
     // itemedit bookauthor <name>
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
             return Util.completePlayers(args[1]);
         return Collections.emptyList();

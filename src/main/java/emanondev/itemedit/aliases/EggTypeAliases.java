@@ -1,9 +1,9 @@
 package emanondev.itemedit.aliases;
 
+import org.bukkit.entity.EntityType;
+
 import java.util.Collection;
 import java.util.EnumSet;
-
-import org.bukkit.entity.EntityType;
 
 public class EggTypeAliases extends EnumAliasSet<EntityType> {
 

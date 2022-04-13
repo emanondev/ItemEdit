@@ -1,15 +1,7 @@
 package emanondev.itemedit;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.regex.Pattern;
-
+import emanondev.itemedit.aliases.AliasSet;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -19,8 +11,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import emanondev.itemedit.aliases.AliasSet;
-import net.md_5.bungee.api.chat.BaseComponent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class Util {
     private static final int MAX_COMPLETES = 100;
@@ -115,7 +114,7 @@ public class Util {
             File saveTo = new File(ItemEdit.get().getDataFolder(),
                     "logs" + File.separatorChar
                             + DateFormatUtils.format(date,
-                            ItemEdit.get().getConfig().loadString("log.file-format", "yyyy.MM.dd", false))
+                            ItemEdit.get().getConfig().loadMessage("log.file-format", "yyyy.MM.dd", false))
                             + ".log");
             if (!saveTo.getParentFile().exists()) { // Create parent folders if they don't exist
                 saveTo.getParentFile().mkdirs();
@@ -126,7 +125,7 @@ public class Util {
             FileWriter fw = new FileWriter(saveTo, true);
             PrintWriter pw = new PrintWriter(fw);
             pw.println(DateFormatUtils.format(date,
-                    ItemEdit.get().getConfig().loadString("log.log-date-format", "[dd.MM.yyyy HH:mm:ss]", false))
+                    ItemEdit.get().getConfig().loadMessage("log.log-date-format", "[dd.MM.yyyy HH:mm:ss]", false))
                     + message);
             pw.flush();
             pw.close();
@@ -148,8 +147,8 @@ public class Util {
                     logToFile("user: '" + user.getName() + "' attempt to write '" + text
                             + "' (stripped by colors and lowcased to '" + message + "') was blocked by regex: '" + regex
                             + "'");
-                sendMessage(user, UtilsString
-                        .fix(ItemEdit.get().getConfig("itemedit.yml").getString("blocked-by-censure"), null, true));
+                sendMessage(user,
+                        ItemEdit.get().getLanguageConfig(user).loadMessage("blocked-by-censure", "", null, true));
                 return true;
             }
         for (String bannedWord : ItemEdit.get().getConfig().getStringList("blocked.words"))
@@ -163,8 +162,8 @@ public class Util {
                     logToFile("user: '" + user.getName() + "' attempt to write '" + text
                             + "' (stripped by colors and lowcased to '" + message + "') was blocked by word: '"
                             + bannedWord.toLowerCase() + "'");
-                sendMessage(user, UtilsString
-                        .fix(ItemEdit.get().getConfig("itemedit.yml").getString("blocked-by-censure"), null, true));
+                sendMessage(user,
+                        ItemEdit.get().getLanguageConfig(user).loadMessage("blocked-by-censure", "", null, true));
                 return true;
             }
         return false;
@@ -206,8 +205,8 @@ public class Util {
         String id = type.name();
         for (String name : values)
             if (id.equalsIgnoreCase(name)) {
-                sendMessage(sender, UtilsString.fix(
-                        ItemEdit.get().getConfig("itemedit.yml").getString("blocked-by-type-restriction"), null, true));
+                sendMessage(sender,
+                        ItemEdit.get().getLanguageConfig(sender).loadMessage("blocked-by-type-restriction", "", null, true));
                 return false;
             }
         return true;
@@ -215,6 +214,7 @@ public class Util {
 
     /**
      * for pre 1.13 compatibility
+     *
      * @param color color
      * @return An ItemStack of selected Dye
      */
@@ -226,8 +226,10 @@ public class Util {
             return new ItemStack(Material.valueOf("INK_SACK"), 1, (short) 0, getData(color));
         }
     }
+
     /**
      * for pre 1.13 compatibility
+     *
      * @param color color
      * @return An ItemStack of selected Dyed wool
      */

@@ -1,9 +1,9 @@
 package emanondev.itemedit.aliases;
 
+import org.bukkit.enchantments.Enchantment;
+
 import java.util.Collection;
 import java.util.HashSet;
-
-import org.bukkit.enchantments.Enchantment;
 
 public class EnchAliases extends AliasSet<Enchantment> {
 

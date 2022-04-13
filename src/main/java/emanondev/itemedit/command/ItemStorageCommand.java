@@ -1,11 +1,7 @@
 package emanondev.itemedit.command;
 
 import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.command.itemstorage.Delete;
-import emanondev.itemedit.command.itemstorage.Get;
-import emanondev.itemedit.command.itemstorage.Save;
-import emanondev.itemedit.command.itemstorage.Show;
-import emanondev.itemedit.command.itemstorage.Update;
+import emanondev.itemedit.command.itemstorage.*;
 
 public class ItemStorageCommand extends AbstractCommand {
     public static ItemStorageCommand instance;

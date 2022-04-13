@@ -1,16 +1,13 @@
 package emanondev.itemedit.command.serveritem;
 
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.command.ServerItemCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsString;
-import emanondev.itemedit.command.ServerItemCommand;
-import emanondev.itemedit.command.SubCmd;
+import java.util.Collections;
+import java.util.List;
 
 public class Save extends SubCmd {
 
@@ -19,7 +16,7 @@ public class Save extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         try {
             if (args.length != 2)
@@ -28,14 +25,14 @@ public class Save extends SubCmd {
                 ItemEdit.get().getServerStorage().setItem(args[1], this.getItemInHand(p).clone());
             else
                 throw new IllegalArgumentException();
-            Util.sendMessage(p, UtilsString.fix(this.getConfString("success"), p, true, "%id%", args[1].toLowerCase()));
+            sendLanguageString("success", null, p, "%id%", args[1].toLowerCase());
         } catch (Exception e) {
-            onFail(p);
+            onFail(p, alias);
         }
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         return Collections.emptyList();
     }
 

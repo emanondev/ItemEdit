@@ -1,18 +1,17 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
 
-import emanondev.itemedit.Util;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class RepairCost extends SubCmd {
 
@@ -21,14 +20,14 @@ public class RepairCost extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
             if (args.length > 2)
                 throw new IllegalArgumentException("Wrong param number");
             if (!sender.hasPermission(this.getPermission() + ".without_durability") && item.getType().getMaxDurability() <= 1) {
-                Util.sendMessage(sender, this.getCommand().getPermissionLackMessage(this.getPermission()+ ".without_durability"));
+                this.getCommand().sendPermissionLackMessage(this.getPermission() + ".without_durability", sender);
                 return;
             }
 
@@ -37,13 +36,13 @@ public class RepairCost extends SubCmd {
             item.setItemMeta((ItemMeta) meta);
             p.updateInventory();
         } catch (Exception e) {
-            onFail(p);
+            onFail(p, alias);
         }
 
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
             return Util.complete(args[1], Arrays.asList("0", "1", "3", "7", "30", "40"));
         return Collections.emptyList();

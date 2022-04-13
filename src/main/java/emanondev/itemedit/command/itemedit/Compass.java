@@ -1,15 +1,15 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
-import emanondev.itemedit.Util;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
+
+import java.util.Collections;
+import java.util.List;
 
 public class Compass extends SubCmd {
 
@@ -25,15 +25,15 @@ public class Compass extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof CompassMeta)) {
-            Util.sendMessage(p, this.getConfString("wrong-type"));
+            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
         if (args.length == 1) {
-            onFail(p);
+            onFail(p, alias);
             return;
         }
 
@@ -45,12 +45,12 @@ public class Compass extends SubCmd {
                 compassClear(p, item, args);
                 return;
             default:
-                onFail(p);
+                onFail(p, alias);
         }
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
             return Util.complete(args[1], compassSub);
 
@@ -63,10 +63,11 @@ public class Compass extends SubCmd {
         meta.setLodestoneTracked(false);
         meta.setLodestone(p.getLocation());
         item.setItemMeta(meta);
-        Util.sendMessage(p, this.getConfString("set.feedback").replace("%world%", p.getLocation().getWorld().getName())
-                .replace("%x%", String.valueOf(p.getLocation().getBlockX()))
-                .replace("%y%", String.valueOf(p.getLocation().getBlockY()))
-                .replace("%z%", String.valueOf(p.getLocation().getBlockZ()))
+        this.getLanguageString("set.feedback", null, p,
+                "%world%", p.getLocation().getWorld().getName(),
+                "%x%", String.valueOf(p.getLocation().getBlockX()),
+                "%y%", String.valueOf(p.getLocation().getBlockY()),
+                "%z%", String.valueOf(p.getLocation().getBlockZ())
         );
         p.updateInventory();
     }
@@ -76,7 +77,7 @@ public class Compass extends SubCmd {
         meta.setLodestoneTracked(true);
         meta.setLodestone(p.getLocation());
         item.setItemMeta(meta);
-        Util.sendMessage(p, this.getConfString("clear.feedback"));
+        Util.sendMessage(p, this.getLanguageString("clear.feedback", null, p));
         p.updateInventory();
     }
 }

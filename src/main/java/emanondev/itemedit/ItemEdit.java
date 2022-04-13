@@ -9,7 +9,6 @@ import emanondev.itemedit.storage.ServerStorage;
 import emanondev.itemedit.storage.YmlPlayerStorage;
 import emanondev.itemedit.storage.YmlServerStorage;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.Collections;
@@ -17,6 +16,9 @@ import java.util.Collections;
 public class ItemEdit extends APlugin {
     private static ItemEdit plugin = null;
     public static final String NMS_VERSION = getNmsver();
+    public static final int GAME_MAIN_VERSION = Integer.parseInt(NMS_VERSION.split("_")[0].substring(1));
+    public static final int GAME_VERSION = Integer.parseInt(NMS_VERSION.split("_")[1]);
+    public static final int GAME_SUB_VERSION = Integer.parseInt(NMS_VERSION.split("_")[2].substring(1));
 
     public static ItemEdit get() {
         return plugin;
@@ -33,64 +35,46 @@ public class ItemEdit extends APlugin {
         return txt.substring(txt.lastIndexOf(".") + 1);
     }
 
-    public void onEnable() {
-        try {
-            Aliases.reload();
-
-            Bukkit.getPluginManager().registerEvents(new GuiHandler(), this);
-
-            pStorage = new YmlPlayerStorage(); //may implement more type of storage and allow selecting storage type from config
-            sStorage = new YmlServerStorage();
-
-            registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
-            registerCommand(new ItemStorageCommand(), Collections.singletonList("is"));
-            registerCommand(new ServerItemCommand(), Collections.singletonList("si"));
-            new ReloadCommand(this).register();
-            registerCommand("itemeditimport", new ItemEditImportCommand(), null);
-
-            getConfig(); //force load the config.yml file
-
-            new UpdateChecker(this, PROJECT_ID).logUpdates();
-            if (Hooks.isPAPIEnabled()) {
-                new PlaceHolders().register();
-            }
-            if (Hooks.isShopGuiPlusEnabled()) {
-                try {
-                    new ShopGuiPlusItemProvider().register();
-                } catch (Throwable t) {
-                    t.printStackTrace();
-                }
-            }
-
-        } catch (Throwable e) {
-            try {
-                Class.forName("org.spigotmc.SpigotConfig");
-            } catch (Throwable t) {
-                TabExecutorError exec = new TabExecutorError(
-                        ChatColor.RED + "CraftBukkit is not supported!!! use Spigot or Paper");
-                for (String command : this.getDescription().getCommands().keySet())
-                    registerCommand(command, exec, null);
-                return;
-            }
-            if (Bukkit.getServer().getBukkitVersion().startsWith("1.7.")) {
-                TabExecutorError exec = new TabExecutorError(ChatColor.RED + "1.7.x is not supported!!! use 1.8+");
-                for (String command : this.getDescription().getCommands().keySet())
-                    registerCommand(command, exec, null);
-                return;
-            }
-            this.log(ChatColor.RED + "Error while loading ItemEdit, disabling it");
-            e.printStackTrace();
-            Bukkit.getServer().getPluginManager().disablePlugin(this);
-        }
+    @Override
+    public Integer getProjectId() {
+        return PROJECT_ID;
     }
 
-    public void onDisable() {
+    public void enable() {
+        Aliases.reload();
+
+        Bukkit.getPluginManager().registerEvents(new GuiHandler(), this);
+
+        pStorage = new YmlPlayerStorage(); //may implement more type of storage and allow selecting storage type from config
+        sStorage = new YmlServerStorage();
+
+        registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
+        registerCommand(new ItemStorageCommand(), Collections.singletonList("is"));
+        registerCommand(new ServerItemCommand(), Collections.singletonList("si"));
+        new ReloadCommand(this).register();
+        registerCommand("itemeditimport", new ItemEditImportCommand(), null);
+
+        //hooks
+        if (Hooks.isPAPIEnabled()) {
+            new PlaceHolders().register();
+        }
+        if (Hooks.isShopGuiPlusEnabled()) {
+            try {
+                new ShopGuiPlusItemProvider().register();
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+        }
+
+    }
+
+    public void disable() {
         for (Player p : Bukkit.getOnlinePlayers())
             if (p.getOpenInventory().getTopInventory().getHolder() instanceof Gui)
                 p.closeInventory();
     }
 
-    public void onReload() {
+    public void reload() {
         Aliases.reload();
         ItemEditCommand.get().reload();
         ItemStorageCommand.get().reload();

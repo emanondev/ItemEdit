@@ -1,17 +1,16 @@
 package emanondev.itemedit.aliases;
 
-import java.util.*;
-
+import emanondev.itemedit.ItemEdit;
 import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.potion.PotionEffectType;
-
-import emanondev.itemedit.ItemEdit;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.*;
 
 public class Aliases {
 
@@ -85,15 +84,15 @@ public class Aliases {
         registerAliasType(AXOLOTL_VARIANT);
     }
 
-    public static <T> void registerAliasType(@Nullable AliasSet<T> set){
-        if (set==null)
+    public static <T> void registerAliasType(@Nullable AliasSet<T> set) {
+        if (set == null)
             return;
         if (types.containsKey(set.getID()))
             throw new IllegalArgumentException("Duplicate id");
-        types.put(set.getID(),set);
+        types.put(set.getID(), set);
     }
 
-    public static AliasSet<?> getAliasType(@NotNull String id){
+    public static AliasSet<?> getAliasType(@NotNull String id) {
         return types.get(id);
     }
 

@@ -1,8 +1,8 @@
 package emanondev.itemedit.aliases;
 
-import java.util.HashMap;
-
 import org.bukkit.enchantments.Enchantment;
+
+import java.util.HashMap;
 
 public class EnchAliasesOld extends EnchAliases {
     public EnchAliasesOld() {

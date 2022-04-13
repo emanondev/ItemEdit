@@ -1,8 +1,9 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -11,43 +12,23 @@ import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import emanondev.itemedit.Util;
-import emanondev.itemedit.aliases.Aliases;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
-import net.md_5.bungee.api.chat.BaseComponent;
+import java.util.Collections;
+import java.util.List;
 
 public class PotionEffectEditor extends SubCmd {
 
     private static final String[] subCommands = new String[]{"add", "remove", "reset"};
-    private BaseComponent[] helpAdd;
-    private BaseComponent[] helpRemove;
 
     public PotionEffectEditor(ItemEditCommand cmd) {
         super("potioneffect", cmd, true, true);
-
-        load();
-
-    }
-
-    private void load() {
-        this.helpAdd = this.craftFailFeedback(getConfString("add.params"),
-                String.join("\n", getConfStringList("add.description")));
-        this.helpRemove = this.craftFailFeedback(getConfString("remove.params"),
-                String.join("\n", getConfStringList("remove.description")));
-    }
-
-    public void reload() {
-        super.reload();
-        load();
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof PotionMeta) && !(item.getItemMeta() instanceof SuspiciousStewMeta)) {
-            Util.sendMessage(p, this.getConfString("wrong-type"));
+            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
 
@@ -69,7 +50,7 @@ public class PotionEffectEditor extends SubCmd {
                     throw new IllegalArgumentException();
             }
         } catch (Exception e) {
-            onFail(p);
+            onFail(p, alias);
         }
 
     }
@@ -92,12 +73,13 @@ public class PotionEffectEditor extends SubCmd {
             }
             p.updateInventory();
         } catch (Exception e) {
-            p.spigot().sendMessage(helpRemove);
+            Util.sendMessage(p, this.craftFailFeedback(getLanguageString("remove.params", null, p),
+                    getLanguageStringList("remove.description", null, p)));
         }
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
             return Util.complete(args[1], subCommands);
         if (args.length == 3 && (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove")))
@@ -135,7 +117,8 @@ public class PotionEffectEditor extends SubCmd {
             }
             p.updateInventory();
         } catch (Exception e) {
-            p.spigot().sendMessage(helpAdd);
+            Util.sendMessage(p, this.craftFailFeedback(getLanguageString("add.params", null, p),
+                    getLanguageStringList("add.description", null, p)));
         }
     }
 

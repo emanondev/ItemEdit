@@ -1,40 +1,27 @@
 package emanondev.itemedit.gui;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.DyeColor;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Material;
+import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.Util;
+import emanondev.itemedit.aliases.Aliases;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsString;
-import emanondev.itemedit.YMLConfig;
-import emanondev.itemedit.aliases.Aliases;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FireworkEditor implements Gui {
 
     private final FireworkMeta meta;
     private final Player target;
-    private static final YMLConfig config = ItemEdit.get().getConfig("itemedit.yml");
-    private static final String subPath = "sub-commands.firework.";
+    private static final String subPath = "gui.firework.";
     private final Inventory inventory;
     private final List<FireworkEffectData> effects = new ArrayList<>();
     private final ItemStack firework;
@@ -111,9 +98,7 @@ public class FireworkEditor implements Gui {
             }
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
-            meta.setDisplayName(UtilsString.fix("&e" + Aliases.FIREWORK_TYPE.getName(type), null, true));
-            meta.setLore(UtilsString.fix(config.getStringList(subPath + "buttons.type",
-                    Arrays.asList("&bType Selector", "&bClick to change type"), target, false), null, true));
+            loadLanguageDescription(meta, subPath + "buttons.type", "%type%", Aliases.FIREWORK_TYPE.getName(type));
             item.setItemMeta(meta);
             return item;
         }
@@ -127,13 +112,9 @@ public class FireworkEditor implements Gui {
             List<String> colorNames = new ArrayList<>();
             for (DyeColor color : colors)
                 colorNames.add(Aliases.COLOR.getName(color));
-
-            meta.setDisplayName(UtilsString.fix("&bColors: &e" + String.join("&b, &e", colorNames), null, true));
-            meta.setLore(UtilsString.fix(config.getStringList(subPath + "buttons.colors",
-                    Arrays.asList("&bColor Selector", "&bSelected color: &6%color%", "",
-                            "&bMiddle Click to add &e%color%", "&bRight/Left Click to change selected color",
-                            "&bShift Click to delete last color"),
-                    target, false, "%color%", Aliases.COLOR.getName(selectedColor)), null, true));
+            loadLanguageDescription(meta, subPath + "buttons.type",
+                    "%color%", Aliases.COLOR.getName(selectedColor),
+                    "%colors%", String.join("&b, &e", colorNames));
             item.setItemMeta(meta);
             item.setAmount(Math.max(colors.size(), 1));
             return item;
@@ -149,12 +130,10 @@ public class FireworkEditor implements Gui {
             for (DyeColor color : fadeColors)
                 colorNames.add(Aliases.COLOR.getName(color));
 
-            meta.setDisplayName(UtilsString.fix("&bFadeColors: &e" + String.join("&b, &e", colorNames), null, true));
-            meta.setLore(UtilsString.fix(config.getStringList(subPath + "buttons.fadecolors",
-                    Arrays.asList("&bFade Color Selector", "&bSelected color: &6%color%", "",
-                            "&bMiddle Click to add &e%color%", "&bRight/Left Click to change selected color",
-                            "&bShift Click to delete last color"),
-                    target, false, "%color%", Aliases.COLOR.getName(selectedFadeColor)), null, true));
+            loadLanguageDescription(meta, subPath + "buttons.fadecolors",
+                    "%color%", Aliases.COLOR.getName(selectedFadeColor),
+                    "%colors%", String.join("&b, &e", colorNames));
+
             item.setItemMeta(meta);
             item.setAmount(Math.max(fadeColors.size(), 1));
             return item;
@@ -163,40 +142,28 @@ public class FireworkEditor implements Gui {
         public ItemStack getTrailFlickerItem() {
             if (!active)
                 return null;
-            ItemStack item = trail ?new ItemStack( Material.DIAMOND):Util.getDyeItemFromColor(DyeColor.GRAY);
+            ItemStack item = trail ? new ItemStack(Material.DIAMOND) : Util.getDyeItemFromColor(DyeColor.GRAY);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
             if (flicker)
                 meta.addEnchant(Enchantment.DURABILITY, 1, true);
-            meta.setDisplayName(config.getString(
-                    subPath + "buttons.flags."
-                            + (trail ? (flicker ? "both" : "trail") : (flicker ? "flicker" : "none")),
-                    trail ? (flicker ? "&eTrail&b and &eFlicker &aActive" : "&eTrail &aActive")
-                            : (flicker ? "&eFlicker &aActive" : "&cNothing active"),
-                    true));
-            meta.setLore(
-                    config.getStringList(
-                            subPath + "buttons.flags.info", Arrays.asList("&bTrail and Flicker Activator", "",
-                                    "&bRight Click to toggle Flicker effect", "&bLeft Click to toggle Trail effect"),
-                            true));
+            loadLanguageDescription(meta, subPath + "buttons.flags.info",
+                    "%status%",
+                    getLanguageMessage(subPath + "buttons.flags."
+                            + (trail ? (flicker ? "both" : "trail") : (flicker ? "flicker" : "none"))
+                    ));
             item.setItemMeta(meta);
             return item;
         }
 
         public ItemStack getPositionItem() {
             ItemStack item = Util
-                        .getDyeItemFromColor(active ? (colors.isEmpty() ? DyeColor.RED : DyeColor.LIME) : DyeColor.GRAY);
+                    .getDyeItemFromColor(active ? (colors.isEmpty() ? DyeColor.RED : DyeColor.LIME) : DyeColor.GRAY);
 
             ItemMeta meta = item.getItemMeta();
 
             meta.addItemFlags(ItemFlag.values());
-            List<String> list = new ArrayList<>(
-                    config.getStringList(
-                            subPath + "buttons.position", Arrays.asList("&bEffect Controller", "",
-                                    "&bMiddle Click to toggle effect", "&bLeft/Right Click to move this effect"),
-                            true));
-            meta.setDisplayName(list.size() > 0 ? list.remove(0) : "");
-            meta.setLore(list);
+            loadLanguageDescription(meta, subPath + "buttons.position");
             item.setItemMeta(meta);
             return item;
         }
@@ -228,15 +195,6 @@ public class FireworkEditor implements Gui {
                     else
                         selectedColor = DyeColor.values()[(selectedColor.ordinal() - 1 + DyeColor.values().length)
                                 % DyeColor.values().length];
-                    /*
-                     * if (!event.isShiftClick()) { if (event.isRightClick()) selectedColor =
-                     * DyeColor.values()[(selectedColor.ordinal() + 1) % DyeColor.values().length];
-                     * else selectedColor = DyeColor.values()[(selectedColor.ordinal() -
-                     * 1+DyeColor.values().length) % DyeColor.values().length]; } else { if
-                     * (event.isRightClick()) { if (colors.size() < 9) colors.add(selectedColor); }
-                     * else if (event.isLeftClick()) { if (colors.size() > 0)
-                     * colors.remove(colors.size() - 1); } }
-                     */
                 }
                 return;
                 case 3: {// fadecolor
@@ -251,17 +209,6 @@ public class FireworkEditor implements Gui {
                     else
                         selectedFadeColor = DyeColor.values()[(selectedFadeColor.ordinal() - 1 + DyeColor.values().length)
                                 % DyeColor.values().length];
-
-                    /*
-                     * if (!event.isShiftClick()) { if (event.isRightClick()) selectedFadeColor =
-                     * DyeColor.values()[(selectedFadeColor.ordinal() + 1) %
-                     * DyeColor.values().length]; else selectedFadeColor =
-                     * DyeColor.values()[(selectedFadeColor.ordinal() - 1+DyeColor.values().length)
-                     * % DyeColor.values().length]; } else { if (event.isRightClick()) { if
-                     * (fadeColors.size() < 9) fadeColors.add(selectedFadeColor); } else if
-                     * (event.isLeftClick()) { if (fadeColors.size() > 0)
-                     * fadeColors.remove(fadeColors.size() - 1); } }
-                     */
                 }
                 return;
                 case 4: {// flags
@@ -274,6 +221,11 @@ public class FireworkEditor implements Gui {
             }
         }
 
+    }
+
+    @Override
+    public ItemEdit getPlugin() {
+        return ItemEdit.get();
     }
 
     private static List<DyeColor> translateToDyeColor(List<Color> colors) {
@@ -310,8 +262,7 @@ public class FireworkEditor implements Gui {
         this.firework = item;
         this.meta = (FireworkMeta) firework.getItemMeta();
         this.target = target;
-        String title = UtilsString.fix(config.loadString(subPath + "gui.title", "", false), target, true,
-                "%player_name%", target.getName());
+        String title = getLanguageMessage(subPath + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
         for (int i = 0; i < 9; i++) {
             if (i < meta.getEffects().size())
@@ -413,24 +364,10 @@ public class FireworkEditor implements Gui {
         item.setAmount(meta.getPower() + 1);
         ItemMeta powerMeta = item.getItemMeta();
         powerMeta.addItemFlags(ItemFlag.values());
-        List<String> list = new ArrayList<>(config.getStringList(subPath + "buttons.power",
-                Arrays.asList("&bPower: &e%power%", "", "&bLeft/Right Click to change"), null, true, "%power%",
-                String.valueOf(meta.getPower() + 1)));
-        powerMeta.setDisplayName(list.size() > 0 ? list.remove(0) : "");
-        powerMeta.setLore(list);
+        loadLanguageDescription(meta, subPath + "buttons.power", "%power%",
+                String.valueOf(meta.getPower() + 1));
         item.setItemMeta(powerMeta);
         this.getInventory().setItem(47, item);
-        /*item = Util.getDyeItemFromColor(DyeColor.LIGHT_BLUE);
-
-         * ItemMeta confirmMeta = item.getItemMeta();
-         * confirmMeta.addItemFlags(ItemFlag.values()); list = new
-         * ArrayList<>(config.getStringList(subPath + "buttons.confirm",
-         * Arrays.asList("&bLeft Click to override you item",
-         * "&bRight Click to obtain a copy"), null, true)); if (list.size() > 0)
-         * confirmMeta.setDisplayName(list.size() > 0 ? list.remove(0) : "");
-         * confirmMeta.setLore(list); item.setItemMeta(confirmMeta);
-         * this.getInventory().setItem(51, item);
-         */
     }
 
     @Override

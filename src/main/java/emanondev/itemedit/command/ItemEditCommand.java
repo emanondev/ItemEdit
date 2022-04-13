@@ -20,10 +20,7 @@ public class ItemEditCommand extends AbstractCommand {
             this.registerSubCommand(new Flag(this));
             this.registerSubCommand(new HideAll(this));
 
-            if (ItemEdit.NMS_VERSION.startsWith("v1_8_R") || ItemEdit.NMS_VERSION.startsWith("v1_9_R"))
-                this.registerSubCommand(new UnbreakableOld(this));
-            else
-                this.registerSubCommand(new UnbreakableNew(this)); //1.10+
+            this.registerSubCommand(new Unbreakable(this));
             this.registerSubCommand(new RepairCost(this));
             this.registerSubCommand(new Amount(this));
             this.registerSubCommand(new Damage(this));

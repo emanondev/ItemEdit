@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +21,14 @@ import java.util.List;
 
 public class ItemEditImportCommand implements TabExecutor {
 
+    private final ItemEdit plugin;
+    private final String permission;
+
+    public ItemEditImportCommand() {
+        this.plugin = ItemEdit.get();
+        this.permission = "itemedit.itemeditimport";
+    }
+
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length == 1)
@@ -27,82 +36,87 @@ public class ItemEditImportCommand implements TabExecutor {
         return Collections.emptyList();
     }
 
+
+    public void sendPermissionLackMessage(@NotNull String permission, CommandSender sender) {
+        Util.sendMessage(sender, plugin.getLanguageConfig(sender).loadMessage("lack-permission", "&cYou lack of permission %permission%",
+                sender instanceof Player ? (Player) sender : null, true
+                , "%permission%",
+                permission));
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        if (sender.hasPermission("itemedit.itemeditimport")) {
-            if (args.length == 0) {
-                Util.sendMessage(sender, String.join("\n", ItemEdit.get().getConfig("itemeditimport.yml")
-                        .loadStringList("help", new ArrayList<>(), true)));
+        if (!sender.hasPermission(permission)) {
+            sendPermissionLackMessage(permission, sender);
+            return true;
+        }
+
+
+        if (args.length == 0) {
+            Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
+                    "itemeditimport.help", new ArrayList<>())));
+            return true;
+        }
+        switch (args[0].toLowerCase()) {
+            case "itemeditor": {
+                File[] files = new File("plugins" + File.separator + "ItemEditor" + File.separator + "items").listFiles();
+                if (files != null
+                        && files.length != 0) {
+                    List<String> importedIds = new ArrayList<>();
+                    int max = files.length;
+                    for (File file : files) {
+                        String name = file.getName().replace(".yml", "");
+                        try {
+                            ItemEdit.get().getServerStorage().validateID(name);
+                        } catch (Exception e) {
+                            Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
+                                    "itemeditimport.itemeditor.invalid-id", new ArrayList<>(), null, true, "%id%", name)));
+                            continue;
+                        }
+                        if (ItemEdit.get().getServerStorage().getItem(name) != null) {
+                            Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
+                                    "itemeditimport.itemeditor.already-used-id", new ArrayList<>(), null, true,
+                                    "%id%", name)));
+                            continue;
+                        }
+
+                        try {
+                            ItemStack item = fromBase64(YamlConfiguration.loadConfiguration(file).getString("Item"));
+                            ItemEdit.get().getServerStorage().setItem(name, item);
+                            importedIds.add(name);
+                        } catch (Exception e) {
+                            Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
+                                    "itemeditimport.itemeditor.unable-to-get-item", new ArrayList<>(), null, true,
+                                    "%id%", name)));
+                            e.printStackTrace();
+                            continue;
+                        }
+
+                    }
+                    if (importedIds.isEmpty()) {
+                        Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
+                                "itemeditimport.itemeditor.import-unsuccess", new ArrayList<>(), null, true,
+                                "%ids%", String.join(", ", importedIds),
+                                "%max%", String.valueOf(max), "%done%", String.valueOf(importedIds.size()))));
+                    } else {
+                        Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
+                                "itemeditimport.itemeditor.import-success", new ArrayList<>(), null, true,
+                                "%ids%", String.join(", ", importedIds)
+                                , "%max%", String.valueOf(max),
+                                "%done%", String.valueOf(importedIds.size()))));
+                    }
+
+                } else {
+                    Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
+                            "itemeditimport.itemeditor.import-empty", new ArrayList<>())));
+                }
                 return true;
             }
-            switch (args[0].toLowerCase()) {
-                case "itemeditor": {
-                    if ((new File("plugins/ItemEditor/items")).listFiles() != null
-                            && ((new File("plugins/ItemEditor/items")).listFiles()).length != 0) {
-                        List<String> importedIds = new ArrayList<>();
-                        int max = (new File("plugins/ItemEditor/items")).listFiles().length;
-                        for (File file : (new File("plugins/ItemEditor/items")).listFiles()) {
-                            String name = file.getName().replace(".yml", "");
-                            try {
-                                ItemEdit.get().getServerStorage().validateID(name);
-                            } catch (Exception e) {
-                                Util.sendMessage(sender, ItemEdit.get().getConfig("itemeditimport.yml")
-                                        .loadString("itemeditor.invalid-id", "", true).replace("%id%", name));
-                                continue;
-                            }
-                            if (ItemEdit.get().getServerStorage().getItem(name) != null) {
-                                Util.sendMessage(sender, ItemEdit.get().getConfig("itemeditimport.yml")
-                                        .loadString("itemeditor.already-used-id", "", true).replace("%id%", name));
-                                continue;
-                            }
-
-                            try {
-                                ItemStack item = fromBase64(YamlConfiguration.loadConfiguration(file).getString("Item"));
-                                ItemEdit.get().getServerStorage().setItem(name, item);
-                                importedIds.add(name);
-                            } catch (Exception e) {
-                                Util.sendMessage(sender, ItemEdit.get().getConfig("itemeditimport.yml")
-                                        .loadString("itemeditor.unable-to-get-item", "", true).replace("%id%", name));
-                                e.printStackTrace();
-                                continue;
-                            }
-
-                        }
-                        if (importedIds.isEmpty()) {
-                            Util.sendMessage(
-                                    sender, String
-                                            .join("\n",
-                                                    ItemEdit.get().getConfig("itemeditimport.yml").loadStringList(
-                                                            "itemeditor.import-unsuccess", new ArrayList<>(), true))
-                                            .replace("%ids%", String.join(", ", importedIds))
-                                            .replace("%max%", String.valueOf(max))
-                                            .replace("%done%", String.valueOf(importedIds.size())));
-                        } else {
-                            Util.sendMessage(
-                                    sender, String
-                                            .join("\n",
-                                                    ItemEdit.get().getConfig("itemeditimport.yml").loadStringList(
-                                                            "itemeditor.import-success", new ArrayList<>(), true))
-                                            .replace("%ids%", String.join(", ", importedIds))
-                                            .replace("%max%", String.valueOf(max))
-                                            .replace("%done%", String.valueOf(importedIds.size())));
-                        }
-
-                    } else {
-                        Util.sendMessage(sender, String.join("\n", ItemEdit.get().getConfig("itemeditimport.yml")
-                                .loadStringList("itemeditor.import-empty", new ArrayList<>(), true)));
-                    }
-                    return true;
-                }
-                default:
-                    break;
-            }
-            Util.sendMessage(sender, String.join("\n", ItemEdit.get().getConfig("itemeditimport.yml")
-                    .loadStringList("help", new ArrayList<>(), true)));
-            return true;
-        } else
-            Util.sendMessage(sender, ItemEdit.get().getConfig("itemeditimport.yml")
-                    .loadString("lack-permission", "", true).replace("%permission%", "itemedit.itemeditimport"));
+            default:
+                break;
+        }
+        Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage("itemeditimport.help",
+                new ArrayList<>())));
         return true;
     }
 

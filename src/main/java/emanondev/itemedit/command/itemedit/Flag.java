@@ -1,18 +1,17 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import emanondev.itemedit.Util;
-import emanondev.itemedit.aliases.Aliases;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
+import java.util.Collections;
+import java.util.List;
 
 public class Flag extends SubCmd {
 
@@ -21,7 +20,7 @@ public class Flag extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
@@ -47,13 +46,13 @@ public class Flag extends SubCmd {
             item.setItemMeta(itemMeta);
             p.updateInventory();
         } catch (Exception e) {
-            onFail(p);
+            onFail(p, alias);
         }
 
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
             return Util.complete(args[1], Aliases.FLAG_TYPE);
         if (args.length == 3)

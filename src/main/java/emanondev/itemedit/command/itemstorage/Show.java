@@ -1,14 +1,13 @@
 package emanondev.itemedit.command.itemstorage;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
 import emanondev.itemedit.command.ItemStorageCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.gui.ShowPlayerItemsGui;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.Collections;
+import java.util.List;
 
 public class Show extends SubCmd {
 
@@ -17,7 +16,7 @@ public class Show extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         try {
             int page = 1;
@@ -25,12 +24,12 @@ public class Show extends SubCmd {
                 page = Integer.parseInt(args[1]);
             p.openInventory(new ShowPlayerItemsGui(p, page).getInventory());
         } catch (Exception e) {
-            onFail(sender);
+            onFail(sender, alias);
         }
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         return Collections.emptyList();
     }
 

@@ -1,7 +1,11 @@
 package emanondev.itemedit.gui;
 
-import emanondev.itemedit.*;
+import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.UtilsInventory;
 import emanondev.itemedit.UtilsInventory.ExcessManage;
+import emanondev.itemedit.UtilsString;
+import emanondev.itemedit.YMLConfig;
+import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.storage.ServerStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -20,11 +24,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ShowServerItemsGui implements Gui {
+public class ShowServerItemsGui implements PagedGui {
     private final Inventory inventory;
     private final Player target;
     private final int page;
-    private static final YMLConfig config = ItemEdit.get().getConfig();
+    private static final YMLConfig GUI_CONFIG = ItemEdit.get().getConfig();
     private int rows;
     private ArrayList<String> ids;
     private boolean showItems = true;
@@ -66,7 +70,7 @@ public class ShowServerItemsGui implements Gui {
             throw new NullPointerException();
 
         this.target = player;
-        rows = config.loadInteger("gui.serveritems.rows", 6);
+        rows = GUI_CONFIG.loadInteger("gui.serveritems.rows", 6);
         if (rows < 1 || rows > 5) {
             rows = Math.min(5, Math.max(1, rows));
         }
@@ -78,83 +82,32 @@ public class ShowServerItemsGui implements Gui {
             page = maxPages;
         this.page = page;
 
-        String title = UtilsString.fix(config.loadString("gui.serveritems.title", "", false), player, true,
+        String title = UtilsString.fix(GUI_CONFIG.loadMessage("gui.serveritems.title", "", false), player, true,
                 "%player_name%", target.getName(), "%page%", String.valueOf(page));
         this.inventory = Bukkit.createInventory(this, (rows + 1) * 9, title);
         updateInventory();
         this.inventory.setItem(rows * 9 + 4, getPageInfoItem());
         if (page > 1)
-            this.inventory.setItem(rows * 9 + 1, getPreviusPageItem());
+            this.inventory.setItem(rows * 9 + 1, getPreviousPageItem());
         if (page < maxPages)
             this.inventory.setItem(rows * 9 + 7, getNextPageItem());
     }
 
     @SuppressWarnings("deprecation")
     private ItemStack getPageInfoItem() {
-        ItemStack item = new ItemStack(config.loadMaterial("gui.serveritems.page-info.material", Material.NAME_TAG));
+        ItemStack item = new ItemStack(GUI_CONFIG.loadMaterial("gui.serveritems.page-info.material", Material.NAME_TAG));
         ItemMeta meta = item.getItemMeta();
         meta.addItemFlags(ItemFlag.values());
-        if (config.loadBoolean("gui.serveritems.page-info.glow", false))
+        if (GUI_CONFIG.loadBoolean("gui.serveritems.page-info.glow", false))
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
-        ArrayList<String> desc = new ArrayList<>(UtilsString.fix(
-                config.loadStringList("gui.serveritems.page-info.description", new ArrayList<>(), false), target, true,
-                "%player_name%", target.getName(), "%page%", String.valueOf(page)));
-        if (desc.size() > 1)
-            meta.setDisplayName(desc.remove(0));
-        else
-            meta.setDisplayName("");
-        if (desc.size() > 0)
-            meta.setLore(desc);
+        this.loadLanguageDescription(meta, "gui.serveritems.page-info.description",
+                "%player_name%", target.getName(), "%page%", String.valueOf(page));
         item.setItemMeta(meta);
-        int dur = config.loadInteger("gui.serveritems.page-info.durability", 0);
+        int dur = GUI_CONFIG.loadInteger("gui.serveritems.page-info.durability", 0);
         if (dur > 0)
             item.setDurability((short) dur);
         return item;
 
-    }
-
-    @SuppressWarnings("deprecation")
-    private ItemStack getPreviusPageItem() {
-        ItemStack item = new ItemStack(config.loadMaterial("gui.serveritems.previus-page.material", Material.ARROW));
-        ItemMeta meta = item.getItemMeta();
-        meta.addItemFlags(ItemFlag.values());
-        if (config.loadBoolean("gui.serveritems.previus-page.glow", false))
-            meta.addEnchant(Enchantment.DURABILITY, 1, true);
-        ArrayList<String> desc = new ArrayList<>(UtilsString.fix(
-                config.loadStringList("gui.serveritems.previus-page.description", new ArrayList<>(), false), target,
-                true, "%player_name%", target.getName(), "%page%", String.valueOf(page), "%target_page%",
-                String.valueOf(page - 1)));
-        if (desc.size() > 1)
-            meta.setDisplayName(desc.remove(0));
-        if (desc.size() > 0)
-            meta.setLore(desc);
-        item.setItemMeta(meta);
-        int dur = config.loadInteger("gui.serveritems.previus-page.durability", 0);
-        if (dur > 0)
-            item.setDurability((short) dur);
-        return item;
-    }
-
-    @SuppressWarnings("deprecation")
-    private ItemStack getNextPageItem() {
-        ItemStack item = new ItemStack(config.loadMaterial("gui.serveritems.next-page.material", Material.ARROW));
-        ItemMeta meta = item.getItemMeta();
-        meta.addItemFlags(ItemFlag.values());
-        if (config.loadBoolean("gui.serveritems.next-page.glow", false))
-            meta.addEnchant(Enchantment.DURABILITY, 1, true);
-        ArrayList<String> desc = new ArrayList<>(UtilsString.fix(
-                config.loadStringList("gui.serveritems.next-page.description", new ArrayList<>(), false), target, true,
-                "%player_name%", target.getName(), "%page%", String.valueOf(page), "%target_page%",
-                String.valueOf(page + 1)));
-        if (desc.size() > 1)
-            meta.setDisplayName(desc.remove(0));
-        if (desc.size() > 0)
-            meta.setLore(desc);
-        item.setItemMeta(meta);
-        int dur = config.loadInteger("gui.serveritems.next-page.durability", 0);
-        if (dur > 0)
-            item.setDurability((short) dur);
-        return item;
     }
 
     /**
@@ -213,10 +166,7 @@ public class ShowServerItemsGui implements Gui {
                 return;
             case SHIFT_RIGHT:
                 if (!event.getWhoClicked().hasPermission("itemedit.serveritem.delete")) {
-                    Util.sendMessage(event.getWhoClicked(),
-                            ItemEdit.get().getConfig("serveritem")
-                                    .loadString("lack-permission", "&cYou lack of permission %permission%", true)
-                                    .replace("%permission%", "itemedit.serveritem.delete"));
+                    ServerItemCommand.get().sendPermissionLackMessage("itemedit.serveritem.delete", event.getWhoClicked());
                     return;
                 }
                 stor.remove(id);
@@ -245,6 +195,11 @@ public class ShowServerItemsGui implements Gui {
     @Override
     public Player getTargetPlayer() {
         return this.target;
+    }
+
+    @Override
+    public ItemEdit getPlugin() {
+        return ItemEdit.get();
     }
 
 }

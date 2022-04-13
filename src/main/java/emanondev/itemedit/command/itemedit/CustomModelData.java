@@ -1,17 +1,16 @@
 package emanondev.itemedit.command.itemedit;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
+import emanondev.itemedit.Util;
+import emanondev.itemedit.command.ItemEditCommand;
+import emanondev.itemedit.command.SubCmd;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import emanondev.itemedit.Util;
-import emanondev.itemedit.command.ItemEditCommand;
-import emanondev.itemedit.command.SubCmd;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class CustomModelData extends SubCmd {
 
@@ -20,7 +19,7 @@ public class CustomModelData extends SubCmd {
     }
 
     @Override
-    public void onCmd(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
@@ -34,12 +33,12 @@ public class CustomModelData extends SubCmd {
             item.setItemMeta(meta);
             p.updateInventory();
         } catch (Exception e) {
-            onFail(p);
+            onFail(p, alias);
         }
     }
 
     @Override
-    public List<String> complete(CommandSender sender, String[] args) {
+    public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
             return Util.complete(args[1], Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
         return Collections.emptyList();

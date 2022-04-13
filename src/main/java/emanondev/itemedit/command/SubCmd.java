@@ -1,28 +1,29 @@
 package emanondev.itemedit.command;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
 import emanondev.itemedit.APlugin;
 import emanondev.itemedit.Util;
-import org.bukkit.ChatColor;
+import emanondev.itemedit.YMLConfig;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class SubCmd {
 
     private final String permission;
     public final String ID;
     private final String PATH;
-    private BaseComponent[] fail;
-    private String description;
-    private String help;
+    private final YMLConfig config;
+    //private BaseComponent[] fail;
+    //private String description;
+    //private String help;
     private String name;
     private final String commandName;
     private final boolean playerOnly;
@@ -39,7 +40,8 @@ public abstract class SubCmd {
         this.commandName = cmd.getName();
         this.playerOnly = playerOnly;
         this.checkNonNullItem = checkNonNullItem;
-        this.PATH = "sub-commands." + this.ID;
+        this.PATH = getCommand().getName() + "." + this.ID;
+        config = this.getPlugin().getConfig("commands.yml");
         load();
         this.permission = this.getPlugin().getName().toLowerCase() + "." + this.commandName + "." + this.ID;
     }
@@ -65,26 +67,10 @@ public abstract class SubCmd {
         return p.getInventory().getItemInHand();
     }
 
-    @SuppressWarnings("deprecation")
     private void load() {
-        name = this.getConfString("name").toLowerCase();
+        name = this.getConfigString("name").toLowerCase();
         if (name.equals("") || name.contains(" "))
             name = ID;
-
-        description = String.join("\n", getConfStringList("description"));
-        String params = getConfString("params");
-        if (params == null)
-            params = "";
-        params = ChatColor.translateAlternateColorCodes('&', params);
-        this.fail = new ComponentBuilder(
-                ChatColor.RED + "/" + commandName + " " + this.name + " " + ChatColor.stripColor(params))
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
-                        "/" + commandName + " " + this.name + " " + ChatColor.stripColor(params)))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                        new ComponentBuilder(this.description).create()))
-                .create();
-        this.help = ChatColor.DARK_GREEN + "/" + commandName + " " + ChatColor.GREEN + this.name + " "
-                + params.replace(ChatColor.RESET.toString(), ChatColor.GREEN.toString());
     }
 
     public void reload() {
@@ -92,38 +78,53 @@ public abstract class SubCmd {
     }
 
     @SuppressWarnings("deprecation")
-    protected BaseComponent[] craftFailFeedback(String params, String desc) {
+    protected BaseComponent[] craftFailFeedback(String params, List<String> desc) {
         if (params == null)
             params = "";
         ComponentBuilder fail = new ComponentBuilder(ChatColor.RED + "/" + commandName + " " + this.name + " " + params)
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + commandName + " " + this.name + " " + params));
-        if (desc != null && !desc.equals("")) {
-            desc = ChatColor.translateAlternateColorCodes('&', desc);
-            fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(desc).create()));
+        if (desc != null && !desc.isEmpty()) {
+            //desc = ChatColor.translateAlternateColorCodes('&', desc);
+            fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(String.join("\n", desc)).create()));
         }
         return fail.create();
     }
 
-    protected String getConfString(String path) {
-        return getPlugin().getConfig(commandName + ".yml").loadString(this.PATH + "." + path, "", true);
+    protected String getLanguageString(String path, String def, CommandSender sender, String... holders) {
+        return getPlugin().getLanguageConfig(sender).loadMessage(this.PATH + "." + path, def == null ? "" : def,
+                sender instanceof Player ? (Player) sender : null, true, holders);
     }
 
-    protected int getConfInt(String path) {
-        return getPlugin().getConfig(commandName + ".yml").loadInteger(this.PATH + "." + path, 0);
+    protected void sendLanguageString(String path, String def, CommandSender sender, String... holders) {
+        Util.sendMessage(sender, getLanguageString(path, def, sender, holders));
     }
 
-    protected long getConfLong(String path) {
-        return getPlugin().getConfig(commandName + ".yml").loadLong(this.PATH + "." + path, 0L);
+    protected List<String> getLanguageStringList(String path, List<String> def, CommandSender sender, String... holders) {
+        return getPlugin().getLanguageConfig(sender).loadMultiMessage(this.PATH + "." + path,
+                def == null ? new ArrayList<>() : def, sender instanceof Player ? (Player) sender : null, true, holders);
     }
 
-    protected boolean getConfBoolean(String path) {
-        return getPlugin().getConfig(commandName + ".yml").loadBoolean(this.PATH + "." + path, true);
+    protected String getConfigString(String path, String... holders) {
+        return config.loadMessage(this.PATH + "." + path, "", null, true, holders);
     }
 
-    protected List<String> getConfStringList(String path) {
-        return getPlugin().getConfig(commandName + ".yml").loadStringList(this.PATH + "." + path, new ArrayList<>(), true);
+    protected int getConfigInt(String path) {
+        return config.loadInteger(this.PATH + "." + path, 0);
     }
+
+    protected long getConfigLong(String path) {
+        return config.loadLong(this.PATH + "." + path, 0L);
+    }
+
+    protected boolean getConfigBoolean(String path) {
+        return config.loadBoolean(this.PATH + "." + path, true);
+    }
+
+    protected List<String> getConfigStringList(String path, String... holders) {
+        return config.loadMultiMessage(this.PATH + "." + path, new ArrayList<>(), null, true, holders);
+    }
+
 
     public String getName() {
         return this.name;
@@ -134,18 +135,34 @@ public abstract class SubCmd {
     }
 
     @SuppressWarnings("deprecation")
-    public ComponentBuilder getHelp(ComponentBuilder base) {
-        base.append(help).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ChatColor.stripColor(help)))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(this.description).create()));
+    public ComponentBuilder getHelp(ComponentBuilder base, CommandSender sender, String alias) {
+        String help = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + this.name + " ";
+        base.append(help + getLanguageString("params", "", sender).replace(ChatColor.RESET.toString(),
+                        ChatColor.GREEN.toString())).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ChatColor.stripColor(help)))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        new ComponentBuilder(getDescription(sender)).create()));
         return base;
     }
 
-    public void onFail(CommandSender target) {
-        Util.sendMessage(target, this.fail);
+    public void onFail(CommandSender target, String alias) {
+        String params = getLanguageString("params", "", target);
+
+        Util.sendMessage(target, new ComponentBuilder(
+                ChatColor.RED + "/" + alias + " " + this.name + " " +
+                        ChatColor.stripColor(params))
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
+                        "/" + alias + " " + this.name + " " + ChatColor.stripColor(params)))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        new ComponentBuilder(getDescription(target)).create()))
+                .create());
     }
 
-    abstract public void onCmd(CommandSender sender, String[] args);
+    private String getDescription(CommandSender target) {
+        return String.join("\n", getLanguageStringList("description", null, target));
+    }
 
-    abstract public List<String> complete(CommandSender sender, String[] args);
+    abstract public void onCommand(CommandSender sender, String alias, String[] args);
+
+    abstract public List<String> onComplete(CommandSender sender, String[] args);
 
 }

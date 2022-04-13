@@ -1,11 +1,10 @@
 package emanondev.itemedit;
 
+import net.brcdev.shopgui.ShopGuiPlusApi;
+import net.brcdev.shopgui.provider.item.ItemProvider;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
-
-import net.brcdev.shopgui.ShopGuiPlusApi;
-import net.brcdev.shopgui.provider.item.ItemProvider;
 
 public class ShopGuiPlusItemProvider extends ItemProvider {
 

@@ -1,12 +1,12 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.YMLConfig;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-
-import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.YMLConfig;
 
 public abstract class AliasSet<T> {
 

@@ -1,0 +1,21 @@
+buttons:
+  previous-page:
+    material: ARROW
+    durability: 0
+    glow: false
+  next-page:
+    material: ARROW
+    durability: 0
+    glow: false
+playeritems:
+  rows: 5
+  page-info:
+    material: NAME_TAG
+    durability: 0
+    glow: false
+serveritems:
+  rows: 5
+  page-info:
+    material: NAME_TAG
+    durability: 0
+    glow: false
