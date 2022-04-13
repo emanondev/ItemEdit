@@ -91,37 +91,37 @@ public abstract class SubCmd {
         return fail.create();
     }
 
-    public String getLanguageString(String path, String def, CommandSender sender, String... holders) {
+    protected String getLanguageString(String path, String def, CommandSender sender, String... holders) {
         return getPlugin().getLanguageConfig(sender).loadMessage(this.PATH + "." + path, def == null ? "" : def,
                 sender instanceof Player ? (Player) sender : null, true, holders);
     }
 
-    public void sendLanguageString(String path, String def, CommandSender sender, String... holders) {
+    protected void sendLanguageString(String path, String def, CommandSender sender, String... holders) {
         Util.sendMessage(sender, getLanguageString(path, def, sender, holders));
     }
 
-    public List<String> getLanguageStringList(String path, List<String> def, CommandSender sender, String... holders) {
+    protected List<String> getLanguageStringList(String path, List<String> def, CommandSender sender, String... holders) {
         return getPlugin().getLanguageConfig(sender).loadMultiMessage(this.PATH + "." + path,
                 def == null ? new ArrayList<>() : def, sender instanceof Player ? (Player) sender : null, true, holders);
     }
 
-    public String getConfigString(String path, String... holders) {
+    protected String getConfigString(String path, String... holders) {
         return config.loadMessage(this.PATH + "." + path, "", null, true, holders);
     }
 
-    public int getConfigInt(String path) {
+    protected int getConfigInt(String path) {
         return config.loadInteger(this.PATH + "." + path, 0);
     }
 
-    public long getConfigLong(String path) {
+    protected long getConfigLong(String path) {
         return config.loadLong(this.PATH + "." + path, 0L);
     }
 
-    public boolean getConfigBoolean(String path) {
+    protected boolean getConfigBoolean(String path) {
         return config.loadBoolean(this.PATH + "." + path, true);
     }
 
-    public List<String> getConfigStringList(String path, String... holders) {
+    protected List<String> getConfigStringList(String path, String... holders) {
         return config.loadMultiMessage(this.PATH + "." + path, new ArrayList<>(), null, true, holders);
     }
 
