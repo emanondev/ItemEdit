@@ -21,9 +21,6 @@ public abstract class SubCmd {
     public final String ID;
     private final String PATH;
     private final YMLConfig config;
-    //private BaseComponent[] fail;
-    //private String description;
-    //private String help;
     private String name;
     private final String commandName;
     private final boolean playerOnly;
@@ -40,7 +37,7 @@ public abstract class SubCmd {
         this.commandName = cmd.getName();
         this.playerOnly = playerOnly;
         this.checkNonNullItem = checkNonNullItem;
-        this.PATH = getCommand().getName() + "." + this.ID;
+        this.PATH = getCommand().getName() + "." + this.ID + ".";
         config = this.getPlugin().getConfig("commands.yml");
         load();
         this.permission = this.getPlugin().getName().toLowerCase() + "." + this.commandName + "." + this.ID;
@@ -85,14 +82,13 @@ public abstract class SubCmd {
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + commandName + " " + this.name + " " + params));
         if (desc != null && !desc.isEmpty()) {
-            //desc = ChatColor.translateAlternateColorCodes('&', desc);
             fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(String.join("\n", desc)).create()));
         }
         return fail.create();
     }
 
     protected String getLanguageString(String path, String def, CommandSender sender, String... holders) {
-        return getPlugin().getLanguageConfig(sender).loadMessage(this.PATH + "." + path, def == null ? "" : def,
+        return getPlugin().getLanguageConfig(sender).loadMessage(this.PATH + path, def == null ? "" : def,
                 sender instanceof Player ? (Player) sender : null, true, holders);
     }
 
@@ -101,28 +97,28 @@ public abstract class SubCmd {
     }
 
     protected List<String> getLanguageStringList(String path, List<String> def, CommandSender sender, String... holders) {
-        return getPlugin().getLanguageConfig(sender).loadMultiMessage(this.PATH + "." + path,
+        return getPlugin().getLanguageConfig(sender).loadMultiMessage(this.PATH + path,
                 def == null ? new ArrayList<>() : def, sender instanceof Player ? (Player) sender : null, true, holders);
     }
 
     protected String getConfigString(String path, String... holders) {
-        return config.loadMessage(this.PATH + "." + path, "", null, true, holders);
+        return config.loadMessage(this.PATH + path, "", null, true, holders);
     }
 
     protected int getConfigInt(String path) {
-        return config.loadInteger(this.PATH + "." + path, 0);
+        return config.loadInteger(this.PATH + path, 0);
     }
 
     protected long getConfigLong(String path) {
-        return config.loadLong(this.PATH + "." + path, 0L);
+        return config.loadLong(this.PATH + path, 0L);
     }
 
     protected boolean getConfigBoolean(String path) {
-        return config.loadBoolean(this.PATH + "." + path, true);
+        return config.loadBoolean(this.PATH + path, true);
     }
 
     protected List<String> getConfigStringList(String path, String... holders) {
-        return config.loadMultiMessage(this.PATH + "." + path, new ArrayList<>(), null, true, holders);
+        return config.loadMultiMessage(this.PATH + path, new ArrayList<>(), null, true, holders);
     }
 
 
