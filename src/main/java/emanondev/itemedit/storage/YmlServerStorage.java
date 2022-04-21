@@ -73,7 +73,7 @@ public class YmlServerStorage implements ServerStorage {
     public void setItem(@NotNull String id, @NotNull ItemStack item) {
         validateID(id);
         id = id.toLowerCase();
-        if (item == null || item.getType() == Material.AIR)
+        if (item.getType() == Material.AIR)
             throw new IllegalArgumentException();
         item.setAmount(1);
         database.set(id + ".item", item);

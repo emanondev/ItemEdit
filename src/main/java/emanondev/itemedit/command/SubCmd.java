@@ -121,7 +121,6 @@ public abstract class SubCmd {
         return config.loadMultiMessage(this.PATH + path, new ArrayList<>(), null, true, holders);
     }
 
-
     public String getName() {
         return this.name;
     }

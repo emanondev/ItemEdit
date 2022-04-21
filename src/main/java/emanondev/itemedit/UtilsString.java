@@ -1,5 +1,6 @@
 package emanondev.itemedit;
 
+import emanondev.itemedit.compability.Hooks;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;

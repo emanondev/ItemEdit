@@ -2,6 +2,10 @@ package emanondev.itemedit;
 
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.*;
+import emanondev.itemedit.compability.Hooks;
+import emanondev.itemedit.compability.MythicMobsListener;
+import emanondev.itemedit.compability.PlaceHolders;
+import emanondev.itemedit.compability.ShopGuiPlusItemProvider;
 import emanondev.itemedit.gui.Gui;
 import emanondev.itemedit.gui.GuiHandler;
 import emanondev.itemedit.storage.PlayerStorage;
@@ -61,6 +65,13 @@ public class ItemEdit extends APlugin {
         if (Hooks.isShopGuiPlusEnabled()) {
             try {
                 new ShopGuiPlusItemProvider().register();
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+        }
+        if (Hooks.isMythicMobsEnabled()){
+            try {
+                registerListener(new MythicMobsListener());
             } catch (Throwable t) {
                 t.printStackTrace();
             }
