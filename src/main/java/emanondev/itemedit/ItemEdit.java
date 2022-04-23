@@ -69,7 +69,7 @@ public class ItemEdit extends APlugin {
                 t.printStackTrace();
             }
         }
-        if (Hooks.isMythicMobsEnabled()){
+        if (Hooks.isMythicMobsEnabled()) {
             try {
                 registerListener(new MythicMobsListener());
             } catch (Throwable t) {

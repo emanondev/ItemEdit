@@ -2,6 +2,9 @@ package emanondev.itemedit.gui;
 
 import emanondev.itemedit.APlugin;
 import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.YMLConfig;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -9,6 +12,8 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -100,5 +105,32 @@ public interface Gui extends InventoryHolder {
         meta.setDisplayName(list == null || list.isEmpty() ? " " : list.get(0));
         if (list != null && !list.isEmpty())
             meta.setLore(list.subList(1, list.size()));
+    }
+
+    default ItemStack getGuiItem(String path, Material defMaterial) {
+        return getGuiItem(path, defMaterial, 0);
+    }
+
+    default ItemStack getGuiItem(String path, Material defMaterial, int defDurability) {
+        YMLConfig config = getPlugin().getConfig("gui.yml");
+        ItemStack item = new ItemStack(config.loadMaterial(path + ".material", defMaterial));
+        ItemMeta meta = item.getItemMeta();
+        meta.addItemFlags(ItemFlag.values());
+        if (config.getBoolean(path + ".glow", false))
+            meta.addEnchant(Enchantment.DURABILITY, 1, true);
+
+        item.setItemMeta(meta);
+        int dur = config.loadInteger(path + ".durability", defDurability);
+        if (dur > 0)
+            item.setDurability((short) dur);
+        return item;
+    }
+
+    default ItemStack getBackItem(){
+        ItemStack item = getGuiItem("buttons.back",Material.BARRIER);
+        ItemMeta meta = item.getItemMeta();
+        this.loadLanguageDescription(meta, "buttons.back.description");
+        item.setItemMeta(meta);
+        return item;
     }
 }

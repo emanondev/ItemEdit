@@ -7,6 +7,10 @@ buttons:
     material: ARROW
     durability: 0
     glow: false
+  back:
+    material: BARRIER
+    durability: 0
+    glow: false
 playeritems:
   rows: 5
   page-info:

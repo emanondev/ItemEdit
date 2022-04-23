@@ -86,6 +86,7 @@ public class GiveAll extends SubCmd {
         if (!(sender instanceof Player))
             return Collections.emptyList();
         switch (args.length) {
+            // <id> [amount] [silent]
             case 2:
                 return Util.complete(args[1], ItemEdit.get().getServerStorage().getIds());
             case 3:
