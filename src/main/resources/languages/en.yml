@@ -8,7 +8,7 @@ itemedit:
   help-header: '&9&lItemEdit - Help'
   rename:
     description:
-      - '&b&lSet item's name'
+      - '&b&lSet item''s name'
       - ''
       - '&b&lTip: &btype &eclear &bto revert name to default'
     params: '<name>'
@@ -39,17 +39,17 @@ itemedit:
       description:
         - '&b&lAdd text on selected line'
     copy:
-      feedback: '&aLore copied'
+      feedback: '&9[&fItemEdit&9] &aLore copied'
     copyBook:
-      wrong-type: '&cItem must be a written book or book and quill'
-      feedback: '&aBook pages copied'
+      wrong-type: '&9[&fItemEdit&9] &cItem must be a written book or book and quill'
+      feedback: '&9[&fItemEdit&9] &aBook pages copied'
     copyFile:
-      no-path: '&cSelect a path /ie lore copyfile &6<path>'
-      wrong-path: '&cInvalid path, remember to reload the configuration and check the CaPs'
-      feedback: '&aConfiguration copied'
+      no-path: '&9[&fItemEdit&9] &cSelect a path /ie lore copyfile &6<path>'
+      wrong-path: '&9[&fItemEdit&9] &cInvalid path, remember to reload the configuration and check the CaPs'
+      feedback: '&9[&fItemEdit&9] &aConfiguration copied'
     paste:
-      feedback: '&aLore pasted'
-      no-copy: '&cCopy a lore first'
+      feedback: '&9[&fItemEdit&9] &aLore pasted'
+      no-copy: '&9[&fItemEdit&9] &cCopy a lore first'
   hide:
     description:
       - '&b&lHide or show components'
@@ -107,7 +107,7 @@ itemedit:
       - '&b&lTip: &bPlace and break the skull to update skins'
     params: '<name>'
   color:
-    wrong-type: '&cItem must be colorable type like leather armors, potions or tipped arrows'
+    wrong-type: '&9[&fItemEdit&9] &cItem must be colorable type like leather armors, potions or tipped arrows'
     description:
       - '&b&lSet color'
       - ''
@@ -127,14 +127,14 @@ itemedit:
       - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
     params: '<enchant> [level]'
   booktype:
-    wrong-type: '&cItem must be a written book'
+    wrong-type: '&9[&fItemEdit&9] &cItem must be a written book'
     description:
       - '&b&lSet book type'
       - ''
       - '&bWorks only on Written books'
     params: '<booktype>'
   bookauthor:
-    wrong-type: '&cItem must be a written book'
+    wrong-type: '&9[&fItemEdit&9] &cItem must be a written book'
     description:
       - '&b&lSet author'
       - ''
@@ -142,9 +142,9 @@ itemedit:
       - '&bWorks only on Written books'
     params: '<name>'
   potioneffect:
-    wrong-type: '&cItem must be a potion or a tipped arrow or a suspicious stew'
+    wrong-type: '&9[&fItemEdit&9] &cItem must be a potion or a tipped arrow or a suspicious stew'
     description:
-      - '&b&lEdit potion's effects'
+      - '&b&lEdit potion''s effects'
       - ''
       - '&bWorks on any Potion, Tipped arrows and Suspicious stew!'
       - '&eAdd <effect> <duration> [level] &b- add effect'
@@ -164,7 +164,7 @@ itemedit:
       description:
         - '&b&lRemove selected effect'
   banner:
-    wrong-type: '&cItem must be a banner'
+    wrong-type: '&9[&fItemEdit&9] &cItem must be a banner'
     description:
       - '&b&lEdit banner'
     set:
@@ -188,19 +188,19 @@ itemedit:
       description:
         - '&b&lChange banner background color'
   fireworkpower:
-    wrong-type: '&cItem must be a firework'
+    wrong-type: '&9[&fItemEdit&9] &cItem must be a firework'
     description:
       - '&b&lSet firework power'
       - ''
       - '&e<power> &bpower of the firework, a value betwheen &e0 &band &e5'
     params: '<power>'
   firework:
-    wrong-type: '&cItem must be a firework'
+    wrong-type: '&9[&fItemEdit&9] &cItem must be a firework'
     description:
       - '&b&lEdit firework'
     params: ''
   spawnereggtype:
-    wrong-type: '&cItem must be a spawner egg'
+    wrong-type: '&9[&fItemEdit&9] &cItem must be a spawner egg'
     description:
       - '&b&lSet type of entity spawned by spawner egg'
       - ''
@@ -232,7 +232,7 @@ itemedit:
         - '&e<attribute/slot> &btype to remove, any modifiers with'
         - '&b                 selected value are removed'
   tropicalfish:
-    wrong-type: '&cItem must be a tropical fish bucket'
+    wrong-type: '&9[&fItemEdit&9] &cItem must be a tropical fish bucket'
     description:
       - '&b&lSet property of tropical fish bucket'
       - ''
@@ -275,7 +275,7 @@ itemedit:
       - '&e<value> &bpositive int of target data model'
     params: '<value>'
   axolotlvariant:
-    wrong-type: '&cItem must be a axolotl bucket'
+    wrong-type: '&9[&fItemEdit&9] &cItem must be a axolotl bucket'
     description:
       - '&b&lEdit Axolotl Variant on Axolotl bucket'
       - ''
@@ -294,7 +294,7 @@ itemedit:
     hover_info: '&9Original value: &e%default%'
     hover_type: '&6Click to examine'
   compass:
-    wrong-type: '&cItem must be a compass'
+    wrong-type: '&9[&fItemEdit&9] &cItem must be a compass'
     description:
       - '&b&lSet compass target location'
       - ''
@@ -302,9 +302,9 @@ itemedit:
       - '&eClear &b- clear compass target'
     params: '<set/clear>'
     set:
-      feedback: '&aCompass now points to &e%world% %x% %y% %z%'
+      feedback: '&9[&fItemEdit&9] &aCompass now points to &e%world% %x% %y% %z%'
     clear:
-      feedback: '&aCompass target cleared'
+      feedback: '&9[&fItemEdit&9] &aCompass target cleared'
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:
@@ -507,8 +507,8 @@ itemstorage:
   help-header: '&9&lItemStorage - Help'
   get:
     #Holders: %id% %amount%
-    success: '&aObtained &e%amount% &aof &e%id%'
-    no-inventory-space: '&cYou don''t have space in your inventory'
+    success: '&9[&fItemEdit&9] &aObtained &e%amount% &aof &e%id%'
+    no-inventory-space: '&9[&fItemEdit&9] &cYou don''t have space in your inventory'
     description:
       - '&b&lGet selected item'
       - ''
@@ -517,9 +517,9 @@ itemstorage:
     params: '<id> [amount]'
   save:
     #Holders: %id%
-    success: '&aItem &e%id% &aregistered'
+    success: '&9[&fItemEdit&9] &aItem &e%id% &aregistered'
     #Holders: %limit%
-    limit-reached: '&cYou reached the maximus number of savable items (%limit%)'
+    limit-reached: '&9[&fItemEdit&9] &cYou reached the maximus number of savable items (%limit%)'
     description:
       - '&b&lRegister the item in your hand'
       - ''
@@ -532,7 +532,7 @@ itemstorage:
     params: '<id>'
   delete:
     #Holders: %id%
-    success: '&aItem &e%id% &aunregistered'
+    success: '&9[&fItemEdit&9] &aItem &e%id% &aunregistered'
     description:
       - '&b&lDelete selected item'
       - ''
@@ -540,7 +540,7 @@ itemstorage:
     params: '<id>'
   update:
     #Holders: %id%
-    success: '&aItem &e%id% &ahas been updated'
+    success: '&9[&fItemEdit&9] &aItem &e%id% &ahas been updated'
     description:
       - '&b&lUpdate selected item'
       - ''
@@ -561,20 +561,20 @@ itemeditimport:
     - '&a/itemeditimport ItemEditor &2- import items from ItemEditor plugin'
   itemeditor:
     unable-to-get-item:
-      - '&4[&cItemEdit&4]&c Unable to load item &6 %id% &c'
+      - '&9[&fItemEdit&9] &c Unable to load item &6 %id% &c'
     already-used-id:
-      - '&9[&fItemEdit&9]&6 %id% &cis already used, maybe you already did this command before otherwise you may rename the file ItemEditor/items/%id%.yml'
+      - '&9[&fItemEdit&9] &6%id% &cis already used, maybe you already did this command before otherwise you may rename the file ItemEditor/items/%id%.yml'
     invalid-id:
-      - '&4[&cItemEdit&4]&6 %id% &cis not an acceptable id, you may rename the file ItemEditor/items/%id%.yml to an alphanumeric name'
+      - '&9[&fItemEdit&9] &6%id% &cis not an acceptable id, you may rename the file ItemEditor/items/%id%.yml to an alphanumeric name'
     import-unsuccess:
-      - '&4[&cItemEdit&4]&c No items of &6%max% &cwere imported, maybe you already did this command before(?)'
+      - '&9[&fItemEdit&9] &cNo items of &6%max% &cwere imported, maybe you already did this command before(?)'
     import-success:
-      - '&9[&fItemEdit&9]&a Imported &e%done% &aof &e%max% &aitems from ItemEditor'
-      - '&9[&fItemEdit&9]&a Imported items: &e%ids%'
+      - '&9[&fItemEdit&9] &aImported &e%done% &aof &e%max% &aitems from ItemEditor'
+      - '&9[&fItemEdit&9] &aImported items: &e%ids%'
     import-empty:
-      - '&4[&cItemEdit&4]&c ItemEditor has no items to import'
+      - '&9[&fItemEdit&9] &cItemEditor has no items to import'
 itemeditreload:
-  success: '&9[&fItemEdit&9]&a reloaded'
+  success: '&9[&fItemEdit&9] &aReloaded'
 gui:
   banner:
     title: '&9Banner Editor'

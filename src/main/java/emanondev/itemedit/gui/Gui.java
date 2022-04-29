@@ -1,7 +1,6 @@
 package emanondev.itemedit.gui;
 
 import emanondev.itemedit.APlugin;
-import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.YMLConfig;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -100,7 +99,7 @@ public interface Gui extends InventoryHolder {
     }
 
     default void loadLanguageDescription(ItemMeta meta, String fullPath, String... holders) {
-        List<String> list = ItemEdit.get().getLanguageConfig(getTargetPlayer()).loadMultiMessage(fullPath,
+        List<String> list = getPlugin().getLanguageConfig(getTargetPlayer()).loadMultiMessage(fullPath,
                 null, getTargetPlayer(), true, holders);
         meta.setDisplayName(list == null || list.isEmpty() ? " " : list.get(0));
         if (list != null && !list.isEmpty())

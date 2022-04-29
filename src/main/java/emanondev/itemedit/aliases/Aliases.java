@@ -83,11 +83,14 @@ public class Aliases {
         registerAliasType(TROPICALPATTERN);
         registerAliasType(AXOLOTL_VARIANT);
     }
-
     public static <T> void registerAliasType(@Nullable AliasSet<T> set) {
+        registerAliasType(set,false);
+    }
+
+    public static <T> void registerAliasType(@Nullable AliasSet<T> set,boolean forced) {
         if (set == null)
             return;
-        if (types.containsKey(set.getID()))
+        if (!forced && types.containsKey(set.getID()))
             throw new IllegalArgumentException("Duplicate id");
         types.put(set.getID(), set);
     }
