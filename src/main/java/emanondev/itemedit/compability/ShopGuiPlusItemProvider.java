@@ -20,25 +20,28 @@ public class ShopGuiPlusItemProvider extends ItemProvider {
 
     @Override
     public ItemStack loadItem(ConfigurationSection section) {
-        String id = section.getString("serverItem");
+        String id = section.getString("serveritem");
         if (id == null) {
             for (String key : section.getKeys(false))
-                if (key.equalsIgnoreCase("serverItem")) {
+                if (key.equalsIgnoreCase("serveritem")) {
                     id = section.getString(key);
                     break;
                 }
-            return null;
+            if (id == null)
+                return null;
         }
         try {
             ItemStack result = ItemEdit.get().getServerStorage().getItem(id);
-            if (result == null)
-                ItemEdit.get().log("Invalid ServerItem id on ShopGuiPlus config for &e" + id + " &fon path &e"
-                        + section.getCurrentPath() + ".serverItem");
-
-            return result;
+            if (result != null) {
+                result.setAmount(section.getInt("quantity", 1));
+                return result;
+            }
+            ItemEdit.get().log("Invalid ServerItem id on ShopGuiPlus config for &e" + id + " &fon path &e"
+                    + section.getCurrentPath() + ".serveritem");
+            return null;
         } catch (Exception e) {
             ItemEdit.get().log("Invalid ServerItem id on ShopGuiPlus config for &e" + id + " &fon path &e"
-                    + section.getCurrentPath() + ".serverItem");
+                    + section.getCurrentPath() + ".serveritem");
         }
         return null;
     }

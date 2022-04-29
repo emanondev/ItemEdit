@@ -1,23 +1,2 @@
-# bash stuff
-*.sh
-
-# Eclipse stuff
-/.classpath
-/.project
-/.settings
-/dependency-reduced-pom.xml
-
-# Maven Depends
-/lib
-
 # maven
 /target
-
-# various other potential build files
-/build
-/bin
-/dist
-/manifest.mf
-
-# Other Libraries
-*.jar

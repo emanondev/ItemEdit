@@ -125,10 +125,10 @@ public interface Gui extends InventoryHolder {
         return item;
     }
 
-    default ItemStack getBackItem(){
-        ItemStack item = getGuiItem("buttons.back",Material.BARRIER);
+    default ItemStack getBackItem() {
+        ItemStack item = getGuiItem("buttons.back", Material.BARRIER);
         ItemMeta meta = item.getItemMeta();
-        this.loadLanguageDescription(meta, "buttons.back.description");
+        this.loadLanguageDescription(meta, "gui.back.description");
         item.setItemMeta(meta);
         return item;
     }

@@ -83,11 +83,12 @@ public class Aliases {
         registerAliasType(TROPICALPATTERN);
         registerAliasType(AXOLOTL_VARIANT);
     }
+
     public static <T> void registerAliasType(@Nullable AliasSet<T> set) {
-        registerAliasType(set,false);
+        registerAliasType(set, false);
     }
 
-    public static <T> void registerAliasType(@Nullable AliasSet<T> set,boolean forced) {
+    public static <T> void registerAliasType(@Nullable AliasSet<T> set, boolean forced) {
         if (set == null)
             return;
         if (!forced && types.containsKey(set.getID()))

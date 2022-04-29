@@ -1,6 +1,7 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.command.AbstractCommand;
+import emanondev.itemedit.compability.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -260,5 +261,13 @@ public abstract class APlugin extends JavaPlugin {
     }
 
     public abstract void disable();
+
+    public void registerMetrics(int pluginId) {
+        try {
+            new Metrics(this, pluginId);
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+    }
 
 }

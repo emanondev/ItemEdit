@@ -586,94 +586,105 @@ gui:
       color_selector_info:
         - '&bSelect &6&l%color%'
       position:
-        - '&bPattern Controller'
+        - '&6Pattern Controller'
         - ''
-        - '&b[&eMiddle&b] Click to toggle pattern'
-        - '&b[&eLeft/Right&b] Click to move this pattern'
+        - '&7[&fMiddle Click&7] &bToggle pattern'
+        - '&7[&fLeft/Right Click&7]&b << Move pattern >>'
       type:
-        - '&e%type%'
-        - '&bType Selector'
-        - '&b[&eAny&b] Click to change type'
+        - '&6Type Selector'
+        - '&bType: &e%type%'
+        - ''
+        - '&7[&fClick&7]&b Change type'
       color:
-        - '&e%color%'
-        - '&bColor Selector'
-        - '&b[&eAny&b] Click to change color'
+        - '&6Color Selector'
+        - '&bColor: &e%color%'
+        - ''
+        - '&7[&fClick&7]&b Change color'
   firework:
     title: '&9Firework Editor'
     buttons:
       type:
-        - '&e%type%'
-        - '&bType Selector'
-        - '&b[&eAny&b] Click to change type'
+        - '&6Type Selector'
+        - '&bType: &e%type%'
+        - ''
+        - '&7[&fClick&7]&b Change type'
       colors:
+        - '&6Colors Selector'
         - '&bColors: &e%colors%'
-        - '&bColor Selector'
-        - '&bSelected color: &6%color%'
         - ''
-        - '&b[&eMiddle&b] Click to add &e%color%'
-        - '&b[&eLeft/Right&b] Click to change selected color'
-        - '&b[&eShift Left/Right&b] Click to delete last color'
+        - '&bSelected color: &6%color%'
+        - '&7[&fMiddle Click&7]&b to add &e%color%'
+        - '&7[&fLeft/Right Click&7]&b Change selected color'
+        - '&7[&fShift Left/Right Click&7]&b Delete last color'
       fadecolors:
-        - '&bFadeColors: &e%colors%'
-        - '&bFade Color Selector'
-        - '&bSelected color: &6%color%'
+        - '&6Fade Colors Selector'
+        - '&bFade Colors: &e%colors%'
         - ''
-        - '&b[&eMiddle&b] Click to add &e%color%'
-        - '&b[&eLeft/Right&b] Click to change selected color'
-        - '&b[&eShift Left/Right&b] Click to delete last color'
+        - '&bSelected color: &6%color%'
+        - '&7[&fMiddle Click&7]&b Add &e%color%'
+        - '&7[&fLeft/Right Click&7]&b Change selected color'
+        - '&7[&fShift Left/Right Click&7]&b Delete last color'
       flags:
         none: '&cNothing active'
         trail: '&eTrail &aActive'
         flicker: '&eFlicker &aActive'
         both: '&eTrail&b and &eFlicker &aActive'
         info:
+          - '&6Trail and Flicker Activator'
           - '%status%'
-          - '&bTrail and Flicker Activator'
           - ''
-          - '&b[&eRight&b] Click to toggle Flicker effect'
-          - '&b[&eLeft&b] Click to toggle Trail effect'
+          - '&7[&fRight Click&7]&b Toggle Flicker effect'
+          - '&7[&fLeft Click&7]&b Toggle Trail effect'
       position:
         - '&bEffect Controller'
         - ''
-        - '&b[&eMiddle&b] Click to toggle effect'
-        - '&b[&eLeft/Right&b] Click to move this effect'
+        - '&7[&fMiddle Click&7]&b Toggle effect'
+        - '&7[&fLeft/Right Click&7]&b Move this effect'
       power:
         - '&bPower: &e%power%'
         - ''
-        - '&b[&eLeft/Right&b] Click to change'
+        - '&7[&fLeft/Right Click&7]&b << Change >>'
   previous-page:
     #Holders: %player_name% %page% %target_page%
     description:
-      - '&9&lNext Page'
-      - '&b[&eAny&b] Go to page &e%target_page%'
+      - '&6&lNext Page'
+      - ''
+      - '&7[&fClick&7]&b Go to page &e%target_page%'
   next-page:
     #Holders: %player_name% %page% %target_page%
     description:
-      - '&9&lPrevious Page'
-      - '&b[&eAny&b] &9Go to page &e%target_page%'
+      - '&6&lPrevious Page'
+      - ''
+      - '&7[&fClick&7]&b Go to page &e%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '&6&lGo Back'
+      - ''
+      - '&7[&fClick&7]&b Go to previous gui'
   playeritems:
     #Holders: %player_name% %page%
     title: '&9%player_name% items - page &b%page%'
     page-info:
       #Holders: %player_name% %page%
       description:
-        - '&9&lPage &e&l%page%'
-        - '&9[Click &eThis&9] to &atoggle &9view of &eitem&9/&eID'
+        - '&6&lPage &e&l%page%'
+        - '&7[&fClick&7]&b Toggle view of &eitem&b/&eID'
         - ''
-        - '&9Click on items'
-        - '&9[&eLeft&9] &egain 1'
-        - '&9[&eShift+Left&9] &egain 64'
-        - '&9[&eShift+Right&9] &cdelete &9item'
+        - '&bClick on items:'
+        - '&7> [&fLeft Click&7]&b Gain &e1'
+        - '&7> [&fShift+Left Click&7]&b Gain &e64'
+        - '&7> [&fShift+Right Click&7]&b Delete item'
   serveritems:
     #Holders: %player_name% %page%
     title: '&9Server items - page &b%page%'
     page-info:
       #Holders: %player_name% %page%
       description:
-        - '&9&lPage &e&l%page%'
-        - '&9[Click &eAny&9] to &atoggle &9view of &eitem&9/&eID'
+        - '&6&lPage &e&l%page%'
+        - '&7[&fClick&7]&b Toggle view of &eitem&b/&eID'
         - ''
-        - '&9Click on items'
-        - '&9[&eLeft&9] &egain 1'
-        - '&9[&eShift+Left&9] &egain 64'
-        - '&9[&eShift+Right&9] &cdelete &9item'
+        - '&bClick on items:'
+        - '&7> [&fLeft Click&7]&b Gain &e1'
+        - '&7> [&fShift+Left Click&7]&b Gain &e64'
+        - '&7> [&fShift+Right Click&7]&b Delete item'

@@ -76,8 +76,10 @@ public class ItemEdit extends APlugin {
                 t.printStackTrace();
             }
         }
-
+        registerMetrics(BSTATS_PLUGIN_ID);
     }
+
+    private static final int BSTATS_PLUGIN_ID = 15076;
 
     public void disable() {
         for (Player p : Bukkit.getOnlinePlayers())
