@@ -25,6 +25,7 @@ itemedit:
       - '&eCopyBook &b- same as copy but from pages of a book as lines'
       - '&eCopyFile <path> &b- same as copy but from loreCopy.yml'
       - '&ePaste &b- paste the last copied lore'
+      - '&eReplace <replaced> <replacer> &b- paste the last copied lore'
     params: '<add/set/remove...> [...]'
     set:
       params: 'set <line> <text>'
@@ -50,6 +51,19 @@ itemedit:
     paste:
       feedback: '&9[&fItemEdit&9] &aLore pasted'
       no-copy: '&4[&cItemEdit&4] &cCopy a lore first'
+    replace:
+      params: 'replace <replaced> <replacer>'
+      description:
+        - '&b&lReplace all occurrences on the lore'
+        - ''
+        - '&bIf you need to replace more than a word you have'
+        - '&b to close them inside &e{ }'
+        - ''
+        - '&bExample: &e/ie lore replace New Rusty'
+        - '&b''&eNew sword&b'' -> ''&eRusty sword&b'''
+        - ''
+        - '&bExample 2: &e/ie lore replace {Heavy} {Very light}'
+        - '&b''&eHeavy sword&b'' -> ''&eVery light sword&b'''
   hide:
     wrong-flag: '&4[&cItemEdit&4] &cWrong Flag Value! &4[&6hover here&4]'
     description:

@@ -2,6 +2,7 @@ package emanondev.itemedit.command.itemedit;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
+import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -15,20 +16,8 @@ import java.util.*;
 
 public class Lore extends SubCmd {
 
-    // private BaseComponent[] helpAdd;
     private final Map<UUID, List<String>> copies = new HashMap<>();
     private final YMLConfig loreCopy = ItemEdit.get().getConfig("loreCopy");
-    /*private BaseComponent[] helpSet;
-    private BaseComponent[] helpRemove;
-    private BaseComponent[] helpInsert;
-    private String copyFeedback;
-    private String copyFileFeedback;
-    private String copyBookFeedback;
-    private String copyBookWrongType;
-    private String copyFileWrongPath;
-    private String copyFileNoPath;
-    private String pasteFeedback;
-    private String pasteNoCopyFeedback;*/
 
     private static final String[] loreSub = new String[]{"add", "set", "remove", "reset", "insert", "copy",
             "copybook", "copyfile", "paste", "replace"};
@@ -83,18 +72,67 @@ public class Lore extends SubCmd {
     }
 
     private void loreReplace(Player p, ItemStack item, String[] args) {
-        switch (args.length) {
-            case 2:
-            case 3:
-                //not enough args
-            case 4:
-                //ok
-
-            case 5:
-                //more words, needs []
-
+        try {
+            if (args.length < 4) {
+                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("replace.params", null, p),
+                        getLanguageStringList("replace.description", null, p)));
+                return;
+            }
+            if (!item.hasItemMeta())
+                return;
+            ItemMeta meta = item.getItemMeta();
+            if (!meta.hasLore())
+                return;
+            List<String> lore = meta.getLore();
+            String from;
+            String to;
+            if (args.length == 4) {
+                from = args[2];
+                to = args[3];
+            } else {
+                StringBuilder raw = new StringBuilder();
+                for (int i = 2; i < args.length; i++)
+                    raw.append(" ").append(args[i]);
+                String rawText = raw.substring(1);
+                int i1 = rawText.indexOf("{");
+                if (i1 != 0) {
+                    replaceBadFormat(p, args);
+                    return;
+                }
+                int i2 = rawText.indexOf("}", i1);
+                if (i2 == -1) {
+                    replaceBadFormat(p, args);
+                    return;
+                }
+                int i3 = rawText.indexOf("{", i2);
+                if (i3 == -1 || i2 + 2 != i3) {
+                    replaceBadFormat(p, args);
+                    return;
+                }
+                int i4 = rawText.indexOf("}", i3);
+                if (i4 != rawText.length() - 1) {
+                    replaceBadFormat(p, args);
+                    return;
+                }
+                from = rawText.substring(1, i2);
+                to = rawText.substring(i3 + 1, i4);
+            }
+            from = UtilsString.fix(from, null, true);
+            to = UtilsString.fix(to, null, true);
+            for (int i = 0; i < lore.size(); i++)
+                lore.set(i, lore.get(i).replace(from, to));
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+            p.updateInventory();
+        } catch (Exception e) {
+            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("replace.params", null, p),
+                    getLanguageStringList("replace.description", null, p)));
         }
+    }
 
+    private void replaceBadFormat(Player p, String[] args) {
+        Util.sendMessage(p, this.craftFailFeedback(getLanguageString("replace.params", null, p),
+                getLanguageStringList("replace.description", null, p)));
     }
 
     private void lorePaste(Player p, ItemStack item, String[] args) {

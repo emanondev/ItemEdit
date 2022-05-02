@@ -124,7 +124,7 @@ class ServerItemDrop implements IItemDrop, ILocationDrop {
     }
 }
 
-class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
+class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, ITargetedLocationSkill {
     private final String id;
     private final int amount;
     private final int diff;
@@ -164,27 +164,42 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
 
     @Override
     public SkillResult castAtEntity(SkillMetadata data, AbstractEntity target) {
+        if (Math.random() > chance)
+            return SkillResult.CONDITION_FAILED;
         if (Bukkit.isPrimaryThread())
-            drop(target);
+            drop(target.getLocation());
         else
             new BukkitRunnable() {
                 public void run() {
-                    drop(target);
+                    drop(target.getLocation());
                 }
             }.runTask(ItemEdit.get());
         return SkillResult.SUCCESS;
     }
 
-    public void drop(AbstractEntity target) {
-        Location loc = target.getBukkitEntity().getLocation();
+    public void drop(AbstractLocation location) {
+        Location loc = BukkitAdapter.adapt(location);
         ItemStack item = ItemEdit.get().getServerStorage().getItem(id);
         if (item == null) {
             ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + id + "' is not a registered serveritem");
             return;
         }
         item.setAmount((int) (amount + Math.random() * diff));
-        if (Math.random() < chance)
-            loc.getWorld().dropItem(loc, item);
+        loc.getWorld().dropItem(loc, item);
     }
 
+    @Override
+    public SkillResult castAtLocation(SkillMetadata data, AbstractLocation location) {
+        if (Math.random() > chance)
+            return SkillResult.CONDITION_FAILED;
+        if (Bukkit.isPrimaryThread())
+            drop(location);
+        else
+            new BukkitRunnable() {
+                public void run() {
+                    drop(location);
+                }
+            }.runTask(ItemEdit.get());
+        return SkillResult.SUCCESS;
+    }
 }
