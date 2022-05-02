@@ -27,8 +27,11 @@ public class Enchant extends SubCmd {
                 throw new IllegalArgumentException("Wrong argument Number");
             int lv = 1;
             Enchantment ench = Aliases.ENCHANT.convertAlias(args[1]);
-            if (ench == null)
-                throw new IllegalArgumentException("Wrong Echantment");
+            if (ench == null) {
+                onWrongAlias("wrong-enchant", p, Aliases.ENCHANT);
+                onFail(p, alias);
+                return;
+            }
             if (args.length == 3)
                 lv = Integer.parseInt(args[2]);
             if (lv == 0)

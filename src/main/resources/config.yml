@@ -1,3 +1,19 @@
+# ItemEdit by Emanon
+# Wiki https://github.com/emanondev/ItemEdit/wiki
+# Discord https://discord.gg/w5HVCDPtRp
+# Donations https://www.paypal.me/FlavioLiponi/
+# Spigot https://www.spigotmc.org/resources/40993/
+#
+# Do not change config-version
+config-version: 1
+language:
+  #Default locale
+  #If you want to add more languages copy language/en.yml, rename it and apply your changes,
+  # plugin will automatically use it after a plugin reload or server restart
+  default: 'en'
+  #Allowed on ServerVersion 1.12+
+  #When true the plugin will use the client language if a language file exist for that client
+  use_multilanguage: true
 serveritem:
   #if server saved items has placeholders inside displayname or lore should replace it?
   #default placeholders: %player_name% %player_uuid%
@@ -11,7 +27,6 @@ serveritem:
   #player A buy an item with %player_name% holder, player B take A item, B try to sell the item but he can't because %player_name% for B it's not the same of A
   #player A buy an item with %player_name% holder, player A change name to B, try to sell the item but he can't because %player_name% now it's B and do not match old name A
   replace-holders: true
-
 storage:
   # player should be identified by uuid?
   # if set to false players will be identified by name
@@ -130,7 +145,7 @@ blocked:
     - '[s\$]mu[t\+][s\$]?'
     - '[s\$]punk[s\$]?'
     - '[t\+]w[a@][t\+][s\$]?'
-  #A list of blocked materials which cannot be renamed unless you have permission to bypass
+  #A list of blocked materials which cannot be renamed (with /ie rename) unless you have permission to bypass
   #You may find valid ids here https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
   #or here for versions 1.8-1.12 https://helpch.at/docs/1.12.2/org/bukkit/Material.html
   #CaPs are not relevant for this config

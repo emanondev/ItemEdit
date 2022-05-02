@@ -1,8 +1,10 @@
 package emanondev.itemedit.command;
 
 import emanondev.itemedit.APlugin;
+import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.YMLConfig;
+import emanondev.itemedit.aliases.AliasSet;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -85,6 +87,34 @@ public abstract class SubCmd {
             fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(String.join("\n", desc)).create()));
         }
         return fail.create();
+    }
+
+    protected <T> void onWrongAlias(String pathMessage, CommandSender sender, AliasSet<T> set, String... holders) {
+        String msg = getLanguageString(pathMessage, null, sender, holders);
+        if (msg == null || msg.isEmpty())
+            return;
+        YMLConfig language = ItemEdit.get().getLanguageConfig(sender);
+        StringBuilder hover = new StringBuilder(language
+                .getMessage("itemedit.listaliases.error-pre-hover", "")).append("\n");
+
+        String color1 = language.getMessage("itemedit.listaliases.first_color", "");
+        String color2 = language.getMessage("itemedit.listaliases.second_color", "");
+        boolean color = true;
+        int counter = 0;
+        for (T value : set.getValues()) {
+            String alias = set.getName(value);
+            counter += alias.length() + 1;
+            hover.append(color ? color1 : color2).append(alias);
+            color = !color;
+            if (counter > 30) {
+                counter = 0;
+                hover.append("\n");
+            } else
+                hover.append(" ");
+        }
+        Util.sendMessage(sender, new ComponentBuilder(msg).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/itemedit "
+                        + ItemEdit.get().getConfig("commands.yml").getString("itemedit.listaliases.name") + " " + set.getID()))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover.toString()).create())).create());
     }
 
     protected String getLanguageString(String path, String def, CommandSender sender, String... holders) {

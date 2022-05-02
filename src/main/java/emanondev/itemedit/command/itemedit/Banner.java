@@ -66,6 +66,12 @@ public class Banner extends SubCmd {
             int id = Integer.parseInt(args[2]) - 1;
             PatternType type = meta.getPattern(id).getPattern();
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
+            if (color == null) {
+                onWrongAlias("wrong-color", p, Aliases.COLOR);
+                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("color.params", null, p),
+                        getLanguageStringList("color.description", null, p)));
+                return;
+            }
             meta.setPattern(id, new Pattern(color, type));
             item.setItemMeta(meta);
             p.updateInventory();
@@ -96,6 +102,12 @@ public class Banner extends SubCmd {
         try {
             BannerMeta meta = (BannerMeta) item.getItemMeta();
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
+            if (color == null) {
+                onWrongAlias("wrong-color", p, Aliases.COLOR);
+                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("colorbanner.params", null, p),
+                        getLanguageStringList("colorbanner.description", null, p)));
+                return;
+            }
             meta.setBaseColor(color);
             item.setItemMeta(meta);
             p.updateInventory();
@@ -110,8 +122,14 @@ public class Banner extends SubCmd {
             BannerMeta meta = (BannerMeta) item.getItemMeta();
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
+            if (type == null || color == null) {
+                if (type == null) onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
+                if (color == null) onWrongAlias("wrong-color", p, Aliases.COLOR);
+                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("set.params", null, p),
+                        getLanguageStringList("set.description", null, p)));
+                return;
+            }
             int id = Integer.parseInt(args[4]) - 1;
-
             meta.setPattern(id, new Pattern(color, type));
             item.setItemMeta(meta);
             p.updateInventory();
@@ -126,7 +144,13 @@ public class Banner extends SubCmd {
             BannerMeta meta = (BannerMeta) item.getItemMeta();
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
-
+            if (type == null || color == null) {
+                if (type == null) onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
+                if (color == null) onWrongAlias("wrong-color", p, Aliases.COLOR);
+                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
+                        getLanguageStringList("add.description", null, p)));
+                return;
+            }
             meta.addPattern(new Pattern(color, type));
             item.setItemMeta(meta);
             p.updateInventory();

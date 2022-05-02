@@ -57,20 +57,35 @@ public class Attribute extends SubCmd {
                 throw new IllegalArgumentException("Wrong param number");
 
             org.bukkit.attribute.Attribute attr = Aliases.ATTRIBUTE.convertAlias(args[2]);
+            if (attr == null) {
+                onWrongAlias("wrong-attribute", p, Aliases.ATTRIBUTE);
+                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
+                        getLanguageStringList("add.description", null, p)));
+                return;
+            }
             double amount = Double.parseDouble(args[3]);
             Operation op;
             if (args.length > 4)
                 op = Aliases.OPERATIONS.convertAlias(args[4]);
             else
                 op = Operation.ADD_NUMBER;
-            if (op == null)
-                throw new IllegalArgumentException("can't find operation '" + args[4] + "'");
+
+            if (op == null) {
+                onWrongAlias("wrong-operation", p, Aliases.OPERATIONS);
+                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
+                        getLanguageStringList("add.description", null, p)));
+                return;
+            }
 
             EquipmentSlot equip;
             if (args.length > 5) {
                 equip = Aliases.EQUIPMENT_SLOTS.convertAlias(args[5]);
-                if (equip == null)
-                    throw new IllegalArgumentException("can't find slot '" + args[5] + "'");
+                if (equip == null) {
+                    onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTS);
+                    p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
+                            getLanguageStringList("add.description", null, p)));
+                    return;
+                }
             } else
                 equip = null;
 
@@ -93,8 +108,13 @@ public class Attribute extends SubCmd {
 
             org.bukkit.attribute.Attribute attr = Aliases.ATTRIBUTE.convertAlias(args[2]);
             EquipmentSlot equip = Aliases.EQUIPMENT_SLOTS.convertAlias(args[2]);
-            if (attr == null && equip == null)
-                throw new IllegalArgumentException();
+            if (attr == null && equip == null) {
+                onWrongAlias("wrong-attribute", p, Aliases.ATTRIBUTE);
+                onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTS);
+                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("remove.params", null, p),
+                        getLanguageStringList("remove.description", null, p)));
+                return;
+            }
 
             ItemMeta itemMeta = item.getItemMeta();
             if (attr != null)

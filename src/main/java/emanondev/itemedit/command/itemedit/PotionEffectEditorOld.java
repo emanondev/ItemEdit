@@ -63,8 +63,12 @@ public class PotionEffectEditorOld extends SubCmd {
             PotionMeta meta = (PotionMeta) item.getItemMeta();
 
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2].toUpperCase());
-            if (effect == null)
-                throw new IllegalArgumentException();
+            if (effect == null) {
+                onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
+                Util.sendMessage(p, this.craftFailFeedback(getLanguageString("remove.params", null, p),
+                        getLanguageStringList("remove.description", null, p)));
+                return;
+            }
 
             meta.removeCustomEffect(effect);
             item.setItemMeta(meta);
@@ -92,8 +96,12 @@ public class PotionEffectEditorOld extends SubCmd {
             PotionMeta meta = (PotionMeta) item.getItemMeta();
             int level = 0;
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2]);
-            if (effect == null)
-                throw new IllegalArgumentException();
+            if (effect == null) {
+                onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
+                Util.sendMessage(p, this.craftFailFeedback(getLanguageString("add.params", null, p),
+                        getLanguageStringList("add.description", null, p)));
+                return;
+            }
             int duration = Integer.parseInt(args[3]) * 20;
             if (duration < 0)
                 throw new IllegalArgumentException();

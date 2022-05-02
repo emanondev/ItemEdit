@@ -32,7 +32,7 @@ public class BannerEditor implements Gui {
     private final static PatternType[] TYPES = Arrays.copyOfRange(PatternType.values(), 1, PatternType.values().length);
 
     @Override
-    public ItemEdit getPlugin() {
+    public @NotNull ItemEdit getPlugin() {
         return ItemEdit.get();
     }
 
@@ -267,7 +267,7 @@ public class BannerEditor implements Gui {
         }
 
         @Override
-        public ItemEdit getPlugin() {
+        public @NotNull ItemEdit getPlugin() {
             return ItemEdit.get();
         }
 
@@ -384,7 +384,7 @@ public class BannerEditor implements Gui {
         }
 
         @Override
-        public ItemEdit getPlugin() {
+        public @NotNull ItemEdit getPlugin() {
             return ItemEdit.get();
         }
 

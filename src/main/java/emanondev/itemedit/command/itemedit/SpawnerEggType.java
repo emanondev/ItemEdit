@@ -35,8 +35,11 @@ public class SpawnerEggType extends SubCmd {
             if (args.length != 2)
                 throw new IllegalArgumentException();
             EntityType type = Aliases.EGG_TYPE.convertAlias(args[1]);
-            if (type == null)
-                throw new IllegalArgumentException();
+            if (type == null) {
+                onWrongAlias("wrong-entity", p, Aliases.EGG_TYPE);
+                onFail(p, alias);
+                return;
+            }
             itemMeta.setSpawnedType(type);
             item.setItemMeta(itemMeta);
             p.updateInventory();

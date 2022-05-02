@@ -33,6 +33,7 @@ public class ItemEdit extends APlugin {
     }
 
     private final static int PROJECT_ID = 40993;
+    private static final int BSTATS_PLUGIN_ID = 15076;
 
     private static String getNmsver() {
         String txt = Bukkit.getServer().getClass().getPackage().getName();
@@ -45,8 +46,8 @@ public class ItemEdit extends APlugin {
     }
 
     public void enable() {
+        ConfigurationUpdater.update();
         Aliases.reload();
-
         Bukkit.getPluginManager().registerEvents(new GuiHandler(), this);
 
         pStorage = new YmlPlayerStorage(); //may implement more type of storage and allow selecting storage type from config
@@ -78,8 +79,6 @@ public class ItemEdit extends APlugin {
         }
         registerMetrics(BSTATS_PLUGIN_ID);
     }
-
-    private static final int BSTATS_PLUGIN_ID = 15076;
 
     public void disable() {
         for (Player p : Bukkit.getOnlinePlayers())

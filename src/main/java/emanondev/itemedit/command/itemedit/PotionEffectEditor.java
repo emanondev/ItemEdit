@@ -4,6 +4,9 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -29,6 +32,16 @@ public class PotionEffectEditor extends SubCmd {
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof PotionMeta) && !(item.getItemMeta() instanceof SuspiciousStewMeta)) {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            if (p.hasPermission("itemedit.admin")) {
+                String msg = this.getLanguageString("itemtag-tip", null, sender);
+                if (msg != null && !msg.isEmpty()) {
+                    Util.sendMessage(p, new ComponentBuilder(msg).event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                    new ComponentBuilder(String.join("\n",
+                                            this.getLanguageStringList("itemtag-tip-hover", null, p))).create()))
+                            .event(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/resources/89634/")).create()
+                    );
+                }
+            }
             return;
         }
 
@@ -60,8 +73,13 @@ public class PotionEffectEditor extends SubCmd {
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2].toUpperCase());
-            if (effect == null)
-                throw new IllegalArgumentException();
+
+            if (effect == null) {
+                onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
+                Util.sendMessage(p, this.craftFailFeedback(getLanguageString("remove.params", null, p),
+                        getLanguageStringList("remove.description", null, p)));
+                return;
+            }
             if (item.getItemMeta() instanceof PotionMeta) {
                 PotionMeta meta = (PotionMeta) item.getItemMeta();
                 meta.removeCustomEffect(effect);
@@ -94,8 +112,12 @@ public class PotionEffectEditor extends SubCmd {
 
             int level = 0;
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2]);
-            if (effect == null)
-                throw new IllegalArgumentException();
+            if (effect == null) {
+                onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
+                Util.sendMessage(p, this.craftFailFeedback(getLanguageString("add.params", null, p),
+                        getLanguageStringList("add.description", null, p)));
+                return;
+            }
             int duration = Integer.parseInt(args[3]) * 20;
             if (duration < 0)
                 throw new IllegalArgumentException();
@@ -134,7 +156,7 @@ public class PotionEffectEditor extends SubCmd {
                 item.setItemMeta(meta);
             }
             p.updateInventory();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 

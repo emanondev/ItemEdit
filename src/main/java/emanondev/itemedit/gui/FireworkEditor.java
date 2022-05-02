@@ -224,7 +224,7 @@ public class FireworkEditor implements Gui {
     }
 
     @Override
-    public ItemEdit getPlugin() {
+    public @NotNull ItemEdit getPlugin() {
         return ItemEdit.get();
     }
 
@@ -357,7 +357,6 @@ public class FireworkEditor implements Gui {
         ItemStack item;
         try {
             item = new ItemStack(Material.GUNPOWDER);
-
         } catch (Throwable t) {
             item = new ItemStack(Material.valueOf("SULPHUR"));
         }

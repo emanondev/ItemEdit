@@ -37,10 +37,12 @@ public class AxolotlVariant extends SubCmd {
             if (args.length != 2)
                 throw new IllegalArgumentException("Wrong param number");
             AxolotlBucketMeta meta = (AxolotlBucketMeta) item.getItemMeta();
-
             Axolotl.Variant type = Aliases.AXOLOTL_VARIANT.convertAlias(args[1]);
-            if (type == null)
-                throw new IllegalArgumentException();
+            if (type == null) {
+                onWrongAlias("wrong-axolotl", p, Aliases.AXOLOTL_VARIANT);
+                onFail(p, alias);
+                return;
+            }
             meta.setVariant(type);
             item.setItemMeta(meta);
             p.updateInventory();

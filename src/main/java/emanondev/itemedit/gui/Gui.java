@@ -14,7 +14,9 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -87,30 +89,44 @@ public interface Gui extends InventoryHolder {
 
     Player getTargetPlayer();
 
-    APlugin getPlugin();
+    @NotNull APlugin getPlugin();
 
-    default String getLanguageMessage(String fullPath, String... holders) {
+    default String getLanguageMessage(@NotNull String fullPath, String... holders) {
         return getPlugin().getLanguageConfig(getTargetPlayer()).loadMessage(fullPath, "", null, true, holders);
     }
 
-    default List<String> getLanguageMultiMessage(String fullPath, String... holders) {
+    default List<String> getLanguageMultiMessage(@NotNull String fullPath, String... holders) {
         return getPlugin().getLanguageConfig(getTargetPlayer())
                 .loadMultiMessage(fullPath, Collections.emptyList(), null, true, holders);
     }
 
-    default void loadLanguageDescription(ItemMeta meta, String fullPath, String... holders) {
+    @Contract("null,_,_->null;!null,_,_->!null")
+    default ItemStack loadLanguageDescription(@Nullable ItemStack item, @NotNull String fullPath, String... holders) {
+        if (item == null)
+            return null;
+        ItemMeta meta = item.getItemMeta();
+        loadLanguageDescription(meta, fullPath, holders);
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    @Contract("null,_,_->null;!null,_,_->!null")
+    default ItemMeta loadLanguageDescription(@Nullable ItemMeta meta, @NotNull String fullPath, String... holders) {
+        if (meta == null)
+            return null;
         List<String> list = getPlugin().getLanguageConfig(getTargetPlayer()).loadMultiMessage(fullPath,
                 null, getTargetPlayer(), true, holders);
         meta.setDisplayName(list == null || list.isEmpty() ? " " : list.get(0));
         if (list != null && !list.isEmpty())
             meta.setLore(list.subList(1, list.size()));
+        return meta;
     }
 
-    default ItemStack getGuiItem(String path, Material defMaterial) {
+    default @NotNull ItemStack getGuiItem(@NotNull String path, @NotNull Material defMaterial) {
         return getGuiItem(path, defMaterial, 0);
     }
 
-    default ItemStack getGuiItem(String path, Material defMaterial, int defDurability) {
+    default @NotNull ItemStack getGuiItem(@NotNull String path, @NotNull Material defMaterial, int defDurability) {
         YMLConfig config = getPlugin().getConfig("gui.yml");
         ItemStack item = new ItemStack(config.loadMaterial(path + ".material", defMaterial));
         ItemMeta meta = item.getItemMeta();
@@ -125,11 +141,7 @@ public interface Gui extends InventoryHolder {
         return item;
     }
 
-    default ItemStack getBackItem() {
-        ItemStack item = getGuiItem("buttons.back", Material.BARRIER);
-        ItemMeta meta = item.getItemMeta();
-        this.loadLanguageDescription(meta, "gui.back.description");
-        item.setItemMeta(meta);
-        return item;
+    default @NotNull ItemStack getBackItem() {
+        return this.loadLanguageDescription(getGuiItem("buttons.back", Material.BARRIER), "gui.back.description");
     }
 }

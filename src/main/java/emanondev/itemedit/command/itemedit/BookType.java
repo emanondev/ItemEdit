@@ -41,8 +41,11 @@ public class BookType extends SubCmd {
             if (args.length != 2)
                 throw new IllegalArgumentException();
             BookMeta.Generation type = Aliases.BOOK_TYPE.convertAlias(args[1]);
-            if (type == null)
-                throw new IllegalArgumentException();
+            if (type == null) {
+                onWrongAlias("wrong-generation", p, Aliases.BOOK_TYPE);
+                onFail(p, alias);
+                return;
+            }
             itemMeta.setGeneration(type);
             item.setItemMeta(itemMeta);
             p.updateInventory();

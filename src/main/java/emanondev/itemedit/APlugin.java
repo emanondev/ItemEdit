@@ -60,12 +60,12 @@ public abstract class APlugin extends JavaPlugin {
      *
      * @param log log
      */
-    public void log(String log) {
+    public void log(@NotNull String log) {
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ChatColor.DARK_BLUE + "["
                 + ChatColor.WHITE + this.getName() + ChatColor.DARK_BLUE + "] " + ChatColor.WHITE + log));
     }
 
-    public abstract Integer getProjectId();
+    public abstract @Nullable Integer getProjectId();
 
     /**
      * Print on console with '[(PluginName)] (prefix) (log)' format
@@ -74,7 +74,7 @@ public abstract class APlugin extends JavaPlugin {
      * @param prefix prefix
      * @param log    log
      */
-    public void log(ChatColor color, String prefix, String log) {
+    public void log(@NotNull ChatColor color, @NotNull String prefix, @NotNull String log) {
         log(color + prefix + " " + ChatColor.WHITE + log);
     }
 
@@ -186,7 +186,7 @@ public abstract class APlugin extends JavaPlugin {
 
             getConfig(); //force load the config.yml file
             this.useMultiLanguage = getConfig().getBoolean("language.use_multilanguage", true);
-            this.defaultLanguage = getConfig().getString("language.use_multilanguage", "en");
+            this.defaultLanguage = getConfig().getString("language.default", "en");
             getLanguageConfig(null);
             if (getProjectId() != null)
                 new UpdateChecker(this, getProjectId()).logUpdates();
@@ -262,12 +262,13 @@ public abstract class APlugin extends JavaPlugin {
 
     public abstract void disable();
 
-    public void registerMetrics(int pluginId) {
+    public Metrics registerMetrics(int pluginId) {
         try {
-            new Metrics(this, pluginId);
+            return new Metrics(this, pluginId);
         } catch (Throwable t) {
             t.printStackTrace();
         }
+        return null;
     }
 
 }

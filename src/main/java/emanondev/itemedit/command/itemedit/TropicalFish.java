@@ -63,8 +63,13 @@ public class TropicalFish extends SubCmd {
             TropicalFishBucketMeta meta = (TropicalFishBucketMeta) item.getItemMeta();
 
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
-            if (color == null)
-                throw new IllegalArgumentException();
+            if (color == null) {
+                onWrongAlias("wrong-color", p, Aliases.COLOR);
+                Util.sendMessage(p, this
+                        .craftFailFeedback(getLanguageString("bodycolor.params", null, p),
+                                getLanguageStringList("bodycolor.description", null, p)));
+                return;
+            }
             meta.setPatternColor(color);
             item.setItemMeta(meta);
             p.updateInventory();
@@ -83,15 +88,20 @@ public class TropicalFish extends SubCmd {
             TropicalFishBucketMeta meta = (TropicalFishBucketMeta) item.getItemMeta();
 
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
-            if (color == null)
-                throw new IllegalArgumentException();
+            if (color == null) {
+                onWrongAlias("wrong-color", p, Aliases.COLOR);
+                Util.sendMessage(p, this
+                        .craftFailFeedback(getLanguageString("patterncolor.params", null, p),
+                                getLanguageStringList("patterncolor.description", null, p)));
+                return;
+            }
             meta.setPatternColor(color);
             item.setItemMeta(meta);
             p.updateInventory();
         } catch (Exception e) {
             Util.sendMessage(p, this
-                    .craftFailFeedback(getLanguageString("bodycolor.params", null, p),
-                            getLanguageStringList("bodycolor.description", null, p)));
+                    .craftFailFeedback(getLanguageString("patterncolor.params", null, p),
+                            getLanguageStringList("patterncolor.description", null, p)));
         }
     }
 
@@ -103,16 +113,18 @@ public class TropicalFish extends SubCmd {
             TropicalFishBucketMeta meta = (TropicalFishBucketMeta) item.getItemMeta();
 
             Pattern pattern = Aliases.TROPICALPATTERN.convertAlias(args[2]);
-            if (pattern == null)
-                throw new IllegalArgumentException();
+            if (pattern == null) {
+                onWrongAlias("wrong-pattern", p, Aliases.TROPICALPATTERN);
+                Util.sendMessage(p, this.craftFailFeedback(getLanguageString("pattern.params", null, p),
+                        getLanguageStringList("pattern.description", null, p)));
+                return;
+            }
             meta.setPattern(pattern);
             item.setItemMeta(meta);
             p.updateInventory();
         } catch (Exception e) {
-            Util.sendMessage(p, this
-                    .craftFailFeedback(getLanguageString("pattern.params", null, p),
-                            getLanguageStringList("pattern.description", null, p))
-            );
+            Util.sendMessage(p, this.craftFailFeedback(getLanguageString("pattern.params", null, p),
+                    getLanguageStringList("pattern.description", null, p)));
         }
     }
 

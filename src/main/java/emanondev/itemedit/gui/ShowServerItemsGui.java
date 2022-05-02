@@ -9,7 +9,6 @@ import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.storage.ServerStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -93,21 +92,9 @@ public class ShowServerItemsGui implements PagedGui {
             this.inventory.setItem(rows * 9 + 7, getNextPageItem());
     }
 
-    @SuppressWarnings("deprecation")
     private ItemStack getPageInfoItem() {
-        ItemStack item = new ItemStack(GUI_CONFIG.loadMaterial("gui.serveritems.page-info.material", Material.NAME_TAG));
-        ItemMeta meta = item.getItemMeta();
-        meta.addItemFlags(ItemFlag.values());
-        if (GUI_CONFIG.loadBoolean("gui.serveritems.page-info.glow", false))
-            meta.addEnchant(Enchantment.DURABILITY, 1, true);
-        this.loadLanguageDescription(meta, "gui.serveritems.page-info.description",
-                "%player_name%", target.getName(), "%page%", String.valueOf(page));
-        item.setItemMeta(meta);
-        int dur = GUI_CONFIG.loadInteger("gui.serveritems.page-info.durability", 0);
-        if (dur > 0)
-            item.setDurability((short) dur);
-        return item;
-
+        return this.loadLanguageDescription(this.getGuiItem("gui.serveritems.page-info", Material.NAME_TAG),
+                "gui.serveritems.page-info.description", "%player_name%", target.getName(), "%page%", String.valueOf(page));
     }
 
     /**
@@ -198,7 +185,7 @@ public class ShowServerItemsGui implements PagedGui {
     }
 
     @Override
-    public ItemEdit getPlugin() {
+    public @NotNull ItemEdit getPlugin() {
         return ItemEdit.get();
     }
 
