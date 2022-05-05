@@ -10,6 +10,8 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -19,18 +21,34 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class Util {
     private static final int MAX_COMPLETES = 100;
 
-    public static List<String> complete(String prefix, Class<? extends Enum<?>> enumClass) {
+    public static <T extends Enum<T>> @NotNull List<String> complete(String prefix, @NotNull Class<T> enumClass) {
         prefix = prefix.toUpperCase();
         ArrayList<String> results = new ArrayList<>();
-        Enum<?>[] list = enumClass.getEnumConstants();
         int c = 0;
-        for (Enum<?> el : list)
+        for (T el : enumClass.getEnumConstants())
             if (el.toString().startsWith(prefix)) {
+                results.add(el.toString().toLowerCase());
+                c++;
+                if (c > MAX_COMPLETES)
+                    return results;
+            }
+        return results;
+    }
+
+
+    public static @NotNull <T extends Enum<T>> List<String> complete(String prefix, @NotNull Class<T> type,
+                                                                     @NotNull Predicate<T> predicate) {
+        prefix = prefix.toUpperCase();
+        ArrayList<String> results = new ArrayList<>();
+        int c = 0;
+        for (T el : type.getEnumConstants())
+            if (predicate.test(el) && el.toString().startsWith(prefix)) {
                 results.add(el.toString().toLowerCase());
                 c++;
                 if (c > MAX_COMPLETES)

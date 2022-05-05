@@ -1,5 +1,6 @@
 package emanondev.itemedit.command.itemedit;
 
+import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -38,8 +39,11 @@ public class Type extends SubCmd {
 
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
-            return Util.complete(args[1], Material.class);
+        if (args.length == 2) {
+            if (ItemEdit.GAME_VERSION < 12 || (ItemEdit.GAME_VERSION == 12 && ItemEdit.GAME_SUB_VERSION < 2))
+                return Util.complete(args[1], Material.class);
+            return Util.complete(args[1], Material.class,(m)->m.isItem());
+        }
         return Collections.emptyList();
     }
 
