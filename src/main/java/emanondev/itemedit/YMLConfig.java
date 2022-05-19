@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Executable;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -62,7 +63,7 @@ public class YMLConfig extends YamlConfiguration {
         this.plugin = plugin;
         name = fixName(name);
         this.name = name;
-        file = new File(plugin.getDataFolder(), name);
+        this.file = new File(plugin.getDataFolder(), name);
         reload();
     }
 
@@ -92,13 +93,16 @@ public class YMLConfig extends YamlConfiguration {
         boolean existed = file.exists();
         if (!file.exists()) {
             if (!file.getParentFile().exists())  // Create parent folders if they don't exist
-                file.getParentFile().mkdirs();
+                if (!file.getParentFile().mkdirs())
+                    new Exception("unable to create parent folder").printStackTrace();
 
-            if (plugin.getResource(name) != null)
+            if (plugin.getResource(name.replace('\\', '/')) != null) {
                 plugin.saveResource(name, true); // Save the one from the JAR if possible
+            }
             else
                 try {
-                    file.createNewFile();
+                    if (!file.createNewFile())
+                        new Exception("unable to create file").printStackTrace();
                 } // Create a blank file if there's not one to copy from the JAR
                 catch (IOException e) {
                     e.printStackTrace();
@@ -109,7 +113,7 @@ public class YMLConfig extends YamlConfiguration {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        InputStream resource = plugin.getResource(name);
+        InputStream resource = plugin.getResource(name.replace('\\', '/'));
         if (resource != null)
             // Set up defaults in case their config is broked.
             this.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(resource, StandardCharsets.UTF_8)));

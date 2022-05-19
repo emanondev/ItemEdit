@@ -130,16 +130,16 @@ public abstract class APlugin extends JavaPlugin {
 
         if (this.languageConfigs.containsKey(locale))
             return languageConfigs.get(locale);
+
         String fileName = "languages" + File.separator + locale + ".yml";
+
         if (locale.equals(this.defaultLanguage) || new File(getDataFolder(), fileName).exists() || this.getResource(fileName) != null) {
             YMLConfig conf = new YMLConfig(this, fileName);
             languageConfigs.put(locale, conf);
             return conf;
         }
-        if (languageConfigs.containsKey(defaultLanguage))
-            return languageConfigs.get(defaultLanguage);
-        fileName = "languages" + File.separator + defaultLanguage + ".yml";
-        YMLConfig conf = new YMLConfig(this, fileName);
+
+        YMLConfig conf = getLanguageConfig(null);
         languageConfigs.put(locale, conf);
         return conf;
     }

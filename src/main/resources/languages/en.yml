@@ -112,7 +112,7 @@ itemedit:
       - '&b from item current amount'
     params: '<amount>'
   skullowner:
-    wrong-type: '&cItem must be a player skull'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a player skull'
     description:
       - '&b&lSet skull owner'
       - ''

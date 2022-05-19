@@ -3,7 +3,7 @@ main: ${groupId}.${project.name}
 version: "${project.version}"
 author: emanon
 api-version: 1.13
-softdepend: [ Vault,SuperVanish,PremiumVanish,PlaceHolderAPI,ShopGUIPlus, MythicMobs,IridiumSkyblock,ASkyBlock,uSkyBlock,IslandWorld,FabledSkyBlock,SimpleSkyblock,SkyBlock,SuperiorSkyblock2,SuperiorSkyblock ]
+softdepend: [ Vault,SuperVanish,PremiumVanish,PlaceHolderAPI,ShopGUIPlus,ItemBridge,MythicMobs,IridiumSkyblock,ASkyBlock,uSkyBlock,IslandWorld,FabledSkyBlock,SimpleSkyblock,SkyBlock,SuperiorSkyblock2,SuperiorSkyblock ]
 
 commands:
   itemedit:

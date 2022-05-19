@@ -26,4 +26,8 @@ public class Hooks {
     public static boolean isMythicMobsEnabled() {
         return isEnabled("MythicMobs");
     }
+
+    public static boolean isItemBridgeEnabled() {
+        return isEnabled("ItemBridge");
+    }
 }

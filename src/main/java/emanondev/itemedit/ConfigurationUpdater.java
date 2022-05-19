@@ -10,6 +10,6 @@ class ConfigurationUpdater {
             return;
         plugin.log("Updating configuration version (" + version + " -> " + CURRENT_VERSION + ")");
         plugin.getConfig().set("config-version", CURRENT_VERSION);
-
+        plugin.getConfig().save();
     }
 }
