@@ -70,7 +70,7 @@ public class TropicalFish extends SubCmd {
                                 getLanguageStringList("bodycolor.description", null, p)));
                 return;
             }
-            meta.setPatternColor(color);
+            meta.setBodyColor(color);
             item.setItemMeta(meta);
             p.updateInventory();
         } catch (Exception e) {
