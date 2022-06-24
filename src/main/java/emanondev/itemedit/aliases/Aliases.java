@@ -1,6 +1,7 @@
 package emanondev.itemedit.aliases;
 
 import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.Util;
 import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect;
 import org.bukkit.block.banner.PatternType;
@@ -115,52 +116,44 @@ public class Aliases {
     }
 
     private static EggTypeAliases getEggTypeAliases() {
-        if (!ItemEdit.NMS_VERSION.startsWith("v1_11_R") && !ItemEdit.NMS_VERSION.startsWith("v1_12_R"))
-            return null;
-        return new EggTypeAliases();
+        if (Util.isVersionInRange(1,11,1,12))
+            return new EggTypeAliases();
+        return null;
     }
 
     private static TropicalFishPatternAliases getTropicalPatternAliases() {
-        if (ItemEdit.NMS_VERSION.startsWith("v1_8_R") || ItemEdit.NMS_VERSION.startsWith("v1_9_R")
-                || ItemEdit.NMS_VERSION.startsWith("v1_10_R") || ItemEdit.NMS_VERSION.startsWith("v1_11_R")
-                || ItemEdit.NMS_VERSION.startsWith("v1_12_R"))
+        if (Util.isVersionUpTo(1,12))
             return null;
         return new TropicalFishPatternAliases();
     }
 
     private static GenAliases getGenAliases() {
-        if (ItemEdit.NMS_VERSION.startsWith("v1_8_R") || ItemEdit.NMS_VERSION.startsWith("v1_9_R"))
+        if (Util.isVersionUpTo(1,9))
             return null;
         return new GenAliases();
     }
 
     @NotNull
     private static EnchAliases getEnchAliases() {
-        if (ItemEdit.NMS_VERSION.startsWith("v1_8_") || ItemEdit.NMS_VERSION.startsWith("v1_9_")
-                || ItemEdit.NMS_VERSION.startsWith("v1_10") || ItemEdit.NMS_VERSION.startsWith("v1_11")
-                || ItemEdit.NMS_VERSION.startsWith("v1_12")) {
+        if (Util.isVersionUpTo(1,12))
             return new EnchAliasesOld();
-        }
         return new EnchAliases();
     }
 
     private static AttributeAliases getAttributeAliases() {
-        if (ItemEdit.NMS_VERSION.startsWith("v1_8_R") || ItemEdit.NMS_VERSION.startsWith("v1_9_R")
-                || ItemEdit.NMS_VERSION.startsWith("v1_10_R") || ItemEdit.NMS_VERSION.startsWith("v1_11_R"))
+        if (Util.isVersionUpTo(1,11))
             return null;
         return new AttributeAliases();
     }
 
     private static OperationAliases getAttributeOperationAliases() {
-        if (ItemEdit.NMS_VERSION.startsWith("v1_8_R") || ItemEdit.NMS_VERSION.startsWith("v1_9_R")
-                || ItemEdit.NMS_VERSION.startsWith("v1_10_R") || ItemEdit.NMS_VERSION.startsWith("v1_11_R"))
+        if (Util.isVersionUpTo(1,11))
             return null;
         return new OperationAliases();
     }
 
     private static AxolotlVariantAliases getAxolotlVariantAliases() {
-        String[] args = ItemEdit.NMS_VERSION.split("_");
-        if (args[0].equals("v1") && Integer.parseInt(args[1]) < 17)
+        if (Util.isVersionUpTo(1,17))
             return null;
         return new AxolotlVariantAliases();
     }

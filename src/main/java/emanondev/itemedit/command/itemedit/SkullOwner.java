@@ -28,9 +28,7 @@ public class SkullOwner extends SubCmd {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
-        if ((ItemEdit.NMS_VERSION.startsWith("v1_8_R") || ItemEdit.NMS_VERSION.startsWith("v1_9_R")
-                || ItemEdit.NMS_VERSION.startsWith("v1_10_R") || ItemEdit.NMS_VERSION.startsWith("v1_11_R")
-                || ItemEdit.NMS_VERSION.startsWith("v1_12_R")) && (!(item.getDurability() == 3))) {
+        if (Util.isVersionUpTo(1,12) && item.getDurability() != 3) {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
@@ -45,11 +43,11 @@ public class SkullOwner extends SubCmd {
             return;
         }
         try {
-            String name = args[1];
+            StringBuilder name = new StringBuilder(args[1]);
             for (int i = 2; i < args.length; i++)
-                name = name + " " + args[i];
-            name = ChatColor.translateAlternateColorCodes('&', name);
-            itemMeta.setOwner(name);
+                name.append(" ").append(args[i]);
+            name = new StringBuilder(ChatColor.translateAlternateColorCodes('&', name.toString()));
+            itemMeta.setOwner(name.toString());
             item.setItemMeta(itemMeta);
             p.updateInventory();
         } catch (Exception e) {

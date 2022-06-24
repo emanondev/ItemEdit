@@ -1,9 +1,6 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsString;
-import emanondev.itemedit.YMLConfig;
+import emanondev.itemedit.*;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import org.bukkit.command.CommandSender;
@@ -207,37 +204,53 @@ public class Lore extends SubCmd {
 
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
-            return Util.complete(args[1], loreSub);
-        if (args.length == 3) {
-            switch (args[1].toLowerCase()) {
-                case "remove":
-                case "set":
-                    return Util.complete(args[2], Arrays.asList("1", "2", "3", "last"));
-                case "copyfile":
-                    return Util.complete(args[2], loreCopy.getKeys(false));
-            }
-        }
-        if (args.length == 4) {
-            switch (args[1].toLowerCase()) {
-                case "set":
-                    if (sender instanceof Player) {
-                        ItemStack item = this.getItemInHand((Player) sender);
-                        if (item != null && item.hasItemMeta()) {
-                            ItemMeta meta = item.getItemMeta();
-                            if (meta.hasLore()) {
+        switch (args.length) {
+            case 2:
+                return Util.complete(args[1], loreSub);
+            case 3:
+                switch (args[1].toLowerCase()) {
+                    case "remove":
+                    case "set":
+                        if (!(sender instanceof Player))
+                            return Collections.emptyList();
+                        Player player = (Player) sender;
+                        ItemStack item = this.getItemInHand(player);
+                        if (Util.isAirOrNull(item))
+                            return Collections.emptyList();
+                        if (!item.hasItemMeta())
+                            return Util.complete(args[2], Arrays.asList("1", "last"));
+                        ItemMeta meta = item.getItemMeta();
+                        if (!meta.hasLore())
+                            return Util.complete(args[2], Arrays.asList("1", "last"));
+                        List<String> list = new ArrayList<>();
+                        for (int i = 0; i<meta.getLore().size();i++)
+                            list.add(String.valueOf(i+1));
+                        list.add("last");
+                        return Util.complete(args[2], list);
+                    case "copyfile":
+                        return Util.complete(args[2], loreCopy.getKeys(false));
+                }
+                return Collections.emptyList();
+            case 4:
+                switch (args[1].toLowerCase()) {
+                    case "set":
+                        if (sender instanceof Player) {
+                            ItemStack item = this.getItemInHand((Player) sender);
+                            if (item != null && item.hasItemMeta()) {
+                                ItemMeta meta = item.getItemMeta();
+                                if (meta.hasLore()) {
 
-                                List<String> lore = meta.getLore();
+                                    List<String> lore = meta.getLore();
 
-                                int line = args[2].equalsIgnoreCase("last") ?
-                                        lore.size() - 1 : Integer.parseInt(args[2]) - 1;
-                                if (line < 0 || line >= lore.size())
-                                    return Collections.emptyList();
-                                return Util.complete(args[3], lore.get(line).replace('§', '&'));
+                                    int line = args[2].equalsIgnoreCase("last") ?
+                                            lore.size() - 1 : Integer.parseInt(args[2]) - 1;
+                                    if (line < 0 || line >= lore.size())
+                                        return Collections.emptyList();
+                                    return Util.complete(args[3], lore.get(line).replace('§', '&'));
+                                }
                             }
                         }
-                    }
-            }
+                }
         }
         return Collections.emptyList();
     }
@@ -245,11 +258,11 @@ public class Lore extends SubCmd {
     // /itemedit lore add
     private void loreAdd(Player p, ItemStack item, String[] args) {
 
-        String text = "";
+        StringBuilder text = new StringBuilder();
         if (args.length > 2) {
-            text = args[2];
+            text = new StringBuilder(args[2]);
             for (int i = 3; i < args.length; i++)
-                text = text + " " + args[i];
+                text.append(" ").append(args[i]);
             // text = ChatColor.translateAlternateColorCodes('&', text);
         }
 
@@ -261,11 +274,11 @@ public class Lore extends SubCmd {
         else
             lore = new ArrayList<>();
 
-        text = Util.formatText(p, text, getPermission());
-        if (Util.hasBannedWords(p, text))
+        text = new StringBuilder(Util.formatText(p, text.toString(), getPermission()));
+        if (Util.hasBannedWords(p, text.toString()))
             return;
 
-        lore.add(text);
+        lore.add(text.toString());
         itemMeta.setLore(lore);
         item.setItemMeta(itemMeta);
         p.updateInventory();
@@ -277,11 +290,11 @@ public class Lore extends SubCmd {
             if (args.length < 3)
                 throw new IllegalArgumentException("Wrong param number");
 
-            String text = "";
+            StringBuilder text = new StringBuilder();
             if (args.length > 3) {
-                text = args[3];
+                text = new StringBuilder(args[3]);
                 for (int i = 4; i < args.length; i++)
-                    text = text + " " + args[i];
+                    text.append(" ").append(args[i]);
                 // text = ChatColor.translateAlternateColorCodes('&', text);
             }
 
@@ -299,11 +312,11 @@ public class Lore extends SubCmd {
             for (int i = lore.size(); i <= line; i++)
                 lore.add("");
 
-            text = Util.formatText(p, text, getPermission());
-            if (Util.hasBannedWords(p, text))
+            text = new StringBuilder(Util.formatText(p, text.toString(), getPermission()));
+            if (Util.hasBannedWords(p, text.toString()))
                 return;
 
-            lore.add(line, text);
+            lore.add(line, text.toString());
             itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
             p.updateInventory();
@@ -319,11 +332,11 @@ public class Lore extends SubCmd {
             if (args.length < 3)
                 throw new IllegalArgumentException("Wrong param number");
 
-            String text = "";
+            StringBuilder text = new StringBuilder();
             if (args.length > 3) {
-                text = args[3];
+                text = new StringBuilder(args[3]);
                 for (int i = 4; i < args.length; i++)
-                    text = text + " " + args[i];
+                    text.append(" ").append(args[i]);
                 // text = ChatColor.translateAlternateColorCodes('&', text);
             }
 
@@ -342,11 +355,11 @@ public class Lore extends SubCmd {
             for (int i = lore.size(); i <= line; i++)
                 lore.add("");
 
-            text = Util.formatText(p, text, getPermission());
-            if (Util.hasBannedWords(p, text))
+            text = new StringBuilder(Util.formatText(p, text.toString(), getPermission()));
+            if (Util.hasBannedWords(p, text.toString()))
                 return;
 
-            lore.set(line, text);
+            lore.set(line, text.toString());
             itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
             p.updateInventory();

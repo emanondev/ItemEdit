@@ -1,6 +1,7 @@
 package emanondev.itemedit.command;
 
 import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.Util;
 import emanondev.itemedit.command.itemedit.*;
 
 public class ItemEditCommand extends AbstractCommand {
@@ -25,42 +26,37 @@ public class ItemEditCommand extends AbstractCommand {
             this.registerSubCommand(new Amount(this));
             this.registerSubCommand(new Damage(this));
             this.registerSubCommand(new Banner(this));
-            if (ItemEdit.NMS_VERSION.startsWith("v1_8_R") || ItemEdit.NMS_VERSION.startsWith("v1_9_R")
-                    || ItemEdit.NMS_VERSION.startsWith("v1_10_R"))
+            if (Util.isVersionUpTo(1,10))
                 this.registerSubCommand(new ColorOld(this));
             else
                 this.registerSubCommand(new Color(this));// 1.11+ add potions and tipped arrows
             this.registerSubCommand(new SkullOwner(this));
             this.registerSubCommand(new FireworkPower(this));
             this.registerSubCommand(new Firework(this));
-            if (ItemEdit.NMS_VERSION.startsWith("v1_8_R") || ItemEdit.NMS_VERSION.startsWith("v1_9_R")
-                    || ItemEdit.NMS_VERSION.startsWith("v1_10_R") || ItemEdit.NMS_VERSION.startsWith("v1_11_R")
-                    || ItemEdit.NMS_VERSION.startsWith("v1_12_R") || ItemEdit.NMS_VERSION.startsWith("v1_13_R")
-                    || ItemEdit.NMS_VERSION.startsWith("v1_14_R"))
+            if (Util.isVersionUpTo(1,14))
                 this.registerSubCommand(new PotionEffectEditorOld(this));
             else
                 this.registerSubCommand(new PotionEffectEditor(this));//1.15+ adds suspicious stew
             this.registerSubCommand(new BookAuthor(this));
-            if (ItemEdit.NMS_VERSION.startsWith("v1_8_R") || ItemEdit.NMS_VERSION.startsWith("v1_9_R"))
+            if (Util.isVersionUpTo(1,9))
                 return;
             this.registerSubCommand(new BookType(this));// 1.10+
-            if (ItemEdit.NMS_VERSION.startsWith("v1_10_R"))
+            if (Util.isVersionUpTo(1,10))
                 return;
-            if (ItemEdit.NMS_VERSION.startsWith("v1_11_R") || ItemEdit.NMS_VERSION.startsWith("v1_12_R"))
+            if (Util.isVersionInRange(1,11,
+                    1,12)) {
                 this.registerSubCommand(new SpawnerEggType(this));// 1.11 & 1.12 only
-            if (ItemEdit.NMS_VERSION.startsWith("v1_11_R") || ItemEdit.NMS_VERSION.startsWith("v1_12_R"))
                 return;
+            }
             this.registerSubCommand(new Attribute(this));// 1.13+
             this.registerSubCommand(new TropicalFish(this));// 1.13+
-            if (ItemEdit.NMS_VERSION.startsWith("v1_13_R"))
+            if (Util.isVersionUpTo(1,13))
                 return;
             this.registerSubCommand(new CustomModelData(this));// 1.14+
-            if (ItemEdit.NMS_VERSION.startsWith("v1_14_R"))
-                return;
-            if (ItemEdit.NMS_VERSION.startsWith("v1_15_R"))
+            if (Util.isVersionUpTo(1,15))
                 return;
             this.registerSubCommand(new Compass(this));// 1.16+
-            if (ItemEdit.NMS_VERSION.startsWith("v1_16_R"))
+            if (Util.isVersionUpTo(1,16))
                 return;
             this.registerSubCommand(new AxolotlVariant(this));// 1.17+
 

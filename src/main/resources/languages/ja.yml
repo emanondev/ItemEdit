@@ -1,0 +1,721 @@
+player-only: '&4[&cItemEdit&4] &cCommand for Players only'
+no-item-on-hand: '&4[&cItemEdit&4] &cYou need to hold an item in hand'
+lack-permission: '&4[&cItemEdit&4] &cYou lack of permission %permission%'
+lack-permission-generic: '&4[&cItemEdit&4] &cYou don''t have permission to use this command'
+blocked-by-censure: '&4[&cItemEdit&4] &cYou can''t use this text, it contains blocked words'
+blocked-by-type-restriction: '&4[&cItemEdit&4] &cYou can''t rename this item'
+itemedit:
+  help-header: '&9&lItemEdit - Help'
+  rename:
+    description:
+      - '&b&lSet item''s name'
+      - ''
+      - '&b&lTip: &btype &eclear &bto revert name to default'
+    params: '<name>'
+  lore:
+    description:
+      - '&b&lEdit lore'
+      - ''
+      - '&eAdd <text> &b- add text on a new line'
+      - '&eInsert <line> <text> &b- add text on selected line'
+      - '&eSet <line> <text> &b- set or replace text on chosen line'
+      - '&eRemove <line> &b- remove chosen line'
+      - '&eReset &b- remove all lines'
+      - '&eCopy &b- copy current item lore to paste it later'
+      - '&eCopyBook &b- same as copy but from pages of a book as lines'
+      - '&eCopyFile <path> &b- same as copy but from loreCopy.yml'
+      - '&ePaste &b- paste the last copied lore'
+      - '&eReplace <replaced> <replacer> &b- replace all occurrences'
+    params: '<add/set/remove...> [...]'
+    set:
+      params: 'set <line> <text>'
+      description:
+        - '&b&lSet or replace text on selected line'
+    remove:
+      params: 'remove <line>'
+      description:
+        - '&b&lRemove selected line'
+    insert:
+      params: 'insert <line> <text>'
+      description:
+        - '&b&lAdd text on selected line'
+    copy:
+      feedback: '&9[&fItemEdit&9] &aLore copied'
+    copyBook:
+      wrong-type: '&4[&cItemEdit&4] &cItem must be a written book or book and quill'
+      feedback: '&9[&fItemEdit&9] &aBook pages copied'
+    copyFile:
+      no-path: '&4[&cItemEdit&4] &cSelect a path /ie lore copyfile &6<path>'
+      wrong-path: '&9[&fItemEdit&9] &cInvalid path, remember to reload the configuration and check the CaPs'
+      feedback: '&9[&fItemEdit&9] &aConfiguration copied'
+    paste:
+      feedback: '&9[&fItemEdit&9] &aLore pasted'
+      no-copy: '&4[&cItemEdit&4] &cCopy a lore first'
+    replace:
+      params: 'replace <replaced> <replacer>'
+      description:
+        - '&b&lReplace all occurrences on the lore'
+        - ''
+        - '&bIf you need to replace more than a word you have'
+        - '&b to close them inside &e{ }'
+        - ''
+        - '&bExample: &e/ie lore replace New Rusty'
+        - '&b''&eNew sword&b'' -> ''&eRusty sword&b'''
+        - ''
+        - '&bExample 2: &e/ie lore replace {Heavy} {Very light}'
+        - '&b''&eHeavy sword&b'' -> ''&eVery light sword&b'''
+  hide:
+    wrong-flag: '&4[&cItemEdit&4] &cWrong Flag Value! &4[&6hover here&4]'
+    description:
+      - '&b&lHide or show components'
+      - ''
+      - '&e<flag> &bitem flag to edit'
+      - '&e[true/false] &bset the flag value, by default toggle'
+      - ''
+      - '&b&lTip: &bhide banner pannerns with potion_effects flag'
+      - '&b&lTip: &bhide all flags at once with &e/itemedit hideall'
+    params: '<flag> [true/false]'
+  hideall:
+    description:
+      - '&b&lHide all components'
+      - ''
+      - '&bHides: enchants, potion effects, banner layers, attributes ...'
+      - ''
+      - '&b&lTip: &bhide single components with &e/itemedit hide <flag> true'
+    params: ''
+  damage:
+    description:
+      - '&b&lEdit durability'
+      - ''
+      - '&e<durability> &bdamage to apply'
+      - '&b&lNote: &e0 &bmeans no damage, full durability'
+    params: '<durability>'
+  type:
+    description:
+      - '&b&lSet item''s type'
+      - ''
+      - '&b&lNote: &ba few types as Air won''t work'
+    params: '<type>'
+  unbreakable:
+    description:
+      - '&b&lSet unbreakable state'
+      - ''
+      - '&bUnbreakable tools and armors won''t lost durability'
+      - '&e[true/false] &bset unbreakable value, by default toggle'
+    params: '[true/false]'
+  amount:
+    description:
+      - '&b&lSet amount'
+      - ''
+      - '&e<amount> &bamount to set (up to 127)'
+      - '&b&lTip: &bNegative amounts are subtracted'
+      - '&b from item current amount'
+    params: '<amount>'
+  skullowner:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a player skull'
+    description:
+      - '&b&lSet skull owner'
+      - ''
+      - '&bWorks only on Player''s skulls'
+      - '&e<name> &bname of the owner'
+      - ''
+      - '&b&lTip: &bPlace and break the skull to update skins'
+    params: '<name>'
+  color:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be colorable type like leather armors, potions or tipped arrows'
+    description:
+      - '&b&lSet color'
+      - ''
+      - '&bWorks on leather armor, on servers 1.11+ works on'
+      - '&b any Potion and Tipped arrows too!'
+      - '&e<red> <green> <blue> &bare the amount of each color to combine'
+      - '&bEach color is an int value between 0 and 255'
+      - '&bIf you are confused google \"&eRGB color picker&b\"'
+    params: '<red> <green> <blue>'
+  enchant:
+    wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
+    description:
+      - '&b&lSet enchants'
+      - ''
+      - '&e<enchant> &benchant type'
+      - '&e[level] &blevel of the enchant, by default &e1'
+      - ''
+      - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
+    params: '<enchant> [level]'
+  booktype:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
+    wrong-generation: '&4[&cItemEdit&4] &cWrong Book type Value! &4[&6hover here&4]'
+    description:
+      - '&b&lSet book type'
+      - ''
+      - '&bWorks only on Written books'
+    params: '<booktype>'
+  bookauthor:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
+    description:
+      - '&b&lSet author'
+      - ''
+      - '&bAuthor name may contains spaces and be colored too'
+      - '&bWorks only on Written books'
+    params: '<name>'
+  potioneffect:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a potion or a tipped arrow or a suspicious stew'
+    wrong-effect: '&4[&cItemEdit&4] &cWrong Effect Value! &4[&6hover here&4]'
+    itemtag-tip: '&9[&fItemEdit&9] &bYou need to add potion effects to common items? try >ItemTag<'
+    itemtag-tip-hover:
+      - '&6Click me'
+    description:
+      - '&b&lEdit potion''s effects'
+      - ''
+      - '&bWorks on any Potion, Tipped arrows and Suspicious stew!'
+      - '&eAdd <effect> <duration> [level] &b- add effect'
+      - '&eRemove <effect> &b- removes selected effect'
+      - '&eReset &b- remove all effects'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: 'add <effect> <duration> [level]'
+      description:
+        - '&b&lAdds/Override selected effect'
+        - ''
+        - '&e<effect> &beffect type'
+        - '&e<duration> &bduration in seconds, &e0 &bfor instant effects'
+        - '&e[level] &bUp to 127, by default &e1'
+    remove:
+      params: 'remove <effect>'
+      description:
+        - '&b&lRemove selected effect'
+  banner:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a banner'
+    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
+    description:
+      - '&b&lEdit banner'
+    set:
+      params: 'set <type> <color> <line>'
+      description:
+        - '&b&lReplace the pattern on selected line'
+    add:
+      params: 'add <type> <color>'
+      description:
+        - '&b&lAdd a pattern'
+    remove:
+      params: 'remove <line>'
+      description:
+        - '&b&lRemove pattern on selected line'
+    color:
+      params: 'color <line> <color>'
+      description:
+        - '&b&lChange pattern color on selected line'
+    colorbanner:
+      params: 'colorbanner <color>'
+      description:
+        - '&b&lChange banner background color'
+  fireworkpower:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    description:
+      - '&b&lSet firework power'
+      - ''
+      - '&e<power> &bpower of the firework, a value betwheen &e0 &band &e5'
+    params: '<power>'
+  firework:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    description:
+      - '&b&lEdit firework'
+    params: ''
+  spawnereggtype:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a spawner egg'
+    wrong-entity: '&4[&cItemEdit&4] &cWrong Egg type Value! &4[&6hover here&4]'
+    description:
+      - '&b&lSet type of entity spawned by spawner egg'
+      - ''
+      - '&e<type> &btype of the entity'
+      - '&bOnly some entity type are spawnable by eggs'
+    params: '<type>'
+  attribute:
+    wrong-attribute: '&4[&cItemEdit&4] &cWrong Attribute Value! &4[&6hover here&4]'
+    wrong-operation: '&4[&cItemEdit&4] &cWrong Operation Value! &4[&6hover here&4]'
+    wrong-equipment: '&4[&cItemEdit&4] &cWrong Equipment Value! &4[&6hover here&4]'
+    description:
+      - '&b&lEdit attribute modifiers'
+      - ''
+      - '&eAdd <attribute> <amount> [operation] [slot] &b- add new modifiers'
+      - '&eRemove <attribute/slot> &b- removes some modifiers'
+    params: '<add/remove> [...]'
+    add:
+      params: 'add <attribute> <amount> [operation] [slot]'
+      description:
+        - '&b&lAdd attribute modifier'
+        - ''
+        - '&e<attribute> &battribute type'
+        - '&e<amount> &bamount to set'
+        - '&e[operation] &bhow the modifier is added, by default sums'
+        - '&e[slot] &bapply this modifier only when item is on selected'
+        - '&e       equipment slot or any equipment slot if not selected'
+    remove:
+      params: 'remove <attribute/slot>'
+      description:
+        - '&b&lRemove modifiers'
+        - ''
+        - '&e<attribute/slot> &btype to remove, any modifiers with'
+        - '&b                 selected value are removed'
+  tropicalfish:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a tropical fish bucket'
+    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
+    description:
+      - '&b&lSet property of tropical fish bucket'
+      - ''
+      - '&epattern <pattern type> &b- type of fish'
+      - '&epatterncolor <color> &b- pattern color of fish'
+      - '&ebodycolor <color> &b- body color of fish'
+    params: '[...]'
+    pattern:
+      params: 'pattern <type>'
+      description:
+        - '&b&lSet tropical fish pattern type'
+        - ''
+        - '&e<type> &bpattern type of the fish'
+    patterncolor:
+      params: 'patterncolor <color>'
+      description:
+        - '&b&lSet tropical fish pattern color'
+        - ''
+        - '&e<color> &bpattern color of the fish'
+    bodycolor:
+      params: 'bodycolor <color>'
+      description:
+        - '&b&lSet tropical fish body color'
+        - ''
+        - '&e<color> &bbody color of the fish'
+  repaircost:
+    description:
+      - '&b&lEdit Anvil Repair Cost'
+      - ''
+      - '&e<cost> &blevels amount'
+      - '&b&lNote: &banvil repair/rename price is always at least &e1'
+      - '&b&lNote: &bthis command set base repair cost of the item, final levels cost on anvil is based what you do'
+      - '&bMore info at &eminecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<cost>'
+  custommodeldata:
+    description:
+      - '&b&lEdit custom model data'
+      - ''
+      - '&bUsed for texture packs'
+      - '&e<value> &bpositive int of target data model'
+    params: '<value>'
+  axolotlvariant:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a axolotl bucket'
+    wrong-axolotl: '&4[&cItemEdit&4] &cWrong Axolotl Value! &4[&6hover here&4]'
+    description:
+      - '&b&lEdit Axolotl Variant on Axolotl bucket'
+      - ''
+      - '&e<type> &bthe type of axolotl'
+    params: '<type>'
+  listaliases:
+    description:
+      - '&b&lShows allowed aliases parameters'
+      - ''
+      - '&e<type> &bthe type of parameter to show'
+    params: '<type>'
+    prefix_line: '&1 ◆  ◆  ◆  ◆  &9Aliases  &1◆  ◆  ◆  ◆'
+    postfix_line: '&1 ◆  ◆  ◆  ◆  &9Aliases  &1◆  ◆  ◆  ◆'
+    first_color: '&b'
+    second_color: '&e'
+    hover_info: '&9Original value: &e%default%'
+    hover_type: '&6Click to examine'
+    error-pre-hover: "&6&lAliases:"
+  compass:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a compass'
+    description:
+      - '&b&lSet compass target location'
+      - ''
+      - '&eSet &b- set your location as compass target'
+      - '&eClear &b- clear compass target'
+    params: '<set/clear>'
+    set:
+      feedback: '&9[&fItemEdit&9] &aCompass now points to &e%world% %x% %y% %z%'
+    clear:
+      feedback: '&9[&fItemEdit&9] &aCompass target cleared'
+serveritem:
+  help-header: '&9&lServerItem - Help'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: '&aObtained &e%amount% &aof &e%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][give] %player_name% obtained %amount% of %id% (%nick%)'
+    description:
+      - '&b&lGive selected item to player'
+      - ''
+      - '&e<id> &bId of the item'
+      - '&e[amount] &bamount of items to give, by default 1'
+      - '&e[player] &bwho gets the items, by default you'
+      - '&e[silent] &btrue if no feedback should be send to player'
+    params: '<id> [amount] [player] [silent]'
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '&aObtained &e%amount% &aof &e%nick%'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets% obtained %amount% of %id% (%nick%)'
+    description:
+      - '&b&lGive selected item to all online players'
+      - ''
+      - '&e<id> &bId of the item'
+      - '&e[amount] &bamount of items to give, by default 1'
+      - '&e[silent] &btrue if no feedback should be send to players'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] dropped %amount% of %id% (%nick%) at %world% %x% %y% %z%'
+    description:
+      - '&b&lDrop selected item at chosen location'
+      - ''
+      - '&e<id> &bId of the item'
+      - '&e<amount> &bamount of items to drop, 1 to 2304'
+      - '&e<world> &bwhich world'
+      - '&e<x> <y> <z> &bcoordinates'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: '&aLost &e%amount% &aof &e%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][take] %player_name% gave %amount% of %id% (%nick%)'
+    description:
+      - '&b&lTake selected item from player'
+      - ''
+      - '&e<id> &bId of the item'
+      - '&e[amount] &bamount of items to give, by default 1'
+      - '&e[player] &bwho gets the items, by default you'
+      - '&e[silent] &btrue if no feedback should be send to player'
+    params: '<id> [amount] [player] [silent]'
+  save:
+    #Holders: %id%
+    success: '&aItem &e%id% &aregistered'
+    description:
+      - '&bRegister the item in your hand'
+      - ''
+      - '&e<id> &bidentify the item, case insensitive and can''t'
+      - '&b     contain spaces or dots also you can''t select'
+      - '&b     any already used id'
+      - ''
+      - '&b&lTip: &buse &e/serveritem update <id>&b, to change an existing item'
+      - '&b&lTip: &bretrieve saved items with &e/serveritem give <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '&aItem &e%id% &aunregistered'
+    description:
+      - '&b&lDelete selected item'
+      - ''
+      - '&e<id> &bId of the item'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '&aItem &e%id% &ahas been updated'
+    description:
+      - '&b&lUpdate selected item'
+      - ''
+      - '&bChange the item associated with id with your hand item'
+      - '&e<id> &bId of the item'
+      - ''
+      - '&b&lTip: &buse &e/serveritem save <id>&b, to create a new item'
+      - '&b&lTip: &buse &e/serveritem delete <id>&b, to delete an item'
+    params: '<id>'
+  show:
+    description:
+      - '&b&lOpen a gui with server saved items'
+      - ''
+      - '&e[page] &bpage of the gui, by default 1'
+    params: '[page]'
+  setnick:
+    #Holders: %id% %nick%
+    success: '&aItem &e%id% &anick has been updated to &e%nick%'
+    description:
+      - '&bSet display name of selected item'
+      - ''
+      - '&bNick is used for holder &e%nick%&b on buy/sell messages, by'
+      - '&b  default is the name of the item, or item type if has no name'
+      - ''
+      - '&e<id> &bId of the item'
+      - '&e[nick] &bname to set'
+      - ''
+      - '&b&lTip: &bto reset to default just use &e/serveritem setnick <id>'
+    params: '<id> [nick]'
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aBought &e%amount% &aof &e%nick% &afor &e%price%'
+    #Holders: %id% %nick% %amount%
+    not-enough-space: '&cYou don''t have enough inventory space to buy &6%amount% &cof &6%nick%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: '&cYou don''t have &6%price% &cto buy &6%amount% &cof &6%nick%'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)'
+    description:
+      - '&b&lSell items to player'
+      - ''
+      - '&bSell differs from SellMax because you sell the whole amount'
+      - '&b  to player or you sell none'
+      - '&e<id> &bid of the item'
+      - '&e<amount> &bamount of items'
+      - '&e<player> &bwho should pay money and get items'
+      - '&e<price> &bprice for the whole amount of items, must be positive'
+      - '&e[silent] &btrue to send feedback to player'
+      - ''
+      - '&bTransaction fails if player has not enough money or enough'
+      - '&b  inventory space for the whole &e<amount>'
+      - '&bNote: balance of the command executor is untouched'
+    params: '<id> <amount> <player> <price> [silent]'
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aSold &e%amount% &aof &e%nick% &efor &a%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '&cYou don''t have &6%amount% &cof &6%nick% &cin your inventory'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%'
+    description:
+      - '&b&lBuy items from player'
+      - ''
+      - '&bBuy differs from BuyMax because you buy the whole amount'
+      - '&b  from player or you buy none'
+      - '&e<id> &bid of the item'
+      - '&e<amount> &bamount of items'
+      - '&e<player> &bwho should pay items and get money'
+      - '&e<price> &bprice for the whole amount of items, must be positive'
+      - '&e[silent] &btrue to send feedback to player'
+      - ''
+      - '&bTransaction fails if player has not at least &e<amount>'
+      - '&b  of &e<id> &bitems'
+      - '&bNote: balance of the command executor is untouched'
+    params: '<id> <amount> <player> <price> [silent]'
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aBought &e%amount% &aof &e%nick% &efor &a%price%'
+    #Holders: %id% %nick%
+    not-enough-space: '&cYou don''t have enough inventory space to buy any &6%nick%'
+    #Holders: %id% %nick% %price%
+    not-enough-money: '&cYou don''t have enough money to buy any &6%nick% &cfor &6%price% &ceach'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)'
+    description:
+      - '&b&lSell items to player'
+      - ''
+      - '&bSellMax differs from Sell because you may sell the less of amount'
+      - '&b  to player if there are not enough money or space for the whole'
+      - '&e<id> &bid of the item'
+      - '&e<amount> &bamount of items'
+      - '&e<player> &bwho should pay money and get items'
+      - '&e<price> &bprice for the whole amount of items, must be positive'
+      - '&e[silent] &btrue to send feedback to player'
+      - ''
+      - '&bTransaction fails if player has not enough money or enough'
+      - '&b  inventory space at least an item'
+      - '&bIf player buy less than &e<price>&b paid price will be scaled'
+      - '&bNote: balance of the command executor is untouched'
+    params: '<id> <amount> <player> <price> [silent]'
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aSold &e%amount% &aof &e%nick% &efor &a%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '&cYou don''t have any &6%nick% &cto sell in your inventory'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%'
+    description:
+      - '&b&lBuy items from player'
+      - ''
+      - '&bBuyMax differs from Buy because you may buy less of amount'
+      - '&b  from player if he has less than amount items in inventory'
+      - '&e<id> &bid of the item'
+      - '&e<amount> &bamount of items'
+      - '&e<player> &bwho should pay items and get money'
+      - '&e<price> &bprice for the whole amount of items, must be positive'
+      - '&e[silent] &btrue to send feedback to player'
+      - ''
+      - '&bTransaction fails if player has not at least an &e<id> &bitem'
+      - '&b  on inventory'
+      - '&bIf player sell less than &e<amount>&b price will be scaled'
+      - '&bNote: balance of the command executor is untouched'
+    params: '<id> <amount> <player> <price> [silent]'
+itemstorage:
+  help-header: '&9&lItemStorage - Help'
+  get:
+    #Holders: %id% %amount%
+    success: '&9[&fItemEdit&9] &aObtained &e%amount% &aof &e%id%'
+    no-inventory-space: '&4[&cItemEdit&4] &cYou don''t have space in your inventory'
+    description:
+      - '&b&lGet selected item'
+      - ''
+      - '&e<id> &bId of the item'
+      - '&e[amount] &bamount to get, by default 1'
+    params: '<id> [amount]'
+  save:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aItem &e%id% &aregistered'
+    #Holders: %limit%
+    limit-reached: '&4[&cItemEdit&4] &cYou reached the maximus number of savable items (%limit%)'
+    description:
+      - '&b&lRegister the item in your hand'
+      - ''
+      - '&e<id> &bidentify your item, case insensitive and can''t'
+      - '&b     contain spaces or dots also you can''t select'
+      - '&b     any already used id'
+      - ''
+      - '&b&lTip: &buse &e/itemstorage update <id>&b, to change an existing item'
+      - '&b&lTip: &bretrieve your saved items with &e/itemstorage get <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aItem &e%id% &aunregistered'
+    description:
+      - '&b&lDelete selected item'
+      - ''
+      - '&e<id> &bId of the item'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aItem &e%id% &ahas been updated'
+    description:
+      - '&b&lUpdate selected item'
+      - ''
+      - '&bChange the item associated with id with your hand item'
+      - '&e<id> &bId of the item'
+      - ''
+      - '&bTip: use &e/itemstorage save <id>&b, to create a new item'
+      - '&bTip: use &e/itemstorage delete <id>&b, to delete an item'
+    params: '<id>'
+  show:
+    description:
+      - '&b&lOpen a gui with your saved items'
+      - ''
+      - '&e[page] &bpage of the gui, by default 1'
+    params: '[page]'
+itemeditimport:
+  help:
+    - '&a/itemeditimport ItemEditor &2- import items from ItemEditor plugin'
+  itemeditor:
+    unable-to-get-item:
+      - '&4[&cItemEdit&4] &cUnable to load item &6%id%'
+    already-used-id:
+      - '&4[&cItemEdit&4] &6%id% &cis already used, maybe you already did this command before otherwise you may rename the file ItemEditor/items/%id%.yml'
+    invalid-id:
+      - '&4[&cItemEdit&4] &6%id% &cis not an acceptable id, you may rename the file ItemEditor/items/%id%.yml to an alphanumeric name'
+    import-unsuccess:
+      - '&4[&cItemEdit&4] &cNo items of &6%max% &cwere imported, maybe you already did this command before(?)'
+    import-success:
+      - '&9[&fItemEdit&9] &aImported &e%done% &aof &e%max% &aitems from ItemEditor'
+      - '&9[&fItemEdit&9] &aImported items: &e%ids%'
+    import-empty:
+      - '&4[&cItemEdit&4] &cItemEditor has no items to import'
+itemeditreload:
+  success: '&9[&fItemEdit&9] &aReloaded'
+gui:
+  banner:
+    title: '&9Banner Editor'
+    color_selector_title: '&9Color selector'
+    pattern_selector_title: '&9Pattern selector'
+    buttons:
+      pattern_selector_info:
+        - '&bSelect &6&l%type%'
+      color_selector_info:
+        - '&bSelect &6&l%color%'
+      position:
+        - '&6Pattern Controller'
+        - ''
+        - '&7[&fMiddle Click&7] &bToggle pattern'
+        - '&7[&fLeft/Right Click&7]&b << Move pattern >>'
+      type:
+        - '&6Type Selector'
+        - '&bType: &e%type%'
+        - ''
+        - '&7[&fClick&7]&b Change type'
+      color:
+        - '&6Color Selector'
+        - '&bColor: &e%color%'
+        - ''
+        - '&7[&fClick&7]&b Change color'
+  firework:
+    title: '&9Firework Editor'
+    buttons:
+      type:
+        - '&6Type Selector'
+        - '&bType: &e%type%'
+        - ''
+        - '&7[&fClick&7]&b Change type'
+      colors:
+        - '&6Colors Selector'
+        - '&bColors: &e%colors%'
+        - ''
+        - '&bSelected color: &6%color%'
+        - '&7[&fMiddle Click&7]&b to add &e%color%'
+        - '&7[&fLeft/Right Click&7]&b Change selected color'
+        - '&7[&fShift Left/Right Click&7]&b Delete last color'
+      fadecolors:
+        - '&6Fade Colors Selector'
+        - '&bFade Colors: &e%colors%'
+        - ''
+        - '&bSelected color: &6%color%'
+        - '&7[&fMiddle Click&7]&b Add &e%color%'
+        - '&7[&fLeft/Right Click&7]&b Change selected color'
+        - '&7[&fShift Left/Right Click&7]&b Delete last color'
+      flags:
+        none: '&cNothing active'
+        trail: '&eTrail &aActive'
+        flicker: '&eFlicker &aActive'
+        both: '&eTrail&b and &eFlicker &aActive'
+        info:
+          - '&6Trail and Flicker Activator'
+          - '%status%'
+          - ''
+          - '&7[&fRight Click&7]&b Toggle Flicker effect'
+          - '&7[&fLeft Click&7]&b Toggle Trail effect'
+      position:
+        - '&bEffect Controller'
+        - ''
+        - '&7[&fMiddle Click&7]&b Toggle effect'
+        - '&7[&fLeft/Right Click&7]&b Move this effect'
+      power:
+        - '&bPower: &e%power%'
+        - ''
+        - '&7[&fLeft/Right Click&7]&b << Change >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '&6&lNext Page'
+      - ''
+      - '&7[&fClick&7]&b Go to page &e%target_page%'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '&6&lPrevious Page'
+      - ''
+      - '&7[&fClick&7]&b Go to page &e%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '&6&lGo Back'
+      - ''
+      - '&7[&fClick&7]&b Go to previous gui'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '&9%player_name% items - page &b%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '&6&lPage &e&l%page%'
+        - '&7[&fClick&7]&b Toggle view of &eitem&b/&eID'
+        - ''
+        - '&bClick on items:'
+        - '&7> [&fLeft Click&7]&b Gain &e1'
+        - '&7> [&fShift+Left Click&7]&b Gain &e64'
+        - '&7> [&fShift+Right Click&7]&b Delete item'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '&9Server items - page &b%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '&6&lPage &e&l%page%'
+        - '&7[&fClick&7]&b Toggle view of &eitem&b/&eID'
+        - ''
+        - '&bClick on items:'
+        - '&7> [&fLeft Click&7]&b Gain &e1'
+        - '&7> [&fShift+Left Click&7]&b Gain &e64'
+        - '&7> [&fShift+Right Click&7]&b Delete item'

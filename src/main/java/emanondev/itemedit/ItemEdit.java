@@ -16,9 +16,13 @@ import java.util.Collections;
 
 public class ItemEdit extends APlugin {
     private static ItemEdit plugin = null;
+    @Deprecated
     public static final String NMS_VERSION = getNmsver();
+    @Deprecated
     public static final int GAME_MAIN_VERSION = Integer.parseInt(NMS_VERSION.split("_")[0].substring(1));
+    @Deprecated
     public static final int GAME_VERSION = Integer.parseInt(NMS_VERSION.split("_")[1]);
+    @Deprecated
     public static final int GAME_SUB_VERSION = Integer.parseInt(NMS_VERSION.split("_")[2].substring(1));
 
     public static ItemEdit get() {
@@ -32,6 +36,7 @@ public class ItemEdit extends APlugin {
     private final static int PROJECT_ID = 40993;
     private static final int BSTATS_PLUGIN_ID = 15076;
 
+    @Deprecated
     private static String getNmsver() {
         String txt = Bukkit.getServer().getClass().getPackage().getName();
         return txt.substring(txt.lastIndexOf(".") + 1);

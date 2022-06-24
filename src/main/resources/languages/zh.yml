@@ -1,0 +1,714 @@
+player-only: '&4[&cItemEdit&4] &c指令僅供玩家'
+no-item-on-hand: '&4[&cItemEdit&4] &c請拿物品於手上'
+lack-permission: '&4[&cItemEdit&4] &c你需要權限 %permission%'
+lack-permission-generic: '&4[&cItemEdit&4] &c你沒有權限'
+blocked-by-censure: '&4[&cItemEdit&4] &c物品有髒話, 無法使用'
+blocked-by-type-restriction: '&4[&cItemEdit&4] &cYou can''t rename this item'
+itemedit:
+  help-header: '&9&lItemEdit - 幫助'
+  rename:
+    description:
+      - '&b&lSet item''s name'
+      - ''
+      - '&b&l提示: &btype &eclear &bto revert name to default'
+    params: '<名稱>'
+  lore:
+    description:
+      - '&b&lEdit lore'
+      - ''
+      - '&eAdd <文字> &b- add text on a new line'
+      - '&eInsert <行> <文字> &b- add text on selected line'
+      - '&eSet <行> <文字> &b- set or replace text on chosen line'
+      - '&eRemove <行> &b- remove chosen line'
+      - '&eReset &b- remove all lines'
+      - '&eCopy &b- copy current item lore to paste it later'
+      - '&eCopyBook &b- same as copy but from pages of a book as lines'
+      - '&eCopyFile <path> &b- same as copy but from loreCopy.yml'
+      - '&ePaste &b- paste the last copied lore'
+      - '&eReplace <replaced> <replacer> &b- replace all occurrences'
+    params: '<add/set/remove...> [...]'
+    set:
+      params: 'set <行> <文字>'
+      description:
+        - '&b&lSet or replace text on selected line'
+    remove:
+      params: 'remove <行>'
+      description:
+        - '&b&lRemove selected line'
+    insert:
+      params: 'insert <行> <文字>'
+      description:
+        - '&b&lAdd text on selected line'
+    copy:
+      feedback: '&9[&fItemEdit&9] &aLore copied'
+    copyBook:
+      wrong-type: '&4[&cItemEdit&4] &cItem must be a written book or book and quill'
+      feedback: '&9[&fItemEdit&9] &aBook pages copied'
+    copyFile:
+      no-path: '&4[&cItemEdit&4] &cSelect a path /ie lore copyfile &6<path>'
+      wrong-path: '&9[&fItemEdit&9] &cInvalid path, remember to reload the configuration and check the CaPs'
+      feedback: '&9[&fItemEdit&9] &aConfiguration copied'
+    paste:
+      feedback: '&9[&fItemEdit&9] &aLore pasted'
+      no-copy: '&4[&cItemEdit&4] &cCopy a lore first'
+    replace:
+      params: 'replace <replaced> <replacer>'
+      description:
+        - '&b&lReplace all occurrences on the lore'
+        - ''
+        - '&bIf you need to replace more than a word you have'
+        - '&b to close them inside &e{ }'
+        - ''
+        - '&bExample: &e/ie lore replace New Rusty'
+        - '&b''&eNew sword&b'' -> ''&eRusty sword&b'''
+        - ''
+        - '&bExample 2: &e/ie lore replace {Heavy} {Very light}'
+        - '&b''&eHeavy sword&b'' -> ''&eVery light sword&b'''
+  hide:
+    wrong-flag: '&4[&cItemEdit&4] &cWrong Flag Value! &4[&6hover here&4]'
+    description:
+      - '&b&lHide or show components'
+      - ''
+      - '&e<NBT> &bitem flag to edit'
+      - '&e[true/false] &bset the flag value, by default toggle'
+      - ''
+      - '&b&l提示: &bhide banner pannerns with potion_effects flag'
+      - '&b&l提示: &bhide all flags at once with &e/itemedit hideall'
+    params: '<NBT> [true/false]'
+  hideall:
+    description:
+      - '&b&lHide all components'
+      - ''
+      - '&bHides: enchants, potion effects, banner layers, attributes ...'
+      - ''
+      - '&b&l提示: &bhide single components with &e/itemedit hide <NBT> true'
+    params: ''
+  damage:
+    description:
+      - '&b&lEdit durability'
+      - ''
+      - '&e<耐久度> &bdamage to apply'
+      - '&b&lNote: &e0 &bmeans no damage, full durability'
+    params: '<耐久度>'
+  type:
+    description:
+      - '&b&lSet item''s type'
+      - ''
+      - '&b&lNote: &ba few types as Air won''t work'
+    params: '<類別>'
+  unbreakable:
+    description:
+      - '&b&lSet unbreakable state'
+      - ''
+      - '&bUnbreakable tools and armors won''t lost durability'
+      - '&e[true/false] &bset unbreakable value, by default toggle'
+    params: '[true/false]'
+  amount:
+    description:
+      - '&b&lSet amount'
+      - ''
+      - '&e<數值> &bamount to set (up to 127)'
+      - '&b&l提示: &bNegative amounts are subtracted'
+      - '&b from item current amount'
+    params: '<數值>'
+  skullowner:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a player skull'
+    description:
+      - '&b&lSet skull owner'
+      - ''
+      - '&bWorks only on Player''s skulls'
+      - '&e<ID> &bname of the owner'
+      - ''
+      - '&b&l提示: &bPlace and break the skull to update skins'
+    params: '<ID>'
+  color:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be colorable type like leather armors, potions or tipped arrows'
+    description:
+      - '&b&lSet color'
+      - ''
+      - '&bWorks on leather armor, on servers 1.11+ works on'
+      - '&b any Potion and Tipped arrows too!'
+      - '&e<R> <G> <B> &bare the amount of each color to combine'
+      - '&bEach color is an int value between 0 and 255'
+      - '&bIf you are confused google \"&eRGB color picker&b\"'
+    params: '<R> <G> <B>'
+  enchant:
+    wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
+    description:
+      - '&b&lSet enchants'
+      - ''
+      - '&e<附魔> &benchant type'
+      - '&e[等級] &blevel of the enchant, by default &e1'
+      - ''
+      - '&b&l提示: &bSet &e[等級] &bto &e0 &bto remove an enchant'
+    params: '<附魔> [等級]'
+  booktype:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
+    wrong-generation: '&4[&cItemEdit&4] &cWrong Book type Value! &4[&6hover here&4]'
+    description:
+      - '&b&lSet book type'
+      - ''
+      - '&bWorks only on Written books'
+    params: '<書本種類>'
+  bookauthor:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
+    description:
+      - '&b&lSet author'
+      - ''
+      - '&bAuthor name may contains spaces and be colored too'
+      - '&bWorks only on Written books'
+    params: '<名稱>'
+  potioneffect:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a potion or a tipped arrow or a suspicious stew'
+    wrong-effect: '&4[&cItemEdit&4] &cWrong Effect Value! &4[&6hover here&4]'
+    itemtag-tip: '&9[&fItemEdit&9] &bYou need to add potion effects to common items? try >ItemTag<'
+    itemtag-tip-hover:
+      - '&6Click me'
+    description:
+      - '&b&lEdit potion''s effects'
+      - ''
+      - '&bWorks on any Potion, Tipped arrows and Suspicious stew!'
+      - '&eAdd <效果> <時間> [等級] &b- add effect'
+      - '&eRemove <效果> &b- removes selected effect'
+      - '&eReset &b- remove all effects'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: 'add <效果> <時間> [等級]'
+      description:
+        - '&b&lAdds/Override selected effect'
+        - ''
+        - '&e<效果> &beffect type'
+        - '&e<時間> &bduration in seconds, &e0 &bfor instant effects'
+        - '&e[等級] &bUp to 127, by default &e1'
+    remove:
+      params: 'remove <效果>'
+      description:
+        - '&b&lRemove selected effect'
+  banner:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a banner'
+    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
+    description:
+      - '&b&lEdit banner'
+    set:
+      params: 'set <類型> <顏色> <行>'
+      description:
+        - '&b&lReplace the pattern on selected line'
+    add:
+      params: 'add <類型> <顏色>'
+      description:
+        - '&b&lAdd a pattern'
+    remove:
+      params: 'remove <行>'
+      description:
+        - '&b&lRemove pattern on selected line'
+    color:
+      params: 'color <行> <顏色>'
+      description:
+        - '&b&lChange pattern color on selected line'
+    colorbanner:
+      params: 'colorbanner <顏色>'
+      description:
+        - '&b&lChange banner background color'
+  fireworkpower:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    description:
+      - '&b&lSet firework power'
+      - ''
+      - '&e<power> &bpower of the firework, a value betwheen &e0 &band &e5'
+    params: '<power>'
+  firework:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    description:
+      - '&b&lEdit firework'
+    params: ''
+  spawnereggtype:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a spawner egg'
+    wrong-entity: '&4[&cItemEdit&4] &cWrong Egg type Value! &4[&6hover here&4]'
+    description:
+      - '&b&lSet type of entity spawned by spawner egg'
+      - ''
+      - '&e<類型> &btype of the entity'
+      - '&bOnly some entity type are spawnable by eggs'
+    params: '<類型>'
+  attribute:
+    wrong-attribute: '&4[&cItemEdit&4] &cWrong Attribute Value! &4[&6hover here&4]'
+    wrong-operation: '&4[&cItemEdit&4] &cWrong Operation Value! &4[&6hover here&4]'
+    wrong-equipment: '&4[&cItemEdit&4] &cWrong Equipment Value! &4[&6hover here&4]'
+    description:
+      - '&b&lEdit attribute modifiers'
+      - ''
+      - '&eAdd <能力> <數值> [運算規則] [欄位] &b- add new modifiers'
+      - '&eRemove <能力/欄位> &b- removes some modifiers'
+    params: '<add/remove> [...]'
+    add:
+      params: 'add <能力> <數值> [運算規則] [欄位]'
+      description:
+        - '&b&lAdd attribute modifier'
+        - ''
+        - '&e<能力> &battribute type'
+        - '&e<數值> &bamount to set'
+        - '&e[運算規則] &bhow the modifier is added, by default sums'
+        - '&e[欄位] &bapply this modifier only when item is on selected'
+        - '&e       equipment slot or any equipment slot if not selected'
+    remove:
+      params: 'remove <能力/欄位>'
+      description:
+        - '&b&lRemove modifiers'
+        - ''
+        - '&e<能力/欄位> &btype to remove, any modifiers with'
+        - '&b                 selected value are removed'
+  tropicalfish:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a tropical fish bucket'
+    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
+    description:
+      - '&b&lSet property of tropical fish bucket'
+      - ''
+      - '&epattern <類別> &b- type of fish'
+      - '&epatterncolor <顏色> &b- pattern color of fish'
+      - '&ebodycolor <顏色> &b- body color of fish'
+    params: '[...]'
+    pattern:
+      params: 'pattern <類別>'
+      description:
+        - '&b&lSet tropical fish pattern type'
+        - ''
+        - '&e<類別> &bpattern type of the fish'
+    patterncolor:
+      params: 'patterncolor <顏色>'
+      description:
+        - '&b&lSet tropical fish pattern color'
+        - ''
+        - '&e<顏色> &bpattern color of the fish'
+    bodycolor:
+      params: 'bodycolor <顏色>'
+      description:
+        - '&b&lSet tropical fish body color'
+        - ''
+        - '&e<顏色> &bbody color of the fish'
+  repaircost:
+    description:
+      - '&b&lEdit Anvil Repair Cost'
+      - ''
+      - '&e<cost> &blevels amount'
+      - '&b&lNote: &banvil repair/rename price is always at least &e1'
+      - '&b&lNote: &bthis command set base repair cost of the item, final levels cost on anvil is based what you do'
+      - '&bMore info at &eminecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<cost>'
+  custommodeldata:
+    description:
+      - '&b&lEdit custom model data'
+      - ''
+      - '&bUsed for texture packs'
+      - '&e<材質> &bpositive int of target data model'
+    params: '<材質>'
+  axolotlvariant:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a axolotl bucket'
+    wrong-axolotl: '&4[&cItemEdit&4] &cWrong Axolotl Value! &4[&6hover here&4]'
+    description:
+      - '&b&lEdit Axolotl Variant on Axolotl bucket'
+      - ''
+      - '&e<type> &bthe type of axolotl'
+    params: '<type>'
+  listaliases:
+    description:
+      - '&b&lShows allowed aliases parameters'
+      - ''
+      - '&e<類型> &bthe type of parameter to show'
+    params: '<類型>'
+    prefix_line: '&1 ◆  ◆  ◆  ◆  &9指令  &1◆  ◆  ◆  ◆'
+    postfix_line: '&1 ◆  ◆  ◆  ◆  &9指令  &1◆  ◆  ◆  ◆'
+    first_color: '&b'
+    second_color: '&e'
+    hover_info: '&9原本數值: &e%default%'
+    hover_type: '&6點擊套用'
+    error-pre-hover: "&6&l指令:"
+  compass:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a compass'
+    description:
+      - '&b&lSet compass target location'
+      - ''
+      - '&eSet &b- set your location as compass target'
+      - '&eClear &b- clear compass target'
+    params: '<set/clear>'
+    set:
+      feedback: '&9[&fItemEdit&9] &aCompass now points to &e%world% %x% %y% %z%'
+    clear:
+      feedback: '&9[&fItemEdit&9] &aCompass target cleared'
+serveritem:
+  help-header: '&9&lServerItem - 幫助'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: "&a給予了 &e%amount% &a個 &e%nick%"
+    #Holders: %id% %nick% %amount% %player_name%
+    log: "[serveritem][give] %player_name% 取得了 %amount% 個 %id% (%nick%)"
+    description:
+      - "&b&l給玩家物品"
+      - ""
+      - "&e<ID> &b物品 ID"
+      - "&e[數量] &b給予的數量，預設為 1"
+      - "&e[玩家] &b給誰？預設是自己"
+      - "&e[安靜輸出] &b如果為是，將安靜的給予玩家，沒有提示"
+    params: "<ID> [數量] [玩家] [安靜輸出]"
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '&aObtained &e%amount% &aof &e%nick%'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets% obtained %amount% of %id% (%nick%)'
+    description:
+      - '&b&lGive selected item to all online players'
+      - ''
+      - '&e<id> &bId of the item'
+      - '&e[amount] &bamount of items to give, by default 1'
+      - '&e[silent] &btrue if no feedback should be send to players'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] dropped %amount% of %id% (%nick%) at %world% %x% %y% %z%'
+    description:
+      - '&b&lDrop selected item at chosen location'
+      - ''
+      - '&e<id> &bId of the item'
+      - '&e<amount> &bamount of items to drop, 1 to 2304'
+      - '&e<world> &bwhich world'
+      - '&e<x> <y> <z> &bcoordinates'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: "&a拿走了 &e%amount% &a個 &e%nick%"
+    #Holders: %id% %nick% %amount% %player_name%
+    log: "[serveritem][take] %player_name% 給予了 %amount% 個 %id% (%nick%)"
+    description:
+      - "&b&l拿走玩家物品"
+      - ""
+      - "&e<ID> &b物品 ID"
+      - "&e[數量] &b給予的數量，預設為 1"
+      - "&e[玩家] &b給誰？預設是自己"
+      - "&e[安靜輸出] &b如果為是，將安靜的給予玩家，沒有提示"
+    params: "<ID> [數量] [玩家] [安靜輸出]"
+  save:
+    #Holders: %id%
+    success: "&a &e%id% &a已註冊"
+    description:
+      - "&b&l註冊你手上的物品"
+      - ""
+      - "&e<ID> &b將手上物品以ID方式儲存。不能重複 ID。"
+      - ""
+      - "&b&l提示: &b使用 &e/itemstorage update <ID>&b, 來更新該物品"
+      - "&b&l提示: &b若要領取請使用 &e/itemstorage get <ID>"
+    params: "<ID>"
+  delete:
+    #Holders: %id%
+    success: "&a物品 &e%id% &a已刪除"
+    description:
+      - "&b&l刪除選定物品"
+      - ""
+      - "&e<ID> &b物品 ID"
+    params: "<ID>"
+  update:
+    #Holders: %id%
+    success: "&a物品 &e%id% &a已被更新"
+    description:
+      - "&b&l更新選定物品"
+      - ""
+      - "&b更改 ID 為手上物品"
+      - "&e<ID> &b物品 ID"
+      - ""
+      - "&b&l提示: 使用 &e/itemstorage save <ID>&b, 來創建新物品"
+      - "&b&l提示: 使用 &e/itemstorage delete <ID>&b, 來刪除物品"
+    params: "<ID>"
+  show:
+    description:
+      - "&b&l顯示已儲存物品"
+      - ""
+      - "&e[頁] &b頁，預設 1"
+    params: "[頁]"
+  setnick:
+    #Holders: %id% %nick%
+    success: "&a物品 &e%id% &a已被稱作 &e%nick%"
+    description:
+      - "&b設置物品暱稱"
+      - ""
+      - "&b暱稱僅用於 &e%nick%&b 或是買賣時"
+      - "&b  預設是該物品名稱，沒名稱就是該物品類別"
+      - ""
+      - "&e<ID> &b物品 ID"
+      - "&e[暱稱] &b要設置的暱稱"
+      - ""
+      - "&b&l提示: &b重置請用 &e/serveritem setnick <ID>"
+    params: "<ID> [暱稱]"
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: "&a購買了 &e%amount% &a個 &e%nick% &a價格: &e%price%"
+    #Holders: %id% %nick% %amount%
+    not-enough-space: "&c你沒有空間去買 &6%amount% &c個 &6%nick%"
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: "&c你沒有 &6%price% &c元去買 &6%amount% &c個 &6%nick%"
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: "[serveritem][sell] %player_name% 用 %price% 買了 %amount% 個 %id% (%nick%)"
+    description:
+      - "&b&l販賣物品給玩家"
+      - ""
+      - "&b如果你想要賣一堆物品請用 SellMAX"
+      - ""
+      - "&e<ID> &b物品 ID"
+      - "&e<數量> &b數量"
+      - "&e<玩家> &b誰應該支付來購買"
+      - "&e<價格> &b價格"
+      - "&e[安靜輸出] &b安靜的使用"
+      - ""
+      - "&b如果玩家沒有空間或金錢"
+      - "&b  交易將會失效"
+    params: "<ID> <數量> <玩家> <價格> [安靜輸出]"
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: "&a販賣了 &e%amount% &a個 &e%nick% &e價格: &a%price%"
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: "&c你沒有 &6%amount% &c個 &6%nick%"
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: "[serveritem][buy] %player_name% 賣了 %amount% 個 %id% (%nick%) 價格: %price%"
+    description:
+      - "&b&l由玩家那買物品"
+      - ""
+      - "&b如果你想要買一堆物品請用 BuyMAX"
+      - "&b"
+      - "&e<ID> &b物品 ID"
+      - "&e<數量> &b物品數量"
+      - "&e<玩家> &b玩家"
+      - "&e<價格> &b價格"
+      - "&e[安靜輸出] &b安靜的使用"
+      - ""
+      - "&b玩家若沒有 &e<數量> &b個 &e<ID> &b交易會失效"
+    params: "<ID> <數量> <玩家> <價格> [安靜輸出]"
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: "&aBought &e%amount% &aof &e%nick% &efor &a%price%"
+    #Holders: %id% %nick%
+    not-enough-space: "&cYou don't have enough inventory space to buy any &6%nick%"
+    #Holders: %id% %nick% %price%
+    not-enough-money: "&cYou don't have enough money to buy any &6%nick% &cfor &6%price% &ceach"
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: "[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)"
+    description:
+      - "&b&lSell items to player"
+      - ""
+      - "&bSellMax differs from Sell because you may sell the less of amount"
+      - "&b  to player if there are not enough money or space for the whole"
+      - "&e<ID> &b物品 ID"
+      - "&e<數量> &bamount of items"
+      - "&e<玩家> &b誰應該支付來購買"
+      - "&e<價格> &bprice for the whole amount of items, must be positive"
+      - "&e[安靜輸出] &b安靜的使用"
+      - ""
+      - "&bTransaction fails if player has not enough money or enough"
+      - "&b  inventory space at least an item"
+      - "&bIf player buy less than &e<價格>&b paid price will be scaled"
+      - "&bNote: balance of the command executor is untouched"
+    params: "<ID> <數量> <玩家> <價格> [安靜輸出]"
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: "&aSold &e%amount% &aof &e%nick% &efor &a%price%"
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: "&cYou don't have any &6%nick% &cto sell in your inventory"
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: "[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%"
+    description:
+      - "&b&lBuy items from player"
+      - ""
+      - "&bBuyMax differs from Buy because you may buy less of amount"
+      - "&b  from player if he has less than amount items in inventory"
+      - "&e<ID> &b物品 ID"
+      - "&e<數量> &bamount of items"
+      - "&e<玩家> &bwho should pay items and get money"
+      - "&e<價格> &bprice for the whole amount of items, must be positive"
+      - "&e[安靜輸出] &b安靜的使用"
+      - ""
+      - "&bTransaction fails if player has not at least an &e<ID> &bitem"
+      - "&b  on inventory"
+      - "&bIf player sell less than &e<數量>&b price will be scaled"
+      - "&bNote: balance of the command executor is untouched"
+    params: "<ID> <數量> <玩家> <價格> [安靜輸出]"
+itemstorage:
+  help-header: '&9&lItemStorage - 幫助'
+  get:
+    #Holders: %id% %amount%
+    success: "&a得到了 &e%amount% &a個 &e%id%"
+    no-inventory-space: "&c你沒有空間"
+    description:
+      - "&b&l取得指定物品"
+      - ""
+      - "&e<ID> &bID"
+      - "&e[數量] &b物品數量, 預設為 1"
+    params: "<ID> [數量]"
+  save:
+    #Holders: %id%
+    success: "&a物品 &e%id% &a已註冊"
+    #Holders: %limit%
+    limit-reached: "&c已達註冊上限! (%limit%)"
+    description:
+      - "&b&l註冊你手上的物品"
+      - ""
+      - "&e<ID> &b將手上物品以ID方式儲存。不能重複 ID。"
+      - ""
+      - "&b&l提示: &b使用 &e/itemstorage update <ID>&b, 來更新該物品"
+      - "&b&l提示: &b若要領取請使用 &e/itemstorage get <ID>"
+    params: "<ID>"
+  delete:
+    #Holders: %id%
+    success: "&a物品 &e%id% &a已刪除"
+    description:
+      - "&b&l刪除選定物品"
+      - ""
+      - "&e<ID> &b物品 ID"
+    params: "<ID>"
+  update:
+    #Holders: %id%
+    success: "&a物品 &e%id% &a已被更新"
+    description:
+      - "&b&l更新選定物品"
+      - ""
+      - "&b更改 ID 為手上物品"
+      - "&e<ID> &b物品 ID"
+      - ""
+      - "&b&l提示: 使用 &e/itemstorage save <ID>&b, 來創建新物品"
+      - "&b&l提示: 使用 &e/itemstorage delete <ID>&b, 來刪除物品"
+    params: "<ID>"
+  show:
+    description:
+      - "&b&l顯示已儲存物品"
+      - ""
+      - "&e[頁] &b頁，預設 1"
+    params: "[頁]"
+itemeditimport:
+  help:
+    - '&a/itemeditimport ItemEditor &2- import items from ItemEditor plugin'
+  itemeditor:
+    unable-to-get-item:
+      - '&4[&cItemEdit&4] &cUnable to load item &6%id%'
+    already-used-id:
+      - '&4[&cItemEdit&4] &6%id% &cis already used, maybe you already did this command before otherwise you may rename the file ItemEditor/items/%id%.yml'
+    invalid-id:
+      - '&4[&cItemEdit&4] &6%id% &cis not an acceptable id, you may rename the file ItemEditor/items/%id%.yml to an alphanumeric name'
+    import-unsuccess:
+      - '&4[&cItemEdit&4] &cNo items of &6%max% &cwere imported, maybe you already did this command before(?)'
+    import-success:
+      - '&9[&fItemEdit&9] &aImported &e%done% &aof &e%max% &aitems from ItemEditor'
+      - '&9[&fItemEdit&9] &aImported items: &e%ids%'
+    import-empty:
+      - '&4[&cItemEdit&4] &cItemEditor has no items to import'
+itemeditreload:
+  success: '&9[&fItemEdit&9] &aReloaded'
+gui:
+  banner:
+    title: '&9Banner Editor'
+    color_selector_title: '&9Color selector'
+    pattern_selector_title: '&9Pattern selector'
+    buttons:
+      pattern_selector_info:
+        - '&bSelect &6&l%type%'
+      color_selector_info:
+        - '&bSelect &6&l%color%'
+      position:
+        - '&6Pattern Controller'
+        - ''
+        - '&7[&fMiddle Click&7] &bToggle pattern'
+        - '&7[&fLeft/Right Click&7]&b << Move pattern >>'
+      type:
+        - '&6Type Selector'
+        - '&bType: &e%type%'
+        - ''
+        - '&7[&fClick&7]&b Change type'
+      color:
+        - '&6Color Selector'
+        - '&bColor: &e%color%'
+        - ''
+        - '&7[&fClick&7]&b Change color'
+  firework:
+    title: '&9Firework Editor'
+    buttons:
+      type:
+        - '&6Type Selector'
+        - '&bType: &e%type%'
+        - ''
+        - '&7[&fClick&7]&b Change type'
+      colors:
+        - '&6Colors Selector'
+        - '&bColors: &e%colors%'
+        - ''
+        - '&bSelected color: &6%color%'
+        - '&7[&fMiddle Click&7]&b to add &e%color%'
+        - '&7[&fLeft/Right Click&7]&b Change selected color'
+        - '&7[&fShift Left/Right Click&7]&b Delete last color'
+      fadecolors:
+        - '&6Fade Colors Selector'
+        - '&bFade Colors: &e%colors%'
+        - ''
+        - '&bSelected color: &6%color%'
+        - '&7[&fMiddle Click&7]&b Add &e%color%'
+        - '&7[&fLeft/Right Click&7]&b Change selected color'
+        - '&7[&fShift Left/Right Click&7]&b Delete last color'
+      flags:
+        none: '&cNothing active'
+        trail: '&eTrail &aActive'
+        flicker: '&eFlicker &aActive'
+        both: '&eTrail&b and &eFlicker &aActive'
+        info:
+          - '&6Trail and Flicker Activator'
+          - '%status%'
+          - ''
+          - '&7[&fRight Click&7]&b Toggle Flicker effect'
+          - '&7[&fLeft Click&7]&b Toggle Trail effect'
+      position:
+        - '&bEffect Controller'
+        - ''
+        - '&7[&fMiddle Click&7]&b Toggle effect'
+        - '&7[&fLeft/Right Click&7]&b Move this effect'
+      power:
+        - '&bPower: &e%power%'
+        - ''
+        - '&7[&fLeft/Right Click&7]&b << Change >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '&6&lNext Page'
+      - ''
+      - '&7[&fClick&7]&b Go to page &e%target_page%'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '&6&lPrevious Page'
+      - ''
+      - '&7[&fClick&7]&b Go to page &e%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '&6&lGo Back'
+      - ''
+      - '&7[&fClick&7]&b Go to previous gui'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '&9%player_name% items - page &b%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '&6&lPage &e&l%page%'
+        - '&7[&fClick&7]&b Toggle view of &eitem&b/&eID'
+        - ''
+        - '&bClick on items:'
+        - '&7> [&fLeft Click&7]&b Gain &e1'
+        - '&7> [&fShift+Left Click&7]&b Gain &e64'
+        - '&7> [&fShift+Right Click&7]&b Delete item'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '&9Server items - page &b%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '&6&lPage &e&l%page%'
+        - '&7[&fClick&7]&b Toggle view of &eitem&b/&eID'
+        - ''
+        - '&bClick on items:'
+        - '&7> [&fLeft Click&7]&b Gain &e1'
+        - '&7> [&fShift+Left Click&7]&b Gain &e64'
+        - '&7> [&fShift+Right Click&7]&b Delete item'

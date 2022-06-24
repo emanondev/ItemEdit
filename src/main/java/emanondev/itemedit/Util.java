@@ -299,4 +299,64 @@ public class Util {
                 throw new IllegalStateException();
         }
     }
+
+    public static boolean isAirOrNull(ItemStack item) {
+        return item == null || item.getType() == Material.AIR;
+    }
+
+    private static final int GAME_MAIN_VERSION = Integer.parseInt(
+            Bukkit.getServer().getClass().getPackage().getName().substring(
+                            Bukkit.getServer().getClass().getPackage().getName().lastIndexOf(".") + 1)
+                    .split("_")[0].substring(1));
+    private static final int GAME_VERSION = Integer.parseInt(
+            Bukkit.getServer().getClass().getPackage().getName().substring(
+                            Bukkit.getServer().getClass().getPackage().getName().lastIndexOf(".") + 1)
+                    .split("_")[1]);
+    private static final int GAME_SUB_VERSION = Integer.parseInt(
+            Bukkit.getServer().getClass().getPackage().getName().substring(
+                            Bukkit.getServer().getClass().getPackage().getName().lastIndexOf(".") + 1)
+                    .split("_")[2].substring(1));
+
+    public static boolean isVersionUpTo(int mainGameVersion, int gameVersion) {
+        return isVersionUpTo(mainGameVersion,gameVersion,99);
+    }
+
+    public static boolean isVersionUpTo(int mainGameVersion, int gameVersion, int gameSubVersion) {
+        if (GAME_MAIN_VERSION > mainGameVersion)
+            return false;
+        if (GAME_MAIN_VERSION < mainGameVersion)
+            return true;
+        if (GAME_VERSION > gameVersion)
+            return false;
+        if (GAME_VERSION < gameVersion)
+            return true;
+        return GAME_SUB_VERSION <= gameSubVersion;
+    }
+    public static boolean isVersionAfter(int mainGameVersion, int gameVersion) {
+        return isVersionAfter(mainGameVersion,gameVersion,0);
+    }
+
+    public static boolean isVersionAfter(int mainGameVersion, int gameVersion, int gameSubVersion) {
+        if (GAME_MAIN_VERSION < mainGameVersion)
+            return false;
+        if (GAME_MAIN_VERSION > mainGameVersion)
+            return true;
+        if (GAME_VERSION < gameVersion)
+            return false;
+        if (GAME_VERSION > gameVersion)
+            return true;
+        return GAME_SUB_VERSION >= gameSubVersion;
+    }
+
+    public static boolean isVersionInRange(int mainGameVersionMin, int gameVersionMin,
+                                           int mainGameVersionMax, int gameVersionMax) {
+        return isVersionInRange(mainGameVersionMin, gameVersionMin, 0,
+                mainGameVersionMax, gameVersionMax, 99);
+    }
+
+    public static boolean isVersionInRange(int mainGameVersionMin, int gameVersionMin, int gameSubVersionMin,
+                                           int mainGameVersionMax, int gameVersionMax, int gameSubVersionMax) {
+        return isVersionAfter(mainGameVersionMin, gameVersionMin, gameSubVersionMin)
+                || isVersionUpTo(mainGameVersionMax, gameVersionMax, gameSubVersionMax);
+    }
 }

@@ -40,9 +40,9 @@ public class Type extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2) {
-            if (ItemEdit.GAME_VERSION < 12 || (ItemEdit.GAME_VERSION == 12 && ItemEdit.GAME_SUB_VERSION < 2))
+            if (Util.isVersionUpTo(1,12,1))
                 return Util.complete(args[1], Material.class);
-            return Util.complete(args[1], Material.class, (m) -> m.isItem());
+            return Util.complete(args[1], Material.class, m -> m.isItem());
         }
         return Collections.emptyList();
     }
