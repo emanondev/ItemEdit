@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>emanondev.itemedit</groupId>
     <artifactId>ItemEdit</artifactId>
-    <version>3.0.3</version>
+    <version>3.0.4</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -69,7 +69,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18.1-R0.1-SNAPSHOT</version>
+            <version>1.19-R0.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
@@ -91,7 +91,7 @@
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.10.9</version>
+            <version>2.11.0</version>
             <scope>provided</scope>
         </dependency>
         <!-- shopguiplus -->
@@ -104,7 +104,7 @@
         <dependency>
             <groupId>io.lumine</groupId>
             <artifactId>Mythic-Dist</artifactId>
-            <version>5.0.3-SNAPSHOT</version>
+            <version>5.1.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

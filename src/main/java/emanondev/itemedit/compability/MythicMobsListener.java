@@ -17,6 +17,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -24,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class MythicMobsListener implements Listener {
 
+    @EventHandler
     private void event(MythicDropLoadEvent event) {
         if (!event.getDropName().equalsIgnoreCase("serveritem"))
             return;
@@ -33,6 +35,7 @@ public class MythicMobsListener implements Listener {
         }
     }
 
+    @EventHandler
     private void event(MythicMechanicLoadEvent event) {
         if (!event.getMechanicName().equalsIgnoreCase("dropserveritem"))
             return;

@@ -10,6 +10,7 @@ import emanondev.itemedit.storage.ServerStorage;
 import emanondev.itemedit.storage.YmlPlayerStorage;
 import emanondev.itemedit.storage.YmlServerStorage;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.Collections;
@@ -63,10 +64,16 @@ public class ItemEdit extends APlugin {
 
         //hooks
         if (Hooks.isPAPIEnabled()) {
-            new PlaceHolders().register();
+            try {
+                this.log("Hooking into PlaceholderApi");
+                new PlaceHolders().register();
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
         }
         if (Hooks.isShopGuiPlusEnabled()) {
             try {
+                this.log("Hooking into ShopGuiPlus");
                 new ShopGuiPlusItemProvider().register();
             } catch (Throwable t) {
                 t.printStackTrace();
@@ -74,6 +81,7 @@ public class ItemEdit extends APlugin {
         }
         if (Hooks.isMythicMobsEnabled()) {
             try {
+                this.log("Hooking into MythicMobs");
                 registerListener(new MythicMobsListener());
             } catch (Throwable t) {
                 t.printStackTrace();
@@ -81,6 +89,7 @@ public class ItemEdit extends APlugin {
         }
         if (Hooks.isItemBridgeEnabled()) {
             try {
+                this.log("Hooking into ItemBridge");
                 ItemBridgeItemProvider.setup(this);
             } catch (Throwable t) {
                 t.printStackTrace();

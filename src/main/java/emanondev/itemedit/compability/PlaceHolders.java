@@ -106,7 +106,7 @@ public class PlaceHolders extends PlaceholderExpansion {
                     int indexS = value.indexOf("{");
                     int indexE = value.indexOf("}", indexS);
                     if (indexS == -1 || indexE == -1)
-                        throw new IllegalStateException();
+                        throw new IllegalStateException("item id not closed inside { }");
 
                     id = value.substring(indexS + 1, indexE);
 

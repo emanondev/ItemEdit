@@ -185,46 +185,46 @@ itemedit:
       description:
         - '&b&lRimuove l''effetto selezionato'
   banner:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a banner'
-    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6Passa il cursore qui&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6Passa il cursore qui&4]'
+    wrong-type: '&4[&cItemEdit&4] &cL''oggetto deve essere una bandiera'
+    wrong-color: '&4[&cItemEdit&4] &cColore errato! &4[&6Passa il cursore qui&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cPattern errato! &4[&6Passa il cursore qui&4]'
     description:
-      - '&b&lEdit banner'
+      - '&b&lModifica bandiera'
     set:
-      params: 'set <type> <color> <line>'
+      params: 'set <tipo> <colore> <linea>'
       description:
-        - '&b&lReplace the pattern on selected line'
+        - '&b&lSovrascrive il pattern alla linea selezionata'
     add:
-      params: 'add <type> <color>'
+      params: 'add <tipo> <colore>'
       description:
-        - '&b&lAdd a pattern'
+        - '&b&lAggiunge il pattern'
     remove:
-      params: 'remove <line>'
+      params: 'remove <linea>'
       description:
-        - '&b&lRemove pattern on selected line'
+        - '&b&lRimuove il pattern alla linea selezionata'
     color:
-      params: 'color <line> <color>'
+      params: 'color <linea> <colore>'
       description:
-        - '&b&lChange pattern color on selected line'
+        - '&b&lCambia il colore alla linea selezionata'
     colorbanner:
-      params: 'colorbanner <color>'
+      params: 'colorbanner <colore>'
       description:
-        - '&b&lChange banner background color'
+        - '&b&lCambia il colore di background'
   fireworkpower:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    wrong-type: '&4[&cItemEdit&4] &cL''oggetto dev''esssere un fuoco d''artificio'
     description:
-      - '&b&lSet firework power'
+      - '&b&lImposta la potenza del fuoco d''artificio'
       - ''
-      - '&e<power> &bpower of the firework, a value betwheen &e0 &band &e5'
-    params: '<power>'
+      - '&e<potenza> &bpotenza esplosione, un valore fra &e0 &be &e5'
+    params: '<potenza>'
   firework:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    wrong-type: '&4[&cItemEdit&4] &cL''oggetto dev''esssere un fuoco d''artificio'
     description:
-      - '&b&lEdit firework'
+      - '&b&lModifica il fuoco d''artificio'
     params: ''
   spawnereggtype:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a spawner egg'
-    wrong-entity: '&4[&cItemEdit&4] &cWrong Egg type Value! &4[&6Passa il cursore qui&4]'
+    wrong-type: '&4[&cItemEdit&4] &cL''oggetto dev''esssere un uovo spawner'
+    wrong-entity: '&4[&cItemEdit&4] &cTipo di uovo errato! &4[&6Passa il cursore qui&4]'
     description:
       - '&b&lSet type of entity spawned by spawner egg'
       - ''
@@ -232,14 +232,14 @@ itemedit:
       - '&bOnly some entity type are spawnable by eggs'
     params: '<type>'
   attribute:
-    wrong-attribute: '&4[&cItemEdit&4] &cWrong Attribute Value! &4[&6Passa il cursore qui&4]'
-    wrong-operation: '&4[&cItemEdit&4] &cWrong Operation Value! &4[&6Passa il cursore qui&4]'
-    wrong-equipment: '&4[&cItemEdit&4] &cWrong Equipment Value! &4[&6Passa il cursore qui&4]'
+    wrong-attribute: '&4[&cItemEdit&4] &cAttributo errato! &4[&6Passa il cursore qui&4]'
+    wrong-operation: '&4[&cItemEdit&4] &cOperazione errata! &4[&6Passa il cursore qui&4]'
+    wrong-equipment: '&4[&cItemEdit&4] &cEquipaggiamento errato! &4[&6Passa il cursore qui&4]'
     description:
-      - '&b&lEdit attribute modifiers'
+      - '&b&lModifica gli attributi'
       - ''
-      - '&eAdd <attribute> <amount> [operation] [slot] &b- add new modifiers'
-      - '&eRemove <attribute/slot> &b- removes some modifiers'
+      - '&eAdd <attributo> <quantità> [operazione] [slot] &b- add new modifiers'
+      - '&eRemove <attributo/slot> &b- removes some modifiers'
     params: '<add/remove> [...]'
     add:
       params: 'add <attribute> <amount> [operation] [slot]'
