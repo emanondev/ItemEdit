@@ -357,6 +357,6 @@ public class Util {
     public static boolean isVersionInRange(int mainGameVersionMin, int gameVersionMin, int gameSubVersionMin,
                                            int mainGameVersionMax, int gameVersionMax, int gameSubVersionMax) {
         return isVersionAfter(mainGameVersionMin, gameVersionMin, gameSubVersionMin)
-                || isVersionUpTo(mainGameVersionMax, gameVersionMax, gameSubVersionMax);
+                && isVersionUpTo(mainGameVersionMax, gameVersionMax, gameSubVersionMax);
     }
 }
