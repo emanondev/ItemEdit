@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Set;
 
 public class YmlServerStorage implements ServerStorage {
@@ -24,7 +25,7 @@ public class YmlServerStorage implements ServerStorage {
     @Override
     public ItemStack getItem(@NotNull String id) {
         validateID(id);
-        id = id.toLowerCase();
+        id = id.toLowerCase(Locale.ENGLISH);
         ItemStack item = database.getItemStack(id + ".item", null);
         return item == null ? null : item.clone();
     }
@@ -32,7 +33,7 @@ public class YmlServerStorage implements ServerStorage {
     @Override
     public String getNick(@NotNull String id) {
         validateID(id);
-        id = id.toLowerCase();
+        id = id.toLowerCase(Locale.ENGLISH);
         String nick = database.getMessage(id + ".nick", null, true);
         if (nick != null)
             return nick;
@@ -40,17 +41,17 @@ public class YmlServerStorage implements ServerStorage {
             return null;
         ItemStack item = getItem(id);
         if (!item.hasItemMeta())
-            return item.getType().name().toLowerCase();
+            return item.getType().name().toLowerCase(Locale.ENGLISH);
         ItemMeta meta = item.getItemMeta();
         if (!meta.hasDisplayName())
-            return item.getType().name().toLowerCase();
+            return item.getType().name().toLowerCase(Locale.ENGLISH);
         return meta.getDisplayName();
     }
 
     @Override
     public void remove(@NotNull String id) {
         validateID(id);
-        id = id.toLowerCase();
+        id = id.toLowerCase(Locale.ENGLISH);
         reversedMap.remove(getItem(id));
         database.set(id, null);
         database.save();
@@ -72,7 +73,7 @@ public class YmlServerStorage implements ServerStorage {
     @Override
     public void setItem(@NotNull String id, @NotNull ItemStack item) {
         validateID(id);
-        id = id.toLowerCase();
+        id = id.toLowerCase(Locale.ENGLISH);
         if (item.getType() == Material.AIR)
             throw new IllegalArgumentException();
         item.setAmount(1);
@@ -86,7 +87,7 @@ public class YmlServerStorage implements ServerStorage {
         validateID(id);
         if (!database.contains(id))
             return;
-        id = id.toLowerCase();
+        id = id.toLowerCase(Locale.ENGLISH);
         database.set(id + ".nick", nick);
         database.save();
     }

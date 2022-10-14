@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class Delete extends SubCmd {
 
@@ -28,7 +29,7 @@ public class Delete extends SubCmd {
             else
                 throw new IllegalArgumentException();
             sendLanguageString("success", null, p, "%id%",
-                    args[1].toLowerCase());
+                    args[1].toLowerCase(Locale.ENGLISH));
         } catch (Exception e) {
             onFail(p, alias);
         }

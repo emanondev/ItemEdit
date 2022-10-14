@@ -8,6 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
+
 /**
  * This class will automatically register as a placeholder expansion when a jar
  * including this class is added to the directory
@@ -116,7 +118,7 @@ public class PlaceHolders extends PlaceholderExpansion {
                         throw new IllegalStateException();
 
                     if (indexS != -1) {
-                        slot = value.substring(indexS + 1, indexE).toLowerCase();
+                        slot = value.substring(indexS + 1, indexE).toLowerCase(Locale.ENGLISH);
 
                         indexS = value.indexOf("{", indexE);
                         indexE = value.indexOf("}", indexS);
@@ -132,7 +134,7 @@ public class PlaceHolders extends PlaceholderExpansion {
                     if (item == null)
                         throw new IllegalStateException();
 
-                    switch (slot.toLowerCase()) {
+                    switch (slot.toLowerCase(Locale.ENGLISH)) {
                         case "main_hand":
                         case "mainhand":
                         case "hand": {

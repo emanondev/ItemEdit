@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class ItemEditImportCommand implements TabExecutor {
 
@@ -57,7 +58,7 @@ public class ItemEditImportCommand implements TabExecutor {
                     "itemeditimport.help", new ArrayList<>())));
             return true;
         }
-        switch (args[0].toLowerCase()) {
+        switch (args[0].toLowerCase(Locale.ENGLISH)) {
             case "itemeditor": {
                 File[] files = new File("plugins" + File.separator + "ItemEditor" + File.separator + "items").listFiles();
                 if (files != null

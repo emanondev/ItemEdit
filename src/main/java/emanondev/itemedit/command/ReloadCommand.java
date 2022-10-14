@@ -2,6 +2,7 @@ package emanondev.itemedit.command;
 
 import emanondev.itemedit.APlugin;
 import emanondev.itemedit.Util;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -28,7 +30,7 @@ public class ReloadCommand implements TabExecutor {
 
     public ReloadCommand(APlugin plugin) {
         this.plugin = plugin;
-        this.permission = plugin.getName().toLowerCase() + "." + plugin.getName().toLowerCase() + "reload";
+        this.permission = plugin.getName().toLowerCase(Locale.ENGLISH) + "." + plugin.getName().toLowerCase(Locale.ENGLISH) + "reload";
     }
 
     @Override
@@ -46,13 +48,18 @@ public class ReloadCommand implements TabExecutor {
     public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender.hasPermission(permission)) {
             plugin.onReload();
-            Util.sendMessage(sender, plugin.getLanguageConfig(sender).loadMessage(plugin.getName().toLowerCase() + "reload.success", "", true));
+            Util.sendMessage(sender, plugin.getLanguageConfig(sender).loadMessage(plugin.getName().toLowerCase(Locale.ENGLISH) + "reload.success", "", true));
         } else
             sendPermissionLackMessage(permission, sender);
         return true;
     }
 
     public void register() {
-        plugin.registerCommand(plugin.getName().toLowerCase() + "reload", this, null);
+        try {
+            plugin.registerCommand(plugin.getName().toLowerCase(Locale.ENGLISH) + "reload", this, null);
+        } catch (Exception e){
+            plugin.log("Unable to register command "+ ChatColor.YELLOW +plugin.getName().toLowerCase(Locale.ENGLISH) + "reload");
+            e.printStackTrace();
+        }
     }
 }

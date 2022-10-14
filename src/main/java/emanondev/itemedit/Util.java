@@ -16,10 +16,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -32,7 +29,7 @@ public class Util {
         int c = 0;
         for (T el : enumClass.getEnumConstants())
             if (el.toString().startsWith(prefix)) {
-                results.add(el.toString().toLowerCase());
+                results.add(el.toString().toLowerCase(Locale.ENGLISH));
                 c++;
                 if (c > MAX_COMPLETES)
                     return results;
@@ -48,7 +45,7 @@ public class Util {
         int c = 0;
         for (T el : type.getEnumConstants())
             if (predicate.test(el) && el.toString().startsWith(prefix)) {
-                results.add(el.toString().toLowerCase());
+                results.add(el.toString().toLowerCase(Locale.ENGLISH));
                 c++;
                 if (c > MAX_COMPLETES)
                     return results;
@@ -57,11 +54,11 @@ public class Util {
     }
 
     public static List<String> complete(String prefix, String... list) {
-        prefix = prefix.toLowerCase();
+        prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
         int c = 0;
         for (String value : list)
-            if (value.toLowerCase().startsWith(prefix)) {
+            if (value.toLowerCase(Locale.ENGLISH).startsWith(prefix)) {
                 results.add(value);
                 c++;
                 if (c > MAX_COMPLETES)
@@ -71,11 +68,11 @@ public class Util {
     }
 
     public static List<String> complete(String prefix, Collection<String> list) {
-        prefix = prefix.toLowerCase();
+        prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
         int c = 0;
         for (String value : list)
-            if (value.toLowerCase().startsWith(prefix)) {
+            if (value.toLowerCase(Locale.ENGLISH).startsWith(prefix)) {
                 results.add(value);
                 c++;
                 if (c > MAX_COMPLETES)
@@ -86,9 +83,9 @@ public class Util {
 
     public static List<String> completePlayers(String prefix) {
         ArrayList<String> names = new ArrayList<>();
-        final String text = prefix.toLowerCase();
+        final String text = prefix.toLowerCase(Locale.ENGLISH);
         Bukkit.getOnlinePlayers().forEach((p) -> {
-            if (p.getName().toLowerCase().startsWith(text))
+            if (p.getName().toLowerCase(Locale.ENGLISH).startsWith(text))
                 names.add(p.getName());
         });
         return names;
@@ -96,7 +93,7 @@ public class Util {
 
     public static List<String> complete(String prefix, AliasSet<?> aliases) {
         ArrayList<String> results = new ArrayList<>();
-        prefix = prefix.toLowerCase();
+        prefix = prefix.toLowerCase(Locale.ENGLISH);
         int c = 0;
         for (String alias : aliases.getAliases()) {
             if (alias.startsWith(prefix)) {
@@ -154,7 +151,7 @@ public class Util {
     public static boolean hasBannedWords(Player user, String text) {
         if (user.hasPermission("itemedit.bypass.censure"))
             return false;
-        String message = ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', text.toLowerCase()));
+        String message = ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', text.toLowerCase(Locale.ENGLISH)));
         for (String regex : ItemEdit.get().getConfig().getStringList("blocked.regex"))
             if (Pattern.compile(regex).matcher(message).find()) {
                 if (ItemEdit.get().getConfig().getBoolean("blocked.log.console", true))
@@ -169,16 +166,16 @@ public class Util {
                 return true;
             }
         for (String bannedWord : ItemEdit.get().getConfig().getStringList("blocked.words"))
-            if (message.contains(bannedWord.toLowerCase())) {
+            if (message.contains(bannedWord.toLowerCase(Locale.ENGLISH))) {
                 if (ItemEdit.get().getConfig().getBoolean("blocked.log.console", true))
                     sendMessage(Bukkit.getConsoleSender(),
                             "user: §e" + user.getName() + "§r attempt to write '" + text
                                     + "'§r (stripped by colors and lowcased) was blocked by word: §e"
-                                    + bannedWord.toLowerCase());
+                                    + bannedWord.toLowerCase(Locale.ENGLISH));
                 if (ItemEdit.get().getConfig().getBoolean("blocked.log.file", true))
                     logToFile("user: '" + user.getName() + "' attempt to write '" + text
                             + "' (stripped by colors and lowcased to '" + message + "') was blocked by word: '"
-                            + bannedWord.toLowerCase() + "'");
+                            + bannedWord.toLowerCase(Locale.ENGLISH) + "'");
                 sendMessage(user,
                         ItemEdit.get().getLanguageConfig(user).loadMessage("blocked-by-censure", "", null, true));
                 return true;
@@ -192,9 +189,9 @@ public class Util {
         if (basePermission != null) {
             for (ChatColor style : ChatColor.values())
                 if (style.isFormat()) {
-                    if (!sender.hasPermission(basePermission + ".format." + style.name().toLowerCase()))
+                    if (!sender.hasPermission(basePermission + ".format." + style.name().toLowerCase(Locale.ENGLISH)))
                         text = text.replaceAll(style.toString(), "");
-                } else if (!sender.hasPermission(basePermission + ".color." + style.name().toLowerCase()))
+                } else if (!sender.hasPermission(basePermission + ".color." + style.name().toLowerCase(Locale.ENGLISH)))
                     text = text.replaceAll(style.toString(), "");
             if (sender.hasPermission(basePermission + ".color.hexa")) {
                 try {

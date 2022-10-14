@@ -112,7 +112,7 @@ public class FireworkEditor implements Gui {
             List<String> colorNames = new ArrayList<>();
             for (DyeColor color : colors)
                 colorNames.add(Aliases.COLOR.getName(color));
-            loadLanguageDescription(meta, subPath + "buttons.type",
+            loadLanguageDescription(meta, subPath + "buttons.colors",
                     "%color%", Aliases.COLOR.getName(selectedColor),
                     "%colors%", String.join("&b, &e", colorNames));
             item.setItemMeta(meta);
@@ -259,7 +259,7 @@ public class FireworkEditor implements Gui {
             } catch (Exception e) {
                 item = new ItemStack(Material.valueOf("FIREWORK"));
             }
-        this.firework = item;
+        this.firework = item.clone();
         this.meta = (FireworkMeta) firework.getItemMeta();
         this.target = target;
         String title = getLanguageMessage(subPath + "title");
@@ -273,8 +273,14 @@ public class FireworkEditor implements Gui {
         updateInventory();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onClose(InventoryCloseEvent event) {
+        try {
+            target.getInventory().setItemInMainHand(firework);
+        } catch (Throwable t) {
+            target.getInventory().setItemInHand(firework);
+        }
     }
 
     @SuppressWarnings("deprecation")
@@ -313,18 +319,18 @@ public class FireworkEditor implements Gui {
             if (event.isLeftClick())
                 meta.setPower((meta.getPower() + 1) % 6);
             else
-                meta.setPower((meta.getPower() - 1) % 6);
+                meta.setPower((meta.getPower() - 1+6) % 6);
             updateInventory();
             return;
         }
         if (event.getSlot() == 49) {
-            if (event.isLeftClick())
+            /*if (event.isLeftClick())
                 try {
                     target.getInventory().setItemInMainHand(firework);
                 } catch (Throwable t) {
                     target.getInventory().setItemInHand(firework);
                 }
-            else
+            else*/
                 target.getInventory().addItem(firework);
             return;
         }
@@ -363,7 +369,7 @@ public class FireworkEditor implements Gui {
         item.setAmount(meta.getPower() + 1);
         ItemMeta powerMeta = item.getItemMeta();
         powerMeta.addItemFlags(ItemFlag.values());
-        loadLanguageDescription(meta, subPath + "buttons.power", "%power%",
+        loadLanguageDescription(powerMeta, subPath + "buttons.power", "%power%",
                 String.valueOf(meta.getPower() + 1));
         item.setItemMeta(powerMeta);
         this.getInventory().setItem(47, item);

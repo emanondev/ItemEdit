@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class PotionEffectEditorOld extends SubCmd {
     private static final String[] subCommands = new String[]{"add", "remove", "reset"};
@@ -36,7 +37,7 @@ public class PotionEffectEditorOld extends SubCmd {
             if (args.length < 2)
                 throw new IllegalArgumentException("Wrong param number");
 
-            switch (args[1].toLowerCase()) {
+            switch (args[1].toLowerCase(Locale.ENGLISH)) {
                 case "reset":
                     potioneffectClear(p, item, args);
                     return;

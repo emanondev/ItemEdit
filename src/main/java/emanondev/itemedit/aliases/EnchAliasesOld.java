@@ -3,6 +3,7 @@ package emanondev.itemedit.aliases;
 import org.bukkit.enchantments.Enchantment;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 public class EnchAliasesOld extends EnchAliases {
     public EnchAliasesOld() {
@@ -48,10 +49,10 @@ public class EnchAliasesOld extends EnchAliases {
             return enchNick.get(ench.getName());
         //Mohist compability
         try {
-            return ench.getName().toLowerCase();
+            return ench.getName().toLowerCase(Locale.ENGLISH);
         } catch (Exception e) {
             //grappling-hook support https://www.spigotmc.org/resources/55955/
-            return ench.toString().toLowerCase().replace(" ", "_");
+            return ench.toString().toLowerCase(Locale.ENGLISH).replace(" ", "_");
         }
     }
 

@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.CompassMeta;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class Compass extends SubCmd {
 
@@ -37,7 +38,7 @@ public class Compass extends SubCmd {
             return;
         }
 
-        switch (args[1].toLowerCase()) {
+        switch (args[1].toLowerCase(Locale.ENGLISH)) {
             case "set":
                 compassSet(p, item, args);
                 return;

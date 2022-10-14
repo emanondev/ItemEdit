@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public abstract class SubCmd {
 
@@ -34,7 +35,7 @@ public abstract class SubCmd {
             throw new NullPointerException();
         if (id.equals("") || id.contains(" "))
             throw new IllegalArgumentException();
-        this.ID = id.toLowerCase();
+        this.ID = id.toLowerCase(Locale.ENGLISH);
         this.cmd = cmd;
         this.commandName = cmd.getName();
         this.playerOnly = playerOnly;
@@ -42,7 +43,7 @@ public abstract class SubCmd {
         this.PATH = getCommand().getName() + "." + this.ID + ".";
         config = this.getPlugin().getConfig("commands.yml");
         load();
-        this.permission = this.getPlugin().getName().toLowerCase() + "." + this.commandName + "." + this.ID;
+        this.permission = this.getPlugin().getName().toLowerCase(Locale.ENGLISH) + "." + this.commandName + "." + this.ID;
     }
 
     public AbstractCommand getCommand() {
@@ -67,7 +68,7 @@ public abstract class SubCmd {
     }
 
     private void load() {
-        name = this.getConfigString("name").toLowerCase();
+        name = this.getConfigString("name").toLowerCase(Locale.ENGLISH);
         if (name.equals("") || name.contains(" "))
             name = ID;
     }

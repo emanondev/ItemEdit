@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public abstract class AbstractCommand implements TabExecutor {
 
@@ -27,7 +28,7 @@ public abstract class AbstractCommand implements TabExecutor {
     }
 
     public AbstractCommand(@NotNull String name, @NotNull APlugin plugin) {
-        this.name = name.toLowerCase();
+        this.name = name.toLowerCase(Locale.ENGLISH);
         this.plugin = plugin;
         this.PATH = getName();
         config = plugin.getConfig("commands.yml");
@@ -152,7 +153,7 @@ public abstract class AbstractCommand implements TabExecutor {
     }
 
     public void completeCmd(List<String> l, String prefix, CommandSender sender) {
-        final String text = prefix.toLowerCase();
+        final String text = prefix.toLowerCase(Locale.ENGLISH);
         cmds.forEach((cmd) -> {
             if (cmd.getName().startsWith(text) && sender.hasPermission(cmd.getPermission()))
                 l.add(cmd.getName());

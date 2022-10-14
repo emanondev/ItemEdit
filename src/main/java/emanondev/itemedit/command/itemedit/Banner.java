@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.BannerMeta;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class Banner extends SubCmd {
 
@@ -38,7 +39,7 @@ public class Banner extends SubCmd {
             return;
         }
 
-        switch (args[1].toLowerCase()) {
+        switch (args[1].toLowerCase(Locale.ENGLISH)) {
             case "add":
                 addPattern(p, item, args);
                 return;

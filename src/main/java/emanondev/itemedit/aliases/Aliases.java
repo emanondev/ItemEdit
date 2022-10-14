@@ -1,6 +1,5 @@
 package emanondev.itemedit.aliases;
 
-import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect;
@@ -22,7 +21,7 @@ public class Aliases {
 
         @Override
         public String getName(PotionEffectType type) {
-            return type.getName().toLowerCase();
+            return type.getName().toLowerCase(Locale.ENGLISH);
         }
 
         private final Collection<PotionEffectType> values = grabValues();

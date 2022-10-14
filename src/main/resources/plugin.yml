@@ -10,6 +10,9 @@ commands:
     description: allows to edit item in hand
     usage: /itemedit
     aliases: [ ie ]
+  itemeditinfo:
+    description: display info of itemedit
+    usage: /itemeditinfo
   itemeditimport:
     description: import configurations from other plugins
     usage: /itemeditimport
@@ -35,6 +38,7 @@ permissions:
       itemedit.serveritem.*: true
       itemedit.itemeditreload: true
       itemedit.itemeditimport: true
+      itemedit.itemeditinfo: true
       itemedit.bypass.*: true
   itemedit.creativeuser:
     default: op
@@ -57,6 +61,9 @@ permissions:
   itemedit.itemeditimport:
     default: op
     description: Gives full access to command /itemeditimport
+  itemedit.itemeditinfo:
+    default: op
+    description: Gives full access to command /itemeditinfo
   itemedit.itemeditreload:
     default: op
     description: Gives full access to command /itemeditreload
@@ -420,6 +427,7 @@ permissions:
       itemedit.itemedit.color.leather: true
       itemedit.itemedit.color.potion: true
       itemedit.itemedit.color.tipped_arrow: true
+      itemedit.itemedit.color.firework_star: true
   itemedit.itemedit.color.leather:
     default: op
     description: Allow editing leather color
@@ -429,6 +437,9 @@ permissions:
   itemedit.itemedit.color.tipped_arrow:
     default: op
     description: Allow editing tipped arrow color
+  itemedit.itemedit.color.firework_star:
+    default: op
+    description: Allow editing firework star color
   itemedit.itemedit.bookauthor:
     default: op
     description: Allow editing book author

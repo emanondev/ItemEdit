@@ -123,7 +123,7 @@ public abstract class APlugin extends JavaPlugin {
         String locale;
         if (!(sender instanceof Player))
             locale = this.defaultLanguage;
-        else if (ItemEdit.GAME_VERSION >= 12 && this.useMultiLanguage)
+        else if (Util.isVersionAfter(1,11,2) && this.useMultiLanguage)
             locale = ((Player) sender).getLocale().split("_")[0];
         else
             locale = this.defaultLanguage;

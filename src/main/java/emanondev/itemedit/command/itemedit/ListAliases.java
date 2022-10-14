@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class ListAliases extends SubCmd {
 
@@ -52,7 +53,7 @@ public class ListAliases extends SubCmd {
                 Util.sendMessage(sender, comp.create());
 
             } else {
-                AliasSet set = Aliases.getTypes().get(args[1].toLowerCase());
+                AliasSet set = Aliases.getTypes().get(args[1].toLowerCase(Locale.ENGLISH));
                 if (set == null) {
                     this.onFail(sender, alias);
                     return;

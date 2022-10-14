@@ -14,6 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 public class Attribute extends SubCmd {
@@ -38,7 +39,7 @@ public class Attribute extends SubCmd {
             return;
         }
 
-        switch (args[1].toLowerCase()) {
+        switch (args[1].toLowerCase(Locale.ENGLISH)) {
             case "add":
                 attributeAdd(p, item, args);
                 return;

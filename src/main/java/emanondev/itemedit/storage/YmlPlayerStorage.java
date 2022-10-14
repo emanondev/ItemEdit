@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ public class YmlPlayerStorage implements PlayerStorage {
     @Override
     public ItemStack getItem(@NotNull OfflinePlayer p, @NotNull String id) {
         validateID(id);
-        id = id.toLowerCase();
+        id = id.toLowerCase(Locale.ENGLISH);
         ItemStack item = database.getItemStack(getBasePath(p) + "." + id + ".item", null);
         return item == null ? null : item.clone();
     }
@@ -33,7 +34,7 @@ public class YmlPlayerStorage implements PlayerStorage {
     @Override
     public void setItem(@NotNull OfflinePlayer p, @NotNull String id, @NotNull ItemStack item) {
         validateID(id);
-        id = id.toLowerCase();
+        id = id.toLowerCase(Locale.ENGLISH);
         if (item.getType() == Material.AIR)
             throw new IllegalArgumentException();
         item.setAmount(1);
@@ -44,7 +45,7 @@ public class YmlPlayerStorage implements PlayerStorage {
     @Override
     public void remove(@NotNull OfflinePlayer p, @NotNull String id) {
         validateID(id);
-        id = id.toLowerCase();
+        id = id.toLowerCase(Locale.ENGLISH);
         database.set(getBasePath(p) + "." + id, null);
         database.save();
     }

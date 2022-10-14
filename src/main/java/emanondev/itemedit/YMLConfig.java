@@ -315,7 +315,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable String loadMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
                                         boolean color, String... args) {
         if (args.length > 0) {
-            if (ItemEdit.GAME_VERSION > 18 || (ItemEdit.GAME_VERSION == 18 && ItemEdit.GAME_SUB_VERSION >= 2)) {
+            if (Util.isVersionAfter(1,18,1)) {
                 if (getComments(path).isEmpty()) {
                     if (this.contains(path + "_HOLDERS"))
                         this.set(path + "_HOLDERS", null);
@@ -345,7 +345,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable String getMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
                                        boolean color, String... args) {
         if (args.length > 0) {
-            if (ItemEdit.GAME_VERSION > 18 || (ItemEdit.GAME_VERSION == 18 && ItemEdit.GAME_SUB_VERSION >= 2)) {
+            if (Util.isVersionAfter(1,18,1)) {
                 if (getComments(path).isEmpty()) {
                     if (this.contains(path + "_HOLDERS"))
                         this.set(path + "_HOLDERS", null);
@@ -436,7 +436,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable List<String> loadMultiMessage(@NotNull String path, @Nullable List<String> def,
                                                    @Nullable Player target, boolean color, String... holders) {
         if (holders.length > 0) {
-            if (ItemEdit.GAME_VERSION > 18 || (ItemEdit.GAME_VERSION == 18 && ItemEdit.GAME_SUB_VERSION >= 2)) {
+            if (Util.isVersionAfter(1,18,1)) {
                 if (getComments(path).isEmpty()) {
                     if (this.contains(path + "_HOLDERS"))
                         this.set(path + "_HOLDERS", null);
@@ -496,7 +496,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable List<String> getMultiMessage(@NotNull String path, @Nullable List<String> def,
                                                   @Nullable Player target, boolean color, String... holders) {
         if (holders.length > 0) {
-            if (ItemEdit.GAME_VERSION > 18 || (ItemEdit.GAME_VERSION == 18 && ItemEdit.GAME_SUB_VERSION >= 2)) {
+            if (Util.isVersionAfter(1,18,1)) {
                 if (getComments(path).isEmpty()) {
                     if (this.contains(path + "_HOLDERS"))
                         this.set(path + "_HOLDERS", null);

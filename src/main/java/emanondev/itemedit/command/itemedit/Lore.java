@@ -32,7 +32,7 @@ public class Lore extends SubCmd {
             return;
         }
 
-        switch (args[1].toLowerCase()) {
+        switch (args[1].toLowerCase(Locale.ENGLISH)) {
             case "set":
                 loreSet(p, item, args);
                 return;
@@ -208,7 +208,7 @@ public class Lore extends SubCmd {
             case 2:
                 return Util.complete(args[1], loreSub);
             case 3:
-                switch (args[1].toLowerCase()) {
+                switch (args[1].toLowerCase(Locale.ENGLISH)) {
                     case "remove":
                     case "set":
                         if (!(sender instanceof Player))
@@ -232,7 +232,7 @@ public class Lore extends SubCmd {
                 }
                 return Collections.emptyList();
             case 4:
-                switch (args[1].toLowerCase()) {
+                switch (args[1].toLowerCase(Locale.ENGLISH)) {
                     case "set":
                         if (sender instanceof Player) {
                             ItemStack item = this.getItemInHand((Player) sender);

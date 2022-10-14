@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class Save extends SubCmd {
 
@@ -32,7 +33,7 @@ public class Save extends SubCmd {
             else
                 throw new IllegalArgumentException();
             sendLanguageString("success", null, p, "%id%",
-                    args[1].toLowerCase());
+                    args[1].toLowerCase(Locale.ENGLISH));
         } catch (Exception e) {
             onFail(p, alias);
         }

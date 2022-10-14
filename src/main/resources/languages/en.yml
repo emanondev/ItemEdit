@@ -122,12 +122,12 @@ itemedit:
       - '&b&lTip: &bPlace and break the skull to update skins'
     params: '<name>'
   color:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be colorable type like leather armors, potions or tipped arrows'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be colorable type like leather armors, firework stars, potions or tipped arrows'
     description:
       - '&b&lSet color'
       - ''
-      - '&bWorks on leather armor, on servers 1.11+ works on'
-      - '&b any Potion and Tipped arrows too!'
+      - '&bWorks on leather armor and firework stars, on servers'
+      - '&b 1.11+ works on any Potion and Tipped arrows too!'
       - '&e<red> <green> <blue> &bare the amount of each color to combine'
       - '&bEach color is an int value between 0 and 255'
       - '&bIf you are confused google \"&eRGB color picker&b\"'

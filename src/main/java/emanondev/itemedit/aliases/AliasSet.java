@@ -3,17 +3,14 @@ package emanondev.itemedit.aliases;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.YMLConfig;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public abstract class AliasSet<T> {
 
     private final String path;
 
     public AliasSet(String path) {
-        this.path = path.toLowerCase();
+        this.path = path.toLowerCase(Locale.ENGLISH);
     }
 
     public String getID() {
@@ -40,8 +37,8 @@ public abstract class AliasSet<T> {
                         .printStackTrace();
                 continue;
             }
-            if (val.contains(" ") || !val.equals(val.toLowerCase())) {
-                val = val.toLowerCase().replace(" ", "_");
+            if (val.contains(" ") || !val.equals(val.toLowerCase(Locale.ENGLISH))) {
+                val = val.toLowerCase(Locale.ENGLISH).replace(" ", "_");
                 ok = false;
             }
             if (map.containsKey(val)) {
@@ -69,7 +66,7 @@ public abstract class AliasSet<T> {
             throw new NullPointerException();
         if (alias.isEmpty())
             throw new IllegalArgumentException();
-        alias = alias.replace(" ", "_").toLowerCase();
+        alias = alias.replace(" ", "_").toLowerCase(Locale.ENGLISH);
 
         String path = this.path + "." + getName(obj);
         if (alias.equals(config.get(path)))
@@ -91,7 +88,7 @@ public abstract class AliasSet<T> {
     }
 
     public T convertAlias(String alias) {
-        return map.get(alias.toLowerCase());
+        return map.get(alias.toLowerCase(Locale.ENGLISH));
     }
 
 }

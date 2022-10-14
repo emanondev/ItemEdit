@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.TropicalFishBucketMeta;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class TropicalFish extends SubCmd {
 
@@ -36,7 +37,7 @@ public class TropicalFish extends SubCmd {
             if (args.length < 2)
                 throw new IllegalArgumentException("Wrong param number");
 
-            switch (args[1].toLowerCase()) {
+            switch (args[1].toLowerCase(Locale.ENGLISH)) {
                 case "pattern":
                     pattern(p, item, args);
                     return;

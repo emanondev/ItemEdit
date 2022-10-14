@@ -10,10 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Get extends SubCmd {
 
@@ -38,7 +35,7 @@ public class Get extends SubCmd {
                 sendLanguageString("no-inventory-space", null, p);
             else
                 sendLanguageString("success", null, p, "%id%",
-                        args[1].toLowerCase(), "%amount%", String.valueOf(given));
+                        args[1].toLowerCase(Locale.ENGLISH), "%amount%", String.valueOf(given));
         } catch (Exception e) {
             onFail(p, alias);
         }
