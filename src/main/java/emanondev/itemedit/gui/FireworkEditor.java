@@ -49,11 +49,11 @@ public class FireworkEditor implements Gui {
             if (type != null)
                 this.type = type;
             else
-                this.type = FireworkEffect.Type.values()[(int) (Math.random()*FireworkEffect.Type.values().length)];
+                this.type = FireworkEffect.Type.values()[(int) (Math.random() * FireworkEffect.Type.values().length)];
             if (colors != null)
                 this.colors.addAll(colors);
             if (this.colors.isEmpty())
-                this.colors.add(DyeColor.values()[(int) (Math.random()*DyeColor.values().length)]);
+                this.colors.add(DyeColor.values()[(int) (Math.random() * DyeColor.values().length)]);
             if (fadeColors != null)
                 this.fadeColors.addAll(fadeColors);
             this.flicker = flicker;
@@ -108,7 +108,7 @@ public class FireworkEditor implements Gui {
         public ItemStack getColorsItem() {
             if (!active)
                 return null;
-            ItemStack item = Util.getDyeItemFromColor(DyeColor.LIGHT_BLUE);
+            ItemStack item = Util.getDyeItemFromColor(colors.size() > 0 ? DyeColor.LIGHT_BLUE : DyeColor.RED);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
             List<String> colorNames = new ArrayList<>();
@@ -117,7 +117,7 @@ public class FireworkEditor implements Gui {
             loadLanguageDescription(meta, subPath + "buttons.colors",
                     "%colors%", String.join("&b, &e", colorNames));
             item.setItemMeta(meta);
-            item.setAmount(Math.max(Math.min(101,colors.size()), 1));
+            item.setAmount(Math.max(Math.min(101, colors.size()), 1));
             return item;
         }
 
@@ -135,7 +135,7 @@ public class FireworkEditor implements Gui {
                     "%colors%", String.join("&b, &e", colorNames));
 
             item.setItemMeta(meta);
-            item.setAmount(Math.max(Math.min(101,fadeColors.size()), 1));
+            item.setAmount(Math.max(Math.min(101, fadeColors.size()), 1));
             return item;
         }
 
@@ -163,7 +163,8 @@ public class FireworkEditor implements Gui {
             ItemMeta meta = item.getItemMeta();
 
             meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.position");
+            loadLanguageDescription(meta, subPath + "buttons.position", "%middle_click%",
+                    getLanguageMessage("gui.middleclick." + (getTargetPlayer().getGameMode() == GameMode.CREATIVE ? "creative" : "other")));
             item.setItemMeta(meta);
             return item;
         }
@@ -299,7 +300,8 @@ public class FireworkEditor implements Gui {
         if (event.getClick() == ClickType.DOUBLE_CLICK)
             return;
         if (event.getSlot() < 9) {
-            if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE) {
+            if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE
+                    || (event.getClick() == ClickType.NUMBER_KEY && event.getHotbarButton() == 0)) {
                 effects.get(event.getSlot()).active = !effects.get(event.getSlot()).active;
             }
             if (event.isLeftClick()) {

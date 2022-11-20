@@ -5,6 +5,7 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
@@ -57,7 +58,8 @@ public class BannerEditor implements Gui {
             BannerMeta bMeta = (BannerMeta) item.getItemMeta();
             bMeta.addPattern(new Pattern(DyeColor.BLACK, pattern.getPattern()));
             bMeta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(bMeta, subPath + "buttons.type", "%type%", Aliases.PATTERN_TYPE.getName(pattern.getPattern()));
+            loadLanguageDescription(bMeta, subPath + "buttons.type", "%type%",
+                    Aliases.PATTERN_TYPE.getName(pattern.getPattern()));
             item.setItemMeta(bMeta);
             return item;
         }
@@ -72,7 +74,8 @@ public class BannerEditor implements Gui {
             ItemStack item = Util.getDyeItemFromColor(pattern.getColor());
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.color", "%color%", Aliases.COLOR.getName(pattern.getColor()));
+            loadLanguageDescription(meta, subPath + "buttons.color", "%color%",
+                    Aliases.COLOR.getName(pattern.getColor()));
             item.setItemMeta(meta);
             return item;
         }
@@ -83,7 +86,8 @@ public class BannerEditor implements Gui {
             ItemMeta meta = item.getItemMeta();
 
             meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.position");
+            loadLanguageDescription(meta, subPath + "buttons.position","%middle_click%",
+                    getLanguageMessage("gui.middleclick."+(getTargetPlayer().getGameMode()==GameMode.CREATIVE?"creative":"other")));
             item.setItemMeta(meta);
             return item;
         }
@@ -150,7 +154,7 @@ public class BannerEditor implements Gui {
         BannerData layer = layers.get(event.getSlot() % 9 - 1);
         if (event.getSlot() > 9 && event.getSlot() < 18) {
             if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE
-                ) {
+                    || (event.getClick() == ClickType.NUMBER_KEY && event.getHotbarButton() == 0)) {
 
                 layer.active = !layer.active;
             } else if (event.isLeftClick()) {
@@ -260,7 +264,8 @@ public class BannerEditor implements Gui {
             for (DyeColor color : DyeColor.values()) {
                 ItemStack item = Util.getDyeItemFromColor(color);
                 ItemMeta meta = item.getItemMeta();
-                loadLanguageDescription(meta, subPath + "buttons.color_selector_info", "%color%", Aliases.COLOR.getName(color));
+                loadLanguageDescription(meta, subPath + "buttons.color_selector_info", "%color%",
+                        Aliases.COLOR.getName(color));
                 item.setItemMeta(meta);
                 this.inventory.setItem(i, item);
                 i++;
@@ -341,7 +346,8 @@ public class BannerEditor implements Gui {
                 }
                 BannerMeta bMeta = (BannerMeta) item.getItemMeta();
                 bMeta.addPattern(new Pattern(DyeColor.BLACK, type));
-                loadLanguageDescription(bMeta, subPath + "buttons.pattern_selector_info", "%type%", Aliases.PATTERN_TYPE.getName(type));
+                loadLanguageDescription(bMeta, subPath + "buttons.pattern_selector_info", "%type%",
+                        Aliases.PATTERN_TYPE.getName(type));
                 item.setItemMeta(bMeta);
                 this.inventory.setItem(i, item);
                 i++;

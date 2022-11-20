@@ -607,6 +607,9 @@ itemeditimport:
 itemeditreload:
   success: '&9[&fItemEdit&9] &aReloaded'
 gui:
+  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
+    creative: 'Middle Click'
+    other: 'Press 1'
   colorselector:
     title: '&9Choose colors'
     buttons:
@@ -615,7 +618,7 @@ gui:
         - '&e%colors%'
         - '&7[&fRight Click&7]&b Add &e%color%'
         - '&7[&fLeft Click&7]&b Remove last color'
-        - '&7[&fMiddle Click&7]&b Clear colors'
+        - '&7[&fShift+Right Click&7]&b Clear colors'
   banner:
     title: '&9Banner Editor'
     color_selector_title: '&9Color selector'
@@ -628,7 +631,7 @@ gui:
       position:
         - '&6Pattern Controller'
         - ''
-        - '&7[&fMiddle Click&7] &bToggle pattern'
+        - '&7[&f%middle_click%&7] &bToggle pattern'
         - '&7[&fLeft/Right Click&7]&b << Move pattern >>'
       type:
         - '&6Type Selector'
@@ -672,7 +675,7 @@ gui:
       position:
         - '&bEffect Controller'
         - ''
-        - '&7[&fMiddle Click&7]&b Toggle effect'
+        - '&7[&f%middle_click%&7]&b Toggle effect'
         - '&7[&fLeft/Right Click&7]&b Move this effect'
       power:
         - '&bPower: &e%power%'

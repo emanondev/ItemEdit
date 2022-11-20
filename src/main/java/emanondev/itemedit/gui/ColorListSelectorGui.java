@@ -46,7 +46,8 @@ public class ColorListSelectorGui implements Gui {
             ItemStack item = Util.getDyeItemFromColor(color);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.color", "%colors%", String.join("&b, &e", list), "%color%", Aliases.COLOR.getName(color));
+            loadLanguageDescription(meta, subPath + "buttons.color", "%colors%",
+                    String.join("&b, &e", list), "%color%", Aliases.COLOR.getName(color));
             item.setItemMeta(meta);
             item.setAmount(Math.max(Math.min(101, colors.size()), 1));
             inventory.setItem(i, item);
@@ -84,7 +85,7 @@ public class ColorListSelectorGui implements Gui {
                     colors.remove(colors.size() - 1);
                     updateInventory();
                     break;
-                case MIDDLE:
+                case SHIFT_RIGHT:
                     colors.clear();
                     updateInventory();
                     break;
