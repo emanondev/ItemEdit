@@ -33,8 +33,8 @@ public class ShowServerItemsGui implements PagedGui {
     private boolean showItems = true;
 
     public void updateInventory() {
-        ServerStorage stor = ItemEdit.get().getServerStorage();
-        ArrayList<String> list = new ArrayList<>(stor.getIds());
+        ServerStorage storage = ItemEdit.get().getServerStorage();
+        ArrayList<String> list = new ArrayList<>(storage.getIds());
         ids = list;
         Collections.sort(list);
         for (int i = 0; i < rows * 9; i++) {
@@ -43,7 +43,7 @@ public class ShowServerItemsGui implements PagedGui {
                 this.inventory.setItem(i, null);
                 continue;
             }
-            ItemStack item = stor.getItem(list.get(slot));
+            ItemStack item = storage.getItem(list.get(slot));
             if (item == null) {
                 new NullPointerException("invalid id " + list.get(slot)).printStackTrace();
                 continue;
@@ -54,7 +54,7 @@ public class ShowServerItemsGui implements PagedGui {
                 ItemStack display = item.clone();
                 ItemMeta meta = display.getItemMeta();
                 meta.addItemFlags(ItemFlag.values());
-                meta.setLore(Collections.singletonList(UtilsString.fix("&9Nick: &e" + stor.getNick(list.get(slot)), null, true)));
+                meta.setLore(Collections.singletonList(UtilsString.fix("&9Nick: &e" + storage.getNick(list.get(slot)), null, true)));
                 meta.setDisplayName(UtilsString.fix("&9ID: &e" + list.get(slot), null, true));
                 display.setItemMeta(meta);
                 this.inventory.setItem(i, display);
@@ -73,8 +73,8 @@ public class ShowServerItemsGui implements PagedGui {
         if (rows < 1 || rows > 5) {
             rows = Math.min(5, Math.max(1, rows));
         }
-        ServerStorage stor = ItemEdit.get().getServerStorage();
-        ArrayList<String> list = new ArrayList<>(stor.getIds());
+        ServerStorage storage = ItemEdit.get().getServerStorage();
+        ArrayList<String> list = new ArrayList<>(storage.getIds());
         Collections.sort(list);
         int maxPages = (list.size()) / (rows * 9) + ((list.size()) % (rows * 9) == 0 ? 0 : 1);
         if (page > maxPages)
@@ -132,22 +132,16 @@ public class ShowServerItemsGui implements PagedGui {
         }
         int slot = rows * 9 * (page - 1) + event.getSlot();
         String id = ids.get(slot);
-        ServerStorage stor = ItemEdit.get().getServerStorage();
-        ItemStack item = stor.getItem(id);
+        ServerStorage storage = ItemEdit.get().getServerStorage();
+        ItemStack item = storage.getItem(id);
         if (item == null || item.getType() == Material.AIR) {
             updateInventory();
             return;
         }
         switch (event.getClick()) {
-            case CREATIVE:
-                break;
             case LEFT:
                 UtilsInventory.giveAmount(target, item, 1, ExcessManage.DELETE_EXCESS);
                 return;
-            case MIDDLE:
-                break;
-            case RIGHT:
-                break;
             case SHIFT_LEFT:
                 UtilsInventory.giveAmount(target, item, 64, ExcessManage.DELETE_EXCESS);
                 return;
@@ -156,11 +150,9 @@ public class ShowServerItemsGui implements PagedGui {
                     ServerItemCommand.get().sendPermissionLackMessage("itemedit.serveritem.delete", event.getWhoClicked());
                     return;
                 }
-                stor.remove(id);
+                storage.remove(id);
                 updateInventory();
                 return;
-            case UNKNOWN:
-                break;
             default:
                 break;
         }

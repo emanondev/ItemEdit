@@ -62,8 +62,8 @@ public class ColorOld extends SubCmd {
                 org.bukkit.Color color = org.bukkit.Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]),
                         Integer.parseInt(args[3]));
                 FireworkEffect oldEffect = starMeta.getEffect();
-                FireworkEffect.Builder newEffect = FireworkEffect.builder().flicker(oldEffect==null?false:oldEffect.hasFlicker())
-                        .trail(oldEffect==null?false:oldEffect.hasTrail()).withColor(color);
+                FireworkEffect.Builder newEffect = FireworkEffect.builder().flicker(oldEffect != null && oldEffect.hasFlicker())
+                        .trail(oldEffect != null && oldEffect.hasTrail()).withColor(color);
                 if (oldEffect!=null && oldEffect.getFadeColors()!=null )
                     newEffect.withFade(oldEffect.getFadeColors());
                 starMeta.setEffect(newEffect.build());

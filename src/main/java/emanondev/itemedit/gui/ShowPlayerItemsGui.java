@@ -70,8 +70,8 @@ public class ShowPlayerItemsGui implements PagedGui {
         if (rows < 1 || rows > 5) {
             rows = Math.min(5, Math.max(1, rows));
         }
-        PlayerStorage stor = ItemEdit.get().getPlayerStorage();
-        ArrayList<String> list = new ArrayList<>(stor.getIds(target));
+        PlayerStorage storage = ItemEdit.get().getPlayerStorage();
+        ArrayList<String> list = new ArrayList<>(storage.getIds(target));
         Collections.sort(list);
         int maxPages = (list.size() - 1) / (rows * 9) + 1;
         if (page > maxPages)

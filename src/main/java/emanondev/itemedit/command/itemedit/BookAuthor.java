@@ -38,11 +38,10 @@ public class BookAuthor extends SubCmd {
         }
 
         try {
-            String name = args[1];
+            StringBuilder name = new StringBuilder(args[1]);
             for (int i = 2; i < args.length; i++)
-                name = name + " " + args[i];
-            name = ChatColor.translateAlternateColorCodes('&', name);
-            itemMeta.setAuthor(name);
+                name.append(" ").append(args[i]);
+            itemMeta.setAuthor(ChatColor.translateAlternateColorCodes('&', name.toString()));
             item.setItemMeta(itemMeta);
             p.updateInventory();
         } catch (Exception e) {

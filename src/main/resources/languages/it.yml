@@ -607,6 +607,15 @@ itemeditimport:
 itemeditreload:
   success: '&9[&fItemEdit&9] &aReloaded'
 gui:
+  colorselector:
+    title: '&9Choose colors'
+    buttons:
+      color:
+        - '&6Colors:'
+        - '&e%colors%'
+        - '&7[&fRight Click&7]&b Add &e%color%'
+        - '&7[&fLeft Click&7]&b Remove last color'
+        - '&7[&fMiddle Click&7]&b Clear colors'
   banner:
     title: '&9Banner Editor'
     color_selector_title: '&9Color selector'
@@ -643,18 +652,12 @@ gui:
         - '&6Colors Selector'
         - '&bColors: &e%colors%'
         - ''
-        - '&bSelected color: &6%color%'
-        - '&7[&fMiddle Click&7]&b to add &e%color%'
-        - '&7[&fLeft/Right Click&7]&b Change selected color'
-        - '&7[&fShift Left/Right Click&7]&b Delete last color'
+        - '&7[&fClick&7]&b to change colors'
       fadecolors:
         - '&6Fade Colors Selector'
         - '&bFade Colors: &e%colors%'
         - ''
-        - '&bSelected color: &6%color%'
-        - '&7[&fMiddle Click&7]&b Add &e%color%'
-        - '&7[&fLeft/Right Click&7]&b Change selected color'
-        - '&7[&fShift Left/Right Click&7]&b Delete last color'
+        - '&7[&fClick&7]&b to change colors'
       flags:
         none: '&cNothing active'
         trail: '&eTrail &aActive'
@@ -678,13 +681,13 @@ gui:
   previous-page:
     #Holders: %player_name% %page% %target_page%
     description:
-      - '&6&lNext Page'
+      - '&6&lPrevious Page'
       - ''
       - '&7[&fClick&7]&b Go to page &e%target_page%'
   next-page:
     #Holders: %player_name% %page% %target_page%
     description:
-      - '&6&lPrevious Page'
+      - '&6&lNext Page'
       - ''
       - '&7[&fClick&7]&b Go to page &e%target_page%'
   back:

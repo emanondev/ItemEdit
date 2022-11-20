@@ -149,7 +149,8 @@ public class BannerEditor implements Gui {
         }
         BannerData layer = layers.get(event.getSlot() % 9 - 1);
         if (event.getSlot() > 9 && event.getSlot() < 18) {
-            if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE) {
+            if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE
+                ) {
 
                 layer.active = !layer.active;
             } else if (event.isLeftClick()) {

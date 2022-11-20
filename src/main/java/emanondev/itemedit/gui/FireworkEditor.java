@@ -27,11 +27,9 @@ public class FireworkEditor implements Gui {
     private final ItemStack firework;
 
     private class FireworkEffectData {
-        private FireworkEffect.Type type = FireworkEffect.Type.values()[0];
+        private FireworkEffect.Type type;
         private final List<DyeColor> colors = new ArrayList<>();
         private final List<DyeColor> fadeColors = new ArrayList<>();
-        private DyeColor selectedColor = DyeColor.values()[0];
-        private DyeColor selectedFadeColor = DyeColor.values()[0];
         private boolean flicker;
         private boolean trail;
         private boolean active = false;
@@ -50,8 +48,12 @@ public class FireworkEditor implements Gui {
                                    boolean flicker, boolean trail) {
             if (type != null)
                 this.type = type;
+            else
+                this.type = FireworkEffect.Type.values()[(int) (Math.random()*FireworkEffect.Type.values().length)];
             if (colors != null)
                 this.colors.addAll(colors);
+            if (this.colors.isEmpty())
+                this.colors.add(DyeColor.values()[(int) (Math.random()*DyeColor.values().length)]);
             if (fadeColors != null)
                 this.fadeColors.addAll(fadeColors);
             this.flicker = flicker;
@@ -106,24 +108,23 @@ public class FireworkEditor implements Gui {
         public ItemStack getColorsItem() {
             if (!active)
                 return null;
-            ItemStack item = Util.getDyeItemFromColor(selectedColor);
+            ItemStack item = Util.getDyeItemFromColor(DyeColor.LIGHT_BLUE);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
             List<String> colorNames = new ArrayList<>();
             for (DyeColor color : colors)
                 colorNames.add(Aliases.COLOR.getName(color));
             loadLanguageDescription(meta, subPath + "buttons.colors",
-                    "%color%", Aliases.COLOR.getName(selectedColor),
                     "%colors%", String.join("&b, &e", colorNames));
             item.setItemMeta(meta);
-            item.setAmount(Math.max(colors.size(), 1));
+            item.setAmount(Math.max(Math.min(101,colors.size()), 1));
             return item;
         }
 
         public ItemStack getFadeColorsItem() {
             if (!active)
                 return null;
-            ItemStack item = Util.getDyeItemFromColor(selectedFadeColor);
+            ItemStack item = Util.getDyeItemFromColor(DyeColor.BLUE);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
             List<String> colorNames = new ArrayList<>();
@@ -131,11 +132,10 @@ public class FireworkEditor implements Gui {
                 colorNames.add(Aliases.COLOR.getName(color));
 
             loadLanguageDescription(meta, subPath + "buttons.fadecolors",
-                    "%color%", Aliases.COLOR.getName(selectedFadeColor),
                     "%colors%", String.join("&b, &e", colorNames));
 
             item.setItemMeta(meta);
-            item.setAmount(Math.max(fadeColors.size(), 1));
+            item.setAmount(Math.max(Math.min(101,fadeColors.size()), 1));
             return item;
         }
 
@@ -184,6 +184,9 @@ public class FireworkEditor implements Gui {
                 }
                 return;
                 case 2: {// color
+                    getTargetPlayer().openInventory(new ColorListSelectorGui(FireworkEditor.this, colors).getInventory());
+                    /*
+
                     if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE) {
                         if (colors.size() < 9)
                             colors.add(selectedColor);
@@ -194,10 +197,12 @@ public class FireworkEditor implements Gui {
                         selectedColor = DyeColor.values()[(selectedColor.ordinal() + 1) % DyeColor.values().length];
                     else
                         selectedColor = DyeColor.values()[(selectedColor.ordinal() - 1 + DyeColor.values().length)
-                                % DyeColor.values().length];
+                                % DyeColor.values().length];*/
                 }
                 return;
                 case 3: {// fadecolor
+                    getTargetPlayer().openInventory(new ColorListSelectorGui(FireworkEditor.this, fadeColors).getInventory());
+                    /*
                     if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE) {
                         if (fadeColors.size() < 9)
                             fadeColors.add(selectedFadeColor);
@@ -208,7 +213,7 @@ public class FireworkEditor implements Gui {
                         selectedFadeColor = DyeColor.values()[(selectedFadeColor.ordinal() + 1) % DyeColor.values().length];
                     else
                         selectedFadeColor = DyeColor.values()[(selectedFadeColor.ordinal() - 1 + DyeColor.values().length)
-                                % DyeColor.values().length];
+                                % DyeColor.values().length];*/
                 }
                 return;
                 case 4: {// flags
@@ -270,7 +275,6 @@ public class FireworkEditor implements Gui {
             else
                 effects.add(new FireworkEffectData());
         }
-        updateInventory();
     }
 
     @SuppressWarnings("deprecation")
@@ -291,6 +295,8 @@ public class FireworkEditor implements Gui {
         if (!inventory.equals(event.getClickedInventory()))
             return;
         if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR)
+            return;
+        if (event.getClick() == ClickType.DOUBLE_CLICK)
             return;
         if (event.getSlot() < 9) {
             if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE) {
@@ -319,7 +325,7 @@ public class FireworkEditor implements Gui {
             if (event.isLeftClick())
                 meta.setPower((meta.getPower() + 1) % 6);
             else
-                meta.setPower((meta.getPower() - 1+6) % 6);
+                meta.setPower((meta.getPower() - 1 + 6) % 6);
             updateInventory();
             return;
         }
@@ -331,7 +337,7 @@ public class FireworkEditor implements Gui {
                     target.getInventory().setItemInHand(firework);
                 }
             else*/
-                target.getInventory().addItem(firework);
+            target.getInventory().addItem(firework);
             return;
         }
     }
