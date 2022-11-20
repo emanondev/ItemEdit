@@ -142,7 +142,7 @@ public class PlaceHolders extends PlaceholderExpansion {
                             try {
                                 copy = player.getEquipment().getItemInMainHand();
                             } catch (Throwable t) {
-                                copy = player.getEquipment().getItemInMainHand();
+                                copy = player.getEquipment().getItemInHand();
                             }
                             if (item.isSimilar(copy))
                                 amount = amount + copy.getAmount();
@@ -156,7 +156,7 @@ public class PlaceHolders extends PlaceholderExpansion {
                             break;
                         }
                         case "legs": {
-                            ItemStack copy = player.getEquipment().getItemInOffHand();
+                            ItemStack copy = player.getEquipment().getLeggings();
                             if (item.isSimilar(copy))
                                 amount = amount + copy.getAmount();
                             break;
