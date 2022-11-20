@@ -124,7 +124,8 @@ public abstract class APlugin extends JavaPlugin {
         if (!(sender instanceof Player))
             locale = this.defaultLanguage;
         else if (Util.isVersionAfter(1,11,2) && this.useMultiLanguage)
-            locale = ((Player) sender).getLocale().split("_")[0];
+            locale = ((Player) sender).getLocale().startsWith("zh")? //apparently zh_tw and zh_cn are quite different
+                    ((Player) sender).getLocale():((Player) sender).getLocale().split("_")[0];
         else
             locale = this.defaultLanguage;
 
