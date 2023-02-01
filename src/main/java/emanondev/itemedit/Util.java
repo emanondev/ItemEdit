@@ -356,4 +356,21 @@ public class Util {
         return isVersionAfter(mainGameVersionMin, gameVersionMin, gameSubVersionMin)
                 && isVersionUpTo(mainGameVersionMax, gameVersionMax, gameSubVersionMax);
     }
+
+    public static boolean isAllowedChangeLore(CommandSender sender, Material type) {
+        if (sender.hasPermission("itemedit.bypass.lore_type_restriction"))
+            return true;
+
+        List<String> values = ItemEdit.get().getConfig().getStringList("blocked.type-blocked-lore");
+        if (values == null || values.isEmpty())
+            return true;
+        String id = type.name();
+        for (String name : values)
+            if (id.equalsIgnoreCase(name)) {
+                sendMessage(sender,
+                        ItemEdit.get().getLanguageConfig(sender).loadMessage("blocked-by-type-restriction-lore", "", null, true));
+                return false;
+            }
+        return true;
+    }
 }

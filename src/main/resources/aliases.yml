@@ -38,6 +38,7 @@ enchant:
   multishot: multishot
   quick_charge: quick_charge
   soul_speed: soul_speed
+  swift_sneak: swift_sneak
   ae_glow: ae_glow
 banner_pattern:
   square_bottom_left: bottom_left_corner
@@ -119,6 +120,7 @@ potion_effect:
   dolphins_grace: dolphins_grace
   bad_omen: bad_omen
   hero_of_the_village: hero_of_the_village
+  darkness: darkness
 color:
   white: white
   orange: orange
@@ -252,3 +254,14 @@ axolotl_variant:
   gold: gold
   cyan: cyan
   blue: blue
+custom_flags: #ItemTag flags https://www.spigotmc.org/resources/89634/
+  placeable: placeable
+  usable: usable
+  recipeingredient: recipeingredient
+  smelt: smelt
+  furnacefuel: furnacefuel
+  enchantable: enchantable
+  renamable: renamable
+  grindable: grindable
+  equipment: equipment
+  entityfood: entityfood

@@ -34,18 +34,28 @@ public class Lore extends SubCmd {
 
         switch (args[1].toLowerCase(Locale.ENGLISH)) {
             case "set":
+                if (!Util.isAllowedChangeLore(sender, item.getType()))
+                    return;
                 loreSet(p, item, args);
                 return;
             case "add":
+                if (!Util.isAllowedChangeLore(sender, item.getType()))
+                    return;
                 loreAdd(p, item, args);
                 return;
             case "insert":
+                if (!Util.isAllowedChangeLore(sender, item.getType()))
+                    return;
                 loreInsert(p, item, args);
                 return;
             case "reset":
+                if (!Util.isAllowedChangeLore(sender, item.getType()))
+                    return;
                 loreReset(p, item, args);
                 return;
             case "remove":
+                if (!Util.isAllowedChangeLore(sender, item.getType()))
+                    return;
                 loreRemove(p, item, args);
                 return;
             case "copy":
@@ -58,9 +68,13 @@ public class Lore extends SubCmd {
                 loreCopyFile(p, item, args);
                 return;
             case "paste":
+                if (!Util.isAllowedChangeLore(sender, item.getType()))
+                    return;
                 lorePaste(p, item, args);
                 return;
             case "replace":
+                if (!Util.isAllowedChangeLore(sender, item.getType()))
+                    return;
                 loreReplace(p, item, args);
                 return;
             default:

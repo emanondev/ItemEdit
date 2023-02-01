@@ -4,6 +4,7 @@ lack-permission: '&4[&cItemEdit&4] &c你需要权限 %permission%'
 lack-permission-generic: '&4[&cItemEdit&4] &c你没有权限'
 blocked-by-censure: '&4[&cItemEdit&4] &c物品有脏话, 无法使用'
 blocked-by-type-restriction: '&4[&cItemEdit&4] &cYou can''t rename this item'
+blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cYou can''t edit lore on this item'
 itemedit:
   help-header: '&9&lItemEdit - 帮助'
   rename:

@@ -150,3 +150,8 @@ blocked:
   #or here for versions 1.8-1.12 https://helpch.at/docs/1.12.2/org/bukkit/Material.html
   #CaPs are not relevant for this config
   type-blocked-rename: [ ]
+  #A list of blocked materials which cannot be edited on lore (with /ie lore) unless you have permission to bypass
+  #You may find valid ids here https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+  #or here for versions 1.8-1.12 https://helpch.at/docs/1.12.2/org/bukkit/Material.html
+  #CaPs are not relevant for this config
+  type-blocked-lore: [ ]

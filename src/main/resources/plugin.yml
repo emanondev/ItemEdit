@@ -52,12 +52,16 @@ permissions:
     children:
       itemedit.bypass.censure: true
       itemedit.bypass.rename_type_restriction: true
+      itemedit.bypass.lore_type_restriction: true
   itemedit.bypass.censure:
     default: op
     description: Bypass words restrictions when editing items
   itemedit.bypass.rename_type_restriction:
     default: op
     description: Bypass type restrictions when renaming items
+  itemedit.bypass.lore_type_restriction:
+    default: op
+    description: Bypass type restrictions when editing item lore
   itemedit.itemeditimport:
     default: op
     description: Gives full access to command /itemeditimport
