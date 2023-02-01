@@ -100,7 +100,7 @@ public class PlaceHolders extends PlaceholderExpansion {
         }
         try {
             String[] args = value.split("_");
-            switch (args[0]) {
+            switch (args[0].toLowerCase(Locale.ENGLISH)) {
                 case "amount": {
                     String slot = "inventory";
                     int amount = 0;

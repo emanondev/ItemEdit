@@ -201,7 +201,7 @@ public abstract class APlugin extends JavaPlugin {
         }
     }
 
-    private void enableWithError(String error) {
+    protected void enableWithError(String error) {
         TabExecutorError exec = new TabExecutorError(ChatColor.RED + error);
         for (String command : this.getDescription().getCommands().keySet())
             registerCommand(command, exec, null);
