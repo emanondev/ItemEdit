@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -28,7 +27,7 @@ public class SkullOwner extends SubCmd {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
-        if (Util.isVersionUpTo(1,12) && item.getDurability() != 3) {
+        if (Util.isVersionUpTo(1, 12) && item.getDurability() != 3) {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }

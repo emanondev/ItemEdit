@@ -57,8 +57,8 @@ public class ReloadCommand implements TabExecutor {
     public void register() {
         try {
             plugin.registerCommand(plugin.getName().toLowerCase(Locale.ENGLISH) + "reload", this, null);
-        } catch (Exception e){
-            plugin.log("Unable to register command "+ ChatColor.YELLOW +plugin.getName().toLowerCase(Locale.ENGLISH) + "reload");
+        } catch (Exception e) {
+            plugin.log("Unable to register command " + ChatColor.YELLOW + plugin.getName().toLowerCase(Locale.ENGLISH) + "reload");
             e.printStackTrace();
         }
     }

@@ -86,8 +86,8 @@ public class BannerEditor implements Gui {
             ItemMeta meta = item.getItemMeta();
 
             meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.position","%middle_click%",
-                    getLanguageMessage("gui.middleclick."+(getTargetPlayer().getGameMode()==GameMode.CREATIVE?"creative":"other")));
+            loadLanguageDescription(meta, subPath + "buttons.position", "%middle_click%",
+                    getLanguageMessage("gui.middleclick." + (getTargetPlayer().getGameMode() == GameMode.CREATIVE ? "creative" : "other")));
             item.setItemMeta(meta);
             return item;
         }

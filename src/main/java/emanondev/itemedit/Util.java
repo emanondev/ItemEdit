@@ -315,7 +315,7 @@ public class Util {
                     .split("_")[2].substring(1));
 
     public static boolean isVersionUpTo(int mainGameVersion, int gameVersion) {
-        return isVersionUpTo(mainGameVersion,gameVersion,99);
+        return isVersionUpTo(mainGameVersion, gameVersion, 99);
     }
 
     public static boolean isVersionUpTo(int mainGameVersion, int gameVersion, int gameSubVersion) {
@@ -329,8 +329,9 @@ public class Util {
             return true;
         return GAME_SUB_VERSION <= gameSubVersion;
     }
+
     public static boolean isVersionAfter(int mainGameVersion, int gameVersion) {
-        return isVersionAfter(mainGameVersion,gameVersion,0);
+        return isVersionAfter(mainGameVersion, gameVersion, 0);
     }
 
     public static boolean isVersionAfter(int mainGameVersion, int gameVersion, int gameSubVersion) {

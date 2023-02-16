@@ -17,30 +17,30 @@ import java.util.Collections;
 public class ItemEdit extends APlugin {
     private static ItemEdit plugin = null;
     /**
-     @see Util#isVersionUpTo(int, int, int)
-     @see Util#isVersionAfter(int, int, int)
-     @see Util#isVersionInRange(int, int, int, int, int, int)
+     * @see Util#isVersionUpTo(int, int, int)
+     * @see Util#isVersionAfter(int, int, int)
+     * @see Util#isVersionInRange(int, int, int, int, int, int)
      */
     @Deprecated
     public static final String NMS_VERSION = getNmsver();
     /**
-     @see Util#isVersionUpTo(int, int, int)
-     @see Util#isVersionAfter(int, int, int)
-     @see Util#isVersionInRange(int, int, int, int, int, int)
+     * @see Util#isVersionUpTo(int, int, int)
+     * @see Util#isVersionAfter(int, int, int)
+     * @see Util#isVersionInRange(int, int, int, int, int, int)
      */
     @Deprecated
     public static final int GAME_MAIN_VERSION = Integer.parseInt(NMS_VERSION.split("_")[0].substring(1));
     /**
-     @see Util#isVersionUpTo(int, int, int)
-     @see Util#isVersionAfter(int, int, int)
-     @see Util#isVersionInRange(int, int, int, int, int, int)
+     * @see Util#isVersionUpTo(int, int, int)
+     * @see Util#isVersionAfter(int, int, int)
+     * @see Util#isVersionInRange(int, int, int, int, int, int)
      */
     @Deprecated
     public static final int GAME_VERSION = Integer.parseInt(NMS_VERSION.split("_")[1]);
     /**
-    @see Util#isVersionUpTo(int, int, int)
-     @see Util#isVersionAfter(int, int, int)
-     @see Util#isVersionInRange(int, int, int, int, int, int)
+     * @see Util#isVersionUpTo(int, int, int)
+     * @see Util#isVersionAfter(int, int, int)
+     * @see Util#isVersionInRange(int, int, int, int, int, int)
      */
     @Deprecated
     public static final int GAME_SUB_VERSION = Integer.parseInt(NMS_VERSION.split("_")[2].substring(1));
@@ -78,7 +78,7 @@ public class ItemEdit extends APlugin {
         registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
         registerCommand(new ItemStorageCommand(), Collections.singletonList("is"));
         registerCommand(new ServerItemCommand(), Collections.singletonList("si"));
-        registerCommand("itemeditinfo",new ItemEditInfoCommand(),null);
+        registerCommand("itemeditinfo", new ItemEditInfoCommand(), null);
         new ReloadCommand(this).register();
         registerCommand("itemeditimport", new ItemEditImportCommand(), null);
 

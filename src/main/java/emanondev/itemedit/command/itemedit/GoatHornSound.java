@@ -6,10 +6,8 @@ import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import org.bukkit.MusicInstrument;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.AxolotlBucketMeta;
 import org.bukkit.inventory.meta.MusicInstrumentMeta;
 
 import java.util.Collections;
@@ -17,7 +15,7 @@ import java.util.List;
 
 public class GoatHornSound extends SubCmd {
     public GoatHornSound(ItemEditCommand cmd) {
-        super("goathornsound",  cmd, true, true);
+        super("goathornsound", cmd, true, true);
     }
 
     @Override

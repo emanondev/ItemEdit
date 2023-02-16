@@ -48,7 +48,7 @@ public class ColorOld extends SubCmd {
             }
             return;
         }
-        if (item.getItemMeta() instanceof FireworkEffectMeta){
+        if (item.getItemMeta() instanceof FireworkEffectMeta) {
             if (!sender.hasPermission(starsPerm)) {
                 this.getCommand().sendPermissionLackMessage(starsPerm, sender);
                 return;
@@ -64,7 +64,7 @@ public class ColorOld extends SubCmd {
                 FireworkEffect oldEffect = starMeta.getEffect();
                 FireworkEffect.Builder newEffect = FireworkEffect.builder().flicker(oldEffect != null && oldEffect.hasFlicker())
                         .trail(oldEffect != null && oldEffect.hasTrail()).withColor(color);
-                if (oldEffect!=null && oldEffect.getFadeColors()!=null )
+                if (oldEffect != null && oldEffect.getFadeColors() != null)
                     newEffect.withFade(oldEffect.getFadeColors());
                 starMeta.setEffect(newEffect.build());
                 item.setItemMeta(starMeta);

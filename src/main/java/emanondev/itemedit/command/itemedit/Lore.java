@@ -1,6 +1,9 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.*;
+import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.Util;
+import emanondev.itemedit.UtilsString;
+import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import org.bukkit.command.CommandSender;
@@ -237,8 +240,8 @@ public class Lore extends SubCmd {
                         if (!meta.hasLore())
                             return Util.complete(args[2], Arrays.asList("1", "last"));
                         List<String> list = new ArrayList<>();
-                        for (int i = 0; i<meta.getLore().size();i++)
-                            list.add(String.valueOf(i+1));
+                        for (int i = 0; i < meta.getLore().size(); i++)
+                            list.add(String.valueOf(i + 1));
                         list.add("last");
                         return Util.complete(args[2], list);
                     case "copyfile":

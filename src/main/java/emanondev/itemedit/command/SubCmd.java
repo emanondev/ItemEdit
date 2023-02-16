@@ -31,7 +31,7 @@ public abstract class SubCmd {
     private final boolean checkNonNullItem;
     private final AbstractCommand cmd;
 
-    public SubCmd(@NotNull String id,@NotNull AbstractCommand cmd, boolean playerOnly, boolean checkNonNullItem) {
+    public SubCmd(@NotNull String id, @NotNull AbstractCommand cmd, boolean playerOnly, boolean checkNonNullItem) {
         if (id.equals("") || id.contains(" "))
             throw new IllegalArgumentException();
         this.ID = id.toLowerCase(Locale.ENGLISH);

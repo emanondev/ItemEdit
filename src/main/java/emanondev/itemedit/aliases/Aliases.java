@@ -119,51 +119,51 @@ public class Aliases {
     }
 
     private static EggTypeAliases getEggTypeAliases() {
-        if (Util.isVersionInRange(1,11,1,12))
+        if (Util.isVersionInRange(1, 11, 1, 12))
             return new EggTypeAliases();
         return null;
     }
 
     private static TropicalFishPatternAliases getTropicalPatternAliases() {
-        if (Util.isVersionUpTo(1,12))
+        if (Util.isVersionUpTo(1, 12))
             return null;
         return new TropicalFishPatternAliases();
     }
 
     private static GenAliases getGenAliases() {
-        if (Util.isVersionUpTo(1,9))
+        if (Util.isVersionUpTo(1, 9))
             return null;
         return new GenAliases();
     }
 
     @NotNull
     private static EnchAliases getEnchAliases() {
-        if (Util.isVersionUpTo(1,12))
+        if (Util.isVersionUpTo(1, 12))
             return new EnchAliasesOld();
         return new EnchAliases();
     }
 
     private static AttributeAliases getAttributeAliases() {
-        if (Util.isVersionUpTo(1,11))
+        if (Util.isVersionUpTo(1, 11))
             return null;
         return new AttributeAliases();
     }
 
     private static OperationAliases getAttributeOperationAliases() {
-        if (Util.isVersionUpTo(1,11))
+        if (Util.isVersionUpTo(1, 11))
             return null;
         return new OperationAliases();
     }
 
     private static AxolotlVariantAliases getAxolotlVariantAliases() {
-        if (Util.isVersionUpTo(1,17))
+        if (Util.isVersionUpTo(1, 17))
             return null;
         return new AxolotlVariantAliases();
     }
 
 
     private static GoatHornSoundAliases getGoatHornSoundAliases() {
-        if (Util.isVersionUpTo(1,19,1))
+        if (Util.isVersionUpTo(1, 19, 1))
             return null;
         return new GoatHornSoundAliases();
     }

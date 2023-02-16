@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
-import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 
@@ -81,7 +80,7 @@ public class Color extends SubCmd {
             }
             return;
         }
-        if (item.getItemMeta() instanceof FireworkEffectMeta){
+        if (item.getItemMeta() instanceof FireworkEffectMeta) {
             if (!sender.hasPermission(starsPerm)) {
                 this.getCommand().sendPermissionLackMessage(starsPerm, sender);
                 return;
@@ -97,7 +96,7 @@ public class Color extends SubCmd {
                 FireworkEffect oldEffect = starMeta.getEffect(); // may be null?
                 FireworkEffect.Builder newEffect = FireworkEffect.builder().flicker(oldEffect != null && oldEffect.hasFlicker())
                         .trail(oldEffect != null && oldEffect.hasTrail()).withColor(color);
-                if (oldEffect!=null && oldEffect.getFadeColors()!=null ) // may be null?
+                if (oldEffect != null && oldEffect.getFadeColors() != null) // may be null?
                     newEffect.withFade(oldEffect.getFadeColors());
                 starMeta.setEffect(newEffect.build());
                 item.setItemMeta(starMeta);
