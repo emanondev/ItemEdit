@@ -337,6 +337,14 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aCompass now points to &e%world% %x% %y% %z%'
     clear:
       feedback: '&9[&fItemEdit&9] &aCompass target cleared'
+  goathornsound:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a goat horn'
+    wrong-sound: '&4[&cItemEdit&4] &cWrong Sound Value! &4[&6hover here&4]'
+    description:
+      - '&b&lSet Goat Horn sound'
+      - ''
+      - '&e<type> &bthe type of sound'
+    params: '<type>'
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:

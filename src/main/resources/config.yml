@@ -5,73 +5,73 @@
 # Spigot https://www.spigotmc.org/resources/40993/
 #
 # Do not change config-version
-config-version: 1
+config-version: 3
 language:
-  #Default locale
-  #If you want to add more languages copy language/en.yml, rename it and apply your changes,
+  # Default locale
+  # If you want to add more languages copy language/en.yml, rename it and apply your changes,
   # plugin will automatically use it after a plugin reload or server restart
   default: 'en'
-  #Allowed on ServerVersion 1.12+
-  #When true the plugin will use the client language if a language file exist for that client
+  # Allowed on ServerVersion 1.12+
+  # When true the plugin will use the client language if a language file exist for that client
   use_multilanguage: true
 serveritem:
-  #if server saved items has placeholders inside displayname or lore should replace it?
-  #default placeholders: %player_name% %player_uuid%
-  #support all placeholders of PlaceHolderAPI
+  # If server saved items has placeholders inside displayname or lore should replace it?
+  # Default placeholders: %player_name% %player_uuid%
+  # Supports PlaceHolderAPI
   #
-  #This affects give/take/sell/sellmax/buy/buymax actions
-  #holders may generate inconsistency if holders values change or if who owns change
-  #this inconsistency may affect only items with placeholders
+  # This affects give/take/sell/sellmax/buy/buymax actions
+  # placeholders may generate inconsistency if placeholders values change or if who owns change
+  # this inconsistency may affect only items with placeholders
   #
-  #inconsistency examples: 
-  #player A buy an item with %player_name% holder, player B take A item, B try to sell the item but he can't because %player_name% for B it's not the same of A
-  #player A buy an item with %player_name% holder, player A change name to B, try to sell the item but he can't because %player_name% now it's B and do not match old name A
+  # Inconsistency examples:
+  # player A buy an item with %player_name% holder, player B take A item, B try to sell the item but he can't because %player_name% for B it's not the same of A
+  # player A buy an item with %player_name% holder, player A change name to B, try to sell the item but he can't because %player_name% now it's B and do not match old name A
   replace-holders: true
 storage:
-  # player should be identified by uuid?
-  # if set to false players will be identified by name
-  # disclaimer: players may change their name, use uuid unless you know what you do
+  # Player should be identified by uuid?
+  # If set to false players will be identified by name
+  # Disclaimer: players may change their name, use uuid unless you know what you do
   store-by-uuid: true
-  #how many item a player may save?
-  #set -1 for unlimited
+  # How many item a player may save?
+  # Tip: set -1 for unlimited
   player-item-limit: 45
 log:
-  #log actions on console?
+  # Log actions on console?
   console: true
-  #log actions on a log file?
+  # Log actions on a log file?
   file: true
-  #logs files are saved on logs folder with a date format that you may edit here
-  #if you wish to store a whole month in a single file instead of a file for each day just remove the ".dd"
+  # Logs files are saved on logs folder with a date format that you may edit here
+  # Tip: if you wish to store a whole month in a single file instead of a file for each day just remove the ".dd"
   file-format: "yyyy.MM.dd"
-  #logs may contain a date prefix, you can set the format here
+  # Logs may contain a date prefix, you can set the format here
   log-date-format: "[dd.MM.yyyy HH:mm:ss]"
   action:
-    #log when a player receive items? (/serveritem give [...])
+    # Log when a player receive items? (/serveritem give [...])
     give: true
-    #log when a player receive items? (/serveritem giveall [...])
+    # Log when a player receive items? (/serveritem giveall [...])
     giveall: true
-    #log when removing items from player? (/serveritem take [...])
+    # Log when removing items from player? (/serveritem take [...])
     take: true
-    #log when a player buy items? (/serveritem sell/sellmax [...])
+    # Log when a player buy items? (/serveritem sell/sellmax [...])
     sell: true
-    #log when a player sell items? (/serveritem buy/buymax [...])
+    # Log when a player sell items? (/serveritem buy/buymax [...])
     buy: true
 blocked:
   log:
-    #when text is blocked a message will be displayed on console, reporting the text and the blocked word/regex
+    # When text is blocked a message will be displayed on console, reporting the text and the blocked word/regex
     console: true
-    #when text is blocked a message will be saved on file, reporting the text and the blocked word/regex
+    # When text is blocked a message will be saved on file, reporting the text and the blocked word/regex
     file: true
-  #Words blocked when editing items unless you have permission to bypass
-  #Affects commands like /ie rename, /ie lore and similar
-  #Any text which contains a subsequence that matches a blocked word is blocked
+  # Words blocked when editing items unless you have permission to bypass
+  # Affects commands like /ie rename, /ie lore and similar
+  # Any text which contains a subsequence that matches a blocked word is blocked
   words:
     - "myblockedworldexample123"
-  #Regex blocked when editing items unless you have permission to bypass
-  #Affects commands like /ie rename, /ie lore and similar
-  #A regex is a sequence of characters that define a search pattern
-  #Any text which contains a subsequence that matches a pattern is blocked
-  #Google 'java regex tester' or go to www.freeformatter.com/java-regex-tester.html to learn more and test new regex
+  # Regex blocked when editing items unless you have permission to bypass
+  # Affects commands like /ie rename, /ie lore and similar
+  # A regex is a sequence of characters that define a search pattern
+  # Any text which contains a subsequence that matches a pattern is blocked
+  # Tip: google 'java regex tester' or go to www.freeformatter.com/java-regex-tester.html to learn more and test new regex
   regex:
     - '^[a@][s\$][s\$]$'
     - '[a@][s\$][s\$]h[o0][l1][e3][s\$]?'
@@ -145,13 +145,13 @@ blocked:
     - '[s\$]mu[t\+][s\$]?'
     - '[s\$]punk[s\$]?'
     - '[t\+]w[a@][t\+][s\$]?'
-  #A list of blocked materials which cannot be renamed (with /ie rename) unless you have permission to bypass
-  #You may find valid ids here https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
-  #or here for versions 1.8-1.12 https://helpch.at/docs/1.12.2/org/bukkit/Material.html
-  #CaPs are not relevant for this config
+  # A list of blocked materials which cannot be renamed (with /ie rename) unless you have permission to bypass
+  # You may find valid ids here https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+  # or here for versions 1.8-1.12 https://helpch.at/docs/1.12.2/org/bukkit/Material.html
+  # CaPs are not relevant for this config
   type-blocked-rename: [ ]
-  #A list of blocked materials which cannot be edited on lore (with /ie lore) unless you have permission to bypass
-  #You may find valid ids here https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
-  #or here for versions 1.8-1.12 https://helpch.at/docs/1.12.2/org/bukkit/Material.html
-  #CaPs are not relevant for this config
+  # A list of blocked materials which cannot be edited on lore (with /ie lore) unless you have permission to bypass
+  # You may find valid ids here https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+  # or here for versions 1.8-1.12 https://helpch.at/docs/1.12.2/org/bukkit/Material.html
+  # CaPs are not relevant for this config
   type-blocked-lore: [ ]

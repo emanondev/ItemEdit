@@ -13,6 +13,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +31,7 @@ public abstract class SubCmd {
     private final boolean checkNonNullItem;
     private final AbstractCommand cmd;
 
-    public SubCmd(String id, AbstractCommand cmd, boolean playerOnly, boolean checkNonNullItem) {
-        if (id == null)
-            throw new NullPointerException();
+    public SubCmd(@NotNull String id,@NotNull AbstractCommand cmd, boolean playerOnly, boolean checkNonNullItem) {
         if (id.equals("") || id.contains(" "))
             throw new IllegalArgumentException();
         this.ID = id.toLowerCase(Locale.ENGLISH);

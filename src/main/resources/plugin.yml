@@ -175,6 +175,7 @@ permissions:
       itemedit.itemedit.listaliases: true
       itemedit.itemedit.compass: true
       itemedit.itemedit.axolotlvariant: true
+      itemedit.itemedit.goathornsound: true
   itemedit.itemedit.rename:
     default: op
     description: Allow editing item name
@@ -485,3 +486,6 @@ permissions:
   itemedit.itemedit.axolotlvariant:
     default: op
     description: Allow editing axolotl variant on axolotl buckets
+  itemedit.itemedit.goathornsound:
+    default: op
+    description: Allow editing goat horn sound

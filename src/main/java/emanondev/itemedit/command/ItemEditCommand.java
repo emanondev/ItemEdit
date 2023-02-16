@@ -3,6 +3,7 @@ package emanondev.itemedit.command;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.itemedit.*;
+import org.bukkit.Bukkit;
 
 public class ItemEditCommand extends AbstractCommand {
     public static ItemEditCommand instance;
@@ -59,7 +60,9 @@ public class ItemEditCommand extends AbstractCommand {
             if (Util.isVersionUpTo(1,16))
                 return;
             this.registerSubCommand(new AxolotlVariant(this));// 1.17+
-
+            if (Util.isVersionUpTo(1,19,1)) //note: subversion is not consistent with game version 1.19.3 -> 1.19.R2
+                return;
+            this.registerSubCommand(new GoatHornSound(this));// 1.19.3+
         } finally {
             this.registerSubCommand(new Type(this));
             this.registerSubCommand(new ListAliases(this));

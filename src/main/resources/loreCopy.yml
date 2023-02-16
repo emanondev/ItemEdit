@@ -1,16 +1,16 @@
-#This file is used for '/ie lore copyfile <path>'
-#Some server admins finds faster to compile a file configuration than using commands
-#so this file is where you can configure text to paste later
-#reload configurations with '/itemeditreload'
+# This file is used for '/ie lore copyfile <path>'
+# Some server admins finds faster to compile a file configuration rather than using commands
+# so this file is where you can configure text to paste later
+# Reload configurations with '/itemeditreload'
 #
-#Pay attention to indentation and avoid 'TAB' char otherwise file may break and unexpected behavior should be expected
-#(don't worry the maximus damage you can do is break '/ie lore copyfile' until you reset this file)
-#The <path> is required to specify which configuration you wish to copy
+# Pay attention to indentation and avoid 'TAB' char otherwise file may break and unexpected behavior should be expected
+# (don't worry the maximus damage you can do is break '/ie lore copyfile' until you reset this file)
+# The <path> is required to specify which configuration you wish to copy
 #
-#Usefull Symbols:
+# Usefull Symbols:
 # ⛏ ☆ ✧ ✗ ✓
 #
-#The following example use 'example_lore' as <path> so '/ie lore copyfile example_lore'
+# The following example use 'example_lore' as <path> so '/ie lore copyfile example_lore'
 example_lore:
   - "&fThis is a configuration example"
   - "&fYou can add color and formats with & char -> &e for yellow"

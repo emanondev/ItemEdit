@@ -45,22 +45,24 @@ itemedit:
     name: "listaliases"
   compass:
     name: "compass"
+  goathornsound:
+    name: "goathornsound"
 serveritem:
   give:
     name: "give"
-    #Holders: %id% %nick% %amount% %player_name%
+    # Placeholders: %id% %nick% %amount% %player_name%
     log: "[serveritem][give] %player_name% obtained %amount% of %id% (%nick%)"
   giveall:
     name: "giveall"
-    #Holders: %id% %nick% %amount% %targets%
+    # Placeholders: %id% %nick% %amount% %targets%
     log: "[serveritem][giveall] %targets% obtained %amount% of %id% (%nick%)"
   drop:
     name: "drop"
-    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    # Placeholders: %id% %nick% %amount% %world% %x% %y% %z%
     log: "[serveritem][drop] dropped %amount% of %id% (%nick%) at %world% %x% %y% %z%"
   take:
     name: "take"
-    #Holders: %id% %nick% %amount% %player_name%
+    # Placeholders: %id% %nick% %amount% %player_name%
     log: "[serveritem][take] %player_name% gave %amount% of %id% (%nick%)"
   save:
     name: "save"
@@ -74,19 +76,19 @@ serveritem:
     name: "setnick"
   sell:
     name: "sell"
-    #Holders: %id% %nick% %amount% %player_name% %price%
+    # Placeholders: %id% %nick% %amount% %player_name% %price%
     log: "[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)"
   buy:
     name: "buy"
-    #Holders: %id% %nick% %amount% %player_name% %price%
+    # Placeholders: %id% %nick% %amount% %player_name% %price%
     log: "[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%"
   sellmax:
     name: "sellmax"
-    #Holders: %id% %nick% %amount% %player_name% %price%
+    # Placeholders: %id% %nick% %amount% %player_name% %price%
     log: "[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)"
   buymax:
     name: "buymax"
-    #Holders: %id% %nick% %amount% %player_name% %price%
+    # Placeholders: %id% %nick% %amount% %player_name% %price%
     log: "[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%"
 itemstorage:
   get:

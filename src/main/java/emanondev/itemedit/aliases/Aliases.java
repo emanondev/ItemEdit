@@ -64,6 +64,9 @@ public class Aliases {
     private final static Map<String, AliasSet<?>> types = new HashMap<>();
     public static final EnumAliasSet<FireworkEffect.Type> FIREWORK_TYPE = new EnumAliasSet<>("firework_type", FireworkEffect.Type.class);
     public static final AxolotlVariantAliases AXOLOTL_VARIANT = getAxolotlVariantAliases();
+    public static final GoatHornSoundAliases GOAT_HORN_SOUND = getGoatHornSoundAliases();
+
+
     private static boolean loaded = false;
 
 
@@ -82,6 +85,7 @@ public class Aliases {
         registerAliasType(OPERATIONS);
         registerAliasType(TROPICALPATTERN);
         registerAliasType(AXOLOTL_VARIANT);
+        registerAliasType(GOAT_HORN_SOUND);
     }
 
     public static <T> void registerAliasType(@Nullable AliasSet<T> set) {
@@ -155,5 +159,12 @@ public class Aliases {
         if (Util.isVersionUpTo(1,17))
             return null;
         return new AxolotlVariantAliases();
+    }
+
+
+    private static GoatHornSoundAliases getGoatHornSoundAliases() {
+        if (Util.isVersionUpTo(1,19,1))
+            return null;
+        return new GoatHornSoundAliases();
     }
 }
