@@ -167,7 +167,7 @@ public class Aliases {
             return null;
         try {
             return new GoatHornSoundAliases();
-        } catch (NoClassDefFoundError e) {
+        } catch (Throwable e) {
             return null;
         }
     }
