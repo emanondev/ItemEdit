@@ -9,6 +9,7 @@ public class GoatHornSoundAliases extends AliasSet<MusicInstrument> {
 
     public GoatHornSoundAliases() {
         super("goat_horn_sound");
+        MusicInstrument.values(); //force load the class or throw an exception if absent
     }
 
     @Override

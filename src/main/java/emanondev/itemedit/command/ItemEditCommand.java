@@ -61,7 +61,11 @@ public class ItemEditCommand extends AbstractCommand {
             this.registerSubCommand(new AxolotlVariant(this));// 1.17+
             if (Util.isVersionUpTo(1, 19, 1)) //note: subversion is not consistent with game version 1.19.3 -> 1.19.R2
                 return;
-            this.registerSubCommand(new GoatHornSound(this));// 1.19.3+
+            try {
+                this.registerSubCommand(new GoatHornSound(this));// 1.19.3+
+            } catch (Throwable ignored){
+                //avoid some issues
+            }
         } finally {
             this.registerSubCommand(new Type(this));
             this.registerSubCommand(new ListAliases(this));

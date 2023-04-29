@@ -16,6 +16,7 @@ import java.util.List;
 public class GoatHornSound extends SubCmd {
     public GoatHornSound(ItemEditCommand cmd) {
         super("goathornsound", cmd, true, true);
+        MusicInstrument.values(); //force load the class or throw an exception if absent
     }
 
     @Override
