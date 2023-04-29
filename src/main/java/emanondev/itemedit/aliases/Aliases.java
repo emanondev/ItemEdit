@@ -165,6 +165,10 @@ public class Aliases {
     private static GoatHornSoundAliases getGoatHornSoundAliases() {
         if (Util.isVersionUpTo(1, 19, 1))
             return null;
-        return new GoatHornSoundAliases();
+        try {
+            return new GoatHornSoundAliases();
+        } catch (NoClassDefFoundError e) {
+            return null;
+        }
     }
 }

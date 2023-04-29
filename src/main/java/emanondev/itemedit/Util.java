@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.HttpRetryException;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
@@ -373,5 +374,18 @@ public class Util {
                 return false;
             }
         return true;
+    }
+
+    public static boolean hasPaperAPI(){
+        try {
+            Class.forName("com.destroystokyo.paper.VersionHistoryManager$VersionData");
+            return true;
+        } catch(NoClassDefFoundError | ClassNotFoundException ex) {
+            return false;
+        }
+    }
+
+    public static boolean hasMiniMessageAPI(){
+        return false;//TODO
     }
 }
