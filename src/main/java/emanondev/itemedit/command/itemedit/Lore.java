@@ -62,12 +62,24 @@ public class Lore extends SubCmd {
                 loreRemove(p, item, args);
                 return;
             case "copy":
+                if (!sender.hasPermission(getPermission()+".copy")) {
+                    getCommand().sendPermissionLackMessage(getPermission()+".copy", sender);
+                    return;
+                }
                 loreCopy(p, item, args);
                 return;
             case "copybook":
+                if (!sender.hasPermission(getPermission()+".copy")) {
+                    getCommand().sendPermissionLackMessage(getPermission()+".copy", sender);
+                    return;
+                }
                 loreCopyBook(p, item, args);
                 return;
             case "copyfile":
+                if (!sender.hasPermission(getPermission()+".copy")) {
+                    getCommand().sendPermissionLackMessage(getPermission()+".copy", sender);
+                    return;
+                }
                 loreCopyFile(p, item, args);
                 return;
             case "paste":

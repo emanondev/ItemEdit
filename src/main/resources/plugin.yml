@@ -286,6 +286,7 @@ permissions:
     default: op
     description: Allow editing item lore
     children:
+      itemedit.itemedit.lore.copy: true
       itemedit.itemedit.lore.format.*: true
       itemedit.itemedit.lore.color.*: true
   itemedit.itemedit.lore.format.*:
@@ -388,6 +389,9 @@ permissions:
   itemedit.itemedit.lore.color.hexa:
     default: op
     description: Allow editing item lore and use hexa colors
+  itemedit.itemedit.lore.copy:
+    default: op
+    description: Allow to use lore sub commands copy, copybook and copyfile
   itemedit.itemedit.amount:
     default: op
     description: Allow editing item amount
