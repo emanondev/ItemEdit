@@ -189,7 +189,7 @@ public abstract class APlugin extends JavaPlugin {
             this.useMultiLanguage = getConfig().getBoolean("language.use_multilanguage", true);
             this.defaultLanguage = getConfig().getString("language.default", "en");
             getLanguageConfig(null);
-            if (getProjectId() != null)
+            if (getProjectId() != null && getConfig().getBoolean("check-updates", true))
                 new UpdateChecker(this, getProjectId()).logUpdates();
             enable();
             log(ChatColor.GREEN, "#", "Enabled (took &e" + (System.currentTimeMillis() - now) + "&f ms)");

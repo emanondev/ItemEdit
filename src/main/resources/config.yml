@@ -5,7 +5,9 @@
 # Spigot https://www.spigotmc.org/resources/40993/
 #
 # Do not change config-version
-config-version: 3
+config-version: 4
+#Notify console when a plugin update is available
+check-updates: true
 language:
   # Default locale
   # If you want to add more languages copy language/en.yml, rename it and apply your changes,

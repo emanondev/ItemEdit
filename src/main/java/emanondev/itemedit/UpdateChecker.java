@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 
 public class UpdateChecker {
     private final int project;
@@ -50,7 +51,7 @@ public class UpdateChecker {
                             .sendMessage("[" + plugin.getName() + "] New Update at " + getResourceUrl());
 
                 }
-            } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException | UnknownHostException e) {
                 Bukkit.getConsoleSender().sendMessage(
                         "[" + plugin.getName() + "] Unable to check for new updates at " + getResourceUrl());
             } catch (Exception e) {

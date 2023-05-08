@@ -3,7 +3,7 @@ package emanondev.itemedit;
 import java.util.Arrays;
 
 class ConfigurationUpdater {
-    private static final int CURRENT_VERSION = 3;
+    private static final int CURRENT_VERSION = 4;
 
     static void update() {
         ItemEdit plugin = ItemEdit.get();
@@ -73,7 +73,9 @@ class ConfigurationUpdater {
             conf.set("goat_horn_sound.seek_goat_horn", "seek");
             conf.save();
         }
-
+        if (version <= 3){
+            plugin.getConfig().set("check-updates",true);
+        }
 
         plugin.log("Updating configuration version (" + version + " -> " + CURRENT_VERSION + ")");
         plugin.getConfig().set("config-version", CURRENT_VERSION);
