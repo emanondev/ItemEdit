@@ -5,7 +5,8 @@ import emanondev.itemedit.command.*;
 import emanondev.itemedit.compability.*;
 import emanondev.itemedit.gui.Gui;
 import emanondev.itemedit.gui.GuiHandler;
-import emanondev.itemedit.storage.MongoStorage;
+import emanondev.itemedit.storage.mongo.MongoPlayerStorage;
+import emanondev.itemedit.storage.mongo.MongoStorage;
 import emanondev.itemedit.storage.PlayerStorage;
 import emanondev.itemedit.storage.ServerStorage;
 import emanondev.itemedit.storage.StorageType;
@@ -15,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.Collections;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemEdit extends APlugin {
     private static ItemEdit plugin = null;
@@ -83,9 +85,14 @@ public class ItemEdit extends APlugin {
         } else if (storageType == StorageType.MONGODB) {
             String connectionString = this.getConfig().load("storage.mongodb.uri", "mongodb://127.0.0.1:27017", String.class);
             String database = this.getConfig().load("storage.mongodb.database", "itemedit", String.class);
-            MongoStorage mongoStorage = new MongoStorage(connectionString, database);
+            String collectionPrefix = this.getConfig().load("storage.mongodb.collection_prefix", "itemedit-", String.class);
 
-            // TODO: Set player and server storage
+            this.mongoStorage = new MongoStorage(connectionString, database, collectionPrefix);
+            this.pStorage = new MongoPlayerStorage(this.mongoStorage, this.getLogger());
+            // TODO: Set server storage
+        } else {
+            this.getLogger().info("You selected an unsupported storage type! Disable player and server storage...");
+            // TODO: Disable player and server storage
         }
 
         registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
@@ -135,6 +142,8 @@ public class ItemEdit extends APlugin {
         for (Player p : Bukkit.getOnlinePlayers())
             if (p.getOpenInventory().getTopInventory().getHolder() instanceof Gui)
                 p.closeInventory();
+
+        if (this.mongoStorage != null) this.mongoStorage.close();
     }
 
     public void reload() {
@@ -145,6 +154,8 @@ public class ItemEdit extends APlugin {
         getPlayerStorage().reload();
         getServerStorage().reload();
     }
+
+    private @Nullable MongoStorage mongoStorage;
 
     private PlayerStorage pStorage;
 
