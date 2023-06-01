@@ -2,6 +2,7 @@ package emanondev.itemedit.storage.mongo;
 
 import com.mongodb.CursorType;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.UpdateOptions;
 import emanondev.itemedit.storage.PlayerStorage;
 import java.util.Collections;
@@ -25,13 +26,13 @@ public class MongoPlayerStorage implements PlayerStorage {
     private final @NotNull MongoStorage mongoStorage;
     private final @NotNull Logger logger;
 
-    private String getStore(OfflinePlayer player) {
-        return storeByUUID() ? player.getUniqueId().toString() : player.getName();
-    }
-
     public MongoPlayerStorage(@NotNull MongoStorage mongoStorage, @NotNull Logger logger) {
         this.mongoStorage = mongoStorage;
         this.logger = logger;
+    }
+
+    private String getStore(OfflinePlayer player) {
+        return storeByUUID() ? player.getUniqueId().toString() : player.getName();
     }
 
     @Override
@@ -104,6 +105,7 @@ public class MongoPlayerStorage implements PlayerStorage {
         Set<String> playerData = this.mongoStorage.getPlayerStorage()
                 .find()
                 .cursorType(CursorType.NonTailable)
+                .projection(Projections.include("store"))
                 // TODO: Add limit?
                 .map(document -> document.getString("store"))
                 .into(new HashSet<>());

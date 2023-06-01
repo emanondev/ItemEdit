@@ -27,4 +27,8 @@ public class MongoStorage {
     public @NotNull MongoCollection<Document> getPlayerStorage() {
         return this.mongoDatabase.getCollection(this.collectionPrefix + "player-storage");
     }
+
+    public @NotNull MongoCollection<Document> getServerStorage() {
+        return this.mongoDatabase.getCollection(this.collectionPrefix + "server-storage");
+    }
 }

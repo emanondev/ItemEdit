@@ -6,6 +6,7 @@ import emanondev.itemedit.compability.*;
 import emanondev.itemedit.gui.Gui;
 import emanondev.itemedit.gui.GuiHandler;
 import emanondev.itemedit.storage.mongo.MongoPlayerStorage;
+import emanondev.itemedit.storage.mongo.MongoServerStorage;
 import emanondev.itemedit.storage.mongo.MongoStorage;
 import emanondev.itemedit.storage.PlayerStorage;
 import emanondev.itemedit.storage.ServerStorage;
@@ -89,7 +90,7 @@ public class ItemEdit extends APlugin {
 
             this.mongoStorage = new MongoStorage(connectionString, database, collectionPrefix);
             this.pStorage = new MongoPlayerStorage(this.mongoStorage, this.getLogger());
-            // TODO: Set server storage
+            this.sStorage = new MongoServerStorage(this.mongoStorage);
         } else {
             this.getLogger().info("You selected an unsupported storage type! Disable player and server storage...");
             // TODO: Disable player and server storage
