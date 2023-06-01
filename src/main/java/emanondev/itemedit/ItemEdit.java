@@ -5,8 +5,10 @@ import emanondev.itemedit.command.*;
 import emanondev.itemedit.compability.*;
 import emanondev.itemedit.gui.Gui;
 import emanondev.itemedit.gui.GuiHandler;
+import emanondev.itemedit.storage.MongoStorage;
 import emanondev.itemedit.storage.PlayerStorage;
 import emanondev.itemedit.storage.ServerStorage;
+import emanondev.itemedit.storage.StorageType;
 import emanondev.itemedit.storage.YmlPlayerStorage;
 import emanondev.itemedit.storage.YmlServerStorage;
 import org.bukkit.Bukkit;
@@ -72,8 +74,19 @@ public class ItemEdit extends APlugin {
         Aliases.reload();
         Bukkit.getPluginManager().registerEvents(new GuiHandler(), this);
 
-        pStorage = new YmlPlayerStorage(); //may implement more type of storage and allow selecting storage type from config
-        sStorage = new YmlServerStorage();
+        StorageType storageType = StorageType.byName(this.getConfig().load("storage.type", "", String.class))
+                .orElse(StorageType.YAML);
+        this.getLogger().info("Selected Storage Type: " + storageType.name());
+        if (storageType == StorageType.YAML) {
+            pStorage = new YmlPlayerStorage();
+            sStorage = new YmlServerStorage();
+        } else if (storageType == StorageType.MONGODB) {
+            String connectionString = this.getConfig().load("storage.mongodb.uri", "mongodb://127.0.0.1:27017", String.class);
+            String database = this.getConfig().load("storage.mongodb.database", "itemedit", String.class);
+            MongoStorage mongoStorage = new MongoStorage(connectionString, database);
+
+            // TODO: Set player and server storage
+        }
 
         registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
         registerCommand(new ItemStorageCommand(), Collections.singletonList("is"));
