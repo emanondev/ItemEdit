@@ -5,19 +5,16 @@ import emanondev.itemedit.command.*;
 import emanondev.itemedit.compability.*;
 import emanondev.itemedit.gui.Gui;
 import emanondev.itemedit.gui.GuiHandler;
+import emanondev.itemedit.storage.*;
 import emanondev.itemedit.storage.mongo.MongoPlayerStorage;
 import emanondev.itemedit.storage.mongo.MongoServerStorage;
 import emanondev.itemedit.storage.mongo.MongoStorage;
-import emanondev.itemedit.storage.PlayerStorage;
-import emanondev.itemedit.storage.ServerStorage;
-import emanondev.itemedit.storage.StorageType;
-import emanondev.itemedit.storage.YmlPlayerStorage;
-import emanondev.itemedit.storage.YmlServerStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
-import org.jetbrains.annotations.Nullable;
 
 public class ItemEdit extends APlugin {
     private static ItemEdit plugin = null;
@@ -67,6 +64,12 @@ public class ItemEdit extends APlugin {
         return txt.substring(txt.lastIndexOf(".") + 1);
     }
 
+    @NotNull
+    public StorageType getStorageType() { //TODO if invalid return YAML, maybe i should add a feedback
+        return StorageType.byName(this.getConfig().load("storage.type", "", String.class))
+                .orElse(StorageType.YAML);
+    }
+
     @Override
     public Integer getProjectId() {
         return PROJECT_ID;
@@ -77,23 +80,27 @@ public class ItemEdit extends APlugin {
         Aliases.reload();
         Bukkit.getPluginManager().registerEvents(new GuiHandler(), this);
 
-        StorageType storageType = StorageType.byName(this.getConfig().load("storage.type", "", String.class))
-                .orElse(StorageType.YAML);
+        StorageType storageType = getStorageType();
         this.getLogger().info("Selected Storage Type: " + storageType.name());
-        if (storageType == StorageType.YAML) {
-            pStorage = new YmlPlayerStorage();
-            sStorage = new YmlServerStorage();
-        } else if (storageType == StorageType.MONGODB) {
-            String connectionString = this.getConfig().load("storage.mongodb.uri", "mongodb://127.0.0.1:27017", String.class);
-            String database = this.getConfig().load("storage.mongodb.database", "itemedit", String.class);
-            String collectionPrefix = this.getConfig().load("storage.mongodb.collection_prefix", "itemedit-", String.class);
+        switch (storageType) {
+            case YAML:
+                pStorage = new YmlPlayerStorage();
+                sStorage = new YmlServerStorage();
+                break;
+            case MONGODB: {
+                String connectionString = this.getConfig().load("storage.mongodb.uri", "mongodb://127.0.0.1:27017", String.class);
+                String database = this.getConfig().load("storage.mongodb.database", "itemedit", String.class);
+                String collectionPrefix = this.getConfig().load("storage.mongodb.collection_prefix", "itemedit-", String.class);
 
-            this.mongoStorage = new MongoStorage(connectionString, database, collectionPrefix);
-            this.pStorage = new MongoPlayerStorage(this.mongoStorage, this.getLogger());
-            this.sStorage = new MongoServerStorage(this.mongoStorage);
-        } else {
-            this.getLogger().info("You selected an unsupported storage type! Disable player and server storage...");
-            // TODO: Disable player and server storage
+                this.mongoStorage = new MongoStorage(connectionString, database, collectionPrefix);
+                this.pStorage = new MongoPlayerStorage(this.mongoStorage, this.getLogger());
+                this.sStorage = new MongoServerStorage(this.mongoStorage);
+                break;
+            }
+            default: {
+                this.enableWithError("Selected storage type is invalid, please fix it: open plugins/ItemEdit/config.yml and set storage: -> type: 'YAML' then restart the server");
+                return;
+            }
         }
 
         registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
@@ -102,6 +109,7 @@ public class ItemEdit extends APlugin {
         registerCommand("itemeditinfo", new ItemEditInfoCommand(), null);
         new ReloadCommand(this).register();
         registerCommand("itemeditimport", new ItemEditImportCommand(), null);
+        //TODO add a command to change storage type (aka conversion)
 
         //hooks
         if (Hooks.isPAPIEnabled()) {
