@@ -45,11 +45,13 @@ public class ItemEditInfoCommand implements TabExecutor {
         if (sender.hasPermission(permission)) {
             Util.sendMessage(sender, new ComponentBuilder(
                     ChatColor.BLUE + "Server: " + ChatColor.AQUA + Bukkit.getVersion() + "\n" +
-                            ChatColor.BLUE + "ItemEdit: " + ChatColor.AQUA + plugin.getDescription().getVersion() + "\n" +
+                            ChatColor.BLUE + "ItemEdit: " + ChatColor.AQUA + plugin.getDescription().getVersion() + " Storage: "+plugin.getServerStorage().getClass().getSimpleName()+"\n" +
                             ChatColor.BLUE + "ItemTag: " + ChatColor.AQUA + (Hooks.isEnabled("ItemTag") ?
                             Bukkit.getPluginManager().getPlugin("ItemTag").getDescription().getVersion() : "Nope") + "\n" +
                             ChatColor.BLUE + "PAPI: " + ChatColor.AQUA + (Hooks.isPAPIEnabled() ?
                             Bukkit.getPluginManager().getPlugin("PlaceholderAPI").getDescription().getVersion() : "Nope") + "\n" +
+                            ChatColor.BLUE + "NBTAPI: " + ChatColor.AQUA + (Hooks.isNBTAPIEnabled() ?
+                            Bukkit.getPluginManager().getPlugin("NBTAPI").getDescription().getVersion() : "Nope") + "\n" +
                             ChatColor.BLUE + "Vault: " + ChatColor.AQUA + (Hooks.isVault() ?
                             Bukkit.getPluginManager().getPlugin("Vault").getDescription().getVersion() : "Nope") + "\n" +
                             ChatColor.BLUE + "MythicMobs: " + ChatColor.AQUA + (Hooks.isMythicMobsEnabled() ?

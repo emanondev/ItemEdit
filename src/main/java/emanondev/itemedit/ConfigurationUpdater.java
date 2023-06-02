@@ -1,9 +1,11 @@
 package emanondev.itemedit;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 
 class ConfigurationUpdater {
-    private static final int CURRENT_VERSION = 4;
+    private static final int CURRENT_VERSION = 5;
 
     static void update() {
         ItemEdit plugin = ItemEdit.get();
@@ -75,6 +77,13 @@ class ConfigurationUpdater {
         }
         if (version <= 3){
             plugin.getConfig().set("check-updates",true);
+        }
+        if (version <= 4){
+            YMLConfig conf = plugin.getConfig();
+            conf.set("storage.type","YAML");
+            conf.set("storage.mongodb.uri","mongodb://127.0.0.1:27017");
+            conf.set("storage.mongodb.database","itemedit");
+            conf.set("storage.mongodb.collection_prefix","itemedit");
         }
 
         plugin.log("Updating configuration version (" + version + " -> " + CURRENT_VERSION + ")");

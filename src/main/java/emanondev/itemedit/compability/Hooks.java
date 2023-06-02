@@ -15,6 +15,10 @@ public class Hooks {
         return isEnabled("PlaceholderAPI");
     }
 
+    public static boolean isNBTAPIEnabled() {
+        return isEnabled("NBTAPI");
+    }
+
     public static boolean isShopGuiPlusEnabled() {
         return isEnabled("ShopGuiPlus");
     }
