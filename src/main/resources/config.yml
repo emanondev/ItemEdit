@@ -30,6 +30,13 @@ serveritem:
   # player A buy an item with %player_name% holder, player A change name to B, try to sell the item but he can't because %player_name% now it's B and do not match old name A
   replace-holders: true
 storage:
+  # Select storage type. Available types: YAML, MongoDB
+  type: "YAML"
+  # If you use MongoDB as a storage solution, please enter the connection data here.
+  mongodb:
+    uri: "mongodb://127.0.0.1:27017"
+    database: "itemedit"
+    collection_prefix: "itemedit-"
   # Player should be identified by uuid?
   # If set to false players will be identified by name
   # Disclaimer: players may change their name, use uuid unless you know what you do

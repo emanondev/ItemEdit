@@ -5,14 +5,19 @@ import emanondev.itemedit.command.*;
 import emanondev.itemedit.compability.*;
 import emanondev.itemedit.gui.Gui;
 import emanondev.itemedit.gui.GuiHandler;
+import emanondev.itemedit.storage.mongo.MongoPlayerStorage;
+import emanondev.itemedit.storage.mongo.MongoServerStorage;
+import emanondev.itemedit.storage.mongo.MongoStorage;
 import emanondev.itemedit.storage.PlayerStorage;
 import emanondev.itemedit.storage.ServerStorage;
+import emanondev.itemedit.storage.StorageType;
 import emanondev.itemedit.storage.YmlPlayerStorage;
 import emanondev.itemedit.storage.YmlServerStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.Collections;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemEdit extends APlugin {
     private static ItemEdit plugin = null;
@@ -72,8 +77,24 @@ public class ItemEdit extends APlugin {
         Aliases.reload();
         Bukkit.getPluginManager().registerEvents(new GuiHandler(), this);
 
-        pStorage = new YmlPlayerStorage(); //may implement more type of storage and allow selecting storage type from config
-        sStorage = new YmlServerStorage();
+        StorageType storageType = StorageType.byName(this.getConfig().load("storage.type", "", String.class))
+                .orElse(StorageType.YAML);
+        this.getLogger().info("Selected Storage Type: " + storageType.name());
+        if (storageType == StorageType.YAML) {
+            pStorage = new YmlPlayerStorage();
+            sStorage = new YmlServerStorage();
+        } else if (storageType == StorageType.MONGODB) {
+            String connectionString = this.getConfig().load("storage.mongodb.uri", "mongodb://127.0.0.1:27017", String.class);
+            String database = this.getConfig().load("storage.mongodb.database", "itemedit", String.class);
+            String collectionPrefix = this.getConfig().load("storage.mongodb.collection_prefix", "itemedit-", String.class);
+
+            this.mongoStorage = new MongoStorage(connectionString, database, collectionPrefix);
+            this.pStorage = new MongoPlayerStorage(this.mongoStorage, this.getLogger());
+            this.sStorage = new MongoServerStorage(this.mongoStorage);
+        } else {
+            this.getLogger().info("You selected an unsupported storage type! Disable player and server storage...");
+            // TODO: Disable player and server storage
+        }
 
         registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
         registerCommand(new ItemStorageCommand(), Collections.singletonList("is"));
@@ -122,6 +143,8 @@ public class ItemEdit extends APlugin {
         for (Player p : Bukkit.getOnlinePlayers())
             if (p.getOpenInventory().getTopInventory().getHolder() instanceof Gui)
                 p.closeInventory();
+
+        if (this.mongoStorage != null) this.mongoStorage.close();
     }
 
     public void reload() {
@@ -132,6 +155,8 @@ public class ItemEdit extends APlugin {
         getPlayerStorage().reload();
         getServerStorage().reload();
     }
+
+    private @Nullable MongoStorage mongoStorage;
 
     private PlayerStorage pStorage;
 

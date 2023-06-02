@@ -107,5 +107,11 @@
             <version>5.1.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <!-- MongoDB -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.12.13</version>
+        </dependency>
     </dependencies>
 </project>
