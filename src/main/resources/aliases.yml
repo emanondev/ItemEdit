@@ -263,6 +263,34 @@ goat_horn_sound:
   admire_goat_horn: admire
   feel_goat_horn: feel
   seek_goat_horn: seek
+trim_material:
+  minecraft:quartz: quartz
+  minecraft:redstone: redstone
+  minecraft:emerald: emerald
+  minecraft:copper: copper
+  minecraft:iron: iron
+  minecraft:lapis: lapis
+  minecraft:diamond: diamond
+  minecraft:gold: gold
+  minecraft:netherite: netherite
+  minecraft:amethyst: amethyst
+trim_pattern:
+  minecraft:rib: rib
+  minecraft:snout: snout
+  minecraft:wild: wild
+  minecraft:coast: coast
+  minecraft:spire: spire
+  minecraft:wayfinder: wayfinder
+  minecraft:shaper: shaper
+  minecraft:tide: tide
+  minecraft:silence: silence
+  minecraft:vex: vex
+  minecraft:sentry: sentry
+  minecraft:dune: dune
+  minecraft:raiser: raiser
+  minecraft:eye: eye
+  minecraft:host: host
+  minecraft:ward: ward
 # ItemTag flags https://www.spigotmc.org/resources/89634/
 custom_flags:
   placeable: placeable

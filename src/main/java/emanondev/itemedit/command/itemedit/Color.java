@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 
@@ -33,7 +34,8 @@ public class Color extends SubCmd {
     public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        if ((item.getItemMeta() instanceof PotionMeta)) {
+        ItemMeta meta = item.getItemMeta();
+        if ((meta instanceof PotionMeta)) {
 
             if (item.getType() == Material.TIPPED_ARROW && !sender.hasPermission(tippedArrowPerm)) {
                 this.getCommand().sendPermissionLackMessage(tippedArrowPerm, sender);
@@ -44,7 +46,7 @@ public class Color extends SubCmd {
                 this.getCommand().sendPermissionLackMessage(potionPerm, sender);
                 return;
             }
-            PotionMeta potionMeta = (PotionMeta) item.getItemMeta();
+            PotionMeta potionMeta = (PotionMeta) meta;
             try {
                 if (args.length != 4)
                     throw new IllegalArgumentException("Wrong param number");
@@ -59,13 +61,13 @@ public class Color extends SubCmd {
             }
             return;
         }
-        if ((item.getItemMeta() instanceof LeatherArmorMeta)) {
+        if ((meta instanceof LeatherArmorMeta)) {
             if (!sender.hasPermission(leatherPerm)) {
                 this.getCommand().sendPermissionLackMessage(leatherPerm, sender);
                 return;
             }
 
-            LeatherArmorMeta leatherMeta = (LeatherArmorMeta) item.getItemMeta();
+            LeatherArmorMeta leatherMeta = (LeatherArmorMeta) meta;
             try {
                 if (args.length != 4)
                     throw new IllegalArgumentException("Wrong param number");
@@ -80,13 +82,13 @@ public class Color extends SubCmd {
             }
             return;
         }
-        if (item.getItemMeta() instanceof FireworkEffectMeta) {
+        if (meta instanceof FireworkEffectMeta) {
             if (!sender.hasPermission(starsPerm)) {
                 this.getCommand().sendPermissionLackMessage(starsPerm, sender);
                 return;
             }
 
-            FireworkEffectMeta starMeta = (FireworkEffectMeta) item.getItemMeta();
+            FireworkEffectMeta starMeta = (FireworkEffectMeta) meta;
             try {
                 if (args.length != 4)
                     throw new IllegalArgumentException("Wrong param number");

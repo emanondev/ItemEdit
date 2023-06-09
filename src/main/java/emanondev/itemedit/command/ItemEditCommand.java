@@ -66,6 +66,9 @@ public class ItemEditCommand extends AbstractCommand {
             } catch (Throwable ignored){
                 //avoid some issues
             }
+            if (Util.isVersionUpTo(1, 19,5))
+                return;
+            this.registerSubCommand(new Trim(this));// 1.20+
         } finally {
             this.registerSubCommand(new Type(this));
             this.registerSubCommand(new ListAliases(this));

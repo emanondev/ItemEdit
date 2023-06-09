@@ -345,6 +345,16 @@ itemedit:
       - ''
       - '&e<type> &bthe type of sound'
     params: '<type>'
+  armortrim:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be an armor'
+    wrong-material: '&4[&cItemEdit&4] &cWrong Trim Material Value! &4[&6hover here&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cWrong Trim Pattern Value! &4[&6hover here&4]'
+    description:
+      - '&b&lSet Armor Trim'
+      - ''
+      - '&e<material> &bthe trim material'
+      - '&e<pattern> &bthe trim pattern'
+    params: '<material> <pattern>'
 serveritem:
   help-header: '&9&lServerItem - 幫助'
   give:

@@ -6,6 +6,8 @@ import org.bukkit.FireworkEffect;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.trim.TrimMaterial;
+import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -60,6 +62,29 @@ public class Aliases {
     public static final AttributeAliases ATTRIBUTE = getAttributeAliases();
     public static final OperationAliases OPERATIONS = getAttributeOperationAliases();
     public static final TropicalFishPatternAliases TROPICALPATTERN = getTropicalPatternAliases();
+    public static final TrimMaterialAliases TRIM_MATERIAL = getTrimMaterialAliases();
+
+    private static TrimMaterialAliases getTrimMaterialAliases() {
+        if (Util.isVersionUpTo(1, 19,5))
+            return null;
+        try {
+            return new TrimMaterialAliases();
+        } catch (Throwable e) {
+            return null;
+        }
+    }
+
+    public static final TrimPatternAliases TRIM_PATTERN = getTrimPatternAliases();
+
+    private static TrimPatternAliases getTrimPatternAliases() {
+        if (Util.isVersionUpTo(1, 19,5))
+            return null;
+        try {
+            return new TrimPatternAliases();
+        } catch (Throwable e) {
+            return null;
+        }
+    }
 
     private final static Map<String, AliasSet<?>> types = new HashMap<>();
     public static final EnumAliasSet<FireworkEffect.Type> FIREWORK_TYPE = new EnumAliasSet<>("firework_type", FireworkEffect.Type.class);
@@ -86,6 +111,8 @@ public class Aliases {
         registerAliasType(TROPICALPATTERN);
         registerAliasType(AXOLOTL_VARIANT);
         registerAliasType(GOAT_HORN_SOUND);
+        registerAliasType(TRIM_MATERIAL);
+        registerAliasType(TRIM_PATTERN);
     }
 
     public static <T> void registerAliasType(@Nullable AliasSet<T> set) {

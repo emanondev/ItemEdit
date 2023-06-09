@@ -1,8 +1,7 @@
 package emanondev.itemedit;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
+import java.util.Locale;
 
 class ConfigurationUpdater {
     private static final int CURRENT_VERSION = 5;
@@ -75,15 +74,32 @@ class ConfigurationUpdater {
             conf.set("goat_horn_sound.seek_goat_horn", "seek");
             conf.save();
         }
-        if (version <= 3){
-            plugin.getConfig().set("check-updates",true);
+        if (version <= 3) {
+            plugin.getConfig().set("check-updates", true);
         }
-        if (version <= 4){
+        if (version <= 4) {
             YMLConfig conf = plugin.getConfig();
-            conf.set("storage.type","YAML");
-            conf.set("storage.mongodb.uri","mongodb://127.0.0.1:27017");
-            conf.set("storage.mongodb.database","itemedit");
-            conf.set("storage.mongodb.collection_prefix","itemedit");
+            conf.set("storage.type", "YAML");
+            conf.set("storage.mongodb.uri", "mongodb://127.0.0.1:27017");
+            conf.set("storage.mongodb.database", "itemedit");
+            conf.set("storage.mongodb.collection_prefix", "itemedit");
+            conf.save();
+            conf = ItemEdit.get().getLanguageConfig(null);
+            conf.set("itemedit.armortrim.wrong-type", "&4[&cItemEdit&4] &cItem must be an armor");
+            conf.set("itemedit.armortrim.wrong-material", "&4[&cItemEdit&4] &cWrong Trim Material Value! &4[&6hover here&4]");
+            conf.set("itemedit.armortrim.wrong-pattern", "&4[&cItemEdit&4] &cWrong Trim Pattern Value! &4[&6hover here&4]");
+            conf.set("itemedit.armortrim.description", Arrays.asList("&b&lSet Armor Trim", "",
+                    "&e<material> &bthe trim material", "&e<pattern> &bthe trim pattern"));
+            conf.set("itemedit.armortrim.params", "<material> <pattern>");
+            conf.save();
+            conf = ItemEdit.get().getConfig("aliases.yml");
+            for (String name : new String[]{"quartz", "redstone", "emerald", "copper", "iron", "lapis",
+                    "diamond", "gold", "netherite", "amethyst"})
+                conf.set("trim_material.minecraft:" + name.toLowerCase(Locale.ENGLISH), name.toLowerCase(Locale.ENGLISH));
+            for (String name : new String[]{"rib", "snout", "wild", "coast", "spire", "wayfinder", "shaper", "tide",
+                    "silence", "vex", "sentry", "dune", "raiser", "eye", "host", "ward"})
+                conf.set("trim_pattern.minecraft:" + name.toLowerCase(Locale.ENGLISH), name.toLowerCase(Locale.ENGLISH));
+            conf.save();
         }
 
         plugin.log("Updating configuration version (" + version + " -> " + CURRENT_VERSION + ")");

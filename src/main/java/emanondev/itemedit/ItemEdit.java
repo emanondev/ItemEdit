@@ -9,6 +9,8 @@ import emanondev.itemedit.storage.*;
 import emanondev.itemedit.storage.mongo.MongoPlayerStorage;
 import emanondev.itemedit.storage.mongo.MongoServerStorage;
 import emanondev.itemedit.storage.mongo.MongoStorage;
+import emanondev.itemedit.storage.yaml.YmlPlayerStorage;
+import emanondev.itemedit.storage.yaml.YmlServerStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
