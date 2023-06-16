@@ -355,6 +355,20 @@ itemedit:
       - '&e<material> &bthe trim material'
       - '&e<pattern> &bthe trim pattern'
     params: '<material> <pattern>'
+  bookenchant:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a book or enchanted book'
+    wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
+    description:
+      - '&b&lSet enchants on the book'
+      - '&bThe difference between enchant and bookenchant is that'
+      - '&ba book with enchant fire aspect sets hit targets on fire'
+      - '&bwhile a book with bookenchant doesn''t'
+      - ''
+      - '&e<enchant> &benchant type'
+      - '&e[level] &blevel of the enchant, by default &e1'
+      - ''
+      - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
+    params: '<enchant> [level]'
 serveritem:
   help-header: '&9&lServerItem - 帮助'
   give:

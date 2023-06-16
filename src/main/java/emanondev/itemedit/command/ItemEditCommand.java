@@ -70,6 +70,7 @@ public class ItemEditCommand extends AbstractCommand {
                 return;
             this.registerSubCommand(new Trim(this));// 1.20+
         } finally {
+            this.registerSubCommand(new BookEnchant(this));
             this.registerSubCommand(new Type(this));
             this.registerSubCommand(new ListAliases(this));
         }

@@ -99,7 +99,6 @@ public abstract class AbstractCommand implements TabExecutor {
             return false;
         }
         if (sub.isPlayerOnly() && sub.checkNonNullItem()) {
-
             @SuppressWarnings("deprecation")
             ItemStack item = ((Player) sender).getInventory().getItemInHand();
             if (item == null || item.getType() == Material.AIR) {

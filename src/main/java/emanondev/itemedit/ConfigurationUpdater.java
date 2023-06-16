@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 class ConfigurationUpdater {
-    private static final int CURRENT_VERSION = 5;
+    private static final int CURRENT_VERSION = 6;
 
     static void update() {
         ItemEdit plugin = ItemEdit.get();
@@ -99,6 +99,20 @@ class ConfigurationUpdater {
             for (String name : new String[]{"rib", "snout", "wild", "coast", "spire", "wayfinder", "shaper", "tide",
                     "silence", "vex", "sentry", "dune", "raiser", "eye", "host", "ward"})
                 conf.set("trim_pattern.minecraft:" + name.toLowerCase(Locale.ENGLISH), name.toLowerCase(Locale.ENGLISH));
+            conf.save();
+        }
+        if (version <= 5) {
+            YMLConfig conf = ItemEdit.get().getLanguageConfig(null);
+            conf.set("itemedit.bookenchant.wrong-type", "&4[&cItemEdit&4] &cItem must be a book or enchanted book");
+            conf.set("itemedit.bookenchant.wrong-enchant", "&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]");
+            conf.set("itemedit.bookenchant.description", Arrays.asList("&b&lSet enchants on the book"
+                    , "&bThe difference between enchant and bookenchant is that"
+                    , "&ba book with enchant fire aspect sets hit targets on fire"
+                    , "&bwhile a book with bookenchant doesn't", ""
+                    , "&e<enchant> &benchant type"
+                    , "&e[level] &blevel of the enchant, by default &e1", ""
+                    , "&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant"));
+            conf.set("itemedit.bookenchant.params", "<enchant> [level]");
             conf.save();
         }
 
