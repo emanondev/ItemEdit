@@ -1,760 +1,763 @@
-player-only: '&4[&cItemEdit&4] &cCommand for Players only'
-no-item-on-hand: '&4[&cItemEdit&4] &cYou need to hold an item in hand'
-lack-permission: '&4[&cItemEdit&4] &cYou lack of permission %permission%'
-lack-permission-generic: '&4[&cItemEdit&4] &cYou don''t have permission to use this command'
-blocked-by-censure: '&4[&cItemEdit&4] &cYou can''t use this text, it contains blocked words'
-blocked-by-type-restriction: '&4[&cItemEdit&4] &cYou can''t rename this item'
-blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cYou can''t edit lore on this item'
+player-only: "&4[&cItemEdit&4] &cCommande réservée aux joueurs uniquement"
+no-item-on-hand: "&4[&cItemEdit&4] &cVous devez tenir un objet en main"
+lack-permission: "&4[&cItemEdit&4] &cVous n'avez pas la permission %permission%"
+lack-permission-generic: "&4[&cItemEdit&4] &cVous n'avez pas la permission d'utiliser cette commande"
+blocked-by-censure: "&4[&cItemEdit&4] &cVous ne pouvez pas utiliser ce texte car
+  il contient des mots bloqués"
+blocked-by-type-restriction: "&4[&cItemEdit&4] &cVous ne pouvez pas renommer cet objet"
+blocked-by-type-restriction-lore: "&4[&cItemEdit&4] &cVous ne pouvez pas
+  modifier le texte descriptions de cet objet"
 itemedit:
-  help-header: '&9&lItemEdit - Help'
+  help-header: "&9&lItemEdit - Aide"
   rename:
     description:
-      - '&b&lSet item''s name'
-      - ''
-      - '&b&lTip: &btype &eclear &bto revert name to default'
-    params: '<name>'
+      - "&b&lDéfinir le nom de l'objet"
+      - ""
+      - "&b&lAstuce : &bTapez &eclear &bpour rétablir le nom par défaut"
+    params: <nom>
   lore:
     description:
-      - '&b&lEdit lore'
-      - ''
-      - '&eAdd <text> &b- add text on a new line'
-      - '&eInsert <line> <text> &b- add text on selected line'
-      - '&eSet <line> <text> &b- set or replace text on chosen line'
-      - '&eRemove <line> &b- remove chosen line'
-      - '&eReset &b- remove all lines'
-      - '&eCopy &b- copy current item lore to paste it later'
-      - '&eCopyBook &b- same as copy but from pages of a book as lines'
-      - '&eCopyFile <path> &b- same as copy but from loreCopy.yml'
-      - '&ePaste &b- paste the last copied lore'
-      - '&eReplace <replaced> <replacer> &b- replace all occurrences'
-    params: '<add/set/remove...> [...]'
+      - "&b&lModifier les descriptions"
+      - ""
+      - "&eAdd <texte> &b- ajouter du texte sur une nouvelle ligne"
+      - "&eInsert <ligne> <texte> &b- ajouter du texte sur la ligne sélectionnée"
+      - "&eSet <ligne> <texte> &b- définir ou remplacer le texte sur la ligne
+        choisie"
+      - "&eRemove <ligne> &b- supprimer la ligne choisie"
+      - "&eReset &b- supprimer toutes les lignes"
+      - "&eCopy &b- copier les descriptions actuelles pour les coller plus tard"
+      - "&eCopyBook &b- même chose que copy, mais à partir des pages d'un livre"
+      - "&eCopyFile <chemin> &b- même chose que copy, mais à partir de
+        loreCopy.yml"
+      - "&ePaste &b- coller les descriptions précédemment copiées"
+      - "&eReplace <remplacé> <remplacent> &b- remplacer toutes les occurrences"
+    params: <add/set/remove...> [...]
     set:
-      params: 'set <line> <text>'
+      params: set <ligne> <texte>
       description:
-        - '&b&lSet or replace text on selected line'
+        - "&b&lDéfinir ou remplacer le texte sur la ligne sélectionnée"
     remove:
-      params: 'remove <line>'
+      params: remove <ligne>
       description:
-        - '&b&lRemove selected line'
+        - "&b&lSupprimer la ligne sélectionnée"
     insert:
-      params: 'insert <line> <text>'
+      params: insert <ligne> <texte>
       description:
-        - '&b&lAdd text on selected line'
+        - "&b&lAjouter du texte sur la ligne sélectionnée"
     copy:
-      feedback: '&9[&fItemEdit&9] &aLore copied'
+      feedback: "&9[&fItemEdit&9] &aDescriptions copiées"
     copyBook:
-      wrong-type: '&4[&cItemEdit&4] &cItem must be a written book or book and quill'
-      feedback: '&9[&fItemEdit&9] &aBook pages copied'
+      wrong-type: "&4[&cItemEdit&4] &cL'objet doit être un livre écrit ou un livre et
+        une plume"
+      feedback: "&9[&fItemEdit&9] &aPages de livre copiées"
     copyFile:
-      no-path: '&4[&cItemEdit&4] &cSelect a path /ie lore copyfile &6<path>'
-      wrong-path: '&9[&fItemEdit&9] &cInvalid path, remember to reload the configuration and check the CaPs'
-      feedback: '&9[&fItemEdit&9] &aConfiguration copied'
+      no-path: "&4[&cItemEdit&4] &cSélectionnez un chemin /ie lore copyfile &6<chemin>"
+      wrong-path: "&9[&fItemEdit&9] &cChemin non valide, n'oubliez pas de recharger la
+        configuration et vérifiez les majuscules"
+      feedback: "&9[&fItemEdit&9] &aConfiguration copiée"
     paste:
-      feedback: '&9[&fItemEdit&9] &aLore pasted'
-      no-copy: '&4[&cItemEdit&4] &cCopy a lore first'
+      feedback: "&9[&fItemEdit&9] &aDescriptions collées"
+      no-copy: "&4[&cItemEdit&4] &cCopiez d'abord des descriptions"
     replace:
-      params: 'replace <replaced> <replacer>'
+      params: 'replace <remplacé> <remplaçant>'
       description:
-        - '&b&lReplace all occurrences on the lore'
+        - '&b&lRemplacez toutes les occurrences dans la description'
         - ''
-        - '&bIf you need to replace more than a word you have'
-        - '&b to close them inside &e{ }'
+        - "&bSi vous devez remplacer plus qu'un mot, vous devez les fermer entre les accolades &e{ }"
         - ''
-        - '&bExample: &e/ie lore replace New Rusty'
-        - '&b''&eNew sword&b'' -> ''&eRusty sword&b'''
+        - "&bExemple : &e/ie lore replace Nouveau Rouillé"
+        - "&b''&eNouvelle épée&b'' -> ''&eÉpée rouillée&b''"
         - ''
-        - '&bExample 2: &e/ie lore replace {Heavy} {Very light}'
-        - '&b''&eHeavy sword&b'' -> ''&eVery light sword&b'''
+        - "&bExemple 2 : &e/ie lore replace {Lourd} {Très léger}"
+        - "&b''&eÉpée lourde&b'' -> ''&eÉpée très légère&b''"
   hide:
-    wrong-flag: '&4[&cItemEdit&4] &cWrong Flag Value! &4[&6hover here&4]'
+    wrong-flag: '&4[&cItemEdit&4] &cMauvaise valeur de drapeau ! &4[&6survoler ici&4]'
     description:
-      - '&b&lHide or show components'
+      - '&b&lMasquer ou afficher des composants'
       - ''
-      - '&e<flag> &bitem flag to edit'
-      - '&e[true/false] &bset the flag value, by default toggle'
+      - '&e<flag> &bdrapeau d''objet à éditer'
+      - '&e[true/false] &bfixer la valeur du drapeau, basculer par défaut'
       - ''
-      - '&b&lTip: &bhide banner pannerns with potion_effects flag'
-      - '&b&lTip: &bhide all flags at once with &e/itemedit hideall'
+      - "&b&lAstuce : &bmasquer les motifs de bannière avec le drapeau potion_effects"
+      - "&b&lAstuce : &bmasquer tous les drapeaux en une fois avec &e/itemedit hideall"
     params: '<flag> [true/false]'
   hideall:
     description:
-      - '&b&lHide all components'
+      - '&b&lMasquer tous les composants'
       - ''
-      - '&bHides: enchants, potion effects, banner layers, attributes ...'
+      - '&bMasque : enchantements, effets de potion, couches de bannière, attributs ...'
       - ''
-      - '&b&lTip: &bhide single components with &e/itemedit hide <flag> true'
+      - "&b&lAstuce : &bmasquer des composants individuels avec &e/itemedit hide <flag> true"
     params: ''
   damage:
     description:
-      - '&b&lEdit durability'
+      - '&b&lModifier la durabilité'
       - ''
-      - '&e<durability> &bdamage to apply'
-      - '&b&lNote: &e0 &bmeans no damage, full durability'
-    params: '<durability>'
+      - "&e<durabilité> &bquantité de dégâts à appliquer"
+      - '&b&lNote : &e0 &bsignifie aucun dégât, durabilité maximale'
+    params: '<durabilité>'
   type:
     description:
-      - '&b&lSet item''s type'
+      - '&b&lDéfinir le type de l''objet'
       - ''
-      - '&b&lNote: &ba few types as Air won''t work'
+      - "&b&lNote : &bquelques types comme Air ne fonctionneront pas"
     params: '<type>'
   unbreakable:
     description:
-      - '&b&lSet unbreakable state'
+      - '&b&lDéfinir l''état incassable'
       - ''
-      - '&bUnbreakable tools and armors won''t lost durability'
-      - '&e[true/false] &bset unbreakable value, by default toggle'
+      - "&bLes outils et armures incassables n'auront pas de perte de durabilité"
+      - '&e[true/false] &bfixer la valeur d''incassabilité, basculer par défaut'
     params: '[true/false]'
   amount:
     description:
-      - '&b&lSet amount'
+      - '&b&lDéfinir la quantité'
       - ''
-      - '&e<amount> &bamount to set (up to 127)'
-      - '&b&lTip: &bNegative amounts are subtracted'
-      - '&b from item current amount'
-    params: '<amount>'
+      - "&e<quantité> &bquantité à définir (jusqu'à 127)"
+      - "&b&lAstuce : &bles quantités négatives sont soustraites"
+      - "&b de la quantité actuelle de l'objet"
+    params: '<quantité>'
   skullowner:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a player skull'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être une tête de joueur'
     description:
-      - '&b&lSet skull owner'
+      - '&b&lDéfinir le propriétaire de la tête'
       - ''
-      - '&bWorks only on Player''s skulls'
-      - '&e<name> &bname of the owner'
+      - "&bFonctionne uniquement sur les têtes de joueur"
+      - "&e<nom> &bnom du propriétaire"
       - ''
-      - '&b&lTip: &bPlace and break the skull to update skins'
-    params: '<name>'
+      - "&b&lAstuce : &bPlacez et cassez la tête pour mettre à jour les skins"
+    params: '<nom>'
   color:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be colorable type like leather armors, potions or tipped arrows'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être d''un type colorable comme les armures en cuir, les potions ou les flèches spéciales'
     description:
-      - '&b&lSet color'
+      - '&b&lDéfinir la couleur'
       - ''
-      - '&bWorks on leather armor, on servers 1.11+ works on'
-      - '&b any Potion and Tipped arrows too!'
-      - '&e<red> <green> <blue> &bare the amount of each color to combine'
-      - '&bEach color is an int value between 0 and 255'
-      - '&bIf you are confused google \"&eRGB color picker&b\"'
-    params: '<red> <green> <blue>'
+      - "&bFonctionne sur les armures en cuir, sur les serveurs 1.11+, fonctionne aussi sur"
+      - "&b n'importe quelle potion et flèche spéciale !"
+      - "&e<rouge> <vert> <bleu> &bsont les quantités de chaque couleur à combiner"
+      - "&bChaque couleur est une valeur entière entre 0 et 255"
+      - "&bSi vous êtes confus, cherchez \"&eSélecteur de couleurs RVB&b\" sur Google"
+    params: '<rouge> <vert> <bleu>'
   enchant:
-    wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
+    wrong-enchant: '&4[&cItemEdit&4] &cMauvaise valeur d''enchantement ! &4[&6survoler ici&4]'
     description:
-      - '&b&lSet enchants'
+      - '&b&lDéfinir les enchantements'
       - ''
-      - '&e<enchant> &benchant type'
-      - '&e[level] &blevel of the enchant, by default &e1'
+      - "&e<enchantement> &btype d'enchantement"
+      - "&e[niveau] &bniveau de l'enchantement, par défaut &e1"
       - ''
-      - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
-    params: '<enchant> [level]'
+      - "&b&lAstuce : &bMettez &e[niveau] &bà &e0 &bpour supprimer un enchantement"
+    params: '<enchantement> [niveau]'
   booktype:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
-    wrong-generation: '&4[&cItemEdit&4] &cWrong Book type Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être un livre écrit'
+    wrong-generation: '&4[&cItemEdit&4] &cMauvaise valeur de type de livre ! &4[&6survoler ici&4]'
     description:
-      - '&b&lSet book type'
+      - '&b&lDéfinir le type de livre'
       - ''
-      - '&bWorks only on Written books'
-    params: '<booktype>'
+      - '&bFonctionne uniquement sur les livres écrits'
+    params: '<type de livre>'
   bookauthor:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être un livre écrit'
     description:
-      - '&b&lSet author'
+      - '&b&lDéfinir l''auteur'
       - ''
-      - '&bAuthor name may contains spaces and be colored too'
-      - '&bWorks only on Written books'
-    params: '<name>'
+      - "&bLe nom de l'auteur peut contenir des espaces et être coloré également"
+      - "&bFonctionne uniquement sur les livres écrits"
+    params: '<nom>'
   potioneffect:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a potion or a tipped arrow or a suspicious stew'
-    wrong-effect: '&4[&cItemEdit&4] &cWrong Effect Value! &4[&6hover here&4]'
-    itemtag-tip: '&9[&fItemEdit&9] &bYou need to add potion effects to common items? try >ItemTag<'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être une potion, une flèche spéciale ou un ragoût suspect'
+    wrong-effect: '&4[&cItemEdit&4] &cMauvaise valeur d''effet ! &4[&6survoler ici&4]'
+    itemtag-tip: '&9[&fItemEdit&9] &bVous avez besoin d''ajouter des effets de potion à des objets communs ? Essayez >ItemTag<'
     itemtag-tip-hover:
-      - '&6Click me'
+      - '&6Cliquez sur moi'
     description:
-      - '&b&lEdit potion''s effects'
+      - '&b&lModifier les effets de potion'
       - ''
-      - '&bWorks on any Potion, Tipped arrows and Suspicious stew!'
-      - '&eAdd <effect> <duration> [level] &b- add effect'
-      - '&eRemove <effect> &b- removes selected effect'
-      - '&eReset &b- remove all effects'
+      - '&bFonctionne sur n''importe quelle potion, flèche spéciale et ragoût suspect !'
+      - "&eAjouter <effet> <durée> [niveau] &b- ajouter un effet"
+      - '&eSupprimer <effet> &b- supprimer l''effet sélectionné'
+      - '&eRéinitialiser &b- supprimer tous les effets'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <effect> <duration> [level]'
+      params: 'add <effet> <durée> [niveau]'
       description:
-        - '&b&lAdds/Override selected effect'
+        - '&b&lAjoute/remplace l''effet sélectionné'
         - ''
-        - '&e<effect> &beffect type'
-        - '&e<duration> &bduration in seconds, &e0 &bfor instant effects'
-        - '&e[level] &bUp to 127, by default &e1'
+        - "&e<effet> &btype d'effet"
+        - '&e<durée> &bdurée en secondes, &e0 &bpour les effets instantanés'
+        - '&e[niveau] &bJusqu''à 127, par défaut &e1'
     remove:
-      params: 'remove <effect>'
+      params: 'remove <effet>'
       description:
-        - '&b&lRemove selected effect'
+        - '&b&lSupprimer l''effet sélectionné'
   banner:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a banner'
-    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être une bannière'
+    wrong-color: '&4[&cItemEdit&4] &cMauvaise valeur de couleur ! &4[&6survoler ici&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cMauvaise valeur de motif ! &4[&6survoler ici&4]'
     description:
-      - '&b&lEdit banner'
+      - '&b&lModifier la bannière'
     set:
-      params: 'set <type> <color> <line>'
+      params: 'set <type> <couleur> <ligne>'
       description:
-        - '&b&lReplace the pattern on selected line'
+        - '&b&lRemplacer le motif sur la ligne sélectionnée'
     add:
-      params: 'add <type> <color>'
+      params: 'add <type> <couleur>'
       description:
-        - '&b&lAdd a pattern'
+        - '&b&lAjouter un motif'
     remove:
-      params: 'remove <line>'
+      params: 'remove <ligne>'
       description:
-        - '&b&lRemove pattern on selected line'
+        - '&b&lSupprimer le motif sur la ligne sélectionnée'
     color:
-      params: 'color <line> <color>'
+      params: 'color <ligne> <couleur>'
       description:
-        - '&b&lChange pattern color on selected line'
+        - '&b&lChanger la couleur du motif sur la ligne sélectionnée'
     colorbanner:
-      params: 'colorbanner <color>'
+      params: 'colorbanner <couleur>'
       description:
-        - '&b&lChange banner background color'
+        - '&b&lChanger la couleur de fond de la bannière'
   fireworkpower:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être un feu d''artifice'
     description:
-      - '&b&lSet firework power'
+      - '&b&lDéfinir la puissance du feu d''artifice'
       - ''
-      - '&e<power> &bpower of the firework, a value betwheen &e0 &band &e5'
-    params: '<power>'
+      - '&e<power> &bpuissance du feu d''artifice, une valeur entre &e0 &bet &e5'
+    params: '<puissance>'
   firework:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être un feu d''artifice'
     description:
-      - '&b&lEdit firework'
+      - '&b&lModifier le feu d''artifice'
     params: ''
   spawnereggtype:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a spawner egg'
-    wrong-entity: '&4[&cItemEdit&4] &cWrong Egg type Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être un œuf de spawner'
+    wrong-entity: '&4[&cItemEdit&4] &cMauvaise valeur de type d''œuf ! &4[&6survoler ici&4]'
     description:
-      - '&b&lSet type of entity spawned by spawner egg'
+      - '&b&lDéfinir le type d''entité invoqué par l''œuf de spawner'
       - ''
-      - '&e<type> &btype of the entity'
-      - '&bOnly some entity type are spawnable by eggs'
+      - '&e<type> &btype de l''entité'
+      - "&bSeuls certains types d'entités sont invoquables par des œufs"
     params: '<type>'
   attribute:
-    wrong-attribute: '&4[&cItemEdit&4] &cWrong Attribute Value! &4[&6hover here&4]'
-    wrong-operation: '&4[&cItemEdit&4] &cWrong Operation Value! &4[&6hover here&4]'
-    wrong-equipment: '&4[&cItemEdit&4] &cWrong Equipment Value! &4[&6hover here&4]'
+    wrong-attribute: '&4[&cItemEdit&4] &cMauvaise valeur d''attribut ! &4[&6survoler ici&4]'
+    wrong-operation: '&4[&cItemEdit&4] &cMauvaise valeur d''opération ! &4[&6survoler ici&4]'
+    wrong-equipment: '&4[&cItemEdit&4] &cMauvaise valeur d''équipement ! &4[&6survoler ici&4]'
     description:
-      - '&b&lEdit attribute modifiers'
+      - '&b&lModifier les modificateurs d''attribut'
       - ''
-      - '&eAdd <attribute> <amount> [operation] [slot] &b- add new modifiers'
-      - '&eRemove <attribute/slot> &b- removes some modifiers'
+      - "&eAjouter <attribut> <montant> [opération] [emplacement] &b- ajouter de nouveaux modificateurs"
+      - '&eSupprimer <attribut/emplacement> &b- supprimer certains modificateurs'
     params: '<add/remove> [...]'
     add:
-      params: 'add <attribute> <amount> [operation] [slot]'
+      params: 'add <attribut> <montant> [opération] [emplacement]'
       description:
-        - '&b&lAdd attribute modifier'
+        - '&b&lAjouter un modificateur d''attribut'
         - ''
-        - '&e<attribute> &battribute type'
-        - '&e<amount> &bamount to set'
-        - '&e[operation] &bhow the modifier is added, by default sums'
-        - '&e[slot] &bapply this modifier only when item is on selected'
-        - '&e       equipment slot or any equipment slot if not selected'
+        - '&e<attribut> &btype d''attribut'
+        - '&e<montant> &bmontant à définir'
+        - '&e[opération] &bmanière dont le modificateur est ajouté, par défaut somme'
+        - '&e[emplacement] &bappliquer ce modificateur uniquement lorsque l''objet est équipé dans l''emplacement sélectionné, ou n''importe quel emplacement d''équipement s''il n''est pas sélectionné'
     remove:
-      params: 'remove <attribute/slot>'
+      params: 'remove <attribut/emplacement>'
       description:
-        - '&b&lRemove modifiers'
+        - '&b&lSupprimer les modificateurs'
         - ''
-        - '&e<attribute/slot> &btype to remove, any modifiers with'
-        - '&b                 selected value are removed'
+        - "&e<attribut/emplacement> &btype à supprimer, tous les modificateurs avec la valeur sélectionnée sont supprimés"
   tropicalfish:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a tropical fish bucket'
-    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être un seau de poisson tropical'
+    wrong-color: '&4[&cItemEdit&4] &cMauvaise valeur de couleur ! &4[&6survoler ici&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cMauvaise valeur de motif ! &4[&6survoler ici&4]'
     description:
-      - '&b&lSet property of tropical fish bucket'
+      - '&b&lDéfinir les propriétés du seau de poisson tropical'
       - ''
-      - '&epattern <pattern type> &b- type of fish'
-      - '&epatterncolor <color> &b- pattern color of fish'
-      - '&ebodycolor <color> &b- body color of fish'
+      - "&emotif <type de motif> &b- type de poisson"
+      - '&ecouleurmotif <couleur> &b- couleur du motif du poisson'
+      - '&ecouleurcorps <couleur> &b- couleur du corps du poisson'
     params: '[...]'
     pattern:
       params: 'pattern <type>'
       description:
-        - '&b&lSet tropical fish pattern type'
+        - '&b&lDéfinir le type de motif du poisson tropical'
         - ''
-        - '&e<type> &bpattern type of the fish'
+        - '&e<type> &btype de motif du poisson'
     patterncolor:
-      params: 'patterncolor <color>'
+      params: 'patterncolor <couleur>'
       description:
-        - '&b&lSet tropical fish pattern color'
+        - '&b&lDéfinir la couleur du motif du poisson tropical'
         - ''
-        - '&e<color> &bpattern color of the fish'
+        - '&e<couleur> &bcouleur du motif du poisson'
     bodycolor:
-      params: 'bodycolor <color>'
+      params: 'bodycolor <couleur>'
       description:
-        - '&b&lSet tropical fish body color'
+        - '&b&lDéfinir la couleur du corps du poisson tropical'
         - ''
-        - '&e<color> &bbody color of the fish'
+        - '&e<couleur> &bcouleur du corps du poisson'
   repaircost:
     description:
-      - '&b&lEdit Anvil Repair Cost'
+      - '&b&lModifier le coût de réparation à l''enclume'
       - ''
-      - '&e<cost> &blevels amount'
-      - '&b&lNote: &banvil repair/rename price is always at least &e1'
-      - '&b&lNote: &bthis command set base repair cost of the item, final levels cost on anvil is based what you do'
-      - '&bMore info at &eminecraft.gamepedia.com/Anvil/Mechanics'
-    params: '<cost>'
+      - '&e<coût> &bmontant en niveaux'
+      - '&b&lNote : &ble prix de réparation/renommage à l''enclume est toujours d''au moins &e1'
+      - '&b&lNote : &bcette commande définit le coût de réparation de base de l''objet, le coût final en niveaux à l''enclume dépend de ce que vous faites'
+      - '&bPlus d''informations sur &eminecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<coût>'
   custommodeldata:
     description:
-      - '&b&lEdit custom model data'
+      - '&b&lModifier les données de modèle personnalisées'
       - ''
-      - '&bUsed for texture packs'
-      - '&e<value> &bpositive int of target data model'
-    params: '<value>'
+      - '&bUtilisé pour les packs de textures'
+      - '&e<valeur> &bentier positif de la donnée de modèle cible'
+    params: '<valeur>'
   axolotlvariant:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a axolotl bucket'
-    wrong-axolotl: '&4[&cItemEdit&4] &cWrong Axolotl Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être un seau d''axolotl'
+    wrong-axolotl: '&4[&cItemEdit&4] &cMauvaise valeur d''axolotl ! &4[&6survoler ici&4]'
     description:
-      - '&b&lEdit Axolotl Variant on Axolotl bucket'
+      - '&b&lModifier la variante d''axolotl sur le seau d''axolotl'
       - ''
-      - '&e<type> &bthe type of axolotl'
+      - '&e<type> &btype d''axolotl'
     params: '<type>'
   listaliases:
     description:
-      - '&b&lShows allowed aliases parameters'
+      - '&b&lAffiche les paramètres d''alias autorisés'
       - ''
-      - '&e<type> &bthe type of parameter to show'
+      - '&e<type> &btype de paramètre à afficher'
     params: '<type>'
-    prefix_line: '&1 ◆  ◆  ◆  ◆  &9Aliases  &1◆  ◆  ◆  ◆'
-    postfix_line: '&1 ◆  ◆  ◆  ◆  &9Aliases  &1◆  ◆  ◆  ◆'
+    prefix_line: '&1 ◆  ◆  ◆  ◆  &9Alias  &1◆  ◆  ◆  ◆'
+    postfix_line: '&1 ◆  ◆  ◆  ◆  &9Alias  &1◆  ◆  ◆  ◆'
     first_color: '&b'
     second_color: '&e'
-    hover_info: '&9Original value: &e%default%'
-    hover_type: '&6Click to examine'
-    error-pre-hover: "&6&lAliases:"
+    hover_info: '&9Valeur d''origine : &e%default%'
+    hover_type: '&6Cliquez pour examiner'
+    error-pre-hover: "&6&lAlias :"
   compass:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a compass'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être une boussole'
     description:
-      - '&b&lSet compass target location'
+      - '&b&lDéfinir la destination de la boussole'
       - ''
-      - '&eSet &b- set your location as compass target'
-      - '&eClear &b- clear compass target'
+      - '&eSet &b- définir votre position comme destination de la boussole'
+      - '&eClear &b- effacer la destination de la boussole'
     params: '<set/clear>'
     set:
-      feedback: '&9[&fItemEdit&9] &aCompass now points to &e%world% %x% %y% %z%'
+      feedback: '&9[&fItemEdit&9] &aLa boussole pointe désormais vers &e%world% %x% %y% %z%'
     clear:
-      feedback: '&9[&fItemEdit&9] &aCompass target cleared'
+      feedback: '&9[&fItemEdit&9] &aDestination de la boussole effacée'
   goathornsound:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a goat horn'
-    wrong-sound: '&4[&cItemEdit&4] &cWrong Sound Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être une corne de chèvre'
+    wrong-sound: '&4[&cItemEdit&4] &cMauvaise valeur de son ! &4[&6survoler ici&4]'
     description:
-      - '&b&lSet Goat Horn sound'
+      - '&b&lDéfinir le son de la corne de chèvre'
       - ''
-      - '&e<type> &bthe type of sound'
+      - '&e<type> &btype de son'
     params: '<type>'
   armortrim:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be an armor'
-    wrong-material: '&4[&cItemEdit&4] &cWrong Trim Material Value! &4[&6hover here&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &cWrong Trim Pattern Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être une armure'
+    wrong-material: '&4[&cItemEdit&4] &cMauvaise valeur de matériau de garniture ! &4[&6survoler ici&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cMauvaise valeur de motif de garniture ! &4[&6survoler ici&4]'
     description:
-      - '&b&lSet Armor Trim'
+      - '&b&lDéfinir la garniture de l''armure'
       - ''
-      - '&e<material> &bthe trim material'
-      - '&e<pattern> &bthe trim pattern'
-    params: '<material> <pattern>'
+      - '&e<matériau> &ble matériau de la garniture'
+      - '&e<motif> &ble motif de la garniture'
+    params: '<matériau> <motif>'
   bookenchant:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a book or enchanted book'
-    wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit être un livre ou un livre enchanté'
+    wrong-enchant: '&4[&cItemEdit&4] &cMauvaise valeur d''enchantement ! &4[&6survoler ici&4]'
     description:
-      - '&b&lSet enchants on the book'
-      - '&bThe difference between enchant and bookenchant is that'
-      - '&ba book with enchant fire aspect sets hit targets on fire'
-      - '&bwhile a book with bookenchant doesn''t'
+      - '&b&lDéfinir les enchantements du livre'
+      - '&bLa différence entre "enchant" et "bookenchant" est que'
+      - '&bun livre avec l''enchantement "Fire Aspect" enflamme les cibles touchées'
+      - '&btandis qu''un livre avec le "bookenchant" ne le fait pas'
       - ''
-      - '&e<enchant> &benchant type'
-      - '&e[level] &blevel of the enchant, by default &e1'
+      - '&e<enchant> &btype d''enchantement'
+      - '&e[niveau] &bniveau de l''enchantement, par défaut &e1'
       - ''
-      - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
-    params: '<enchant> [level]'
+      - '&b&lAstuce : &bMettez &e[niveau] &bà &e0 &bpour supprimer un enchantement'
+    params: '<enchant> [niveau]'
 serveritem:
-  help-header: '&9&lServerItem - Help'
+  help-header: '&9&lServerItem - Aide'
   give:
     #Holders: %id% %nick% %amount%
-    feedback: '&aObtained &e%amount% &aof &e%nick%'
+    feedback: '&aObtenu &e%amount% &ade &e%nick%'
     #Holders: %id% %nick% %amount% %player_name%
-    log: '[serveritem][give] %player_name% obtained %amount% of %id% (%nick%)'
+    log: '[serveritem][give] %player_name% a obtenu %amount% de %id% (%nick%)'
     description:
-      - '&b&lGive selected item to player'
+      - '&b&lDonner l''objet sélectionné au joueur'
       - ''
-      - '&e<id> &bId of the item'
-      - '&e[amount] &bamount of items to give, by default 1'
-      - '&e[player] &bwho gets the items, by default you'
-      - '&e[silent] &btrue if no feedback should be send to player'
-    params: '<id> [amount] [player] [silent]'
+      - '&e<id> &bID de l''objet'
+      - '&e[amount] &bquantité d''objets à donner, par défaut 1'
+      - '&e[joueur] &bqui reçoit les objets, par défaut vous'
+      - '&e[silent] &btrue si aucun retour d''information ne doit être envoyé au joueur'
+    params: '<id> [amount] [joueur] [silent]'
   giveall:
     #Holders: %id% %nick% %amount%
-    feedback: '&aObtained &e%amount% &aof &e%nick%'
+    feedback: '&aObtenu &e%amount% &ade &e%nick%'
     #Holders: %id% %nick% %amount% %targets%
-    log: '[serveritem][giveall] %targets% obtained %amount% of %id% (%nick%)'
+    log: '[serveritem][giveall] %targets% a obtenu %amount% de %id% (%nick%)'
     description:
-      - '&b&lGive selected item to all online players'
+      - '&b&lDonner l''objet sélectionné à tous les joueurs en ligne'
       - ''
-      - '&e<id> &bId of the item'
-      - '&e[amount] &bamount of items to give, by default 1'
-      - '&e[silent] &btrue if no feedback should be send to players'
+      - '&e<id> &bID de l''objet'
+      - '&e[amount] &bquantité d''objets à donner, par défaut 1'
+      - '&e[silent] &btrue si aucun retour d''information ne doit être envoyé aux joueurs'
     params: '<id> [amount] [silent]'
   drop:
     #Holders: %id% %nick% %amount% %world% %x% %y% %z%
-    log: '[serveritem][drop] dropped %amount% of %id% (%nick%) at %world% %x% %y% %z%'
+    log: '[serveritem][drop] a lâché %amount% de %id% (%nick%) à %world% %x% %y% %z%'
     description:
-      - '&b&lDrop selected item at chosen location'
+      - '&b&lLâcher l''objet sélectionné à l''emplacement choisi'
       - ''
-      - '&e<id> &bId of the item'
-      - '&e<amount> &bamount of items to drop, 1 to 2304'
-      - '&e<world> &bwhich world'
-      - '&e<x> <y> <z> &bcoordinates'
+      - '&e<id> &bID de l''objet'
+      - '&e<amount> &bquantité d''objets à lâcher, de 1 à 2304'
+      - '&e<world> &ble monde'
+      - '&e<x> <y> <z> &bcoordonnées'
     params: '<id> <amount> <world> <x> <y> <z>'
   take:
     #Holders: %id% %nick% %amount%
-    feedback: '&aLost &e%amount% &aof &e%nick%'
+    feedback: '&aPerdu &e%amount% &ade &e%nick%'
     #Holders: %id% %nick% %amount% %player_name%
-    log: '[serveritem][take] %player_name% gave %amount% of %id% (%nick%)'
+    log: '[serveritem][take] %player_name% a donné %amount% de %id% (%nick%)'
     description:
-      - '&b&lTake selected item from player'
+      - '&b&lPrendre l''objet sélectionné du joueur'
       - ''
-      - '&e<id> &bId of the item'
-      - '&e[amount] &bamount of items to give, by default 1'
-      - '&e[player] &bwho gets the items, by default you'
-      - '&e[silent] &btrue if no feedback should be send to player'
-    params: '<id> [amount] [player] [silent]'
+      - '&e<id> &bID de l''objet'
+      - '&e[amount] &bquantité d''objets à donner, par défaut 1'
+      - '&e[joueur] &bqui reçoit les objets, par défaut vous'
+      - '&e[silent] &btrue si aucun retour d''information ne doit être envoyé au joueur'
+    params: '<id> [amount] [joueur] [silent]'
   save:
     #Holders: %id%
-    success: '&aItem &e%id% &aregistered'
+    success: '&aObjet &e%id% &aenregistré'
     description:
-      - '&bRegister the item in your hand'
+      - '&bEnregistrer l''objet dans votre main'
       - ''
-      - '&e<id> &bidentify the item, case insensitive and can''t'
-      - '&b     contain spaces or dots also you can''t select'
-      - '&b     any already used id'
+      - '&e<id> &bidentifier l''objet, insensible à la casse et ne peut'
+      - '&b     pas contenir d''espaces ou de points, vous ne pouvez pas'
+      - '&b     sélectionner un ID déjà utilisé'
       - ''
-      - '&b&lTip: &buse &e/serveritem update <id>&b, to change an existing item'
-      - '&b&lTip: &bretrieve saved items with &e/serveritem give <id>'
+      - '&b&lAstuce : &butilisez &e/serveritem update <id>&b pour modifier un objet existant'
+      - '&b&lAstuce : &bretirez les objets enregistrés avec &e/serveritem give <id>'
     params: '<id>'
   delete:
     #Holders: %id%
-    success: '&aItem &e%id% &aunregistered'
+    success: '&aObjet &e%id% &adésenregistré'
     description:
-      - '&b&lDelete selected item'
+      - '&b&lSupprimer l''objet sélectionné'
       - ''
-      - '&e<id> &bId of the item'
+      - '&e<id> &bID de l''objet'
     params: '<id>'
   update:
     #Holders: %id%
-    success: '&aItem &e%id% &ahas been updated'
+    success: '&aObjet &e%id% &aa été mis à jour'
     description:
-      - '&b&lUpdate selected item'
+      - '&b&lMettre à jour l''objet sélectionné'
       - ''
-      - '&bChange the item associated with id with your hand item'
-      - '&e<id> &bId of the item'
+      - '&bChangez l''objet associé à l''ID avec l''objet de votre main'
+      - '&e<id> &bID de l''objet'
       - ''
-      - '&b&lTip: &buse &e/serveritem save <id>&b, to create a new item'
-      - '&b&lTip: &buse &e/serveritem delete <id>&b, to delete an item'
+      - '&b&lAstuce : &butilisez &e/serveritem save <id>&b pour créer un nouvel objet'
+      - '&b&lAstuce : &butilisez &e/serveritem delete <id>&b pour supprimer un objet'
     params: '<id>'
   show:
     description:
-      - '&b&lOpen a gui with server saved items'
+      - '&b&lOuvrir une interface graphique avec les objets enregistrés sur le serveur'
       - ''
-      - '&e[page] &bpage of the gui, by default 1'
+      - '&e[page] &bpage de l''interface, par défaut 1'
     params: '[page]'
   setnick:
     #Holders: %id% %nick%
-    success: '&aItem &e%id% &anick has been updated to &e%nick%'
+    success: '&aLe surnom de l''objet &e%id% &aa été mis à jour pour &e%nick%'
     description:
-      - '&bSet display name of selected item'
+      - '&bDéfinir le nom d''affichage de l''objet sélectionné'
       - ''
-      - '&bNick is used for holder &e%nick%&b on buy/sell messages, by'
-      - '&b  default is the name of the item, or item type if has no name'
+      - '&bLe surnom est utilisé pour le détenteur &e%nick% &bdans les messages d''achat/vente, par'
+      - '&bdéfaut, il s''agit du nom de l''objet, ou du type d''objet s''il n''a pas de nom'
       - ''
-      - '&e<id> &bId of the item'
-      - '&e[nick] &bname to set'
+      - '&e<id> &bID de l''objet'
+      - '&e[nick] &bnom à définir'
       - ''
-      - '&b&lTip: &bto reset to default just use &e/serveritem setnick <id>'
+      - '&b&lAstuce : &bpour réinitialiser le nom par défaut, utilisez &e/serveritem setnick <id>'
     params: '<id> [nick]'
   sell:
     #Holders: %id% %nick% %amount% %price%
-    feedback: '&aBought &e%amount% &aof &e%nick% &afor &e%price%'
+    feedback: '&aAchété &e%amount% &ade &e%nick% &apour &e%price%'
     #Holders: %id% %nick% %amount%
-    not-enough-space: '&cYou don''t have enough inventory space to buy &6%amount% &cof &6%nick%'
+    not-enough-space: '&cVous n''avez pas assez de place dans votre inventaire pour acheter &6%amount% &cde &6%nick%'
     #Holders: %id% %nick% %amount% %price%
-    not-enough-money: '&cYou don''t have &6%price% &cto buy &6%amount% &cof &6%nick%'
+    not-enough-money: '&cVous n''avez pas assez d''argent pour acheter &6%amount% &cde &6%nick% &cpour &6%price%'
     #Holders: %id% %nick% %amount% %player_name% %price%
-    log: '[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)'
+    log: '[serveritem][sell] %player_name% a payé %price% pour %amount% de %id% (%nick%)'
     description:
-      - '&b&lSell items to player'
+      - '&b&lVendre des objets au joueur'
       - ''
-      - '&bSell differs from SellMax because you sell the whole amount'
-      - '&b  to player or you sell none'
-      - '&e<id> &bid of the item'
-      - '&e<amount> &bamount of items'
-      - '&e<player> &bwho should pay money and get items'
-      - '&e<price> &bprice for the whole amount of items, must be positive'
-      - '&e[silent] &btrue to send feedback to player'
+      - '&bLa différence entre vendre et vendre tout est que vous vendez'
+      - '&bl''ensemble de la quantité au joueur ou vous ne vendez rien'
+      - '&e<id> &bID de l''objet'
+      - '&e<amount> &bquantité d''objets'
+      - '&e<player> &bqui doit payer et obtenir les objets'
+      - '&e<price> &bprix pour l''ensemble de la quantité d''objets, doit être positif'
+      - '&e[silent] &btrue pour ne pas envoyer de message au joueur'
       - ''
-      - '&bTransaction fails if player has not enough money or enough'
-      - '&b  inventory space for the whole &e<amount>'
-      - '&bNote: balance of the command executor is untouched'
+      - '&bLa transaction échoue si le joueur n''a pas assez d''argent ou d''espace'
+      - '&bdans l''inventaire pour l''ensemble de la quantité &e<amount>'
+      - '&bRemarque : le solde de l''exécuteur de la commande reste inchangé'
     params: '<id> <amount> <player> <price> [silent]'
   buy:
     #Holders: %id% %nick% %amount% %price%
-    feedback: '&aSold &e%amount% &aof &e%nick% &efor &a%price%'
+    feedback: '&aVendu &e%amount% &ade &e%nick% &epour &a%price%'
     #Holders: %id% %nick% %amount% %price%
-    not-enough-items: '&cYou don''t have &6%amount% &cof &6%nick% &cin your inventory'
+    not-enough-items: '&cVous n''avez pas &6%amount% &cde &6%nick% &cdans votre inventaire'
     #Holders: %id% %nick% %amount% %player_name% %price%
-    log: '[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%'
+    log: '[serveritem][buy] %player_name% a vendu %amount% de %id% (%nick%) pour un total de %price%'
     description:
-      - '&b&lBuy items from player'
+      - '&b&lAcheter des objets au joueur'
       - ''
-      - '&bBuy differs from BuyMax because you buy the whole amount'
-      - '&b  from player or you buy none'
-      - '&e<id> &bid of the item'
-      - '&e<amount> &bamount of items'
-      - '&e<player> &bwho should pay items and get money'
-      - '&e<price> &bprice for the whole amount of items, must be positive'
-      - '&e[silent] &btrue to send feedback to player'
+      - '&bL''achat diffère de l''achat de tout car vous achetez'
+      - '&b  l''ensemble de la quantité au joueur ou vous n''achetez rien'
+      - '&e<id> &bID de l''objet'
+      - '&e<amount> &bquantité d''objets'
+      - '&e<player> &bqui doit payer et obtenir les objets'
+      - '&e<price> &bprix pour l''ensemble de la quantité d''objets, doit être positif'
+      - '&e[silent] &btrue pour ne pas envoyer de message au joueur'
       - ''
-      - '&bTransaction fails if player has not at least &e<amount>'
-      - '&b  of &e<id> &bitems'
-      - '&bNote: balance of the command executor is untouched'
+      - '&bLa transaction échoue si le joueur n''a pas au moins &e<amount>'
+      - '&b  d''objets &e<id>'
+      - '&bRemarque : le solde de l''exécuteur de la commande reste inchangé'
     params: '<id> <amount> <player> <price> [silent]'
   sellmax:
     #Holders: %id% %nick% %amount% %price%
-    feedback: '&aBought &e%amount% &aof &e%nick% &efor &a%price%'
+    feedback: '&aAchété &e%amount% &ade &e%nick% &apour &e%price%'
     #Holders: %id% %nick%
-    not-enough-space: '&cYou don''t have enough inventory space to buy any &6%nick%'
+    not-enough-space: '&cVous n''avez pas assez de place dans votre inventaire pour acheter &6%nick%'
     #Holders: %id% %nick% %price%
-    not-enough-money: '&cYou don''t have enough money to buy any &6%nick% &cfor &6%price% &ceach'
+    not-enough-money: '&cVous n''avez pas assez d''argent pour acheter &6%nick% &cpour &6%price% &cchacun'
     #Holders: %id% %nick% %amount% %player_name% %price%
-    log: '[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)'
+    log: '[serveritem][sell] %player_name% a payé %price% pour %amount% de %id% (%nick%)'
     description:
-      - '&b&lSell items to player'
+      - '&b&lVendre des objets au joueur'
       - ''
-      - '&bSellMax differs from Sell because you may sell the less of amount'
-      - '&b  to player if there are not enough money or space for the whole'
-      - '&e<id> &bid of the item'
-      - '&e<amount> &bamount of items'
-      - '&e<player> &bwho should pay money and get items'
-      - '&e<price> &bprice for the whole amount of items, must be positive'
-      - '&e[silent] &btrue to send feedback to player'
+      - '&bVendreMax diffère de Vendre car vous pouvez vendre la quantité'
+      - '&b  la moins élevée au joueur s''il n''y a pas assez d''argent ou d''espace'
+      - '&e<id> &bID de l''objet'
+      - '&e<amount> &bquantité d''objets'
+      - '&e<player> &bqui doit payer et obtenir les objets'
+      - '&e<price> &bprix pour l''ensemble de la quantité d''objets, doit être positif'
+      - '&e[silent] &btrue pour ne pas envoyer de message au joueur'
       - ''
-      - '&bTransaction fails if player has not enough money or enough'
-      - '&b  inventory space at least an item'
-      - '&bIf player buy less than &e<price>&b paid price will be scaled'
-      - '&bNote: balance of the command executor is untouched'
+      - '&bLa transaction échoue si le joueur n''a pas assez d''argent ou d''espace'
+      - '&b  au moins un objet &e<id>'
+      - '&bSi le joueur vend moins de &e<price>&b, le prix sera ajusté'
+      - '&bRemarque : le solde de l''exécuteur de la commande reste inchangé'
     params: '<id> <amount> <player> <price> [silent]'
   buymax:
     #Holders: %id% %nick% %amount% %price%
-    feedback: '&aSold &e%amount% &aof &e%nick% &efor &a%price%'
+    feedback: '&aVendu &e%amount% &ade &e%nick% &epour &a%price%'
     #Holders: %id% %nick% %amount% %price%
-    not-enough-items: '&cYou don''t have any &6%nick% &cto sell in your inventory'
+    not-enough-items: '&cVous n''avez aucun &6%nick% &cà vendre dans votre inventaire'
     #Holders: %id% %nick% %amount% %player_name% %price%
-    log: '[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%'
+    log: '[serveritem][buy] %player_name% a vendu %amount% de %id% (%nick%) pour un total de %price%'
     description:
-      - '&b&lBuy items from player'
+      - '&b&lAcheter des objets au joueur'
       - ''
-      - '&bBuyMax differs from Buy because you may buy less of amount'
-      - '&b  from player if he has less than amount items in inventory'
-      - '&e<id> &bid of the item'
-      - '&e<amount> &bamount of items'
-      - '&e<player> &bwho should pay items and get money'
-      - '&e<price> &bprice for the whole amount of items, must be positive'
-      - '&e[silent] &btrue to send feedback to player'
+      - '&bAcheterMax diffère d''Acheter car vous pouvez acheter moins de la quantité'
+      - '&b  au joueur s''il a moins d''objets que la quantité dans son inventaire'
+      - '&e<id> &bID de l''objet'
+      - '&e<amount> &bquantité d''objets'
+      - '&e<player> &bqui doit payer les objets et recevoir l''argent'
+      - '&e<price> &bprix pour l''ensemble de la quantité d''objets, doit être positif'
+      - '&e[silent] &btrue pour envoyer ou non des messages au joueur'
       - ''
-      - '&bTransaction fails if player has not at least an &e<id> &bitem'
-      - '&b  on inventory'
-      - '&bIf player sell less than &e<amount>&b price will be scaled'
-      - '&bNote: balance of the command executor is untouched'
+      - '&bLa transaction échoue si le joueur n''a pas au moins un &e<id> &bobjet'
+      - '&b  dans son inventaire'
+      - '&bSi le joueur vend moins de &e<amount>&b, le prix sera ajusté'
+      - '&bRemarque : le solde de l''exécuteur de la commande reste inchangé'
     params: '<id> <amount> <player> <price> [silent]'
 itemstorage:
-  help-header: '&9&lItemStorage - Help'
+  help-header: '&9&lItemStorage - Aide'
   get:
     #Holders: %id% %amount%
-    success: '&9[&fItemEdit&9] &aObtained &e%amount% &aof &e%id%'
-    no-inventory-space: '&4[&cItemEdit&4] &cYou don''t have space in your inventory'
+    success: '&9[&fItemEdit&9] &aObtenu &e%amount% &ade &e%id%'
+    no-inventory-space: '&4[&cItemEdit&4] &cVous n''avez pas assez de place dans votre inventaire'
     description:
-      - '&b&lGet selected item'
+      - '&b&lObtenir l''objet sélectionné'
       - ''
-      - '&e<id> &bId of the item'
-      - '&e[amount] &bamount to get, by default 1'
+      - '&e<id> &bID de l''objet'
+      - '&e[amount] &bquantité à obtenir, par défaut 1'
     params: '<id> [amount]'
   save:
     #Holders: %id%
-    success: '&9[&fItemEdit&9] &aItem &e%id% &aregistered'
+    success: '&9[&fItemEdit&9] &aObjet &e%id% &ainscrit'
     #Holders: %limit%
-    limit-reached: '&4[&cItemEdit&4] &cYou reached the maximus number of savable items (%limit%)'
+    limit-reached: '&4[&cItemEdit&4] &cVous avez atteint le nombre maximum d''objets enregistrables (%limit%)'
     description:
-      - '&b&lRegister the item in your hand'
+      - '&b&lEnregistrer l''objet dans votre main'
       - ''
-      - '&e<id> &bidentify your item, case insensitive and can''t'
-      - '&b     contain spaces or dots also you can''t select'
-      - '&b     any already used id'
+      - '&e<id> &bidentifiez votre objet, insensible à la casse et ne peut pas'
+      - '&b     contenir d''espaces ou de points, vous ne pouvez pas non plus'
+      - '&b     sélectionner un ID déjà utilisé'
       - ''
-      - '&b&lTip: &buse &e/itemstorage update <id>&b, to change an existing item'
-      - '&b&lTip: &bretrieve your saved items with &e/itemstorage get <id>'
+      - '&b&lAstuce : &butilisez &e/itemstorage update <id>&b, pour modifier un objet existant'
+      - '&b&lAstuce : &bretournez vos objets enregistrés avec &e/itemstorage get <id>'
     params: '<id>'
   delete:
     #Holders: %id%
-    success: '&9[&fItemEdit&9] &aItem &e%id% &aunregistered'
+    success: '&9[&fItemEdit&9] &aObjet &e%id% &adésenregistré'
     description:
-      - '&b&lDelete selected item'
+      - '&b&lSupprimer l''objet sélectionné'
       - ''
-      - '&e<id> &bId of the item'
+      - '&e<id> &bID de l''objet'
     params: '<id>'
   update:
     #Holders: %id%
-    success: '&9[&fItemEdit&9] &aItem &e%id% &ahas been updated'
+    success: '&9[&fItemEdit&9] &aL''objet &e%id% &aa été mis à jour'
     description:
-      - '&b&lUpdate selected item'
+      - '&b&lMettre à jour l''objet sélectionné'
       - ''
-      - '&bChange the item associated with id with your hand item'
-      - '&e<id> &bId of the item'
+      - '&bRemplacez l''objet associé à l''ID par l''objet que vous tenez en main'
+      - '&e<id> &bID de l''objet'
       - ''
-      - '&bTip: use &e/itemstorage save <id>&b, to create a new item'
-      - '&bTip: use &e/itemstorage delete <id>&b, to delete an item'
+      - '&bAstuce : utilisez &e/itemstorage save <id>&b, pour créer un nouvel objet'
+      - '&bAstuce : utilisez &e/itemstorage delete <id>&b, pour supprimer un objet'
     params: '<id>'
   show:
     description:
-      - '&b&lOpen a gui with your saved items'
+      - '&b&lOuvrir une interface graphique avec vos objets enregistrés'
       - ''
-      - '&e[page] &bpage of the gui, by default 1'
+      - '&e[page] &bnuméro de la page de l''interface, par défaut 1'
     params: '[page]'
 itemeditimport:
   help:
-    - '&a/itemeditimport ItemEditor &2- import items from ItemEditor plugin'
+    - '&a/itemeditimport ItemEditor &2- importer des objets depuis le plugin ItemEditor'
   itemeditor:
     unable-to-get-item:
-      - '&4[&cItemEdit&4] &cUnable to load item &6%id%'
+      - '&4[&cItemEdit&4] &cImpossible de charger l''objet &6%id%'
     already-used-id:
-      - '&4[&cItemEdit&4] &6%id% &cis already used, maybe you already did this command before otherwise you may rename the file ItemEditor/items/%id%.yml'
+      - '&4[&cItemEdit&4] &6%id% &cest déjà utilisé, peut-être avez-vous déjà effectué cette commande auparavant, sinon vous pouvez renommer le fichier ItemEditor/items/%id%.yml'
     invalid-id:
-      - '&4[&cItemEdit&4] &6%id% &cis not an acceptable id, you may rename the file ItemEditor/items/%id%.yml to an alphanumeric name'
+      - '&4[&cItemEdit&4] &6%id% &cn''est pas un ID acceptable, vous pouvez renommer le fichier ItemEditor/items/%id%.yml en un nom alphanumérique'
     import-unsuccess:
-      - '&4[&cItemEdit&4] &cNo items of &6%max% &cwere imported, maybe you already did this command before(?)'
+      - '&4[&cItemEdit&4] &cAucun objet parmi les &6%max% &cn''a été importé, peut-être avez-vous déjà effectué cette commande auparavant (?)'
     import-success:
-      - '&9[&fItemEdit&9] &aImported &e%done% &aof &e%max% &aitems from ItemEditor'
-      - '&9[&fItemEdit&9] &aImported items: &e%ids%'
+      - '&9[&fItemEdit&9] &aImportation de &e%done% &aobjets sur &e%max% &aréussie depuis ItemEditor'
+      - '&9[&fItemEdit&9] &aObjets importés : &e%ids%'
     import-empty:
-      - '&4[&cItemEdit&4] &cItemEditor has no items to import'
+      - '&4[&cItemEdit&4] &cItemEditor ne contient aucun objet à importer'
 itemeditreload:
-  success: '&9[&fItemEdit&9] &aReloaded'
+  success: '&9[&fItemEdit&9] &aRechargé'
 gui:
-  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
-    creative: 'Middle Click'
-    other: 'Press 1'
+  middleclick: # Le clic du milieu ne peut être utilisé que dans le mode Créatif, une alternative est d'appuyer sur le bouton de la barre d'action 1
+    creative: 'Clic Milieu'
+    other: 'Appuyez sur 1'
   colorselector:
-    title: '&9Choose colors'
+    title: '&9Choisissez les couleurs'
     buttons:
       color:
-        - '&6Colors:'
+        - '&6Couleurs :'
         - '&e%colors%'
-        - '&7[&fRight Click&7]&b Add &e%color%'
-        - '&7[&fLeft Click&7]&b Remove last color'
-        - '&7[&fShift+Right Click&7]&b Clear colors'
+        - '&7[&fClic Droit&7]&b Ajouter &e%color%'
+        - '&7[&fClic Gauche&7]&b Supprimer la dernière couleur'
+        - '&7[&fMaj+Clic Droit&7]&b Effacer les couleurs'
   banner:
-    title: '&9Banner Editor'
-    color_selector_title: '&9Color selector'
-    pattern_selector_title: '&9Pattern selector'
+    title: '&9Éditeur de bannière'
+    color_selector_title: '&9Sélecteur de couleur'
+    pattern_selector_title: '&9Sélecteur de motif'
     buttons:
       pattern_selector_info:
-        - '&bSelect &6&l%type%'
+        - '&bSélectionnez &6&l%type%'
       color_selector_info:
-        - '&bSelect &6&l%color%'
+        - '&bSélectionnez &6&l%color%'
       position:
-        - '&6Pattern Controller'
+        - '&6Contrôleur de motif'
         - ''
-        - '&7[&f%middle_click%&7] &bToggle pattern'
-        - '&7[&fLeft/Right Click&7]&b << Move pattern >>'
+        - '&7[&fClic Milieu&7]&b Basculer le motif'
+        - '&7[&fClic Gauche/Droit&7]&b << Déplacer le motif >>'
       type:
-        - '&6Type Selector'
-        - '&bType: &e%type%'
+        - '&6Sélecteur de type'
+        - '&bType : &e%type%'
         - ''
-        - '&7[&fClick&7]&b Change type'
+        - '&7[&fClic&7]&b Changer le type'
       color:
-        - '&6Color Selector'
-        - '&bColor: &e%color%'
+        - '&6Sélecteur de couleur'
+        - '&bCouleur : &e%color%'
         - ''
-        - '&7[&fClick&7]&b Change color'
+        - '&7[&fClic&7]&b Changer la couleur'
   firework:
-    title: '&9Firework Editor'
+    title: '&9Éditeur de feu d''artifice'
     buttons:
       type:
-        - '&6Type Selector'
-        - '&bType: &e%type%'
+        - '&6Sélecteur de type'
+        - '&bType : &e%type%'
         - ''
-        - '&7[&fClick&7]&b Change type'
+        - '&7[&fClic&7]&b Changer le type'
       colors:
-        - '&6Colors Selector'
-        - '&bColors: &e%colors%'
+        - '&6Sélecteur de couleurs'
+        - '&bCouleurs : &e%colors%'
         - ''
-        - '&7[&fClick&7]&b to change colors'
+        - '&7[&fClic&7]&b pour changer les couleurs'
       fadecolors:
-        - '&6Fade Colors Selector'
-        - '&bFade Colors: &e%colors%'
+        - '&6Sélecteur de couleurs de dégradé'
+        - '&bCouleurs de dégradé : &e%colors%'
         - ''
-        - '&7[&fClick&7]&b to change colors'
+        - '&7[&fClic&7]&b pour changer les couleurs de dégradé'
       flags:
-        none: '&cNothing active'
-        trail: '&eTrail &aActive'
-        flicker: '&eFlicker &aActive'
-        both: '&eTrail&b and &eFlicker &aActive'
+        none: '&cAucun effet actif'
+        trail: '&eEffet traînée &aactif'
+        flicker: '&eEffet scintillement &aactif'
+        both: '&eEffet traînée &bet scintillement &aactifs'
         info:
-          - '&6Trail and Flicker Activator'
+          - '&6Activateur d''effets de traînée et de scintillement'
           - '%status%'
           - ''
-          - '&7[&fRight Click&7]&b Toggle Flicker effect'
-          - '&7[&fLeft Click&7]&b Toggle Trail effect'
+          - '&7[&fClic Droit&7]&b Activer/désactiver l''effet de scintillement'
+          - '&7[&fClic Gauche&7]&b Activer/désactiver l''effet de traînée'
       position:
-        - '&bEffect Controller'
+        - '&bContrôleur d''effet'
         - ''
-        - '&7[&f%middle_click%&7]&b Toggle effect'
-        - '&7[&fLeft/Right Click&7]&b Move this effect'
+        - '&7[&fClic Milieu&7]&b Activer/désactiver l''effet'
+        - '&7[&fClic Gauche/Droit&7]&b Déplacer cet effet'
       power:
-        - '&bPower: &e%power%'
+        - '&bPuissance : &e%power%'
         - ''
-        - '&7[&fLeft/Right Click&7]&b << Change >>'
+        - '&7[&fClic Gauche/Droit&7]&b << Changer >>'
   previous-page:
     #Holders: %player_name% %page% %target_page%
     description:
-      - '&6&lPrevious Page'
+      - '&6&lPage précédente'
       - ''
-      - '&7[&fClick&7]&b Go to page &e%target_page%'
+      - '&7[&fClic&7]&b Aller à la page &e%target_page%'
   next-page:
     #Holders: %player_name% %page% %target_page%
     description:
-      - '&6&lNext Page'
+      - '&6&lPage suivante'
       - ''
-      - '&7[&fClick&7]&b Go to page &e%target_page%'
+      - '&7[&fClic&7]&b Aller à la page &e%target_page%'
   back:
     #Holders: %player_name%
     description:
-      - '&6&lGo Back'
+      - '&6&lRetour'
       - ''
-      - '&7[&fClick&7]&b Go to previous gui'
+      - '&7[&fClic&7]&b Revenir à l''interface précédente'
   playeritems:
     #Holders: %player_name% %page%
-    title: '&9%player_name% items - page &b%page%'
+    title: '&9Objets de %player_name% - page &b%page%'
     page-info:
       #Holders: %player_name% %page%
       description:
         - '&6&lPage &e&l%page%'
-        - '&7[&fClick&7]&b Toggle view of &eitem&b/&eID'
+        - '&7[&fClic&7]&b Basculer entre l''affichage de l''objet et l''ID'
         - ''
-        - '&bClick on items:'
-        - '&7> [&fLeft Click&7]&b Gain &e1'
-        - '&7> [&fShift+Left Click&7]&b Gain &e64'
-        - '&7> [&fShift+Right Click&7]&b Delete item'
+        - '&bCliquez sur les objets :'
+        - '&7> [&fClic Gauche&7]&b Obtenir &e1'
+        - '&7> [&fMaj + Clic Gauche&7]&b Obtenir &e64'
+        - '&7> [&fMaj + Clic Droit&7]&b Supprimer l''objet'
   serveritems:
     #Holders: %player_name% %page%
-    title: '&9Server items - page &b%page%'
+    title: '&9Objets du serveur - page &b%page%'
     page-info:
       #Holders: %player_name% %page%
       description:
         - '&6&lPage &e&l%page%'
-        - '&7[&fClick&7]&b Toggle view of &eitem&b/&eID'
+        - '&7[&fClic&7]&b Basculer entre l''affichage de l''objet et l''ID'
         - ''
-        - '&bClick on items:'
-        - '&7> [&fLeft Click&7]&b Gain &e1'
-        - '&7> [&fShift+Left Click&7]&b Gain &e64'
-        - '&7> [&fShift+Right Click&7]&b Delete item'
+        - '&bCliquez sur les objets :'
+        - '&7> [&fClic Gauche&7]&b Obtenir &e1'
+        - '&7> [&fMaj + Clic Gauche&7]&b Obtenir &e64'
+        - '&7> [&fMaj + Clic Droit&7]&b Supprimer l''objet'
