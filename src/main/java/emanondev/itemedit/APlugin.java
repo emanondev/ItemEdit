@@ -123,7 +123,7 @@ public abstract class APlugin extends JavaPlugin {
         String locale;
         if (!(sender instanceof Player))
             locale = this.defaultLanguage;
-        else if (Util.isVersionAfter(1, 11, 2) && this.useMultiLanguage)
+        else if (Util.isVersionAfter(1, 12) && this.useMultiLanguage)
             locale = ((Player) sender).getLocale().startsWith("zh") ? //apparently zh_tw and zh_cn are quite different
                     ((Player) sender).getLocale() : ((Player) sender).getLocale().split("_")[0];
         else
@@ -134,7 +134,8 @@ public abstract class APlugin extends JavaPlugin {
 
         String fileName = "languages" + File.separator + locale + ".yml";
 
-        if (locale.equals(this.defaultLanguage) || new File(getDataFolder(), fileName).exists() || this.getResource(fileName) != null) {
+        if (locale.equals(this.defaultLanguage) || new File(getDataFolder(), fileName).exists()
+                || this.getResource("languages/"  + locale + ".yml") != null) {
             YMLConfig conf = new YMLConfig(this, fileName);
             languageConfigs.put(locale, conf);
             return conf;
