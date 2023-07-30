@@ -1,6 +1,7 @@
 package emanondev.itemedit.compability;
 
 import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.Util;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -28,7 +29,7 @@ public class PlaceHolders extends PlaceholderExpansion {
         ItemEdit.get().log("    shows how many &6itemid player &fhas on &6slot");
         ItemEdit.get().log("    <{itemid}> for item id on serveritem");
         ItemEdit.get().log("    [{slot}] for the slot where the item should be counted, by default &ainventory");
-        ItemEdit.get().log("      Values: &einventory&f, &eequip&f, &einventoryandequip&f, &ehand&f, &eoffhand&f, &ehead&f, &echest&f, &elegs&f, &efeet");
+        ItemEdit.get().log("      Values: &einventory&f (include offhand), &eequip&f (include offhand), &einventoryandequip&f (include offhand), &ehand&f, &eoffhand&f, &ehead&f, &echest&f, &elegs&f, &efeet");
         ItemEdit.get().log("    [{player}] for the player, by default &aself");
         ItemEdit.get().log("    example: %itemedit_amount_{&6my_item_id&f}_{&6hand&f}%");
     }
@@ -102,110 +103,7 @@ public class PlaceHolders extends PlaceholderExpansion {
             String[] args = value.split("_");
             switch (args[0].toLowerCase(Locale.ENGLISH)) {
                 case "amount": {
-                    String slot = "inventory";
-                    int amount = 0;
-                    String id = args[1];
-                    int indexS = value.indexOf("{");
-                    int indexE = value.indexOf("}", indexS);
-                    if (indexS == -1 || indexE == -1)
-                        throw new IllegalStateException("item id not closed inside { }");
-
-                    id = value.substring(indexS + 1, indexE);
-
-                    indexS = value.indexOf("{", indexE);
-                    indexE = value.indexOf("}", indexS);
-                    if (indexS > indexE)
-                        throw new IllegalStateException();
-
-                    if (indexS != -1) {
-                        slot = value.substring(indexS + 1, indexE).toLowerCase(Locale.ENGLISH);
-
-                        indexS = value.indexOf("{", indexE);
-                        indexE = value.indexOf("}", indexS);
-                        if (indexS > indexE)
-                            throw new IllegalStateException();
-                        if (indexS != -1)
-                            player = Bukkit.getPlayer(value.substring(indexS + 1, indexE));
-                    }
-                    if (player == null)
-                        throw new IllegalStateException();
-
-                    ItemStack item = ItemEdit.get().getServerStorage().getItem(id, player);
-                    if (item == null)
-                        throw new IllegalStateException();
-
-                    switch (slot.toLowerCase(Locale.ENGLISH)) {
-                        case "main_hand":
-                        case "mainhand":
-                        case "hand": {
-                            ItemStack copy;
-                            try {
-                                copy = player.getEquipment().getItemInMainHand();
-                            } catch (Throwable t) {
-                                copy = player.getEquipment().getItemInHand();
-                            }
-                            if (item.isSimilar(copy))
-                                amount = amount + copy.getAmount();
-                            break;
-                        }
-                        case "off_hand":
-                        case "offhand": {
-                            ItemStack copy = player.getEquipment().getItemInOffHand();
-                            if (item.isSimilar(copy))
-                                amount = amount + copy.getAmount();
-                            break;
-                        }
-                        case "legs": {
-                            ItemStack copy = player.getEquipment().getLeggings();
-                            if (item.isSimilar(copy))
-                                amount = amount + copy.getAmount();
-                            break;
-                        }
-                        case "chest": {
-                            ItemStack copy = player.getEquipment().getChestplate();
-                            if (item.isSimilar(copy))
-                                amount = amount + copy.getAmount();
-                            break;
-                        }
-                        case "head": {
-                            ItemStack copy = player.getEquipment().getHelmet();
-                            if (item.isSimilar(copy))
-                                amount = amount + copy.getAmount();
-                            break;
-                        }
-                        case "feet": {
-                            ItemStack copy = player.getEquipment().getBoots();
-                            if (item.isSimilar(copy))
-                                amount = amount + copy.getAmount();
-                            break;
-                        }
-                        case "inventory": {
-                            for (ItemStack copy : player.getInventory().getStorageContents())
-                                if (item.isSimilar(copy))
-                                    amount += copy.getAmount();
-                            break;
-                        }
-                        case "equip": {
-                            for (ItemStack copy : player.getInventory().getArmorContents())
-                                if (item.isSimilar(copy))
-                                    amount = amount + copy.getAmount();
-                            break;
-                        }
-                        case "inventoryandequip": {
-                            for (ItemStack copy : player.getInventory().getStorageContents())
-                                if (item.isSimilar(copy))
-                                    amount += copy.getAmount();
-
-                            for (ItemStack copy : player.getInventory().getArmorContents())
-                                if (item.isSimilar(copy))
-                                    amount += copy.getAmount();
-                            break;
-                        }
-                        default: {
-                            throw new IllegalStateException();
-                        }
-                    }
-                    return String.valueOf(amount);
+                    return amount(player, value.substring("amount_".length()));
                 }
                 default:
                     throw new IllegalStateException();
@@ -213,10 +111,136 @@ public class PlaceHolders extends PlaceholderExpansion {
 
         } catch (Exception e) {
             ItemEdit.get().log("&c! &fWrong PlaceHolderValue %" + getIdentifier() + "_" + ChatColor.YELLOW + value
-                    + ChatColor.WHITE + "%");
-            e.printStackTrace();
+                    + ChatColor.WHITE + "% "+e.getMessage());
+            //e.printStackTrace();
         }
         return null;
+    }
+
+    //{itemid}
+    //{itemid}_{slot}
+    //{itemid}_{slot}_{player}
+    private String amount(Player player, String value) {
+        String slot = "inventory";
+        int amount = 0;
+        String id;
+        int indexStart = value.indexOf("{");
+        int indexEnd = value.indexOf("}", indexStart);
+        if (indexStart != 0 || indexEnd == -1)
+            throw new IllegalStateException("item id not closed inside { }");
+        id = value.substring(indexStart + 1, indexEnd);
+        ItemStack item = ItemEdit.get().getServerStorage().getItem(id, player);
+        if (item == null)
+            throw new IllegalStateException("item id '" + id + "' is invalid or doesn't exist");
+
+        value = value.substring(indexEnd + 1);
+        if (!value.isEmpty()) {  //has slot
+            indexStart = value.indexOf("{");
+            indexEnd = value.indexOf("}");
+            if (indexStart != 1)
+                throw new IllegalStateException("bad formatting");
+            if (indexEnd == -1) //_{..}?..
+                throw new IllegalStateException("slot value not closed inside { }");
+            slot = value.substring(indexStart + 1, indexEnd).toLowerCase(Locale.ENGLISH);
+            ItemEdit.get().log(id + " " + slot + " " + player.getName());
+            value = value.substring(indexEnd + 1);
+
+            indexStart = value.indexOf("{", indexEnd);
+            indexEnd = value.indexOf("}", indexStart);
+            if (indexStart > indexEnd)
+                throw new IllegalStateException();
+            if (indexStart != -1)
+                player = Bukkit.getPlayer(value.substring(indexStart + 1, indexEnd));
+
+            if (player == null)
+                throw new IllegalStateException();
+        }
+
+        switch (slot.toLowerCase(Locale.ENGLISH)) {
+            case "main_hand":
+            case "mainhand":
+            case "hand": {
+                ItemStack copy;
+                try {
+                    copy = player.getEquipment().getItemInMainHand();
+                } catch (Throwable t) {
+                    copy = player.getEquipment().getItemInHand();
+                }
+                if (item.isSimilar(copy))
+                    amount = amount + copy.getAmount();
+                break;
+            }
+            case "off_hand":
+            case "offhand": {
+                ItemStack copy = player.getEquipment().getItemInOffHand();
+                if (item.isSimilar(copy))
+                    amount = amount + copy.getAmount();
+                break;
+            }
+            case "legs": {
+                ItemStack copy = player.getEquipment().getLeggings();
+                if (item.isSimilar(copy))
+                    amount = amount + copy.getAmount();
+                break;
+            }
+            case "chest": {
+                ItemStack copy = player.getEquipment().getChestplate();
+                if (item.isSimilar(copy))
+                    amount = amount + copy.getAmount();
+                break;
+            }
+            case "head": {
+                ItemStack copy = player.getEquipment().getHelmet();
+                if (item.isSimilar(copy))
+                    amount = amount + copy.getAmount();
+                break;
+            }
+            case "feet": {
+                ItemStack copy = player.getEquipment().getBoots();
+                if (item.isSimilar(copy))
+                    amount = amount + copy.getAmount();
+                break;
+            }
+            case "inventory": {
+                for (ItemStack copy : player.getInventory().getStorageContents())
+                    if (item.isSimilar(copy))
+                        amount += copy.getAmount();
+                if (Util.isVersionAfter(1, 9)) {
+                    if (item.isSimilar(player.getInventory().getItemInOffHand()))
+                        amount += player.getInventory().getItemInOffHand().getAmount();
+                }
+                break;
+            }
+            case "equip": {
+                for (ItemStack copy : player.getInventory().getArmorContents())
+                    if (item.isSimilar(copy))
+                        amount = amount + copy.getAmount();
+                if (Util.isVersionAfter(1, 9)) {
+                    if (item.isSimilar(player.getInventory().getItemInOffHand()))
+                        amount += player.getInventory().getItemInOffHand().getAmount();
+                }
+                break;
+            }
+            case "inventoryandequip": {
+                for (ItemStack copy : player.getInventory().getStorageContents())
+                    if (item.isSimilar(copy))
+                        amount += copy.getAmount();
+
+                for (ItemStack copy : player.getInventory().getArmorContents())
+                    if (item.isSimilar(copy))
+                        amount += copy.getAmount();
+                if (Util.isVersionAfter(1, 9)) {
+                    if (item.isSimilar(player.getInventory().getItemInOffHand()))
+                        amount += player.getInventory().getItemInOffHand().getAmount();
+                }
+
+                break;
+            }
+            default: {
+                throw new IllegalStateException();
+            }
+        }
+        return String.valueOf(amount);
     }
 
     @Override
