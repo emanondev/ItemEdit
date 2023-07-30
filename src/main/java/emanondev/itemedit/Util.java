@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.HttpRetryException;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
@@ -215,7 +214,7 @@ public class Util {
             return true;
 
         List<String> values = ItemEdit.get().getConfig().getStringList("blocked.type-blocked-rename");
-        if (values == null || values.isEmpty())
+        if (values.isEmpty())
             return true;
         String id = type.name();
         for (String name : values)
@@ -315,10 +314,18 @@ public class Util {
                             Bukkit.getServer().getClass().getPackage().getName().lastIndexOf(".") + 1)
                     .split("_")[2].substring(1));
 
+    /**
+     * Inclusive
+     * isVersionUpTo(1,9) on 1.9.0 is true
+     */
     public static boolean isVersionUpTo(int mainGameVersion, int gameVersion) {
         return isVersionUpTo(mainGameVersion, gameVersion, 99);
     }
 
+    /**
+     * Inclusive
+     * isVersionUpTo(1,9,4) on 1.9.4 is true
+     */
     public static boolean isVersionUpTo(int mainGameVersion, int gameVersion, int gameSubVersion) {
         if (GAME_MAIN_VERSION > mainGameVersion)
             return false;
@@ -331,10 +338,18 @@ public class Util {
         return GAME_SUB_VERSION <= gameSubVersion;
     }
 
+    /**
+     * Inclusive
+     * isVersionAfter(1,9) on 1.9.0 is true
+     */
     public static boolean isVersionAfter(int mainGameVersion, int gameVersion) {
         return isVersionAfter(mainGameVersion, gameVersion, 0);
     }
 
+    /**
+     * Inclusive
+     * isVersionAfter(1,9,4) on 1.9.4 is true
+     */
     public static boolean isVersionAfter(int mainGameVersion, int gameVersion, int gameSubVersion) {
         if (GAME_MAIN_VERSION < mainGameVersion)
             return false;
@@ -347,12 +362,18 @@ public class Util {
         return GAME_SUB_VERSION >= gameSubVersion;
     }
 
+    /**
+     * Inclusive
+     */
     public static boolean isVersionInRange(int mainGameVersionMin, int gameVersionMin,
                                            int mainGameVersionMax, int gameVersionMax) {
         return isVersionInRange(mainGameVersionMin, gameVersionMin, 0,
                 mainGameVersionMax, gameVersionMax, 99);
     }
 
+    /**
+     * Inclusive
+     */
     public static boolean isVersionInRange(int mainGameVersionMin, int gameVersionMin, int gameSubVersionMin,
                                            int mainGameVersionMax, int gameVersionMax, int gameSubVersionMax) {
         return isVersionAfter(mainGameVersionMin, gameVersionMin, gameSubVersionMin)
@@ -376,16 +397,16 @@ public class Util {
         return true;
     }
 
-    public static boolean hasPaperAPI(){
+    public static boolean hasPaperAPI() {
         try {
             Class.forName("com.destroystokyo.paper.VersionHistoryManager$VersionData");
             return true;
-        } catch(NoClassDefFoundError | ClassNotFoundException ex) {
+        } catch (NoClassDefFoundError | ClassNotFoundException ex) {
             return false;
         }
     }
 
-    public static boolean hasMiniMessageAPI(){
-        return false;//TODO
+    public static boolean hasMiniMessageAPI() {
+        return hasPaperAPI()&&Util.isVersionAfter(1,18,2);//TODO
     }
 }
