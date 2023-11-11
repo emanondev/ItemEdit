@@ -5,6 +5,7 @@ lack-permission-generic: '&4[&cItemEdit&4] &cDu hast keine Berechtigung, diesen 
 blocked-by-censure: '&4[&cItemEdit&4] &cDu kannst diesen Text nicht verwenden, er enthält blockierte Wörter'
 blocked-by-type-restriction: '&4[&cItemEdit&4] &cDu kannst dieses Item nicht umbenennen'
 blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cDu kannst die Beschreibung dieses Items nicht bearbeiten'
+blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cDu kannst diesem Gegenstand keine weiteren Beschreibungslinien hinzufügen'
 itemedit:
   help-header: '&9&lItemEdit - Hilfe'
   rename:

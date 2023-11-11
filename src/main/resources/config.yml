@@ -5,7 +5,7 @@
 # Spigot https://www.spigotmc.org/resources/40993/
 #
 # Do not change config-version
-config-version: 4
+config-version: 7
 #Notify console when a plugin update is available
 check-updates: true
 language:
@@ -164,3 +164,7 @@ blocked:
   # or here for versions 1.8-1.12 https://helpch.at/docs/1.12.2/org/bukkit/Material.html
   # CaPs are not relevant for this config
   type-blocked-lore: [ ]
+  # Set a limit to how many lore lines a player can add to an item
+  # this limit is ignored if user has permission itemedit.bypass.lore_line_limit
+  # set -1 for no limit
+  lore-line-limit: 16

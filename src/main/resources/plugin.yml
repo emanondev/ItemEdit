@@ -54,6 +54,7 @@ permissions:
       itemedit.bypass.censure: true
       itemedit.bypass.rename_type_restriction: true
       itemedit.bypass.lore_type_restriction: true
+      itemedit.bypass.lore_line_limit: true
   itemedit.bypass.censure:
     default: op
     description: Bypass words restrictions when editing items
@@ -63,6 +64,9 @@ permissions:
   itemedit.bypass.lore_type_restriction:
     default: op
     description: Bypass type restrictions when editing item lore
+  itemedit.bypass.lore_line_limit:
+    default: op
+    description: Bypass restrictions on lore line amount set on config
   itemedit.itemeditimport:
     default: op
     description: Gives full access to command /itemeditimport
@@ -413,6 +417,14 @@ permissions:
   itemedit.itemedit.enchant.bypass_max_level:
     default: op
     description: Allow editing item enchants above vanilla limits
+  itemedit.itemedit.bookenchant:
+    default: op
+    description: Allow editing book enchants
+    children:
+      itemedit.itemedit.enchant.bypass_max_level: true
+  itemedit.itemedit.bookenchant.bypass_max_level:
+    default: op
+    description: Allow editing book enchants above vanilla limits
   itemedit.itemedit.unbreakable:
     default: op
     description: Allow editing item unbreakablity
@@ -494,3 +506,6 @@ permissions:
   itemedit.itemedit.goathornsound:
     default: op
     description: Allow editing goat horn sound
+  itemedit.itemedit.armortrim:
+    default: op
+    description: Allow setting trims on armor

@@ -18,12 +18,25 @@ public class Lore extends SubCmd {
 
     private final Map<UUID, List<String>> copies = new HashMap<>();
     private final YMLConfig loreCopy = ItemEdit.get().getConfig("loreCopy");
+    private int lineLimit;
 
     private static final String[] loreSub = new String[]{"add", "set", "remove", "reset", "insert", "copy",
             "copybook", "copyfile", "paste", "replace"};
 
     public Lore(ItemEditCommand cmd) {
         super("lore", cmd, true, true);
+        lineLimit = getPlugin().getConfig().getInt("blocked.lore-line-limit", 16);
+    }
+
+    public void reload() {
+        super.reload();
+        lineLimit = getPlugin().getConfig().getInt("blocked.lore-line-limit", 16);
+    }
+
+    private boolean allowedLineLimit(Player who, int lines) {
+        if (lineLimit < 0 || who.hasPermission("itemedit.bypass.lore_line_limit"))
+            return true;
+        return lines <= lineLimit;
     }
 
     @Override
@@ -62,29 +75,29 @@ public class Lore extends SubCmd {
                 loreRemove(p, item, args);
                 return;
             case "copy":
-                if (!sender.hasPermission(getPermission()+".copy")) {
-                    getCommand().sendPermissionLackMessage(getPermission()+".copy", sender);
+                if (!sender.hasPermission(getPermission() + ".copy")) {
+                    getCommand().sendPermissionLackMessage(getPermission() + ".copy", sender);
                     return;
                 }
                 loreCopy(p, item, args);
                 return;
             case "copybook":
-                if (!sender.hasPermission(getPermission()+".copy")) {
-                    getCommand().sendPermissionLackMessage(getPermission()+".copy", sender);
+                if (!sender.hasPermission(getPermission() + ".copy")) {
+                    getCommand().sendPermissionLackMessage(getPermission() + ".copy", sender);
                     return;
                 }
                 loreCopyBook(p, item, args);
                 return;
             case "copyfile":
-                if (!sender.hasPermission(getPermission()+".copy")) {
-                    getCommand().sendPermissionLackMessage(getPermission()+".copy", sender);
+                if (!sender.hasPermission(getPermission() + ".copy")) {
+                    getCommand().sendPermissionLackMessage(getPermission() + ".copy", sender);
                     return;
                 }
                 loreCopyFile(p, item, args);
                 return;
             case "paste":
-                if (!sender.hasPermission(getPermission()+".copy")) {
-                    getCommand().sendPermissionLackMessage(getPermission()+".copy", sender);
+                if (!sender.hasPermission(getPermission() + ".copy")) {
+                    getCommand().sendPermissionLackMessage(getPermission() + ".copy", sender);
                     return;
                 }
                 if (!Util.isAllowedChangeLore(sender, item.getType()))
@@ -290,7 +303,6 @@ public class Lore extends SubCmd {
 
     // /itemedit lore add
     private void loreAdd(Player p, ItemStack item, String[] args) {
-
         StringBuilder text = new StringBuilder();
         if (args.length > 2) {
             text = new StringBuilder(args[2]);
@@ -306,6 +318,11 @@ public class Lore extends SubCmd {
             lore = new ArrayList<>(itemMeta.getLore());
         else
             lore = new ArrayList<>();
+        if (!allowedLineLimit(p, lore.size() + 1)) {
+            Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-line-limit",
+                    "", null, true, "%limit%", String.valueOf(lineLimit)));
+            return;
+        }
 
         text = new StringBuilder(Util.formatText(p, text.toString(), getPermission()));
         if (Util.hasBannedWords(p, text.toString()))
@@ -341,6 +358,11 @@ public class Lore extends SubCmd {
                 lore = new ArrayList<>(itemMeta.getLore());
             else
                 lore = new ArrayList<>();
+            if (!allowedLineLimit(p, lore.size() + 1)) {
+                Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-line-limit",
+                        "", null, true, "%limit%", String.valueOf(lineLimit)));
+                return;
+            }
 
             for (int i = lore.size(); i <= line; i++)
                 lore.add("");
@@ -385,6 +407,11 @@ public class Lore extends SubCmd {
             if (line < 0)
                 throw new IllegalArgumentException("Wrong line number");
 
+            if (lore.size() <= line && !allowedLineLimit(p, line+1)) {
+                Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-line-limit",
+                        "", null, true, "%limit%", String.valueOf(lineLimit)));
+                return;
+            }
             for (int i = lore.size(); i <= line; i++)
                 lore.add("");
 

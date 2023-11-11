@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 class ConfigurationUpdater {
-    private static final int CURRENT_VERSION = 6;
+    private static final int CURRENT_VERSION = 7;
 
     static void update() {
         ItemEdit plugin = ItemEdit.get();
@@ -113,6 +113,11 @@ class ConfigurationUpdater {
                     , "&e[level] &blevel of the enchant, by default &e1", ""
                     , "&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant"));
             conf.set("itemedit.bookenchant.params", "<enchant> [level]");
+            conf.save();
+        }
+        if (version <= 6) {
+            YMLConfig conf = ItemEdit.get().getConfig();
+            conf.set("blocked.lore-line-limit", 16);
             conf.save();
         }
 

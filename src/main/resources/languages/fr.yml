@@ -7,6 +7,7 @@ blocked-by-censure: "&4[&cItemEdit&4] &cVous ne pouvez pas utiliser ce texte car
 blocked-by-type-restriction: "&4[&cItemEdit&4] &cVous ne pouvez pas renommer cet objet"
 blocked-by-type-restriction-lore: "&4[&cItemEdit&4] &cVous ne pouvez pas
   modifier le texte descriptions de cet objet"
+blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cVous ne pouvez pas ajouter plus de lignes de description à cet objet'
 itemedit:
   help-header: "&9&lItemEdit - Aide"
   rename:

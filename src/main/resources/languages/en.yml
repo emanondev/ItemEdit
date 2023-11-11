@@ -5,6 +5,7 @@ lack-permission-generic: '&4[&cItemEdit&4] &cYou don''t have permission to use t
 blocked-by-censure: '&4[&cItemEdit&4] &cYou can''t use this text, it contains blocked words'
 blocked-by-type-restriction: '&4[&cItemEdit&4] &cYou can''t rename this item'
 blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cYou can''t edit lore on this item'
+blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cYou can''t add more lore lines on this item'
 itemedit:
   help-header: '&9&lItemEdit - Help'
   rename:
