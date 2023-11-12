@@ -20,8 +20,7 @@ public class EnchAliases extends AliasSet<Enchantment> {
     public Collection<Enchantment> getValues() {
         HashSet<Enchantment> set = new HashSet<>();
         for (Enchantment ench : Enchantment.values())
-            if (ench != null &&
-                    ench.getKey()!=null && ench.getKey().getKey()!=null)//some plugins do violate the @NotNull API
+            if (ench != null)
                 set.add(ench);
         return set;
     }
