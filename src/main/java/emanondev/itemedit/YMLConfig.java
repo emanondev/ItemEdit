@@ -1,6 +1,5 @@
 package emanondev.itemedit;
 
-import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
@@ -58,7 +57,6 @@ public class YMLConfig extends YamlConfiguration {
      * @throws IllegalArgumentException if name is empty
      */
     public YMLConfig(@NotNull JavaPlugin plugin, @NotNull String name) {
-        Validate.notNull(plugin, "plugin is null");
         this.plugin = plugin;
         name = fixName(name);
         this.name = name;
@@ -74,9 +72,9 @@ public class YMLConfig extends YamlConfiguration {
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is empty
      */
-    public static String fixName(String name) {
-        Validate.notNull(name, "YAML file must have a name!");
-        Validate.notEmpty(name, "YAML file must have a name!");
+    public static String fixName(@NotNull String name) {
+        if(name.isEmpty())
+            throw new IllegalArgumentException("YAML file must have a name!");
         if (!name.endsWith(".yml"))
             name += ".yml";
         return name;

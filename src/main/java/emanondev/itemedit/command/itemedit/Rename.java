@@ -1,5 +1,6 @@
 package emanondev.itemedit.command.itemedit;
 
+import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -12,9 +13,23 @@ import java.util.Collections;
 import java.util.List;
 
 public class Rename extends SubCmd {
+    private int lengthLimit;
 
     public Rename(ItemEditCommand cmd) {
         super("rename", cmd, true, true);
+        lengthLimit = getPlugin().getConfig().getInt("blocked.rename-length-limit", 120);
+    }
+
+    private boolean allowedLengthLimit(Player who, String text) {
+        if (lengthLimit < 0 || who.hasPermission("itemedit.bypass.rename_length_limit"))
+            return true;
+        return text.length()<=lengthLimit;
+    }
+
+    @Override
+    public void reload() {
+        super.reload();
+        lengthLimit = getPlugin().getConfig().getInt("blocked.rename-length-limit", 120);
     }
 
     @Override
@@ -46,6 +61,11 @@ public class Rename extends SubCmd {
         String name = Util.formatText(p, bname.toString(), getPermission());
         if (Util.hasBannedWords(p, name))
             return;
+        if (!allowedLengthLimit(p, name)) {
+            Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-rename-length-limit",
+                    "", null, true, "%limit%", String.valueOf(lengthLimit)));
+            return;
+        }
 
         itemMeta.setDisplayName(name);
         item.setItemMeta(itemMeta);

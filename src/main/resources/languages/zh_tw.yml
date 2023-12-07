@@ -6,6 +6,8 @@ blocked-by-censure: '&4[&cItemEdit&4] &c此文本包含禁止使用的字詞，�
 blocked-by-type-restriction: '&4[&cItemEdit&4] &c你無法更改此物品的名稱'
 blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &c你無法編輯此物品的描述'
 blocked-by-lore-line-limit: '&4[&cItemEdit&4] &c您無法對此物品添加更多描述行'
+blocked-by-lore-length-limit: '&4[&cItemEdit&4] &c您不能設置超過 %limit% 個字符的行'
+blocked-by-rename-length-limit: '&4[&cItemEdit&4] &c您不能設置超過 %limit% 個字符的名稱'
 itemedit:
   help-header: '&9&lItemEdit - 幫助'
   rename:

@@ -2,7 +2,6 @@ package emanondev.itemedit;
 
 import emanondev.itemedit.aliases.AliasSet;
 import net.md_5.bungee.api.chat.BaseComponent;
-import org.apache.commons.lang.time.DateFormatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -16,12 +15,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class Util {
-    private static final int MAX_COMPLETES = 100;
+    private static final int MAX_COMPLETES = 200;
 
     public static <T extends Enum<T>> @NotNull List<String> complete(String prefix, @NotNull Class<T> enumClass) {
         prefix = prefix.toUpperCase();
@@ -127,8 +127,10 @@ public class Util {
             Date date = new Date();
             File saveTo = new File(ItemEdit.get().getDataFolder(),
                     "logs" + File.separatorChar
-                            + DateFormatUtils.format(date,
-                            ItemEdit.get().getConfig().loadMessage("log.file-format", "yyyy.MM.dd", false))
+                            + new SimpleDateFormat(ItemEdit.get().getConfig().loadMessage("log.file-format", "yyyy.MM.dd", false)
+                            ,Locale.ENGLISH).format(date)
+                            //+ DateFormatUtils.format(date,
+                            //ItemEdit.get().getConfig().loadMessage("log.file-format", "yyyy.MM.dd", false))
                             + ".log");
             if (!saveTo.getParentFile().exists()) { // Create parent folders if they don't exist
                 saveTo.getParentFile().mkdirs();
@@ -138,8 +140,8 @@ public class Util {
 
             FileWriter fw = new FileWriter(saveTo, true);
             PrintWriter pw = new PrintWriter(fw);
-            pw.println(DateFormatUtils.format(date,
-                    ItemEdit.get().getConfig().loadMessage("log.log-date-format", "[dd.MM.yyyy HH:mm:ss]", false))
+            pw.println(new SimpleDateFormat(ItemEdit.get().getConfig().loadMessage("log.log-date-format", "[dd.MM.yyyy HH:mm:ss]", false)
+            ,Locale.ENGLISH).format(date)
                     + message);
             pw.flush();
             pw.close();

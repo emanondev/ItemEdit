@@ -8,6 +8,8 @@ blocked-by-type-restriction: "&4[&cItemEdit&4] &cVous ne pouvez pas renommer cet
 blocked-by-type-restriction-lore: "&4[&cItemEdit&4] &cVous ne pouvez pas
   modifier le texte descriptions de cet objet"
 blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cVous ne pouvez pas ajouter plus de lignes de description à cet objet'
+blocked-by-lore-length-limit: '&4[&cItemEdit&4] &cVous ne pouvez pas définir des lignes plus longues que %limit% caractères'
+blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cVous ne pouvez pas définir des noms plus longs que %limit% caractères'
 itemedit:
   help-header: "&9&lItemEdit - Aide"
   rename:

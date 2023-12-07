@@ -168,3 +168,13 @@ blocked:
   # this limit is ignored if user has permission itemedit.bypass.lore_line_limit
   # set -1 for no limit
   lore-line-limit: 16
+  # How many chars can an item name contains?
+  # format codes are NOT ignored
+  # this limit is ignored if user has permission itemedit.bypass.rename_length_limit
+  # set -1 for no limit
+  rename-length-limit: 120
+  # How many chars can an item lore line contains?
+  # format codes are NOT ignored
+  # this limit is ignored if user has permission itemedit.bypass.lore_length_limit
+  # set -1 for no limit
+  lore-length-limit: 120

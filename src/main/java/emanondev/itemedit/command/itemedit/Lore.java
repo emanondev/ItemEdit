@@ -19,6 +19,7 @@ public class Lore extends SubCmd {
     private final Map<UUID, List<String>> copies = new HashMap<>();
     private final YMLConfig loreCopy = ItemEdit.get().getConfig("loreCopy");
     private int lineLimit;
+    private int lengthLimit;
 
     private static final String[] loreSub = new String[]{"add", "set", "remove", "reset", "insert", "copy",
             "copybook", "copyfile", "paste", "replace"};
@@ -26,17 +27,24 @@ public class Lore extends SubCmd {
     public Lore(ItemEditCommand cmd) {
         super("lore", cmd, true, true);
         lineLimit = getPlugin().getConfig().getInt("blocked.lore-line-limit", 16);
+        lengthLimit = getPlugin().getConfig().getInt("blocked.lore-length-limit", 120);
     }
 
     public void reload() {
         super.reload();
         lineLimit = getPlugin().getConfig().getInt("blocked.lore-line-limit", 16);
+        lengthLimit = getPlugin().getConfig().getInt("blocked.lore-length-limit", 120);
     }
 
     private boolean allowedLineLimit(Player who, int lines) {
         if (lineLimit < 0 || who.hasPermission("itemedit.bypass.lore_line_limit"))
             return true;
         return lines <= lineLimit;
+    }
+    private boolean allowedLengthLimit(Player who, String text) {
+        if (lengthLimit < 0 || who.hasPermission("itemedit.bypass.lore_length_limit"))
+            return true;
+        return text.length()<=lengthLimit;
     }
 
     @Override
@@ -162,8 +170,19 @@ public class Lore extends SubCmd {
             }
             from = UtilsString.fix(from, null, true);
             to = UtilsString.fix(to, null, true);
-            for (int i = 0; i < lore.size(); i++)
+
+            for (String s : lore) {
+                String text = s.replace(from, to);
+                if (!allowedLengthLimit(p, text)) {
+                    Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
+                            "", null, true, "%limit%", String.valueOf(lengthLimit)));
+                    return;
+                }
+            }
+
+            for (int i = 0; i < lore.size(); i++) {
                 lore.set(i, lore.get(i).replace(from, to));
+            }
             meta.setLore(lore);
             item.setItemMeta(meta);
             p.updateInventory();
@@ -325,6 +344,11 @@ public class Lore extends SubCmd {
         }
 
         text = new StringBuilder(Util.formatText(p, text.toString(), getPermission()));
+        if (!allowedLengthLimit(p, text.toString())) {
+            Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
+                    "", null, true, "%limit%", String.valueOf(lengthLimit)));
+            return;
+        }
         if (Util.hasBannedWords(p, text.toString()))
             return;
 
@@ -363,6 +387,12 @@ public class Lore extends SubCmd {
                         "", null, true, "%limit%", String.valueOf(lineLimit)));
                 return;
             }
+            if (!allowedLengthLimit(p, text.toString())) {
+                Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
+                        "", null, true, "%limit%", String.valueOf(lengthLimit)));
+                return;
+            }
+
 
             for (int i = lore.size(); i <= line; i++)
                 lore.add("");
@@ -410,6 +440,11 @@ public class Lore extends SubCmd {
             if (lore.size() <= line && !allowedLineLimit(p, line+1)) {
                 Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-line-limit",
                         "", null, true, "%limit%", String.valueOf(lineLimit)));
+                return;
+            }
+            if (!allowedLengthLimit(p, text.toString())) {
+                Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
+                        "", null, true, "%limit%", String.valueOf(lengthLimit)));
                 return;
             }
             for (int i = lore.size(); i <= line; i++)

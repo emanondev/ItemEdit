@@ -6,6 +6,8 @@ blocked-by-censure: '&4[&cItemEdit&4] &cNon puoi usare questo testo, contiene pa
 blocked-by-type-restriction: '&4[&cItemEdit&4] &cNon puoi rinominare quest''oggetto'
 blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cNon puoi modificare la descrizione di quest''oggetto'
 blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cNon puoi aggiungere altre righe di descrizione a questo oggetto'
+blocked-by-lore-length-limit: '&4[&cItemEdit&4] &cNon puoi impostare linee più lunghe di %limit% caratteri'
+blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cNon puoi impostare nomi più lunghi di %limit% caratteri'
 itemedit:
   help-header: '&9&lItemEdit - Aiuto'
   rename:

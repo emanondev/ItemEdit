@@ -1,6 +1,5 @@
 package emanondev.itemedit;
 
-import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -28,10 +27,8 @@ public class UtilsInventory {
      */
     public static int giveAmount(@NotNull HumanEntity player, @NotNull ItemStack item, final int amount,
                                  @NotNull final ExcessManage mode) {
-        Validate.notNull(player, "player is null");
-        Validate.notNull(mode, "mode is null");
-        Validate.notNull(item, "item is null");
-        Validate.isTrue(amount >= 0, "negative amount");
+        if (amount < 0)
+            throw new IllegalArgumentException("negative amount");
         item = item.clone();
         if (amount == 0)
             return 0;
@@ -83,10 +80,8 @@ public class UtilsInventory {
      */
     public static int removeAmount(@NotNull HumanEntity player, @NotNull ItemStack item, final int amount,
                                    @NotNull final LackManage mode) {
-        Validate.notNull(player, "player is null");
-        Validate.notNull(mode, "mode is null");
-        Validate.notNull(item, "item is null");
-        Validate.isTrue(amount >= 0, "negative amount");
+        if (amount < 0)
+            throw new IllegalArgumentException("negative amount");
         item = item.clone();
         if (amount == 0)
             return 0;

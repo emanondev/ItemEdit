@@ -55,6 +55,8 @@ permissions:
       itemedit.bypass.rename_type_restriction: true
       itemedit.bypass.lore_type_restriction: true
       itemedit.bypass.lore_line_limit: true
+      itemedit.bypass.lore_length_limit: true
+      itemedit.bypass.rename_length_limit: true
   itemedit.bypass.censure:
     default: op
     description: Bypass words restrictions when editing items
@@ -67,6 +69,12 @@ permissions:
   itemedit.bypass.lore_line_limit:
     default: op
     description: Bypass restrictions on lore line amount set on config
+  itemedit.bypass.rename_length_limit:
+    default: op
+    description: Bypass restrictions on rename line max length set on config
+  itemedit.bypass.lore_length_limit:
+    default: op
+    description: Bypass restrictions on lore line max length set on config
   itemedit.itemeditimport:
     default: op
     description: Gives full access to command /itemeditimport
