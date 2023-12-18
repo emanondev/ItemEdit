@@ -225,6 +225,7 @@ attribute:
   horse_jump_strength: horse_jump_strength
   zombie_spawn_reinforcements: zombie_spawn_reinforcements
   generic_attack_knockback: attack_knockback
+  generic_max_absorption: max_absorption
 operation:
   add_number: add_number
   add_scalar: add_scalar
