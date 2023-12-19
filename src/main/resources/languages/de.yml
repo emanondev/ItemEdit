@@ -47,11 +47,11 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aBeschreibung kopiert'
     copyBook:
       wrong-type: '&4[&cItemEdit&4] &cDas Item muss ein beschriebenes Buch oder ein Buch und Feder sein'
-      feedback: '&9[&fItemEdit&9] &aBuchseiten kopiert'
+      feedback: '&9[&fItemEdit&9] &aBuchseiten kopiert und bereit zum Einfügen'
     copyFile:
       no-path: '&4[&cItemEdit&4] &cWähle einen Pfad aus /ie lore copyfile &6<pfad>'
       wrong-path: '&9[&fItemEdit&9] &cUngültiger Pfad, vergewissere dich, dass die Groß-/Kleinschreibung beachtet wurde und lade die Konfiguration neu'
-      feedback: '&9[&fItemEdit&9] &aKonfiguration kopiert'
+      feedback: '&9[&fItemEdit&9] &aKonfiguration kopiert und bereit zum Einfügen'
     paste:
       feedback: '&9[&fItemEdit&9] &aBeschreibung eingefügt'
       no-copy: '&4[&cItemEdit&4] &cKopiere zuerst eine Beschreibung'

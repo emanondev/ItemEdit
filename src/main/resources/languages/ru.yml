@@ -47,11 +47,11 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aОписание скопировано'
     copyBook:
       wrong-type: '&4[&cItemEdit&4] &cЭтот предмет должен быть книгой или пером'
-      feedback: '&9[&fItemEdit&9] &aСтраницы книги скопированы'
+      feedback: '&9[&fItemEdit&9] &aСтраницы книги скопированы и готовы к вставке'
     copyFile:
       no-path: '&4[&cItemEdit&4] &cВыберите путь /ie lore copyfile &6<путь>'
       wrong-path: '&9[&fItemEdit&9] &cНеверный путь, проверьте настройки регистра и перезагрузите конфигурацию'
-      feedback: '&9[&fItemEdit&9] &aКонфигурация скопирована'
+      feedback: '&9[&fItemEdit&9] &aКонфигурация скопирована и готова к вставке'
     paste:
       feedback: '&9[&fItemEdit&9] &aОписание вставлено'
       no-copy: '&4[&cItemEdit&4] &cСначала скопируйте описание'

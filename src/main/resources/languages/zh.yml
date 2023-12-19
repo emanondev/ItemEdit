@@ -47,11 +47,11 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &a描述已复制'
     copyBook:
       wrong-type: '&4[&cItemEdit&4] &c物品必须是已经写过的书本或书与羽毛笔'
-      feedback: '&9[&fItemEdit&9] &a书本页码已复制'
+      feedback: '&9[&fItemEdit&9] &a书页已复制，准备粘贴'
     copyFile:
       no-path: '&4[&cItemEdit&4] &c请选择路径 /例如 lore copyfile &6<路径>'
       wrong-path: '&9[&fItemEdit&9] &c无效路径，请重新载入配置并检查大小写'
-      feedback: '&9[&fItemEdit&9] &a配置已复制'
+      feedback: '&9[&fItemEdit&9] &a配置已复制，准备粘贴'
     paste:
       feedback: '&9[&fItemEdit&9] &a描述已粘贴'
       no-copy: '&4[&cItemEdit&4] &c请先复制一行描述'

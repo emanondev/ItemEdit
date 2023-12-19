@@ -52,12 +52,12 @@ itemedit:
     copyBook:
       wrong-type: "&4[&cItemEdit&4] &cL'objet doit être un livre écrit ou un livre et
         une plume"
-      feedback: "&9[&fItemEdit&9] &aPages de livre copiées"
+      feedback: '&9[&fItemEdit&9] &aPages du livre copiées et prêtes à être collées'
     copyFile:
       no-path: "&4[&cItemEdit&4] &cSélectionnez un chemin /ie lore copyfile &6<chemin>"
       wrong-path: "&9[&fItemEdit&9] &cChemin non valide, n'oubliez pas de recharger la
         configuration et vérifiez les majuscules"
-      feedback: "&9[&fItemEdit&9] &aConfiguration copiée"
+      feedback: '&9[&fItemEdit&9] &aConfiguration copiée et prête à être collée'
     paste:
       feedback: "&9[&fItemEdit&9] &aDescriptions collées"
       no-copy: "&4[&cItemEdit&4] &cCopiez d'abord des descriptions"

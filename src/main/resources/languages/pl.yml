@@ -47,11 +47,11 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aOpis skopiowany'
     copyBook:
       wrong-type: '&4[&cItemEdit&4] &cPrzedmiot musi być napisaną książką lub piórem i książką'
-      feedback: '&9[&fItemEdit&9] &aStrony książki skopiowane'
+      feedback: '&9[&fItemEdit&9] &aStrony książki skopiowane i gotowe do wklejenia'
     copyFile:
       no-path: '&4[&cItemEdit&4] &cWybierz ścieżkę /np. lore copyfile &6<ścieżka>'
       wrong-path: '&9[&fItemEdit&9] &cNieprawidłowa ścieżka, upewnij się, że wgrano konfigurację i sprawdź wielkość liter'
-      feedback: '&9[&fItemEdit&9] &aSkopiowano konfigurację'
+      feedback: '&9[&fItemEdit&9] &aKonfiguracja skopiowana i gotowa do wklejenia'
     paste:
       feedback: '&9[&fItemEdit&9] &aOpis wklejony'
       no-copy: '&4[&cItemEdit&4] &cNajpierw skopiuj opis'

@@ -47,11 +47,11 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aLore copied'
     copyBook:
       wrong-type: '&4[&cItemEdit&4] &cItem must be a written book or book and quill'
-      feedback: '&9[&fItemEdit&9] &aBook pages copied'
+      feedback: '&9[&fItemEdit&9] &aBook pages copied, and ready to be pasted'
     copyFile:
       no-path: '&4[&cItemEdit&4] &cSelect a path /ie lore copyfile &6<path>'
       wrong-path: '&9[&fItemEdit&9] &cInvalid path, remember to reload the configuration and check the CaPs'
-      feedback: '&9[&fItemEdit&9] &aConfiguration copied'
+      feedback: '&9[&fItemEdit&9] &aConfiguration copied, and ready to be pasted'
     paste:
       feedback: '&9[&fItemEdit&9] &aLore pasted'
       no-copy: '&4[&cItemEdit&4] &cCopy a lore first'

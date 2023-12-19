@@ -47,11 +47,11 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aDescrizione copiata'
     copyBook:
       wrong-type: '&4[&cItemEdit&4] &cL''oggetto deve essere un libro scritto o libro e penna'
-      feedback: '&9[&fItemEdit&9] &aPagine del libro copiate'
+      feedback: '&9[&fItemEdit&9] &aPagine del libro copiate e pronte per essere incollate'
     copyFile:
       no-path: '&4[&cItemEdit&4] &cSeleziona un percorso /ie lore copyfile &6<percorso>'
       wrong-path: '&9[&fItemEdit&9] &cPercorso non valido, ricordati di ricaricare le configurazione e controlla le MaIuScOlE'
-      feedback: '&9[&fItemEdit&9] &aConfigurazione copiata'
+      feedback: '&9[&fItemEdit&9] &aConfigurazione copiata e pronta per essere incollata'
     paste:
       feedback: '&9[&fItemEdit&9] &aDescrizione incollata'
       no-copy: '&4[&cItemEdit&4] &cDevi prima copiare una descrizione'
