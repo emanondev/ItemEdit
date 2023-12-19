@@ -6,8 +6,6 @@ import org.bukkit.FireworkEffect;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.meta.trim.TrimMaterial;
-import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,7 +42,15 @@ public class Aliases {
     };
     public static final AliasSet<DyeColor> COLOR = new EnumAliasSet<>("color", DyeColor.class);
     public static final EggTypeAliases EGG_TYPE = getEggTypeAliases();
-    public static final AliasSet<ItemFlag> FLAG_TYPE = new EnumAliasSet<>("flag_type", ItemFlag.class);
+    public static final AliasSet<ItemFlag> FLAG_TYPE = new EnumAliasSet<ItemFlag>("flag_type", ItemFlag.class){
+        @Override
+        public String getName(ItemFlag type) {
+            String name = type.name().toLowerCase(Locale.ENGLISH);
+            if (name.startsWith("hide_"))
+                name = name.substring("hide_".length());
+            return name;
+        }
+    };
     public static final AliasSet<Boolean> BOOLEAN = new AliasSet<Boolean>("boolean") {
 
         @Override
