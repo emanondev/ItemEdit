@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 class ConfigurationUpdater {
-    private static final int CURRENT_VERSION = 7;
+    private static final int CURRENT_VERSION = 8;
 
     static void update() {
         ItemEdit plugin = ItemEdit.get();
@@ -118,6 +118,12 @@ class ConfigurationUpdater {
         if (version <= 6) {
             YMLConfig conf = ItemEdit.get().getConfig();
             conf.set("blocked.lore-line-limit", 16);
+            conf.save();
+        }
+
+        if (version <= 7) {
+            YMLConfig conf = ItemEdit.get().getConfig("aliases.yml");
+            conf.set("attribute.generic_max_absorption", "max_absorption");
             conf.save();
         }
 
