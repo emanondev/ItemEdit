@@ -2,6 +2,7 @@ package emanondev.itemedit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -17,7 +18,7 @@ public class UpdateChecker {
     private String newVersion;
     private final JavaPlugin plugin;
 
-    public UpdateChecker(JavaPlugin plugin, int projectID) {
+    public UpdateChecker(@NotNull JavaPlugin plugin, int projectID) {
         this.plugin = plugin;
         project = projectID;
         newVersion = plugin.getDescription().getVersion();
@@ -29,7 +30,7 @@ public class UpdateChecker {
         }
     }
 
-    public String getResourceUrl() {
+    public @NotNull String getResourceUrl() {
         return "https://spigotmc.org/resources/" + project;
     }
 

@@ -1,6 +1,7 @@
 package emanondev.itemedit;
 
 import org.bukkit.OfflinePlayer;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -9,7 +10,7 @@ public class CooldownAPI {
 
     private final YMLConfig conf;
 
-    CooldownAPI(APlugin plugin) {
+    CooldownAPI(@NotNull APlugin plugin) {
         long now = System.currentTimeMillis();
         conf = plugin.getConfig("cooldownData.yml");
         for (String id : conf.getKeys("users")) {

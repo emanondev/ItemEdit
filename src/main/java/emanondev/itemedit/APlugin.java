@@ -46,7 +46,7 @@ public abstract class APlugin extends JavaPlugin {
      * @param fileName might contains folder separator for file inside folders
      * @return config file at specified path inside plugin folder.
      */
-    public @NotNull YMLConfig getConfig(String fileName) {
+    public @NotNull YMLConfig getConfig(@NotNull String fileName) {
         fileName = YMLConfig.fixName(fileName);
         if (configs.containsKey(fileName))
             return configs.get(fileName);
@@ -95,7 +95,7 @@ public abstract class APlugin extends JavaPlugin {
                 try {
                     if (!v.getFile().exists())
                         toRemove.add(k);
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             });
             for (String key : toRemove)
@@ -119,7 +119,7 @@ public abstract class APlugin extends JavaPlugin {
     }
 
 
-    public YMLConfig getLanguageConfig(@Nullable CommandSender sender) {
+    public @NotNull YMLConfig getLanguageConfig(@Nullable CommandSender sender) {
         String locale;
         if (!(sender instanceof Player))
             locale = this.defaultLanguage;
@@ -148,7 +148,7 @@ public abstract class APlugin extends JavaPlugin {
 
     private CooldownAPI cooldownApi = null;
 
-    public CooldownAPI getCooldownAPI() {
+    public @NotNull CooldownAPI getCooldownAPI() {
         if (cooldownApi == null)
             cooldownApi = new CooldownAPI(this);
         return cooldownApi;
@@ -202,7 +202,7 @@ public abstract class APlugin extends JavaPlugin {
         }
     }
 
-    protected void enableWithError(String error) {
+    protected void enableWithError(@NotNull String error) {
         TabExecutorError exec = new TabExecutorError(ChatColor.RED + error);
         for (String command : this.getDescription().getCommands().keySet())
             registerCommand(command, exec, null);
@@ -240,7 +240,7 @@ public abstract class APlugin extends JavaPlugin {
 
         private final String msg;
 
-        public TabExecutorError(String msg) {
+        public TabExecutorError(@NotNull String msg) {
             this.msg = msg;
             for (int i = 0; i < 20; i++)
                 APlugin.this.log(msg);
@@ -264,7 +264,7 @@ public abstract class APlugin extends JavaPlugin {
 
     public abstract void disable();
 
-    public Metrics registerMetrics(int pluginId) {
+    public @Nullable Metrics registerMetrics(int pluginId) {
         try {
             return new Metrics(this, pluginId);
         } catch (Throwable t) {

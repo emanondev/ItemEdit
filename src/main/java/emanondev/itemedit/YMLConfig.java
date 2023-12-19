@@ -40,7 +40,7 @@ public class YMLConfig extends YamlConfiguration {
      *
      * @return the plugin associated with this Config
      */
-    public JavaPlugin getPlugin() {
+    public @NotNull JavaPlugin getPlugin() {
         return plugin;
     }
 

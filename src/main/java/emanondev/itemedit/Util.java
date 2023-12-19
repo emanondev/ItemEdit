@@ -53,7 +53,7 @@ public class Util {
         return results;
     }
 
-    public static List<String> complete(String prefix, String... list) {
+    public static @NotNull List<String> complete(String prefix, String... list) {
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
         int c = 0;
@@ -67,7 +67,7 @@ public class Util {
         return results;
     }
 
-    public static List<String> complete(String prefix, Collection<String> list) {
+    public static @NotNull List<String> complete(String prefix, Collection<String> list) {
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
         int c = 0;
@@ -81,7 +81,7 @@ public class Util {
         return results;
     }
 
-    public static List<String> completePlayers(String prefix) {
+    public static @NotNull List<String> completePlayers(String prefix) {
         ArrayList<String> names = new ArrayList<>();
         final String text = prefix.toLowerCase(Locale.ENGLISH);
         Bukkit.getOnlinePlayers().forEach((p) -> {
@@ -91,7 +91,7 @@ public class Util {
         return names;
     }
 
-    public static List<String> complete(String prefix, AliasSet<?> aliases) {
+    public static @NotNull List<String> complete(String prefix, AliasSet<?> aliases) {
         ArrayList<String> results = new ArrayList<>();
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         int c = 0;
@@ -106,13 +106,13 @@ public class Util {
         return results;
     }
 
-    public static void sendMessage(CommandSender sender, String message) {
+    public static void sendMessage(@NotNull CommandSender sender, String message) {
         if (message == null || message.isEmpty())
             return;
         sender.sendMessage(message);
     }
 
-    public static void sendMessage(CommandSender sender, BaseComponent... message) {
+    public static void sendMessage(@NotNull CommandSender sender, BaseComponent... message) {
         if (sender instanceof Player)
             ((Player) sender).spigot().sendMessage(message);
         else
@@ -150,7 +150,7 @@ public class Util {
         }
     }
 
-    public static boolean hasBannedWords(Player user, String text) {
+    public static boolean hasBannedWords(@NotNull Player user, String text) {
         if (user.hasPermission("itemedit.bypass.censure"))
             return false;
         String message = ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', text.toLowerCase(Locale.ENGLISH)));
@@ -203,7 +203,7 @@ public class Util {
                         text = text.replace(text.substring(from - 1, from + 7),
                                 net.md_5.bungee.api.ChatColor.of(text.substring(from, from + 7)).toString());
                     }
-                } catch (Throwable t) {
+                } catch (Throwable ignored) {
                 }
             }
         }
