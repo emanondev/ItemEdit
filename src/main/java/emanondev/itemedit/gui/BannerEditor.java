@@ -208,7 +208,8 @@ public class BannerEditor implements Gui {
         this.getInventory().setItem(0, item);
         DyeColor bcolor;
         try {
-            bcolor = DyeColor.valueOf(item.getType().name().split("_")[0]);
+            String name = item.getType().name();
+            bcolor = DyeColor.valueOf(name.substring(0,name.lastIndexOf("_")));
         } catch (Exception e) {
             bcolor = meta.getBaseColor();
         }
