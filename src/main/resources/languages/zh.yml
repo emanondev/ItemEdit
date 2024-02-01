@@ -419,7 +419,8 @@ serveritem:
     params: '<id> [amount] [player] [silent]'
   save:
     #Holders: %id%
-    success: '&a物品 &e%id% &a已注册'
+    success: '&9[&fItemEdit&9] &a物品 &e%id% &a已注册'
+    already_used_id: '&4[&cItemEdit&4] &c具有ID &e%id% &c的物品已存在，请更改ID或执行 /si update 进行覆盖'
     description:
       - '&b将手中的物品注册到数据库'
       - ''
@@ -430,7 +431,7 @@ serveritem:
     params: '<id>'
   delete:
     #Holders: %id%
-    success: '&a物品 &e%id% &a已取消注册'
+    success: '&9[&fItemEdit&9] &a物品 &e%id% &a已取消注册'
     description:
       - '&b&l删除选定的物品'
       - ''
@@ -438,7 +439,7 @@ serveritem:
     params: '<id>'
   update:
     #Holders: %id%
-    success: '&a物品 &e%id% &a已更新'
+    success: '&9[&fItemEdit&9] &a物品 &e%id% &a已更新'
     description:
       - '&b&l更新选定的物品'
       - ''

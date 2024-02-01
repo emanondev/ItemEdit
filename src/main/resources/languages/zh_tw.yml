@@ -85,7 +85,6 @@ itemedit:
       - ''
       - '&b&l提示: &b使用 &e/itemedit hide <標記> true &b隱藏單個組件'
     params: ''
-ie:
   damage:
     description:
       - '&b&l修改耐久度'
@@ -420,7 +419,8 @@ serveritem:
     params: '<id> [amount] [player] [silent]'
   save:
     #Holders: %id%
-    success: '&a已註冊物品 &e%id%'
+    success: '&9[&fItemEdit&9] &a已註冊物品 &e%id%'
+    already_used_id: '&4[&cItemEdit&4] &c具有 ID &e%id% &c的物品已經存在，請更改 ID 或執行 /si update 進行覆蓋'
     description:
       - '&b將手中物品註冊'
       - ''
@@ -432,16 +432,15 @@ serveritem:
     params: '<id>'
   delete:
     #Holders: %id%
-    success: '&a已解除註冊物品 &e%id%'
+    success: '&9[&fItemEdit&9] &a已解除註冊物品 &e%id%'
     description:
       - '&b&l刪除所選物品'
       - ''
       - '&e<id> &b物品的ID'
     params: '<id>'
-si:
   update:
     #Holders: %id%
-    success: '&a已更新物品 &e%id%'
+    success: '&9[&fItemEdit&9] &a已更新物品 &e%id%'
     description:
       - '&b&l更新所選物品'
       - ''

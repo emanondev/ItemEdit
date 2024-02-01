@@ -23,8 +23,10 @@ public class Save extends SubCmd {
                 throw new IllegalArgumentException("Wrong param number");
             if (ItemEdit.get().getServerStorage().getItem(args[1]) == null)
                 ItemEdit.get().getServerStorage().setItem(args[1], this.getItemInHand(p).clone());
-            else
-                throw new IllegalArgumentException();
+            else {
+                sendLanguageString("already_used_id", null, p, "%id%", args[1].toLowerCase());
+                return;
+            }
             sendLanguageString("success", null, p, "%id%", args[1].toLowerCase());
         } catch (Exception e) {
             onFail(p, alias);

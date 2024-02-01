@@ -382,7 +382,7 @@ public class Lore extends SubCmd {
                 lore = new ArrayList<>(itemMeta.getLore());
             else
                 lore = new ArrayList<>();
-            if (!allowedLineLimit(p, lore.size() + 1)) {
+            if (!allowedLineLimit(p, Math.max(lore.size() + 1,line+1))) {
                 Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-line-limit",
                         "", null, true, "%limit%", String.valueOf(lineLimit)));
                 return;
@@ -394,7 +394,7 @@ public class Lore extends SubCmd {
             }
 
 
-            for (int i = lore.size(); i <= line; i++)
+            for (int i = lore.size(); i < line; i++)
                 lore.add("");
 
             text = new StringBuilder(Util.formatText(p, text.toString(), getPermission()));

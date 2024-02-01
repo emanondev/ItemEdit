@@ -425,7 +425,8 @@ serveritem:
     params: '<id> [amount] [player] [silent]'
   save:
     #Holders: %id%
-    success: '&aItem &e%id% &aregistered'
+    success: '&9[&fItemEdit&9] &aItem &e%id% &aregistered'
+    already_used_id: '&4[&cItemEdit&4] &cItem with id &e%id% &calready exists, change the id or do /si update to override'
     description:
       - '&bRegister the item in your hand'
       - ''
@@ -438,7 +439,7 @@ serveritem:
     params: '<id>'
   delete:
     #Holders: %id%
-    success: '&aItem &e%id% &aunregistered'
+    success: '&9[&fItemEdit&9] &aItem &e%id% &aunregistered'
     description:
       - '&b&lDelete selected item'
       - ''
@@ -446,7 +447,7 @@ serveritem:
     params: '<id>'
   update:
     #Holders: %id%
-    success: '&aItem &e%id% &ahas been updated'
+    success: '&9[&fItemEdit&9] &aItem &e%id% &ahas been updated'
     description:
       - '&b&lUpdate selected item'
       - ''
@@ -464,7 +465,7 @@ serveritem:
     params: '[page]'
   setnick:
     #Holders: %id% %nick%
-    success: '&aItem &e%id% &anick has been updated to &e%nick%'
+    success: '&9[&fItemEdit&9] &aItem &e%id% &anick has been updated to &e%nick%'
     description:
       - '&bSet display name of selected item'
       - ''

@@ -421,7 +421,8 @@ serveritem:
     params: '<id> [amount] [player] [silent]'
   save:
     #Holders: %id%
-    success: '&aПредмет &e%id% &aзарегистрирован'
+    success: '&9[&fItemEdit&9] &aПредмет &e%id% &aзарегистрирован'
+    already_used_id: '&4[&cItemEdit&4] &cПредмет с ID &e%id% &cуже существует, измените ID или используйте /si update для замены'
     description:
       - '&bЗарегистрировать предмет из вашей руки'
       - ''
@@ -432,7 +433,7 @@ serveritem:
     params: '<id>'
   delete:
     #Holders: %id%
-    success: '&aПредмет &e%id% &aудален'
+    success: '&9[&fItemEdit&9] &aПредмет &e%id% &aудален'
     description:
       - '&b&lУдалить выбранный предмет'
       - ''
@@ -440,7 +441,7 @@ serveritem:
     params: '<id>'
   update:
     #Holders: %id%
-    success: '&aПредмет &e%id% &aобновлен'
+    success: '&9[&fItemEdit&9] &aПредмет &e%id% &aобновлен'
     description:
       - '&b&lОбновить выбранный предмет'
       - ''

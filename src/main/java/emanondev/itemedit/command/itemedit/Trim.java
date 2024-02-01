@@ -8,7 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ArmorMeta;
-import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
@@ -16,6 +15,7 @@ import org.bukkit.inventory.meta.trim.TrimPattern;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class Trim extends SubCmd {
 
@@ -34,6 +34,13 @@ public class Trim extends SubCmd {
             return;
         }
         try {
+            if (args.length == 2 && args[1].equalsIgnoreCase("clear")) {
+                ArmorMeta armorMeta = (ArmorMeta) meta;
+                armorMeta.setTrim(null);
+                item.setItemMeta(armorMeta);
+                p.updateInventory();
+                return;
+            }
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
             TrimMaterial mat = Aliases.TRIM_MATERIAL.convertAlias(args[1]);
@@ -44,7 +51,6 @@ public class Trim extends SubCmd {
                                 getLanguageStringList("description", null, p)));
                 return;
             }
-
             TrimPattern patt = Aliases.TRIM_PATTERN.convertAlias(args[2]);
             if (patt == null) {
                 onWrongAlias("wrong-pattern", p, Aliases.TRIM_PATTERN);
@@ -54,7 +60,7 @@ public class Trim extends SubCmd {
                 return;
             }
             ArmorMeta armorMeta = (ArmorMeta) meta;
-            armorMeta.setTrim(new ArmorTrim(mat,patt));
+            armorMeta.setTrim(new ArmorTrim(mat, patt));
             item.setItemMeta(armorMeta);
             p.updateInventory();
         } catch (Exception e) {
@@ -65,9 +71,13 @@ public class Trim extends SubCmd {
 
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
-            return Util.complete(args[1], Aliases.TRIM_MATERIAL);
-        if (args.length == 3)
+        if (args.length == 2) {
+            List<String> list = Util.complete(args[1], Aliases.TRIM_MATERIAL);
+            if ("clear".startsWith(args[1].toLowerCase(Locale.ENGLISH)))
+                list.add("CLEAR");
+            return list;
+        }
+        if (args.length == 3 && !args[1].equalsIgnoreCase("clear"))
             return Util.complete(args[2], Aliases.TRIM_PATTERN);
         return Collections.emptyList();
     }

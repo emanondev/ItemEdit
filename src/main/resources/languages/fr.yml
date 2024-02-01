@@ -428,7 +428,8 @@ serveritem:
     params: '<id> [amount] [joueur] [silent]'
   save:
     #Holders: %id%
-    success: '&aObjet &e%id% &aenregistré'
+    success: '&9[&fItemEdit&9] &aObjet &e%id% &aenregistré'
+    already_used_id: '&4[&cItemEdit&4] &cL''objet avec l''ID &e%id% &cexiste déjà, changez l''ID ou utilisez /si update pour le remplacer'
     description:
       - '&bEnregistrer l''objet dans votre main'
       - ''
@@ -441,7 +442,7 @@ serveritem:
     params: '<id>'
   delete:
     #Holders: %id%
-    success: '&aObjet &e%id% &adésenregistré'
+    success: '&9[&fItemEdit&9] &aObjet &e%id% &adésenregistré'
     description:
       - '&b&lSupprimer l''objet sélectionné'
       - ''
@@ -449,7 +450,7 @@ serveritem:
     params: '<id>'
   update:
     #Holders: %id%
-    success: '&aObjet &e%id% &aa été mis à jour'
+    success: '&9[&fItemEdit&9] &aObjet &e%id% &aa été mis à jour'
     description:
       - '&b&lMettre à jour l''objet sélectionné'
       - ''

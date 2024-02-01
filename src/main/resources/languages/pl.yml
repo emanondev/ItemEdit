@@ -425,7 +425,8 @@ serveritem:
     params: '<id> [amount] [player] [silent]'
   save:
     #Holders: %id%
-    success: '&aPrzedmiot &e%id% &azarejestrowany'
+    success: '&9[&fItemEdit&9] &aPrzedmiot &e%id% &azarejestrowany'
+    already_used_id: '&4[&cItemEdit&4] &cPrzedmiot o ID &e%id% &cjuż istnieje, zmień ID lub użyj /si update, aby go nadpisać'
     description:
       - '&bZarejestruj przedmiot w swojej dłoni'
       - ''
@@ -438,7 +439,7 @@ serveritem:
     params: '<id>'
   delete:
     #Holders: %id%
-    success: '&aPrzedmiot &e%id% &aniezarejestrowany'
+    success: '&9[&fItemEdit&9] &aPrzedmiot &e%id% &aniezarejestrowany'
     description:
       - '&b&lUsuń wybrany przedmiot'
       - ''
@@ -446,7 +447,7 @@ serveritem:
     params: '<id>'
   update:
     #Holders: %id%
-    success: '&aPrzedmiot &e%id% &azostał zaktualizowany'
+    success: '&9[&fItemEdit&9] &aPrzedmiot &e%id% &azostał zaktualizowany'
     description:
       - '&b&lZaktualizuj wybrany przedmiot'
       - ''
