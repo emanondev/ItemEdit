@@ -11,7 +11,7 @@ public interface MiniMessageUtil {
 
     static MiniMessageUtil getInstance() {
         try {
-            if (Util.hasPaperAPI() && Util.isVersionAfter(1, 18, 2))
+            if (Util.hasPaperAPI() && Util.isVersionAfter(1, 16, 5))
                 return MiniMessagePaper.getInstance();
             if (Hooks.isMythicMobsEnabled())
                 return MiniMessageMM.getInstance();
