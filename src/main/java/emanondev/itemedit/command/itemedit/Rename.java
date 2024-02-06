@@ -4,6 +4,7 @@ import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -61,7 +62,7 @@ public class Rename extends SubCmd {
         String name = Util.formatText(p, bname.toString(), getPermission());
         if (Util.hasBannedWords(p, name))
             return;
-        if (!allowedLengthLimit(p, name)) {
+        if (!allowedLengthLimit(p, ChatColor.stripColor(name))) {
             Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-rename-length-limit",
                     "", null, true, "%limit%", String.valueOf(lengthLimit)));
             return;

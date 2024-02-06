@@ -195,6 +195,7 @@ permissions:
     children:
       itemedit.itemedit.rename.format.*: true
       itemedit.itemedit.rename.color.*: true
+      itemedit.itemedit.rename.minimessage: true
   itemedit.itemedit.rename.format.*:
     default: op
     description: Allow editing item name and use all formats
@@ -226,6 +227,9 @@ permissions:
       itemedit.itemedit.rename.color.white: true
       itemedit.itemedit.rename.color.yellow: true
       itemedit.itemedit.rename.color.hexa: true
+  itemedit.itemedit.rename.minimessage:
+    default: op
+    description: Allow editing item name using minimessage placeholders
   itemedit.itemedit.rename.format.bold:
     default: op
     description: Allow editing item name and use bold format
@@ -302,6 +306,7 @@ permissions:
       itemedit.itemedit.lore.copy: true
       itemedit.itemedit.lore.format.*: true
       itemedit.itemedit.lore.color.*: true
+      itemedit.itemedit.lore.minimessage: true
   itemedit.itemedit.lore.format.*:
     default: op
     description: Allow editing item lore and use all formats
@@ -333,6 +338,9 @@ permissions:
       itemedit.itemedit.lore.color.white: true
       itemedit.itemedit.lore.color.yellow: true
       itemedit.itemedit.lore.color.hexa: true
+  itemedit.itemedit.lore.minimessage:
+    default: op
+    description: Allow editing item lore using minimessage placeholders
   itemedit.itemedit.lore.format.bold:
     default: op
     description: Allow editing item lore and use bold format

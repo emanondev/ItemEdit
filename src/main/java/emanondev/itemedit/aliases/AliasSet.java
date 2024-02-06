@@ -24,11 +24,11 @@ public abstract class AliasSet<T> {
     public void reload() {
         map.clear();
         for (T value : getValues()) {
-            String path = this.path + "." + getName(value);
+            String path = this.path + "." + getPathName(value);
             String val = config.getString(path, null);
             boolean ok = true;
             if (val == null || val.isEmpty()) {
-                val = getName(value);
+                val = getDefaultName(value);
                 ok = false;
             }
             if (val == null) {
@@ -57,7 +57,27 @@ public abstract class AliasSet<T> {
         }
     }
 
+    /**
+     * @return default name, for autogeneration
+     */
+    public String getDefaultName(T value) {
+        return getPathName(value);
+    }
+
+    /**
+     * @see #getDefaultName(Object)
+     * @see #getPathName(Object)
+     */
+    @Deprecated
     public abstract String getName(T value);
+
+    /**
+     *
+     * @return path for specified value (set path not included)
+     */
+    public String getPathName(T value){
+        return getName(value);
+    }
 
     public abstract Collection<T> getValues();
 
@@ -68,7 +88,7 @@ public abstract class AliasSet<T> {
             throw new IllegalArgumentException();
         alias = alias.replace(" ", "_").toLowerCase(Locale.ENGLISH);
 
-        String path = this.path + "." + getName(obj);
+        String path = this.path + "." + getPathName(obj);
         if (alias.equals(config.get(path)))
             return;
 

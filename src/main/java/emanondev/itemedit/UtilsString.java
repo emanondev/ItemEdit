@@ -1,6 +1,7 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.compability.Hooks;
+import emanondev.itemedit.compability.MiniMessageUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -67,7 +68,7 @@ public class UtilsString {
 
         // apply holders and colors for title and lore
         title = fix(title, p, color, holders);
-        fix(lore, p, color, holders);
+        lore = fix(lore, p, color, holders);
 
         // apply title and lore to item
         ItemMeta meta = item.getItemMeta();
@@ -133,6 +134,11 @@ public class UtilsString {
         // papi
         if (player != null && Hooks.isPAPIEnabled())
             text = PlaceholderAPI.setPlaceholders(player, text);
+
+        //minimessage
+        if (MiniMessageUtil.hasMiniMessage())
+            text=MiniMessageUtil.getInstance().fromMiniToText(text);
+
 
         // color
         if (color)

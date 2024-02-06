@@ -1,6 +1,8 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.aliases.AliasSet;
+import emanondev.itemedit.compability.MiniMessageUtil;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -186,7 +188,11 @@ public class Util {
 
     }
 
+
     public static String formatText(CommandSender sender, String text, String basePermission) {
+        if (Util.hasMiniMessageAPI() && sender.hasPermission(basePermission + ".minimessage")) {
+            text = MiniMessageUtil.getInstance().fromMiniToText(text);
+        }
         text = ChatColor.translateAlternateColorCodes('&', text);
         if (basePermission != null) {
             for (ChatColor style : ChatColor.values())
@@ -409,6 +415,6 @@ public class Util {
     }
 
     public static boolean hasMiniMessageAPI() {
-        return hasPaperAPI()&&Util.isVersionAfter(1,18,2);//TODO
+        return MiniMessageUtil.hasMiniMessage();
     }
 }

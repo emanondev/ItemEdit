@@ -6,6 +6,7 @@ import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -173,7 +174,7 @@ public class Lore extends SubCmd {
 
             for (String s : lore) {
                 String text = s.replace(from, to);
-                if (!allowedLengthLimit(p, text)) {
+                if (!allowedLengthLimit(p, ChatColor.stripColor(text))) {
                     Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
                             "", null, true, "%limit%", String.valueOf(lengthLimit)));
                     return;
@@ -343,16 +344,16 @@ public class Lore extends SubCmd {
             return;
         }
 
-        text = new StringBuilder(Util.formatText(p, text.toString(), getPermission()));
-        if (!allowedLengthLimit(p, text.toString())) {
+        String lineText = Util.formatText(p, text.toString(), getPermission());
+        if (!allowedLengthLimit(p, ChatColor.stripColor(lineText))) {
             Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
                     "", null, true, "%limit%", String.valueOf(lengthLimit)));
             return;
         }
-        if (Util.hasBannedWords(p, text.toString()))
+        if (Util.hasBannedWords(p, lineText))
             return;
 
-        lore.add(text.toString());
+        lore.add(lineText);
         itemMeta.setLore(lore);
         item.setItemMeta(itemMeta);
         p.updateInventory();
@@ -387,7 +388,8 @@ public class Lore extends SubCmd {
                         "", null, true, "%limit%", String.valueOf(lineLimit)));
                 return;
             }
-            if (!allowedLengthLimit(p, text.toString())) {
+            String lineText = Util.formatText(p, text.toString(), getPermission());
+            if (!allowedLengthLimit(p, ChatColor.stripColor(lineText))) {
                 Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
                         "", null, true, "%limit%", String.valueOf(lengthLimit)));
                 return;
@@ -397,11 +399,10 @@ public class Lore extends SubCmd {
             for (int i = lore.size(); i < line; i++)
                 lore.add("");
 
-            text = new StringBuilder(Util.formatText(p, text.toString(), getPermission()));
-            if (Util.hasBannedWords(p, text.toString()))
+            if (Util.hasBannedWords(p, lineText))
                 return;
 
-            lore.add(line, text.toString());
+            lore.add(line, lineText);
             itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
             p.updateInventory();
@@ -424,6 +425,7 @@ public class Lore extends SubCmd {
                     text.append(" ").append(args[i]);
                 // text = ChatColor.translateAlternateColorCodes('&', text);
             }
+            String lineText = Util.formatText(p, text.toString(), getPermission());
 
             ItemMeta itemMeta = item.getItemMeta();
 
@@ -442,7 +444,7 @@ public class Lore extends SubCmd {
                         "", null, true, "%limit%", String.valueOf(lineLimit)));
                 return;
             }
-            if (!allowedLengthLimit(p, text.toString())) {
+            if (!allowedLengthLimit(p, ChatColor.stripColor(lineText))) {
                 Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
                         "", null, true, "%limit%", String.valueOf(lengthLimit)));
                 return;
@@ -450,11 +452,10 @@ public class Lore extends SubCmd {
             for (int i = lore.size(); i <= line; i++)
                 lore.add("");
 
-            text = new StringBuilder(Util.formatText(p, text.toString(), getPermission()));
-            if (Util.hasBannedWords(p, text.toString()))
+            if (Util.hasBannedWords(p, lineText))
                 return;
 
-            lore.set(line, text.toString());
+            lore.set(line, lineText);
             itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
             p.updateInventory();
