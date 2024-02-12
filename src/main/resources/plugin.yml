@@ -4,7 +4,7 @@ version: "${project.version}"
 author: emanon
 api-version: 1.13
 folia-supported: true
-softdepend: [ Vault,SuperVanish,PremiumVanish,PlaceHolderAPI,ShopGUIPlus,ItemBridge,MythicMobs,IridiumSkyblock,ASkyBlock,uSkyBlock,IslandWorld,FabledSkyBlock,SimpleSkyblock,SkyBlock,SuperiorSkyblock2,SuperiorSkyblock ]
+softdepend: [ SCore,Vault,SuperVanish,PremiumVanish,PlaceHolderAPI,ShopGUIPlus,ItemBridge,MythicMobs,IridiumSkyblock,ASkyBlock,uSkyBlock,IslandWorld,FabledSkyBlock,SimpleSkyblock,SkyBlock,SuperiorSkyblock2,SuperiorSkyblock ]
 
 commands:
   itemedit:
