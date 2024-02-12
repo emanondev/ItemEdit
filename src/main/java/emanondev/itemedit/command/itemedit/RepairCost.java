@@ -33,8 +33,8 @@ public class RepairCost extends SubCmd {
 
             Repairable meta = (Repairable) item.getItemMeta();
             meta.setRepairCost(Integer.parseInt(args[1]));
-            item.setItemMeta((ItemMeta) meta);
-            p.updateInventory();
+            item.setItemMeta((ItemMeta) meta); //cast is required for old game version
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

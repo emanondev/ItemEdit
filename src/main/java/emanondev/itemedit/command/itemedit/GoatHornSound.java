@@ -40,7 +40,7 @@ public class GoatHornSound extends SubCmd {
             }
             meta.setInstrument(type);
             item.setItemMeta(meta);
-            player.updateInventory();
+            updateView(player);
         } catch (Exception e) {
             onFail(player, alias);
         }

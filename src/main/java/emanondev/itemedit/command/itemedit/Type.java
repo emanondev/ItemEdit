@@ -29,7 +29,7 @@ public class Type extends SubCmd {
             if (mat == Material.AIR)
                 throw new IllegalArgumentException();
             item.setType(mat);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }
@@ -41,7 +41,7 @@ public class Type extends SubCmd {
         if (args.length == 2) {
             if (Util.isVersionUpTo(1, 12, 1))
                 return Util.complete(args[1], Material.class);
-            return Util.complete(args[1], Material.class, m -> m.isItem());
+            return Util.complete(args[1], Material.class, Material::isItem);
         }
         return Collections.emptyList();
     }

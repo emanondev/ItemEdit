@@ -38,7 +38,7 @@ public class SkullOwner extends SubCmd {
         if (args.length == 1) {
 
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
             return;
         }
         try {
@@ -48,7 +48,7 @@ public class SkullOwner extends SubCmd {
             name = new StringBuilder(ChatColor.translateAlternateColorCodes('&', name.toString()));
             itemMeta.setOwner(name.toString());
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

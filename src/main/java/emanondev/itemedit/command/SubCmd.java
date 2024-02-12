@@ -190,4 +190,10 @@ public abstract class SubCmd {
 
     abstract public List<String> onComplete(CommandSender sender, String[] args);
 
+    protected void updateView(Player player){
+        if (Util.isVersionUpTo(1,19,4)){
+            player.updateInventory();
+        }
+    }
+
 }

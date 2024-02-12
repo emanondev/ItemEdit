@@ -38,7 +38,7 @@ public class Trim extends SubCmd {
                 ArmorMeta armorMeta = (ArmorMeta) meta;
                 armorMeta.setTrim(null);
                 item.setItemMeta(armorMeta);
-                p.updateInventory();
+                updateView(p);
                 return;
             }
             if (args.length != 3)
@@ -62,7 +62,7 @@ public class Trim extends SubCmd {
             ArmorMeta armorMeta = (ArmorMeta) meta;
             armorMeta.setTrim(new ArmorTrim(mat, patt));
             item.setItemMeta(armorMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

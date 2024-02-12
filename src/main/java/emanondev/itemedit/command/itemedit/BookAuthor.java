@@ -1,6 +1,7 @@
 package emanondev.itemedit.command.itemedit;
 
 import emanondev.itemedit.Util;
+import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import net.md_5.bungee.api.ChatColor;
@@ -33,7 +34,7 @@ public class BookAuthor extends SubCmd {
         if (args.length == 1) {
             itemMeta.setAuthor(null);
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
             return;
         }
 
@@ -41,9 +42,9 @@ public class BookAuthor extends SubCmd {
             StringBuilder name = new StringBuilder(args[1]);
             for (int i = 2; i < args.length; i++)
                 name.append(" ").append(args[i]);
-            itemMeta.setAuthor(ChatColor.translateAlternateColorCodes('&', name.toString()));
+            itemMeta.setAuthor(UtilsString.fix( name.toString(),null, true));
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

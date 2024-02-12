@@ -41,7 +41,7 @@ public class Enchant extends SubCmd {
                     lv = Math.min(ench.getMaxLevel(), lv);
                 item.addUnsafeEnchantment(ench, lv);
             }
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

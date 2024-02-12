@@ -27,7 +27,7 @@ public class HideAll extends SubCmd {
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.addItemFlags(ItemFlag.values());
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

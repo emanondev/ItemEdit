@@ -55,7 +55,7 @@ public class Color extends SubCmd {
                         Integer.parseInt(args[3]));
                 potionMeta.setColor(color);
                 item.setItemMeta(potionMeta);
-                p.updateInventory();
+                updateView(p);
             } catch (Exception e) {
                 onFail(p, alias);
             }
@@ -76,7 +76,7 @@ public class Color extends SubCmd {
                         Integer.parseInt(args[3]));
                 leatherMeta.setColor(color);
                 item.setItemMeta(leatherMeta);
-                p.updateInventory();
+                updateView(p);
             } catch (Exception e) {
                 onFail(p, alias);
             }
@@ -102,7 +102,7 @@ public class Color extends SubCmd {
                     newEffect.withFade(oldEffect.getFadeColors());
                 starMeta.setEffect(newEffect.build());
                 item.setItemMeta(starMeta);
-                p.updateInventory();
+                updateView(p);
             } catch (Exception e) {
                 onFail(p, alias);
             }

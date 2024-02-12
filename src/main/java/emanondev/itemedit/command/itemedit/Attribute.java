@@ -94,7 +94,7 @@ public class Attribute extends SubCmd {
             itemMeta.addAttributeModifier(attr,
                     new AttributeModifier(UUID.randomUUID(), attr.toString(), amount, op, equip));
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
                     getLanguageStringList("add.description", null, p)));
@@ -123,7 +123,7 @@ public class Attribute extends SubCmd {
             if (equip != null)
                 itemMeta.removeAttributeModifier(equip);
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("remove.params", null, p),
                     getLanguageStringList("remove.description", null, p)));

@@ -75,7 +75,7 @@ public class Banner extends SubCmd {
             }
             meta.setPattern(id, new Pattern(color, type));
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("color.params", null, p),
                     getLanguageStringList("color.description", null, p)));
@@ -91,7 +91,7 @@ public class Banner extends SubCmd {
             list.remove(id);
             meta.setPatterns(list);
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("remove.params", null, p),
                     getLanguageStringList("remove.description", null, p)));
@@ -111,7 +111,7 @@ public class Banner extends SubCmd {
             }
             meta.setBaseColor(color);
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("colorbanner.params", null, p),
                     getLanguageStringList("colorbanner.description", null, p)));
@@ -133,7 +133,7 @@ public class Banner extends SubCmd {
             int id = Integer.parseInt(args[4]) - 1;
             meta.setPattern(id, new Pattern(color, type));
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("set.params", null, p),
                     getLanguageStringList("set.description", null, p)));
@@ -154,7 +154,7 @@ public class Banner extends SubCmd {
             }
             meta.addPattern(new Pattern(color, type));
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
                     getLanguageStringList("add.description", null, p)));

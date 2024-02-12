@@ -47,7 +47,7 @@ public class Hide extends SubCmd {
             }
 
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

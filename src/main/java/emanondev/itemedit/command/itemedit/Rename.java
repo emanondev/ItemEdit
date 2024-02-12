@@ -44,14 +44,14 @@ public class Rename extends SubCmd {
         if (args.length == 1) {
             itemMeta.setDisplayName(" ");
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
             return;
         }
 
         if (args.length == 2 && args[1].equalsIgnoreCase("clear")) {
             itemMeta.setDisplayName(null);
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
             return;
         }
 
@@ -70,7 +70,7 @@ public class Rename extends SubCmd {
 
         itemMeta.setDisplayName(name);
         item.setItemMeta(itemMeta);
-        p.updateInventory();
+        updateView(p);
     }
 
     @Override

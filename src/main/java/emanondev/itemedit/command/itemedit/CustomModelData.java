@@ -31,7 +31,7 @@ public class CustomModelData extends SubCmd {
             ItemMeta meta = item.getItemMeta();
             meta.setCustomModelData(amount);
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

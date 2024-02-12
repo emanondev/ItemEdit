@@ -27,7 +27,7 @@ public class Damage extends SubCmd {
             short amount = Short.parseShort(args[1]);
             amount = (short) Math.max(0, Math.min(amount, item.getType().getMaxDurability()));
             item.setDurability(amount);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

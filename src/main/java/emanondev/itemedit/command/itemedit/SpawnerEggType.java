@@ -42,7 +42,7 @@ public class SpawnerEggType extends SubCmd {
             }
             itemMeta.setSpawnedType(type);
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

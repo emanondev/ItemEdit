@@ -46,7 +46,7 @@ public class Unbreakable extends SubCmd {
                 ItemMeta meta = (ItemMeta) ConfigurationSerialization.deserializeObject(map);
                 item.setItemMeta(meta);
             }
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

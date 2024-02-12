@@ -186,7 +186,7 @@ public class Lore extends SubCmd {
             }
             meta.setLore(lore);
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("replace.params", null, p),
                     getLanguageStringList("replace.description", null, p)));
@@ -207,7 +207,7 @@ public class Lore extends SubCmd {
         meta.setLore(copies.get(p.getUniqueId()));
         item.setItemMeta(meta);
         Util.sendMessage(p, this.getLanguageString("paste.feedback", null, p));
-        p.updateInventory();
+        updateView(p);
     }
 
     private void loreCopy(Player p, ItemStack item, String[] args) {
@@ -356,7 +356,7 @@ public class Lore extends SubCmd {
         lore.add(lineText);
         itemMeta.setLore(lore);
         item.setItemMeta(itemMeta);
-        p.updateInventory();
+        updateView(p);
     }
 
     // /itemedit lore insert [line] [text]
@@ -405,7 +405,7 @@ public class Lore extends SubCmd {
             lore.add(line, lineText);
             itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("insert.params", null, p),
                     getLanguageStringList("insert.description", null, p)));
@@ -458,7 +458,7 @@ public class Lore extends SubCmd {
             lore.set(line, lineText);
             itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("set.params", null, p),
                     getLanguageStringList("set.description", null, p)));
@@ -489,7 +489,7 @@ public class Lore extends SubCmd {
             lore.remove(line);
             itemMeta.setLore(lore);
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("remove.params", null, p),
                     getLanguageStringList("remove.description", null, p)));
@@ -500,6 +500,6 @@ public class Lore extends SubCmd {
         ItemMeta meta = item.getItemMeta();
         meta.setLore(null);
         item.setItemMeta(meta);
-        p.updateInventory();
+        updateView(p);
     }
 }

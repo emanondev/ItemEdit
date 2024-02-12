@@ -73,7 +73,7 @@ public class PotionEffectEditorOld extends SubCmd {
 
             meta.removeCustomEffect(effect);
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             Util.sendMessage(p, this.craftFailFeedback(getLanguageString("remove.params", null, p),
                     getLanguageStringList("remove.description", null, p)));
@@ -117,7 +117,7 @@ public class PotionEffectEditorOld extends SubCmd {
             meta.addCustomEffect(new PotionEffect(effect, duration, level), true);
 
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             Util.sendMessage(p, this
                     .craftFailFeedback(getLanguageString("add.params", null, p),
@@ -130,6 +130,6 @@ public class PotionEffectEditorOld extends SubCmd {
         PotionMeta meta = (PotionMeta) item.getItemMeta();
         meta.clearCustomEffects();
         item.setItemMeta(meta);
-        p.updateInventory();
+        updateView(p);
     }
 }

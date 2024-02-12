@@ -70,7 +70,7 @@ public class Compass extends SubCmd {
                 "%y%", String.valueOf(p.getLocation().getBlockY()),
                 "%z%", String.valueOf(p.getLocation().getBlockZ())
         );
-        p.updateInventory();
+        updateView(p);
     }
 
     private void compassClear(Player p, ItemStack item, String[] args) {
@@ -79,6 +79,6 @@ public class Compass extends SubCmd {
         meta.setLodestone(p.getLocation());
         item.setItemMeta(meta);
         Util.sendMessage(p, this.getLanguageString("clear.feedback", null, p));
-        p.updateInventory();
+        updateView(p);
     }
 }

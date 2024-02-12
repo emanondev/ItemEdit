@@ -34,7 +34,7 @@ public class BookType extends SubCmd {
             if (args.length == 1) {
                 itemMeta.setGeneration(null);
                 item.setItemMeta(itemMeta);
-                p.updateInventory();
+                updateView(p);
                 return;
             }
 
@@ -48,7 +48,7 @@ public class BookType extends SubCmd {
             }
             itemMeta.setGeneration(type);
             item.setItemMeta(itemMeta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }

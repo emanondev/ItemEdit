@@ -73,7 +73,7 @@ public class TropicalFish extends SubCmd {
             }
             meta.setBodyColor(color);
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             Util.sendMessage(p, this
                     .craftFailFeedback(getLanguageString("bodycolor.params", null, p),
@@ -98,7 +98,7 @@ public class TropicalFish extends SubCmd {
             }
             meta.setPatternColor(color);
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             Util.sendMessage(p, this
                     .craftFailFeedback(getLanguageString("patterncolor.params", null, p),
@@ -122,7 +122,7 @@ public class TropicalFish extends SubCmd {
             }
             meta.setPattern(pattern);
             item.setItemMeta(meta);
-            p.updateInventory();
+            updateView(p);
         } catch (Exception e) {
             Util.sendMessage(p, this.craftFailFeedback(getLanguageString("pattern.params", null, p),
                     getLanguageStringList("pattern.description", null, p)));
