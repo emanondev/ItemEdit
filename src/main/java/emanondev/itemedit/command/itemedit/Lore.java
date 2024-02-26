@@ -42,10 +42,11 @@ public class Lore extends SubCmd {
             return true;
         return lines <= lineLimit;
     }
+
     private boolean allowedLengthLimit(Player who, String text) {
         if (lengthLimit < 0 || who.hasPermission("itemedit.bypass.lore_length_limit"))
             return true;
-        return text.length()<=lengthLimit;
+        return text.length() <= lengthLimit;
     }
 
     @Override
@@ -308,11 +309,15 @@ public class Lore extends SubCmd {
 
                                     List<String> lore = meta.getLore();
 
-                                    int line = args[2].equalsIgnoreCase("last") ?
-                                            lore.size() - 1 : Integer.parseInt(args[2]) - 1;
-                                    if (line < 0 || line >= lore.size())
+                                    try {
+                                        int line = args[2].equalsIgnoreCase("last") ?
+                                                lore.size() - 1 : Integer.parseInt(args[2]) - 1;
+                                        if (line < 0 || line >= lore.size())
+                                            return Collections.emptyList();
+                                        return Util.complete(args[3], lore.get(line).replace('§', '&'));
+                                    } catch (NumberFormatException e) {
                                         return Collections.emptyList();
-                                    return Util.complete(args[3], lore.get(line).replace('§', '&'));
+                                    }
                                 }
                             }
                         }
@@ -383,7 +388,7 @@ public class Lore extends SubCmd {
                 lore = new ArrayList<>(itemMeta.getLore());
             else
                 lore = new ArrayList<>();
-            if (!allowedLineLimit(p, Math.max(lore.size() + 1,line+1))) {
+            if (!allowedLineLimit(p, Math.max(lore.size() + 1, line + 1))) {
                 Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-line-limit",
                         "", null, true, "%limit%", String.valueOf(lineLimit)));
                 return;
@@ -439,7 +444,7 @@ public class Lore extends SubCmd {
             if (line < 0)
                 throw new IllegalArgumentException("Wrong line number");
 
-            if (lore.size() <= line && !allowedLineLimit(p, line+1)) {
+            if (lore.size() <= line && !allowedLineLimit(p, line + 1)) {
                 Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-line-limit",
                         "", null, true, "%limit%", String.valueOf(lineLimit)));
                 return;
