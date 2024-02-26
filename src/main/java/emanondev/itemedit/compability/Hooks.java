@@ -34,4 +34,7 @@ public class Hooks {
     public static boolean isItemBridgeEnabled() {
         return isEnabled("ItemBridge");
     }
+    public static boolean isDungeonMMOEnabled() {
+        return isEnabled("DungeonMMO");
+    }
 }

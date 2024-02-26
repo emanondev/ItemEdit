@@ -146,6 +146,14 @@ public class ItemEdit extends APlugin {
                 t.printStackTrace();
             }
         }
+        if (Hooks.isDungeonMMOEnabled()) {
+            try {
+                this.log("Hooking into DungeonMMO");
+                DungeonMMOItemProvider.register();
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+        }
         registerMetrics(BSTATS_PLUGIN_ID);
     }
 
