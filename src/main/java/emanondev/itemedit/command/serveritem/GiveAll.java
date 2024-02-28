@@ -57,12 +57,13 @@ public class GiveAll extends SubCmd {
                             "%player_uuid%", target.getUniqueId().toString()));
                     item.setItemMeta(meta);
                 }
-                total+= UtilsInventory.giveAmount(target, item, amount, ItemEdit.get().getConfig()
+                int given = UtilsInventory.giveAmount(target, item, amount, ItemEdit.get().getConfig()
                         .loadBoolean("serveritem.give-drops-excess", true) ? ExcessManage.DROP_EXCESS : ExcessManage.DELETE_EXCESS);
-                if (!silent)
+                total+=given;
+                if (given>0&&!silent)
                     sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
                             "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
-                            String.valueOf(amount));
+                            String.valueOf(given));
             }
 
             if (total>0&&ItemEdit.get().getConfig().loadBoolean("log.action.giveall", true)) {
