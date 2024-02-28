@@ -47,7 +47,8 @@ public class Give extends SubCmd {
                         "%player_uuid%", target.getUniqueId().toString()));
                 item.setItemMeta(meta);
             }
-            UtilsInventory.giveAmount(target, item, amount, ExcessManage.DROP_EXCESS);
+            UtilsInventory.giveAmount(target, item, amount, ItemEdit.get().getConfig()
+                    .loadBoolean("serveritem.give-drops-excess", true) ? ExcessManage.DROP_EXCESS : ExcessManage.DELETE_EXCESS);
             if (!silent)
                 sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",

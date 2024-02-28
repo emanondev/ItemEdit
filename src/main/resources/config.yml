@@ -26,9 +26,13 @@ serveritem:
   # this inconsistency may affect only items with placeholders
   #
   # Inconsistency examples:
-  # player A buy an item with %player_name% holder, player B take A item, B try to sell the item but he can't because %player_name% for B it's not the same of A
-  # player A buy an item with %player_name% holder, player A change name to B, try to sell the item but he can't because %player_name% now it's B and do not match old name A
+  # player A buy an item with %player_name% holder, player B take A item, B try to sell the item, but he can't because %player_name% for B it's not the same of A
+  # player A buy an item with %player_name% holder, player A change name to B, try to sell the item, but he can't because %player_name% now it's B and do not match old name A
   replace-holders: true
+  # /si give & /si giveall should drop excess that cannot stay in the inventory of target player?
+  # if true, excess items are dropped in front of the player
+  # if false, excess items are deleted
+  give-drops-excess: true
 storage:
   # Select storage type. Available types: YAML, MongoDB
   type: "YAML"
