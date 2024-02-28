@@ -47,17 +47,17 @@ public class Give extends SubCmd {
                         "%player_uuid%", target.getUniqueId().toString()));
                 item.setItemMeta(meta);
             }
-            UtilsInventory.giveAmount(target, item, amount, ItemEdit.get().getConfig()
+            int given = UtilsInventory.giveAmount(target, item, amount, ItemEdit.get().getConfig()
                     .loadBoolean("serveritem.give-drops-excess", true) ? ExcessManage.DROP_EXCESS : ExcessManage.DELETE_EXCESS);
             if (!silent)
                 sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount));
 
-            if (ItemEdit.get().getConfig().loadBoolean("log.action.give", true)) {
+            if (given > 0 && ItemEdit.get().getConfig().loadBoolean("log.action.give", true)) {
                 String msg = UtilsString.fix(this.getConfigString("log"), target, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
-                        String.valueOf(amount), "%player_name%", target.getName());
+                        String.valueOf(given), "%player_name%", target.getName());
                 if (ItemEdit.get().getConfig().loadBoolean("log.console", true))
                     Util.sendMessage(Bukkit.getConsoleSender(), msg);
                 if (ItemEdit.get().getConfig().loadBoolean("log.file", true))

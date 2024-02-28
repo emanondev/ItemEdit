@@ -48,6 +48,7 @@ public class GiveAll extends SubCmd {
                 lore = meta.hasLore() ? meta.getLore() : null;
                 title = meta.hasDisplayName() ? meta.getDisplayName() : null;
             }
+            int total = 0;
             for (Player target : Bukkit.getOnlinePlayers()) {
                 if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
                     meta.setDisplayName(UtilsString.fix(title, target, true, "%player_name%",
@@ -56,7 +57,7 @@ public class GiveAll extends SubCmd {
                             "%player_uuid%", target.getUniqueId().toString()));
                     item.setItemMeta(meta);
                 }
-                UtilsInventory.giveAmount(target, item, amount, ItemEdit.get().getConfig()
+                total+= UtilsInventory.giveAmount(target, item, amount, ItemEdit.get().getConfig()
                         .loadBoolean("serveritem.give-drops-excess", true) ? ExcessManage.DROP_EXCESS : ExcessManage.DELETE_EXCESS);
                 if (!silent)
                     sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
@@ -64,14 +65,14 @@ public class GiveAll extends SubCmd {
                             String.valueOf(amount));
             }
 
-            if (ItemEdit.get().getConfig().loadBoolean("log.action.giveall", true)) {
+            if (total>0&&ItemEdit.get().getConfig().loadBoolean("log.action.giveall", true)) {
                 StringBuilder sb = new StringBuilder("[");
                 for (Player target : Bukkit.getOnlinePlayers())
                     sb.append(target.getName()).append(", ");
 
                 String msg = UtilsString.fix(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
-                        String.valueOf(amount), "%targets%", sb.delete(sb.length() - 2, sb.length()).append("]").toString());
+                        amount +" (for a total of "+total+" given)", "%targets%", sb.delete(sb.length() - 2, sb.length()).append("]").toString());
                 if (ItemEdit.get().getConfig().loadBoolean("log.console", true))
                     Util.sendMessage(Bukkit.getConsoleSender(), msg);
                 if (ItemEdit.get().getConfig().loadBoolean("log.file", true))
