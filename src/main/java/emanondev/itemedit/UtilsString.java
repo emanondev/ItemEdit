@@ -136,8 +136,8 @@ public class UtilsString {
             text = PlaceholderAPI.setPlaceholders(player, text);
 
         //minimessage
-        if (MiniMessageUtil.hasMiniMessage())
-            text=MiniMessageUtil.getInstance().fromMiniToText(text);
+        if (Hooks.hasMiniMessage())
+            text=Hooks.getMiniMessageUtil().fromMiniToText(text);
 
 
         // color

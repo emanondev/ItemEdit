@@ -1,5 +1,6 @@
 package emanondev.itemedit.compability;
 
+import emanondev.itemedit.Util;
 import org.bukkit.Bukkit;
 
 public class Hooks {
@@ -36,5 +37,29 @@ public class Hooks {
     }
     public static boolean isDungeonMMOEnabled() {
         return isEnabled("DungeonMMO");
+    }
+
+    private static final MiniMessageUtil miniMessage = initMiniMessage();
+    private static MiniMessageUtil initMiniMessage(){
+        try {
+            if (Util.hasPaperAPI() && Util.isVersionAfter(1, 16, 5))
+                return MiniMessagePaper.getInstance();
+        } catch (Throwable t) {
+
+        }
+        try {
+            if (Hooks.isMythicMobsEnabled())
+                return MiniMessageMM.getInstance();
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean hasMiniMessage() {
+        return miniMessage!=null;
+    }
+    public static MiniMessageUtil getMiniMessageUtil() {
+        return miniMessage;
     }
 }
