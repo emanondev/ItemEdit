@@ -111,7 +111,7 @@ public class YMLConfig extends YamlConfiguration {
         }
         InputStream resource = plugin.getResource(name.replace('\\', '/'));
         if (resource != null)
-            // Set up defaults in case their config is broked.
+            // Set up defaults in case their config is broken.
             this.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(resource, StandardCharsets.UTF_8)));
 
         return existed;
