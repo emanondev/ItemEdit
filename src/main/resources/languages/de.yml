@@ -209,10 +209,6 @@ itemedit:
       params: 'color <line> <color>'
       description:
         - '&b&lÄndere die Musterfarbe in der ausgewählten Zeile'
-    colorbanner:
-      params: 'colorbanner <color>'
-      description:
-        - '&b&lÄndere die Hintergrundfarbe des Banners'
   fireworkpower:
     wrong-type: '&4[&cItemEdit&4] &cDas Item muss ein Feuerwerk sein'
     description:

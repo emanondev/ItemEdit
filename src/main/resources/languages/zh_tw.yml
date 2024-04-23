@@ -206,10 +206,6 @@ itemedit:
       params: 'color <行> <顏色>'
       description:
         - '&b&l更改所選行的圖案顏色'
-    colorbanner:
-      params: 'colorbanner <顏色>'
-      description:
-        - '&b&l更改旗幟的背景顏色'
   fireworkpower:
     wrong-type: '&4[&cItemEdit&4] &c物品必須是煙火'
     description:

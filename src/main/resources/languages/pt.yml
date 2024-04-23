@@ -210,10 +210,6 @@ itemedit:
       params: 'color <linha> <cor>'
       description:
         - '&b&lAlterar a cor do padrão na linha selecionada'
-    colorbanner:
-      params: 'colorbanner <cor>'
-      description:
-        - '&b&lAlterar a cor de fundo da bandeira'
   fireworkpower:
     wrong-type: '&4[&cItemEdit&4] &cO item deve ser um foguete'
     description:

@@ -210,10 +210,6 @@ itemedit:
       params: 'color <linea> <colore>'
       description:
         - '&b&lCambia il colore alla linea selezionata'
-    colorbanner:
-      params: 'colorbanner <colore>'
-      description:
-        - '&b&lCambia il colore di background'
   fireworkpower:
     wrong-type: '&4[&cItemEdit&4] &cL''oggetto dev''esssere un fuoco d''artificio'
     description:

@@ -210,10 +210,6 @@ itemedit:
       params: 'color <line> <color>'
       description:
         - '&b&lChange pattern color on selected line'
-    colorbanner:
-      params: 'colorbanner <color>'
-      description:
-        - '&b&lChange banner background color'
   fireworkpower:
     wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
     description:

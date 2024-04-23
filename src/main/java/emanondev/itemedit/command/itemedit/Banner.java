@@ -24,7 +24,7 @@ public class Banner extends SubCmd {
         super("banner", cmd, true, true);
     }
 
-    private static final String[] subCommands = new String[]{"add", "set", "colorbanner", "remove", "color"};
+    private static final String[] subCommands = new String[]{"add", "set", "remove", "color"};
 
     @Override
     public void onCommand(CommandSender sender, String alias, String[] args) {
@@ -45,9 +45,6 @@ public class Banner extends SubCmd {
                 return;
             case "set":
                 setPattern(p, item, args);
-                return;
-            case "colorbanner":
-                color(p, item, args);
                 return;
             case "remove":
                 removePattern(p, item, args);
@@ -95,26 +92,6 @@ public class Banner extends SubCmd {
         } catch (Exception e) {
             p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("remove.params", null, p),
                     getLanguageStringList("remove.description", null, p)));
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    private void color(Player p, ItemStack item, String[] args) {
-        try {
-            BannerMeta meta = (BannerMeta) item.getItemMeta();
-            DyeColor color = Aliases.COLOR.convertAlias(args[2]);
-            if (color == null) {
-                onWrongAlias("wrong-color", p, Aliases.COLOR);
-                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("colorbanner.params", null, p),
-                        getLanguageStringList("colorbanner.description", null, p)));
-                return;
-            }
-            meta.setBaseColor(color);
-            item.setItemMeta(meta);
-            updateView(p);
-        } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("colorbanner.params", null, p),
-                    getLanguageStringList("colorbanner.description", null, p)));
         }
     }
 
@@ -171,8 +148,6 @@ public class Banner extends SubCmd {
         if (args.length == 4 && (args[1].equalsIgnoreCase("color") || args[1].equalsIgnoreCase("add")
                 || args[1].equalsIgnoreCase("set")))
             return Util.complete(args[3], Aliases.COLOR);
-        if (args.length == 3 && args[1].equalsIgnoreCase("colorbanner"))
-            return Util.complete(args[2], Aliases.COLOR);
         return Collections.emptyList();
     }
 

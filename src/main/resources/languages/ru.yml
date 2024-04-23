@@ -207,10 +207,6 @@ itemedit:
       params: 'color <строка> <цвет>'
       description:
         - '&b&lИзменить цвет узора на выбранной строке'
-    colorbanner:
-      params: 'colorbanner <цвет>'
-      description:
-        - '&b&lИзменить цвет фона знамени'
   fireworkpower:
     wrong-type: '&4[&cItemEdit&4] &cЭтот предмет должен быть фейерверком'
     description:

@@ -215,10 +215,6 @@ itemedit:
       params: 'color <ligne> <couleur>'
       description:
         - '&b&lChanger la couleur du motif sur la ligne sélectionnée'
-    colorbanner:
-      params: 'colorbanner <couleur>'
-      description:
-        - '&b&lChanger la couleur de fond de la bannière'
   fireworkpower:
     wrong-type: '&4[&cItemEdit&4] &cL''objet doit être un feu d''artifice'
     description:

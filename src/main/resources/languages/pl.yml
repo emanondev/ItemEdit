@@ -210,10 +210,6 @@ itemedit:
       params: 'color <linia> <kolor>'
       description:
         - '&b&lZmień kolor wzoru na wybranej linii'
-    colorbanner:
-      params: 'colorbanner <kolor>'
-      description:
-        - '&b&lZmień kolor tła baneru'
   fireworkpower:
     wrong-type: '&4[&cItemEdit&4] &cPrzedmiot musi być fajerwerkiem'
     description:

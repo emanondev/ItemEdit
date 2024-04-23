@@ -210,10 +210,6 @@ itemedit:
       params: 'color <лінія> <колір>'
       description:
         - '&b&lЗмінити колір візерунка на вибраному рядку'
-    colorbanner:
-      params: 'colorbanner <колір>'
-      description:
-        - '&b&lЗмінити колір фону прапора'
   fireworkpower:
     wrong-type: '&4[&cItemEdit&4] &cПредмет має бути піротехнічним вогнеметом'
     description:
