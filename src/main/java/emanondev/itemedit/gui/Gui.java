@@ -131,8 +131,9 @@ public interface Gui extends InventoryHolder {
         ItemStack item = new ItemStack(config.loadMaterial(path + ".material", defMaterial));
         ItemMeta meta = item.getItemMeta();
         meta.addItemFlags(ItemFlag.values());
-        if (config.getBoolean(path + ".glow", false))
-            meta.addEnchant(Enchantment.DURABILITY, 1, true);
+        if (config.getBoolean(path + ".glow", false)) {
+            meta.addEnchant(Enchantment.LURE, 1, true);
+        }
 
         item.setItemMeta(meta);
         int dur = config.loadInteger(path + ".durability", defDurability);
