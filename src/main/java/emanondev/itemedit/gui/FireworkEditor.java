@@ -146,7 +146,7 @@ public class FireworkEditor implements Gui {
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
             if (flicker)
-                meta.addEnchant(Enchantment.DURABILITY, 1, true);
+                meta.addEnchant(Enchantment.LURE, 1, true);
             loadLanguageDescription(meta, subPath + "buttons.flags.info",
                     "%status%",
                     getLanguageMessage(subPath + "buttons.flags."

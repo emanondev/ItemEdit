@@ -206,13 +206,7 @@ public class BannerEditor implements Gui {
         meta = (BannerMeta) item.getItemMeta();
         item.setAmount(1);
         this.getInventory().setItem(0, item);
-        DyeColor bcolor;
-        try {
-            String name = item.getType().name();
-            bcolor = DyeColor.valueOf(name.substring(0,name.lastIndexOf("_")));
-        } catch (Exception e) {
-            bcolor = meta.getBaseColor();
-        }
+        DyeColor bcolor = Util.getColorFromBanner(item);
         item = Util.getDyeItemFromColor(bcolor);
         ItemMeta bmeta = item.getItemMeta();
         bmeta.addItemFlags(ItemFlag.values());
@@ -294,14 +288,13 @@ public class BannerEditor implements Gui {
                 return;
             if (data != null)
                 data.setColor(DyeColor.values()[event.getSlot()]);
-            else
-                try {
-                    banner.setType(Material.valueOf(DyeColor.values()[event.getSlot()].name() + "_BANNER"));
-                    meta = (BannerMeta) banner.getItemMeta();
-                } catch (Throwable t) {
-                    // pre 1.13
-                    meta.setBaseColor(DyeColor.values()[event.getSlot()]);
-                }
+            else {
+                if (Util.isVersionAfter(1, 13))
+                    banner.setType(Util.getBannerItemFromColor(DyeColor.values()[event.getSlot()]));
+                else
+                    banner.setDurability(Util.getDataByColor(DyeColor.values()[event.getSlot()]));
+                meta = (BannerMeta) banner.getItemMeta();
+            }
             BannerEditor.this.updateInventory();
             BannerEditor.this.getTargetPlayer().openInventory(BannerEditor.this.getInventory());
         }

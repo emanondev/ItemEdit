@@ -2,8 +2,6 @@ package emanondev.itemedit;
 
 import emanondev.itemedit.aliases.AliasSet;
 import emanondev.itemedit.compability.Hooks;
-import emanondev.itemedit.compability.MiniMessageUtil;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -246,7 +244,7 @@ public class Util {
         try {
             return new ItemStack(Material.valueOf(color.name() + "_DYE"));
         } catch (Exception e) {
-            return new ItemStack(Material.valueOf("INK_SACK"), 1, (short) 0, getData(color));
+            return new ItemStack(Material.valueOf("INK_SACK"), 1, (short) 0, getDataByColor(color));
         }
     }
 
@@ -262,11 +260,72 @@ public class Util {
         try {
             return new ItemStack(Material.valueOf(color.name() + "_WOOL"));
         } catch (Exception e) {
-            return new ItemStack(Material.valueOf("WOOL"), 1, (short) 0, getData(color));
+            return new ItemStack(Material.valueOf("WOOL"), 1, (short) 0, getDataByColor(color));
+        }
+    }
+    /**
+     * for pre 1.13 compatibility
+     *
+     * @param color color
+     * @return An ItemStack of selected Dyed wool
+     */
+    public static Material getBannerItemFromColor(DyeColor color) {
+        try {
+            return Material.valueOf(color.name() + "_BANNER");
+        } catch (Exception e) {
+            return Material.valueOf("BANNER");
+        }
+    }
+    @SuppressWarnings("deprecation")
+    public static DyeColor getColorFromBanner(ItemStack banner) {
+        try {
+            String name = banner.getType().name();
+            return DyeColor.valueOf(name.substring(0,name.length()-7));
+        } catch (Exception e) {
+            return getColorByData((byte) banner.getDurability());
         }
     }
 
-    private static Byte getData(DyeColor color) {
+    public static DyeColor getColorByData(byte color) {
+        switch (color) { //Silver
+            case 0:
+                return DyeColor.BLACK;
+            case 4:
+                return DyeColor.BLUE;
+            case 3:
+                return DyeColor.BROWN;
+            case 6:
+                return DyeColor.CYAN;
+            case 8:
+                return DyeColor.GRAY;
+            case 2:
+                return DyeColor.GREEN;
+            case 12:
+                return DyeColor.LIGHT_BLUE;
+            case 10:
+                return DyeColor.LIME;
+            case 13:
+                return DyeColor.MAGENTA;
+            case 14:
+                return DyeColor.ORANGE;
+            case 9:
+                return DyeColor.PINK;
+            case 5:
+                return DyeColor.PURPLE;
+            case 1:
+                return DyeColor.RED;
+            case 7:
+                return DyeColor.LIGHT_GRAY;
+            case 15:
+                return DyeColor.WHITE;
+            case 11:
+                return DyeColor.YELLOW;
+            default:
+                throw new IllegalStateException();
+        }
+    }
+
+    public static Byte getDataByColor(DyeColor color) {
         switch (color.name()) { //Silver
             case "BLACK":
                 return 0;
