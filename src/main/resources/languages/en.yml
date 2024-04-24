@@ -368,6 +368,40 @@ itemedit:
       - ''
       - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
     params: '<enchant> [level]'
+ie:
+  hidetooltip:
+    description:
+      - '&b&lHide or show tooltips'
+      - ''
+      - '&e[true/false] &bset the flag value, by default toggle'
+    params: '[true/false]'
+  fireresistent:
+    description:
+      - '&b&lSet item resistence to fire/lava'
+      - ''
+      - '&e[true/false] &bset the value, by default toggle'
+      - ''
+      - '&bAn item with fire resistance won''t be destroyed'
+      - '&b when falling into fire and will float over lava'
+    params: '[true/false]'
+  glow:
+    description:
+      - '&b&lOverride enchantment glow effect'
+      - ''
+      - '&e[true/false/default] &bset the value, by default toggle'
+      - ''
+      - '&b&lTip: &edefault &brestore vanilla behavior'
+    params: '[true/false/default]'
+  maxstacksize:
+    description:
+      - '&b&lSets item max stack size'
+      - ''
+      - '&e[1-99/default] &bset the flag value'
+      - ''
+      - '&edefault &bwill restore common stack size which is &e64'
+      - '&b for most items, &e1&b for armors and tools, and other'
+      - '&b values for a few items'
+    params: '[1-99/default]'
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:

@@ -368,6 +368,39 @@ itemedit:
       - ''
       - '&b&lWskazówka: &bUstaw &e[poziom] &bna &e0 &baby usunąć zaklęcie'
     params: '<zaklęcie> [poziom]'
+  hidetooltip:
+    description:
+      - '&b&lUkryj lub pokaż podpowiedzi'
+      - ''
+      - '&e[true/false] &bustawia wartość flagi, domyślnie przełącza'
+    params: '[true/false]'
+  fireresistent:
+    description:
+      - '&b&lUstaw odporność przedmiotu na ogień/lawę'
+      - ''
+      - '&e[true/false] &bustawia wartość, domyślnie przełącza'
+      - ''
+      - '&bPrzedmiot z odpornością na ogień nie zostanie zniszczony'
+      - '&b gdy wpadnie do ognia i będzie unoszący się na lawie'
+    params: '[true/false]'
+  glow:
+    description:
+      - '&b&lZastąp efekt świetlistości ulepszeń'
+      - ''
+      - '&e[true/false/default] &bustawia wartość, domyślnie przełącza'
+      - ''
+      - '&b&lPorada: &e"default" &bprzywraca standardowe zachowanie'
+    params: '[true/false/default]'
+  maxstacksize:
+    description:
+      - '&b&lUstaw maksymalny rozmiar stosu przedmiotów'
+      - ''
+      - '&e[1-99/default] &bustawia wartość flagi'
+      - ''
+      - '&edefault &bprzywróci zwykły rozmiar stosu, który wynosi &e64'
+      - '&b dla większości przedmiotów, &e1&b dla zbroi i narzędzi oraz inne'
+      - '&b wartości dla niektórych przedmiotów'
+    params: '[1-99/default]'
 serveritem:
   help-header: '&9&lServerItem - Pomoc'
   give:

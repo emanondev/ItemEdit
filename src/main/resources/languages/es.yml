@@ -368,6 +368,39 @@ itemedit:
       - ''
       - '&b&lConsejo: &bEstablece &e[nivel] &ba &e0 &bpara eliminar un encantamiento'
     params: '<encantamiento> [nivel]'
+  hidetooltip:
+    description:
+      - '&b&lOcultar o mostrar consejos emergentes'
+      - ''
+      - '&e[true/false] &bestablece el valor del indicador, por defecto es alternar'
+    params: '[true/false]'
+  fireresistent:
+    description:
+      - '&b&lEstablecer resistencia al fuego/lava del objeto'
+      - ''
+      - '&e[true/false] &bestablece el valor, por defecto es alternar'
+      - ''
+      - '&bUn objeto con resistencia al fuego no será destruido'
+      - '&b al caer en el fuego y flotará sobre la lava'
+    params: '[true/false]'
+  glow:
+    description:
+      - '&b&lAnular el efecto de brillo de los encantamientos'
+      - ''
+      - '&e[true/false/default] &bestablece el valor, por defecto es alternar'
+      - ''
+      - '&b&lConsejo: &e"default" &brestaura el comportamiento estándar'
+    params: '[true/false/default]'
+  maxstacksize:
+    description:
+      - '&b&lEstablecer el tamaño máximo del montón de objetos'
+      - ''
+      - '&e[1-99/default] &bestablece el valor del indicador'
+      - ''
+      - '&e"default" &brestaurará el tamaño estándar del montón, que es &e64'
+      - '&b para la mayoría de los objetos, &e1&b para armaduras y herramientas, y otros'
+      - '&b valores para algunos objetos'
+    params: '[1-99/default]'
 serveritem:
   help-header: '&9&lServerItem - Ayuda'
   give:

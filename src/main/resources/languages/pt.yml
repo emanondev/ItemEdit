@@ -367,6 +367,39 @@ itemedit:
       - ''
       - '&b&lDica: &bDefina &e<nível> &bcomo &e0 &bpara remover um encantamento'
     params: '<encantamento> [nível]'
+  hidetooltip:
+    description:
+      - '&b&lOcultar ou mostrar dicas'
+      - ''
+      - '&e[true/false] &bdefine o valor do sinalizador, por padrão é alternar'
+    params: '[true/false]'
+  fireresistent:
+    description:
+      - '&b&lDefinir resistência do item ao fogo/lava'
+      - ''
+      - '&e[true/false] &bdefinir o valor, por padrão é alternar'
+      - ''
+      - '&bUm item com resistência ao fogo não será destruído'
+      - '&b ao cair no fogo e flutuará sobre lava'
+    params: '[true/false]'
+  glow:
+    description:
+      - '&b&lSubstituir o efeito de brilho do encantamento'
+      - ''
+      - '&e[true/false/default] &bdefine o valor, por padrão é alternar'
+      - ''
+      - '&b&lDica: &e"default" &brestaura o comportamento padrão'
+    params: '[true/false/default]'
+  maxstacksize:
+    description:
+      - '&b&lDefine o tamanho máximo do monte de itens'
+      - ''
+      - '&e[1-99/default] &bdefine o valor do sinalizador'
+      - ''
+      - '&edefault &brestaura o tamanho comum do monte, que é &e64'
+      - '&b para a maioria dos itens, &e1&b para armaduras e ferramentas, e outros'
+      - '&b valores para alguns itens'
+    params: '[1-99/default]'
 serveritem:
   help-header: '&9&lServerItem - Ajuda'
   give:

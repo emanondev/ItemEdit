@@ -369,6 +369,39 @@ itemedit:
       - ''
       - '&b&lSuggerimento: &bImposta &e[level] &ba &e0 &bper rimuovere un incanto'
     params: '<enchant> [level]'
+  hidetooltip:
+    description:
+      - '&b&lNascondi o mostra le descrizioni'
+      - ''
+      - '&e[true/false] &bimposta il valore del flag, di default è alternato'
+    params: '[true/false]'
+  fireresistent:
+    description:
+      - '&b&lImposta la resistenza agli incendi/lave dell''oggetto'
+      - ''
+      - '&e[true/false] &bimposta il valore, di default è alternato'
+      - ''
+      - '&bUn oggetto con resistenza al fuoco non verrà distrutto'
+      - '&b cadendo nel fuoco e galleggerà sulla lava'
+    params: '[true/false]'
+  glow:
+    description:
+      - '&b&lSovrascrivi l''effetto di bagliore degli incantamenti'
+      - ''
+      - '&e[true/false/default] &bimposta il valore, di default è alternato'
+      - ''
+      - '&b&lSuggerimento: &e"default" &bripristina il comportamento standard'
+    params: '[true/false/default]'
+  maxstacksize:
+    description:
+      - '&b&lImposta la dimensione massima dello stack dell''oggetto'
+      - ''
+      - '&e[1-99/default] &bimposta il valore del flag'
+      - ''
+      - '&edefault &bripristinerà la dimensione dello stack comune, che è &e64'
+      - '&b per la maggior parte degli oggetti, &e1&b per armature e attrezzi, e altri'
+      - '&b valori per alcuni oggetti'
+    params: '[1-99/default]'
 serveritem:
   help-header: '&9&lServerItem - Guida'
   give:

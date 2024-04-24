@@ -371,6 +371,39 @@ itemedit:
       - ''
       - '&b&lAstuce : &bMettez &e[niveau] &bà &e0 &bpour supprimer un enchantement'
     params: '<enchant> [niveau]'
+  hidetooltip:
+    description:
+      - '&b&lMasquer ou afficher les infobulles'
+      - ''
+      - '&e[true/false] &bdéfinir la valeur du drapeau, bascule par défaut'
+    params: '[true/false]'
+  fireresistent:
+    description:
+      - '&b&lDéfinir la résistance au feu/lave de l''objet'
+      - ''
+      - '&e[true/false] &bdéfinir la valeur, bascule par défaut'
+      - ''
+      - '&bUn objet avec une résistance au feu ne sera pas détruit'
+      - '&b en tombant dans le feu et flottera sur la lave'
+    params: '[true/false]'
+  glow:
+    description:
+      - '&b&lRemplacer l''effet de lueur des enchantements'
+      - ''
+      - '&e[true/false/default] &bdéfinir la valeur, bascule par défaut'
+      - ''
+      - '&b&lAstuce : &e"default" &brestaure le comportement vanilla'
+    params: '[true/false/default]'
+  maxstacksize:
+    description:
+      - '&b&lDéfinir la taille maximale de la pile d''objets'
+      - ''
+      - '&e[1-99/default] &bdéfinir la valeur du drapeau'
+      - ''
+      - '&e"default" &brestaurera la taille de pile classique qui est &e64'
+      - '&b pour la plupart des objets, &e1&b pour les armures et outils, et d''autres'
+      - '&b valeurs pour quelques objets'
+    params: '[1-99/default]'
 serveritem:
   help-header: '&9&lServerItem - Aide'
   give:

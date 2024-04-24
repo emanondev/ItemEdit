@@ -367,6 +367,39 @@ itemedit:
       - ''
       - '&b&lTipp: &bSetze &e[level] &bauf &e0 &bum eine Verzauberung zu entfernen'
     params: '<enchant> [level]'
+  hidetooltip:
+    description:
+      - '&b&lTooltip ausblenden oder anzeigen'
+      - ''
+      - '&e[true/false] &bsetze den Flag-Wert, standardmäßig umschalten'
+    params: '[true/false]'
+  fireresistent:
+    description:
+      - '&b&lSetze Feuer-/Lavabeständigkeit des Gegenstands'
+      - ''
+      - '&e[true/false] &bsetze den Wert, standardmäßig umschalten'
+      - ''
+      - '&bEin Gegenstand mit Feuerbeständigkeit wird nicht zerstört'
+      - '&b wenn er in Feuer fällt und schwebt über Lava'
+    params: '[true/false]'
+  glow:
+    description:
+      - '&b&lÜberschreibe den Glanzeffekt von Verzauberungen'
+      - ''
+      - '&e[true/false/default] &bsetze den Wert, standardmäßig umschalten'
+      - ''
+      - '&b&lTipp: &e"default" &bstellt das Standardverhalten wieder her'
+    params: '[true/false/default]'
+  maxstacksize:
+    description:
+      - '&b&lSetze die maximale Stapelgröße des Gegenstands'
+      - ''
+      - '&e[1-99/default] &bsetze den Flag-Wert'
+      - ''
+      - '&edefault &bstellt die übliche Stapelgröße wieder her, die &e64'
+      - '&b für die meisten Gegenstände beträgt, &e1&b für Rüstungen und Werkzeuge, und andere'
+      - '&b Werte für einige Gegenstände'
+    params: '[1-99/default]'
 serveritem:
   help-header: '&9&lServerItem - Hilfe'
   give:

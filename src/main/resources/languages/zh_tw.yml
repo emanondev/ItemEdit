@@ -362,6 +362,38 @@ itemedit:
       - ''
       - '&b&l提示: &b將&e<level> &b設為&e0 &b可以移除附魔'
     params: '<enchant> [level]'
+  hidetooltip:
+    description:
+      - '&b&l隱藏或顯示提示'
+      - ''
+      - '&e[true/false] &b設定旗標值，預設為切換'
+    params: '[true/false]'
+  fireresistent:
+    description:
+      - '&b&l將物品抗火/岩漿設定為'
+      - ''
+      - '&e[true/false] &b設定值，預設為切換'
+      - ''
+      - '&b具有火焰抗性的物品不會在掉入火中被摧毀'
+      - '&b 並且將在岩漿上漂浮'
+    params: '[true/false]'
+  glow:
+    description:
+      - '&b&l覆蓋附魔發光效果'
+      - ''
+      - '&e[true/false/default] &b設定值，預設為切換'
+      - ''
+      - '&b&l提示：&e"default" &b恢復原始行為'
+    params: '[true/false/default]'
+  maxstacksize:
+    description:
+      - '&b&l設定物品最大堆疊大小'
+      - ''
+      - '&e[1-99/default] &b設定旗標值'
+      - ''
+      - '&e"default" &b將恢復常見的堆疊大小，大部分物品為 &e64'
+      - '&b，護甲和工具為 &e1&b，其他物品為其他值'
+    params: '[1-99/default]'
 serveritem:
   help-header: '&9&lServerItem - 幫助'
   give:
