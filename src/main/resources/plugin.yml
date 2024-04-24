@@ -189,6 +189,11 @@ permissions:
       itemedit.itemedit.compass: true
       itemedit.itemedit.axolotlvariant: true
       itemedit.itemedit.goathornsound: true
+      itemedit.itemedit.armortrim: true
+      itemedit.itemedit.maxstacksize: true
+      itemedit.itemedit.hidetooltip: true
+      itemedit.itemedit.fireresistent: true
+      itemedit.itemedit.glow: true
   itemedit.itemedit.rename:
     default: op
     description: Allow editing item name
@@ -525,3 +530,15 @@ permissions:
   itemedit.itemedit.armortrim:
     default: op
     description: Allow setting trims on armor
+  itemedit.itemedit.maxstacksize:
+    default: op
+    description: Allow setting max stack size
+  itemedit.itemedit.fireresistent:
+    default: op
+    description: Allow setting fire resistance of this stack
+  itemedit.itemedit.hidetooltip:
+    default: op
+    description: Allow hiding tooltips
+  itemedit.itemedit.glow:
+    default: op
+    description: Allow setting glow visual effect

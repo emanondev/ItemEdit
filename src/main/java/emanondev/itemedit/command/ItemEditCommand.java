@@ -3,6 +3,8 @@ package emanondev.itemedit.command;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.itemedit.*;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 public class ItemEditCommand extends AbstractCommand {
     public static ItemEditCommand instance;
@@ -20,9 +22,43 @@ public class ItemEditCommand extends AbstractCommand {
             this.registerSubCommand(new Enchant(this));
             this.registerSubCommand(new Hide(this));
             this.registerSubCommand(new HideAll(this));
+            try{
+                if (Util.isVersionAfter(1,20,5)){
+                    new ItemStack(Material.STONE).getItemMeta().setHideTooltip(true);
+                    this.registerSubCommand(new HideToolTip(this));
+                }
+            }catch (Throwable t){
+                ItemEdit.get().log("Warning: issue for HideTooltip feature");
+            }
+            try{
+                if (Util.isVersionAfter(1,20,5)){
+                    new ItemStack(Material.STONE).getItemMeta().setFireResistant(true);
+                    this.registerSubCommand(new FireResistent(this));
+                }
+            }catch (Throwable t){
+                ItemEdit.get().log("Warning: issue for FireResistent feature");
+            }
 
             this.registerSubCommand(new Unbreakable(this));
             this.registerSubCommand(new RepairCost(this));
+
+            try{
+                if (Util.isVersionAfter(1,20,5)){
+                    new ItemStack(Material.STONE).getItemMeta().setMaxStackSize(1);
+                    this.registerSubCommand(new MaxStackSize(this));
+                }
+            }catch (Throwable t){
+                ItemEdit.get().log("Warning: issue for MaxStackSize feature");
+            }
+            try{
+                if (Util.isVersionAfter(1,20,5)){
+                    new ItemStack(Material.STONE).getItemMeta().setEnchantmentGlintOverride(true);
+                    this.registerSubCommand(new Glow(this));
+                }
+            }catch (Throwable t){
+                ItemEdit.get().log("Warning: issue for Glow feature");
+            }
+
             this.registerSubCommand(new Amount(this));
             this.registerSubCommand(new Damage(this));
             this.registerSubCommand(new Banner(this));
