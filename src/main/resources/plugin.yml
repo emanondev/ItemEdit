@@ -190,6 +190,7 @@ permissions:
       itemedit.itemedit.axolotlvariant: true
       itemedit.itemedit.goathornsound: true
       itemedit.itemedit.armortrim: true
+      itemedit.itemedit.bookenchant: true
       itemedit.itemedit.maxstacksize: true
       itemedit.itemedit.hidetooltip: true
       itemedit.itemedit.fireresistent: true
@@ -442,7 +443,7 @@ permissions:
     default: op
     description: Allow editing book enchants
     children:
-      itemedit.itemedit.enchant.bypass_max_level: true
+      itemedit.itemedit.bookenchant.bypass_max_level: true
   itemedit.itemedit.bookenchant.bypass_max_level:
     default: op
     description: Allow editing book enchants above vanilla limits
