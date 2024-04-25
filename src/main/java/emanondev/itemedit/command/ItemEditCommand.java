@@ -23,7 +23,7 @@ public class ItemEditCommand extends AbstractCommand {
             this.registerSubCommand(new Hide(this));
             this.registerSubCommand(new HideAll(this));
             try{
-                if (Util.isVersionAfter(1,20,5)){
+                if (Util.isVersionAfter(1,20,4)){
                     new ItemStack(Material.STONE).getItemMeta().setHideTooltip(true);
                     this.registerSubCommand(new HideToolTip(this));
                 }
@@ -31,7 +31,7 @@ public class ItemEditCommand extends AbstractCommand {
                 ItemEdit.get().log("Warning: issue for HideTooltip feature");
             }
             try{
-                if (Util.isVersionAfter(1,20,5)){
+                if (Util.isVersionAfter(1,20,4)){
                     new ItemStack(Material.STONE).getItemMeta().setFireResistant(true);
                     this.registerSubCommand(new FireResistent(this));
                 }
@@ -43,7 +43,7 @@ public class ItemEditCommand extends AbstractCommand {
             this.registerSubCommand(new RepairCost(this));
 
             try{
-                if (Util.isVersionAfter(1,20,5)){
+                if (Util.isVersionAfter(1,20,4)){
                     new ItemStack(Material.STONE).getItemMeta().setMaxStackSize(1);
                     this.registerSubCommand(new MaxStackSize(this));
                 }
@@ -51,7 +51,7 @@ public class ItemEditCommand extends AbstractCommand {
                 ItemEdit.get().log("Warning: issue for MaxStackSize feature");
             }
             try{
-                if (Util.isVersionAfter(1,20,5)){
+                if (Util.isVersionAfter(1,20,4)){
                     new ItemStack(Material.STONE).getItemMeta().setEnchantmentGlintOverride(true);
                     this.registerSubCommand(new Glow(this));
                 }
