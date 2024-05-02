@@ -67,6 +67,7 @@ public class Aliases {
     public static final AliasSet<EquipmentSlot> EQUIPMENT_SLOTS = new EnumAliasSet<>("equip_slot", EquipmentSlot.class);
     public static final AttributeAliases ATTRIBUTE = getAttributeAliases();
     public static final OperationAliases OPERATIONS = getAttributeOperationAliases();
+    public static final RarityAliases RARITY = getRarityAliases();
     public static final TropicalFishPatternAliases TROPICALPATTERN = getTropicalPatternAliases();
     public static final TrimMaterialAliases TRIM_MATERIAL = getTrimMaterialAliases();
 
@@ -119,6 +120,7 @@ public class Aliases {
         registerAliasType(GOAT_HORN_SOUND);
         registerAliasType(TRIM_MATERIAL);
         registerAliasType(TRIM_PATTERN);
+        registerAliasType(RARITY);
     }
 
     public static <T> void registerAliasType(@Nullable AliasSet<T> set) {
@@ -186,6 +188,16 @@ public class Aliases {
         if (Util.isVersionUpTo(1, 11))
             return null;
         return new OperationAliases();
+    }
+    private static RarityAliases getRarityAliases() {
+        if (Util.isVersionUpTo(1, 20, 3))
+            return null;
+        try {
+            return new RarityAliases();
+        } catch (Throwable t){
+            t.printStackTrace();
+            return null;
+        }
     }
 
     private static AxolotlVariantAliases getAxolotlVariantAliases() {

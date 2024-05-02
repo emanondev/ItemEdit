@@ -20,34 +20,31 @@ import java.util.Collections;
 
 public class ItemEdit extends APlugin {
     private static ItemEdit plugin = null;
+
     /**
      * @see Util#isVersionUpTo(int, int, int)
      * @see Util#isVersionAfter(int, int, int)
      * @see Util#isVersionInRange(int, int, int, int, int, int)
      */
     @Deprecated
-    public static final String NMS_VERSION = getNmsver();
+    public static final int GAME_MAIN_VERSION = Integer.parseInt(
+            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[0]);
     /**
      * @see Util#isVersionUpTo(int, int, int)
      * @see Util#isVersionAfter(int, int, int)
      * @see Util#isVersionInRange(int, int, int, int, int, int)
      */
     @Deprecated
-    public static final int GAME_MAIN_VERSION = Integer.parseInt(NMS_VERSION.split("_")[0].substring(1));
+    public static final int GAME_VERSION = Integer.parseInt(
+            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[1]);
     /**
      * @see Util#isVersionUpTo(int, int, int)
      * @see Util#isVersionAfter(int, int, int)
      * @see Util#isVersionInRange(int, int, int, int, int, int)
      */
     @Deprecated
-    public static final int GAME_VERSION = Integer.parseInt(NMS_VERSION.split("_")[1]);
-    /**
-     * @see Util#isVersionUpTo(int, int, int)
-     * @see Util#isVersionAfter(int, int, int)
-     * @see Util#isVersionInRange(int, int, int, int, int, int)
-     */
-    @Deprecated
-    public static final int GAME_SUB_VERSION = Integer.parseInt(NMS_VERSION.split("_")[2].substring(1));
+    public static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length<3?0:Integer.parseInt(
+            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[2]);
 
     public static ItemEdit get() {
         return plugin;
@@ -59,12 +56,6 @@ public class ItemEdit extends APlugin {
 
     private final static int PROJECT_ID = 40993;
     private static final int BSTATS_PLUGIN_ID = 15076;
-
-    @Deprecated
-    private static String getNmsver() {
-        String txt = Bukkit.getServer().getClass().getPackage().getName();
-        return txt.substring(txt.lastIndexOf(".") + 1);
-    }
 
     @NotNull
     public StorageType getStorageType() { //TODO if invalid return YAML, maybe i should add a feedback

@@ -370,17 +370,11 @@ public class Util {
     }
 
     private static final int GAME_MAIN_VERSION = Integer.parseInt(
-            Bukkit.getServer().getClass().getPackage().getName().substring(
-                            Bukkit.getServer().getClass().getPackage().getName().lastIndexOf(".") + 1)
-                    .split("_")[0].substring(1));
+            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[0]);
     private static final int GAME_VERSION = Integer.parseInt(
-            Bukkit.getServer().getClass().getPackage().getName().substring(
-                            Bukkit.getServer().getClass().getPackage().getName().lastIndexOf(".") + 1)
-                    .split("_")[1]);
-    private static final int GAME_SUB_VERSION = Integer.parseInt(
-            Bukkit.getServer().getClass().getPackage().getName().substring(
-                            Bukkit.getServer().getClass().getPackage().getName().lastIndexOf(".") + 1)
-                    .split("_")[2].substring(1));
+            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[1]);
+    private static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length<3?0:Integer.parseInt(
+            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[2]);
 
     /**
      * Inclusive
