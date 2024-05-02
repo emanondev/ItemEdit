@@ -27,6 +27,7 @@ public class Rarity extends SubCmd {
         try {
             if (args.length != 2)
                 throw new IllegalArgumentException("Wrong param number");
+            //TODO add none
             ItemRarity rarity = Aliases.RARITY.convertAlias(args[1]);
             ItemMeta meta = item.getItemMeta();
             meta.setRarity(rarity);
@@ -40,11 +41,8 @@ public class Rarity extends SubCmd {
 
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2) {
-            if (Util.isVersionUpTo(1, 12, 1))
-                return Util.complete(args[1], Material.class);
-            return Util.complete(args[1], Material.class, Material::isItem);
-        }
+        if (args.length == 2)
+            return Util.complete(args[1], Material.class, Material::isItem); //isItem was added since 1.12.2 but Rarity can be used only since 1.20.5
         return Collections.emptyList();
     }
 

@@ -380,66 +380,66 @@ public class Util {
      * Inclusive
      * isVersionUpTo(1,9) on 1.9.0 is true
      */
-    public static boolean isVersionUpTo(int mainGameVersion, int gameVersion) {
-        return isVersionUpTo(mainGameVersion, gameVersion, 99);
+    public static boolean isVersionUpTo(int mainVersion, int version) {
+        return isVersionUpTo(mainVersion, version, 99);
     }
 
     /**
      * Inclusive
      * isVersionUpTo(1,9,4) on 1.9.4 is true
      */
-    public static boolean isVersionUpTo(int mainGameVersion, int gameVersion, int gameSubVersion) {
-        if (GAME_MAIN_VERSION > mainGameVersion)
+    public static boolean isVersionUpTo(int mainVersion, int version, int subVersion) {
+        if (GAME_MAIN_VERSION > mainVersion)
             return false;
-        if (GAME_MAIN_VERSION < mainGameVersion)
+        if (GAME_MAIN_VERSION < mainVersion)
             return true;
-        if (GAME_VERSION > gameVersion)
+        if (GAME_VERSION > version)
             return false;
-        if (GAME_VERSION < gameVersion)
+        if (GAME_VERSION < version)
             return true;
-        return GAME_SUB_VERSION <= gameSubVersion;
+        return GAME_SUB_VERSION <= subVersion;
     }
 
     /**
      * Inclusive
      * isVersionAfter(1,9) on 1.9.0 is true
      */
-    public static boolean isVersionAfter(int mainGameVersion, int gameVersion) {
-        return isVersionAfter(mainGameVersion, gameVersion, 0);
+    public static boolean isVersionAfter(int mainVersion, int version) {
+        return isVersionAfter(mainVersion, version, 0);
     }
 
     /**
      * Inclusive
      * isVersionAfter(1,9,4) on 1.9.4 is true
      */
-    public static boolean isVersionAfter(int mainGameVersion, int gameVersion, int gameSubVersion) {
-        if (GAME_MAIN_VERSION < mainGameVersion)
+    public static boolean isVersionAfter(int mainVersion, int version, int subVersion) {
+        if (GAME_MAIN_VERSION < mainVersion)
             return false;
-        if (GAME_MAIN_VERSION > mainGameVersion)
+        if (GAME_MAIN_VERSION > mainVersion)
             return true;
-        if (GAME_VERSION < gameVersion)
+        if (GAME_VERSION < version)
             return false;
-        if (GAME_VERSION > gameVersion)
+        if (GAME_VERSION > version)
             return true;
-        return GAME_SUB_VERSION >= gameSubVersion;
+        return GAME_SUB_VERSION >= subVersion;
     }
 
     /**
      * Inclusive
      */
-    public static boolean isVersionInRange(int mainGameVersionMin, int gameVersionMin,
-                                           int mainGameVersionMax, int gameVersionMax) {
-        return isVersionInRange(mainGameVersionMin, gameVersionMin, 0,
-                mainGameVersionMax, gameVersionMax, 99);
+    public static boolean isVersionInRange(int mainVersionMin, int versionMin,
+                                           int mainVersionMax, int versionMax) {
+        return isVersionInRange(mainVersionMin, versionMin, 0,
+                mainVersionMax, versionMax, 99);
     }
 
     /**
      * Inclusive
      */
-    public static boolean isVersionInRange(int mainGameVersionMin, int gameVersionMin, int gameSubVersionMin,
-                                           int mainGameVersionMax, int gameVersionMax, int gameSubVersionMax) {
-        return isVersionAfter(mainGameVersionMin, gameVersionMin, gameSubVersionMin)
-                && isVersionUpTo(mainGameVersionMax, gameVersionMax, gameSubVersionMax);
+    public static boolean isVersionInRange(int mainVersionMin, int versionMin, int subVersionMin,
+                                           int mainVersionMax, int versionMax, int subVersionMax) {
+        return isVersionAfter(mainVersionMin, versionMin, subVersionMin)
+                && isVersionUpTo(mainVersionMax, versionMax, subVersionMax);
     }
 
     public static boolean isAllowedChangeLore(CommandSender sender, Material type) {

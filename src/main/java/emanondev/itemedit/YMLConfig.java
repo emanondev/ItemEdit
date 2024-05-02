@@ -313,9 +313,6 @@ public class YMLConfig extends YamlConfiguration {
         if (args.length > 0) {
             if (Util.isVersionAfter(1, 18, 1)) {
                 if (getComments(path).isEmpty()) {
-                    if (this.contains(path + "_HOLDERS"))
-                        this.set(path + "_HOLDERS", null);
-
                     StringBuilder build = new StringBuilder();
                     for (int i = 0; i < args.length; i += 2)
                         build.append(args[i]).append(" ");
@@ -343,9 +340,6 @@ public class YMLConfig extends YamlConfiguration {
         if (args.length > 0) {
             if (Util.isVersionAfter(1, 18, 1)) {
                 if (getComments(path).isEmpty()) {
-                    if (this.contains(path + "_HOLDERS"))
-                        this.set(path + "_HOLDERS", null);
-
                     StringBuilder build = new StringBuilder();
                     for (int i = 0; i < args.length; i += 2)
                         build.append(args[i]).append(" ");

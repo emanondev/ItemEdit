@@ -72,7 +72,7 @@ public class Aliases {
     public static final TrimMaterialAliases TRIM_MATERIAL = getTrimMaterialAliases();
 
     private static TrimMaterialAliases getTrimMaterialAliases() {
-        if (Util.isVersionUpTo(1, 19,5))
+        if (Util.isVersionUpTo(1, 19,3))
             return null;
         try {
             return new TrimMaterialAliases();
@@ -84,7 +84,7 @@ public class Aliases {
     public static final TrimPatternAliases TRIM_PATTERN = getTrimPatternAliases();
 
     private static TrimPatternAliases getTrimPatternAliases() {
-        if (Util.isVersionUpTo(1, 19,5))
+        if (Util.isVersionUpTo(1, 19,3))
             return null;
         try {
             return new TrimPatternAliases();
@@ -190,7 +190,7 @@ public class Aliases {
         return new OperationAliases();
     }
     private static RarityAliases getRarityAliases() {
-        if (Util.isVersionUpTo(1, 20, 3))
+        if (Util.isVersionUpTo(1, 20, 4))
             return null;
         try {
             return new RarityAliases();
@@ -208,7 +208,7 @@ public class Aliases {
 
 
     private static GoatHornSoundAliases getGoatHornSoundAliases() {
-        if (Util.isVersionUpTo(1, 19, 1))
+        if (Util.isVersionUpTo(1, 19, 2))
             return null;
         try {
             return new GoatHornSoundAliases();
