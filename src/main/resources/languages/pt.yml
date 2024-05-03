@@ -400,6 +400,15 @@ itemedit:
       - '&b para a maioria dos itens, &e1&b para armaduras e ferramentas, e outros'
       - '&b valores para alguns itens'
     params: '[1-99/default]'
+  rarity:
+    wrong-rarity: '&4[&cItemEdit&4] &cValor de raridade incorreto! &4[&6passe o mouse aqui&4]'
+    description:
+      - '&b&lDefine a raridade do item'
+      - ''
+      - '&e[raridade] &bdefine a raridade do item'
+      - ''
+      - '&b&lDica: definir nenhum valor de raridade restaurará o padrão'
+    params: '[raridade]'
 serveritem:
   help-header: '&9&lServerItem - Ajuda'
   give:

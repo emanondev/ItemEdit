@@ -195,6 +195,7 @@ permissions:
       itemedit.itemedit.hidetooltip: true
       itemedit.itemedit.fireresistent: true
       itemedit.itemedit.glow: true
+      itemedit.itemedit.rarity: true
   itemedit.itemedit.rename:
     default: op
     description: Allow editing item name
@@ -543,3 +544,6 @@ permissions:
   itemedit.itemedit.glow:
     default: op
     description: Allow setting glow visual effect
+  itemedit.itemedit.rarity:
+    default: op
+    description: Allow setting rarity of an item

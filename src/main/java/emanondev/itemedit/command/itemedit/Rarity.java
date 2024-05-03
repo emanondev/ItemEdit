@@ -4,7 +4,6 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
-import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemRarity;
@@ -25,10 +24,14 @@ public class Rarity extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length != 2)
+            if (args.length > 2)
                 throw new IllegalArgumentException("Wrong param number");
-            //TODO add none
-            ItemRarity rarity = Aliases.RARITY.convertAlias(args[1]);
+            ItemRarity rarity = args.length==1?null:Aliases.RARITY.convertAlias(args[1]);
+            if (rarity==null && args.length!=1){
+                onWrongAlias("wrong-rarity", p, Aliases.RARITY);
+                onFail(p, alias);
+                return;
+            }
             ItemMeta meta = item.getItemMeta();
             meta.setRarity(rarity);
             item.setItemMeta(meta);
@@ -42,7 +45,7 @@ public class Rarity extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Material.class, Material::isItem); //isItem was added since 1.12.2 but Rarity can be used only since 1.20.5
+            return Util.complete(args[1], Aliases.RARITY);
         return Collections.emptyList();
     }
 

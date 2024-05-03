@@ -394,6 +394,15 @@ itemedit:
       - '&e"default" &b将恢复常见的堆叠大小，大部分物品为 &e64'
       - '&b，护甲和工具为 &e1&b，其他物品为其他值'
     params: '[1-99/default]'
+  rarity:
+    wrong-rarity: '&4[&cItemEdit&4] &c错误的稀有度值！&4[&6悬停此处&4]'
+    description:
+      - '&b&l设置物品稀有度'
+      - ''
+      - '&e[稀有度] &b设置物品稀有度'
+      - ''
+      - '&b&l提示：设置没有稀有度的值将恢复默认值'
+    params: '[稀有度]'
 serveritem:
   help-header: '&9&lServerItem - 帮助'
   give:
