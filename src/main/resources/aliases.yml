@@ -39,6 +39,10 @@ enchant:
   quick_charge: quick_charge
   soul_speed: soul_speed
   swift_sneak: swift_sneak
+  sweeping_edge: sweeping_edge
+  density: density
+  breach: breach
+  wind_burst: wind_burst
   ae_glow: ae_glow
 banner_pattern:
   square_bottom_left: bottom_left_corner
@@ -82,6 +86,15 @@ banner_pattern:
   globe: globe
   base: base
   piglin: piglin
+  small_stripes: small_stripes
+  diagonal_up_right: diagonal_up_right
+  diagonal_up_left: diagonal_up_left
+  circle: circle
+  rhombus: rhombus
+  half_vertical_right: half_vertical_right
+  half_horizontal_bottom: half_horizontal_bottom
+  flow: flow
+  guster: guster
 book_type:
   original: original
   copy_of_original: copy_of_original
@@ -226,6 +239,9 @@ attribute:
   zombie_spawn_reinforcements: zombie_spawn_reinforcements
   generic_attack_knockback: attack_knockback
   generic_max_absorption: max_absorption
+  player_block_interaction_range: block_interaction_range
+  player_entity_interaction_range: entity_interaction_range
+  player_block_break_speed: block_break_speed
 operation:
   add_number: add_number
   add_scalar: add_scalar

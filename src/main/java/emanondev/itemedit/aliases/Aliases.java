@@ -21,7 +21,10 @@ public class Aliases {
 
         @Override
         public String getName(PotionEffectType type) {
-            return type.getName().toLowerCase(Locale.ENGLISH);
+            String name = type.getName().toLowerCase(Locale.ENGLISH);
+            if (name.startsWith("minecraft:"))
+                name = name.substring(10);
+            return name;
         }
 
         private final Collection<PotionEffectType> values = grabValues();
