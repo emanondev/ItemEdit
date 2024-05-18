@@ -5,7 +5,7 @@ import emanondev.itemedit.YMLConfig;
 
 import java.util.*;
 
-public abstract class AliasSet<T> {
+public abstract class AliasSet<T> implements IAliasSet<T> {
 
     private final String path;
 

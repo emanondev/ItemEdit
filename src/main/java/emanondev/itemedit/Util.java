@@ -1,6 +1,6 @@
 package emanondev.itemedit;
 
-import emanondev.itemedit.aliases.AliasSet;
+import emanondev.itemedit.aliases.IAliasSet;
 import emanondev.itemedit.compability.Hooks;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
@@ -92,7 +92,7 @@ public class Util {
         return names;
     }
 
-    public static @NotNull List<String> complete(String prefix, AliasSet<?> aliases) {
+    public static @NotNull List<String> complete(String prefix, IAliasSet<?> aliases) {
         ArrayList<String> results = new ArrayList<>();
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         int c = 0;

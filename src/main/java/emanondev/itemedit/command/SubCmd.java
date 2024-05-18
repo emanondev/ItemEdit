@@ -5,6 +5,7 @@ import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.aliases.AliasSet;
+import emanondev.itemedit.aliases.IAliasSet;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -89,7 +90,7 @@ public abstract class SubCmd {
         return fail.create();
     }
 
-    protected <T> void onWrongAlias(String pathMessage, CommandSender sender, AliasSet<T> set, String... holders) {
+    protected <T> void onWrongAlias(String pathMessage, CommandSender sender, IAliasSet<T> set, String... holders) {
         String msg = getLanguageString(pathMessage, null, sender, holders);
         if (msg == null || msg.isEmpty())
             return;

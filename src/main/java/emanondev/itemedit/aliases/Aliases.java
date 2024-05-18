@@ -78,9 +78,9 @@ public class Aliases {
         if (Util.isVersionUpTo(1, 19,3))
             return null;
         try {
-            return new TrimMaterialAliases();
+            return new TrimMaterialAliasesNew();
         } catch (Throwable e) {
-            return null;
+            return new TrimMaterialAliasesOld();
         }
     }
 
@@ -90,13 +90,13 @@ public class Aliases {
         if (Util.isVersionUpTo(1, 19,3))
             return null;
         try {
-            return new TrimPatternAliases();
+            return new TrimPatternAliasesNew();
         } catch (Throwable e) {
-            return null;
+            return new TrimPatternAliasesOld();
         }
     }
 
-    private final static Map<String, AliasSet<?>> types = new HashMap<>();
+    private final static Map<String, IAliasSet<?>> types = new HashMap<>();
     public static final EnumAliasSet<FireworkEffect.Type> FIREWORK_TYPE = new EnumAliasSet<>("firework_type", FireworkEffect.Type.class);
     public static final AxolotlVariantAliases AXOLOTL_VARIANT = getAxolotlVariantAliases();
     public static final GoatHornSoundAliases GOAT_HORN_SOUND = getGoatHornSoundAliases();
@@ -126,11 +126,11 @@ public class Aliases {
         registerAliasType(RARITY);
     }
 
-    public static <T> void registerAliasType(@Nullable AliasSet<T> set) {
+    public static <T> void registerAliasType(@Nullable IAliasSet<T> set) {
         registerAliasType(set, false);
     }
 
-    public static <T> void registerAliasType(@Nullable AliasSet<T> set, boolean forced) {
+    public static <T> void registerAliasType(@Nullable IAliasSet<T> set, boolean forced) {
         if (set == null)
             return;
         if (!forced && types.containsKey(set.getID()))
@@ -138,7 +138,7 @@ public class Aliases {
         types.put(set.getID(), set);
     }
 
-    public static AliasSet<?> getAliasType(@NotNull String id) {
+    public static IAliasSet<?> getAliasType(@NotNull String id) {
         return types.get(id);
     }
 
@@ -147,12 +147,12 @@ public class Aliases {
             loaded = true;
             loadTypesMap();
         }
-        for (AliasSet<?> set : types.values()) {
+        for (IAliasSet<?> set : types.values()) {
             set.reload();
         }
     }
 
-    public static Map<String, AliasSet<?>> getTypes() {
+    public static Map<String, IAliasSet<?>> getTypes() {
         return Collections.unmodifiableMap(types);
     }
 

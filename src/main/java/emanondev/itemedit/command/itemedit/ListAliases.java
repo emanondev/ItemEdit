@@ -3,6 +3,7 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.AliasSet;
 import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.aliases.IAliasSet;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -53,7 +54,7 @@ public class ListAliases extends SubCmd {
                 Util.sendMessage(sender, comp.create());
 
             } else {
-                AliasSet set = Aliases.getTypes().get(args[1].toLowerCase(Locale.ENGLISH));
+                IAliasSet set = Aliases.getTypes().get(args[1].toLowerCase(Locale.ENGLISH));
                 if (set == null) {
                     this.onFail(sender, alias);
                     return;
