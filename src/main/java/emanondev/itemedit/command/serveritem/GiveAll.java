@@ -27,7 +27,7 @@ public class GiveAll extends SubCmd {
     @Override
     public void onCommand(CommandSender sender, String alias, String[] args) {
         try {
-            if (Bukkit.getOnlinePlayers().size() == 0)
+            if (Bukkit.getOnlinePlayers().isEmpty())
                 return;
             // <id> [amount] [silent]
             if (args.length < 2 || args.length > 4) {
@@ -59,21 +59,21 @@ public class GiveAll extends SubCmd {
                 }
                 int given = UtilsInventory.giveAmount(target, item, amount, ItemEdit.get().getConfig()
                         .loadBoolean("serveritem.give-drops-excess", true) ? ExcessManage.DROP_EXCESS : ExcessManage.DELETE_EXCESS);
-                total+=given;
-                if (given>0&&!silent)
+                total += given;
+                if (given > 0 && !silent)
                     sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
                             "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                             String.valueOf(given));
             }
 
-            if (total>0&&ItemEdit.get().getConfig().loadBoolean("log.action.giveall", true)) {
+            if (total > 0 && ItemEdit.get().getConfig().loadBoolean("log.action.giveall", true)) {
                 StringBuilder sb = new StringBuilder("[");
                 for (Player target : Bukkit.getOnlinePlayers())
                     sb.append(target.getName()).append(", ");
 
                 String msg = UtilsString.fix(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
-                        amount +" (for a total of "+total+" given)", "%targets%", sb.delete(sb.length() - 2, sb.length()).append("]").toString());
+                        amount + " (for a total of " + total + " given)", "%targets%", sb.delete(sb.length() - 2, sb.length()).append("]").toString());
                 if (ItemEdit.get().getConfig().loadBoolean("log.console", true))
                     Util.sendMessage(Bukkit.getConsoleSender(), msg);
                 if (ItemEdit.get().getConfig().loadBoolean("log.file", true))

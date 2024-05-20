@@ -22,7 +22,6 @@ public interface IAliasSet<T> {
     String getName(T value);
 
     /**
-     *
      * @return path for specified value (set path not included)
      */
     String getPathName(T value);

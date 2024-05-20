@@ -26,8 +26,8 @@ public class Rarity extends SubCmd {
         try {
             if (args.length > 2)
                 throw new IllegalArgumentException("Wrong param number");
-            ItemRarity rarity = args.length==1?null:Aliases.RARITY.convertAlias(args[1]);
-            if (rarity==null && args.length!=1){
+            ItemRarity rarity = args.length == 1 ? null : Aliases.RARITY.convertAlias(args[1]);
+            if (rarity == null && args.length != 1) {
                 onWrongAlias("wrong-rarity", p, Aliases.RARITY);
                 onFail(p, alias);
                 return;

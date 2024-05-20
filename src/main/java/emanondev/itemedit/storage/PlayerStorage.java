@@ -19,7 +19,8 @@ public interface PlayerStorage {
      * @param id unique identifier of the item, case insensitive
      * @return item associated with id
      */
-    @Nullable ItemStack getItem(@NotNull OfflinePlayer p, @NotNull String id);
+    @Nullable
+    ItemStack getItem(@NotNull OfflinePlayer p, @NotNull String id);
 
     /**
      * Set association for id and item for player.
@@ -51,14 +52,16 @@ public interface PlayerStorage {
      * @param p player
      * @return a set of all ids saved for player
      */
-    @NotNull Set<String> getIds(@NotNull OfflinePlayer p);
+    @NotNull
+    Set<String> getIds(@NotNull OfflinePlayer p);
 
     /**
      * Get all players with at least one saved id.
      *
      * @return a set af all players with at least an id
      */
-    @NotNull Set<OfflinePlayer> getPlayers();
+    @NotNull
+    Set<OfflinePlayer> getPlayers();
 
     default boolean storeByUUID() {
         return ItemEdit.get().getConfig().loadBoolean("storage.store-by-uuid", true);

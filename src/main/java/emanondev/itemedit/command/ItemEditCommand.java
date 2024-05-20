@@ -27,9 +27,10 @@ public class ItemEditCommand extends AbstractCommand {
 
             this.registerSubCommand(new Unbreakable(this));
             this.registerSubCommand(new RepairCost(this));
-
-            if (Util.isVersionAfter(1, 20, 5))
+            if (Util.isVersionAfter(1, 20, 5)) {
                 this.registerSubCommand(new MaxStackSize(this));
+                this.registerSubCommand(new MaxDurability(this));
+            }
             if (Util.isVersionAfter(1, 20, 5))
                 this.registerSubCommand(new Glow(this));
             if (Util.isVersionAfter(1, 20, 5))

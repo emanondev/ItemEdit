@@ -35,12 +35,14 @@ public class Hooks {
     public static boolean isItemBridgeEnabled() {
         return isEnabled("ItemBridge");
     }
+
     public static boolean isDungeonMMOEnabled() {
         return isEnabled("DungeonMMO");
     }
 
     private static final MiniMessageUtil miniMessage = initMiniMessage();
-    private static MiniMessageUtil initMiniMessage(){
+
+    private static MiniMessageUtil initMiniMessage() {
         try {
             if (Util.hasPaperAPI() && Util.isVersionAfter(1, 16, 5))
                 return MiniMessagePaper.getInstance();
@@ -57,8 +59,9 @@ public class Hooks {
     }
 
     public static boolean hasMiniMessage() {
-        return miniMessage!=null;
+        return miniMessage != null;
     }
+
     public static MiniMessageUtil getMiniMessageUtil() {
         return miniMessage;
     }

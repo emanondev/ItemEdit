@@ -1,7 +1,5 @@
 package emanondev.itemedit.compability;
 
-import emanondev.itemedit.Util;
-
 public interface MiniMessageUtil {
 
     String fromMiniToText(String text);

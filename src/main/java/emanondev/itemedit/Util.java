@@ -129,7 +129,7 @@ public class Util {
             File saveTo = new File(ItemEdit.get().getDataFolder(),
                     "logs" + File.separatorChar
                             + new SimpleDateFormat(ItemEdit.get().getConfig().loadMessage("log.file-format", "yyyy.MM.dd", false)
-                            ,Locale.ENGLISH).format(date)
+                            , Locale.ENGLISH).format(date)
                             //+ DateFormatUtils.format(date,
                             //ItemEdit.get().getConfig().loadMessage("log.file-format", "yyyy.MM.dd", false))
                             + ".log");
@@ -142,7 +142,7 @@ public class Util {
             FileWriter fw = new FileWriter(saveTo, true);
             PrintWriter pw = new PrintWriter(fw);
             pw.println(new SimpleDateFormat(ItemEdit.get().getConfig().loadMessage("log.log-date-format", "[dd.MM.yyyy HH:mm:ss]", false)
-            ,Locale.ENGLISH).format(date)
+                    , Locale.ENGLISH).format(date)
                     + message);
             pw.flush();
             pw.close();
@@ -263,6 +263,7 @@ public class Util {
             return new ItemStack(Material.valueOf("WOOL"), 1, (short) 0, getDataByColor(color));
         }
     }
+
     /**
      * for pre 1.13 compatibility
      *
@@ -276,11 +277,12 @@ public class Util {
             return Material.valueOf("BANNER");
         }
     }
+
     @SuppressWarnings("deprecation")
     public static DyeColor getColorFromBanner(ItemStack banner) {
         try {
             String name = banner.getType().name();
-            return DyeColor.valueOf(name.substring(0,name.length()-7));
+            return DyeColor.valueOf(name.substring(0, name.length() - 7));
         } catch (Exception e) {
             return getColorByData((byte) banner.getDurability());
         }
@@ -373,7 +375,7 @@ public class Util {
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[0]);
     private static final int GAME_VERSION = Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[1]);
-    private static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length<3?0:Integer.parseInt(
+    private static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length < 3 ? 0 : Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[2]);
 
     /**

@@ -413,6 +413,13 @@ itemedit:
       - ''
       - '&b&lConseil : définir aucune valeur de rareté restaurera la valeur par défaut'
     params: '[rareté]'
+  maxdurability:
+    wrong-type: '&4[&cItemEdit&4] &cL''objet doit avoir une durabilité comme les outils et les armures'
+    description:
+      - '&b&lDéfinit la durabilité maximale de l''objet'
+      - ''
+      - '&e<durabilité maximale> &bnouvelle valeur de durabilité de l''objet, doit être supérieure à 1'
+    params: '<durabilité maximale>'
 serveritem:
   help-header: '&9&lServerItem - Aide'
   give:

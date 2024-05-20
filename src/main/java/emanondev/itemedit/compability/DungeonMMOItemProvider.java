@@ -7,8 +7,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class DungeonMMOItemProvider implements ItemProvider {
 
-    public static void register(){
-        DungeonMMOAPI.getInstance().registerItemProvider("itemedit",new DungeonMMOItemProvider());
+    public static void register() {
+        DungeonMMOAPI.getInstance().registerItemProvider("itemedit", new DungeonMMOItemProvider());
     }
 
     @Override

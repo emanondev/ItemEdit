@@ -68,7 +68,7 @@ itemedit:
         - '&b例子2: &e/ie lore replace {重} {非常轻}'
         - '&b''&e重剑&b'' -> ''&e非常轻剑&b'''
   hide:
-    wrong-flag: '&4[&cItemEdit&4] &c错误的标记值！ &4[&6hover here&4]'
+    wrong-flag: '&4[&cItemEdit&4] &c错误的标记值！ &4[&6悬停此处&4]'
     description:
       - '&b&l隐藏或显示组件'
       - ''
@@ -133,7 +133,7 @@ itemedit:
       - '&b如果您感到困惑，可以在Google上搜索"RGB色彩选择器"'
     params: '<红> <绿> <蓝>'
   enchant:
-    wrong-enchant: '&4[&cItemEdit&4] &c错误的附魔值！ &4[&6hover here&4]'
+    wrong-enchant: '&4[&cItemEdit&4] &c错误的附魔值！ &4[&6悬停此处&4]'
     description:
       - '&b&l设置附魔'
       - ''
@@ -144,7 +144,7 @@ itemedit:
     params: '<附魔> [等级]'
   booktype:
     wrong-type: '&4[&cItemEdit&4] &c物品必须是一本写入的书'
-    wrong-generation: '&4[&cItemEdit&4] &c错误的书籍类型值！ &4[&6hover here&4]'
+    wrong-generation: '&4[&cItemEdit&4] &c错误的书籍类型值！ &4[&6悬停此处&4]'
     description:
       - '&b&l设置书籍类型'
       - ''
@@ -160,7 +160,7 @@ itemedit:
     params: '<名称>'
   potioneffect:
     wrong-type: '&4[&cItemEdit&4] &c物品必须是药水、尖端箭或可疑的汤'
-    wrong-effect: '&4[&cItemEdit&4] &c错误的效果值！ &4[&6hover here&4]'
+    wrong-effect: '&4[&cItemEdit&4] &c错误的效果值！ &4[&6悬停此处&4]'
     itemtag-tip: '&9[&fItemEdit&9] &b需要将药水效果添加到普通物品吗？试试>ItemTag<'
     itemtag-tip-hover:
       - '&6点击我'
@@ -403,6 +403,13 @@ itemedit:
       - ''
       - '&b&l提示：设置没有稀有度的值将恢复默认值'
     params: '[稀有度]'
+  maxdurability:
+    wrong-type: '&4[&cItemEdit&4] &c物品必须具有像工具和盔甲这样的耐久度'
+    description:
+      - '&b&l设置物品的最大耐久度'
+      - ''
+      - '&e<最大耐久度> &b物品的新耐久度值，必须大于1'
+    params: '<最大耐久度>'
 serveritem:
   help-header: '&9&lServerItem - 帮助'
   give:

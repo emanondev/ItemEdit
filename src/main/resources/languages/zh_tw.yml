@@ -68,7 +68,7 @@ itemedit:
         - '&b例子2: &e/ie lore replace {重} {非常輕}'
         - '&b''&e重劍&b'' -> ''&e非常輕劍&b'''
   hide:
-    wrong-flag: '&4[&cItemEdit&4] &c錯誤的標記值！ &4[&6hover here&4]'
+    wrong-flag: '&4[&cItemEdit&4] &c錯誤的標記值！ &4[&6懸停這裡&4]'
     description:
       - '&b&l隱藏或顯示組件'
       - ''
@@ -133,7 +133,7 @@ itemedit:
       - '&b如果您感到困惑，可以在Google上搜索"RGB色彩選取器"'
     params: '<紅> <綠> <藍>'
   enchant:
-    wrong-enchant: '&4[&cItemEdit&4] &c錯誤的附魔值！ &4[&6hover here&4]'
+    wrong-enchant: '&4[&cItemEdit&4] &c錯誤的附魔值！ &4[&6懸停這裡&4]'
     description:
       - '&b&l設置附魔'
       - ''
@@ -144,7 +144,7 @@ itemedit:
     params: '<附魔> [等級]'
   booktype:
     wrong-type: '&4[&cItemEdit&4] &c物品必須是一本寫入的書'
-    wrong-generation: '&4[&cItemEdit&4] &c錯誤的書籍類型值！ &4[&6hover here&4]'
+    wrong-generation: '&4[&cItemEdit&4] &c錯誤的書籍類型值！ &4[&6懸停這裡&4]'
     description:
       - '&b&l設置書籍類型'
       - ''
@@ -160,7 +160,7 @@ itemedit:
     params: '<名稱>'
   potioneffect:
     wrong-type: '&4[&cItemEdit&4] &c物品必須是藥水、尖端箭或可疑的湯'
-    wrong-effect: '&4[&cItemEdit&4] &c錯誤的效果值！ &4[&6hover here&4]'
+    wrong-effect: '&4[&cItemEdit&4] &c錯誤的效果值！ &4[&6懸停這裡&4]'
     itemtag-tip: '&9[&fItemEdit&9] &b需要將藥水效果添加到普通物品嗎？試試>ItemTag<'
     itemtag-tip-hover:
       - '&6點擊我'
@@ -186,8 +186,8 @@ itemedit:
         - '&b&l移除所選效果'
   banner:
     wrong-type: '&4[&cItemEdit&4] &c物品必須是旗幟'
-    wrong-color: '&4[&cItemEdit&4] &c錯誤的顏色值！ &4[&6hover here&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &c錯誤的圖案值！ &4[&6hover here&4]'
+    wrong-color: '&4[&cItemEdit&4] &c錯誤的顏色值！ &4[&6懸停這裡&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &c錯誤的圖案值！ &4[&6懸停這裡&4]'
     description:
       - '&b&l編輯旗幟'
     set:
@@ -220,7 +220,7 @@ itemedit:
     params: ''
   spawnereggtype:
     wrong-type: '&4[&cItemEdit&4] &c物品必須是創造蛋'
-    wrong-entity: '&4[&cItemEdit&4] &c錯誤的蛋類型值！ &4[&6hover here&4]'
+    wrong-entity: '&4[&cItemEdit&4] &c錯誤的蛋類型值！ &4[&6懸停這裡&4]'
     description:
       - '&b&l設置創造蛋生成的實體類型'
       - ''
@@ -228,9 +228,9 @@ itemedit:
       - '&b只有一些實體類型可以由創造蛋生成'
     params: '<類型>'
   attribute:
-    wrong-attribute: '&4[&cItemEdit&4] &c錯誤的屬性值！ &4[&6hover here&4]'
-    wrong-operation: '&4[&cItemEdit&4] &c錯誤的操作值！ &4[&6hover here&4]'
-    wrong-equipment: '&4[&cItemEdit&4] &c錯誤的裝備值！ &4[&6hover here&4]'
+    wrong-attribute: '&4[&cItemEdit&4] &c錯誤的屬性值！ &4[&6懸停這裡&4]'
+    wrong-operation: '&4[&cItemEdit&4] &c錯誤的操作值！ &4[&6懸停這裡&4]'
+    wrong-equipment: '&4[&cItemEdit&4] &c錯誤的裝備值！ &4[&6懸停這裡&4]'
     description:
       - '&b&l編輯屬性修改器'
       - ''
@@ -254,8 +254,8 @@ itemedit:
         - '&e<屬性/插槽> &b要移除的類型，任何擁有所選值的修改器都將被移除'
   tropicalfish:
     wrong-type: '&4[&cItemEdit&4] &c物品必須是熱帶魚桶'
-    wrong-color: '&4[&cItemEdit&4] &c錯誤的顏色值！ &4[&6hover here&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &c錯誤的圖案值！ &4[&6hover here&4]'
+    wrong-color: '&4[&cItemEdit&4] &c錯誤的顏色值！ &4[&6懸停這裡&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &c錯誤的圖案值！ &4[&6懸停這裡&4]'
     description:
       - '&b&l設置熱帶魚桶的屬性'
       - ''
@@ -299,7 +299,7 @@ itemedit:
     params: '<值>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &c物品必須是水貂桶'
-    wrong-axolotl: '&4[&cItemEdit&4] &c錯誤的水貂值！ &4[&6hover here&4]'
+    wrong-axolotl: '&4[&cItemEdit&4] &c錯誤的水貂值！ &4[&6懸停這裡&4]'
     description:
       - '&b&l編輯水貂桶的水貂變種'
       - ''
@@ -403,6 +403,13 @@ itemedit:
       - ''
       - '&b&l提示：設定沒有稀有度的值將恢復預設值'
     params: '[稀有度]'
+  maxdurability:
+    wrong-type: '&4[&cItemEdit&4] &c物品必須具有像工具和盔甲這樣的耐久度'
+    description:
+      - '&b&l設定物品的最大耐久度'
+      - ''
+      - '&e<最大耐久度> &b物品的新耐久度值，必須大於1'
+    params: '<最大耐久度>'
 serveritem:
   help-header: '&9&lServerItem - 幫助'
   give:

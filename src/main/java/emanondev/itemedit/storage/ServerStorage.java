@@ -20,7 +20,8 @@ public interface ServerStorage {
      * @param id unique identifier of the item, case insensitive
      * @return item associated with id
      */
-    @Nullable ItemStack getItem(@NotNull String id);
+    @Nullable
+    ItemStack getItem(@NotNull String id);
 
     /**
      * Get the nick associated with id.
@@ -29,7 +30,8 @@ public interface ServerStorage {
      * @return nick associated with id, if none is set returns item title, if item
      * has no title@Override item material name is returned
      */
-    @Nullable String getNick(@NotNull String id);
+    @Nullable
+    String getNick(@NotNull String id);
 
     /**
      * Set association for id and item for player.
@@ -64,7 +66,8 @@ public interface ServerStorage {
      *
      * @return a set of all ids saved
      */
-    @NotNull Set<String> getIds();
+    @NotNull
+    Set<String> getIds();
 
     default void validateID(String id) {
         if (id == null || id.contains(" ") || id.contains(".") || id.isEmpty())

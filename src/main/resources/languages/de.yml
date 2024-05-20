@@ -409,6 +409,13 @@ itemedit:
       - ''
       - '&b&lTipp: Das Festlegen von keinem Seltenheitswert stellt den Standard wieder her'
     params: '[rarität]'
+  maxdurability:
+    wrong-type: '&4[&cItemEdit&4] &cGegenstand muss eine Haltbarkeit haben wie Werkzeuge und Rüstungen'
+    description:
+      - '&b&lSetzt die maximale Haltbarkeit des Gegenstands'
+      - ''
+      - '&e<maximale Haltbarkeit> &bneuer Haltbarkeitswert des Gegenstands, muss größer als 1 sein'
+    params: '<maximale Haltbarkeit>'
 serveritem:
   help-header: '&9&lServerItem - Hilfe'
   give:

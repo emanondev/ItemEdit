@@ -5,7 +5,9 @@ import emanondev.itemedit.command.*;
 import emanondev.itemedit.compability.*;
 import emanondev.itemedit.gui.Gui;
 import emanondev.itemedit.gui.GuiHandler;
-import emanondev.itemedit.storage.*;
+import emanondev.itemedit.storage.PlayerStorage;
+import emanondev.itemedit.storage.ServerStorage;
+import emanondev.itemedit.storage.StorageType;
 import emanondev.itemedit.storage.mongo.MongoPlayerStorage;
 import emanondev.itemedit.storage.mongo.MongoServerStorage;
 import emanondev.itemedit.storage.mongo.MongoStorage;
@@ -43,7 +45,7 @@ public class ItemEdit extends APlugin {
      * @see Util#isVersionInRange(int, int, int, int, int, int)
      */
     @Deprecated
-    public static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length<3?0:Integer.parseInt(
+    public static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length < 3 ? 0 : Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[2]);
 
     public static ItemEdit get() {

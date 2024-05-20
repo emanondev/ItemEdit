@@ -1,7 +1,6 @@
 package emanondev.itemedit.command.itemedit;
 
 import emanondev.itemedit.Util;
-import emanondev.itemedit.aliases.AliasSet;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.aliases.IAliasSet;
 import emanondev.itemedit.command.ItemEditCommand;

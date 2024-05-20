@@ -19,8 +19,8 @@ public class RegistryAliasSet<T extends Keyed> extends AliasSet<T> {
 
     @Override
     public String getName(T type) {
-        return type.getKey().getNamespace().equals(NamespacedKey.MINECRAFT)?
-                type.getKey().getKey():type.getKey().toString();
+        return type.getKey().getNamespace().equals(NamespacedKey.MINECRAFT) ?
+                type.getKey().getKey() : type.getKey().toString();
     }
 
     @Override

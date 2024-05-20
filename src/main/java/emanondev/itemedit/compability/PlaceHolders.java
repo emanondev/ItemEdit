@@ -111,7 +111,7 @@ public class PlaceHolders extends PlaceholderExpansion {
 
         } catch (Exception e) {
             ItemEdit.get().log("&c! &fWrong PlaceHolderValue %" + getIdentifier() + "_" + ChatColor.YELLOW + value
-                    + ChatColor.WHITE + "% "+e.getMessage());
+                    + ChatColor.WHITE + "% " + e.getMessage());
             //e.printStackTrace();
         }
         return null;

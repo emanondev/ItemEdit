@@ -410,6 +410,13 @@ itemedit:
       - ''
       - '&b&lTip: setting no rarity value will restore default'
     params: '[rarity]'
+  maxdurability:
+    wrong-type: '&4[&cItemEdit&4] &cItem must have a durability like tools and armors'
+    description:
+      - '&b&lSets item max durability'
+      - ''
+      - '&e<max durability> &bitem new durability value, must be bigger than 1'
+    params: '<max durability>'
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:

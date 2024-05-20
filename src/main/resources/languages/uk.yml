@@ -410,6 +410,13 @@ itemedit:
       - ''
       - '&b&lПорада: встановлення відсутнього значення рідкості відновить стандартне значення'
     params: '[рідкість]'
+  maxdurability:
+    wrong-type: '&4[&cItemEdit&4] &cПредмет повинен мати міцність, як інструменти та броня'
+    description:
+      - '&b&lВстановлює максимальну міцність предмета'
+      - ''
+      - '&e<максимальна міцність> &bнове значення міцності предмета, повинно бути більше 1'
+    params: '<максимальна міцність>'
 serveritem:
   help-header: '&9&lServerItem - Довідка'
   give:
@@ -783,6 +790,7 @@ gui:
   serveritems:
     #Holders: %player_name% %page%
     title: '&9Предмети Сервера - сторінка &b%page%'
+    page-info:
       #Holders: %player_name% %page%
       description:
         - '&6&lСторінка &e&l%page%'

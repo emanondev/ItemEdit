@@ -45,7 +45,7 @@ public class Aliases {
     };
     public static final AliasSet<DyeColor> COLOR = new EnumAliasSet<>("color", DyeColor.class);
     public static final EggTypeAliases EGG_TYPE = getEggTypeAliases();
-    public static final AliasSet<ItemFlag> FLAG_TYPE = new EnumAliasSet<ItemFlag>("flag_type", ItemFlag.class){
+    public static final AliasSet<ItemFlag> FLAG_TYPE = new EnumAliasSet<ItemFlag>("flag_type", ItemFlag.class) {
         @Override
         public String getName(ItemFlag type) {
             String name = type.name().toLowerCase(Locale.ENGLISH);
@@ -75,7 +75,7 @@ public class Aliases {
     public static final TrimMaterialAliases TRIM_MATERIAL = getTrimMaterialAliases();
 
     private static TrimMaterialAliases getTrimMaterialAliases() {
-        if (Util.isVersionUpTo(1, 19,3))
+        if (Util.isVersionUpTo(1, 19, 4))
             return null;
         try {
             return new TrimMaterialAliasesNew();
@@ -87,7 +87,7 @@ public class Aliases {
     public static final TrimPatternAliases TRIM_PATTERN = getTrimPatternAliases();
 
     private static TrimPatternAliases getTrimPatternAliases() {
-        if (Util.isVersionUpTo(1, 19,3))
+        if (Util.isVersionUpTo(1, 19, 4))
             return null;
         try {
             return new TrimPatternAliasesNew();
@@ -192,12 +192,13 @@ public class Aliases {
             return null;
         return new OperationAliases();
     }
+
     private static RarityAliases getRarityAliases() {
         if (Util.isVersionUpTo(1, 20, 4))
             return null;
         try {
             return new RarityAliases();
-        } catch (Throwable t){
+        } catch (Throwable t) {
             t.printStackTrace();
             return null;
         }

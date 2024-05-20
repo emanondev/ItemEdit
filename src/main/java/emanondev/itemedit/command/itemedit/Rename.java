@@ -24,7 +24,7 @@ public class Rename extends SubCmd {
     private boolean allowedLengthLimit(Player who, String text) {
         if (lengthLimit < 0 || who.hasPermission("itemedit.bypass.rename_length_limit"))
             return true;
-        return text.length()<=lengthLimit;
+        return text.length() <= lengthLimit;
     }
 
     @Override

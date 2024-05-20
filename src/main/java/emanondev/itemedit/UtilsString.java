@@ -1,7 +1,6 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.compability.Hooks;
-import emanondev.itemedit.compability.MiniMessageUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -137,7 +136,7 @@ public class UtilsString {
 
         //minimessage
         if (Hooks.hasMiniMessage())
-            text=Hooks.getMiniMessageUtil().fromMiniToText(text);
+            text = Hooks.getMiniMessageUtil().fromMiniToText(text);
 
 
         // color

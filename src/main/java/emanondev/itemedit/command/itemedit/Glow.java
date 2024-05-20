@@ -30,7 +30,7 @@ public class Glow extends SubCmd {
             if (args.length > 2)
                 throw new IllegalArgumentException("Wrong param number");
             ItemMeta meta = item.getItemMeta();
-            Boolean value = args.length==1?(meta.hasEnchantmentGlintOverride()?!meta.getEnchantmentGlintOverride():Boolean.TRUE):Aliases.BOOLEAN.convertAlias(args[1]);
+            Boolean value = args.length == 1 ? (meta.hasEnchantmentGlintOverride() ? !meta.getEnchantmentGlintOverride() : Boolean.TRUE) : Aliases.BOOLEAN.convertAlias(args[1]);
             meta.setEnchantmentGlintOverride(value);
             item.setItemMeta(meta);
         } catch (Exception e) {

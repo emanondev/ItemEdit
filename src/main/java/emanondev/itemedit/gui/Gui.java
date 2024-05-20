@@ -85,11 +85,13 @@ public interface Gui extends InventoryHolder {
     /**
      * @return button at slot position
      */
-    @NotNull Inventory getInventory();
+    @NotNull
+    Inventory getInventory();
 
     Player getTargetPlayer();
 
-    @NotNull APlugin getPlugin();
+    @NotNull
+    APlugin getPlugin();
 
     default String getLanguageMessage(@NotNull String fullPath, String... holders) {
         return getPlugin().getLanguageConfig(getTargetPlayer()).loadMessage(fullPath, "", null, true, holders);

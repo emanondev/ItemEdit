@@ -18,7 +18,7 @@ public class MiniMessageMM implements MiniMessageUtil {
         if (text == null || text.isEmpty())
             return text;
         try {
-            return UNGLY_LEGACY.serialize(MiniMessage.miniMessage().deserialize(text.replace("§","&")));
+            return UNGLY_LEGACY.serialize(MiniMessage.miniMessage().deserialize(text.replace("§", "&")));
         } catch (ParsingExceptionImpl exception) {
             exception.printStackTrace();
             return text;

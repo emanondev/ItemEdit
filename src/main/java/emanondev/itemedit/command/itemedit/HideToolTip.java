@@ -11,7 +11,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 public class HideToolTip extends SubCmd {
 
@@ -28,7 +27,7 @@ public class HideToolTip extends SubCmd {
             if (args.length > 2)
                 throw new IllegalArgumentException("Wrong param number");
             ItemMeta meta = item.getItemMeta();
-            boolean value = args.length==1?!meta.isHideTooltip():Aliases.BOOLEAN.convertAlias(args[1]);
+            boolean value = args.length == 1 ? !meta.isHideTooltip() : Aliases.BOOLEAN.convertAlias(args[1]);
             meta.setHideTooltip(value);
             item.setItemMeta(meta);
         } catch (Exception e) {

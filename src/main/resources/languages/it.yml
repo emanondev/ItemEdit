@@ -411,6 +411,13 @@ itemedit:
       - ''
       - '&b&lSuggerimento: impostare nessuna rarità ripristinerà quella predefinita'
     params: '[rarità]'
+  maxdurability:
+    wrong-type: '&4[&cItemEdit&4] &cL''oggetto deve avere una durabilità come gli strumenti e le armature'
+    description:
+      - '&b&lImposta la durabilità massima dell''oggetto'
+      - ''
+      - '&e<durabilità massima> &bnuovo valore di durabilità dell''oggetto, deve essere maggiore di 1'
+    params: '<durabilità massima>'
 serveritem:
   help-header: '&9&lServerItem - Guida'
   give:

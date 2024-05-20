@@ -27,7 +27,7 @@ public class FireResistent extends SubCmd {
             if (args.length > 2)
                 throw new IllegalArgumentException("Wrong param number");
             ItemMeta meta = item.getItemMeta();
-            boolean value = args.length==1?!meta.isFireResistant():Aliases.BOOLEAN.convertAlias(args[1]);
+            boolean value = args.length == 1 ? !meta.isFireResistant() : Aliases.BOOLEAN.convertAlias(args[1]);
             meta.setFireResistant(value);
             item.setItemMeta(meta);
         } catch (Exception e) {

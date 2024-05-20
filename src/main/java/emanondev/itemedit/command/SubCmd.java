@@ -4,7 +4,6 @@ import emanondev.itemedit.APlugin;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.YMLConfig;
-import emanondev.itemedit.aliases.AliasSet;
 import emanondev.itemedit.aliases.IAliasSet;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -33,7 +32,7 @@ public abstract class SubCmd {
     private final AbstractCommand cmd;
 
     public SubCmd(@NotNull String id, @NotNull AbstractCommand cmd, boolean playerOnly, boolean checkNonNullItem) {
-        if (id.equals("") || id.contains(" "))
+        if (id.isEmpty() || id.contains(" "))
             throw new IllegalArgumentException();
         this.ID = id.toLowerCase(Locale.ENGLISH);
         this.cmd = cmd;
@@ -69,7 +68,7 @@ public abstract class SubCmd {
 
     private void load() {
         name = this.getConfigString("name").toLowerCase(Locale.ENGLISH);
-        if (name.equals("") || name.contains(" "))
+        if (name.isEmpty() || name.contains(" "))
             name = ID;
     }
 
@@ -191,8 +190,8 @@ public abstract class SubCmd {
 
     abstract public List<String> onComplete(CommandSender sender, String[] args);
 
-    protected void updateView(Player player){
-        if (Util.isVersionUpTo(1,19,4)){
+    protected void updateView(Player player) {
+        if (Util.isVersionUpTo(1, 19, 4)) {
             player.updateInventory();
         }
     }

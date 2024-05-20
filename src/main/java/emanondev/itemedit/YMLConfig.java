@@ -73,7 +73,7 @@ public class YMLConfig extends YamlConfiguration {
      * @throws IllegalArgumentException if name is empty
      */
     public static String fixName(@NotNull String name) {
-        if(name.isEmpty())
+        if (name.isEmpty())
             throw new IllegalArgumentException("YAML file must have a name!");
         if (!name.endsWith(".yml"))
             name += ".yml";

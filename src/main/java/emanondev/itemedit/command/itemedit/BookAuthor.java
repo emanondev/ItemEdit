@@ -4,7 +4,6 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -42,7 +41,7 @@ public class BookAuthor extends SubCmd {
             StringBuilder name = new StringBuilder(args[1]);
             for (int i = 2; i < args.length; i++)
                 name.append(" ").append(args[i]);
-            itemMeta.setAuthor(UtilsString.fix( name.toString(),null, true));
+            itemMeta.setAuthor(UtilsString.fix(name.toString(), null, true));
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {

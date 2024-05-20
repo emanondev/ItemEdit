@@ -410,6 +410,13 @@ itemedit:
       - ''
       - '&b&lWskazówka: ustawienie braku wartości rzadkości przywróci domyślną'
     params: '[rzadkość]'
+  maxdurability:
+    wrong-type: '&4[&cItemEdit&4] &cPrzedmiot musi mieć trwałość jak narzędzia i zbroje'
+    description:
+      - '&b&lUstawia maksymalną trwałość przedmiotu'
+      - ''
+      - '&e<maksymalna trwałość> &bnowa wartość trwałości przedmiotu, musi być większa niż 1'
+    params: '<maksymalna trwałość>'
 serveritem:
   help-header: '&9&lServerItem - Pomoc'
   give:

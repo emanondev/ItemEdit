@@ -24,7 +24,7 @@ public class BookEnchant extends SubCmd {
     public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        if (item.getType()== Material.BOOK)
+        if (item.getType() == Material.BOOK)
             item.setType(Material.ENCHANTED_BOOK);
         if (!(item.getItemMeta() instanceof EnchantmentStorageMeta)) {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
@@ -48,7 +48,7 @@ public class BookEnchant extends SubCmd {
             else {
                 if (!p.hasPermission(this.getPermission() + ".bypass_max_level"))
                     lv = Math.min(ench.getMaxLevel(), lv);
-                meta.addStoredEnchant(ench,lv,true);
+                meta.addStoredEnchant(ench, lv, true);
             }
             item.setItemMeta(meta);
             updateView(p);

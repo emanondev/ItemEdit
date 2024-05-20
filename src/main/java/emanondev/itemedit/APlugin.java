@@ -135,7 +135,7 @@ public abstract class APlugin extends JavaPlugin {
         String fileName = "languages" + File.separator + locale + ".yml";
 
         if (locale.equals(this.defaultLanguage) || new File(getDataFolder(), fileName).exists()
-                || this.getResource("languages/"  + locale + ".yml") != null) {
+                || this.getResource("languages/" + locale + ".yml") != null) {
             YMLConfig conf = new YMLConfig(this, fileName);
             languageConfigs.put(locale, conf);
             return conf;
@@ -186,16 +186,35 @@ public abstract class APlugin extends JavaPlugin {
                 return;
             }
 
-            getConfig(); //force load the config.yml file
+            //getConfig(); //force load the config.yml file
             this.useMultiLanguage = getConfig().getBoolean("language.use_multilanguage", true);
             this.defaultLanguage = getConfig().getString("language.default", "en");
+            if (getConfig().getBoolean("language.regen_files", true)) {
+                YMLConfig version = getConfig("version.yml");
+                if (!getDescription().getVersion().equals(version.loadMessage("previous_version", "1"))) {
+                    version.set("previous_version", getDescription().getVersion());
+                    version.save();
+                    File langFolder = new File(getDataFolder(), "languages");
+                    if (langFolder.exists()) {
+                        File[] list = langFolder.listFiles();
+                        if (list != null) {
+                            log(ChatColor.GREEN, "#", "Enabled (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
+                            for (File file : list)
+                                if (getResource("languages/" + file.getName()) != null) {
+                                    saveResource("languages/" + file.getName(), true);
+                                }
+                        }
+                    }
+                }
+            }
             getLanguageConfig(null);
             if (getProjectId() != null && getConfig().getBoolean("check-updates", true))
                 new UpdateChecker(this, getProjectId()).logUpdates();
             enable();
             log(ChatColor.GREEN, "#", "Enabled (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
 
-        } catch (Throwable e) {
+        } catch (
+                Throwable e) {
             this.log(ChatColor.RED + "Error while loading " + this.getName() + ", disabling it");
             e.printStackTrace();
             Bukkit.getServer().getPluginManager().disablePlugin(this);

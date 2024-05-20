@@ -72,10 +72,9 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
     public abstract String getName(T value);
 
     /**
-     *
      * @return path for specified value (set path not included)
      */
-    public String getPathName(T value){
+    public String getPathName(T value) {
         return getName(value);
     }
 
@@ -96,7 +95,7 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
             throw new IllegalArgumentException("Alias " + alias
                     + " is already used, check aliases.yml avoid using the same alias for different things");
 
-        map.remove(config.get(path));
+        map.remove(config.get(path)); //TODO to fix
         map.put(alias, obj);
 
         config.set(path, alias);

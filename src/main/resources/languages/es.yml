@@ -410,6 +410,13 @@ itemedit:
       - ''
       - '&b&lConsejo: establecer ningún valor de rareza restaurará el valor predeterminado'
     params: '[rareza]'
+  maxdurability:
+    wrong-type: '&4[&cItemEdit&4] &cEl objeto debe tener durabilidad como las herramientas y armaduras'
+    description:
+      - '&b&lEstablece la durabilidad máxima del objeto'
+      - ''
+      - '&e<durabilidad máxima> &bnuevo valor de durabilidad del objeto, debe ser mayor que 1'
+    params: '<durabilidad máxima>'
 serveritem:
   help-header: '&9&lServerItem - Ayuda'
   give:
