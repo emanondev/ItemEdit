@@ -78,9 +78,13 @@ public class Aliases {
         if (Util.isVersionUpTo(1, 19, 4))
             return null;
         try {
-            return new TrimMaterialAliasesNew();
+            if (Util.isVersionAfter(1, 20, 2))
+                return new TrimMaterialAliasesNew();
+            else
+                return new TrimMaterialAliasesOld();
         } catch (Throwable e) {
-            return new TrimMaterialAliasesOld();
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -90,9 +94,13 @@ public class Aliases {
         if (Util.isVersionUpTo(1, 19, 4))
             return null;
         try {
-            return new TrimPatternAliasesNew();
+            if (Util.isVersionAfter(1, 20, 2))
+                return new TrimPatternAliasesNew();
+            else
+                return new TrimPatternAliasesOld();
         } catch (Throwable e) {
-            return new TrimPatternAliasesOld();
+            e.printStackTrace();
+            return null;
         }
     }
 
