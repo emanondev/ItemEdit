@@ -177,13 +177,16 @@ itemedit:
       - '&eReset &b- remover todos os efeitos'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <efeito> <duração> [nível]'
+      params: 'add <efeito> <duração> [nível] [partículas] [ambiente] [ícone]'
       description:
         - '&b&lAdicionar/substituir efeito selecionado'
         - ''
         - '&e<efeito> &btipo de efeito'
         - '&e<duração> &bduração em segundos, &e0 &bpara efeitos instantâneos'
         - '&e[nível] &baté 127, por padrão é &e1'
+        - '&e[partículas] &bDeve mostrar partículas? &etrue&b/&efalse'
+        - '&e[ambiente] &bAs partículas devem ter a bandeira ambiental? &etrue&b/&efalse'
+        - '&e[ícone] &bMostrar ícone no canto superior direito? &etrue&b/&efalse &b(somente para 1.13+)'
     remove:
       params: 'remove <efeito>'
       description:

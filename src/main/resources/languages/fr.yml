@@ -182,13 +182,16 @@ itemedit:
       - '&eRéinitialiser &b- supprimer tous les effets'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <effet> <durée> [niveau]'
+      params: 'add <effet> <durée> [niveau] [particules] [ambiant] [icône]'
       description:
         - '&b&lAjoute/remplace l''effet sélectionné'
         - ''
         - "&e<effet> &btype d'effet"
         - '&e<durée> &bdurée en secondes, &e0 &bpour les effets instantanés'
         - '&e[niveau] &bJusqu''à 127, par défaut &e1'
+        - '&e[particules] &bAfficher les particules? &etrue&b/&efalse'
+        - '&e[ambiant] &bLes particules doivent-elles avoir le drapeau ambiant? &etrue&b/&efalse'
+        - '&e[icône] &bAfficher l''icône en haut à droite? &etrue&b/&efalse &b(seulement pour 1.13+)'
     remove:
       params: 'remove <effet>'
       description:

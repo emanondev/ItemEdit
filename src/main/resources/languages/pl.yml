@@ -177,13 +177,16 @@ itemedit:
       - '&eReset &b- usuń wszystkie efekty'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <efekt> <czas_trwania> [poziom]'
+      params: 'add <efekt> <czas_trwania> [poziom] [cząsteczki] [otoczenie] [ikona]'
       description:
         - '&b&lDodaje/Przywraca wybrany efekt'
         - ''
         - '&e<efekt> &btyp efektu'
         - '&e<czas_trwania> &bczas trwania w sekundach, &e0 &bdla efektów natychmiastowych'
         - '&e[poziom] &bDo 127, domyślnie &e1'
+        - '&e[cząsteczki] &bCzy powinny być wyświetlane cząsteczki? &etrue&b/&efalse'
+        - '&e[otoczenie] &bCząsteczki powinny mieć flagę otoczenia? &etrue&b/&efalse'
+        - '&e[ikona] &bPokaż ikonę w prawym górnym rogu? &etrue&b/&efalse &b(tylko dla 1.13+)'
     remove:
       params: 'remove <efekt>'
       description:

@@ -177,13 +177,16 @@ itemedit:
       - '&eReset &b- remove all effects'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <effect> <duration> [level]'
+      params: 'add <effect> <duration> [level] [particles] [ambient] [icon]'
       description:
         - '&b&lAdds/Override selected effect'
         - ''
         - '&e<effect> &beffect type'
         - '&e<duration> &bduration in seconds, &e0 &bfor instant effects'
         - '&e[level] &bUp to 127, by default &e1'
+        - '&e[particles] &bShould show particles? &etrue&b/&efalse'
+        - '&e[ambient] &bParticles should have ambient flag? &etrue&b/&efalse'
+        - '&e[icon] &bShow icon on top-right corner? &etrue&b/&efalse &b(for 1.13+ only)'
     remove:
       params: 'remove <effect>'
       description:

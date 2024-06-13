@@ -82,16 +82,35 @@ public class PotionEffectEditorOld extends SubCmd {
 
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
-            return Util.complete(args[1], subCommands);
-        if (args.length == 3 && (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove")))
-            return Util.complete(args[2], Aliases.POTION_EFFECT);
-        return Collections.emptyList();
+        switch (args.length) {
+            case 2:
+                return Util.complete(args[1], subCommands);
+            case 3:
+                if (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove"))
+                    return Util.complete(args[2], Aliases.POTION_EFFECT);
+                return Collections.emptyList();
+            case 4:
+                if (args[1].equalsIgnoreCase("add"))
+                    return Util.complete(args[3], "-1", "0", "90", "180", "480");
+                return Collections.emptyList();
+            case 5:
+                if (args[1].equalsIgnoreCase("add"))
+                    return Util.complete(args[4], "1", "2", "3");
+                return Collections.emptyList();
+            case 6:
+            case 7:
+            case 8:
+                if (args[1].equalsIgnoreCase("add"))
+                    return Util.complete(args[args.length - 1], Aliases.BOOLEAN);
+                return Collections.emptyList();
+            default:
+                return Collections.emptyList();
+        }
     }
 
     private void potioneffectAdd(Player p, ItemStack item, String[] args) {
         try {
-            if (args.length != 4 && args.length != 5)
+            if (args.length != 4 && args.length != 5 && args.length != 6 && args.length != 7 && args.length != 8)
                 throw new IllegalArgumentException("Wrong param number");
 
             PotionMeta meta = (PotionMeta) item.getItemMeta();
@@ -103,18 +122,37 @@ public class PotionEffectEditorOld extends SubCmd {
                         getLanguageStringList("add.description", null, p)));
                 return;
             }
-            int duration = Integer.parseInt(args[3]) * 20;
-            if (duration < 0)
+            int duration = Integer.parseInt(args[3]);
+            if (duration < -1)
                 throw new IllegalArgumentException();
-            if (args.length == 5) {
+            if (duration != -1)
+                duration *= 20;
+            if (args.length >= 5) {
                 level = Integer.parseInt(args[4]) - 1;
                 if ((level < 0) || (level > 127))
                     throw new IllegalArgumentException();
             }
+            boolean particles = true;
+            if (args.length >= 6) {
+                particles = Aliases.BOOLEAN.convertAlias(args[5]);
+            }
+            boolean ambient = false;
+            if (args.length >= 7) {
+                ambient = Aliases.BOOLEAN.convertAlias(args[6]);
+            }
+            boolean icon = true;
+            if (Util.isVersionAfter(1, 13))
+                if (args.length == 8) {
+                    icon = Aliases.BOOLEAN.convertAlias(args[7]);
+                }
             if (!p.hasPermission(this.getPermission() + ".bypass_limits"))
                 level = Math.min(level, 1);
 
-            meta.addCustomEffect(new PotionEffect(effect, duration, level), true);
+
+            if (Util.isVersionAfter(1, 13))
+                meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles, icon), true);
+            else
+                meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles), true);
 
             item.setItemMeta(meta);
             updateView(p);

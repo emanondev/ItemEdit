@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>emanondev.itemedit</groupId>
     <artifactId>ItemEdit</artifactId>
-    <version>3.4.1</version>
+    <version>3.4.2</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -56,12 +56,12 @@
         <dependency>
             <groupId>net.kyori</groupId>
             <artifactId>adventure-text-minimessage</artifactId>
-            <version>4.15.0</version>
+            <version>4.17.0</version>
         </dependency>
         <dependency>
             <groupId>net.kyori</groupId>
             <artifactId>adventure-text-serializer-legacy</artifactId>
-            <version>4.15.0</version>
+            <version>4.17.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>*</groupId>

@@ -173,13 +173,16 @@ itemedit:
       - '&eReset &b- 移除所有效果'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <effect> <duration> [level]'
+      params: 'add <effect> <duration> [level] [粒子] [环境] [图标]'
       description:
         - '&b&l添加/覆盖所选效果'
         - ''
         - '&e<effect> &b效果类型'
         - '&e<duration> &b持续时间（秒），&e0 &b表示即时效果'
         - '&e[level] &b最高为127，默认为&e1'
+        - '&e[粒子] &b是否显示粒子？ &etrue&b/&efalse'
+        - '&e[环境] &b粒子应有环境标志？ &etrue&b/&efalse'
+        - '&e[图标] &b在右上角显示图标？ &etrue&b/&efalse &b(仅适用于 1.13+)'
     remove:
       params: 'remove <effect>'
       description:
