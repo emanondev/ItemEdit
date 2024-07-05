@@ -92,13 +92,13 @@ itemedit:
       - '&b&lEdit durability'
       - ''
       - '&e<durability> &bdamage to apply'
-      - '&b&lNote: &e0 &bmeans no damage, full durability'
+      - '&b&lN.B.: &e0 &bmeans no damage, full durability'
     params: '<durability>'
   type:
     description:
       - '&b&lSet item''s type'
       - ''
-      - '&b&lNote: &ba few types as Air won''t work'
+      - '&b&lN.B.: &ba few types as Air won''t work'
     params: '<type>'
   unbreakable:
     description:
@@ -295,8 +295,8 @@ itemedit:
       - '&b&lEdit Anvil Repair Cost'
       - ''
       - '&e<cost> &blevels amount'
-      - '&b&lNote: &banvil repair/rename price is always at least &e1'
-      - '&b&lNote: &bthis command set base repair cost of the item, final levels cost on anvil is based what you do'
+      - '&b&lN.B.: &banvil repair/rename price is always at least &e1'
+      - '&b&lN.B.: &bthis command set base repair cost of the item, final levels cost on anvil is based what you do'
       - '&bMore info at &eminecraft.gamepedia.com/Anvil/Mechanics'
     params: '<cost>'
   custommodeldata:
@@ -420,6 +420,109 @@ itemedit:
       - ''
       - '&e<max durability> &bitem new durability value, must be bigger than 1'
     params: '<max durability>'
+  food:
+    help-header: '&9&lItemEdit Food - Help'
+    wrong-effect: '&4[&cItemEdit&4] &cWrong Effect Value! &4[&6hover here&4]'
+    description:
+      - '&6&lSets food property of the item'
+      - ''
+      - '&bTip: type &e/ie food&b for more info'
+    params: '[...]'
+    clear:
+      description:
+        - '&6&lCompletely remove food property on item'
+      params: ''
+    canalwayseat:
+      description:
+        - '&6&lSets whenever the item can be eaten'
+        - ''
+        - '&e[true/false] &bThe value to set, by default toggle'
+        - ''
+        - '&bUsually food require hunger to be eaten,'
+        - '&bsetting true will mimic golden apple behavior'
+      params: '[true/false]'
+    eatticks:
+      description:
+        - '&6&lSets the time required to eat the item'
+        - ''
+        - '&e<ticks> &bThe amount of time to eat the item'
+        - '  &bmust be &e1 &bor bigger'
+        - ''
+        - '&e20 &bticks = &e1 &bsecond'
+      params: '<ticks>'
+    nutrition:
+      description:
+        - '&6&lSets recovered nutrition'
+        - ''
+        - '&e<amount> &bThe amount hunger to restore'
+        - '  &bmust be &e0 &bor bigger'
+        - ''
+        - '&bA full hunger bar is &e20'
+      params: '<amount>'
+    saturation:
+      description:
+        - '&6&lSets recovered saturation'
+        - ''
+        - '&e<amount> &bThe amount saturation to add'
+        - '  &bnegative values are allowed'
+        - ''
+        - '&bSaturation controls how fast food level'
+        - '&b  (nutrition) decrease'
+      params: '<amount>'
+    addeffect:
+      description:
+        - '&6&lAdd an effect to the item'
+        - ''
+        - '&e<type> &bThe potion effect type'
+        - '&e<duration> &bDuration as seconds of the effect'
+        - '  &btype &einfinite &bfor permanent effect'
+        - '&e[level] &blevel of the effect, &e1&b by default'
+        - '&e[particles] &bthe effect show particles?'
+        - '&e[ambient] &bthe effect is ambient?'
+        - '&e[icon] &bthe effect show icon on top right corner?'
+        - '&e[chance] &bwhat''s the % chance to apply the effect?'
+        - '  &bmust be bigger than &e0&b and lower equals to &e100'
+      params: '<type> <duration> [level] [particles] [ambient] [icon] [chance]'
+    removeeffect:
+      description:
+        - '&6&lRemove an effect from the item'
+        - ''
+        - '&e<type> &bThe potion effect type'
+        - '&e[level] &blevel of the effect to remove'
+        - '  &bif omitted remove all the effects of selected'
+        - '  &btype regardless of level'
+      params: '<type> [level]'
+    cleareffects:
+      description:
+        - '&6&lRemove effects from the item'
+      params: ''
+    info:
+      not_food: "&9[&fItemEdit&9] &aItem has no food property or has default property"
+      message:
+        - '&9[&fItemEdit&9] &2&bItem Food Property'
+        - '&aItem can be eaten in &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
+        - '&aRestore &e%nutrition%&a hunger, &e%saturation%&a saturation'
+        - '&aEatable with full hunger bar? &e%canalwayseat%'
+        - '&aWhen eaten returns an item? &e%convertto%'
+        - '&aItem contains a total of &e%effects%&a possible effects'
+      effect:
+        - '&a%index%. Type: &e&b%type%&a   Lv: &e%level%&a   For: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
+        - '&a   Particles: &e%hasparticle%&a  Ambient: &e%isAmbient%&a  Icon: &e%hasicon%&a  Chance: &e%chance_perc%&a%'
+      description:
+        - '&6&lDescribe current food info for item'
+      params: ''
+    convertto:
+      description:
+        - '&6&lSets an item give when food is consumed'
+        - '&bOnly for &c1.21+'
+        - ''
+        - '&e[type/serveritem id] &bthe item to return'
+        - '  &byou can set a Material or you can'
+        - '  &bselect an item from ServerItem saved items'
+        - ''
+        - '&bMimic bucket milk behavior where a bucket is'
+        - '&breturned when milk is consumed'
+      params: '[type/serveritem id]'
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:
@@ -547,7 +650,7 @@ serveritem:
       - ''
       - '&bTransaction fails if player has not enough money or enough'
       - '&b  inventory space for the whole &e<amount>'
-      - '&bNote: balance of the command executor is untouched'
+      - '&bN.B.: balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
   buy:
     #Holders: %id% %nick% %amount% %price%
@@ -569,7 +672,7 @@ serveritem:
       - ''
       - '&bTransaction fails if player has not at least &e<amount>'
       - '&b  of &e<id> &bitems'
-      - '&bNote: balance of the command executor is untouched'
+      - '&bN.B.: balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
   sellmax:
     #Holders: %id% %nick% %amount% %price%
@@ -594,7 +697,7 @@ serveritem:
       - '&bTransaction fails if player has not enough money or enough'
       - '&b  inventory space at least an item'
       - '&bIf player buy less than &e<price>&b paid price will be scaled'
-      - '&bNote: balance of the command executor is untouched'
+      - '&bN.B.: balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
   buymax:
     #Holders: %id% %nick% %amount% %price%
@@ -617,7 +720,7 @@ serveritem:
       - '&bTransaction fails if player has not at least an &e<id> &bitem'
       - '&b  on inventory'
       - '&bIf player sell less than &e<amount>&b price will be scaled'
-      - '&bNote: balance of the command executor is untouched'
+      - '&bN.B.: balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
 itemstorage:
   help-header: '&9&lItemStorage - Help'

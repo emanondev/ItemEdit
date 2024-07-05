@@ -159,7 +159,6 @@ public class PotionEffectEditorOld extends SubCmd {
         } catch (Exception e) {
             Util.sendMessage(p, this
                     .craftFailFeedback(getLanguageString("add.params", null, p),
-
                             getLanguageStringList("add.description", null, p)));
         }
     }

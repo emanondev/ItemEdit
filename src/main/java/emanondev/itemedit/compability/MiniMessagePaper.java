@@ -19,8 +19,8 @@ public class MiniMessagePaper implements MiniMessageUtil {
             return text;
         try {
             return UNGLY_LEGACY.serialize(MiniMessage.miniMessage().deserialize(text.replace("§", "&")));
-        } catch (ParsingExceptionImpl exception) {
-            exception.printStackTrace();
+        } catch (ParsingExceptionImpl | NoSuchMethodError e) {
+            e.printStackTrace();
             return text;
         }
     }

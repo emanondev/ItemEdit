@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Predicate;
@@ -461,13 +462,34 @@ public class Util {
         return true;
     }
 
-    public static boolean hasPaperAPI() {
+
+    private static final boolean hasPaper = initPaper();
+
+    private static boolean initPaper() {
         try {
             Class.forName("com.destroystokyo.paper.VersionHistoryManager$VersionData");
             return true;
         } catch (NoClassDefFoundError | ClassNotFoundException ex) {
             return false;
         }
+    }
+    public static boolean hasPaperAPI() {
+        return hasPaper;
+    }
+
+    private static final boolean hasPurpur = initPurpur();
+
+    private static boolean initPurpur() {
+        try {
+            Method method = org.bukkit.Server.class.getMethod("getPurpurConfig");
+            return true;
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
+    }
+
+    public static boolean hasPurpurAPI() {
+        return hasPurpur;
     }
 
     public static boolean hasMiniMessageAPI() {

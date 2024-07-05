@@ -152,7 +152,7 @@ public class ItemEdit extends APlugin {
 
     public void disable() {
         for (Player p : Bukkit.getOnlinePlayers())
-            if (p.getOpenInventory().getTopInventory().getHolder() instanceof Gui)
+            if (UtilLegacy.getTopInventory(p).getHolder() instanceof Gui)
                 p.closeInventory();
 
         if (this.mongoStorage != null) this.mongoStorage.close();

@@ -8,8 +8,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,4 +170,10 @@ public class UtilsString {
         return ChatColor.stripColor(text);
     }
 
+    public static @NotNull String formatNumber(double saturation, int decimals, boolean optional) {
+        DecimalFormat df = new DecimalFormat("0");
+        df.setMaximumFractionDigits(decimals);
+        df.setMinimumFractionDigits(optional?0:decimals);
+        return df.format(saturation);
+    }
 }
