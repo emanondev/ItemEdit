@@ -1,6 +1,7 @@
 package emanondev.itemedit.command.itemedit;
 
 import emanondev.itemedit.Util;
+import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -108,7 +109,7 @@ public class PotionEffectEditor extends SubCmd {
                 return Collections.emptyList();
             case 4:
                 if (args[1].equalsIgnoreCase("add"))
-                    return Util.complete(args[3], "-1", "0", "90", "180", "480");
+                    return Util.complete(args[3], "infinite", "0", "90", "180", "480");
                 return Collections.emptyList();
             case 5:
                 if (args[1].equalsIgnoreCase("add"))
@@ -138,11 +139,8 @@ public class PotionEffectEditor extends SubCmd {
                         getLanguageStringList("add.description", null, p)));
                 return;
             }
-            int duration = Integer.parseInt(args[3]);
-            if (duration < -1)
-                throw new IllegalArgumentException();
-            if (duration != -1)
-                duration *= 20;
+            int duration = UtilLegacy.readPotionEffectDurationSecondsToTicks(args[3]);
+
             if (args.length >= 5) {
                 level = Integer.parseInt(args[4]) - 1;
                 if ((level < 0) || (level > 127))
