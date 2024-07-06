@@ -419,6 +419,112 @@ itemedit:
       - ''
       - '&e<maximale Haltbarkeit> &bneuer Haltbarkeitswert des Gegenstands, muss größer als 1 sein'
     params: '<maximale Haltbarkeit>'
+  food:
+    help-header: '&9&lItemEdit Essen - Hilfe'
+    wrong-effect: '&4[&cItemEdit&4] &cFalscher Effektwert! &4[&6hier schweben&4]'
+    description:
+      - '&6&lLegt die Nahrungsmittel-Eigenschaft des Gegenstands fest'
+      - ''
+      - '&bN.B. trinkbare Gegenstände können nicht gegessen werden'
+      - '&bTipp: tippen Sie &e/ie food&b für weitere Informationen'
+    params: '[...]'
+    clear:
+      description:
+        - '&6&lEntfernt die Nahrungsmittel-Eigenschaft des Gegenstands vollständig'
+        - ''
+        - '&bOder stellt die Standardwerte wieder her, wenn der Gegenstand ein Vanille-Nahrungsmittel ist'
+      params: ''
+    canalwayseat:
+      description:
+        - '&6&lLegt fest, wann der Gegenstand gegessen werden kann'
+        - ''
+        - '&e[true/false] &bDer Wert zum Festlegen, standardmäßig umschalten'
+        - ''
+        - '&bNormalerweise muss Hunger vorhanden sein, um Nahrung zu essen,'
+        - '&bdas Einstellen von true imitiert das Verhalten eines goldenen Apfels'
+      params: '[true/false]'
+    eatticks:
+      description:
+        - '&6&lLegt die benötigte Zeit zum Essen des Gegenstands fest'
+        - ''
+        - '&e<ticks> &bDie Zeitmenge zum Essen des Gegenstands'
+        - '  &bmuss &e1 &boder größer sein'
+        - ''
+        - '&e20 &bTicks = &e1 &bSekunde'
+      params: '<ticks>'
+    nutrition:
+      description:
+        - '&6&lLegt die wiederhergestellte Ernährung fest'
+        - ''
+        - '&e<amount> &bDie Menge an Hunger, die wiederhergestellt wird'
+        - '  &bmuss &e0 &boder größer sein'
+        - ''
+        - '&bEine volle Hungerskala beträgt &e20'
+      params: '<amount>'
+    saturation:
+      description:
+        - '&6&lLegt die wiederhergestellte Sättigung fest'
+        - ''
+        - '&e<amount> &bDie Menge an Sättigung, die hinzugefügt wird'
+        - '  &bnegative Werte sind erlaubt'
+        - ''
+        - '&bDie Sättigung bestimmt, wie schnell der Nahrungslvl'
+        - '&b  (Ernährung) abnimmt'
+      params: '<amount>'
+    addeffect:
+      description:
+        - '&6&lFügt dem Gegenstand einen Effekt hinzu'
+        - ''
+        - '&e<type> &bDer Trankeffekttyp'
+        - '&e<duration> &bDauer des Effekts in Sekunden'
+        - '  &btippen Sie &einfinite &bfür einen permanenten Effekt'
+        - '&e[level] &bEffektstufe, standardmäßig &e1'
+        - '&e[particles] &bsoll der Effekt Partikel zeigen?'
+        - '&e[ambient] &bsoll der Effekt Umgebungsgeräusche haben?'
+        - '&e[icon] &bsoll der Effekt ein Symbol in der oberen rechten Ecke anzeigen?'
+        - '&e[chance] &bwie hoch ist die Wahrscheinlichkeit in %, den Effekt anzuwenden?'
+        - '  &bmuss größer als &e0&b und kleiner oder gleich &e100 sein'
+      params: '<type> <duration> [level] [particles] [ambient] [icon] [chance]'
+    removeeffect:
+      description:
+        - '&6&lEntfernt einen Effekt vom Gegenstand'
+        - ''
+        - '&e<type> &bDer Trankeffekttyp'
+        - '&e[level] &bDie zu entfernende Effektstufe'
+        - '  &bwenn weggelassen, werden alle Effekte des ausgewählten Typs entfernt'
+        - '  &bunabhängig von der Stufe'
+      params: '<type> [level]'
+    cleareffects:
+      description:
+        - '&6&lEntfernt Effekte vom Gegenstand'
+      params: ''
+    info:
+      not_food: "&9[&fItemEdit&9] &aDer Gegenstand hat keine Nahrungsmittel-Eigenschaft oder hat die Standardeigenschaft"
+      message:
+        - '&9[&fItemEdit&9] &2&bNahrungsmittel-Eigenschaft des Gegenstands'
+        - '&aDer Gegenstand kann in &e%eatseconds%&a s &8(&7%eatticks%&8 Ticks) gegessen werden'
+        - '&aStellt &e%nutrition%&a Hunger, &e%saturation%&a Sättigung wieder her'
+        - '&aKann mit voller Hungerskala gegessen werden? &e%canalwayseat%'
+        - '&aWenn gegessen, wird ein Gegenstand zurückgegeben? &e%convertto%'
+        - '&aDer Gegenstand enthält insgesamt &e%effects%&a mögliche Effekte'
+      effect:
+        - '&a%index%. Typ: &e&b%type%&a   Stufe: &e%level%&a   Für: &e%duration_s%&a s &8(&7%duration_ticks%&8 Ticks)'
+        - '&a   Partikel: &e%hasparticle%&a  Umgebungsgeräusche: &e%isambient%&a  Symbol: &e%hasicon%&a  Wahrscheinlichkeit: &e%chance_perc%&a%'
+      description:
+        - '&6&lBeschreiben Sie aktuelle Informationen zur Nahrung des Gegenstands'
+      params: ''
+    convertto:
+      description:
+        - '&6&lLegt einen Gegenstand fest, der zurückgegeben wird, wenn die Nahrung verbraucht wird'
+        - '&bnur für &c1.21+'
+        - ''
+        - '&e[Typ/Serveritem ID] &bder zurückzugebende Gegenstand'
+        - '  &bSie können ein Material festlegen oder'
+        - '  &beinen Gegenstand aus den gespeicherten Gegenständen von ServerItem auswählen'
+        - ''
+        - '&bImitiert das Verhalten des Milcheimers, bei dem ein Eimer'
+        - '&bzurückgegeben wird, wenn Milch verbraucht wird'
+      params: '[Typ/Serveritem ID]'
 serveritem:
   help-header: '&9&lServerItem - Hilfe'
   give:

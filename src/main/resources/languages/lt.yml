@@ -1,367 +1,373 @@
-player-only: '&4[&cItemEdit&4] &cCommand for Players only'
-no-item-on-hand: '&4[&cItemEdit&4] &cYou need to hold an item in hand'
-lack-permission: '&4[&cItemEdit&4] &cYou lack of permission %permission%'
-lack-permission-generic: '&4[&cItemEdit&4] &cYou don''t have permission to use this command'
-blocked-by-censure: '&4[&cItemEdit&4] &cYou can''t use this text, it contains blocked words'
-blocked-by-type-restriction: '&4[&cItemEdit&4] &cYou can''t rename this item'
-blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cYou can''t edit lore on this item'
-blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cYou can''t add more lore lines on this item'
-blocked-by-lore-length-limit: '&4[&cItemEdit&4] &cYou can''t set lines longer than %limit% chars'
-blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cYou can''t set names longer than %limit% chars'
+player-only: '&4[&cItemEdit&4] &cKomanda tik žaidėjams'
+no-item-on-hand: '&4[&cItemEdit&4] &cReikia laikyti daiktą rankoje'
+lack-permission: '&4[&cItemEdit&4] &cNeturite leidimo %permission%'
+lack-permission-generic: '&4[&cItemEdit&4] &cNeturite leidimo naudoti šią komandą'
+blocked-by-censure: '&4[&cItemEdit&4] &cNegalite naudoti šio teksto, jis turi užblokuotų
+  žodžių'
+blocked-by-type-restriction: '&4[&cItemEdit&4] &cNegalite pervadinti šio daikto'
+blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cNegalite redaguoti šio daikto
+  aprašymo'
 itemedit:
-  help-header: '&9&lItemEdit - Help'
+  help-header: '&9&lItemEdit - Pagalba'
   rename:
     description:
-      - '&6&lSet item''s name'
+      - '&b&lNustatyti daikto pavadinimą'
       - ''
-      - '&b&lTip: &btype &eclear &bto revert name to default'
-    params: '<name>'
+      - '&b&lPatarimas: &bįveskite &eclear &b, kad grąžintumėte pavadinimą į numatytąjį'
+    params: <name>
   lore:
     description:
-      - '&6&lEdit lore'
+      - '&b&lRedaguoti aprašymą'
       - ''
-      - '&eAdd <text> &b- add text on a new line'
-      - '&eInsert <line> <text> &b- add text on selected line'
-      - '&eSet <line> <text> &b- set or replace text on chosen line'
-      - '&eRemove <line> &b- remove chosen line'
-      - '&eReset &b- remove all lines'
-      - '&eCopy &b- copy current item lore to paste it later'
-      - '&eCopyBook &b- same as copy but from pages of a book as lines'
-      - '&eCopyFile <path> &b- same as copy but from loreCopy.yml'
-      - '&ePaste &b- paste the last copied lore'
-      - '&eReplace <replaced> <replacer> &b- replace all occurrences'
-    params: '<add/set/remove...> [...]'
+      - '&ePridėti <text> &b- pridėti tekstą naujoje eilutėje'
+      - '&eĮterpti <line> <text> &b- įterpti tekstą pasirinktoje eilutėje'
+      - '&eNustatyti <line> <text> &b- nustatyti arba pakeisti tekstą pasirinktoje eilutėje'
+      - '&ePašalinti <line> &b- pašalinti pasirinktą eilutę'
+      - '&eAtstatyti &b- pašalinti visas eilutes'
+      - '&eKopijuoti &b- kopijuoti dabartinį daikto aprašymą, kad galėtumėte jį įklijuoti vėliau'
+      - '&eKopijuotiKnygą &b- tas pats kaip kopijuoti, bet iš knygos puslapių kaip eilutes'
+      - '&eKopijuotiFailą <path> &b- tas pats kaip kopijuoti, bet iš loreCopy.yml'
+      - '&eĮklijuoti &b- įklijuoti paskutinį nukopijuotą aprašymą'
+      - '&ePakeisti <replaced> <replacer> &b- pakeisti visus atvejus'
+    params: <add/set/remove...> [...]
     set:
-      params: 'set <line> <text>'
+      params: set <line> <text>
       description:
-        - '&6&lSet or replace text on selected line'
+        - '&b&lNustatyti arba pakeisti tekstą pasirinktoje eilutėje'
     remove:
-      params: 'remove <line>'
+      params: remove <line>
       description:
-        - '&6&lRemove selected line'
+        - '&b&lPašalinti pasirinktą eilutę'
     insert:
-      params: 'insert <line> <text>'
+      params: insert <line> <text>
       description:
-        - '&6&lAdd text on selected line'
+        - '&b&lĮterpti tekstą pasirinktoje eilutėje'
     copy:
-      feedback: '&9[&fItemEdit&9] &aLore copied'
+      feedback: '&9[&fItemEdit&9] &aAprašymas nukopijuotas'
     copyBook:
-      wrong-type: '&4[&cItemEdit&4] &cItem must be a written book or book and quill'
-      feedback: '&9[&fItemEdit&9] &aBook pages copied, and ready to be pasted'
+      wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti parašyta knyga arba knyga ir plunksna'
+      feedback: '&9[&fItemEdit&9] &aKnygos puslapiai nukopijuoti'
     copyFile:
-      no-path: '&4[&cItemEdit&4] &cSelect a path /ie lore copyfile &6<path>'
-      wrong-path: '&9[&fItemEdit&9] &cInvalid path, remember to reload the configuration and check the CaPs'
-      feedback: '&9[&fItemEdit&9] &aConfiguration copied, and ready to be pasted'
+      no-path: '&4[&cItemEdit&4] &cPasirinkite kelią /ie lore copyfile &6<path>'
+      wrong-path: '&9[&fItemEdit&9] &cNeteisingas kelias, prisiminkite perkrauti konfigūraciją
+        ir patikrinti didžiąsias raides'
+      feedback: '&9[&fItemEdit&9] &aKonfigūracija nukopijuota'
     paste:
-      feedback: '&9[&fItemEdit&9] &aLore pasted'
-      no-copy: '&4[&cItemEdit&4] &cCopy a lore first'
+      feedback: '&9[&fItemEdit&9] &aAprašymas įklijuotas'
+      no-copy: '&4[&cItemEdit&4] &cPirmiausia nukopijuokite aprašymą'
     replace:
-      params: 'replace <replaced> <replacer>'
+      params: replace <replaced> <replacer>
       description:
-        - '&6&lReplace all occurrences on the lore'
+        - '&b&lPakeisti visus atvejus aprašyme'
         - ''
-        - '&bIf you need to replace more than a word you have'
-        - '&b to close them inside &e{ }'
+        - '&bJei reikia pakeisti daugiau nei vieną žodį,'
+        - '&b uždarykite juos į &e{ }'
         - ''
-        - '&bExample: &e/ie lore replace New Rusty'
+        - '&bPavyzdys: &e/ie lore replace New Rusty'
         - '&b''&eNew sword&b'' -> ''&eRusty sword&b'''
         - ''
-        - '&bExample 2: &e/ie lore replace {Heavy} {Very light}'
+        - '&bPavyzdys 2: &e/ie lore replace {Heavy} {Very light}'
         - '&b''&eHeavy sword&b'' -> ''&eVery light sword&b'''
   hide:
-    wrong-flag: '&4[&cItemEdit&4] &cWrong Flag Value! &4[&6hover here&4]'
+    wrong-flag: '&4[&cItemEdit&4] &cNeteisinga vėliavos reikšmė! &4[&6hover here&4]'
     description:
-      - '&6&lHide or show components'
+      - '&b&lPaslėpti arba rodyti komponentus'
       - ''
-      - '&e<flag> &bitem flag to edit'
-      - '&e[true/false] &bset the flag value, by default toggle'
+      - '&e<flag> &bdaikto vėliava redaguoti'
+      - '&e[true/false] &bnustatyti vėliavos reikšmę, pagal numatytuosius nustatymus perjungti'
       - ''
-      - '&b&lTip: &bhide banner pannerns with potion_effects flag'
-      - '&b&lTip: &bhide all flags at once with &e/itemedit hideall'
-    params: '<flag> [true/false]'
+      - '&b&lPatarimas: &bpaslėpti vėliavos modelius su potion_effects vėliava'
+      - '&b&lPatarimas: &bpaslėpti visas vėliavas vienu metu su &e/itemedit hideall'
+    params: <flag> [true/false]
   hideall:
     description:
-      - '&6&lHide all components'
+      - '&b&lPaslėpti visus komponentus'
       - ''
-      - '&bHides: enchants, potion effects, banner layers, attributes ...'
+      - '&bPaslepia: užkeikimus, potion efektus, vėliavos sluoksnius, atributus ...'
       - ''
-      - '&b&lTip: &bhide single components with &e/itemedit hide <flag> true'
+      - '&b&lPatarimas: &bpaslėpti atskirus komponentus su &e/itemedit hide <flag> true'
     params: ''
   damage:
     description:
-      - '&6&lEdit durability'
+      - '&b&lRedaguoti patvarumą'
       - ''
-      - '&e<durability> &bdamage to apply'
-      - '&b&lN.B. &e0 &bmeans no damage, full durability'
-    params: '<durability>'
+      - '&e<durability> &bžala, kurią reikia pritaikyti'
+      - '&b&lPastaba: &e0 &breiškia be žalos, pilnas patvarumas'
+    params: <durability>
   type:
     description:
-      - '&6&lSet item''s type'
+      - '&b&lNustatyti daikto tipą'
       - ''
-      - '&b&lN.B. &ba few types as Air won''t work'
-    params: '<type>'
+      - '&b&lPastaba: &bkeli tipai, tokie kaip Air, neveiks'
+    params: <type>
   unbreakable:
     description:
-      - '&6&lSet unbreakable state'
+      - '&b&lNustatyti nesulaužomą būseną'
       - ''
-      - '&bUnbreakable tools and armors won''t lost durability'
-      - '&e[true/false] &bset unbreakable value, by default toggle'
+      - '&bNesulaužomi įrankiai ir šarvai nepraranda patvarumo'
+      - '&e[true/false] &bnustatyti nesulaužomą reikšmę, pagal numatytuosius nustatymus perjungti'
     params: '[true/false]'
   amount:
     description:
-      - '&6&lSet amount'
+      - '&b&lNustatyti kiekį'
       - ''
-      - '&e<amount> &bamount to set (up to 127)'
-      - '&b&lTip: &bNegative amounts are subtracted'
-      - '&b from item current amount'
-    params: '<amount>'
+      - '&e<amount> &bkiekis, kurį reikia nustatyti (iki 127)'
+      - '&b&lPatarimas: &bNeigiami kiekiai atimami'
+      - '&b iš dabartinio daikto kiekio'
+    params: <amount>
   skullowner:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a player skull'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti žaidėjo kaukolė'
     description:
-      - '&6&lSet skull owner'
+      - '&b&lNustatyti kaukolės savininką'
       - ''
-      - '&bWorks only on Player''s skulls'
-      - '&e<name> &bname of the owner'
+      - '&bVeikia tik su žaidėjo kaukolėmis'
+      - '&e<name> &bsavininko vardas'
       - ''
-      - '&b&lTip: &bPlace and break the skull to update skins'
-    params: '<name>'
+      - '&b&lPatarimas: &bPadėkite ir sulaužykite kaukolę, kad atnaujintumėte odą'
+    params: <name>
   color:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be colorable type like leather armors, firework stars, potions or tipped arrows'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti spalvinamas tipas, pvz., odiniai šarvai,
+      fejerverkų žvaigždės, potionai arba užnuodytos strėlės'
     description:
-      - '&6&lSet color'
+      - '&b&lNustatyti spalvą'
       - ''
-      - '&bWorks on leather armor and firework stars, on servers'
-      - '&b 1.11+ works on any Potion and Tipped arrows too!'
-      - '&e<red> <green> <blue> &bare the amount of each color to combine'
-      - '&bEach color is an int value between 0 and 255'
-      - '&bIf you are confused google "&eRGB color picker&b"'
-    params: '<red> <green> <blue>'
+      - '&bVeikia su odiniais šarvais ir fejerverkų žvaigždėmis, serveriuose'
+      - '&b 1.11+ veikia su bet kokiais potionais ir užnuodytomis strėlėmis!'
+      - '&e<red> <green> <blue> &byra kiekvienos spalvos kiekis, kurį reikia sujungti'
+      - '&bKiekviena spalva yra int reikšmė nuo 0 iki 255'
+      - '&bJei nesuprantate, ieškokite „&eRGB color picker&b“'
+    params: <red> <green> <blue>
   enchant:
-    wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
+    wrong-enchant: '&4[&cItemEdit&4] &cNeteisinga užkeikimo reikšmė! &4[&6hover here&4]'
     description:
-      - '&6&lSet enchants'
+      - '&b&lNustatyti užkeikimus'
       - ''
-      - '&e<enchant> &benchant type'
-      - '&e[level] &blevel of the enchant, by default &e1'
+      - '&e<enchant> &bužkeikimo tipas'
+      - '&e[level] &bužkeikimo lygis, pagal numatytuosius nustatymus &e1'
       - ''
-      - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
-    params: '<enchant> [level]'
+      - '&b&lPatarimas: &bNustatykite &e[level] &bį &e0 &b, kad pašalintumėte užkeikimą'
+    params: <enchant> [level]
   booktype:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
-    wrong-generation: '&4[&cItemEdit&4] &cWrong Book type Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti parašyta knyga'
+    wrong-generation: '&4[&cItemEdit&4] &cNeteisinga knygos tipo reikšmė! &4[&6hover here&4]'
     description:
-      - '&6&lSet book type'
+      - '&b&lNustatyti knygos tipą'
       - ''
-      - '&bWorks only on Written books'
-    params: '<booktype>'
+      - '&bVeikia tik su parašytomis knygomis'
+    params: <booktype>
   bookauthor:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti parašyta knyga'
     description:
-      - '&6&lSet author'
+      - '&b&lNustatyti autorių'
       - ''
-      - '&bAuthor name may contains spaces and be colored too'
-      - '&bWorks only on Written books'
-    params: '<name>'
+      - '&bAutoriaus vardas gali turėti tarpų ir būti spalvotas'
+      - '&bVeikia tik su parašytomis knygomis'
+    params: <name>
   potioneffect:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a potion or a tipped arrow or a suspicious stew'
-    wrong-effect: '&4[&cItemEdit&4] &cWrong Effect Value! &4[&6hover here&4]'
-    itemtag-tip: '&9[&fItemEdit&9] &bYou need to add potion effects to common items? try >ItemTag<'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti potionas arba užnuodyta strėlė arba įtartina
+      sriuba'
+    wrong-effect: '&4[&cItemEdit&4] &cNeteisinga efekto reikšmė! &4[&6hover here&4]'
+    itemtag-tip: '&9[&fItemEdit&9] &bReikia pridėti potion efektus prie įprastų daiktų?
+      pabandykite >ItemTag<'
     itemtag-tip-hover:
-      - '&6Click me'
+      - '&6Spustelėkite mane'
     description:
-      - '&6&lEdit potion''s effects'
+      - '&b&lRedaguoti potiono efektus'
       - ''
-      - '&bWorks on any Potion, Tipped arrows and Suspicious stew!'
-      - '&eAdd <effect> <duration> [level] &b- add effect'
-      - '&eRemove <effect> &b- removes selected effect'
-      - '&eReset &b- remove all effects'
-    params: '<add/remove/reset> [...]'
+      - '&bVeikia su bet kokiais potionais, užnuodytomis strėlėmis ir įtartina sriuba!'
+      - '&ePridėti <effect> <duration> [level] &b- pridėti efektą'
+      - '&ePašalinti <effect> &b- pašalinti pasirinktą efektą'
+      - '&eAtstatyti &b- pašalinti visus efektus'
+    params: <add/remove/reset> [...]
     add:
-      params: 'add <effect> <duration> [level] [particles] [ambient] [icon]'
+      params: add <effect> <duration> [level]
       description:
-        - '&6&lAdds/Override selected effect'
+        - '&b&lPridėti/Pakeisti pasirinktą efektą'
         - ''
-        - '&e<effect> &beffect type'
-        - '&e<duration> &bduration in seconds, &e0 &bfor instant effects'
-        - '&e[level] &bUp to 127, by default &e1'
-        - '&e[particles] &bShould show particles? &etrue&b/&efalse'
-        - '&e[ambient] &bParticles should have ambient flag? &etrue&b/&efalse'
-        - '&e[icon] &bShow icon on top-right corner? &etrue&b/&efalse &b(for 1.13+ only)'
+        - '&e<effect> &befekto tipas'
+        - '&e<duration> &btrukmė sekundėmis, &e0 &bskirta momentiniams efektams'
+        - '&e[level] &bIki 127, pagal numatytuosius nustatymus &e1'
     remove:
-      params: 'remove <effect>'
+      params: remove <effect>
       description:
-        - '&6&lRemove selected effect'
+        - '&b&lPašalinti pasirinktą efektą'
   banner:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a banner'
-    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti vėliava'
+    wrong-color: '&4[&cItemEdit&4] &cNeteisinga spalvos reikšmė! &4[&6hover here&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cNeteisinga modelio reikšmė! &4[&6hover here&4]'
     description:
-      - '&6&lEdit banner'
+      - '&b&lRedaguoti vėliavą'
     set:
-      params: 'set <type> <color> <line>'
+      params: set <type> <color> <line>
       description:
-        - '&6&lReplace the pattern on selected line'
+        - '&b&lPakeisti modelį pasirinktoje eilutėje'
     add:
-      params: 'add <type> <color>'
+      params: add <type> <color>
       description:
-        - '&6&lAdd a pattern'
+        - '&b&lPridėti modelį'
     remove:
-      params: 'remove <line>'
+      params: remove <line>
       description:
-        - '&6&lRemove pattern on selected line'
+        - '&b&lPašalinti modelį pasirinktoje eilutėje'
     color:
-      params: 'color <line> <color>'
+      params: color <line> <color>
       description:
-        - '&6&lChange pattern color on selected line'
+        - '&b&lPakeisti modelio spalvą pasirinktoje eilutėje'
+    colorbanner:
+      params: colorbanner <color>
+      description:
+        - '&b&lPakeisti vėliavos fono spalvą'
+    params: ''
   fireworkpower:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti fejerverkas'
     description:
-      - '&6&lSet firework power'
+      - '&b&lNustatyti fejerverko galią'
       - ''
-      - '&e<power> &bpower of the firework, a value betwheen &e0 &band &e5'
-    params: '<power>'
+      - '&e<power> &bgalia fejerverko, reikšmė tarp &e0 &bir &e5'
+    params: <power>
   firework:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti fejerverkas'
     description:
-      - '&6&lEdit firework'
+      - '&b&lRedaguoti fejerverką'
     params: ''
   spawnereggtype:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a spawner egg'
-    wrong-entity: '&4[&cItemEdit&4] &cWrong Egg type Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti spawnerio kiaušinis'
+    wrong-entity: '&4[&cItemEdit&4] &cNeteisinga kiaušinio tipo reikšmė! &4[&6hover here&4]'
     description:
-      - '&6&lSet type of entity spawned by spawner egg'
+      - '&b&lNustatyti spawnerio kiaušinio iššaukiamą būtybę'
       - ''
-      - '&e<type> &btype of the entity'
-      - '&bOnly some entity type are spawnable by eggs'
-    params: '<type>'
+      - '&e<type> &bbūtybės tipas'
+      - '&bTik kai kurie būtybių tipai gali būti iššaukiami kiaušiniais'
+    params: <type>
   attribute:
-    wrong-attribute: '&4[&cItemEdit&4] &cWrong Attribute Value! &4[&6hover here&4]'
-    wrong-operation: '&4[&cItemEdit&4] &cWrong Operation Value! &4[&6hover here&4]'
-    wrong-equipment: '&4[&cItemEdit&4] &cWrong Equipment Value! &4[&6hover here&4]'
+    wrong-attribute: '&4[&cItemEdit&4] &cNeteisinga atributo reikšmė! &4[&6hover here&4]'
+    wrong-operation: '&4[&cItemEdit&4] &cNeteisinga operacijos reikšmė! &4[&6hover here&4]'
+    wrong-equipment: '&4[&cItemEdit&4] &cNeteisinga įrangos reikšmė! &4[&6hover here&4]'
     description:
-      - '&6&lEdit attribute modifiers'
+      - '&b&lRedaguoti atributo modifikatorius'
       - ''
-      - '&eAdd <attribute> <amount> [operation] [slot] &b- add new modifiers'
-      - '&eRemove <attribute/slot> &b- removes some modifiers'
-    params: '<add/remove> [...]'
+      - '&ePridėti <attribute> <amount> [operation] [slot] &b- pridėti naujus modifikatorius'
+      - '&ePašalinti <attribute/slot> &b- pašalinti kai kuriuos modifikatorius'
+    params: <add/remove> [...]
     add:
-      params: 'add <attribute> <amount> [operation] [slot]'
+      params: add <attribute> <amount> [operation] [slot]
       description:
-        - '&6&lAdd attribute modifier'
+        - '&b&lPridėti atributo modifikatorių'
         - ''
-        - '&e<attribute> &battribute type'
-        - '&e<amount> &bamount to set'
-        - '&e[operation] &bhow the modifier is added, by default sums'
-        - '&e[slot] &bapply this modifier only when item is on selected'
-        - '&e       equipment slot or any equipment slot if not selected'
+        - '&e<attribute> &batributo tipas'
+        - '&e<amount> &bkiekis, kurį reikia nustatyti'
+        - '&e[operation] &bkaip modifikatorius pridedamas, pagal numatytuosius nustatymus sumuoja'
+        - '&e[slot] &btaikyti šį modifikatorių tik tada, kai daiktas yra pasirinktoje'
+        - '&e       įrangos vietoje arba bet kurioje įrangos vietoje, jei nepasirinkta'
     remove:
-      params: 'remove <attribute/slot>'
+      params: remove <attribute/slot>
       description:
-        - '&6&lRemove modifiers'
+        - '&b&lPašalinti modifikatorius'
         - ''
-        - '&e<attribute/slot> &btype to remove, any modifiers with'
-        - '&b                 selected value are removed'
+        - '&e<attribute/slot> &btipas, kurį reikia pašalinti, bet kokie modifikatoriai su'
+        - '&b                 pasirinkta reikšme bus pašalinti'
   tropicalfish:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a tropical fish bucket'
-    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti tropinių žuvų kibiras'
+    wrong-color: '&4[&cItemEdit&4] &cNeteisinga spalvos reikšmė! &4[&6hover here&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cNeteisinga modelio reikšmė! &4[&6hover here&4]'
     description:
-      - '&6&lSet property of tropical fish bucket'
+      - '&b&lNustatyti tropinių žuvų kibiro savybes'
       - ''
-      - '&epattern <pattern type> &b- type of fish'
-      - '&epatterncolor <color> &b- pattern color of fish'
-      - '&ebodycolor <color> &b- body color of fish'
+      - '&emodelis <pattern type> &b- žuvies tipas'
+      - '&emodeliospalva <color> &b- žuvies modelio spalva'
+      - '&ekūnospalva <color> &b- žuvies kūno spalva'
     params: '[...]'
     pattern:
-      params: 'pattern <type>'
+      params: pattern <type>
       description:
-        - '&6&lSet tropical fish pattern type'
+        - '&b&lNustatyti tropinių žuvų modelio tipą'
         - ''
-        - '&e<type> &bpattern type of the fish'
+        - '&e<type> &bžuvies modelio tipas'
     patterncolor:
-      params: 'patterncolor <color>'
+      params: patterncolor <color>
       description:
-        - '&6&lSet tropical fish pattern color'
+        - '&b&lNustatyti tropinių žuvų modelio spalvą'
         - ''
-        - '&e<color> &bpattern color of the fish'
+        - '&e<color> &bžuvies modelio spalva'
     bodycolor:
-      params: 'bodycolor <color>'
+      params: bodycolor <color>
       description:
-        - '&6&lSet tropical fish body color'
+        - '&b&lNustatyti tropinių žuvų kūno spalvą'
         - ''
-        - '&e<color> &bbody color of the fish'
+        - '&e<color> &bžuvies kūno spalva'
   repaircost:
     description:
-      - '&6&lEdit Anvil Repair Cost'
+      - '&b&lRedaguoti priekalo taisymo kainą'
       - ''
-      - '&e<cost> &blevels amount'
-      - '&b&lN.B. &banvil repair/rename price is always at least &e1'
-      - '&b&lN.B. &bthis command set base repair cost of the item, final levels cost on anvil is based what you do'
-      - '&bMore info at &eminecraft.gamepedia.com/Anvil/Mechanics'
-    params: '<cost>'
+      - '&e<cost> &blygių kiekis'
+      - '&b&lPastaba: &bpriekalo taisymo/pervadinimo kaina visada yra bent &e1'
+      - '&b&lPastaba: &bši komanda nustato pagrindinę daikto taisymo kainą, galutinė lygių kaina
+      priekale priklauso nuo to, ką darote'
+      - '&bDaugiau informacijos rasite &eminecraft.gamepedia.com/Anvil/Mechanics'
+    params: <cost>
   custommodeldata:
     description:
-      - '&6&lEdit custom model data'
+      - '&b&lRedaguoti pasirinktinių modelių duomenis'
       - ''
-      - '&bUsed for texture packs'
-      - '&e<value> &bpositive int of target data model'
-    params: '<value>'
+      - '&bNaudojama tekstūrų paketams'
+      - '&e<value> &bteigiama int reikšmė tiksliniams duomenų modeliams'
+    params: <value>
   axolotlvariant:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a axolotl bucket'
-    wrong-axolotl: '&4[&cItemEdit&4] &cWrong Axolotl Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti aksolotlio kibiras'
+    wrong-axolotl: '&4[&cItemEdit&4] &cNeteisinga aksolotlio reikšmė! &4[&6hover here&4]'
     description:
-      - '&6&lEdit Axolotl Variant on Axolotl bucket'
+      - '&b&lRedaguoti aksolotlio variantą aksolotlio kibire'
       - ''
-      - '&e<type> &bthe type of axolotl'
-    params: '<type>'
+      - '&e<type> &baksotlio tipas'
+    params: <type>
   listaliases:
     description:
-      - '&6&lShows allowed aliases parameters'
+      - '&b&lRodyti leistinus alias parametrus'
       - ''
-      - '&e<type> &bthe type of parameter to show'
-    params: '<type>'
-    prefix_line: '&1 ◆  ◆  ◆  ◆  &9Aliases  &1◆  ◆  ◆  ◆'
-    postfix_line: '&1 ◆  ◆  ◆  ◆  &9Aliases  &1◆  ◆  ◆  ◆'
+      - '&e<type> &bparametro tipas, kurį reikia rodyti'
+    params: <type>
+    prefix_line: '&1 ◆  ◆  ◆  ◆  &9Aliasai  &1◆  ◆  ◆  ◆'
+    postfix_line: '&1 ◆  ◆  ◆  ◆  &9Aliasai  &1◆  ◆  ◆  ◆'
     first_color: '&b'
     second_color: '&e'
-    hover_info: '&9Original value: &e%default%'
-    hover_type: '&6Click to examine'
-    error-pre-hover: "&6&lAliases:"
+    hover_info: '&9Originali reikšmė: &e%default%'
+    hover_type: '&6Spustelėkite, kad patikrintumėte'
+    error-pre-hover: '&6&lAliasai:'
   compass:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a compass'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti kompasas'
     description:
-      - '&6&lSet compass target location'
+      - '&b&lNustatyti kompaso tikslinę vietą'
       - ''
-      - '&eSet &b- set your location as compass target'
-      - '&eClear &b- clear compass target'
-    params: '<set/clear>'
+      - '&eNustatyti &b- nustatyti jūsų vietą kaip kompaso tikslą'
+      - '&eIšvalyti &b- išvalyti kompaso tikslą'
+    params: <set/clear>
     set:
-      feedback: '&9[&fItemEdit&9] &aCompass now points to &e%world% %x% %y% %z%'
+      feedback: '&9[&fItemEdit&9] &aKompasas dabar rodo į &e%world% %x% %y% %z%'
     clear:
-      feedback: '&9[&fItemEdit&9] &aCompass target cleared'
+      feedback: '&9[&fItemEdit&9] &aKompaso tikslas išvalytas'
   goathornsound:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a goat horn'
-    wrong-sound: '&4[&cItemEdit&4] &cWrong Sound Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti ožio ragas'
+    wrong-sound: '&4[&cItemEdit&4] &cNeteisinga garso reikšmė! &4[&6hover here&4]'
     description:
-      - '&6&lSet Goat Horn sound'
+      - '&b&lNustatyti ožio rago garsą'
       - ''
-      - '&e<type> &bthe type of sound'
-    params: '<type>'
+      - '&e<type> &bgarso tipas'
+    params: <type>
   armortrim:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be an armor'
-    wrong-material: '&4[&cItemEdit&4] &cWrong Trim Material Value! &4[&6hover here&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &cWrong Trim Pattern Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti šarvai'
+    wrong-material: '&4[&cItemEdit&4] &cNeteisinga apdailos medžiagos reikšmė! &4[&6hover here&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cNeteisinga apdailos rašto reikšmė! &4[&6hover here&4]'
     description:
-      - '&6&lSet Armor Trim'
+      - '&b&lNustatyti šarvų apdailą'
       - ''
-      - '&e<material> &bthe trim material'
-      - '&e<pattern> &bthe trim pattern'
-    params: '<material> <pattern>'
+      - '&e<material> &bapdailos medžiaga'
+      - '&e<pattern> &bapdailos raštas'
+    params: <material> <pattern>
   bookenchant:
     wrong-type: '&4[&cItemEdit&4] &cItem must be a book or enchanted book'
     wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
     description:
-      - '&6&lSet enchants on the book'
+      - '&b&lSet enchants on the book'
       - '&bThe difference between enchant and bookenchant is that'
       - '&ba book with enchant fire aspect sets hit targets on fire'
       - '&bwhile a book with bookenchant doesn''t'
@@ -373,13 +379,13 @@ itemedit:
     params: '<enchant> [level]'
   hidetooltip:
     description:
-      - '&6&lHide or show tooltips'
+      - '&b&lHide or show tooltips'
       - ''
       - '&e[true/false] &bset the flag value, by default toggle'
     params: '[true/false]'
   fireresistent:
     description:
-      - '&6&lSet item resistence to fire/lava'
+      - '&b&lSet item resistence to fire/lava'
       - ''
       - '&e[true/false] &bset the value, by default toggle'
       - ''
@@ -388,7 +394,7 @@ itemedit:
     params: '[true/false]'
   glow:
     description:
-      - '&6&lOverride enchantment glow effect'
+      - '&b&lOverride enchantment glow effect'
       - ''
       - '&e[true/false/default] &bset the value, by default toggle'
       - ''
@@ -396,7 +402,7 @@ itemedit:
     params: '[true/false/default]'
   maxstacksize:
     description:
-      - '&6&lSets item max stack size'
+      - '&b&lSets item max stack size'
       - ''
       - '&e[1-99/default] &bset the flag value'
       - ''
@@ -407,7 +413,7 @@ itemedit:
   rarity:
     wrong-rarity: '&4[&cItemEdit&4] &cWrong Rarity Value! &4[&6hover here&4]'
     description:
-      - '&6&lSets item rarity'
+      - '&b&lSets item rarity'
       - ''
       - '&e[rarity] &bset item rarity'
       - ''
@@ -416,7 +422,7 @@ itemedit:
   maxdurability:
     wrong-type: '&4[&cItemEdit&4] &cItem must have a durability like tools and armors'
     description:
-      - '&6&lSets item max durability'
+      - '&b&lSets item max durability'
       - ''
       - '&e<max durability> &bitem new durability value, must be bigger than 1'
     params: '<max durability>'
@@ -534,7 +540,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name%
     log: '[serveritem][give] %player_name% obtained %amount% of %id% (%nick%)'
     description:
-      - '&6&lGive selected item to player'
+      - '&b&lGive selected item to player'
       - ''
       - '&e<id> &bId of the item'
       - '&e[amount] &bamount of items to give, by default 1'
@@ -547,7 +553,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %targets%
     log: '[serveritem][giveall] %targets% obtained %amount% of %id% (%nick%)'
     description:
-      - '&6&lGive selected item to all online players'
+      - '&b&lGive selected item to all online players'
       - ''
       - '&e<id> &bId of the item'
       - '&e[amount] &bamount of items to give, by default 1'
@@ -557,7 +563,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %world% %x% %y% %z%
     log: '[serveritem][drop] dropped %amount% of %id% (%nick%) at %world% %x% %y% %z%'
     description:
-      - '&6&lDrop selected item at chosen location'
+      - '&b&lDrop selected item at chosen location'
       - ''
       - '&e<id> &bId of the item'
       - '&e<amount> &bamount of items to drop, 1 to 2304'
@@ -570,7 +576,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name%
     log: '[serveritem][take] %player_name% gave %amount% of %id% (%nick%)'
     description:
-      - '&6&lTake selected item from player'
+      - '&b&lTake selected item from player'
       - ''
       - '&e<id> &bId of the item'
       - '&e[amount] &bamount of items to give, by default 1'
@@ -595,7 +601,7 @@ serveritem:
     #Holders: %id%
     success: '&9[&fItemEdit&9] &aItem &e%id% &aunregistered'
     description:
-      - '&6&lDelete selected item'
+      - '&b&lDelete selected item'
       - ''
       - '&e<id> &bId of the item'
     params: '<id>'
@@ -603,7 +609,7 @@ serveritem:
     #Holders: %id%
     success: '&9[&fItemEdit&9] &aItem &e%id% &ahas been updated'
     description:
-      - '&6&lUpdate selected item'
+      - '&b&lUpdate selected item'
       - ''
       - '&bChange the item associated with id with your hand item'
       - '&e<id> &bId of the item'
@@ -613,7 +619,7 @@ serveritem:
     params: '<id>'
   show:
     description:
-      - '&6&lOpen a gui with server saved items'
+      - '&b&lOpen a gui with server saved items'
       - ''
       - '&e[page] &bpage of the gui, by default 1'
     params: '[page]'
@@ -641,7 +647,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)'
     description:
-      - '&6&lSell items to player'
+      - '&b&lSell items to player'
       - ''
       - '&bSell differs from SellMax because you sell the whole amount'
       - '&b  to player or you sell none'
@@ -653,7 +659,7 @@ serveritem:
       - ''
       - '&bTransaction fails if player has not enough money or enough'
       - '&b  inventory space for the whole &e<amount>'
-      - '&bN.B. balance of the command executor is untouched'
+      - '&bNote: balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
   buy:
     #Holders: %id% %nick% %amount% %price%
@@ -663,7 +669,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%'
     description:
-      - '&6&lBuy items from player'
+      - '&b&lBuy items from player'
       - ''
       - '&bBuy differs from BuyMax because you buy the whole amount'
       - '&b  from player or you buy none'
@@ -675,7 +681,7 @@ serveritem:
       - ''
       - '&bTransaction fails if player has not at least &e<amount>'
       - '&b  of &e<id> &bitems'
-      - '&bN.B. balance of the command executor is untouched'
+      - '&bNote: balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
   sellmax:
     #Holders: %id% %nick% %amount% %price%
@@ -687,7 +693,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)'
     description:
-      - '&6&lSell items to player'
+      - '&b&lSell items to player'
       - ''
       - '&bSellMax differs from Sell because you may sell the less of amount'
       - '&b  to player if there are not enough money or space for the whole'
@@ -700,7 +706,7 @@ serveritem:
       - '&bTransaction fails if player has not enough money or enough'
       - '&b  inventory space at least an item'
       - '&bIf player buy less than &e<price>&b paid price will be scaled'
-      - '&bN.B. balance of the command executor is untouched'
+      - '&bNote: balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
   buymax:
     #Holders: %id% %nick% %amount% %price%
@@ -710,7 +716,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%'
     description:
-      - '&6&lBuy items from player'
+      - '&b&lBuy items from player'
       - ''
       - '&bBuyMax differs from Buy because you may buy less of amount'
       - '&b  from player if he has less than amount items in inventory'
@@ -723,7 +729,7 @@ serveritem:
       - '&bTransaction fails if player has not at least an &e<id> &bitem'
       - '&b  on inventory'
       - '&bIf player sell less than &e<amount>&b price will be scaled'
-      - '&bN.B. balance of the command executor is untouched'
+      - '&bNote: balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
 itemstorage:
   help-header: '&9&lItemStorage - Help'
@@ -732,7 +738,7 @@ itemstorage:
     success: '&9[&fItemEdit&9] &aObtained &e%amount% &aof &e%id%'
     no-inventory-space: '&4[&cItemEdit&4] &cYou don''t have space in your inventory'
     description:
-      - '&6&lGet selected item'
+      - '&b&lGet selected item'
       - ''
       - '&e<id> &bId of the item'
       - '&e[amount] &bamount to get, by default 1'
@@ -743,7 +749,7 @@ itemstorage:
     #Holders: %limit%
     limit-reached: '&4[&cItemEdit&4] &cYou reached the maximus number of savable items (%limit%)'
     description:
-      - '&6&lRegister the item in your hand'
+      - '&b&lRegister the item in your hand'
       - ''
       - '&e<id> &bidentify your item, case insensitive and can''t'
       - '&b     contain spaces or dots also you can''t select'
@@ -756,7 +762,7 @@ itemstorage:
     #Holders: %id%
     success: '&9[&fItemEdit&9] &aItem &e%id% &aunregistered'
     description:
-      - '&6&lDelete selected item'
+      - '&b&lDelete selected item'
       - ''
       - '&e<id> &bId of the item'
     params: '<id>'
@@ -764,7 +770,7 @@ itemstorage:
     #Holders: %id%
     success: '&9[&fItemEdit&9] &aItem &e%id% &ahas been updated'
     description:
-      - '&6&lUpdate selected item'
+      - '&b&lUpdate selected item'
       - ''
       - '&bChange the item associated with id with your hand item'
       - '&e<id> &bId of the item'
@@ -774,7 +780,7 @@ itemstorage:
     params: '<id>'
   show:
     description:
-      - '&6&lOpen a gui with your saved items'
+      - '&b&lOpen a gui with your saved items'
       - ''
       - '&e[page] &bpage of the gui, by default 1'
     params: '[page]'

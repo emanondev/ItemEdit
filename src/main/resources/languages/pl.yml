@@ -420,6 +420,112 @@ itemedit:
       - ''
       - '&e<maksymalna trwałość> &bnowa wartość trwałości przedmiotu, musi być większa niż 1'
     params: '<maksymalna trwałość>'
+  food:
+    help-header: '&9&lItemEdit Jedzenie - Pomoc'
+    wrong-effect: '&4[&cItemEdit&4] &cNieprawidłowa Wartość Efektu! &4[&6najedź tutaj&4]'
+    description:
+      - '&6&lUstawia właściwości jedzenia przedmiotu'
+      - ''
+      - '&bN.B. przedmioty do picia nie mogą być jedzone'
+      - '&bWskazówka: wpisz &e/ie food&b po więcej informacji'
+    params: '[...]'
+    clear:
+      description:
+        - '&6&lCałkowicie usuwa właściwości jedzenia przedmiotu'
+        - ''
+        - '&bLub przywraca domyślne wartości, jeśli przedmiot jest jedzeniem z Minecrafta'
+      params: ''
+    canalwayseat:
+      description:
+        - '&6&lUstawia, kiedy przedmiot może być jedzony'
+        - ''
+        - '&e[true/false] &bWartość do ustawienia, domyślnie przełącz'
+        - ''
+        - '&bZwykle jedzenie wymaga głodu do spożycia,'
+        - '&bustawienie true imituje zachowanie złotego jabłka'
+      params: '[true/false]'
+    eatticks:
+      description:
+        - '&6&lUstawia czas potrzebny na zjedzenie przedmiotu'
+        - ''
+        - '&e<ticks> &bIlość czasu na zjedzenie przedmiotu'
+        - '  &bmusi być &e1 &blub więcej'
+        - ''
+        - '&e20 &bticks = &e1 &bsekunda'
+      params: '<ticks>'
+    nutrition:
+      description:
+        - '&6&lUstawia odzyskaną wartość odżywczą'
+        - ''
+        - '&e<amount> &bIlość głodu do przywrócenia'
+        - '  &bmusi być &e0 &blub więcej'
+        - ''
+        - '&bPełny pasek głodu to &e20'
+      params: '<amount>'
+    saturation:
+      description:
+        - '&6&lUstawia odzyskaną wartość nasycenia'
+        - ''
+        - '&e<amount> &bIlość nasycenia do dodania'
+        - '  &bdopuszczalne są wartości ujemne'
+        - ''
+        - '&bNasycenie kontroluje, jak szybko spada poziom jedzenia'
+        - '&b  (odżywianie)'
+      params: '<amount>'
+    addeffect:
+      description:
+        - '&6&lDodaj efekt do przedmiotu'
+        - ''
+        - '&e<type> &bTyp efektu mikstury'
+        - '&e<duration> &bCzas trwania efektu w sekundach'
+        - '  &bwpisz &einfinite &bdla trwałego efektu'
+        - '&e[level] &bpoziom efektu, domyślnie &e1'
+        - '&e[particles] &bczy efekt ma pokazywać cząsteczki?'
+        - '&e[ambient] &bczy efekt jest ambientowy?'
+        - '&e[icon] &bczy efekt pokazuje ikonę w prawym górnym rogu?'
+        - '&e[chance] &bjaka jest % szansa na zastosowanie efektu?'
+        - '  &bmusi być większa niż &e0&b i mniejsza lub równa &e100'
+      params: '<type> <duration> [level] [particles] [ambient] [icon] [chance]'
+    removeeffect:
+      description:
+        - '&6&lUsuń efekt z przedmiotu'
+        - ''
+        - '&e<type> &bTyp efektu mikstury'
+        - '&e[level] &bpoziom efektu do usunięcia'
+        - '  &bjeśli pominięty, usuwa wszystkie efekty wybranego typu'
+        - '  &bbez względu na poziom'
+      params: '<type> [level]'
+    cleareffects:
+      description:
+        - '&6&lUsuń efekty z przedmiotu'
+      params: ''
+    info:
+      not_food: "&9[&fItemEdit&9] &aPrzedmiot nie ma właściwości jedzenia lub ma domyślną właściwość"
+      message:
+        - '&9[&fItemEdit&9] &2&bWłaściwości jedzenia przedmiotu'
+        - '&aPrzedmiot można zjeść w &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
+        - '&aPrzywraca &e%nutrition%&a głodu, &e%saturation%&a nasycenia'
+        - '&aCzy można jeść przy pełnym pasku głodu? &e%canalwayseat%'
+        - '&aPo zjedzeniu zwraca przedmiot? &e%convertto%'
+        - '&aPrzedmiot zawiera łącznie &e%effects%&a możliwych efektów'
+      effect:
+        - '&a%index%. Typ: &e&b%type%&a   Poziom: &e%level%&a   Na: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
+        - '&a   Cząsteczki: &e%hasparticle%&a  Ambient: &e%isambient%&a  Ikona: &e%hasicon%&a  Szansa: &e%chance_perc%&a%'
+      description:
+        - '&6&lOpisuje bieżące informacje o jedzeniu dla przedmiotu'
+      params: ''
+    convertto:
+      description:
+        - '&6&lUstawia przedmiot do zwrócenia po spożyciu jedzenia'
+        - '&bTylko dla &c1.21+'
+        - ''
+        - '&e[typ/ID ServerItem] &bprzedmiot do zwrócenia'
+        - '  &bMożesz ustawić materiał lub'
+        - '  &bwybrać przedmiot z zapisanych przedmiotów ServerItem'
+        - ''
+        - '&bImituje zachowanie wiaderka z mlekiem, gdzie wiadro'
+        - '&bzwracane jest po spożyciu mleka'
+      params: '[typ/ID ServerItem]'
 serveritem:
   help-header: '&9&lServerItem - Pomoc'
   give:

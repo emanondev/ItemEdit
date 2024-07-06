@@ -413,6 +413,111 @@ itemedit:
       - ''
       - '&e<最大耐久度> &b物品的新耐久度值，必須大於1'
     params: '<最大耐久度>'
+  food:
+    help-header: '&9&lItemEdit 食物 - 幫助'
+    wrong-effect: '&4[&cItemEdit&4] &c錯誤的效果值！ &4[&6懸停此處&4]'
+    description:
+      - '&6&l設置物品的食物屬性'
+      - ''
+      - '&b注意：飲料物品不能食用'
+      - '&b提示：輸入 &e/ie food&b 獲取更多信息'
+    params: '[...]'
+    clear:
+      description:
+        - '&6&l完全移除物品的食物屬性'
+        - ''
+        - '&b如果物品是原版食物，則恢復默認值'
+      params: ''
+    canalwayseat:
+      description:
+        - '&6&l設置物品何時可以食用'
+        - ''
+        - '&e[true/false] &b要設置的值，默認情況下切換'
+        - ''
+        - '&b通常食物需要飢餓才能食用，'
+        - '&b設置為 true 會模仿金蘋果的行為'
+      params: '[true/false]'
+    eatticks:
+      description:
+        - '&6&l設置食用物品所需的時間'
+        - ''
+        - '&e<ticks> &b食用物品所需的時間'
+        - '  &b必須大於等於 &e1 &b刻'
+        - ''
+        - '&e20 &b刻 = &e1 &b秒'
+      params: '<ticks>'
+    nutrition:
+      description:
+        - '&6&l設置恢復的營養值'
+        - ''
+        - '&e<amount> &b恢復的飢餓值'
+        - '  &b必須大於等於 &e0'
+        - ''
+        - '&b滿飢餓條為 &e20'
+      params: '<amount>'
+    saturation:
+      description:
+        - '&6&l設置恢復的飽和度'
+        - ''
+        - '&e<amount> &b增加的飽和度'
+        - '  &b允許負值'
+        - ''
+        - '&b飽和度控制食物值的下降速度'
+        - '&b  (營養)'
+      params: '<amount>'
+    addeffect:
+      description:
+        - '&6&l添加效果到物品'
+        - ''
+        - '&e<type> &b藥水效果類型'
+        - '&e<duration> &b效果持續時間（秒）'
+        - '  &b輸入 &einfinite &b表示永久效果'
+        - '&e[level] &b效果等級，默認 &e1'
+        - '&e[particles] &b效果是否顯示粒子？'
+        - '&e[ambient] &b效果是否為環境效果？'
+        - '&e[icon] &b效果是否顯示在右上角？'
+        - '&e[chance] &b應用效果的機率是多少？'
+        - '  &b必須大於 &e0&b 並且小於等於 &e100'
+      params: '<type> <duration> [level] [particles] [ambient] [icon] [chance]'
+    removeeffect:
+      description:
+        - '&6&l移除物品的效果'
+        - ''
+        - '&e<type> &b藥水效果類型'
+        - '&e[level] &b要移除的效果等級'
+        - '  &b如果省略，移除選定類型的所有效果'
+        - '  &b無論等級'
+      params: '<type> [level]'
+    cleareffects:
+      description:
+        - '&6&l移除物品的效果'
+      params: ''
+    info:
+      not_food: "&9[&fItemEdit&9] &a物品沒有食物屬性或具有默認屬性"
+      message:
+        - '&9[&fItemEdit&9] &2&b物品食物屬性'
+        - '&a物品可以在 &e%eatseconds%&a 秒內食用 &8(&7%eatticks%&8 刻)'
+        - '&a恢復 &e%nutrition%&a 飢餓值, &e%saturation%&a 飽和度'
+        - '&a可以在滿飢餓條時食用嗎？ &e%canalwayseat%'
+        - '&a食用後返回物品嗎？ &e%convertto%'
+        - '&a物品包含總共 &e%effects%&a 種可能的效果'
+      effect:
+        - '&a%index%. 類型: &e&b%type%&a   等級: &e%level%&a   持續時間: &e%duration_s%&a 秒 &8(&7%duration_ticks%&8 刻)'
+        - '&a   粒子: &e%hasparticle%&a  環境效果: &e%isambient%&a  圖標: &e%hasicon%&a  概率: &e%chance_perc%&a%'
+      description:
+        - '&6&l描述當前物品的食物信息'
+      params: ''
+    convertto:
+      description:
+        - '&6&l設置食物消耗後返回的物品'
+        - '&b僅適用於 &c1.21+'
+        - ''
+        - '&e[類型/ServerItem ID] &b返回的物品'
+        - '  &b你可以設置一個材料或'
+        - '  &b從ServerItem保存的物品中選擇一個'
+        - ''
+        - '&b模擬牛奶桶的行為，當牛奶被消耗時返回一個桶'
+      params: '[類型/ServerItem ID]'
 serveritem:
   help-header: '&9&lServerItem - 幫助'
   give:

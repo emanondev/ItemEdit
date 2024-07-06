@@ -421,6 +421,112 @@ itemedit:
       - ''
       - '&e<durabilità massima> &bnuovo valore di durabilità dell''oggetto, deve essere maggiore di 1'
     params: '<durabilità massima>'
+  food:
+    help-header: '&9&lItemEdit Cibo - Aiuto'
+    wrong-effect: '&4[&cItemEdit&4] &cValore Effetto Sbagliato! &4[&6passa qui con il mouse&4]'
+    description:
+      - '&6&lImposta la proprietà cibo dell''oggetto'
+      - ''
+      - '&bN.B. gli oggetti bevibili non possono essere mangiati'
+      - '&bSuggerimento: digita &e/ie food&b per maggiori informazioni'
+    params: '[...]'
+    clear:
+      description:
+        - '&6&lRimuove completamente la proprietà cibo dall''oggetto'
+        - ''
+        - '&bOppure ripristina i valori predefiniti se l''oggetto è un cibo vanilla'
+      params: ''
+    canalwayseat:
+      description:
+        - '&6&lImposta quando l''oggetto può essere mangiato'
+        - ''
+        - '&e[true/false] &bIl valore da impostare, di default alterna'
+        - ''
+        - '&bDi solito il cibo richiede fame per essere mangiato,'
+        - '&bimpostare true imiterà il comportamento della mela d''oro'
+      params: '[true/false]'
+    eatticks:
+      description:
+        - '&6&lImposta il tempo necessario per mangiare l''oggetto'
+        - ''
+        - '&e<ticks> &bLa quantità di tempo per mangiare l''oggetto'
+        - '  &bdeve essere &e1 &bo maggiore'
+        - ''
+        - '&e20 &bticks = &e1 &bsecondo'
+      params: '<ticks>'
+    nutrition:
+      description:
+        - '&6&lImposta la nutrizione recuperata'
+        - ''
+        - '&e<amount> &bLa quantità di fame da ripristinare'
+        - '  &bdeve essere &e0 &bo maggiore'
+        - ''
+        - '&bUna barra di fame piena è &e20'
+      params: '<amount>'
+    saturation:
+      description:
+        - '&6&lImposta la saturazione recuperata'
+        - ''
+        - '&e<amount> &bLa quantità di saturazione da aggiungere'
+        - '  &bsono consentiti valori negativi'
+        - ''
+        - '&bLa saturazione controlla la velocità con cui il livello di cibo'
+        - '&b  (nutrizione) diminuisce'
+      params: '<amount>'
+    addeffect:
+      description:
+        - '&6&lAggiungi un effetto all''oggetto'
+        - ''
+        - '&e<type> &bIl tipo di effetto pozione'
+        - '&e<duration> &bDurata dell''effetto in secondi'
+        - '  &bdigita &einfinito &bper effetto permanente'
+        - '&e[level] &blivello dell''effetto, &e1&b per default'
+        - '&e[particles] &bl''effetto mostra particelle?'
+        - '&e[ambient] &bl''effetto è ambientale?'
+        - '&e[icon] &bl''effetto mostra l''icona nell''angolo in alto a destra?'
+        - '&e[chance] &bqual è la % di probabilità di applicare l''effetto?'
+        - '  &bdeve essere maggiore di &e0&b e minore o uguale a &e100'
+      params: '<type> <duration> [level] [particles] [ambient] [icon] [chance]'
+    removeeffect:
+      description:
+        - '&6&lRimuovere un effetto dall''oggetto'
+        - ''
+        - '&e<type> &bIl tipo di effetto pozione'
+        - '&e[level] &blivello dell''effetto da rimuovere'
+        - '  &bse omesso, rimuove tutti gli effetti del tipo selezionato'
+        - '  &bindipendentemente dal livello'
+      params: '<type> [level]'
+    cleareffects:
+      description:
+        - '&6&lRimuovere gli effetti dall''oggetto'
+      params: ''
+    info:
+      not_food: "&9[&fItemEdit&9] &aL''oggetto non ha la proprietà cibo o ha la proprietà predefinita"
+      message:
+        - '&9[&fItemEdit&9] &2&bProprietà Cibo Oggetto'
+        - '&aL''oggetto può essere mangiato in &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
+        - '&aRipristina &e%nutrition%&a fame, &e%saturation%&a saturazione'
+        - '&aMangibile con la barra della fame piena? &e%canalwayseat%'
+        - '&aQuando mangiato restituisce un oggetto? &e%convertto%'
+        - '&aL''oggetto contiene un totale di &e%effects%&a possibili effetti'
+      effect:
+        - '&a%index%. Tipo: &e&b%type%&a   Lv: &e%level%&a   Per: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
+        - '&a   Particelle: &e%hasparticle%&a  Ambientale: &e%isambient%&a  Icona: &e%hasicon%&a  Probabilità: &e%chance_perc%&a%'
+      description:
+        - '&6&lDescrivi le attuali informazioni sul cibo per l''oggetto'
+      params: ''
+    convertto:
+      description:
+        - '&6&lImposta un oggetto che viene restituito quando il cibo viene consumato'
+        - '&bSolo per &c1.21+'
+        - ''
+        - '&e[tipo/id serveritem] &bl''oggetto da restituire'
+        - '  &bpuoi impostare un Material o puoi'
+        - '  &bselezionare un oggetto dagli oggetti salvati di ServerItem'
+        - ''
+        - '&bImita il comportamento del secchio di latte dove un secchio'
+        - '&bviene restituito quando il latte viene consumato'
+      params: '[tipo/id serveritem]'
 serveritem:
   help-header: '&9&lServerItem - Guida'
   give:

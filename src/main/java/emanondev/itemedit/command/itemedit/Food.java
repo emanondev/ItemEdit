@@ -356,7 +356,7 @@ public class Food extends SubCmd {
                         "%level%", String.valueOf(effect.getAmplifier() + 1),
                         "%duration_s%", effect.getDuration() == -1 ? "∞" : UtilsString.formatNumber(effect.getDuration() / 20D, 2, true),
                         "%hasparticle%", Aliases.BOOLEAN.getDefaultName(effect.hasParticles()),
-                        "%isAmbient%", Aliases.BOOLEAN.getDefaultName(effect.isAmbient()),
+                        "%isambient%", Aliases.BOOLEAN.getDefaultName(effect.isAmbient()),
                         "%hasicon%", Aliases.BOOLEAN.getDefaultName(!Util.isVersionAfter(1, 13) || effect.hasIcon()),
                         "%duration_ticks%", effect.getDuration() == -1 ? "∞" : String.valueOf(effect.getDuration()),
                         "%chance_perc%", UtilsString.formatNumber(foodEffect.getProbability() * 100, 2, true)
@@ -451,6 +451,8 @@ public class Food extends SubCmd {
                         return Util.complete(args[2], Aliases.POTION_EFFECT);
                     case "removeeffect": {
                         ItemStack item = getItemInHand((Player) sender);
+                        if (item==null || !item.hasItemMeta())
+                            return Collections.emptyList();
                         HashSet<PotionEffectType> types = new HashSet<>();
                         for (FoodComponent.FoodEffect food:item.getItemMeta().getFood().getEffects())
                             types.add(food.getEffect().getType());
@@ -470,7 +472,7 @@ public class Food extends SubCmd {
             case 4:
                 switch (args[1].toLowerCase(Locale.ENGLISH)) {
                     case "addeffect":
-                        return Util.complete(args[3], "infinite", "0", "60", "180");
+                        return Util.complete(args[3], "infinite", "0", "90", "180", "480");
                     case "removeeffect":
                         return Util.complete(args[3], "1", "2", "3", "4", "5");
                     case "convertto":

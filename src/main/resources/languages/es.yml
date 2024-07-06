@@ -420,6 +420,112 @@ itemedit:
       - ''
       - '&e<durabilidad máxima> &bnuevo valor de durabilidad del objeto, debe ser mayor que 1'
     params: '<durabilidad máxima>'
+  food:
+    help-header: '&9&lItemEdit Food - Ayuda'
+    wrong-effect: '&4[&cItemEdit&4] &c¡Valor de Efecto Incorrecto! &4[&6haz clic aquí&4]'
+    description:
+      - '&6&lEstablece la propiedad de comida del ítem'
+      - ''
+      - '&bN.B. los ítems bebibles no se pueden comer'
+      - '&bConsejo: escribe &e/ie food&b para más información'
+    params: '[...]'
+    clear:
+      description:
+        - '&6&lEliminar completamente la propiedad de comida del ítem'
+        - ''
+        - '&bO restaurar valores predeterminados si el ítem es una comida de vanilla'
+      params: ''
+    canalwayseat:
+      description:
+        - '&6&lEstablece si el ítem se puede comer en cualquier momento'
+        - ''
+        - '&e[true/false] &bEl valor a establecer, por defecto alternar'
+        - ''
+        - '&bUsualmente la comida requiere hambre para ser comida,'
+        - '&bestablecer true imitará el comportamiento de la manzana dorada'
+      params: '[true/false]'
+    eatticks:
+      description:
+        - '&6&lEstablece el tiempo requerido para comer el ítem'
+        - ''
+        - '&e<ticks> &bLa cantidad de tiempo para comer el ítem'
+        - '  &bdebe ser &e1 &bo mayor'
+        - ''
+        - '&e20 &bticks = &e1 &bsegundo'
+      params: '<ticks>'
+    nutrition:
+      description:
+        - '&6&lEstablece la nutrición recuperada'
+        - ''
+        - '&e<cantidad> &bLa cantidad de hambre a restaurar'
+        - '  &bdebe ser &e0 &bo mayor'
+        - ''
+        - '&bUna barra de hambre llena es &e20'
+      params: '<cantidad>'
+    saturation:
+      description:
+        - '&6&lEstablece la saturación recuperada'
+        - ''
+        - '&e<cantidad> &bLa cantidad de saturación a añadir'
+        - '  &bse permiten valores negativos'
+        - ''
+        - '&bLa saturación controla la velocidad a la que se reduce'
+        - '&b  el nivel de comida (nutrición)'
+      params: '<cantidad>'
+    addeffect:
+      description:
+        - '&6&lAñadir un efecto al ítem'
+        - ''
+        - '&e<tipo> &bEl tipo de efecto de poción'
+        - '&e<duración> &bDuración del efecto en segundos'
+        - '  &bescribe &einfinito &bpara efecto permanente'
+        - '&e[nivel] &bnivel del efecto, &e1&b por defecto'
+        - '&e[partículas] &bel efecto muestra partículas?'
+        - '&e[ambiente] &bel efecto es ambiental?'
+        - '&e[ícono] &bel efecto muestra ícono en la esquina superior derecha?'
+        - '&e[probabilidad] &b¿cuál es el % de probabilidad de aplicar el efecto?'
+        - '  &bdebe ser mayor que &e0&b y menor o igual a &e100'
+      params: '<tipo> <duración> [nivel] [partículas] [ambiente] [ícono] [probabilidad]'
+    removeeffect:
+      description:
+        - '&6&lEliminar un efecto del ítem'
+        - ''
+        - '&e<tipo> &bEl tipo de efecto de poción'
+        - '&e[nivel] &bnivel del efecto a eliminar'
+        - '  &bsi se omite, eliminar todos los efectos del tipo seleccionado'
+        - '  &bsin importar el nivel'
+      params: '<tipo> [nivel]'
+    cleareffects:
+      description:
+        - '&6&lEliminar efectos del ítem'
+      params: ''
+    info:
+      not_food: "&9[&fItemEdit&9] &aEl ítem no tiene propiedad de comida o tiene la propiedad predeterminada"
+      message:
+        - '&9[&fItemEdit&9] &2&bPropiedad de Comida del Ítem'
+        - '&aEl ítem se puede comer en &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
+        - '&aRestaurar &e%nutrition%&a hambre, &e%saturation%&a saturación'
+        - '&a¿Comible con la barra de hambre llena? &e%canalwayseat%'
+        - '&a¿Al comer devuelve un ítem? &e%convertto%'
+        - '&aEl ítem contiene un total de &e%effects%&a efectos posibles'
+      effect:
+        - '&a%index%. Tipo: &e&b%type%&a   Nv: &e%level%&a   Por: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
+        - '&a   Partículas: &e%hasparticle%&a  Ambiental: &e%isambient%&a  Ícono: &e%hasicon%&a  Probabilidad: &e%chance_perc%&a%'
+      description:
+        - '&6&lDescribir la información actual de comida del ítem'
+      params: ''
+    convertto:
+      description:
+        - '&6&lEstablece un ítem que se da cuando se consume la comida'
+        - '&bSolo para &c1.21+'
+        - ''
+        - '&e[tipo/id ServerItem] &bel ítem a devolver'
+        - '  &bpuedes establecer un Material o puedes'
+        - '  &bseleccionar un ítem de los ítems guardados de ServerItem'
+        - ''
+        - '&bImita el comportamiento del cubo de leche donde un cubo es'
+        - '&bdevuelto cuando se consume la leche'
+      params: '[tipo/id ServerItem]'
 serveritem:
   help-header: '&9&lServerItem - Ayuda'
   give:
