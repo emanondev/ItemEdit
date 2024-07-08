@@ -481,9 +481,9 @@ public class Util {
 
     private static boolean initPurpur() {
         try {
-            Method method = org.bukkit.Server.class.getMethod("getPurpurConfig");
+            Class.forName("org.purpurmc.purpur.event.PlayerAFKEvent");
             return true;
-        } catch (NoSuchMethodException e) {
+        } catch (ClassNotFoundException e) {
             return false;
         }
     }
