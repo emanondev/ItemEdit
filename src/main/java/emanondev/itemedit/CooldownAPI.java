@@ -80,12 +80,12 @@ public class CooldownAPI {
     }
 
     public boolean hasCooldown(UUID player, String cooldownId) {
-        return getCooldownMillis(player, cooldownId) > System.currentTimeMillis();
+        return getCooldownMillis(player, cooldownId) > 0;
 
     }
 
     public long getCooldownMillis(UUID player, String cooldownId) {
-        return cooldowns.containsKey(player) ? (cooldowns.get(player).getOrDefault(cooldownId, 0L)) : 0L;
+        return cooldowns.containsKey(player) ? Math.max(0L, cooldowns.get(player).getOrDefault(cooldownId, 0L) - System.currentTimeMillis()) : 0L;
     }
 
     public long getCooldownSeconds(UUID player, String cooldownId) {
