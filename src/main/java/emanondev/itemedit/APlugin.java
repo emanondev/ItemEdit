@@ -33,6 +33,7 @@ public abstract class APlugin extends JavaPlugin {
      * @return Plugin config file
      * @see #getConfig(String) getConfig("config.yml");
      */
+    @Override
     public @NotNull YMLConfig getConfig() {
         return getConfig("config.yml");
     }
@@ -170,6 +171,7 @@ public abstract class APlugin extends JavaPlugin {
     /**
      *
      */
+    @Override
     public final void onEnable() {
         try {
             long now = System.currentTimeMillis();
@@ -277,6 +279,7 @@ public abstract class APlugin extends JavaPlugin {
         }
     }
 
+    @Override
     public void onDisable() {
         disable();
     }

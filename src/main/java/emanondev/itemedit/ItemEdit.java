@@ -52,6 +52,7 @@ public class ItemEdit extends APlugin {
         return plugin;
     }
 
+    @Override
     public void onLoad() {
         plugin = this;
     }
@@ -70,6 +71,7 @@ public class ItemEdit extends APlugin {
         return PROJECT_ID;
     }
 
+    @Override
     public void enable() {
         ConfigurationUpdater.update();
         Aliases.reload();
@@ -150,6 +152,7 @@ public class ItemEdit extends APlugin {
         registerMetrics(BSTATS_PLUGIN_ID);
     }
 
+    @Override
     public void disable() {
         for (Player p : Bukkit.getOnlinePlayers())
             if (UtilLegacy.getTopInventory(p).getHolder() instanceof Gui)
@@ -158,6 +161,7 @@ public class ItemEdit extends APlugin {
         if (this.mongoStorage != null) this.mongoStorage.close();
     }
 
+    @Override
     public void reload() {
         Aliases.reload();
         ItemEditCommand.get().reload();
