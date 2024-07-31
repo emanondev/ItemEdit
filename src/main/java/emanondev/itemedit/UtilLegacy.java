@@ -1,8 +1,12 @@
 package emanondev.itemedit;
 
+import emanondev.itemedit.compability.V1_20_6;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.block.banner.PatternType;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -11,15 +15,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class UtilLegacy {
 
 
-    private static final HashMap<Class<?>,Method> getTopInventory = new HashMap<>();
-    private static final HashMap<Class<?>,Method> getBottomInventory = new HashMap<>();
+    private static final HashMap<Class<?>, Method> getTopInventory = new HashMap<>();
+    private static final HashMap<Class<?>, Method> getBottomInventory = new HashMap<>();
 
 
     /**
@@ -58,7 +60,7 @@ public class UtilLegacy {
             if (method == null) {
                 method = view.getClass().getMethod("getTopInventory");
                 method.setAccessible(true);
-                getTopInventory.put(view.getClass(),method);
+                getTopInventory.put(view.getClass(), method);
             }
             return (Inventory) method.invoke(view);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
@@ -88,7 +90,7 @@ public class UtilLegacy {
             if (method == null) {
                 method = view.getClass().getMethod("getBottomInventory");
                 method.setAccessible(true);
-                getBottomInventory.put(view.getClass(),method);
+                getBottomInventory.put(view.getClass(), method);
             }
             return (Inventory) method.invoke(view);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
@@ -157,7 +159,7 @@ public class UtilLegacy {
      * @return true if the meta has unbreakable tag
      */
     public static boolean isUnbreakable(@Nullable ItemMeta meta) {
-        if (meta==null)
+        if (meta == null)
             return false;
         if (Util.isVersionAfter(1, 11))
             return meta.isUnbreakable();
@@ -169,7 +171,7 @@ public class UtilLegacy {
      * In API versions 1.10.2 and earlier, there is no setUnbreakable method on ItemMeta, so we rely on serialization.<br>
      * In API versions 1.11 and later, setUnbreakable method was added on ItemMeta.
      *
-     * @param item The ItemStack to set tag on
+     * @param item  The ItemStack to set tag on
      * @param value The value to set
      * @see #setUnbreakable(ItemMeta, boolean)
      */
@@ -184,12 +186,12 @@ public class UtilLegacy {
      * In API versions 1.10.2 and earlier, there is no setUnbreakable method on ItemMeta, so we rely on serialization.<br>
      * In API versions 1.11 and later, setUnbreakable method was added on ItemMeta.
      *
-     * @param meta The ItemMeta to set tag on
+     * @param meta  The ItemMeta to set tag on
      * @param value The value to set
      * @see #setUnbreakable(ItemMeta, boolean)
      */
     public static ItemMeta setUnbreakable(@Nullable ItemMeta meta, boolean value) {
-        if (meta==null)
+        if (meta == null)
             return null;
         if (Util.isVersionAfter(1, 11)) {
             meta.setUnbreakable(value);
@@ -210,6 +212,47 @@ public class UtilLegacy {
         map.put("==", "ItemMeta");
         return (ItemMeta) ConfigurationSerialization.deserializeObject(map);
     }
+
+
+    public static AttributeModifier createAttributeModifier(org.bukkit.attribute.Attribute attr, double amount, AttributeModifier.Operation op, @Nullable String slot) {
+        try {
+            if (Util.isVersionAfter(1, 20, 6))
+                return V1_20_6.createAttribute(attr, amount, op, slot);
+        } catch (Throwable e) {
+        }
+        return new AttributeModifier(UUID.randomUUID(), attr.toString(), amount, op, EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)));
+    }
+
+
+    public static PatternType[] getPatternTypes() {
+        try {
+            if (Util.isVersionAfter(1, 20, 6))
+                return V1_20_6.getPatternTypes();
+        } catch (Throwable e) {
+        }
+        try {
+            Class<PatternType> clazz = PatternType.class;
+            Method method = clazz.getMethod("values");
+            PatternType[] result = (PatternType[]) method.invoke(null);
+            return Arrays.copyOfRange(result, 1, result.length);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+    public static PatternType[] getPatternTypesFilthered() {
+        PatternType[] val = getPatternTypes();
+        ArrayList<PatternType> list = new ArrayList<>(Arrays.asList(val));
+        list.remove(PatternType.BASE);
+        if (Util.isVersionAfter(1,20,6)&&!Util.isVersionAfter(1,21)) { //those are not craftable items on 1.20.6
+            list.remove(PatternType.FLOW);
+            list.remove(PatternType.GUSTER);
+        }
+        return list.toArray(new PatternType[0]);
+    }
+
 
 
 }

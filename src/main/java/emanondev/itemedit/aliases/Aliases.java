@@ -15,7 +15,17 @@ import java.util.*;
 public class Aliases {
 
     public static final EnchAliases ENCHANT = getEnchAliases();
-    public static final AliasSet<PatternType> PATTERN_TYPE = new EnumAliasSet<>("banner_pattern", PatternType.class);
+    public static final AliasSet<PatternType> PATTERN_TYPE = getPatternAlias();
+
+    private static AliasSet<PatternType> getPatternAlias() {
+        try {
+            if (Util.isVersionAfter(1, 20,6))
+                return new BannerPatternAliasesNew();
+        } catch (Throwable ignored){
+        }
+        return new BannerPatternAliasesOld();
+    }
+
     public static final GenAliases BOOK_TYPE = getGenAliases();
     public static final AliasSet<PotionEffectType> POTION_EFFECT = new AliasSet<PotionEffectType>("potion_effect") {
 
@@ -108,6 +118,7 @@ public class Aliases {
     public static final EnumAliasSet<FireworkEffect.Type> FIREWORK_TYPE = new EnumAliasSet<>("firework_type", FireworkEffect.Type.class);
     public static final AxolotlVariantAliases AXOLOTL_VARIANT = getAxolotlVariantAliases();
     public static final GoatHornSoundAliases GOAT_HORN_SOUND = getGoatHornSoundAliases();
+    public static final EquipmentSlotGroupAliases EQUIPMENT_SLOTGROUPS = Util.isVersionAfter(1,21)? new EquipmentSlotGroupAliases():null;
 
 
     private static boolean loaded = false;
@@ -132,6 +143,7 @@ public class Aliases {
         registerAliasType(TRIM_MATERIAL);
         registerAliasType(TRIM_PATTERN);
         registerAliasType(RARITY);
+        registerAliasType(EQUIPMENT_SLOTGROUPS);
     }
 
     public static <T> void registerAliasType(@Nullable IAliasSet<T> set) {

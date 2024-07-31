@@ -48,6 +48,8 @@ public class ItemEditInfoCommand implements TabExecutor {
             StringBuilder copyText = new StringBuilder();
             if (sender instanceof Player)
                 copyText.append("Server: ").append(Bukkit.getVersion()).append("\n")
+                        .append("View: ").append(Util.hasFoliaAPI() ? "Folia" : (Util.hasPurpurAPI() ? "Purpur" : (Util.hasPaperAPI() ? "Paper" : "Spigot")))
+                        .append(" ").append(Util.GAME_MAIN_VERSION).append(".").append(Util.GAME_VERSION).append(".").append(Util.GAME_SUB_VERSION).append("\n")
                         .append("Java: ").append(System.getProperty("java.version")).append("\n")
                         .append("ItemEdit: ").append(plugin.getDescription().getVersion())
                         .append(" Storage: ").append(plugin.getStorageType().name()).append("\n")
@@ -62,6 +64,9 @@ public class ItemEditInfoCommand implements TabExecutor {
             ComponentBuilder msg = new ComponentBuilder(
                     ChatColor.BLUE + "Server: " + ChatColor.AQUA + Bukkit.getVersion() + "\n" +
                             ChatColor.BLUE + "Java: " + ChatColor.AQUA + System.getProperty("java.version") + "\n" +
+                            ChatColor.BLUE + "View: "+ ChatColor.AQUA + (Util.hasFoliaAPI() ? "Folia" :
+                              (Util.hasPurpurAPI() ? "Purpur" : (Util.hasPaperAPI() ? "Paper" : "Spigot")))
+                    +" "+Util.GAME_MAIN_VERSION+"."+Util.GAME_VERSION+"."+Util.GAME_SUB_VERSION+"\n"+
                             ChatColor.BLUE + "ItemEdit: " + ChatColor.AQUA + plugin.getDescription().getVersion() + " Storage: " + plugin.getStorageType().name() + "\n" +
                             ChatColor.BLUE + "ItemTag: " + ChatColor.AQUA + (Hooks.isEnabled("ItemTag") ?
                             Bukkit.getPluginManager().getPlugin("ItemTag").getDescription().getVersion() : "Nope") + "\n" +

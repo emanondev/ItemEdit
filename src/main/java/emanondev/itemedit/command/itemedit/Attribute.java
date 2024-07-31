@@ -1,10 +1,10 @@
 package emanondev.itemedit.command.itemedit;
 
 import emanondev.itemedit.Util;
+import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -15,7 +15,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 public class Attribute extends SubCmd {
     private static final String[] attributeSub = new String[]{"add", "remove"};
@@ -78,21 +77,33 @@ public class Attribute extends SubCmd {
                 return;
             }
 
-            EquipmentSlot equip;
+
+            String equip = null;
+
             if (args.length > 5) {
-                equip = Aliases.EQUIPMENT_SLOTS.convertAlias(args[5]);
-                if (equip == null) {
-                    onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTS);
-                    p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
-                            getLanguageStringList("add.description", null, p)));
-                    return;
+                if (Util.isVersionAfter(1, 21)) {
+                    {
+                        equip = Aliases.EQUIPMENT_SLOTGROUPS.convertAlias(args[5]).toString();
+                        if (equip == null) {
+                            onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTGROUPS);
+                            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
+                                    getLanguageStringList("add.description", null, p)));
+                            return;
+                        }
+                    }
+                } else {
+                    equip = Aliases.EQUIPMENT_SLOTS.convertAlias(args[5]).toString();
+                    if (equip == null) {
+                        onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTS);
+                        p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
+                                getLanguageStringList("add.description", null, p)));
+                        return;
+                    }
                 }
-            } else
-                equip = null;
+            }
 
             ItemMeta itemMeta = item.getItemMeta();
-            itemMeta.addAttributeModifier(attr,
-                    new AttributeModifier(UUID.randomUUID(), attr.toString(), amount, op, equip));
+            itemMeta.addAttributeModifier(attr,UtilLegacy.createAttributeModifier(attr, amount, op, equip));
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
@@ -140,8 +151,11 @@ public class Attribute extends SubCmd {
                 return Util.complete(args[2], Aliases.ATTRIBUTE);
             if (args.length == 5)
                 return Util.complete(args[4], Aliases.OPERATIONS);
-            if (args.length == 6)
+            if (args.length == 6) {
+                if (Util.isVersionAfter(1, 21))
+                    return Util.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
                 return Util.complete(args[5], Aliases.EQUIPMENT_SLOTS);
+            }
         } else if (args[1].equalsIgnoreCase("remove") && args.length == 3) {
             List<String> l = Util.complete(args[2], Aliases.ATTRIBUTE);
             l.addAll(Util.complete(args[2], Aliases.EQUIPMENT_SLOTS));

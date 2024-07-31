@@ -2,6 +2,7 @@ package emanondev.itemedit.gui;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
+import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -19,99 +20,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BannerEditor implements Gui {
 
-    private BannerMeta meta;
-    private final Player target;
     private static final String subPath = "gui.banner.";
+    private final static PatternType[] TYPES = UtilLegacy.getPatternTypesFilthered();
+    private final Player target;
     private final Inventory inventory;
     private final List<BannerData> layers = new ArrayList<>();
     private final ItemStack banner;
-    private final static PatternType[] TYPES = Arrays.copyOfRange(PatternType.values(), 1, PatternType.values().length);
-
-    @Override
-    public @NotNull ItemEdit getPlugin() {
-        return ItemEdit.get();
-    }
-
-    private class BannerData {
-        private Pattern pattern;
-        private boolean active = false;
-
-        private BannerData() {
-            pattern = new Pattern(DyeColor.values()[(int) (Math.random() * DyeColor.values().length)],
-                    TYPES[(int) (Math.random() * TYPES.length)]);
-        }
-
-        private BannerData(Pattern pattern) {
-            this.pattern = pattern == null ? new Pattern(DyeColor.BLUE, TYPES[0]) : pattern;
-            active = true;
-        }
-
-        public ItemStack getPatternTypeItem() {
-            if (!active)
-                return null;
-            ItemStack item = new ItemStack(Material.WHITE_BANNER);
-            BannerMeta bMeta = (BannerMeta) item.getItemMeta();
-            bMeta.addPattern(new Pattern(DyeColor.BLACK, pattern.getPattern()));
-            bMeta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(bMeta, subPath + "buttons.type", "%type%",
-                    Aliases.PATTERN_TYPE.getName(pattern.getPattern()));
-            item.setItemMeta(bMeta);
-            return item;
-        }
-
-        public Pattern getPattern() {
-            return pattern;
-        }
-
-        public ItemStack getColorItem() {
-            if (!active)
-                return null;
-            ItemStack item = Util.getDyeItemFromColor(pattern.getColor());
-            ItemMeta meta = item.getItemMeta();
-            meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.color", "%color%",
-                    Aliases.COLOR.getName(pattern.getColor()));
-            item.setItemMeta(meta);
-            return item;
-        }
-
-        public ItemStack getPositionItem() {
-            ItemStack item = active ? new ItemStack(Material.ITEM_FRAME) : Util.getDyeItemFromColor(DyeColor.GRAY);
-
-            ItemMeta meta = item.getItemMeta();
-
-            meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.position", "%middle_click%",
-                    getLanguageMessage("gui.middleclick." + (getTargetPlayer().getGameMode() == GameMode.CREATIVE ? "creative" : "other")));
-            item.setItemMeta(meta);
-            return item;
-        }
-
-        public void onClick(int line, InventoryClickEvent event) {
-            switch (line) {
-                case 2:
-                    target.openInventory(new PatternSelector(this).getInventory());
-                    return;
-                case 3:
-                    target.openInventory(new ColorSelector(this).getInventory());
-                    return;
-            }
-        }
-
-        public void setColor(DyeColor dyeColor) {
-            pattern = new Pattern(dyeColor, pattern.getPattern());
-        }
-
-        public void setPattern(PatternType type) {
-            pattern = new Pattern(pattern.getColor(), type);
-        }
-
-    }
+    private BannerMeta meta;
 
     public BannerEditor(Player target, ItemStack item) {
         if (item == null || !(item.getItemMeta() instanceof BannerMeta))
@@ -132,6 +51,11 @@ public class BannerEditor implements Gui {
                 layers.add(new BannerData());
         }
         updateInventory();
+    }
+
+    @Override
+    public @NotNull ItemEdit getPlugin() {
+        return ItemEdit.get();
     }
 
     @Override
@@ -244,6 +168,82 @@ public class BannerEditor implements Gui {
     @Override
     public Player getTargetPlayer() {
         return target;
+    }
+
+    private class BannerData {
+        private Pattern pattern;
+        private boolean active = false;
+
+        private BannerData() {
+            pattern = new Pattern(DyeColor.values()[(int) (Math.random() * DyeColor.values().length)],
+                    TYPES[(int) (Math.random() * TYPES.length)]);
+        }
+
+        private BannerData(Pattern pattern) {
+            this.pattern = pattern == null ? new Pattern(DyeColor.BLUE, TYPES[0]) : pattern;
+            active = true;
+        }
+
+        public ItemStack getPatternTypeItem() {
+            if (!active)
+                return null;
+            ItemStack item = new ItemStack(Material.WHITE_BANNER);
+            BannerMeta bMeta = (BannerMeta) item.getItemMeta();
+            bMeta.addPattern(new Pattern(DyeColor.BLACK, pattern.getPattern()));
+            bMeta.addItemFlags(ItemFlag.values());
+            loadLanguageDescription(bMeta, subPath + "buttons.type", "%type%",
+                    Aliases.PATTERN_TYPE.getName(pattern.getPattern()));
+            item.setItemMeta(bMeta);
+            return item;
+        }
+
+        public Pattern getPattern() {
+            return pattern;
+        }
+
+        public ItemStack getColorItem() {
+            if (!active)
+                return null;
+            ItemStack item = Util.getDyeItemFromColor(pattern.getColor());
+            ItemMeta meta = item.getItemMeta();
+            meta.addItemFlags(ItemFlag.values());
+            loadLanguageDescription(meta, subPath + "buttons.color", "%color%",
+                    Aliases.COLOR.getName(pattern.getColor()));
+            item.setItemMeta(meta);
+            return item;
+        }
+
+        public ItemStack getPositionItem() {
+            ItemStack item = active ? new ItemStack(Material.ITEM_FRAME) : Util.getDyeItemFromColor(DyeColor.GRAY);
+
+            ItemMeta meta = item.getItemMeta();
+
+            meta.addItemFlags(ItemFlag.values());
+            loadLanguageDescription(meta, subPath + "buttons.position", "%middle_click%",
+                    getLanguageMessage("gui.middleclick." + (getTargetPlayer().getGameMode() == GameMode.CREATIVE ? "creative" : "other")));
+            item.setItemMeta(meta);
+            return item;
+        }
+
+        public void onClick(int line, InventoryClickEvent event) {
+            switch (line) {
+                case 2:
+                    target.openInventory(new PatternSelector(this).getInventory());
+                    return;
+                case 3:
+                    target.openInventory(new ColorSelector(this).getInventory());
+                    return;
+            }
+        }
+
+        public void setColor(DyeColor dyeColor) {
+            pattern = new Pattern(dyeColor, pattern.getPattern());
+        }
+
+        public void setPattern(PatternType type) {
+            pattern = new Pattern(pattern.getColor(), type);
+        }
+
     }
 
     private class ColorSelector implements Gui {

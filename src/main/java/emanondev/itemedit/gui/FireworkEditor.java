@@ -19,17 +19,181 @@ import java.util.List;
 
 public class FireworkEditor implements Gui {
 
+    private static final String subPath = "gui.firework.";
     private final FireworkMeta meta;
     private final Player target;
-    private static final String subPath = "gui.firework.";
     private final Inventory inventory;
     private final List<FireworkEffectData> effects = new ArrayList<>();
     private final ItemStack firework;
 
+    public FireworkEditor(Player target, ItemStack item) {
+        if (item == null || !(item.getItemMeta() instanceof FireworkMeta))
+            try {
+                item = new ItemStack(Material.FIREWORK_ROCKET);
+            } catch (Exception e) {
+                item = new ItemStack(Material.valueOf("FIREWORK"));
+            }
+        this.firework = item.clone();
+        this.meta = (FireworkMeta) firework.getItemMeta();
+        this.target = target;
+        String title = getLanguageMessage(subPath + "title");
+        this.inventory = Bukkit.createInventory(this, (6) * 9, title);
+        for (int i = 0; i < 9; i++) {
+            if (i < meta.getEffects().size())
+                effects.add(new FireworkEffectData(meta.getEffects().get(i)));
+            else
+                effects.add(new FireworkEffectData());
+        }
+    }
+
+    private static List<DyeColor> translateToDyeColor(List<Color> colors) {
+        if (colors == null)
+            return null;
+        List<DyeColor> list = new ArrayList<>();
+        for (Color color : colors) {
+            DyeColor col = DyeColor.getByFireworkColor(color);
+            if (col != null)
+                list.add(col);
+        }
+        return list;
+    }
+
+    private static List<Color> translateToColor(List<DyeColor> colors) {
+        if (colors == null)
+            return null;
+        List<Color> list = new ArrayList<>();
+        for (DyeColor color : colors) {
+            Color col = color.getFireworkColor();
+            if (col != null)
+                list.add(col);
+        }
+        return list;
+    }
+
+    @Override
+    public @NotNull ItemEdit getPlugin() {
+        return ItemEdit.get();
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onClose(InventoryCloseEvent event) {
+        try {
+            target.getInventory().setItemInMainHand(firework);
+        } catch (Throwable t) {
+            target.getInventory().setItemInHand(firework);
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onClick(InventoryClickEvent event) {
+        if (!event.getWhoClicked().equals(target))
+            return;
+        if (!inventory.equals(event.getClickedInventory()))
+            return;
+        if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR)
+            return;
+        if (event.getClick() == ClickType.DOUBLE_CLICK)
+            return;
+        if (event.getSlot() < 9) {
+            if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE
+                    || (event.getClick() == ClickType.NUMBER_KEY && event.getHotbarButton() == 0)) {
+                effects.get(event.getSlot()).active = !effects.get(event.getSlot()).active;
+            }
+            if (event.isLeftClick()) {
+                if (event.getSlot() == 0)
+                    return;
+                effects.add(event.getSlot() - 1, effects.remove(event.getSlot()));
+            } else if (event.isRightClick()) {
+                if (event.getSlot() == 8)
+                    return;
+                effects.add(event.getSlot() + 1, effects.remove(event.getSlot()));
+            }
+            updateInventory();
+            return;
+        }
+        if (event.getSlot() < 45) {
+            if (!effects.get(event.getSlot() % 9).active)
+                return;
+            effects.get(event.getSlot() % 9).onClick(event.getSlot() / 9, event);
+            updateInventory();
+            return;
+        }
+        if (event.getSlot() == 47) {
+            if (event.isLeftClick())
+                meta.setPower((meta.getPower() + 1) % 6);
+            else
+                meta.setPower((meta.getPower() - 1 + 6) % 6);
+            updateInventory();
+            return;
+        }
+        if (event.getSlot() == 49) {
+            /*if (event.isLeftClick())
+                try {
+                    target.getInventory().setItemInMainHand(firework);
+                } catch (Throwable t) {
+                    target.getInventory().setItemInHand(firework);
+                }
+            else*/
+            target.getInventory().addItem(firework);
+            return;
+        }
+    }
+
+    @Override
+    public void onDrag(InventoryDragEvent event) {
+    }
+
+    @Override
+    public void onOpen(InventoryOpenEvent event) {
+        updateInventory();
+    }
+
+    private void updateInventory() {
+        meta.clearEffects();
+        for (int i = 0; i < 9; i++) {
+            ItemStack item = effects.get(i).getPositionItem();
+            item.setAmount(i + 1);
+            this.getInventory().setItem(i, item);
+            this.getInventory().setItem(i + 9, effects.get(i).getTypeItem());
+            this.getInventory().setItem(i + 18, effects.get(i).getColorsItem());
+            this.getInventory().setItem(i + 27, effects.get(i).getFadeColorsItem());
+            this.getInventory().setItem(i + 36, effects.get(i).getTrailFlickerItem());
+            if (effects.get(i).active && !effects.get(i).colors.isEmpty())
+                meta.addEffect(effects.get(i).getEffect());
+        }
+        firework.setItemMeta(meta);
+        this.getInventory().setItem(49, firework);
+        ItemStack item;
+        try {
+            item = new ItemStack(Material.GUNPOWDER);
+        } catch (Throwable t) {
+            item = new ItemStack(Material.valueOf("SULPHUR"));
+        }
+        item.setAmount(meta.getPower() + 1);
+        ItemMeta powerMeta = item.getItemMeta();
+        powerMeta.addItemFlags(ItemFlag.values());
+        loadLanguageDescription(powerMeta, subPath + "buttons.power", "%power%",
+                String.valueOf(meta.getPower() + 1));
+        item.setItemMeta(powerMeta);
+        this.getInventory().setItem(47, item);
+    }
+
+    @Override
+    public @NotNull Inventory getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public Player getTargetPlayer() {
+        return target;
+    }
+
     private class FireworkEffectData {
-        private FireworkEffect.Type type;
         private final List<DyeColor> colors = new ArrayList<>();
         private final List<DyeColor> fadeColors = new ArrayList<>();
+        private FireworkEffect.Type type;
         private boolean flicker;
         private boolean trail;
         private boolean active = false;
@@ -227,170 +391,6 @@ public class FireworkEditor implements Gui {
             }
         }
 
-    }
-
-    @Override
-    public @NotNull ItemEdit getPlugin() {
-        return ItemEdit.get();
-    }
-
-    private static List<DyeColor> translateToDyeColor(List<Color> colors) {
-        if (colors == null)
-            return null;
-        List<DyeColor> list = new ArrayList<>();
-        for (Color color : colors) {
-            DyeColor col = DyeColor.getByFireworkColor(color);
-            if (col != null)
-                list.add(col);
-        }
-        return list;
-    }
-
-    private static List<Color> translateToColor(List<DyeColor> colors) {
-        if (colors == null)
-            return null;
-        List<Color> list = new ArrayList<>();
-        for (DyeColor color : colors) {
-            Color col = color.getFireworkColor();
-            if (col != null)
-                list.add(col);
-        }
-        return list;
-    }
-
-    public FireworkEditor(Player target, ItemStack item) {
-        if (item == null || !(item.getItemMeta() instanceof FireworkMeta))
-            try {
-                item = new ItemStack(Material.FIREWORK_ROCKET);
-            } catch (Exception e) {
-                item = new ItemStack(Material.valueOf("FIREWORK"));
-            }
-        this.firework = item.clone();
-        this.meta = (FireworkMeta) firework.getItemMeta();
-        this.target = target;
-        String title = getLanguageMessage(subPath + "title");
-        this.inventory = Bukkit.createInventory(this, (6) * 9, title);
-        for (int i = 0; i < 9; i++) {
-            if (i < meta.getEffects().size())
-                effects.add(new FireworkEffectData(meta.getEffects().get(i)));
-            else
-                effects.add(new FireworkEffectData());
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onClose(InventoryCloseEvent event) {
-        try {
-            target.getInventory().setItemInMainHand(firework);
-        } catch (Throwable t) {
-            target.getInventory().setItemInHand(firework);
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onClick(InventoryClickEvent event) {
-        if (!event.getWhoClicked().equals(target))
-            return;
-        if (!inventory.equals(event.getClickedInventory()))
-            return;
-        if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR)
-            return;
-        if (event.getClick() == ClickType.DOUBLE_CLICK)
-            return;
-        if (event.getSlot() < 9) {
-            if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE
-                    || (event.getClick() == ClickType.NUMBER_KEY && event.getHotbarButton() == 0)) {
-                effects.get(event.getSlot()).active = !effects.get(event.getSlot()).active;
-            }
-            if (event.isLeftClick()) {
-                if (event.getSlot() == 0)
-                    return;
-                effects.add(event.getSlot() - 1, effects.remove(event.getSlot()));
-            } else if (event.isRightClick()) {
-                if (event.getSlot() == 8)
-                    return;
-                effects.add(event.getSlot() + 1, effects.remove(event.getSlot()));
-            }
-            updateInventory();
-            return;
-        }
-        if (event.getSlot() < 45) {
-            if (!effects.get(event.getSlot() % 9).active)
-                return;
-            effects.get(event.getSlot() % 9).onClick(event.getSlot() / 9, event);
-            updateInventory();
-            return;
-        }
-        if (event.getSlot() == 47) {
-            if (event.isLeftClick())
-                meta.setPower((meta.getPower() + 1) % 6);
-            else
-                meta.setPower((meta.getPower() - 1 + 6) % 6);
-            updateInventory();
-            return;
-        }
-        if (event.getSlot() == 49) {
-            /*if (event.isLeftClick())
-                try {
-                    target.getInventory().setItemInMainHand(firework);
-                } catch (Throwable t) {
-                    target.getInventory().setItemInHand(firework);
-                }
-            else*/
-            target.getInventory().addItem(firework);
-            return;
-        }
-    }
-
-    @Override
-    public void onDrag(InventoryDragEvent event) {
-    }
-
-    @Override
-    public void onOpen(InventoryOpenEvent event) {
-        updateInventory();
-    }
-
-    private void updateInventory() {
-        meta.clearEffects();
-        for (int i = 0; i < 9; i++) {
-            ItemStack item = effects.get(i).getPositionItem();
-            item.setAmount(i + 1);
-            this.getInventory().setItem(i, item);
-            this.getInventory().setItem(i + 9, effects.get(i).getTypeItem());
-            this.getInventory().setItem(i + 18, effects.get(i).getColorsItem());
-            this.getInventory().setItem(i + 27, effects.get(i).getFadeColorsItem());
-            this.getInventory().setItem(i + 36, effects.get(i).getTrailFlickerItem());
-            if (effects.get(i).active && !effects.get(i).colors.isEmpty())
-                meta.addEffect(effects.get(i).getEffect());
-        }
-        firework.setItemMeta(meta);
-        this.getInventory().setItem(49, firework);
-        ItemStack item;
-        try {
-            item = new ItemStack(Material.GUNPOWDER);
-        } catch (Throwable t) {
-            item = new ItemStack(Material.valueOf("SULPHUR"));
-        }
-        item.setAmount(meta.getPower() + 1);
-        ItemMeta powerMeta = item.getItemMeta();
-        powerMeta.addItemFlags(ItemFlag.values());
-        loadLanguageDescription(powerMeta, subPath + "buttons.power", "%power%",
-                String.valueOf(meta.getPower() + 1));
-        item.setItemMeta(powerMeta);
-        this.getInventory().setItem(47, item);
-    }
-
-    @Override
-    public @NotNull Inventory getInventory() {
-        return inventory;
-    }
-
-    @Override
-    public Player getTargetPlayer() {
-        return target;
     }
 
 }

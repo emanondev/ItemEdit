@@ -372,11 +372,11 @@ public class Util {
         return item == null || item.getType() == Material.AIR;
     }
 
-    private static final int GAME_MAIN_VERSION = Integer.parseInt(
+    public static final int GAME_MAIN_VERSION = Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[0]);
-    private static final int GAME_VERSION = Integer.parseInt(
+    public static final int GAME_VERSION = Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[1]);
-    private static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length < 3 ? 0 : Integer.parseInt(
+    public static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length < 3 ? 0 : Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[2]);
 
     /**
@@ -464,6 +464,7 @@ public class Util {
 
 
     private static final boolean hasPaper = initPaper();
+    private static final boolean hasFolia = initFolia();
 
     private static boolean initPaper() {
         try {
@@ -488,8 +489,20 @@ public class Util {
         }
     }
 
+    private static boolean initFolia() {
+        try {
+            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
     public static boolean hasPurpurAPI() {
         return hasPurpur;
+    }
+    public static boolean hasFoliaAPI() {
+        return hasFolia;
     }
 
     public static boolean hasMiniMessageAPI() {
