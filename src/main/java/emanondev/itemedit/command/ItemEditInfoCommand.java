@@ -64,9 +64,9 @@ public class ItemEditInfoCommand implements TabExecutor {
             ComponentBuilder msg = new ComponentBuilder(
                     ChatColor.BLUE + "Server: " + ChatColor.AQUA + Bukkit.getVersion() + "\n" +
                             ChatColor.BLUE + "Java: " + ChatColor.AQUA + System.getProperty("java.version") + "\n" +
-                            ChatColor.BLUE + "View: "+ ChatColor.AQUA + (Util.hasFoliaAPI() ? "Folia" :
-                              (Util.hasPurpurAPI() ? "Purpur" : (Util.hasPaperAPI() ? "Paper" : "Spigot")))
-                    +" "+Util.GAME_MAIN_VERSION+"."+Util.GAME_VERSION+"."+Util.GAME_SUB_VERSION+"\n"+
+                            ChatColor.BLUE + "View: " + ChatColor.AQUA + (Util.hasFoliaAPI() ? "Folia" :
+                            (Util.hasPurpurAPI() ? "Purpur" : (Util.hasPaperAPI() ? "Paper" : "Spigot")))
+                            + " " + Util.GAME_MAIN_VERSION + "." + Util.GAME_VERSION + "." + Util.GAME_SUB_VERSION + "\n" +
                             ChatColor.BLUE + "ItemEdit: " + ChatColor.AQUA + plugin.getDescription().getVersion() + " Storage: " + plugin.getStorageType().name() + "\n" +
                             ChatColor.BLUE + "ItemTag: " + ChatColor.AQUA + (Hooks.isEnabled("ItemTag") ?
                             Bukkit.getPluginManager().getPlugin("ItemTag").getDescription().getVersion() : "Nope") + "\n" +
@@ -96,7 +96,7 @@ public class ItemEditInfoCommand implements TabExecutor {
                         .event(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD,
                                 copyText.substring(0, copyText.length() - 2))).create());
             } else {
-                msg.append("\n"+ChatColor.BLUE+"Plugins: "+ChatColor.AQUA);
+                msg.append("\n" + ChatColor.BLUE + "Plugins: " + ChatColor.AQUA);
                 for (Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
                     copyText.append(plugin.getName()).append(" (").append(plugin.getDescription().getVersion()).append(plugin.isEnabled() ? "), " : " loaded only), ");
                 }

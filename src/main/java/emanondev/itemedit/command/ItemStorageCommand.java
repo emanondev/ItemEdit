@@ -6,10 +6,6 @@ import emanondev.itemedit.command.itemstorage.*;
 public class ItemStorageCommand extends AbstractCommand {
     public static ItemStorageCommand instance;
 
-    public static ItemStorageCommand get() {
-        return instance;
-    }
-
     public ItemStorageCommand() {
         super("itemstorage", ItemEdit.get());
         instance = this;
@@ -18,6 +14,10 @@ public class ItemStorageCommand extends AbstractCommand {
         this.registerSubCommand(new Delete(this));
         this.registerSubCommand(new Show(this));
         this.registerSubCommand(new Get(this));
+    }
+
+    public static ItemStorageCommand get() {
+        return instance;
     }
 
 }

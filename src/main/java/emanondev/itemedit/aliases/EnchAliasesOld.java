@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class EnchAliasesOld extends EnchAliases {
+    private final HashMap<String, String> enchNick = new HashMap<>();
+
     public EnchAliasesOld() {
         super();
         enchNick.put("PROTECTION_FIRE", "fire_protection");
@@ -39,8 +41,6 @@ public class EnchAliasesOld extends EnchAliases {
         enchNick.put("ARROW_DAMAGE", "power");
         enchNick.put("ARROW_INFINITE", "infinity");
     }
-
-    private final HashMap<String, String> enchNick = new HashMap<>();
 
     @SuppressWarnings("deprecation")
     @Override

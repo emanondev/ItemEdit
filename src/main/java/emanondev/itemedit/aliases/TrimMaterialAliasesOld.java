@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.HashSet;
 
 public class TrimMaterialAliasesOld extends AliasSet<TrimMaterial> implements TrimMaterialAliases {
+    private final HashSet<TrimMaterial> values = new HashSet<>();
+
     public TrimMaterialAliasesOld() {
         super("trim_material");
         registerValue(TrimMaterial.AMETHYST);
@@ -29,8 +31,6 @@ public class TrimMaterialAliasesOld extends AliasSet<TrimMaterial> implements Tr
     public void registerValue(TrimMaterial pattern) {
         values.add(pattern);
     }
-
-    private final HashSet<TrimMaterial> values = new HashSet<>();
 
     @Override
     public Collection<TrimMaterial> getValues() {

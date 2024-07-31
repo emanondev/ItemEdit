@@ -16,14 +16,22 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class Util {
+    public static final int GAME_MAIN_VERSION = Integer.parseInt(
+            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[0]);
+    public static final int GAME_VERSION = Integer.parseInt(
+            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[1]);
+    public static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length < 3 ? 0 : Integer.parseInt(
+            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[2]);
     private static final int MAX_COMPLETES = 200;
+    private static final boolean hasPaper = initPaper();
+    private static final boolean hasFolia = initFolia();
+    private static final boolean hasPurpur = initPurpur();
 
     public static <T extends Enum<T>> @NotNull List<String> complete(String prefix, @NotNull Class<T> enumClass) {
         prefix = prefix.toUpperCase();
@@ -38,7 +46,6 @@ public class Util {
             }
         return results;
     }
-
 
     public static @NotNull <T extends Enum<T>> List<String> complete(String prefix, @NotNull Class<T> type,
                                                                      @NotNull Predicate<T> predicate) {
@@ -188,7 +195,6 @@ public class Util {
 
     }
 
-
     public static String formatText(CommandSender sender, String text, String basePermission) {
         if (Util.hasMiniMessageAPI() && sender.hasPermission(basePermission + ".minimessage")) {
             text = Hooks.getMiniMessageUtil().fromMiniToText(text);
@@ -248,7 +254,6 @@ public class Util {
             return new ItemStack(Material.valueOf("INK_SACK"), 1, (short) 0, getDataByColor(color));
         }
     }
-
 
     /**
      * for pre 1.13 compatibility
@@ -372,13 +377,6 @@ public class Util {
         return item == null || item.getType() == Material.AIR;
     }
 
-    public static final int GAME_MAIN_VERSION = Integer.parseInt(
-            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[0]);
-    public static final int GAME_VERSION = Integer.parseInt(
-            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[1]);
-    public static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length < 3 ? 0 : Integer.parseInt(
-            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[2]);
-
     /**
      * Inclusive
      * isVersionUpTo(1,9) on 1.9.0 is true
@@ -462,10 +460,6 @@ public class Util {
         return true;
     }
 
-
-    private static final boolean hasPaper = initPaper();
-    private static final boolean hasFolia = initFolia();
-
     private static boolean initPaper() {
         try {
             Class.forName("com.destroystokyo.paper.VersionHistoryManager$VersionData");
@@ -474,11 +468,10 @@ public class Util {
             return false;
         }
     }
+
     public static boolean hasPaperAPI() {
         return hasPaper;
     }
-
-    private static final boolean hasPurpur = initPurpur();
 
     private static boolean initPurpur() {
         try {
@@ -501,6 +494,7 @@ public class Util {
     public static boolean hasPurpurAPI() {
         return hasPurpur;
     }
+
     public static boolean hasFoliaAPI() {
         return hasFolia;
     }

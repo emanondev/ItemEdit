@@ -18,15 +18,15 @@ import java.util.Locale;
 
 public abstract class SubCmd {
 
-    private final String permission;
     public final String ID;
+    private final String permission;
     private final String PATH;
     private final YMLConfig config;
-    private String name;
     private final String commandName;
     private final boolean playerOnly;
     private final boolean checkNonNullItem;
     private final AbstractCommand cmd;
+    private String name;
 
     public SubCmd(@NotNull String id, @NotNull AbstractCommand cmd, boolean playerOnly, boolean checkNonNullItem) {
         if (id.isEmpty() || id.contains(" "))

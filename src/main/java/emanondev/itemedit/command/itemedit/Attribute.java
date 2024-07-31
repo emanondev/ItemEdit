@@ -103,7 +103,7 @@ public class Attribute extends SubCmd {
             }
 
             ItemMeta itemMeta = item.getItemMeta();
-            itemMeta.addAttributeModifier(attr,UtilLegacy.createAttributeModifier(attr, amount, op, equip));
+            itemMeta.addAttributeModifier(attr, UtilLegacy.createAttributeModifier(attr, amount, op, equip));
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {

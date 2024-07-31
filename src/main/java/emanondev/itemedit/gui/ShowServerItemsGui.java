@@ -24,43 +24,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ShowServerItemsGui implements PagedGui {
+    private static final YMLConfig GUI_CONFIG = ItemEdit.get().getConfig();
     private final Inventory inventory;
     private final Player target;
     private final int page;
-    private static final YMLConfig GUI_CONFIG = ItemEdit.get().getConfig();
     private int rows;
     private ArrayList<String> ids;
     private boolean showItems = true;
-
-    public void updateInventory() {
-        ServerStorage storage = ItemEdit.get().getServerStorage();
-        ArrayList<String> list = new ArrayList<>(storage.getIds());
-        ids = list;
-        Collections.sort(list);
-        for (int i = 0; i < rows * 9; i++) {
-            int slot = rows * 9 * (page - 1) + i;
-            if (slot >= list.size()) {
-                this.inventory.setItem(i, null);
-                continue;
-            }
-            ItemStack item = storage.getItem(list.get(slot));
-            if (item == null) {
-                new NullPointerException("invalid id " + list.get(slot)).printStackTrace();
-                continue;
-            }
-            if (showItems) {
-                this.inventory.setItem(i, item);
-            } else {
-                ItemStack display = item.clone();
-                ItemMeta meta = display.getItemMeta();
-                meta.addItemFlags(ItemFlag.values());
-                meta.setLore(Collections.singletonList(UtilsString.fix("&9Nick: &e" + storage.getNick(list.get(slot)), null, true)));
-                meta.setDisplayName(UtilsString.fix("&9ID: &e" + list.get(slot), null, true));
-                display.setItemMeta(meta);
-                this.inventory.setItem(i, display);
-            }
-        }
-    }
 
     public ShowServerItemsGui(Player player, int page) {
         if (player == null)
@@ -90,6 +60,36 @@ public class ShowServerItemsGui implements PagedGui {
             this.inventory.setItem(rows * 9 + 1, getPreviousPageItem());
         if (page < maxPages)
             this.inventory.setItem(rows * 9 + 7, getNextPageItem());
+    }
+
+    public void updateInventory() {
+        ServerStorage storage = ItemEdit.get().getServerStorage();
+        ArrayList<String> list = new ArrayList<>(storage.getIds());
+        ids = list;
+        Collections.sort(list);
+        for (int i = 0; i < rows * 9; i++) {
+            int slot = rows * 9 * (page - 1) + i;
+            if (slot >= list.size()) {
+                this.inventory.setItem(i, null);
+                continue;
+            }
+            ItemStack item = storage.getItem(list.get(slot));
+            if (item == null) {
+                new NullPointerException("invalid id " + list.get(slot)).printStackTrace();
+                continue;
+            }
+            if (showItems) {
+                this.inventory.setItem(i, item);
+            } else {
+                ItemStack display = item.clone();
+                ItemMeta meta = display.getItemMeta();
+                meta.addItemFlags(ItemFlag.values());
+                meta.setLore(Collections.singletonList(UtilsString.fix("&9Nick: &e" + storage.getNick(list.get(slot)), null, true)));
+                meta.setDisplayName(UtilsString.fix("&9ID: &e" + list.get(slot), null, true));
+                display.setItemMeta(meta);
+                this.inventory.setItem(i, display);
+            }
+        }
     }
 
     private ItemStack getPageInfoItem() {

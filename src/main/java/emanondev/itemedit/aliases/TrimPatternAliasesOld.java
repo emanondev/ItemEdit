@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.HashSet;
 
 public class TrimPatternAliasesOld extends AliasSet<TrimPattern> implements TrimPatternAliases {
+    private final HashSet<TrimPattern> values = new HashSet<>();
+
     public TrimPatternAliasesOld() {
         super("trim_pattern");
         registerValue(TrimPattern.COAST);
@@ -35,8 +37,6 @@ public class TrimPatternAliasesOld extends AliasSet<TrimPattern> implements Trim
     public void registerValue(TrimPattern pattern) {
         values.add(pattern);
     }
-
-    private final HashSet<TrimPattern> values = new HashSet<>();
 
     @Override
     public Collection<TrimPattern> getValues() {

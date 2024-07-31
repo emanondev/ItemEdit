@@ -7,7 +7,9 @@ import java.util.*;
 
 public abstract class AliasSet<T> implements IAliasSet<T> {
 
+    private static final YMLConfig config = ItemEdit.get().getConfig("aliases.yml");
     private final String path;
+    private final HashMap<String, T> map = new HashMap<>();
 
     public AliasSet(String path) {
         this.path = path.toLowerCase(Locale.ENGLISH);
@@ -16,10 +18,6 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
     public String getID() {
         return path;
     }
-
-    private static final YMLConfig config = ItemEdit.get().getConfig("aliases.yml");
-
-    private final HashMap<String, T> map = new HashMap<>();
 
     public void reload() {
         map.clear();

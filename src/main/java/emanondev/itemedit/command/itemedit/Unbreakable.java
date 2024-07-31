@@ -30,7 +30,7 @@ public class Unbreakable extends SubCmd {
         try {
             ItemMeta meta = item.getItemMeta();
             boolean value = args.length == 2 ? Aliases.BOOLEAN.convertAlias(args[1]) : !UtilLegacy.isUnbreakable(meta);
-            meta = UtilLegacy.setUnbreakable(meta,value);
+            meta = UtilLegacy.setUnbreakable(meta, value);
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {

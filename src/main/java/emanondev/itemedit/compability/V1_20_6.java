@@ -1,6 +1,5 @@
 package emanondev.itemedit.compability;
 
-import emanondev.itemedit.Util;
 import org.bukkit.Registry;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.banner.PatternType;

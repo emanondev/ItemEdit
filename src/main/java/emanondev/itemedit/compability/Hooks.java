@@ -4,6 +4,8 @@ import emanondev.itemedit.Util;
 import org.bukkit.Bukkit;
 
 public class Hooks {
+    private static final MiniMessageUtil miniMessage = initMiniMessage();
+
     public static boolean isVault() {
         return isEnabled("Vault");
     }
@@ -39,8 +41,6 @@ public class Hooks {
     public static boolean isDungeonMMOEnabled() {
         return isEnabled("DungeonMMO");
     }
-
-    private static final MiniMessageUtil miniMessage = initMiniMessage();
 
     private static MiniMessageUtil initMiniMessage() {
         try {

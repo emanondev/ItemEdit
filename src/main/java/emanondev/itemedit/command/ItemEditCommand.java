@@ -7,10 +7,6 @@ import emanondev.itemedit.command.itemedit.*;
 public class ItemEditCommand extends AbstractCommand {
     public static ItemEditCommand instance;
 
-    public static ItemEditCommand get() {
-        return instance;
-    }
-
     public ItemEditCommand() {
         super("itemedit", ItemEdit.get());
         instance = this;
@@ -89,6 +85,10 @@ public class ItemEditCommand extends AbstractCommand {
             this.registerSubCommand(new ListAliases(this));
         }
 
+    }
+
+    public static ItemEditCommand get() {
+        return instance;
     }
 
 }

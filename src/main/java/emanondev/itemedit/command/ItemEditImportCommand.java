@@ -30,13 +30,24 @@ public class ItemEditImportCommand implements TabExecutor {
         this.permission = "itemedit.itemeditimport";
     }
 
+    private static ItemStack fromBase64(String data) throws IOException {
+        try {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
+            BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+            ItemStack item = (ItemStack) dataInput.readObject();
+            dataInput.close();
+            return item;
+        } catch (ClassNotFoundException e) {
+            throw new IOException("Unable to decode class type.", e);
+        }
+    }
+
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length == 1)
             return Util.complete(args[0], Collections.singletonList("itemeditor"));
         return Collections.emptyList();
     }
-
 
     public void sendPermissionLackMessage(@NotNull String permission, CommandSender sender) {
         Util.sendMessage(sender, plugin.getLanguageConfig(sender).loadMessage("lack-permission", "&cYou lack of permission %permission%",
@@ -119,18 +130,6 @@ public class ItemEditImportCommand implements TabExecutor {
         Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage("itemeditimport.help",
                 new ArrayList<>())));
         return true;
-    }
-
-    private static ItemStack fromBase64(String data) throws IOException {
-        try {
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
-            BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
-            ItemStack item = (ItemStack) dataInput.readObject();
-            dataInput.close();
-            return item;
-        } catch (ClassNotFoundException e) {
-            throw new IOException("Unable to decode class type.", e);
-        }
     }
 
 }

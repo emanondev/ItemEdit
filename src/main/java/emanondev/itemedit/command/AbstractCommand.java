@@ -22,10 +22,7 @@ public abstract class AbstractCommand implements TabExecutor {
     private final String name;
     private final APlugin plugin;
     private final YMLConfig config;
-
-    public final @NotNull String getName() {
-        return name;
-    }
+    private final List<SubCmd> cmds = new ArrayList<>();
 
     public AbstractCommand(@NotNull String name, @NotNull APlugin plugin) {
         this.name = name.toLowerCase(Locale.ENGLISH);
@@ -34,11 +31,13 @@ public abstract class AbstractCommand implements TabExecutor {
         config = plugin.getConfig("commands.yml");
     }
 
+    public final @NotNull String getName() {
+        return name;
+    }
+
     public final @NotNull APlugin getPlugin() {
         return plugin;
     }
-
-    private final List<SubCmd> cmds = new ArrayList<>();
 
     public void reload() {
         config.reload();

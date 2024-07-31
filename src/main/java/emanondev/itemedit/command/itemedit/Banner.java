@@ -20,11 +20,11 @@ import java.util.Locale;
 
 public class Banner extends SubCmd {
 
+    private static final String[] subCommands = new String[]{"add", "set", "remove", "color"};
+
     public Banner(ItemEditCommand cmd) {
         super("banner", cmd, true, true);
     }
-
-    private static final String[] subCommands = new String[]{"add", "set", "remove", "color"};
 
     @Override
     public void onCommand(CommandSender sender, String alias, String[] args) {

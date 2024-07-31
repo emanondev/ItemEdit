@@ -26,6 +26,7 @@ public abstract class APlugin extends JavaPlugin {
     private final HashMap<String, YMLConfig> languageConfigs = new HashMap<>();
     private boolean useMultiLanguage;
     private String defaultLanguage;
+    private CooldownAPI cooldownApi = null;
 
     /**
      * Gets plugin Config file.
@@ -119,7 +120,6 @@ public abstract class APlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(listener, this);
     }
 
-
     public @NotNull YMLConfig getLanguageConfig(@Nullable CommandSender sender) {
         String locale;
         if (!(sender instanceof Player))
@@ -146,8 +146,6 @@ public abstract class APlugin extends JavaPlugin {
         languageConfigs.put(locale, conf);
         return conf;
     }
-
-    private CooldownAPI cooldownApi = null;
 
     public @NotNull CooldownAPI getCooldownAPI() {
         if (cooldownApi == null)
@@ -254,6 +252,22 @@ public abstract class APlugin extends JavaPlugin {
         log(ChatColor.GREEN, "#", "Reloaded (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
     }
 
+    @Override
+    public void onDisable() {
+        disable();
+    }
+
+    public abstract void disable();
+
+    public @Nullable Metrics registerMetrics(int pluginId) {
+        try {
+            return new Metrics(this, pluginId);
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * Utility class to explain users what when wrong on plugin load/enable and why commands are not working
      */
@@ -277,22 +291,6 @@ public abstract class APlugin extends JavaPlugin {
             sender.sendMessage(msg);
             return true;
         }
-    }
-
-    @Override
-    public void onDisable() {
-        disable();
-    }
-
-    public abstract void disable();
-
-    public @Nullable Metrics registerMetrics(int pluginId) {
-        try {
-            return new Metrics(this, pluginId);
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-        return null;
     }
 
 }

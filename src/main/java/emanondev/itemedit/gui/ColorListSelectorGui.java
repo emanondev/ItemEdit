@@ -20,9 +20,9 @@ import java.util.List;
 
 public class ColorListSelectorGui implements Gui {
 
+    private static final String subPath = "gui.colorselector.";
     private final List<DyeColor> colors;
     private final Gui parent;
-    private static final String subPath = "gui.colorselector.";
     private final Inventory inventory;
 
     /**

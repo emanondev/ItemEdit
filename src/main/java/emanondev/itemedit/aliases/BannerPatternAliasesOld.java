@@ -8,22 +8,22 @@ import java.util.Collections;
 import java.util.HashSet;
 
 public class BannerPatternAliasesOld extends AliasSet<PatternType> implements BannerPatternAliases {
+    private final HashSet<PatternType> values = new HashSet<>();
+
     public BannerPatternAliasesOld() {
         super("banner_pattern");
-        for (PatternType type: UtilLegacy.getPatternTypesFilthered())
+        for (PatternType type : UtilLegacy.getPatternTypesFilthered())
             registerValue(type);
     }
 
     @Override
     public String getName(PatternType value) {
-        return ""+value;//do not change this
+        return "" + value;//do not change this
     }
 
     public void registerValue(PatternType pattern) {
         values.add(pattern);
     }
-
-    private final HashSet<PatternType> values = new HashSet<>();
 
     @Override
     public Collection<PatternType> getValues() {

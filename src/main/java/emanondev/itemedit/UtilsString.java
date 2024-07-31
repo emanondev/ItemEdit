@@ -173,7 +173,7 @@ public class UtilsString {
     public static @NotNull String formatNumber(double saturation, int decimals, boolean optional) {
         DecimalFormat df = new DecimalFormat("0");
         df.setMaximumFractionDigits(decimals);
-        df.setMinimumFractionDigits(optional?0:decimals);
+        df.setMinimumFractionDigits(optional ? 0 : decimals);
         return df.format(saturation);
     }
 }

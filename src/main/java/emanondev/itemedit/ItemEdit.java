@@ -21,8 +21,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 
 public class ItemEdit extends APlugin {
-    private static ItemEdit plugin = null;
-
     /**
      * @see Util#isVersionUpTo(int, int, int)
      * @see Util#isVersionAfter(int, int, int)
@@ -47,6 +45,12 @@ public class ItemEdit extends APlugin {
     @Deprecated
     public static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length < 3 ? 0 : Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[2]);
+    private final static int PROJECT_ID = 40993;
+    private static final int BSTATS_PLUGIN_ID = 15076;
+    private static ItemEdit plugin = null;
+    private @Nullable MongoStorage mongoStorage;
+    private PlayerStorage pStorage;
+    private ServerStorage sStorage;
 
     public static ItemEdit get() {
         return plugin;
@@ -56,9 +60,6 @@ public class ItemEdit extends APlugin {
     public void onLoad() {
         plugin = this;
     }
-
-    private final static int PROJECT_ID = 40993;
-    private static final int BSTATS_PLUGIN_ID = 15076;
 
     @NotNull
     public StorageType getStorageType() { //TODO if invalid return YAML, maybe i should add a feedback
@@ -171,15 +172,9 @@ public class ItemEdit extends APlugin {
         getServerStorage().reload();
     }
 
-    private @Nullable MongoStorage mongoStorage;
-
-    private PlayerStorage pStorage;
-
     public PlayerStorage getPlayerStorage() {
         return pStorage;
     }
-
-    private ServerStorage sStorage;
 
     public ServerStorage getServerStorage() {
         return sStorage;

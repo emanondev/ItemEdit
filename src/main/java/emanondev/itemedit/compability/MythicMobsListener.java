@@ -133,11 +133,6 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, IT
     private final int diff;
     private final double chance;
 
-    public ThreadSafetyLevel getThreadSafetyLevel() {
-        return ThreadSafetyLevel.SYNC_ONLY;
-    }
-
-
     public DropServerItemMechanic(MythicLineConfig mlc) {
         id = mlc.getString(new String[]{"id", "name", "type", "serveritem",}, null);
         if (id == null) {
@@ -163,6 +158,10 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, IT
             ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid max amount, should be from [amount to +inf[");
             throw new IllegalArgumentException();
         }
+    }
+
+    public ThreadSafetyLevel getThreadSafetyLevel() {
+        return ThreadSafetyLevel.SYNC_ONLY;
     }
 
     @Override

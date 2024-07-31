@@ -17,13 +17,12 @@ import java.util.*;
 
 public class Lore extends SubCmd {
 
+    private static final String[] loreSub = new String[]{"add", "set", "remove", "reset", "insert", "copy",
+            "copybook", "copyfile", "paste", "replace"};
     private final Map<UUID, List<String>> copies = new HashMap<>();
     private final YMLConfig loreCopy = ItemEdit.get().getConfig("loreCopy");
     private int lineLimit;
     private int lengthLimit;
-
-    private static final String[] loreSub = new String[]{"add", "set", "remove", "reset", "insert", "copy",
-            "copybook", "copyfile", "paste", "replace"};
 
     public Lore(ItemEditCommand cmd) {
         super("lore", cmd, true, true);

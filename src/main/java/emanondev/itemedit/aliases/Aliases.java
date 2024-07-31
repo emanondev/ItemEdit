@@ -16,18 +16,10 @@ public class Aliases {
 
     public static final EnchAliases ENCHANT = getEnchAliases();
     public static final AliasSet<PatternType> PATTERN_TYPE = getPatternAlias();
-
-    private static AliasSet<PatternType> getPatternAlias() {
-        try {
-            if (Util.isVersionAfter(1, 20,6))
-                return new BannerPatternAliasesNew();
-        } catch (Throwable ignored){
-        }
-        return new BannerPatternAliasesOld();
-    }
-
     public static final GenAliases BOOK_TYPE = getGenAliases();
     public static final AliasSet<PotionEffectType> POTION_EFFECT = new AliasSet<PotionEffectType>("potion_effect") {
+
+        private final Collection<PotionEffectType> values = grabValues();
 
         @Override
         public String getName(PotionEffectType type) {
@@ -36,8 +28,6 @@ public class Aliases {
                 name = name.substring(10);
             return name;
         }
-
-        private final Collection<PotionEffectType> values = grabValues();
 
         private Collection<PotionEffectType> grabValues() {
             HashSet<PotionEffectType> set = new HashSet<>();
@@ -83,6 +73,22 @@ public class Aliases {
     public static final RarityAliases RARITY = getRarityAliases();
     public static final TropicalFishPatternAliases TROPICALPATTERN = getTropicalPatternAliases();
     public static final TrimMaterialAliases TRIM_MATERIAL = getTrimMaterialAliases();
+    public static final TrimPatternAliases TRIM_PATTERN = getTrimPatternAliases();
+    public static final EnumAliasSet<FireworkEffect.Type> FIREWORK_TYPE = new EnumAliasSet<>("firework_type", FireworkEffect.Type.class);
+    public static final AxolotlVariantAliases AXOLOTL_VARIANT = getAxolotlVariantAliases();
+    public static final GoatHornSoundAliases GOAT_HORN_SOUND = getGoatHornSoundAliases();
+    public static final EquipmentSlotGroupAliases EQUIPMENT_SLOTGROUPS = Util.isVersionAfter(1, 21) ? new EquipmentSlotGroupAliases() : null;
+    private final static Map<String, IAliasSet<?>> types = new HashMap<>();
+    private static boolean loaded = false;
+
+    private static AliasSet<PatternType> getPatternAlias() {
+        try {
+            if (Util.isVersionAfter(1, 20, 6))
+                return new BannerPatternAliasesNew();
+        } catch (Throwable ignored) {
+        }
+        return new BannerPatternAliasesOld();
+    }
 
     private static TrimMaterialAliases getTrimMaterialAliases() {
         if (Util.isVersionUpTo(1, 19, 4))
@@ -98,8 +104,6 @@ public class Aliases {
         }
     }
 
-    public static final TrimPatternAliases TRIM_PATTERN = getTrimPatternAliases();
-
     private static TrimPatternAliases getTrimPatternAliases() {
         if (Util.isVersionUpTo(1, 19, 4))
             return null;
@@ -113,16 +117,6 @@ public class Aliases {
             return null;
         }
     }
-
-    private final static Map<String, IAliasSet<?>> types = new HashMap<>();
-    public static final EnumAliasSet<FireworkEffect.Type> FIREWORK_TYPE = new EnumAliasSet<>("firework_type", FireworkEffect.Type.class);
-    public static final AxolotlVariantAliases AXOLOTL_VARIANT = getAxolotlVariantAliases();
-    public static final GoatHornSoundAliases GOAT_HORN_SOUND = getGoatHornSoundAliases();
-    public static final EquipmentSlotGroupAliases EQUIPMENT_SLOTGROUPS = Util.isVersionAfter(1,21)? new EquipmentSlotGroupAliases():null;
-
-
-    private static boolean loaded = false;
-
 
     private static void loadTypesMap() {
         registerAliasType(ENCHANT);

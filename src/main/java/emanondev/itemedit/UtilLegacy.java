@@ -246,13 +246,12 @@ public class UtilLegacy {
         PatternType[] val = getPatternTypes();
         ArrayList<PatternType> list = new ArrayList<>(Arrays.asList(val));
         list.remove(PatternType.BASE);
-        if (Util.isVersionAfter(1,20,6)&&!Util.isVersionAfter(1,21)) { //those are not craftable items on 1.20.6
+        if (Util.isVersionAfter(1, 20, 6) && !Util.isVersionAfter(1, 21)) { //those are not craftable items on 1.20.6
             list.remove(PatternType.FLOW);
             list.remove(PatternType.GUSTER);
         }
         return list.toArray(new PatternType[0]);
     }
-
 
 
 }

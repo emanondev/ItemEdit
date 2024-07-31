@@ -6,10 +6,6 @@ import emanondev.itemedit.command.serveritem.*;
 public class ServerItemCommand extends AbstractCommand {
     public static ServerItemCommand instance;
 
-    public static ServerItemCommand get() {
-        return instance;
-    }
-
     public ServerItemCommand() {
         super("serveritem", ItemEdit.get());
         instance = this;
@@ -31,6 +27,10 @@ public class ServerItemCommand extends AbstractCommand {
         } catch (NoClassDefFoundError | IllegalStateException e) {
             ItemEdit.get().log("Unable to hook into Vault");
         }
+    }
+
+    public static ServerItemCommand get() {
+        return instance;
     }
 
 }

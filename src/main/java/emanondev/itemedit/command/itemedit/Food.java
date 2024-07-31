@@ -19,7 +19,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -247,7 +246,7 @@ public class Food extends SubCmd {
             }
             float chance = 1;
             if (args.length == 9) {
-                chance = Float.parseFloat(args[8])/100;
+                chance = Float.parseFloat(args[8]) / 100;
                 if (chance <= 0 || chance > 1)
                     throw new IllegalArgumentException();
             }
@@ -433,7 +432,7 @@ public class Food extends SubCmd {
         switch (args.length) {
             case 2:
                 List<String> list = Util.complete(args[1], foodSub);
-                if (!Util.isVersionAfter(1,21))
+                if (!Util.isVersionAfter(1, 21))
                     list.remove("convertto");
                 return list;
             case 3:
@@ -451,15 +450,15 @@ public class Food extends SubCmd {
                         return Util.complete(args[2], Aliases.POTION_EFFECT);
                     case "removeeffect": {
                         ItemStack item = getItemInHand((Player) sender);
-                        if (item==null || !item.hasItemMeta())
+                        if (item == null || !item.hasItemMeta())
                             return Collections.emptyList();
                         HashSet<PotionEffectType> types = new HashSet<>();
-                        for (FoodComponent.FoodEffect food:item.getItemMeta().getFood().getEffects())
+                        for (FoodComponent.FoodEffect food : item.getItemMeta().getFood().getEffects())
                             types.add(food.getEffect().getType());
                         List<String> list2 = new ArrayList<>();//Util.complete(args[2], Aliases.POTION_EFFECT);
-                        for (PotionEffectType type:types)
+                        for (PotionEffectType type : types)
                             list2.add(Aliases.POTION_EFFECT.getDefaultName(type));
-                        return Util.complete(args[2],list2);
+                        return Util.complete(args[2], list2);
                     }
                     case "convertto":
                         if (Util.isVersionAfter(1, 21)) {

@@ -9,6 +9,7 @@ import java.util.UUID;
 public class CooldownAPI {
 
     private final YMLConfig conf;
+    private final HashMap<UUID, HashMap<String, Long>> cooldowns = new HashMap<>();
 
     CooldownAPI(@NotNull APlugin plugin) {
         long now = System.currentTimeMillis();
@@ -38,8 +39,6 @@ public class CooldownAPI {
         }
         conf.save();
     }
-
-    private final HashMap<UUID, HashMap<String, Long>> cooldowns = new HashMap<>();
 
     public void setCooldown(UUID player, String cooldownId, long duration) {
         if (duration <= 0 && cooldowns.containsKey(player))

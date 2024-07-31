@@ -24,6 +24,11 @@ public class SellMax extends SubCmd {
 
     private static Economy economy = null;
 
+    public SellMax(ServerItemCommand cmd) {
+        super("sellmax", cmd, false, false);
+        setupEconomy();
+    }
+
     private void setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager()
                 .getRegistration(Economy.class);
@@ -32,11 +37,6 @@ public class SellMax extends SubCmd {
         }
         if (economy == null)
             throw new IllegalStateException();
-    }
-
-    public SellMax(ServerItemCommand cmd) {
-        super("sellmax", cmd, false, false);
-        setupEconomy();
     }
 
     @Override
