@@ -62,9 +62,11 @@ public abstract class APlugin extends JavaPlugin {
      *
      * @param log log
      */
+    //TODO add minimessage?
     public void log(@NotNull String log) {
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', ChatColor.DARK_BLUE + "["
-                + ChatColor.WHITE + this.getName() + ChatColor.DARK_BLUE + "] " + ChatColor.WHITE + log));
+        Bukkit.getConsoleSender().sendMessage(
+                ChatColor.translateAlternateColorCodes('&', ChatColor.DARK_BLUE + "["
+                        + ChatColor.WHITE + this.getName() + ChatColor.DARK_BLUE + "] " + ChatColor.WHITE + log));
     }
 
     public abstract @Nullable Integer getProjectId();

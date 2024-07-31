@@ -74,12 +74,16 @@ public class ItemEdit extends APlugin {
 
     @Override
     public void enable() {
+        if (Util.hasMiniMessageAPI()) {
+            ItemEdit.get().log("Hooking into " + UtilsString.fix("<rainbow>MiniMessageAPI</rainbow>", null, true) + "&f see https://webui.advntr.dev/");
+        }
+
         ConfigurationUpdater.update();
         Aliases.reload();
         Bukkit.getPluginManager().registerEvents(new GuiHandler(), this);
 
         StorageType storageType = getStorageType();
-        this.getLogger().info("Selected Storage Type: " + storageType.name());
+        log("Selected Storage Type: " + storageType.name());
         switch (storageType) {
             case YAML:
                 pStorage = new YmlPlayerStorage();
@@ -112,7 +116,7 @@ public class ItemEdit extends APlugin {
         //hooks
         if (Hooks.isPAPIEnabled()) {
             try {
-                this.log("Hooking into PlaceholderApi");
+                this.log("Hooking into PlaceHolderAPI");
                 new PlaceHolders().register();
             } catch (Throwable t) {
                 t.printStackTrace();

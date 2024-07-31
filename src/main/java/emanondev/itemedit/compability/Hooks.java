@@ -46,10 +46,10 @@ public class Hooks {
         try {
             if (Util.hasPaperAPI() && Util.isVersionAfter(1, 16, 5)) {
                 MiniMessagePaper inst = MiniMessagePaper.getInstance();
-                inst.fromMiniToText("<red>this is a test</red>");
-                return inst;
+                if (!inst.fromMiniToText("<red>this is a test</red>").equals("<red>this is a test</red>"))
+                    return inst;
             }
-        } catch (Throwable t) {
+        } catch (Throwable ignored) {
         }
         try {
             if (Hooks.isMythicMobsEnabled())

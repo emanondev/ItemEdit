@@ -1,8 +1,9 @@
 package emanondev.itemedit.compability;
 
+import emanondev.itemedit.ItemEdit;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.internal.parser.ParsingExceptionImpl;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.Bukkit;
 
 public class MiniMessagePaper implements MiniMessageUtil {
 
@@ -19,7 +20,13 @@ public class MiniMessagePaper implements MiniMessageUtil {
             return text;
         try {
             return UNGLY_LEGACY.serialize(MiniMessage.miniMessage().deserialize(text.replace("§", "&")));
-        } catch (ParsingExceptionImpl | NoSuchMethodError e) {
+        } catch (NoSuchMethodError e) {
+            if (Bukkit.getPluginManager().isPluginEnabled("SCore"))
+                ItemEdit.get().log("SCore is disabling MiniMessage compability?");
+            else
+                e.printStackTrace();
+            return text;
+        } catch (Throwable e) {
             e.printStackTrace();
             return text;
         }

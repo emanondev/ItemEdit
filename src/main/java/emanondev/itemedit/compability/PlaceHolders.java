@@ -23,7 +23,7 @@ import java.util.Locale;
 public class PlaceHolders extends PlaceholderExpansion {
     public PlaceHolders() {
 
-        ItemEdit.get().log("Hooked into PlaceHolderAPI:");
+        //ItemEdit.get().log("Hooked into PlaceHolderAPI:");
         ItemEdit.get().log("placeholders:");
         ItemEdit.get().log("  &e%itemedit_amount_&6<{itemid}>&e_&6[{slot}]&e_&6[{player}]&e%");
         ItemEdit.get().log("    shows how many &6itemid player &fhas on &6slot");
