@@ -1,6 +1,5 @@
 package emanondev.itemedit;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -43,8 +42,7 @@ public class UtilsInventory {
             break;
         }
 
-        if (player instanceof Player)
-            Bukkit.getScheduler().runTaskLater(ItemEdit.get(), () -> ((Player) player).updateInventory(), 1L);
+        UtilLegacy.updateViewDelayed((Player) player);
 
         if (remains == 0)
             return amount;
@@ -90,22 +88,19 @@ public class UtilsInventory {
                 item.setAmount(amount);
                 HashMap<Integer, ItemStack> map = player.getInventory().removeItem(item);
 
-                if (player instanceof Player)
-                    Bukkit.getScheduler().runTaskLater(ItemEdit.get(), () -> ((Player) player).updateInventory(), 1L);
+                UtilLegacy.updateViewDelayed((Player) player);
 
                 if (map.isEmpty())
                     return amount;
                 else
                     return amount - map.get(0).getAmount();
-
             }
             case CANCEL: {
                 if (player.getInventory().containsAtLeast(item, amount)) {
                     item.setAmount(amount);
                     HashMap<Integer, ItemStack> map = player.getInventory().removeItem(item);
 
-                    if (player instanceof Player)
-                        Bukkit.getScheduler().runTaskLater(ItemEdit.get(), () -> ((Player) player).updateInventory(), 1L);
+                    UtilLegacy.updateViewDelayed((Player) player);
 
                     if (map.isEmpty())
                         return amount;

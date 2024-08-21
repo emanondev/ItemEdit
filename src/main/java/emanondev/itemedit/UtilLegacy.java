@@ -1,6 +1,7 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.compability.V1_20_6;
+import org.bukkit.Bukkit;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -110,6 +111,20 @@ public class UtilLegacy {
     public static void updateView(@NotNull Player player) {
         if (Util.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
             player.updateInventory();
+        }
+    }
+
+    /**
+     * Update InventoryView for player.<br><br>
+     * In API versions 1.19.3 and earlier, there is no implicit consistency for inventory and
+     * changes, so it has to be done manually (also Purpur has similar issue in later versions too).<br>
+     * In API versions 1.19.4 and later, there is implicit consistency for inventory and changes.
+     *
+     * @param player The player which inventory view should be updated
+     */
+    public static void updateViewDelayed(@NotNull Player player) {
+        if (Util.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
+            Bukkit.getScheduler().runTaskLater(ItemEdit.get(), player::updateInventory, 1L);
         }
     }
 
