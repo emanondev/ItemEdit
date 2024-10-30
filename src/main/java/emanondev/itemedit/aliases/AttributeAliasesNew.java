@@ -5,7 +5,7 @@ import org.bukkit.attribute.Attribute;
 
 public class AttributeAliasesNew extends RegistryAliasSet<Attribute> implements AttributeAliases {
     public AttributeAliasesNew() {
-        super("trim_material", Registry.ATTRIBUTE);
+        super("attribute", Registry.ATTRIBUTE);
     }
 
     @Override
