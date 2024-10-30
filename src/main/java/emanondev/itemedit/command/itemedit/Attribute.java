@@ -103,6 +103,9 @@ public class Attribute extends SubCmd {
             }
 
             ItemMeta itemMeta = item.getItemMeta();
+            //TODO here
+
+
             itemMeta.addAttributeModifier(attr, UtilLegacy.createAttributeModifier(attr, amount, op, equip));
             item.setItemMeta(itemMeta);
             updateView(p);
@@ -129,6 +132,10 @@ public class Attribute extends SubCmd {
             }
 
             ItemMeta itemMeta = item.getItemMeta();
+            //TODO here
+
+
+
             if (attr != null)
                 itemMeta.removeAttributeModifier(attr);
             if (equip != null)

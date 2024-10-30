@@ -198,7 +198,9 @@ public class Aliases {
     private static AttributeAliases getAttributeAliases() {
         if (Util.isVersionUpTo(1, 11))
             return null;
-        return new AttributeAliases();
+        if (Util.isVersionUpTo(1, 21, 2))
+            return new AttributeAliasesOld();
+        return new AttributeAliasesNew();
     }
 
     private static OperationAliases getAttributeOperationAliases() {
