@@ -132,10 +132,10 @@ itemedit:
       - ''
       - '&bWorks on leather armor and firework stars, on servers'
       - '&b 1.11+ works on any Potion and Tipped arrows too!'
-      - '&e<red> <green> <blue> &bare the amount of each color to combine'
+      - '&e<red (0-255)> <green (0-255)> <blue (0-255)> &bare the amount of each color to combine'
       - '&bEach color is an int value between 0 and 255'
       - '&bIf you are confused google "&eRGB color picker&b"'
-    params: '<red> <green> <blue>'
+    params: '<red (0-255)> <green (0-255)> <blue (0-255)>'
   enchant:
     wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
     description:
