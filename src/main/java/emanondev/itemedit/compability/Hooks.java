@@ -51,12 +51,6 @@ public class Hooks {
             }
         } catch (Throwable ignored) {
         }
-        try {
-            if (Hooks.isMythicMobsEnabled())
-                return MiniMessageMM.getInstance();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
         return null;
     }
 

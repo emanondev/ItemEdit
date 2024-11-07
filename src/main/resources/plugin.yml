@@ -6,6 +6,13 @@ api-version: 1.13
 folia-supported: true
 softdepend: [ SCore,Vault,SuperVanish,PremiumVanish,PlaceholderAPI,ShopGUIPlus,ItemBridge,MythicMobs,IridiumSkyblock,ASkyBlock,uSkyBlock,IslandWorld,FabledSkyBlock,SimpleSkyblock,SkyBlock,SuperiorSkyblock2,SuperiorSkyblock,DungeonMMO ]
 
+libraries:
+  - net.kyori:adventure-api:4.16.0
+  - net.kyori:adventure-platform-bukkit:4.3.2
+  - net.kyori:adventure-text-minimessage:4.16.0
+  - net.kyori:adventure-text-serializer-gson:4.16.0
+  - net.kyori:adventure-text-serializer-legacy:4.16.0
+
 commands:
   itemedit:
     description: allows to edit item in hand

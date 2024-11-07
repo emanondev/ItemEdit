@@ -10,7 +10,7 @@ import io.lumine.mythic.api.drops.IItemDrop;
 import io.lumine.mythic.api.drops.ILocationDrop;
 import io.lumine.mythic.api.skills.*;
 import io.lumine.mythic.bukkit.BukkitAdapter;
-import io.lumine.mythic.bukkit.adapters.BukkitItemStack;
+import io.lumine.mythic.bukkit.adapters.item.ItemComponentBukkitItemStack;
 import io.lumine.mythic.bukkit.events.MythicDropLoadEvent;
 import io.lumine.mythic.bukkit.events.MythicMechanicLoadEvent;
 import org.bukkit.Bukkit;
@@ -86,7 +86,7 @@ class ServerItemDrop implements IItemDrop, ILocationDrop {
             ItemStack item = getItem(getPlayer(dropMetadata), v);
             if (item == null)
                 return null;
-            return new BukkitItemStack(item);
+            return new ItemComponentBukkitItemStack(item);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
