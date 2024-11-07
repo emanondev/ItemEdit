@@ -625,6 +625,7 @@ public class YMLConfig extends YamlConfiguration {
         }
     }
 
+    /*
     @Contract("_, !null -> !null")
     public @Nullable Sound loadSound(@NotNull String path, @Nullable Sound def) {
         return loadEnum(path, def, Sound.class);
@@ -633,7 +634,7 @@ public class YMLConfig extends YamlConfiguration {
     @Contract("_, !null -> !null")
     public @Nullable Sound getSound(@NotNull String path, @Nullable Sound def) {
         return getEnum(path, def, Sound.class);
-    }
+    }*/
 
     @Contract("_, !null -> !null")
     public @Nullable Material loadMaterial(@NotNull String path, @Nullable Material def) {
