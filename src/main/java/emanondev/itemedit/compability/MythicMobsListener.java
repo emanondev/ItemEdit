@@ -1,9 +1,11 @@
 package emanondev.itemedit.compability;
 
 import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.UtilsInventory;
 import io.lumine.mythic.api.adapters.AbstractEntity;
 import io.lumine.mythic.api.adapters.AbstractItemStack;
 import io.lumine.mythic.api.adapters.AbstractLocation;
+import io.lumine.mythic.api.adapters.AbstractPlayer;
 import io.lumine.mythic.api.config.MythicLineConfig;
 import io.lumine.mythic.api.drops.DropMetadata;
 import io.lumine.mythic.api.drops.IItemDrop;
@@ -23,6 +25,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Locale;
+
 public class MythicMobsListener implements Listener {
 
     @EventHandler
@@ -37,11 +41,17 @@ public class MythicMobsListener implements Listener {
 
     @EventHandler
     private void event(MythicMechanicLoadEvent event) {
-        if (!event.getMechanicName().equalsIgnoreCase("dropserveritem"))
-            return;
-        try {
-            event.register(new DropServerItemMechanic(event.getConfig()));
-        } catch (IllegalArgumentException ignored) {
+        switch (event.getMechanicName().toLowerCase(Locale.ENGLISH)) {
+            case "dropserveritem":
+                try {
+                    event.register(new DropServerItemMechanic(event.getConfig()));
+                } catch (IllegalArgumentException ignored) {
+                }
+            case "giveserveritem":
+                try {
+                    event.register(new GiveServerItemMechanic(event.getConfig()));
+                } catch (IllegalArgumentException ignored) {
+                }
         }
     }
 }
@@ -203,5 +213,70 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, IT
                 }
             }.runTask(ItemEdit.get());
         return SkillResult.SUCCESS;
+    }
+}
+
+
+class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
+    private final String id;
+    private final int amount;
+    private final int diff;
+    private final double chance;
+
+    public GiveServerItemMechanic(MythicLineConfig mlc) {
+        id = mlc.getString(new String[]{"id", "name", "type", "serveritem",}, null);
+        if (id == null) {
+            ItemEdit.get().log("&9[&fMythicMobs&9] &fMissing item id on mechanic, use {&eid&f='<your_id>' ....}");
+            throw new IllegalArgumentException();
+        }
+        if (ItemEdit.get().getServerStorage().getItem(id) == null) {
+            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + id + "' is not a registered serveritem");
+            throw new IllegalArgumentException();
+        }
+        this.amount = mlc.getInteger(new String[]{"amount", "a"}, 1);
+        this.diff = mlc.getInteger(new String[]{"amountmax", "amount-max", "amax"}, this.amount) - this.amount;
+        this.chance = mlc.getDouble(new String[]{"chance", "c"}, 1D);//probabilità 0 = nulla 1 = 100%
+        if (chance <= 0) {
+            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid chance, should be from ]0 to 1]");
+            throw new IllegalArgumentException();
+        }
+        if (amount <= 0) {
+            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid amount, should be from [1 to +inf[");
+            throw new IllegalArgumentException();
+        }
+        if (diff < 0) {
+            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid max amount, should be from [amount to +inf[");
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public ThreadSafetyLevel getThreadSafetyLevel() {
+        return ThreadSafetyLevel.SYNC_ONLY;
+    }
+
+    @Override
+    public SkillResult castAtEntity(SkillMetadata data, AbstractEntity target) {
+        if (Math.random() > chance || !(target instanceof AbstractPlayer))
+            return SkillResult.CONDITION_FAILED;
+        if (Bukkit.isPrimaryThread())
+            give((AbstractPlayer) target);
+        else
+            new BukkitRunnable() {
+                public void run() {
+                    give((AbstractPlayer) target);
+                }
+            }.runTask(ItemEdit.get());
+        return SkillResult.SUCCESS;
+    }
+
+    public void give(AbstractPlayer target) {
+        Player player = BukkitAdapter.adapt(target);
+        ItemStack item = ItemEdit.get().getServerStorage().getItem(id);
+        if (item == null) {
+            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + id + "' is not a registered serveritem");
+            return;
+        }
+        item.setAmount((int) (amount + Math.random() * diff));
+        UtilsInventory.giveAmount(player, item, amount, UtilsInventory.ExcessManage.DROP_EXCESS);
     }
 }
