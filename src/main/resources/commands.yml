@@ -47,6 +47,9 @@ itemedit:
     name: "compass"
   goathornsound:
     name: "goathornsound"
+  help:
+    name: "help"
+    commands_per_page: 8
 serveritem:
   give:
     name: "give"

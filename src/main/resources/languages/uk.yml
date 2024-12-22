@@ -9,7 +9,20 @@ blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cВи не можете дода�
 blocked-by-lore-length-limit: '&4[&cItemEdit&4] &cВи не можете встановлювати рядки довше %limit% символів'
 blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cВи не можете встановлювати імена довше %limit% символів'
 itemedit:
-  help-header: '&9&lItemEdit - Довідка'
+  help:
+    header: "&9&lItemEdit - Допомога"
+    footer: "%prev_clickable% &9&lДопомога [%page%/%max_page%] %next_clickable%"
+    next_text: " &d&l>&m> >&r "
+    prev_text: " &d&l&m< <&d&l< "
+    next_void: " &8&l>&m> >&r "
+    prev_void: " &8&l&m< <&8&l< "
+    next_hover: "&6&lПерейти на сторінку %target%"
+    prev_hover: "&6&lПерейти на сторінку %target%"
+    description:
+      - '&6&lПоказує допомогу'
+      - ''
+      - '[сторінка] &b- сторінка допомоги'
+    params: '[сторінка]'
   rename:
     description:
       - '&b&lВстановити назву предмета'

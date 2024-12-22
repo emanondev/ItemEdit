@@ -9,7 +9,20 @@ blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cDu kannst diesem Gegenstand kein
 blocked-by-lore-length-limit: '&4[&cItemEdit&4] &cDu kannst keine Zeilen länger als %limit% Zeichen setzen'
 blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cDu kannst keine Namen länger als %limit% Zeichen setzen'
 itemedit:
-  help-header: '&9&lItemEdit - Hilfe'
+  help:
+    header: "&9&lItemEdit - Hilfe"
+    footer: "%prev_clickable% &9&lHilfe [%page%/%max_page%] %next_clickable%"
+    next_text: " &d&l>&m> >&r "
+    prev_text: " &d&l&m< <&d&l< "
+    next_void: " &8&l>&m> >&r "
+    prev_void: " &8&l&m< <&8&l< "
+    next_hover: "&6&lGehe zu Seite %target%"
+    prev_hover: "&6&lGehe zu Seite %target%"
+    description:
+      - '&6&lZeigt Hilfe an'
+      - ''
+      - '[Seite] &b- Hilfeseite'
+    params: '[Seite]'
   rename:
     description:
       - '&b&lSetze den Namen des Items'

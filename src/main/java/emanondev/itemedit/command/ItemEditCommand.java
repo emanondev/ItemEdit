@@ -8,7 +8,7 @@ public class ItemEditCommand extends AbstractCommand {
     public static ItemEditCommand instance;
 
     public ItemEditCommand() {
-        super("itemedit", ItemEdit.get());
+        super("itemedit", ItemEdit.get(), true);
         instance = this;
         try {
             this.registerSubCommand(new Rename(this));

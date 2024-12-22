@@ -8,7 +8,20 @@ blocked-by-type-restriction: '&4[&cItemEdit&4] &cNegalite pervadinti šio daikto
 blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cNegalite redaguoti šio daikto
   aprašymo'
 itemedit:
-  help-header: '&9&lItemEdit - Pagalba'
+  help:
+    header: "&9&lItemEdit - Pagalba"
+    footer: "%prev_clickable% &9&lPagalba [%page%/%max_page%] %next_clickable%"
+    next_text: " &d&l>&m> >&r "
+    prev_text: " &d&l&m< <&d&l< "
+    next_void: " &8&l>&m> >&r "
+    prev_void: " &8&l&m< <&8&l< "
+    next_hover: "&6&lEiti į puslapį %target%"
+    prev_hover: "&6&lEiti į puslapį %target%"
+    description:
+      - '&6&lRodo pagalbą'
+      - ''
+      - '[puslapis] &b- pagalbos puslapis'
+    params: '[puslapis]'
   rename:
     description:
       - '&b&lNustatyti daikto pavadinimą'

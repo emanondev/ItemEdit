@@ -9,7 +9,20 @@ blocked-by-lore-line-limit: '&4[&cItemEdit&4] &c您無法對此物品添加更�
 blocked-by-lore-length-limit: '&4[&cItemEdit&4] &c您不能設置超過 %limit% 個字符的行'
 blocked-by-rename-length-limit: '&4[&cItemEdit&4] &c您不能設置超過 %limit% 個字符的名稱'
 itemedit:
-  help-header: '&9&lItemEdit - 幫助'
+  help:
+    header: "&9&lItemEdit - 幫助"
+    footer: "%prev_clickable% &9&l幫助 [%page%/%max_page%] %next_clickable%"
+    next_text: " &d&l>&m> >&r "
+    prev_text: " &d&l&m< <&d&l< "
+    next_void: " &8&l>&m> >&r "
+    prev_void: " &8&l&m< <&8&l< "
+    next_hover: "&6&l跳轉到第 %target% 頁"
+    prev_hover: "&6&l跳轉到第 %target% 頁"
+    description:
+      - '&6&l顯示幫助'
+      - ''
+      - '[頁碼] &b- 幫助頁'
+    params: '[頁碼]'
   rename:
     description:
       - '&b&l設定物品名稱'

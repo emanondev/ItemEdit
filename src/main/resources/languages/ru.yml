@@ -9,7 +9,20 @@ blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cВы не можете доба�
 blocked-by-lore-length-limit: '&4[&cItemEdit&4] &cВы не можете устанавливать строки длиннее %limit% символов'
 blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cВы не можете устанавливать имена длиннее %limit% символов'
 itemedit:
-  help-header: '&9&lItemEdit - Помощь'
+  help:
+    header: "&9&lItemEdit - Помощь"
+    footer: "%prev_clickable% &9&lПомощь [%page%/%max_page%] %next_clickable%"
+    next_text: " &d&l>&m> >&r "
+    prev_text: " &d&l&m< <&d&l< "
+    next_void: " &8&l>&m> >&r "
+    prev_void: " &8&l&m< <&8&l< "
+    next_hover: "&6&lПерейти на страницу %target%"
+    prev_hover: "&6&lПерейти на страницу %target%"
+    description:
+      - '&6&lПоказывает помощь'
+      - ''
+      - '[страница] &b- страница помощи'
+    params: '[страница]'
   rename:
     description:
       - '&b&lЗадать имя предмета'
