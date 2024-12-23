@@ -457,6 +457,22 @@ itemedit:
         - '&bZwykle jedzenie wymaga głodu do spożycia,'
         - '&bustawienie true imituje zachowanie złotego jabłka'
       params: '[true/false]'
+    consumeparticles:
+      description:
+        - '&6&lUstawia, czy przedmiot pokazuje cząsteczki podczas jedzenia'
+        - ''
+        - '&e[true/false] &bWartość do ustawienia, domyślnie przełącz'
+      params: '[true/false]'
+    animation:
+      description:
+        - '&6&lUstawia animację jedzenia'
+        - ''
+        - '&e<animacja> &bWartość do ustawienia, domyślnie przełącz'
+        - ''
+        - '&bNiektóre animacje są pokazywane tylko w widoku pierwszej osoby,'
+        - '&bniektóre animacje są pokazywane tylko w widoku trzeciej osoby,'
+        - '&bniektóre animacje są pokazywane zarówno w widoku pierwszej, jak i trzeciej osoby'
+      params: '<animacja>'
     eatticks:
       description:
         - '&6&lUstawia czas potrzebny na zjedzenie przedmiotu'

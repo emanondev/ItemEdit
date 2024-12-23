@@ -457,6 +457,22 @@ itemedit:
         - '&bUsually food require hunger to be eaten,'
         - '&bsetting true will mimic golden apple behavior'
       params: '[true/false]'
+    consumeparticles:
+      description:
+        - '&6&lSets whenever the item show particles when eaten'
+        - ''
+        - '&e[true/false] &bThe value to set, by default toggle'
+      params: '[true/false]'
+    animation:
+      description:
+        - '&6&lSets eat animation'
+        - ''
+        - '&e<animation> &bThe value to set, by default toggle'
+        - ''
+        - '&bSome animations are shown only on first person view,'
+        - '&bsome animations are shown only on third person view,'
+        - '&bsome animations are shown on both first and third person view'
+      params: '<animation>'
     eatticks:
       description:
         - '&6&lSets the time required to eat the item'

@@ -450,6 +450,22 @@ itemedit:
         - '&b通常食物需要飢餓才能食用，'
         - '&b設置為 true 會模仿金蘋果的行為'
       params: '[true/false]'
+    consumeparticles:
+      description:
+        - '&6&l設置物品在食用時是否顯示粒子效果'
+        - ''
+        - '&e[true/false] &b設置的值，預設為切換'
+      params: '[true/false]'
+    animation:
+      description:
+        - '&6&l設置進食動畫'
+        - ''
+        - '&e<動畫> &b設置的值，預設為切換'
+        - ''
+        - '&b某些動畫僅顯示在第一人稱視角,'
+        - '&b某些動畫僅顯示在第三人稱視角,'
+        - '&b某些動畫同時顯示在第一人稱和第三人稱視角中'
+      params: '<動畫>'
     eatticks:
       description:
         - '&6&l設置食用物品所需的時間'

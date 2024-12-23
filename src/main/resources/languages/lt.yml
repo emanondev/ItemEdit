@@ -463,6 +463,22 @@ itemedit:
         - '&bUsually food require hunger to be eaten,'
         - '&bsetting true will mimic golden apple behavior'
       params: '[true/false]'
+    consumeparticles:
+      description:
+        - '&6&lNustato, ar daiktas rodo daleles valgant'
+        - ''
+        - '&e[true/false] &bVertė nustatyti, pagal nutylėjimą perjungia'
+      params: '[true/false]'
+    animation:
+      description:
+        - '&6&lNustato valgymo animaciją'
+        - ''
+        - '&e<animacija> &bVertė nustatyti, pagal nutylėjimą perjungia'
+        - ''
+        - '&bKai kurios animacijos rodomos tik iš pirmojo asmens vaizdo,'
+        - '&bkai kurios animacijos rodomos tik iš trečiojo asmens vaizdo,'
+        - '&bkai kurios animacijos rodomos tiek iš pirmojo, tiek iš trečiojo asmens vaizdo'
+      params: '<animacija>'
     eatticks:
       description:
         - '&6&lSets the time required to eat the item'

@@ -44,6 +44,25 @@ public class Aliases {
 
     };
     public static final AliasSet<DyeColor> COLOR = new EnumAliasSet<>("color", DyeColor.class);
+    public static final AliasSet<String> ANIMATION = new AliasSet<String>("animations"){
+
+        private final LinkedHashSet<String> values = new LinkedHashSet<>(craftValues());
+
+        @Override
+        public String getName(String type) {
+            return type.toLowerCase(Locale.ENGLISH);
+        }
+
+        private List<String> craftValues(){
+            return Arrays.asList(new String[]{"drink","eat","crossbow",
+                    "none","block","bow","spear","spyglass","toot_horn","brush"});
+        }
+
+        @Override
+        public Collection<String> getValues() {
+            return values;
+        }
+    };
     public static final EggTypeAliases EGG_TYPE = getEggTypeAliases();
     public static final AliasSet<ItemFlag> FLAG_TYPE = new EnumAliasSet<ItemFlag>("flag_type", ItemFlag.class) {
         @Override

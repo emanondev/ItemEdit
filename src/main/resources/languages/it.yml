@@ -458,6 +458,22 @@ itemedit:
         - '&bDi solito il cibo richiede fame per essere mangiato,'
         - '&bimpostare true imiterà il comportamento della mela d''oro'
       params: '[true/false]'
+    consumeparticles:
+      description:
+        - '&6&lImposta se l''oggetto mostra particelle quando viene consumato'
+        - ''
+        - '&e[true/false] &bIl valore da impostare, di default alterna'
+      params: '[true/false]'
+    animation:
+      description:
+        - '&6&lImposta l''animazione di consumo'
+        - ''
+        - '&e<animazione> &bIl valore da impostare, di default alterna'
+        - ''
+        - '&bAlcune animazioni vengono mostrate solo in prima persona,'
+        - '&baltre vengono mostrate solo in terza persona,'
+        - '&balcune sono visibili in entrambe le visuali'
+      params: '<animazione>'
     eatticks:
       description:
         - '&6&lImposta il tempo necessario per mangiare l''oggetto'

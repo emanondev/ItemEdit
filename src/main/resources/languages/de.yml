@@ -456,6 +456,22 @@ itemedit:
         - '&bNormalerweise muss Hunger vorhanden sein, um Nahrung zu essen,'
         - '&bdas Einstellen von true imitiert das Verhalten eines goldenen Apfels'
       params: '[true/false]'
+    consumeparticles:
+      description:
+        - '&6&lLegt fest, ob das Objekt beim Essen Partikel anzeigt'
+        - ''
+        - '&e[true/false] &bDer Wert, der festgelegt werden soll, standardmäßig umschalten'
+      params: '[true/false]'
+    animation:
+      description:
+        - '&6&lLegt die Essanimation fest'
+        - ''
+        - '&e<Animation> &bDer Wert, der festgelegt werden soll, standardmäßig umschalten'
+        - ''
+        - '&bEinige Animationen werden nur in der Ego-Perspektive angezeigt,'
+        - '&beinige Animationen werden nur in der Third-Person-Perspektive angezeigt,'
+        - '&beinige Animationen werden in beiden Perspektiven angezeigt'
+      params: '<Animation>'
     eatticks:
       description:
         - '&6&lLegt die benötigte Zeit zum Essen des Gegenstands fest'

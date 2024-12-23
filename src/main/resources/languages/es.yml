@@ -457,6 +457,22 @@ itemedit:
         - '&bUsualmente la comida requiere hambre para ser comida,'
         - '&bestablecer true imitará el comportamiento de la manzana dorada'
       params: '[true/false]'
+    consumeparticles:
+      description:
+        - '&6&lEstablece si el objeto muestra partículas al comerlo'
+        - ''
+        - '&e[true/false] &bEl valor a configurar, por defecto alterna'
+      params: '[true/false]'
+    animation:
+      description:
+        - '&6&lEstablece la animación al comer'
+        - ''
+        - '&e<animación> &bEl valor a configurar, por defecto alterna'
+        - ''
+        - '&bAlgunas animaciones solo se muestran en primera persona,'
+        - '&balgunas animaciones solo se muestran en tercera persona,'
+        - '&balgunas animaciones se muestran en ambas vistas'
+      params: '<animación>'
     eatticks:
       description:
         - '&6&lEstablece el tiempo requerido para comer el ítem'

@@ -456,6 +456,22 @@ itemedit:
         - '&bNormalmente, a comida requer fome para ser comida,'
         - '&bdefinir true imitará o comportamento da maçã dourada'
       params: '[true/false]'
+    consumeparticles:
+      description:
+        - '&6&lDefine se o item mostra partículas ao ser consumido'
+        - ''
+        - '&e[true/false] &bO valor a ser definido, por padrão alterna'
+      params: '[true/false]'
+    animation:
+      description:
+        - '&6&lDefine a animação de comer'
+        - ''
+        - '&e<animação> &bO valor a ser definido, por padrão alterna'
+        - ''
+        - '&bAlgumas animações são mostradas apenas na visão em primeira pessoa,'
+        - '&balgumas animações são mostradas apenas na visão em terceira pessoa,'
+        - '&balgumas animações são mostradas em ambas as visões, em primeira e terceira pessoa'
+      params: '<animação>'
     eatticks:
       description:
         - '&6&lDefine o tempo necessário para comer o item'
