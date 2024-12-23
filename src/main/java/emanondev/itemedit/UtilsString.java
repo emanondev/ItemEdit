@@ -170,10 +170,10 @@ public class UtilsString {
         return ChatColor.stripColor(text);
     }
 
-    public static @NotNull String formatNumber(double saturation, int decimals, boolean optional) {
+    public static @NotNull String formatNumber(double value, int decimals, boolean optional) {
         DecimalFormat df = new DecimalFormat("0");
         df.setMaximumFractionDigits(decimals);
         df.setMinimumFractionDigits(optional ? 0 : decimals);
-        return df.format(saturation);
+        return df.format(value);
     }
 }

@@ -82,14 +82,12 @@ public class Attribute extends SubCmd {
 
             if (args.length > 5) {
                 if (Util.isVersionAfter(1, 21)) {
-                    {
-                        equip = Aliases.EQUIPMENT_SLOTGROUPS.convertAlias(args[5]).toString();
-                        if (equip == null) {
-                            onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTGROUPS);
-                            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
-                                    getLanguageStringList("add.description", null, p)));
-                            return;
-                        }
+                    equip = Aliases.EQUIPMENT_SLOTGROUPS.convertAlias(args[5]).toString();
+                    if (equip == null) {
+                        onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTGROUPS);
+                        p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
+                                getLanguageStringList("add.description", null, p)));
+                        return;
                     }
                 } else {
                     equip = Aliases.EQUIPMENT_SLOTS.convertAlias(args[5]).toString();
@@ -133,7 +131,6 @@ public class Attribute extends SubCmd {
 
             ItemMeta itemMeta = item.getItemMeta();
             //TODO here
-
 
 
             if (attr != null)

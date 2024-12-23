@@ -1,13 +1,22 @@
 package emanondev.itemedit.aliases;
 
 import org.bukkit.attribute.Attribute;
+import org.bukkit.potion.PotionEffectType;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Locale;
 
-public class AttributeAliasesOld extends EnumAliasSet<Attribute> implements AttributeAliases {
+public class AttributeAliasesOld extends AliasSet<Attribute> implements AttributeAliases {
 
     public AttributeAliasesOld() {
-        super(Attribute.class);
+        super("attribute");
+    }
+
+    @Override
+    public Collection<Attribute> getValues() {
+        return Arrays.asList(Attribute.values());
     }
 
     @Override
