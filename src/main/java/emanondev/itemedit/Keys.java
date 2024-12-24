@@ -14,28 +14,25 @@ import java.util.stream.StreamSupport;
 
 public class Keys {
 
-    public static class Component implements Keyed {
-        private final NamespacedKey key;
+    private static NamespacedKey craftKey(String postfix){
+        return new NamespacedKey(NamespacedKey.MINECRAFT, postfix);
+    }
 
-        private Component(String postfix) {
-            this.key = new NamespacedKey(NamespacedKey.MINECRAFT, postfix);
-        }
+    public static abstract class EffectType implements Keyed {
 
-        @NotNull
-        @Override
-        public NamespacedKey getKey() {
-            return key;
-        }
+        public static final NamespacedKey APPLY_EFFECTS = craftKey("apply_effects");
+        public static final NamespacedKey REMOVE_EFFECTS = craftKey("remove_effects");
+        public static final NamespacedKey CLEAR_ALL_EFFECTS = craftKey("clear_all_effects");
+        public static final NamespacedKey TELEPORT_RANDOMLY = craftKey("teleport_randomly");
+        public static final NamespacedKey PLAY_SOUND = craftKey("play_sound");
+    }
 
-        @NotNull
-        @Override
-        public String toString() {
-            return key.toString();
-        }
+    public static abstract class Component implements Keyed {
 
-        public static Component FOOD = new Component("food");
-        public static Component CONSUMABLE = new Component("consumable");
-        public static Component USE_REMAINDER = new Component("use_remainder");
+        public static final NamespacedKey FOOD = craftKey("food");
+        public static final NamespacedKey CONSUMABLE = craftKey("consumable");
+        public static final NamespacedKey USE_REMAINDER = craftKey("use_remainder");
+        public static final NamespacedKey CROSS_VERSION_CONSUMABLE = Util.isVersionUpTo(1, 21, 1)?FOOD:CONSUMABLE;
     }
 
 
