@@ -11,6 +11,7 @@ import net.md_5.bungee.api.chat.ComponentBuilder.FormatRetention;
 import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.command.CommandSender;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -40,7 +41,9 @@ public class ListAliases extends SubCmd {
                 else
                     comp = new ComponentBuilder("");
                 boolean counter = true;
-                for (String id : Aliases.getTypes().keySet()) {
+                List<String> values = new ArrayList<>(Aliases.getTypes().keySet());
+                Collections.sort(values);
+                for (String id : values) {
                     comp.retain(FormatRetention.NONE).append((counter ? colorOne : colorTwo) + id)
                             .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover).create()))
                             .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
