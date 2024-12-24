@@ -23,9 +23,15 @@ import java.util.*;
 public class Food extends SubCmd {
 
 
-    private static final String[] foodSub = new String[]{"clear", "canalwayseat",
-            "eatticks", "nutrition", "saturation", "addeffect", "removeeffect", "cleareffects", "info", "convertto",
-            "consumeparticles", "animation", "sound"};
+    private static final String[] foodSub =
+            Util.isVersionAfter(1, 21, 2) ?
+                    new String[]{"clear", "canalwayseat", "eatticks", "nutrition", "saturation", "addeffect",
+                            "removeeffect", "cleareffects", "info", "convertto", "consumeparticles", "animation", "sound"} :
+                    (Util.isVersionAfter(1, 21) ?
+                            new String[]{"clear", "canalwayseat", "eatticks", "nutrition", "saturation", "addeffect",
+                                    "removeeffect", "cleareffects", "info", "convertto",} :
+                            new String[]{"clear", "canalwayseat", "eatticks", "nutrition", "saturation", "addeffect",
+                                    "removeeffect", "cleareffects", "info"});
 
     public Food(ItemEditCommand cmd) {
         super("food", cmd, true, true);
@@ -78,12 +84,18 @@ public class Food extends SubCmd {
                 foodClearEffects(p, item, alias, args);
                 return;
             case "consumeparticles":
+                if (!Util.isVersionAfter(1, 21, 2))
+                    onFail(p, alias);
                 foodConsumeParticles(p, item, alias, args);
                 return;
             case "animation":
+                if (!Util.isVersionAfter(1, 21, 2))
+                    onFail(p, alias);
                 foodAnimation(p, item, alias, args);
                 return;
             case "sound":
+                if (!Util.isVersionAfter(1, 21, 2))
+                    onFail(p, alias);
                 foodSound(p, item, alias, args);
                 return;
             case "info":
@@ -495,7 +507,7 @@ public class Food extends SubCmd {
                     "%sound%", Aliases.SOUND.getDefaultName(sound(item))));
 
             int appliedEffects = getFoodEffects(item).size();
-            if (appliedEffects>0) {
+            if (appliedEffects > 0) {
                 list.addAll(this.getLanguageStringList("info.apply_effect_prefix", Collections.emptyList(), p,
                         "%effects%", String.valueOf(getFoodEffects(item).size())));
                 int index = 1;
@@ -623,12 +635,19 @@ public class Food extends SubCmd {
             case 3:
                 switch (args[1].toLowerCase(Locale.ENGLISH)) {
                     case "canalwayseat":
-                    case "consumeparticles":
                         return Util.complete(args[2], Aliases.BOOLEAN);
+                    case "consumeparticles":
+                        if (Util.isVersionAfter(1, 21, 2))
+                            return Util.complete(args[2], Aliases.BOOLEAN);
+                        return Collections.emptyList();
                     case "animation":
-                        return Util.complete(args[2], Aliases.ANIMATION);
+                        if (Util.isVersionAfter(1, 21, 2))
+                            return Util.complete(args[2], Aliases.ANIMATION);
+                        return Collections.emptyList();
                     case "sound":
-                        return Util.complete(args[2], Aliases.SOUND);
+                        if (Util.isVersionAfter(1, 21, 2))
+                            return Util.complete(args[2], Aliases.SOUND);
+                        return Collections.emptyList();
                     case "eatticks":
                         return Util.complete(args[2], "1", "20", "40");
                     case "saturation":

@@ -463,12 +463,14 @@ itemedit:
     consumeparticles:
       description:
         - '&6&lNustato, ar daiktas rodo daleles valgant'
+        - '&bOnly for &c1.21.2+'
         - ''
         - '&e[true/false] &bVertė nustatyti, pagal nutylėjimą perjungia'
       params: '[true/false]'
     animation:
       description:
         - '&6&lNustato valgymo animaciją'
+        - '&bOnly for &c1.21.2+'
         - ''
         - '&e<animacija> &bVertė nustatyti, pagal nutylėjimą perjungia'
         - ''
@@ -479,9 +481,10 @@ itemedit:
     sound:
       description:
         - '&6&lNustato valgymo garsą'
+        - '&bOnly for &c1.21.2+'
         - ''
         - '&e<garsas> &bVertė, kurią reikia nustatyti'
-      params: '<garsas>'gua
+      params: '<garsas>'
     eatticks:
       description:
         - '&6&lSets the time required to eat the item'

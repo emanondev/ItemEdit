@@ -462,12 +462,14 @@ itemedit:
     consumeparticles:
       description:
         - '&6&lUstawia, czy przedmiot pokazuje cząsteczki podczas jedzenia'
+        - '&bTylko dla &c1.21.2+'
         - ''
         - '&e[true/false] &bWartość do ustawienia, domyślnie przełącz'
       params: '[true/false]'
     animation:
       description:
         - '&6&lUstawia animację jedzenia'
+        - '&bTylko dla &c1.21.2+'
         - ''
         - '&e<animacja> &bWartość do ustawienia, domyślnie przełącz'
         - ''
@@ -478,6 +480,7 @@ itemedit:
     sound:
       description:
         - '&6&lUstawia dźwięk jedzenia'
+        - '&bTylko dla &c1.21.2+'
         - ''
         - '&e<dźwięk> &bWartość do ustawienia'
       params: '<dźwięk>'

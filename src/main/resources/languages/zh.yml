@@ -455,12 +455,14 @@ itemedit:
     consumeparticles:
       description:
         - '&6&l设置物品在食用时是否显示粒子效果'
+        - '&b仅适用于 &c1.21.2+'
         - ''
         - '&e[true/false] &b设置的值，默认切换'
       params: '[true/false]'
     animation:
       description:
         - '&6&l设置进食动画'
+        - '&b仅适用于 &c1.21.2+'
         - ''
         - '&e<动画> &b设置的值，默认切换'
         - ''
@@ -471,6 +473,7 @@ itemedit:
     sound:
       description:
         - '&6&l设置进食声音'
+        - '&b仅适用于 &c1.21.2+'
         - ''
         - '&e<声音> &b要设置的值'
       params: '<声音>'

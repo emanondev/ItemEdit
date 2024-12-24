@@ -461,12 +461,14 @@ itemedit:
     consumeparticles:
       description:
         - '&6&lLegt fest, ob das Objekt beim Essen Partikel anzeigt'
+        - '&bnur für &c1.21.2+'
         - ''
         - '&e[true/false] &bDer Wert, der festgelegt werden soll, standardmäßig umschalten'
       params: '[true/false]'
     animation:
       description:
         - '&6&lLegt die Essanimation fest'
+        - '&bnur für &c1.21.2+'
         - ''
         - '&e<Animation> &bDer Wert, der festgelegt werden soll, standardmäßig umschalten'
         - ''
@@ -477,6 +479,7 @@ itemedit:
     sound:
       description:
         - '&6&lLegt das Essgeräusch fest'
+        - '&bnur für &c1.21.2+'
         - ''
         - '&e<Klang> &bDer Wert, der festgelegt werden soll'
       params: '<Klang>'

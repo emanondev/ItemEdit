@@ -463,12 +463,14 @@ itemedit:
     consumeparticles:
       description:
         - '&6&lImposta se l''oggetto mostra particelle quando viene consumato'
+        - '&bSolo per &c1.21.2+'
         - ''
         - '&e[true/false] &bIl valore da impostare, di default alterna'
       params: '[true/false]'
     animation:
       description:
         - '&6&lImposta l''animazione di consumo'
+        - '&bSolo per &c1.21.2+'
         - ''
         - '&e<animazione> &bIl valore da impostare, di default alterna'
         - ''
@@ -479,6 +481,7 @@ itemedit:
     sound:
       description:
         - '&6&lImposta il suono di consumo'
+        - '&bSolo per &c1.21.2+'
         - ''
         - '&e<suono> &bIl valore da impostare'
       params: '<suono>'

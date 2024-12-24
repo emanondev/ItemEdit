@@ -461,12 +461,14 @@ itemedit:
     consumeparticles:
       description:
         - '&6&lDefine se o item mostra partículas ao ser consumido'
+        - '&bApenas para &c1.21.2+'
         - ''
         - '&e[true/false] &bO valor a ser definido, por padrão alterna'
       params: '[true/false]'
     animation:
       description:
         - '&6&lDefine a animação de comer'
+        - '&bApenas para &c1.21.2+'
         - ''
         - '&e<animação> &bO valor a ser definido, por padrão alterna'
         - ''
@@ -477,6 +479,7 @@ itemedit:
     sound:
       description:
         - '&6&lDefine o som de comer'
+        - '&bApenas para &c1.21.2+'
         - ''
         - '&e<som> &bO valor a ser definido'
       params: '<som>'

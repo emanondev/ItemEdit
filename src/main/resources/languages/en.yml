@@ -462,12 +462,14 @@ itemedit:
     consumeparticles:
       description:
         - '&6&lSets whenever the item show particles when eaten'
+        - '&bOnly for &c1.21.2+'
         - ''
         - '&e[true/false] &bThe value to set, by default toggle'
       params: '[true/false]'
     animation:
       description:
         - '&6&lSets eat animation'
+        - '&bOnly for &c1.21.2+'
         - ''
         - '&e<animation> &bThe value to set, by default toggle'
         - ''
@@ -478,6 +480,7 @@ itemedit:
     sound:
       description:
         - '&6&lSets eat sound'
+        - '&bOnly for &c1.21.2+'
         - ''
         - '&e<sound> &bThe value to set'
       params: '<sound>'
