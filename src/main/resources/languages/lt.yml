@@ -538,17 +538,18 @@ itemedit:
         - '&6&lRemove effects from the item'
       params: ''
     info:
-      not_food: "&9[&fItemEdit&9] &aItem has no food property or has default property"
+      not_food: "&9[&fItemEdit&9] &bPrekė neturi maisto savybių arba turi numatytąsias savybes"
       message:
-        - '&9[&fItemEdit&9] &2&bItem Food Property'
-        - '&aItem can be eaten in &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
-        - '&aRestore &e%nutrition%&a hunger, &e%saturation%&a saturation'
-        - '&aEatable with full hunger bar? &e%canalwayseat%'
-        - '&aWhen eaten returns an item? &e%convertto%'
-        - '&aItem contains a total of &e%effects%&a possible effects'
-      effect:
-        - '&a%index%. Type: &e&b%type%&a   Lv: &e%level%&a   For: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
-        - '&a   Particles: &e%hasparticle%&a  Ambient: &e%isambient%&a  Icon: &e%hasicon%&a  Chance: &e%chance_perc%&a%'
+        - '&9[&fItemEdit&9] &2&lMaisto savybės prekės'
+        - '&aValgymo laikas: &e%eatseconds%&a s &8(&7%eatticks%&8 taktai)'
+        - '&aAlkio atstatymas: &e%nutrition% &8| &aSotumas: &e%saturation%&a'
+        - '&aAnimacija: &e%animation% &8| &aGarsas: &e%sound% &8| &aDalelės: &e%consumeparticles%'
+        - '&aValgoma, kai pilna: &e%canalwayseat% &8| &aSuvalgius gaunama: &e%convertto%'
+      apply_effect_prefix:
+        - '&2&lSudaro &e&l%effects%&2&l galimų eliksyrų efektų:'
+      apply_effect:
+        - '&a%index%. Tipas: &e&b%type% &8| &aLygis: &e%level% &8| &aTrukmė: &e%duration_s%&a s &8(&7%duration_ticks%&8 taktai)'
+        - '&a   Dalelės: &e%hasparticle% &8| &aAplinka: &e%isambient% &8| &aPiktograma: &e%hasicon% &8| &aTikimybė: &e%chance_perc%&a%'
       description:
         - '&6&lDescribe current food info for item'
       params: ''

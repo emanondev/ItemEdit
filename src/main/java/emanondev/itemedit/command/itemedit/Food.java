@@ -107,7 +107,7 @@ public class Food extends SubCmd {
             }
             Sound value = Aliases.SOUND.convertAlias(args[2]);
             ParsedItem parsed = new ParsedItem(item);
-            parsed.set(value.getKey(), Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "sound");
+            parsed.set(((Keyed) value).getKey(), Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "sound");
             p.getInventory().setItemInMainHand(parsed.toItemStack());
             updateView(p);
         } catch (Exception e) {
@@ -698,6 +698,7 @@ public class Food extends SubCmd {
             }
             meta.setFood(food);
             origin.setItemMeta(meta);
+            return;
         }
         origin.getItemMeta().setUseRemainder(remainer);
     }

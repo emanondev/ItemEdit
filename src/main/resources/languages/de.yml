@@ -536,17 +536,18 @@ itemedit:
         - '&6&lEntfernt Effekte vom Gegenstand'
       params: ''
     info:
-      not_food: "&9[&fItemEdit&9] &aDer Gegenstand hat keine Nahrungsmittel-Eigenschaft oder hat die Standardeigenschaft"
+      not_food: "&9[&fItemEdit&9] &bDer Gegenstand hat keine Essenseigenschaft oder besitzt die Standardeigenschaft"
       message:
-        - '&9[&fItemEdit&9] &2&bNahrungsmittel-Eigenschaft des Gegenstands'
-        - '&aDer Gegenstand kann in &e%eatseconds%&a s &8(&7%eatticks%&8 Ticks) gegessen werden'
-        - '&aStellt &e%nutrition%&a Hunger, &e%saturation%&a Sättigung wieder her'
-        - '&aKann mit voller Hungerskala gegessen werden? &e%canalwayseat%'
-        - '&aWenn gegessen, wird ein Gegenstand zurückgegeben? &e%convertto%'
-        - '&aDer Gegenstand enthält insgesamt &e%effects%&a mögliche Effekte'
-      effect:
-        - '&a%index%. Typ: &e&b%type%&a   Stufe: &e%level%&a   Für: &e%duration_s%&a s &8(&7%duration_ticks%&8 Ticks)'
-        - '&a   Partikel: &e%hasparticle%&a  Umgebungsgeräusche: &e%isambient%&a  Symbol: &e%hasicon%&a  Wahrscheinlichkeit: &e%chance_perc%&a%'
+        - '&9[&fItemEdit&9] &2&lEssenseigenschaften des Gegenstands'
+        - '&aEssenszeit: &e%eatseconds%&a s &8(&7%eatticks%&8 Ticks)'
+        - '&aHunger wiederherstellen: &e%nutrition% &8| &aSättigung: &e%saturation%&a'
+        - '&aAnimation: &e%animation% &8| &aSound: &e%sound% &8| &aPartikel: &e%consumeparticles%'
+        - '&aEssbar wenn voll: &e%canalwayseat% &8| &aBeim Essen erhalten: &e%convertto%'
+      apply_effect_prefix:
+        - '&2&lEnthält &e&l%effects%&2&l mögliche Trankeffects:'
+      apply_effect:
+        - '&a%index%. Typ: &e&b%type% &8| &aStufe: &e%level% &8| &aDauer: &e%duration_s%&a s &8(&7%duration_ticks%&8 Ticks)'
+        - '&a   Partikel: &e%hasparticle% &8| &aUmgebung: &e%isambient% &8| &aSymbol: &e%hasicon% &8| &aChance: &e%chance_perc%&a%'
       description:
         - '&6&lBeschreiben Sie aktuelle Informationen zur Nahrung des Gegenstands'
       params: ''

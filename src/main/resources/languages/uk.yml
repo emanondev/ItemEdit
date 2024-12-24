@@ -537,17 +537,18 @@ itemedit:
         - '&6&lВидалити ефекти з предмета'
       params: ''
     info:
-      not_food: "&9[&fItemEdit&9] &aПредмет не має властивості їжі або має властивості за замовчуванням"
+      not_food: "&9[&fItemEdit&9] &bПредмет не має властивостей їжі або має стандартні властивості"
       message:
-        - '&9[&fItemEdit&9] &2&bВластивості Їжі Предмета'
-        - '&aПредмет можна з''їсти за &e%eatseconds%&a с &8(&7%eatticks%&8 тіків)'
-        - '&aВідновлює &e%nutrition%&a голоду, &e%saturation%&a насичення'
-        - '&aЧи можна їсти з повною шкалою голоду? &e%canalwayseat%'
-        - '&aЧи повертає предмет при споживанні? &e%convertto%'
-        - '&aПредмет містить загалом &e%effects%&a можливих ефектів'
-      effect:
-        - '&a%index%. Тип: &e&b%type%&a   Рівень: &e%level%&a   Протягом: &e%duration_s%&a с &8(&7%duration_ticks%&8 тіків)'
-        - '&a   Частинки: &e%hasparticle%&a  Амбієнт: &e%isambient%&a  Іконка: &e%hasicon%&a  Ймовірність: &e%chance_perc%&a%'
+        - '&9[&fItemEdit&9] &2&lВластивості їжі предмета'
+        - '&aЧас споживання: &e%eatseconds%&a с &8(&7%eatticks%&8 тіків)'
+        - '&aВідновлення голоду: &e%nutrition% &8| &aНасичення: &e%saturation%&a'
+        - '&aАнімація: &e%animation% &8| &aЗвук: &e%sound% &8| &aЧастинки: &e%consumeparticles%'
+        - '&aЇстівне при повному голоді: &e%canalwayseat% &8| &aПісля споживання перетворюється на: &e%convertto%'
+      apply_effect_prefix:
+        - '&2&lМістить &e&l%effects%&2&l можливих ефектів зілля:'
+      apply_effect:
+        - '&a%index%. Тип: &e&b%type% &8| &aРівень: &e%level% &8| &aТривалість: &e%duration_s%&a с &8(&7%duration_ticks%&8 тіків)'
+        - '&a   Частинки: &e%hasparticle% &8| &aНавколишній ефект: &e%isambient% &8| &aІконка: &e%hasicon% &8| &aШанс: &e%chance_perc%&a%'
       description:
         - '&6&lОписати поточну інформацію про їжу для предмета'
       params: ''

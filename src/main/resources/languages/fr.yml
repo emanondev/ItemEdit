@@ -540,17 +540,18 @@ itemedit:
         - '&6&lSupprimer les effets de l''objet'
       params: ''
     info:
-      not_food: "&9[&fItemEdit&9] &aL''objet n''a pas de propriété de nourriture ou a la propriété par défaut"
+      not_food: "&9[&fItemEdit&9] &bL'objet n'a pas de propriété alimentaire ou a une propriété par défaut"
       message:
-        - '&9[&fItemEdit&9] &2&bPropriété de Nourriture de l''Objet'
-        - '&aL''objet peut être mangé en &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
-        - '&aRestaure &e%nutrition%&a de faim, &e%saturation%&a de saturation'
-        - '&aPeut être mangé avec une barre de faim pleine? &e%canalwayseat%'
-        - '&aLorsqu''il est mangé, renvoie un objet? &e%convertto%'
-        - '&aL''objet contient un total de &e%effects%&a effets possibles'
-      effect:
-        - '&a%index%. Type: &e&b%type%&a   Niv: &e%level%&a   Pour: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
-        - '&a   Particules: &e%hasparticle%&a  Ambiant: &e%isambient%&a  Icône: &e%hasicon%&a  Chance: &e%chance_perc%&a%'
+        - '&9[&fItemEdit&9] &2&lPropriétés alimentaires de l''objet'
+        - '&aTemps de consommation: &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
+        - '&aRestaurer la faim: &e%nutrition% &8| &aSaturation: &e%saturation%&a'
+        - '&aAnimation: &e%animation% &8| &aSon: &e%sound% &8| &aParticules: &e%consumeparticles%'
+        - '&aMangeable lorsqu''il est plein: &e%canalwayseat% &8| &aLorsqu''il est mangé, obtenir: &e%convertto%'
+      apply_effect_prefix:
+        - '&2&lContient &e&l%effects%&2&l effets de potion possibles :'
+      apply_effect:
+        - '&a%index%. Type : &e&b%type% &8| &aNiv : &e%level% &8| &aDurée : &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
+        - '&a   Particules : &e%hasparticle% &8| &aAmbiance : &e%isambient% &8| &aIcône : &e%hasicon% &8| &aChance : &e%chance_perc%&a%'
       description:
         - '&6&lDécrire les informations actuelles sur la nourriture pour l''objet'
       params: ''

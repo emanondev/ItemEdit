@@ -537,17 +537,18 @@ itemedit:
         - '&6&lRemove effects from the item'
       params: ''
     info:
-      not_food: "&9[&fItemEdit&9] &aItem has no food property or has default property"
+      not_food: "&9[&fItemEdit&9] &bItem has no food property or has default property"
       message:
-        - '&9[&fItemEdit&9] &2&bItem Food Property'
-        - '&aItem can be eaten in &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
-        - '&aRestore &e%nutrition%&a hunger, &e%saturation%&a saturation'
-        - '&aEatable with full hunger bar? &e%canalwayseat%'
-        - '&aWhen eaten returns an item? &e%convertto%'
-        - '&aItem contains a total of &e%effects%&a possible effects'
-      effect:
-        - '&a%index%. Type: &e&b%type%&a   Lv: &e%level%&a   For: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
-        - '&a   Particles: &e%hasparticle%&a  Ambient: &e%isambient%&a  Icon: &e%hasicon%&a  Chance: &e%chance_perc%&a%'
+        - '&9[&fItemEdit&9] &2&lItem Food Property'
+        - '&aEat time: &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
+        - '&aRestore Hunger: &e%nutrition% &8| &aSaturation: &e%saturation%&a '
+        - '&aAnimation: &e%animation% &8| &aSound: &e%sound% &8| &aParticles: &e%consumeparticles%'
+        - '&aEatable when full: &e%canalwayseat% &8| &aWhen eaten obtain: &e%convertto%'
+      apply_effect_prefix:
+        - '&2&lContains &e&l%effects%&2&l possible potion effects:'
+      apply_effect:
+        - '&a%index%. Type: &e&b%type% &8| &aLv: &e%level% &8| &aDuration: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
+        - '&a   Particles: &e%hasparticle% &8| &aAmbient: &e%isambient% &8| &aIcon: &e%hasicon% &8| &aChance: &e%chance_perc%&a%'
       description:
         - '&6&lDescribe current food info for item'
       params: ''

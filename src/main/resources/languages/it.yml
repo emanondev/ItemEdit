@@ -538,17 +538,18 @@ itemedit:
         - '&6&lRimuovere gli effetti dall''oggetto'
       params: ''
     info:
-      not_food: "&9[&fItemEdit&9] &aL''oggetto non ha la proprietà cibo o ha la proprietà predefinita"
+      not_food: "&9[&fItemEdit&9] &bL'oggetto non ha proprietà alimentari o ha proprietà predefinite"
       message:
-        - '&9[&fItemEdit&9] &2&bProprietà Cibo Oggetto'
-        - '&aL''oggetto può essere mangiato in &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
-        - '&aRipristina &e%nutrition%&a fame, &e%saturation%&a saturazione'
-        - '&aMangibile con la barra della fame piena? &e%canalwayseat%'
-        - '&aQuando mangiato restituisce un oggetto? &e%convertto%'
-        - '&aL''oggetto contiene un totale di &e%effects%&a possibili effetti'
-      effect:
-        - '&a%index%. Tipo: &e&b%type%&a   Lv: &e%level%&a   Per: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
-        - '&a   Particelle: &e%hasparticle%&a  Ambientale: &e%isambient%&a  Icona: &e%hasicon%&a  Probabilità: &e%chance_perc%&a%'
+        - '&9[&fItemEdit&9] &2&lProprietà alimentari dell''oggetto'
+        - '&aTempo per mangiare: &e%eatseconds%&a s &8(&7%eatticks%&8 tick)'
+        - '&aRipristina fame: &e%nutrition% &8| &aSaturazione: &e%saturation%&a'
+        - '&aAnimazione: &e%animation% &8| &aSuono: &e%sound% &8| &aParticelle: &e%consumeparticles%'
+        - '&aMangia anche se pieno: &e%canalwayseat% &8| &aQuando mangiato ottieni: &e%convertto%'
+      apply_effect_prefix:
+        - '&2&lContiene &e&l%effects%&2&l possibili effetti di pozione:'
+      apply_effect:
+        - '&a%index%. Tipo: &e&b%type% &8| &aLv: &e%level% &8| &aDurata: &e%duration_s%&a s &8(&7%duration_ticks%&8 tick)'
+        - '&a   Particelle: &e%hasparticle% &8| &aAmbiente: &e%isambient% &8| &aIcona: &e%hasicon% &8| &aProbabilità: &e%chance_perc%&a%'
       description:
         - '&6&lDescrivi le attuali informazioni sul cibo per l''oggetto'
       params: ''

@@ -530,17 +530,18 @@ itemedit:
         - '&6&l移除物品的效果'
       params: ''
     info:
-      not_food: "&9[&fItemEdit&9] &a物品没有食物属性或具有默认属性"
+      not_food: "&9[&fItemEdit&9] &b物品没有食物属性或具有默认属性"
       message:
-        - '&9[&fItemEdit&9] &2&b物品食物属性'
-        - '&a物品可以在 &e%eatseconds%&a 秒内食用 &8(&7%eatticks%&8 刻)'
-        - '&a恢复 &e%nutrition%&a 饥饿值, &e%saturation%&a 饱和度'
-        - '&a可以在满饥饿条时食用吗？ &e%canalwayseat%'
-        - '&a食用后返回物品吗？ &e%convertto%'
-        - '&a物品包含总共 &e%effects%&a 种可能的效果'
-      effect:
-        - '&a%index%. 类型: &e&b%type%&a   等级: &e%level%&a   持续时间: &e%duration_s%&a 秒 &8(&7%duration_ticks%&8 刻)'
-        - '&a   粒子: &e%hasparticle%&a  环境效果: &e%isambient%&a  图标: &e%hasicon%&a  概率: &e%chance_perc%&a%'
+        - '&9[&fItemEdit&9] &2&l物品的食物属性'
+        - '&a食用时间: &e%eatseconds%&a 秒 &8(&7%eatticks%&8 tick)'
+        - '&a恢复饥饿值: &e%nutrition% &8| &a饱和度: &e%saturation%&a'
+        - '&a动画: &e%animation% &8| &a声音: &e%sound% &8| &a粒子效果: &e%consumeparticles%'
+        - '&a饱腹时可食用: &e%canalwayseat% &8| &a食用后变为: &e%convertto%'
+      apply_effect_prefix:
+        - '&2&l包含 &e&l%effects%&2&l 个可能的药水效果:'
+      apply_effect:
+        - '&a%index%. 类型: &e&b%type% &8| &a等级: &e%level% &8| &a持续时间: &e%duration_s%&a 秒 &8(&7%duration_ticks%&8 tick)'
+        - '&a   粒子效果: &e%hasparticle% &8| &a环境效果: &e%isambient% &8| &a图标: &e%hasicon% &8| &a几率: &e%chance_perc%&a%'
       description:
         - '&6&l描述当前物品的食物信息'
       params: ''

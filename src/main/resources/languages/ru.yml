@@ -533,17 +533,18 @@ itemedit:
         - '&6&lУдаляет эффекты с предмета'
       params: ''
     info:
-      not_food: "&9[&fItemEdit&9] &aУ предмета нет свойства еды или оно стандартное"
+      not_food: "&9[&fItemEdit&9] &bПредмет не имеет свойств еды или имеет стандартные свойства"
       message:
-        - '&9[&fItemEdit&9] &2&bСвойства еды предмета'
-        - '&aПредмет можно съесть за &e%eatseconds%&a с &8(&7%eatticks%&8 тиков)'
-        - '&aВосстанавливает &e%nutrition%&a голода, &e%saturation%&a насыщения'
-        - '&aМожно ли есть при полной шкале голода? &e%canalwayseat%'
-        - '&aВозвращается ли предмет после поедания? &e%convertto%'
-        - '&aПредмет содержит всего &e%effects%&a возможных эффектов'
-      effect:
-        - '&a%index%. Тип: &e&b%type%&a   Уровень: &e%level%&a   На: &e%duration_s%&a с &8(&7%duration_ticks%&8 тиков)'
-        - '&a   Частицы: &e%hasparticle%&a  Фоновый: &e%isambient%&a  Иконка: &e%hasicon%&a  Вероятность: &e%chance_perc%&a%'
+        - '&9[&fItemEdit&9] &2&lСвойства еды предмета'
+        - '&aВремя еды: &e%eatseconds%&a с &8(&7%eatticks%&8 тиков)'
+        - '&aВосстановление голода: &e%nutrition% &8| &aСытость: &e%saturation%&a'
+        - '&aАнимация: &e%animation% &8| &aЗвук: &e%sound% &8| &aЧастицы: &e%consumeparticles%'
+        - '&aСъедобно при сытости: &e%canalwayseat% &8| &aПри употреблении становится: &e%convertto%'
+      apply_effect_prefix:
+        - '&2&lСодержит &e&l%effects%&2&l возможных эффектов зелий:'
+      apply_effect:
+        - '&a%index%. Тип: &e&b%type% &8| &aУровень: &e%level% &8| &aДлительность: &e%duration_s%&a с &8(&7%duration_ticks%&8 тиков)'
+        - '&a   Частицы: &e%hasparticle% &8| &aОкружающий эффект: &e%isambient% &8| &aИконка: &e%hasicon% &8| &aШанс: &e%chance_perc%&a%'
       description:
         - '&6&lОпишите текущие свойства еды для предмета'
       params: ''
