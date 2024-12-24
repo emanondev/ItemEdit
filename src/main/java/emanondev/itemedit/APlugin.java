@@ -169,10 +169,12 @@ public abstract class APlugin extends JavaPlugin {
     }
 
     /**
-     *
+     * @see #enable()
+     * @deprecated internal use only
      */
     @Override
-    public final void onEnable() {
+    @Deprecated
+    public void onEnable() {
         try {
             long now = System.currentTimeMillis();
             try {
