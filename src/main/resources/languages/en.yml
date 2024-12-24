@@ -436,6 +436,8 @@ itemedit:
   food:
     help-header: '&9&lItemEdit Food - Help'
     wrong-effect: '&4[&cItemEdit&4] &cWrong Effect Value! &4[&6hover here&4]'
+    wrong-animation: '&4[&cItemEdit&4] &cWrong Animation Value! &4[&6hover here&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cWrong Sound Value! &4[&6hover here&4]'
     description:
       - '&6&lSets food property of the item'
       - ''
@@ -473,6 +475,12 @@ itemedit:
         - '&bsome animations are shown only on third person view,'
         - '&bsome animations are shown on both first and third person view'
       params: '<animation>'
+    sound:
+      description:
+        - '&6&lSets eat sound'
+        - ''
+        - '&e<sound> &bThe value to set'
+      params: '<sound>'
     eatticks:
       description:
         - '&6&lSets the time required to eat the item'

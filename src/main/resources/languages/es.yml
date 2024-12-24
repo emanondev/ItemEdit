@@ -436,6 +436,8 @@ itemedit:
   food:
     help-header: '&9&lItemEdit Food - Ayuda'
     wrong-effect: '&4[&cItemEdit&4] &c¡Valor de Efecto Incorrecto! &4[&6haz clic aquí&4]'
+    wrong-animation: '&4[&cItemEdit&4] &c¡Valor de animación incorrecto! &4[&6pasa el ratón aquí&4]'
+    wrong-sound: '&4[&cItemEdit&4] &c¡Valor de sonido incorrecto! &4[&6pasa el ratón aquí&4]'
     description:
       - '&6&lEstablece la propiedad de comida del ítem'
       - ''
@@ -473,6 +475,12 @@ itemedit:
         - '&balgunas animaciones solo se muestran en tercera persona,'
         - '&balgunas animaciones se muestran en ambas vistas'
       params: '<animación>'
+    sound:
+      description:
+        - '&6&lEstablece el sonido al comer'
+        - ''
+        - '&e<sonido> &bEl valor a configurar'
+      params: '<sonido>'
     eatticks:
       description:
         - '&6&lEstablece el tiempo requerido para comer el ítem'

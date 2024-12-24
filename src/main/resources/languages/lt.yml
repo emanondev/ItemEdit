@@ -442,6 +442,8 @@ itemedit:
   food:
     help-header: '&9&lItemEdit Food - Help'
     wrong-effect: '&4[&cItemEdit&4] &cWrong Effect Value! &4[&6hover here&4]'
+    wrong-animation: '&4[&cItemEdit&4] &cNetinkama animacijos reikšmė! &4[&6užveskite pelę čia&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cNetinkama garso reikšmė! &4[&6užveskite pelę čia&4]'
     description:
       - '&6&lSets food property of the item'
       - ''
@@ -479,6 +481,12 @@ itemedit:
         - '&bkai kurios animacijos rodomos tik iš trečiojo asmens vaizdo,'
         - '&bkai kurios animacijos rodomos tiek iš pirmojo, tiek iš trečiojo asmens vaizdo'
       params: '<animacija>'
+    sound:
+      description:
+        - '&6&lNustato valgymo garsą'
+        - ''
+        - '&e<garsas> &bVertė, kurią reikia nustatyti'
+      params: '<garsas>'gua
     eatticks:
       description:
         - '&6&lSets the time required to eat the item'

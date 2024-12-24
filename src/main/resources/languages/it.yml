@@ -437,6 +437,8 @@ itemedit:
   food:
     help-header: '&9&lItemEdit Cibo - Aiuto'
     wrong-effect: '&4[&cItemEdit&4] &cValore Effetto Sbagliato! &4[&6passa qui con il mouse&4]'
+    wrong-animation: '&4[&cItemEdit&4] &cValore animazione errato! &4[&6passa il mouse qui&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cValore suono errato! &4[&6passa il mouse qui&4]'
     description:
       - '&6&lImposta la proprietà cibo dell''oggetto'
       - ''
@@ -474,6 +476,12 @@ itemedit:
         - '&baltre vengono mostrate solo in terza persona,'
         - '&balcune sono visibili in entrambe le visuali'
       params: '<animazione>'
+    sound:
+      description:
+        - '&6&lImposta il suono di consumo'
+        - ''
+        - '&e<suono> &bIl valore da impostare'
+      params: '<suono>'
     eatticks:
       description:
         - '&6&lImposta il tempo necessario per mangiare l''oggetto'

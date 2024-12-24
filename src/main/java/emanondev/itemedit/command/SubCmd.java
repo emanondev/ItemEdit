@@ -73,13 +73,28 @@ public abstract class SubCmd {
         load();
     }
 
-    @SuppressWarnings("deprecation")
+    /**
+     * @see #craftFailFeedback(String, String, List)
+     */
+    @Deprecated
     protected BaseComponent[] craftFailFeedback(String params, List<String> desc) {
         if (params == null)
             params = "";
         ComponentBuilder fail = new ComponentBuilder(ChatColor.RED + "/" + commandName + " " + this.name + " " + params)
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + commandName + " " + this.name + " " + params));
+        if (desc != null && !desc.isEmpty()) {
+            fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(String.join("\n", desc)).create()));
+        }
+        return fail.create();
+    }
+
+    protected BaseComponent[] craftFailFeedback(String alias, String params, List<String> desc) {
+        if (params == null)
+            params = "";
+        ComponentBuilder fail = new ComponentBuilder(ChatColor.RED + "/" + alias + " " + this.name + " " + params)
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
+                        "/" + alias + " " + this.name + " " + params));
         if (desc != null && !desc.isEmpty()) {
             fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(String.join("\n", desc)).create()));
         }

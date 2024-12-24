@@ -429,6 +429,8 @@ itemedit:
   food:
     help-header: '&9&lItemEdit 食物 - 幫助'
     wrong-effect: '&4[&cItemEdit&4] &c錯誤的效果值！ &4[&6懸停此處&4]'
+    wrong-animation: '&4[&cItemEdit&4] &c動畫值錯誤！ &4[&6將滑鼠懸停於此&4]'
+    wrong-sound: '&4[&cItemEdit&4] &c聲音值錯誤！ &4[&6將滑鼠懸停於此&4]'
     description:
       - '&6&l設置物品的食物屬性'
       - ''
@@ -466,6 +468,12 @@ itemedit:
         - '&b某些動畫僅顯示在第三人稱視角,'
         - '&b某些動畫同時顯示在第一人稱和第三人稱視角中'
       params: '<動畫>'
+    sound:
+      description:
+        - '&6&l設置進食聲音'
+        - ''
+        - '&e<聲音> &b要設置的值'
+      params: '<聲音>'
     eatticks:
       description:
         - '&6&l設置食用物品所需的時間'

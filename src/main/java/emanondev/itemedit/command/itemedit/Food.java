@@ -8,10 +8,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.hover.content.Text;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
+import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -25,7 +22,8 @@ public class Food extends SubCmd {
 
 
     private static final String[] foodSub = new String[]{"clear", "canalwayseat",
-            "eatticks", "nutrition", "saturation", "addeffect", "removeeffect", "cleareffects", "info", "convertto", "consumeparticles", "eatanimation"};
+            "eatticks", "nutrition", "saturation", "addeffect", "removeeffect", "cleareffects", "info", "convertto",
+            "consumeparticles", "animation", "sound"};
 
     public Food(ItemEditCommand cmd) {
         super("food", cmd, true, true);
@@ -54,71 +52,92 @@ public class Food extends SubCmd {
 
         switch (args[1].toLowerCase(Locale.ENGLISH)) {
             case "clear":
-                foodClear(p, item, args);
+                foodClear(p, item, alias, args);
                 return;
             case "canalwayseat":
-                foodCanAlwaysEat(p, item, args);
+                foodCanAlwaysEat(p, item, alias, args);
                 return;
             case "eatticks":
-                foodEatTicks(p, item, args);
+                foodEatTicks(p, item, alias, args);
                 return;
             case "nutrition":
-                foodNutrition(p, item, args);
+                foodNutrition(p, item, alias, args);
                 return;
             case "saturation":
-                foodSaturation(p, item, args);
+                foodSaturation(p, item, alias, args);
                 return;
             case "addeffect":
-                foodAddEffect(p, item, args);
+                foodAddEffect(p, item, alias, args);
                 return;
             case "removeeffect":
-                foodRemoveEffect(p, item, args);
+                foodRemoveEffect(p, item, alias, args);
                 return;
             case "cleareffects":
-                foodClearEffects(p, item, args);
+                foodClearEffects(p, item, alias, args);
                 return;
             case "consumeparticles":
-                foodConsumeParticles(p, item, args);
+                foodConsumeParticles(p, item, alias, args);
                 return;
-            case "eatanimation":
-                foodEatAnimation(p, item, args);
+            case "animation":
+                foodAnimation(p, item, alias, args);
+                return;
+            case "sound":
+                foodSound(p, item, alias, args);
                 return;
             case "info":
-                foodInfo(p, item, args);
+                foodInfo(p, item, alias, args);
                 return;
             case "convertto":
                 if (!Util.isVersionAfter(1, 21))
                     onFail(p, alias);
-                foodConvertTo(p, item, args);
+                foodConvertTo(p, item, alias, args);
                 return;
             default:
                 onFail(p, alias);
         }
     }
 
-    private void foodEatAnimation(Player p, ItemStack item, String[] args) {
+    private void foodSound(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3) {
-                p.spigot().sendMessage(this.craftFailFeedback("eatanimation " + getLanguageString("eatanimation.params", null, p),
-                        getLanguageStringList("eatanimation.description", null, p)));
+                onSubFail(p, alias, "sound");
+                return;
+            }
+            Sound value = Aliases.SOUND.convertAlias(args[2]);
+            ParsedItem parsed = new ParsedItem(item);
+            parsed.set(value.getKey(), getComponentPath(), "sound");
+            p.getInventory().setItemInMainHand(parsed.toItemStack());
+            updateView(p);
+        } catch (Exception e) {
+            onSubFail(p, alias, "sound");
+        }
+    }
+
+    private void foodAnimation(Player p, ItemStack item, String alias, String[] args) {
+        try {
+            if (args.length != 3) {
+                onSubFail(p, alias, "animation");
                 return;
             }
             String value = Aliases.ANIMATION.convertAlias(args[2]);
+            if (value == null) {
+                onWrongAlias("wrong-animation", p, Aliases.ANIMATION);
+                onSubFail(p, alias, "animation");
+                return;
+            }
             ParsedItem parsed = new ParsedItem(item);
             parsed.set(value, getComponentPath(), "animation");
             p.getInventory().setItemInMainHand(parsed.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback("eatanimation " + getLanguageString("eatanimation.params", null, p),
-                    getLanguageStringList("eatanimation.description", null, p)));
+            onSubFail(p, alias, "animation");
         }
     }
 
-    private void foodConsumeParticles(Player p, ItemStack item, String[] args) {
+    private void foodConsumeParticles(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 2 && args.length != 3) {
-                p.spigot().sendMessage(this.craftFailFeedback("consumeparticles " + getLanguageString("consumeparticles.params", null, p),
-                        getLanguageStringList("consumeparticles.description", null, p)));
+                onSubFail(p, alias, "consumeparticles");
                 return;
             }
             Boolean value = args.length == 2 ? !consumeParticles(item) : Aliases.BOOLEAN.convertAlias(args[2]);
@@ -127,8 +146,7 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsed.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback("consumeparticles " + getLanguageString("consumeparticles.params", null, p),
-                    getLanguageStringList("consumeparticles.description", null, p)));
+            onSubFail(p, alias, "consumeparticles");
         }
     }
 
@@ -147,7 +165,12 @@ public class Food extends SubCmd {
                     .create());
     }
 
-    private void foodClear(Player p, ItemStack item, String[] args) {
+    private void onSubFail(CommandSender target, String alias, String subCommand) {
+        target.spigot().sendMessage(this.craftFailFeedback(alias, subCommand + " " + getLanguageString(subCommand + ".params", null, target),
+                getLanguageStringList(subCommand + ".description", null, target)));
+    }
+
+    private void foodClear(Player p, ItemStack item, String alias, String[] args) {
         if (!item.hasItemMeta())
             return;
         ItemMeta meta = item.getItemMeta();
@@ -162,11 +185,10 @@ public class Food extends SubCmd {
     }
 
     //ie food canalwayseat [true/false]
-    private void foodCanAlwaysEat(Player p, ItemStack item, String[] args) {
+    private void foodCanAlwaysEat(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 2 && args.length != 3) {
-                p.spigot().sendMessage(this.craftFailFeedback("canalwayseat " + getLanguageString("canalwayseat.params", null, p),
-                        getLanguageStringList("canalwayseat.description", null, p)));
+                onSubFail(p, alias, "canalwayseat");
                 return;
             }
             Boolean value = args.length == 2 ? !canAlwaysEat(item) : Aliases.BOOLEAN.convertAlias(args[2]);
@@ -178,8 +200,7 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsed.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback("canalwayseat " + getLanguageString("canalwayseat.params", null, p),
-                    getLanguageStringList("canalwayseat.description", null, p)));
+            onSubFail(p, alias, "canalwayseat");
         }
     }
 
@@ -291,11 +312,10 @@ public class Food extends SubCmd {
 
 
     //ie food eatticks <amount>
-    private void foodEatTicks(Player p, ItemStack item, String[] args) {
+    private void foodEatTicks(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3) {
-                p.spigot().sendMessage(this.craftFailFeedback("eatticks " + getLanguageString("eatticks.params", null, p),
-                        getLanguageStringList("eatticks.description", null, p)));
+                onSubFail(p, alias, "eatticks");
                 return;
             }
             int val = Integer.parseInt(args[2]);
@@ -308,9 +328,7 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsedItem.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            e.printStackTrace();
-            p.spigot().sendMessage(this.craftFailFeedback("eatticks " + getLanguageString("eatticks.params", null, p),
-                    getLanguageStringList("eatticks.description", null, p)));
+            onSubFail(p, alias, "eatticks");
         }
     }
 
@@ -328,11 +346,10 @@ public class Food extends SubCmd {
 
 
     //ie food nutrition <amount>
-    private void foodNutrition(Player p, ItemStack item, String[] args) {
+    private void foodNutrition(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3) {
-                p.spigot().sendMessage(this.craftFailFeedback("nutrition " + getLanguageString("nutrition.params", null, p),
-                        getLanguageStringList("nutrition.description", null, p)));
+                onSubFail(p, alias, "nutrition");
                 return;
             }
             int val = Integer.parseInt(args[2]);
@@ -343,17 +360,15 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsedItem.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback("nutrition " + getLanguageString("nutrition.params", null, p),
-                    getLanguageStringList("nutrition.description", null, p)));
+            onSubFail(p, alias, "nutrition");
         }
     }
 
     //ie food saturation <amount>
-    private void foodSaturation(Player p, ItemStack item, String[] args) {
+    private void foodSaturation(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3) {
-                p.spigot().sendMessage(this.craftFailFeedback("saturation " + getLanguageString("saturation.params", null, p),
-                        getLanguageStringList("saturation.description", null, p)));
+                onSubFail(p, alias, "saturation");
                 return;
             }
             float val = Float.parseFloat(args[2]);
@@ -364,25 +379,22 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsedItem.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback("saturation " + getLanguageString("saturation.params", null, p),
-                    getLanguageStringList("saturation.description", null, p)));
+            onSubFail(p, alias, "saturation");
         }
     }
 
 
     //ie food addeffect <type> <duration> [amplifier=1] [particles] [ambient] [icon] [chances=100%]
-    private void foodAddEffect(Player p, ItemStack item, String[] args) {
+    private void foodAddEffect(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 4 || args.length > 9) {
-                p.spigot().sendMessage(this.craftFailFeedback("addeffect " + getLanguageString("addeffect.params", null, p),
-                        getLanguageStringList("addeffect.description", null, p)));
+                onSubFail(p, alias, "addeffect");
                 return;
             }
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2]);
             if (effect == null) {
                 onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
-                Util.sendMessage(p, this.craftFailFeedback("addeffect " + getLanguageString("addeffect.params", null, p),
-                        getLanguageStringList("addeffect.description", null, p)));
+                onSubFail(p, alias, "addeffect");
                 return;
             }
             int duration = UtilLegacy.readPotionEffectDurationSecondsToTicks(args[3]);
@@ -422,24 +434,21 @@ public class Food extends SubCmd {
             updateView(p);
         } catch (Exception e) {
             e.printStackTrace();
-            p.spigot().sendMessage(this.craftFailFeedback("addeffect " + getLanguageString("addeffect.params", null, p),
-                    getLanguageStringList("addeffect.description", null, p)));
+            onSubFail(p, alias, "addeffect");
         }
     }
 
     //ie food removeeffect <type> [amplifier]
-    private void foodRemoveEffect(Player p, ItemStack item, String[] args) {
+    private void foodRemoveEffect(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3 && args.length != 4) {
-                p.spigot().sendMessage(this.craftFailFeedback("removeeffect " + getLanguageString("removeeffect.params", null, p),
-                        getLanguageStringList("removeeffect.description", null, p)));
+                onSubFail(p, alias, "removeeffect");
                 return;
             }
             PotionEffectType type = Aliases.POTION_EFFECT.convertAlias(args[2]);
             if (type == null) {
                 onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
-                Util.sendMessage(p, this.craftFailFeedback("removeeffect " + getLanguageString("removeeffect.params", null, p),
-                        getLanguageStringList("removeeffect.description", null, p)));
+                onSubFail(p, alias, "removeeffect");
                 return;
             }
             Integer level;
@@ -456,24 +465,22 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(setFoodEffects(item, values));
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback("removeeffect " + getLanguageString("removeeffect.params", null, p),
-                    getLanguageStringList("removeeffect.description", null, p)));
+            onSubFail(p, alias, "removeeffect");
         }
     }
 
     //ie food cleareffects
-    private void foodClearEffects(Player p, ItemStack item, String[] args) {
+    private void foodClearEffects(Player p, ItemStack item, String alias, String[] args) {
         try {
             p.getInventory().setItemInMainHand(setFoodEffects(item, null));
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback("cleareffects " + getLanguageString("cleareffects.params", null, p),
-                    getLanguageStringList("cleareffects.description", null, p)));
+            onSubFail(p, alias, "cleareffects");
         }
     }
 
     //ie food info
-    private void foodInfo(Player p, ItemStack item, String[] args) {
+    private void foodInfo(Player p, ItemStack item, String alias, String[] args) {
         try {
             ItemMeta meta = item.getItemMeta();
             ParsedItem parsedItem = new ParsedItem(item);
@@ -495,7 +502,8 @@ public class Food extends SubCmd {
                             : "&c1.21+ only",
                     "%effects%", String.valueOf(getFoodEffects(item).size()),
                     "%consumeparticles%", Aliases.BOOLEAN.getDefaultName(consumeParticles(item)),
-                    "%eatanimation%", Aliases.ANIMATION.getDefaultName(eatAnimation(item)),
+                    "%animation%", Aliases.ANIMATION.getDefaultName(animation(item)),
+                    "%sound%", Aliases.SOUND.getDefaultName(sound(item)),
                     "%effects%", String.valueOf(getFoodEffects(item).size())));
             int index = 1;
             for (FoodPojo foodEffect : getFoodEffects(item)) {
@@ -519,9 +527,22 @@ public class Food extends SubCmd {
         }
     }
 
-    private String eatAnimation(ItemStack item) {
+    private String animation(ItemStack item) {
         ParsedItem parsedItem = new ParsedItem(item);
         return parsedItem.readString("eat", getComponentPath(), "animation");
+    }
+
+    private Sound sound(ItemStack item) {
+        ParsedItem parsedItem = new ParsedItem(item);
+        String val = parsedItem.readString((String) null, getComponentPath(), "sound");
+        if (val == null)
+            return Sound.ENTITY_GENERIC_EAT;
+        try {
+            Sound value = Registry.SOUNDS.get(new NamespacedKey(val.split(":")[0], val.split(":")[1]));
+            return value == null ? Sound.ENTITY_GENERIC_EAT : value;
+        } catch (Exception e) {
+            return Sound.ENTITY_GENERIC_EAT;
+        }
     }
 
     private boolean consumeParticles(ItemStack item) {
@@ -546,11 +567,10 @@ public class Food extends SubCmd {
     }
 
     //ie food convertto <material/type> [amount]
-    private void foodConvertTo(Player p, ItemStack item, String[] args) {
+    private void foodConvertTo(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length > 4) {
-                p.spigot().sendMessage(this.craftFailFeedback("convertto " + getLanguageString("convertto.params", null, p),
-                        getLanguageStringList("convertto.description", null, p)));
+                onSubFail(p, alias, "convertto");
                 return;
             }
             ItemStack target = null;
@@ -564,8 +584,7 @@ public class Food extends SubCmd {
                             throw new IllegalArgumentException();
                         target = new ItemStack(mat);
                     } catch (IllegalArgumentException e2) {
-                        p.spigot().sendMessage(this.craftFailFeedback("convertto " + getLanguageString("convertto.invalid-type", null, p),
-                                getLanguageStringList("convertto.description", null, p)));
+                        onSubFail(p, alias, "convertto");
                         return;
                     }
                 }
@@ -583,8 +602,7 @@ public class Food extends SubCmd {
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("convertto.params", null, p),
-                    getLanguageStringList("convertto.description", null, p)));
+            onSubFail(p, alias, "convertto");
         }
     }
 
@@ -615,9 +633,10 @@ public class Food extends SubCmd {
                     case "canalwayseat":
                     case "consumeparticles":
                         return Util.complete(args[2], Aliases.BOOLEAN);
-                    case "eatanimation":
-                        //TODO
-                        return Collections.emptyList();
+                    case "animation":
+                        return Util.complete(args[2], Aliases.ANIMATION);
+                    case "sound":
+                        return Util.complete(args[2], Aliases.SOUND);
                     case "eatticks":
                         return Util.complete(args[2], "1", "20", "40");
                     case "saturation":

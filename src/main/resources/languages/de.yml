@@ -435,6 +435,8 @@ itemedit:
   food:
     help-header: '&9&lItemEdit Essen - Hilfe'
     wrong-effect: '&4[&cItemEdit&4] &cFalscher Effektwert! &4[&6hier schweben&4]'
+    wrong-animation: '&4[&cItemEdit&4] &cFalscher Animationswert! &4[&6hier schweben&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cFalscher Klangwert! &4[&6hier schweben&4]'
     description:
       - '&6&lLegt die Nahrungsmittel-Eigenschaft des Gegenstands fest'
       - ''
@@ -472,6 +474,12 @@ itemedit:
         - '&beinige Animationen werden nur in der Third-Person-Perspektive angezeigt,'
         - '&beinige Animationen werden in beiden Perspektiven angezeigt'
       params: '<Animation>'
+    sound:
+      description:
+        - '&6&lLegt das Essgeräusch fest'
+        - ''
+        - '&e<Klang> &bDer Wert, der festgelegt werden soll'
+      params: '<Klang>'
     eatticks:
       description:
         - '&6&lLegt die benötigte Zeit zum Essen des Gegenstands fest'

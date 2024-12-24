@@ -54,8 +54,8 @@ public class Aliases {
         }
 
         private List<String> craftValues(){
-            return Arrays.asList(new String[]{"drink","eat","crossbow",
-                    "none","block","bow","spear","spyglass","toot_horn","brush"});
+            return Arrays.asList("drink","eat","crossbow",
+                    "none","block","bow","spear","spyglass","toot_horn","brush");
         }
 
         @Override
@@ -93,10 +93,15 @@ public class Aliases {
     public static final TropicalFishPatternAliases TROPICALPATTERN = getTropicalPatternAliases();
     public static final TrimMaterialAliases TRIM_MATERIAL = getTrimMaterialAliases();
     public static final TrimPatternAliases TRIM_PATTERN = getTrimPatternAliases();
-    public static final EnumAliasSet<FireworkEffect.Type> FIREWORK_TYPE = new EnumAliasSet<>("firework_type", FireworkEffect.Type.class);
+    public static final EnumAliasSet<FireworkEffect.Type> FIREWORK_TYPE =
+            new EnumAliasSet<>("firework_type", FireworkEffect.Type.class);
     public static final AxolotlVariantAliases AXOLOTL_VARIANT = getAxolotlVariantAliases();
     public static final GoatHornSoundAliases GOAT_HORN_SOUND = getGoatHornSoundAliases();
-    public static final EquipmentSlotGroupAliases EQUIPMENT_SLOTGROUPS = Util.isVersionAfter(1, 21) ? new EquipmentSlotGroupAliases() : null;
+    public static final EquipmentSlotGroupAliases EQUIPMENT_SLOTGROUPS = Util.isVersionAfter(1, 21) ?
+            new EquipmentSlotGroupAliases() : null;
+    public static final SoundAliases SOUND = getSoundAliases();
+
+
     private final static Map<String, IAliasSet<?>> types = new HashMap<>();
     private static boolean loaded = false;
 
@@ -157,6 +162,8 @@ public class Aliases {
         registerAliasType(TRIM_PATTERN);
         registerAliasType(RARITY);
         registerAliasType(EQUIPMENT_SLOTGROUPS);
+        registerAliasType(ANIMATION);
+        registerAliasType(SOUND);
     }
 
     public static <T> void registerAliasType(@Nullable IAliasSet<T> set) {
@@ -255,4 +262,11 @@ public class Aliases {
             return null;
         }
     }
+
+    private static SoundAliases getSoundAliases() {
+        if (Util.isVersionAfter(1, 17))
+            return new SoundAliases();
+        return null;
+    }
+
 }
