@@ -47,17 +47,17 @@ itemedit:
         loreCopy.yml"
       - "&ePaste &b- coller les descriptions précédemment copiées"
       - "&eReplace <remplacé> <remplacent> &b- remplacer toutes les occurrences"
-    params: <add/set/remove...> [...]
+    params: '<add/set/remove...> [...]'
     set:
-      params: set <ligne> <texte>
+      params: '<ligne> <texte>'
       description:
         - "&b&lDéfinir ou remplacer le texte sur la ligne sélectionnée"
     remove:
-      params: remove <ligne>
+      params: '<ligne>'
       description:
         - "&b&lSupprimer la ligne sélectionnée"
     insert:
-      params: insert <ligne> <texte>
+      params: '<ligne> <texte>'
       description:
         - "&b&lAjouter du texte sur la ligne sélectionnée"
     copy:
@@ -75,7 +75,7 @@ itemedit:
       feedback: "&9[&fItemEdit&9] &aDescriptions collées"
       no-copy: "&4[&cItemEdit&4] &cCopiez d'abord des descriptions"
     replace:
-      params: 'replace <remplacé> <remplaçant>'
+      params: '<remplacé> <remplaçant>'
       description:
         - '&b&lRemplacez toutes les occurrences dans la description'
         - ''
@@ -195,7 +195,7 @@ itemedit:
       - '&eRéinitialiser &b- supprimer tous les effets'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <effet> <durée> [niveau] [particules] [ambiant] [icône]'
+      params: '<effet> <durée> [niveau] [particules] [ambiant] [icône]'
       description:
         - '&b&lAjoute/remplace l''effet sélectionné'
         - ''
@@ -206,7 +206,7 @@ itemedit:
         - '&e[ambiant] &bLes particules doivent-elles avoir le drapeau ambiant? &etrue&b/&efalse'
         - '&e[icône] &bAfficher l''icône en haut à droite? &etrue&b/&efalse &b(seulement pour 1.13+)'
     remove:
-      params: 'remove <effet>'
+      params: '<effet>'
       description:
         - '&b&lSupprimer l''effet sélectionné'
   banner:
@@ -216,19 +216,19 @@ itemedit:
     description:
       - '&b&lModifier la bannière'
     set:
-      params: 'set <type> <couleur> <ligne>'
+      params: '<type> <couleur> <ligne>'
       description:
         - '&b&lRemplacer le motif sur la ligne sélectionnée'
     add:
-      params: 'add <type> <couleur>'
+      params: '<type> <couleur>'
       description:
         - '&b&lAjouter un motif'
     remove:
-      params: 'remove <ligne>'
+      params: '<ligne>'
       description:
         - '&b&lSupprimer le motif sur la ligne sélectionnée'
     color:
-      params: 'color <ligne> <couleur>'
+      params: '<ligne> <couleur>'
       description:
         - '&b&lChanger la couleur du motif sur la ligne sélectionnée'
   fireworkpower:
@@ -263,7 +263,7 @@ itemedit:
       - '&eSupprimer <attribut/emplacement> &b- supprimer certains modificateurs'
     params: '<add/remove> [...]'
     add:
-      params: 'add <attribut> <montant> [opération] [emplacement]'
+      params: '<attribut> <montant> [opération] [emplacement]'
       description:
         - '&b&lAjouter un modificateur d''attribut'
         - ''
@@ -272,7 +272,7 @@ itemedit:
         - '&e[opération] &bmanière dont le modificateur est ajouté, par défaut somme'
         - '&e[emplacement] &bappliquer ce modificateur uniquement lorsque l''objet est équipé dans l''emplacement sélectionné, ou n''importe quel emplacement d''équipement s''il n''est pas sélectionné'
     remove:
-      params: 'remove <attribut/emplacement>'
+      params: '<attribut/emplacement>'
       description:
         - '&b&lSupprimer les modificateurs'
         - ''
@@ -289,19 +289,19 @@ itemedit:
       - '&ecouleurcorps <couleur> &b- couleur du corps du poisson'
     params: '[...]'
     pattern:
-      params: 'pattern <type>'
+      params: '<type>'
       description:
         - '&b&lDéfinir le type de motif du poisson tropical'
         - ''
         - '&e<type> &btype de motif du poisson'
     patterncolor:
-      params: 'patterncolor <couleur>'
+      params: '<couleur>'
       description:
         - '&b&lDéfinir la couleur du motif du poisson tropical'
         - ''
         - '&e<couleur> &bcouleur du motif du poisson'
     bodycolor:
-      params: 'bodycolor <couleur>'
+      params: '<couleur>'
       description:
         - '&b&lDéfinir la couleur du corps du poisson tropical'
         - ''

@@ -46,17 +46,13 @@ public class Trim extends SubCmd {
             TrimMaterial mat = Aliases.TRIM_MATERIAL.convertAlias(args[1]);
             if (mat == null) {
                 onWrongAlias("wrong-material", p, Aliases.TRIM_MATERIAL);
-                Util.sendMessage(p, this
-                        .craftFailFeedback(getLanguageString("params", null, p),
-                                getLanguageStringList("description", null, p)));
+                onFail(p,alias);
                 return;
             }
             TrimPattern patt = Aliases.TRIM_PATTERN.convertAlias(args[2]);
             if (patt == null) {
                 onWrongAlias("wrong-pattern", p, Aliases.TRIM_PATTERN);
-                Util.sendMessage(p, this
-                        .craftFailFeedback(getLanguageString("params", null, p),
-                                getLanguageStringList("description", null, p)));
+                onFail(p,alias);
                 return;
             }
             ArmorMeta armorMeta = (ArmorMeta) meta;

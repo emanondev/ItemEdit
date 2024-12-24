@@ -45,15 +45,15 @@ itemedit:
       - '&eReplace <被替换> <替换者> &b- 替换描述中所有出现的文字'
     params: '<add/set/remove...> [...]'
     set:
-      params: 'set <行号> <文字>'
+      params: '<行号> <文字>'
       description:
         - '&b&l设置或替换指定行号的文字'
     remove:
-      params: 'remove <行号>'
+      params: '<行号>'
       description:
         - '&b&l删除指定行号的文字'
     insert:
-      params: 'insert <行号> <文字>'
+      params: '<行号> <文字>'
       description:
         - '&b&l在指定行号添加文字'
     copy:
@@ -69,7 +69,7 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &a描述已粘贴'
       no-copy: '&4[&cItemEdit&4] &c请先复制一行描述'
     replace:
-      params: 'replace <被替换> <替换者>'
+      params: '<被替换> <替换者>'
       description:
         - '&b&l替换描述中所有出现的文字'
         - ''
@@ -186,7 +186,7 @@ itemedit:
       - '&eReset &b- 移除所有效果'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <effect> <duration> [level] [粒子] [环境] [图标]'
+      params: '<effect> <duration> [level] [粒子] [环境] [图标]'
       description:
         - '&b&l添加/覆盖所选效果'
         - ''
@@ -197,7 +197,7 @@ itemedit:
         - '&e[环境] &b粒子应有环境标志？ &etrue&b/&efalse'
         - '&e[图标] &b在右上角显示图标？ &etrue&b/&efalse &b(仅适用于 1.13+)'
     remove:
-      params: 'remove <effect>'
+      params: '<effect>'
       description:
         - '&b&l移除所选效果'
   banner:
@@ -207,19 +207,19 @@ itemedit:
     description:
       - '&b&l编辑旗帜'
     set:
-      params: 'set <type> <color> <line>'
+      params: '<type> <color> <line>'
       description:
         - '&b&l替换所选行上的图案'
     add:
-      params: 'add <type> <color>'
+      params: '<type> <color>'
       description:
         - '&b&l添加图案'
     remove:
-      params: 'remove <line>'
+      params: '<line>'
       description:
         - '&b&l移除所选行上的图案'
     color:
-      params: 'color <line> <color>'
+      params: '<line> <color>'
       description:
         - '&b&l更改所选行上的图案颜色'
   fireworkpower:
@@ -254,7 +254,7 @@ itemedit:
       - '&eRemove <attribute/slot> &b- 移除某些修改器'
     params: '<add/remove> [...]'
     add:
-      params: 'add <attribute> <amount> [operation] [slot]'
+      params: '<attribute> <amount> [operation] [slot]'
       description:
         - '&b&l添加属性修改器'
         - ''
@@ -263,7 +263,7 @@ itemedit:
         - '&e[operation] &b修改器的添加方式，默认为求和'
         - '&e[slot] &b仅在物品装备于所选装备槽时应用此修改器，如果未选择则应用于任何装备槽'
     remove:
-      params: 'remove <attribute/slot>'
+      params: '<attribute/slot>'
       description:
         - '&b&l移除修改器'
         - ''
@@ -280,19 +280,19 @@ itemedit:
       - '&ebodycolor <颜色> &b- 鱼的身体颜色'
     params: '[...]'
     pattern:
-      params: 'pattern <类别>'
+      params: '<类别>'
       description:
         - '&b&l设置热带鱼图案种类'
         - ''
         - '&e<类别> &b鱼的图案种类'
     patterncolor:
-      params: 'patterncolor <颜色>'
+      params: '<颜色>'
       description:
         - '&b&l设置热带鱼图案颜色'
         - ''
         - '&e<颜色> &b鱼的图案颜色'
     bodycolor:
-      params: 'bodycolor <颜色>'
+      params: '<颜色>'
       description:
         - '&b&l设置热带鱼身体颜色'
         - ''

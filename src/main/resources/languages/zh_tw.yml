@@ -45,15 +45,15 @@ itemedit:
       - '&eReplace <被替換> <替換者> &b- 替換描述中所有出現的文字'
     params: '<add/set/remove...> [...]'
     set:
-      params: 'set <行號> <文字>'
+      params: '<行號> <文字>'
       description:
         - '&b&l在指定行號設定或取代文字'
     remove:
-      params: 'remove <行號>'
+      params: '<行號>'
       description:
         - '&b&l刪除指定行號的文字'
     insert:
-      params: 'insert <行號> <文字>'
+      params: '<行號> <文字>'
       description:
         - '&b&l在指定行號添加文字'
     copy:
@@ -69,7 +69,7 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &a描述已貼上'
       no-copy: '&4[&cItemEdit&4] &c請先複製一行描述'
     replace:
-      params: 'replace <被替換的文字> <替換者>'
+      params: '<被替換的文字> <替換者>'
       description:
         - '&b&l替換描述中所有出現的文字'
         - ''
@@ -186,7 +186,7 @@ itemedit:
       - '&eReset &b- 移除所有效果'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <效果> <持續時間> [等級] [粒子] [環境] [圖標]'
+      params: '<效果> <持續時間> [等級] [粒子] [環境] [圖標]'
       description:
         - '&b&l添加/覆蓋所選效果'
         - ''
@@ -197,7 +197,7 @@ itemedit:
         - '&e[環境] &b粒子應有環境標誌？ &etrue&b/&efalse'
         - '&e[圖標] &b在右上角顯示圖標？ &etrue&b/&efalse &b(僅適用於 1.13+)'
     remove:
-      params: 'remove <效果>'
+      params: '<效果>'
       description:
         - '&b&l移除所選效果'
   banner:
@@ -207,19 +207,19 @@ itemedit:
     description:
       - '&b&l編輯旗幟'
     set:
-      params: 'set <類型> <顏色> <行>'
+      params: '<類型> <顏色> <行>'
       description:
         - '&b&l替換所選行的圖案'
     add:
-      params: 'add <類型> <顏色>'
+      params: '<類型> <顏色>'
       description:
         - '&b&l新增一個圖案'
     remove:
-      params: 'remove <行>'
+      params: '<行>'
       description:
         - '&b&l移除所選行的圖案'
     color:
-      params: 'color <行> <顏色>'
+      params: '<行> <顏色>'
       description:
         - '&b&l更改所選行的圖案顏色'
   fireworkpower:
@@ -254,7 +254,7 @@ itemedit:
       - '&eRemove <屬性/插槽> &b- 移除一些修改器'
     params: '<add/remove> [...]'
     add:
-      params: 'add <屬性> <數量> [操作] [插槽]'
+      params: '<屬性> <數量> [操作] [插槽]'
       description:
         - '&b&l添加屬性修改器'
         - ''
@@ -263,7 +263,7 @@ itemedit:
         - '&e[操作] &b修改器的添加方式，默認為加總'
         - '&e[插槽] &b僅在物品放置在所選裝備插槽時應用此修改器，如果未選擇則應用於任何裝備插槽'
     remove:
-      params: 'remove <屬性/插槽>'
+      params: '<屬性/插槽>'
       description:
         - '&b&l移除修改器'
         - ''
@@ -275,24 +275,24 @@ itemedit:
     description:
       - '&b&l設置熱帶魚桶的屬性'
       - ''
-      - '&epattern <圖案類型> &b- 魚的圖案'
+      - '&epattern <類型> &b- 魚的圖案'
       - '&epatterncolor <顏色> &b- 魚的圖案顏色'
       - '&ebodycolor <顏色> &b- 魚的身體顏色'
     params: '[...]'
     pattern:
-      params: 'pattern <類型>'
+      params: '<類型>'
       description:
         - '&b&l設置熱帶魚的圖案類型'
         - ''
         - '&e<類型> &b魚的圖案類型'
     patterncolor:
-      params: 'patterncolor <顏色>'
+      params: '<顏色>'
       description:
         - '&b&l設置熱帶魚的圖案顏色'
         - ''
         - '&e<顏色> &b魚的圖案顏色'
     bodycolor:
-      params: 'bodycolor <顏色>'
+      params: '<顏色>'
       description:
         - '&b&l設置熱帶魚的身體顏色'
         - ''
@@ -304,7 +304,7 @@ itemedit:
       - '&e<花費> &b等級數量'
       - '&b&l提示：&b鐵砧修復/重新命名的價格至少為&e1'
       - '&b&l提示：&b這個指令設置物品的基本修復花費，最終鐵砧修復的花費基於您的操作'
-      - '&b更多信息請參考&eminecraft.gamepedia.com/Anvil/Mechanics'
+      - '&b更多信息請參考 &eminecraft.gamepedia.com/Anvil/Mechanics'
     params: '<花費>'
   custommodeldata:
     description:

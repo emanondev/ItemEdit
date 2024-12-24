@@ -45,15 +45,15 @@ itemedit:
       - '&eReplace <replaced> <replacer> &b- Ersetze alle Vorkommnisse'
     params: '<add/set/remove...> [...]'
     set:
-      params: 'set <line> <text>'
+      params: '<line> <text>'
       description:
         - '&b&lSetze oder ersetze den Text in der ausgewählten Zeile'
     remove:
-      params: 'remove <line>'
+      params: '<line>'
       description:
         - '&b&lEntferne die ausgewählte Zeile'
     insert:
-      params: 'insert <line> <text>'
+      params: '<line> <text>'
       description:
         - '&b&lFüge Text in der ausgewählten Zeile hinzu'
     copy:
@@ -69,7 +69,7 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aBeschreibung eingefügt'
       no-copy: '&4[&cItemEdit&4] &cKopiere zuerst eine Beschreibung'
     replace:
-      params: 'replace <replaced> <replacer>'
+      params: '<replaced> <replacer>'
       description:
         - '&b&lErsetze alle Vorkommnisse in der Beschreibung'
         - ''
@@ -189,7 +189,7 @@ itemedit:
       - '&eReset &b- alle Effekte entfernen'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <effect> <duration> [level] [particles] [ambient] [icon]'
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
       description:
         - '&b&lFüge einen Effekt hinzu oder überschreibe ihn'
         - ''
@@ -200,7 +200,7 @@ itemedit:
         - '&e[ambient] &bPartikel sollten das Umgebungs-Flag haben? &etrue&b/&efalse'
         - '&e[icon] &bIcon in der oberen rechten Ecke anzeigen? &etrue&b/&efalse &b(nur für 1.13+)'
     remove:
-      params: 'remove <effect>'
+      params: '<effect>'
       description:
         - '&b&lEntferne den ausgewählten Effekt'
   banner:
@@ -210,19 +210,19 @@ itemedit:
     description:
       - '&b&lBanner bearbeiten'
     set:
-      params: 'set <type> <color> <line>'
+      params: '<type> <color> <line>'
       description:
         - '&b&lErsetze das Muster in der ausgewählten Zeile'
     add:
-      params: 'add <type> <color>'
+      params: '<type> <color>'
       description:
         - '&b&lFüge ein Muster hinzu'
     remove:
-      params: 'remove <line>'
+      params: '<line>'
       description:
         - '&b&lEntferne das Muster in der ausgewählten Zeile'
     color:
-      params: 'color <line> <color>'
+      params: '<line> <color>'
       description:
         - '&b&lÄndere die Musterfarbe in der ausgewählten Zeile'
   fireworkpower:
@@ -257,7 +257,7 @@ itemedit:
       - '&eRemove <attribute/slot> &b- einige Modifikatoren entfernen'
     params: '<add/remove> [...]'
     add:
-      params: 'add <attribute> <amount> [operation] [slot]'
+      params: '<attribute> <amount> [operation] [slot]'
       description:
         - '&b&lFüge einen Attributmodifikator hinzu'
         - ''
@@ -267,7 +267,7 @@ itemedit:
         - '&e[slot] &bgelte den Modifikator nur, wenn das Item in der ausgewählten'
         - '&e       Ausrüstungsslot oder jedem Ausrüstungsslot, falls nicht ausgewählt, liegt'
     remove:
-      params: 'remove <attribute/slot>'
+      params: '<attribute/slot>'
       description:
         - '&b&lEntferne Modifikatoren'
         - ''
@@ -285,19 +285,19 @@ itemedit:
       - '&ebodycolor <Farbe> &b- Körperfarbe des Fisches'
     params: '[...]'
     pattern:
-      params: 'pattern <type>'
+      params: '<type>'
       description:
         - '&b&lMustertyp des tropischen Fisches setzen'
         - ''
         - '&e<type> &bMustertyp des Fisches'
     patterncolor:
-      params: 'patterncolor <color>'
+      params: '<color>'
       description:
         - '&b&lMusterfarbe des tropischen Fisches setzen'
         - ''
         - '&e<color> &bMusterfarbe des Fisches'
     bodycolor:
-      params: 'bodycolor <color>'
+      params: '<color>'
       description:
         - '&b&lKörperfarbe des tropischen Fisches setzen'
         - ''

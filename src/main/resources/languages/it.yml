@@ -45,15 +45,15 @@ itemedit:
       - '&eReplace <rimpiazzato> <rimpiazzatore> &b- rimpiazza il testo scelto'
     params: '<add/set/remove...> [...]'
     set:
-      params: 'set <linea> <testo>'
+      params: '<linea> <testo>'
       description:
         - '&b&lImposta o rimpiazza testo alla linea scelta'
     remove:
-      params: 'remove <linea>'
+      params: '<linea>'
       description:
         - '&b&lRimuove la linea scelta'
     insert:
-      params: 'insert <linea> <testo>'
+      params: '<linea> <testo>'
       description:
         - '&b&lAggiunge testo alla linea scelta'
     copy:
@@ -69,7 +69,7 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aDescrizione incollata'
       no-copy: '&4[&cItemEdit&4] &cDevi prima copiare una descrizione'
     replace:
-      params: 'replace <rimpiazzato> <rimpiazzatore>'
+      params: '<rimpiazzato> <rimpiazzatore>'
       description:
         - '&b&lRimpiazza il testo scelto nella lore'
         - ''
@@ -190,7 +190,7 @@ itemedit:
       - '&eReset &b- Rimuove tutti gli effetti'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <effecto> <durata> [lv] [particelle] [ambientale] [icona]'
+      params: '<effecto> <durata> [lv] [particelle] [ambientale] [icona]'
       description:
         - '&b&lAggiunge/Sovrascrive l''effetto selezionato'
         - ''
@@ -201,7 +201,7 @@ itemedit:
         - '&e[ambientale] &bLe particelle dovrebbero avere la flag ambientale? &etrue&b/&efalse'
         - '&e[icona] &bMostrare l''icona nell''angolo in alto a destra? &etrue&b/&efalse &b(solo per 1.13+)'
     remove:
-      params: 'remove <effetto>'
+      params: '<effetto>'
       description:
         - '&b&lRimuove l''effetto selezionato'
   banner:
@@ -211,19 +211,19 @@ itemedit:
     description:
       - '&b&lModifica bandiera'
     set:
-      params: 'set <tipo> <colore> <linea>'
+      params: '<tipo> <colore> <linea>'
       description:
         - '&b&lSovrascrive il pattern alla linea selezionata'
     add:
-      params: 'add <tipo> <colore>'
+      params: '<tipo> <colore>'
       description:
         - '&b&lAggiunge il pattern'
     remove:
-      params: 'remove <linea>'
+      params: '<linea>'
       description:
         - '&b&lRimuove il pattern alla linea selezionata'
     color:
-      params: 'color <linea> <colore>'
+      params: '<linea> <colore>'
       description:
         - '&b&lCambia il colore alla linea selezionata'
   fireworkpower:
@@ -258,7 +258,7 @@ itemedit:
       - '&eRemove <attributo/slot> &b- rimuovi alcuni modificatori'
     params: '<add/remove> [...]'
     add:
-      params: 'add <attributo> <quantità> [operazione] [slot]'
+      params: '<attributo> <quantità> [operazione] [slot]'
       description:
         - '&b&lAggiungi un modificatore attributo'
         - ''
@@ -268,7 +268,7 @@ itemedit:
         - '&e[slot] &bapplica questo modificatore solo quando l''oggetto è nell''equipaggiamento selezionato'
         - '&e      o in qualsiasi slot dell''equipaggiamento se non selezionato'
     remove:
-      params: 'remove <attributo/slot>'
+      params: '<attributo/slot>'
       description:
         - '&b&lRimuovi i modificatori'
         - ''
@@ -286,19 +286,19 @@ itemedit:
       - '&ebodycolor <colore> &b- colore del corpo del pesce'
     params: '[...]'
     pattern:
-      params: 'pattern <tipo>'
+      params: '<tipo>'
       description:
         - '&b&lImposta il tipo di motivo del pesce tropicale'
         - ''
         - '&e<tipo> &btipo di motivo del pesce'
     patterncolor:
-      params: 'patterncolor <colore>'
+      params: '<colore>'
       description:
         - '&b&lImposta il colore del motivo del pesce tropicale'
         - ''
         - '&e<colore> &bcolore del motivo del pesce'
     bodycolor:
-      params: 'bodycolor <colore>'
+      params: '<colore>'
       description:
         - '&b&lImposta il colore del corpo del pesce tropicale'
         - ''

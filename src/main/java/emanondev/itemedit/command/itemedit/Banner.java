@@ -41,16 +41,16 @@ public class Banner extends SubCmd {
 
         switch (args[1].toLowerCase(Locale.ENGLISH)) {
             case "add":
-                addPattern(p, item, args);
+                addPattern(p, item, alias, args);
                 return;
             case "set":
-                setPattern(p, item, args);
+                setPattern(p, item, alias, args);
                 return;
             case "remove":
-                removePattern(p, item, args);
+                removePattern(p, item, alias, args);
                 return;
             case "color":
-                colorPattern(p, item, args);
+                colorPattern(p, item, alias, args);
                 return;
             default:
                 onFail(p, alias);
@@ -58,7 +58,7 @@ public class Banner extends SubCmd {
     }
 
     // itemedit banner color id color
-    private void colorPattern(Player p, ItemStack item, String[] args) {
+    private void colorPattern(Player p, ItemStack item, String alias,String[] args) {
         try {
             BannerMeta meta = (BannerMeta) item.getItemMeta();
             int id = Integer.parseInt(args[2]) - 1;
@@ -66,21 +66,19 @@ public class Banner extends SubCmd {
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (color == null) {
                 onWrongAlias("wrong-color", p, Aliases.COLOR);
-                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("color.params", null, p),
-                        getLanguageStringList("color.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"color");
                 return;
             }
             meta.setPattern(id, new Pattern(color, type));
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("color.params", null, p),
-                    getLanguageStringList("color.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"color");
         }
 
     }
 
-    private void removePattern(Player p, ItemStack item, String[] args) {
+    private void removePattern(Player p, ItemStack item, String alias,String[] args) {
         try {
             BannerMeta meta = (BannerMeta) item.getItemMeta();
             int id = Integer.parseInt(args[2]) - 1;
@@ -90,12 +88,11 @@ public class Banner extends SubCmd {
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("remove.params", null, p),
-                    getLanguageStringList("remove.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"remove");
         }
     }
 
-    private void setPattern(Player p, ItemStack item, String[] args) {
+    private void setPattern(Player p, ItemStack item, String alias,String[] args) {
         try {
             BannerMeta meta = (BannerMeta) item.getItemMeta();
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
@@ -103,8 +100,7 @@ public class Banner extends SubCmd {
             if (type == null || color == null) {
                 if (type == null) onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
                 if (color == null) onWrongAlias("wrong-color", p, Aliases.COLOR);
-                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("set.params", null, p),
-                        getLanguageStringList("set.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"set");
                 return;
             }
             int id = Integer.parseInt(args[4]) - 1;
@@ -112,12 +108,11 @@ public class Banner extends SubCmd {
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("set.params", null, p),
-                    getLanguageStringList("set.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"set");
         }
     }
 
-    private void addPattern(Player p, ItemStack item, String[] args) {
+    private void addPattern(Player p, ItemStack item, String alias,String[] args) {
         try {
             BannerMeta meta = (BannerMeta) item.getItemMeta();
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
@@ -125,16 +120,14 @@ public class Banner extends SubCmd {
             if (type == null || color == null) {
                 if (type == null) onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
                 if (color == null) onWrongAlias("wrong-color", p, Aliases.COLOR);
-                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
-                        getLanguageStringList("add.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"add");
                 return;
             }
             meta.addPattern(new Pattern(color, type));
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
-                    getLanguageStringList("add.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"add");
         }
     }
 
@@ -143,9 +136,11 @@ public class Banner extends SubCmd {
         if (args.length == 2) {
             return Util.complete(args[1], subCommands);
         }
-        if (args.length == 3 && (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("set")))
+        if (args.length == 3 && (args[1].equalsIgnoreCase("add")
+                || args[1].equalsIgnoreCase("set")))
             return Util.complete(args[2], Aliases.PATTERN_TYPE);
-        if (args.length == 4 && (args[1].equalsIgnoreCase("color") || args[1].equalsIgnoreCase("add")
+        if (args.length == 4 && (args[1].equalsIgnoreCase("color")
+                || args[1].equalsIgnoreCase("add")
                 || args[1].equalsIgnoreCase("set")))
             return Util.complete(args[3], Aliases.COLOR);
         return Collections.emptyList();

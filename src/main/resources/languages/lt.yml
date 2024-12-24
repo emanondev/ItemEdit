@@ -42,17 +42,17 @@ itemedit:
       - '&eKopijuotiFailą <path> &b- tas pats kaip kopijuoti, bet iš loreCopy.yml'
       - '&eĮklijuoti &b- įklijuoti paskutinį nukopijuotą aprašymą'
       - '&ePakeisti <replaced> <replacer> &b- pakeisti visus atvejus'
-    params: <add/set/remove...> [...]
+    params: '<add/set/remove...> [...]'
     set:
-      params: set <line> <text>
+      params: '<line> <text>'
       description:
         - '&b&lNustatyti arba pakeisti tekstą pasirinktoje eilutėje'
     remove:
-      params: remove <line>
+      params: '<line>'
       description:
         - '&b&lPašalinti pasirinktą eilutę'
     insert:
-      params: insert <line> <text>
+      params: '<line> <text>'
       description:
         - '&b&lĮterpti tekstą pasirinktoje eilutėje'
     copy:
@@ -69,7 +69,7 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aAprašymas įklijuotas'
       no-copy: '&4[&cItemEdit&4] &cPirmiausia nukopijuokite aprašymą'
     replace:
-      params: replace <replaced> <replacer>
+      params: '<replaced> <replacer>'
       description:
         - '&b&lPakeisti visus atvejus aprašyme'
         - ''
@@ -191,9 +191,9 @@ itemedit:
       - '&ePridėti <effect> <duration> [level] &b- pridėti efektą'
       - '&ePašalinti <effect> &b- pašalinti pasirinktą efektą'
       - '&eAtstatyti &b- pašalinti visus efektus'
-    params: <add/remove/reset> [...]
+    params: '<add/remove/reset> [...]'
     add:
-      params: add <effect> <duration> [level]
+      params: '<effect> <duration> [level]'
       description:
         - '&b&lPridėti/Pakeisti pasirinktą efektą'
         - ''
@@ -201,7 +201,7 @@ itemedit:
         - '&e<duration> &btrukmė sekundėmis, &e0 &bskirta momentiniams efektams'
         - '&e[level] &bIki 127, pagal numatytuosius nustatymus &e1'
     remove:
-      params: remove <effect>
+      params: '<effect>'
       description:
         - '&b&lPašalinti pasirinktą efektą'
   banner:
@@ -211,26 +211,21 @@ itemedit:
     description:
       - '&b&lRedaguoti vėliavą'
     set:
-      params: set <type> <color> <line>
+      params: '<type> <color> <line>'
       description:
         - '&b&lPakeisti modelį pasirinktoje eilutėje'
     add:
-      params: add <type> <color>
+      params: '<type> <color>'
       description:
         - '&b&lPridėti modelį'
     remove:
-      params: remove <line>
+      params: '<line>'
       description:
         - '&b&lPašalinti modelį pasirinktoje eilutėje'
     color:
-      params: color <line> <color>
+      params: '<line> <color>'
       description:
         - '&b&lPakeisti modelio spalvą pasirinktoje eilutėje'
-    colorbanner:
-      params: colorbanner <color>
-      description:
-        - '&b&lPakeisti vėliavos fono spalvą'
-    params: ''
   fireworkpower:
     wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti fejerverkas'
     description:
@@ -261,9 +256,9 @@ itemedit:
       - ''
       - '&ePridėti <attribute> <amount> [operation] [slot] &b- pridėti naujus modifikatorius'
       - '&ePašalinti <attribute/slot> &b- pašalinti kai kuriuos modifikatorius'
-    params: <add/remove> [...]
+    params: '<add/remove> [...]'
     add:
-      params: add <attribute> <amount> [operation] [slot]
+      params: '<attribute> <amount> [operation] [slot]'
       description:
         - '&b&lPridėti atributo modifikatorių'
         - ''
@@ -273,7 +268,7 @@ itemedit:
         - '&e[slot] &btaikyti šį modifikatorių tik tada, kai daiktas yra pasirinktoje'
         - '&e       įrangos vietoje arba bet kurioje įrangos vietoje, jei nepasirinkta'
     remove:
-      params: remove <attribute/slot>
+      params: '<attribute/slot>'
       description:
         - '&b&lPašalinti modifikatorius'
         - ''
@@ -291,19 +286,19 @@ itemedit:
       - '&ekūnospalva <color> &b- žuvies kūno spalva'
     params: '[...]'
     pattern:
-      params: pattern <type>
+      params: '<type>'
       description:
         - '&b&lNustatyti tropinių žuvų modelio tipą'
         - ''
         - '&e<type> &bžuvies modelio tipas'
     patterncolor:
-      params: patterncolor <color>
+      params: '<color>'
       description:
         - '&b&lNustatyti tropinių žuvų modelio spalvą'
         - ''
         - '&e<color> &bžuvies modelio spalva'
     bodycolor:
-      params: bodycolor <color>
+      params: '<color>'
       description:
         - '&b&lNustatyti tropinių žuvų kūno spalvą'
         - ''

@@ -100,7 +100,7 @@ public class Food extends SubCmd {
     private void foodSound(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3) {
-                onSubFail(p, alias, "sound");
+                sendFailFeedbackForSub(p, alias, "sound");
                 return;
             }
             Sound value = Aliases.SOUND.convertAlias(args[2]);
@@ -109,20 +109,20 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsed.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            onSubFail(p, alias, "sound");
+            sendFailFeedbackForSub(p, alias, "sound");
         }
     }
 
     private void foodAnimation(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3) {
-                onSubFail(p, alias, "animation");
+                sendFailFeedbackForSub(p, alias, "animation");
                 return;
             }
             String value = Aliases.ANIMATION.convertAlias(args[2]);
             if (value == null) {
                 onWrongAlias("wrong-animation", p, Aliases.ANIMATION);
-                onSubFail(p, alias, "animation");
+                sendFailFeedbackForSub(p, alias, "animation");
                 return;
             }
             ParsedItem parsed = new ParsedItem(item);
@@ -130,14 +130,14 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsed.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            onSubFail(p, alias, "animation");
+            sendFailFeedbackForSub(p, alias, "animation");
         }
     }
 
     private void foodConsumeParticles(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 2 && args.length != 3) {
-                onSubFail(p, alias, "consumeparticles");
+                sendFailFeedbackForSub(p, alias, "consumeparticles");
                 return;
             }
             Boolean value = args.length == 2 ? !consumeParticles(item) : Aliases.BOOLEAN.convertAlias(args[2]);
@@ -146,7 +146,7 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsed.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            onSubFail(p, alias, "consumeparticles");
+            sendFailFeedbackForSub(p, alias, "consumeparticles");
         }
     }
 
@@ -163,11 +163,6 @@ public class Food extends SubCmd {
                             new Text(String.join("\n",
                                     getLanguageStringList(sub + ".description", null, target)))))
                     .create());
-    }
-
-    private void onSubFail(CommandSender target, String alias, String subCommand) {
-        target.spigot().sendMessage(this.craftFailFeedback(alias, subCommand + " " + getLanguageString(subCommand + ".params", null, target),
-                getLanguageStringList(subCommand + ".description", null, target)));
     }
 
     private void foodClear(Player p, ItemStack item, String alias, String[] args) {
@@ -188,7 +183,7 @@ public class Food extends SubCmd {
     private void foodCanAlwaysEat(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 2 && args.length != 3) {
-                onSubFail(p, alias, "canalwayseat");
+                sendFailFeedbackForSub(p, alias, "canalwayseat");
                 return;
             }
             Boolean value = args.length == 2 ? !canAlwaysEat(item) : Aliases.BOOLEAN.convertAlias(args[2]);
@@ -200,7 +195,7 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsed.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            onSubFail(p, alias, "canalwayseat");
+            sendFailFeedbackForSub(p, alias, "canalwayseat");
         }
     }
 
@@ -315,7 +310,7 @@ public class Food extends SubCmd {
     private void foodEatTicks(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3) {
-                onSubFail(p, alias, "eatticks");
+                sendFailFeedbackForSub(p, alias, "eatticks");
                 return;
             }
             int val = Integer.parseInt(args[2]);
@@ -328,7 +323,7 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsedItem.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            onSubFail(p, alias, "eatticks");
+            sendFailFeedbackForSub(p, alias, "eatticks");
         }
     }
 
@@ -349,7 +344,7 @@ public class Food extends SubCmd {
     private void foodNutrition(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3) {
-                onSubFail(p, alias, "nutrition");
+                sendFailFeedbackForSub(p, alias, "nutrition");
                 return;
             }
             int val = Integer.parseInt(args[2]);
@@ -360,7 +355,7 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsedItem.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            onSubFail(p, alias, "nutrition");
+            sendFailFeedbackForSub(p, alias, "nutrition");
         }
     }
 
@@ -368,7 +363,7 @@ public class Food extends SubCmd {
     private void foodSaturation(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3) {
-                onSubFail(p, alias, "saturation");
+                sendFailFeedbackForSub(p, alias, "saturation");
                 return;
             }
             float val = Float.parseFloat(args[2]);
@@ -379,7 +374,7 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(parsedItem.toItemStack());
             updateView(p);
         } catch (Exception e) {
-            onSubFail(p, alias, "saturation");
+            sendFailFeedbackForSub(p, alias, "saturation");
         }
     }
 
@@ -388,13 +383,13 @@ public class Food extends SubCmd {
     private void foodAddEffect(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 4 || args.length > 9) {
-                onSubFail(p, alias, "addeffect");
+                sendFailFeedbackForSub(p, alias, "addeffect");
                 return;
             }
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2]);
             if (effect == null) {
                 onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
-                onSubFail(p, alias, "addeffect");
+                sendFailFeedbackForSub(p, alias, "addeffect");
                 return;
             }
             int duration = UtilLegacy.readPotionEffectDurationSecondsToTicks(args[3]);
@@ -434,7 +429,7 @@ public class Food extends SubCmd {
             updateView(p);
         } catch (Exception e) {
             e.printStackTrace();
-            onSubFail(p, alias, "addeffect");
+            sendFailFeedbackForSub(p, alias, "addeffect");
         }
     }
 
@@ -442,13 +437,13 @@ public class Food extends SubCmd {
     private void foodRemoveEffect(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3 && args.length != 4) {
-                onSubFail(p, alias, "removeeffect");
+                sendFailFeedbackForSub(p, alias, "removeeffect");
                 return;
             }
             PotionEffectType type = Aliases.POTION_EFFECT.convertAlias(args[2]);
             if (type == null) {
                 onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
-                onSubFail(p, alias, "removeeffect");
+                sendFailFeedbackForSub(p, alias, "removeeffect");
                 return;
             }
             Integer level;
@@ -465,7 +460,7 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(setFoodEffects(item, values));
             updateView(p);
         } catch (Exception e) {
-            onSubFail(p, alias, "removeeffect");
+            sendFailFeedbackForSub(p, alias, "removeeffect");
         }
     }
 
@@ -475,7 +470,7 @@ public class Food extends SubCmd {
             p.getInventory().setItemInMainHand(setFoodEffects(item, null));
             updateView(p);
         } catch (Exception e) {
-            onSubFail(p, alias, "cleareffects");
+            sendFailFeedbackForSub(p, alias, "cleareffects");
         }
     }
 
@@ -570,7 +565,7 @@ public class Food extends SubCmd {
     private void foodConvertTo(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length > 4) {
-                onSubFail(p, alias, "convertto");
+                sendFailFeedbackForSub(p, alias, "convertto");
                 return;
             }
             ItemStack target = null;
@@ -584,7 +579,7 @@ public class Food extends SubCmd {
                             throw new IllegalArgumentException();
                         target = new ItemStack(mat);
                     } catch (IllegalArgumentException e2) {
-                        onSubFail(p, alias, "convertto");
+                        sendFailFeedbackForSub(p, alias, "convertto");
                         return;
                     }
                 }
@@ -602,7 +597,7 @@ public class Food extends SubCmd {
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            onSubFail(p, alias, "convertto");
+            sendFailFeedbackForSub(p, alias, "convertto");
         }
     }
 

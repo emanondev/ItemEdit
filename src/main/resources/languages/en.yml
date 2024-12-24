@@ -45,15 +45,15 @@ itemedit:
       - '&eReplace <replaced> <replacer> &b- replace all occurrences'
     params: '<add/set/remove...> [...]'
     set:
-      params: 'set <line> <text>'
+      params: '<line> <text>'
       description:
         - '&6&lSet or replace text on selected line'
     remove:
-      params: 'remove <line>'
+      params: '<line>'
       description:
         - '&6&lRemove selected line'
     insert:
-      params: 'insert <line> <text>'
+      params: '<line> <text>'
       description:
         - '&6&lAdd text on selected line'
     copy:
@@ -69,7 +69,7 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aLore pasted'
       no-copy: '&4[&cItemEdit&4] &cCopy a lore first'
     replace:
-      params: 'replace <replaced> <replacer>'
+      params: '<replaced> <replacer>'
       description:
         - '&6&lReplace all occurrences on the lore'
         - ''
@@ -190,7 +190,7 @@ itemedit:
       - '&eReset &b- remove all effects'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <effect> <duration> [level] [particles] [ambient] [icon]'
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
       description:
         - '&6&lAdds/Override selected effect'
         - ''
@@ -201,7 +201,7 @@ itemedit:
         - '&e[ambient] &bParticles should have ambient flag? &etrue&b/&efalse'
         - '&e[icon] &bShow icon on top-right corner? &etrue&b/&efalse &b(for 1.13+ only)'
     remove:
-      params: 'remove <effect>'
+      params: '<effect>'
       description:
         - '&6&lRemove selected effect'
   banner:
@@ -211,19 +211,19 @@ itemedit:
     description:
       - '&6&lEdit banner'
     set:
-      params: 'set <type> <color> <line>'
+      params: '<type> <color> <line>'
       description:
         - '&6&lReplace the pattern on selected line'
     add:
-      params: 'add <type> <color>'
+      params: '<type> <color>'
       description:
         - '&6&lAdd a pattern'
     remove:
-      params: 'remove <line>'
+      params: '<line>'
       description:
         - '&6&lRemove pattern on selected line'
     color:
-      params: 'color <line> <color>'
+      params: '<line> <color>'
       description:
         - '&6&lChange pattern color on selected line'
   fireworkpower:
@@ -258,7 +258,7 @@ itemedit:
       - '&eRemove <attribute/slot> &b- removes some modifiers'
     params: '<add/remove> [...]'
     add:
-      params: 'add <attribute> <amount> [operation] [slot]'
+      params: '<attribute> <amount> [operation] [slot]'
       description:
         - '&6&lAdd attribute modifier'
         - ''
@@ -268,7 +268,7 @@ itemedit:
         - '&e[slot] &bapply this modifier only when item is on selected'
         - '&e       equipment slot or any equipment slot if not selected'
     remove:
-      params: 'remove <attribute/slot>'
+      params: '<attribute/slot>'
       description:
         - '&6&lRemove modifiers'
         - ''
@@ -286,19 +286,19 @@ itemedit:
       - '&ebodycolor <color> &b- body color of fish'
     params: '[...]'
     pattern:
-      params: 'pattern <type>'
+      params: '<type>'
       description:
         - '&6&lSet tropical fish pattern type'
         - ''
         - '&e<type> &bpattern type of the fish'
     patterncolor:
-      params: 'patterncolor <color>'
+      params: '<color>'
       description:
         - '&6&lSet tropical fish pattern color'
         - ''
         - '&e<color> &bpattern color of the fish'
     bodycolor:
-      params: 'bodycolor <color>'
+      params: '<color>'
       description:
         - '&6&lSet tropical fish body color'
         - ''

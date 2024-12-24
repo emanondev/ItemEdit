@@ -45,15 +45,15 @@ itemedit:
       - '&eReplace <substituído> <substituto> &b- substituir todas as ocorrências'
     params: '<add/set/remove...> [...]'
     set:
-      params: 'set <linha> <texto>'
+      params: '<linha> <texto>'
       description:
         - '&b&lDefinir ou substituir texto na linha selecionada'
     remove:
-      params: 'remove <linha>'
+      params: '<linha>'
       description:
         - '&b&lRemover a linha selecionada'
     insert:
-      params: 'insert <linha> <texto>'
+      params: '<linha> <texto>'
       description:
         - '&b&lAdicionar texto na linha selecionada'
     copy:
@@ -69,7 +69,7 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aLore colada'
       no-copy: '&4[&cItemEdit&4] &cCopie uma lore primeiro'
     replace:
-      params: 'replace <substituído> <substituto>'
+      params: '<substituído> <substituto>'
       description:
         - '&b&lSubstituir todas as ocorrências na lore'
         - ''
@@ -190,7 +190,7 @@ itemedit:
       - '&eReset &b- remover todos os efeitos'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <efeito> <duração> [nível] [partículas] [ambiente] [ícone]'
+      params: '<efeito> <duração> [nível] [partículas] [ambiente] [ícone]'
       description:
         - '&b&lAdicionar/substituir efeito selecionado'
         - ''
@@ -201,7 +201,7 @@ itemedit:
         - '&e[ambiente] &bAs partículas devem ter a bandeira ambiental? &etrue&b/&efalse'
         - '&e[ícone] &bMostrar ícone no canto superior direito? &etrue&b/&efalse &b(somente para 1.13+)'
     remove:
-      params: 'remove <efeito>'
+      params: '<efeito>'
       description:
         - '&b&lRemover efeito selecionado'
   banner:
@@ -211,19 +211,19 @@ itemedit:
     description:
       - '&b&lEditar bandeira'
     set:
-      params: 'set <tipo> <cor> <linha>'
+      params: '<tipo> <cor> <linha>'
       description:
         - '&b&lSubstituir o padrão na linha selecionada'
     add:
-      params: 'add <tipo> <cor>'
+      params: '<tipo> <cor>'
       description:
         - '&b&lAdicionar um padrão'
     remove:
-      params: 'remove <linha>'
+      params: '<linha>'
       description:
         - '&b&lRemover o padrão na linha selecionada'
     color:
-      params: 'color <linha> <cor>'
+      params: '<linha> <cor>'
       description:
         - '&b&lAlterar a cor do padrão na linha selecionada'
   fireworkpower:
@@ -258,7 +258,7 @@ itemedit:
       - '&eRemove <atributo/slot> &b- remover alguns modificadores'
     params: '<add/remove> [...]'
     add:
-      params: 'add <atributo> <quantidade> [operação] [slot]'
+      params: '<atributo> <quantidade> [operação] [slot]'
       description:
         - '&b&lAdicionar modificador de atributo'
         - ''
@@ -268,7 +268,7 @@ itemedit:
         - '&e[slot] &baplicar esse modificador apenas quando o item está em um'
         - '&e      slot de equipamento selecionado ou qualquer slot de equipamento, se não selecionado'
     remove:
-      params: 'remove <atributo/slot>'
+      params: '<atributo/slot>'
       description:
         - '&b&lRemover modificadores'
         - ''
@@ -286,19 +286,19 @@ itemedit:
       - '&ebodycolor <cor> &b- cor do corpo do peixe'
     params: '[...]'
     pattern:
-      params: 'pattern <tipo>'
+      params: '<tipo>'
       description:
         - '&b&lDefinir tipo de padrão do peixe tropical'
         - ''
         - '&e<tipo> &btipo de padrão do peixe'
     patterncolor:
-      params: 'patterncolor <cor>'
+      params: '<cor>'
       description:
         - '&b&lDefinir cor do padrão do peixe tropical'
         - ''
         - '&e<cor> &bcor do padrão do peixe'
     bodycolor:
-      params: 'bodycolor <cor>'
+      params: '<cor>'
       description:
         - '&b&lDefinir cor do corpo do peixe tropical'
         - ''

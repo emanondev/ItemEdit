@@ -39,7 +39,8 @@ public abstract class SubCmd {
         this.PATH = getCommand().getName() + "." + this.ID + ".";
         config = this.getPlugin().getConfig("commands.yml");
         load();
-        this.permission = this.getPlugin().getName().toLowerCase(Locale.ENGLISH) + "." + this.commandName + "." + this.ID;
+        this.permission = this.getPlugin().getName().toLowerCase(Locale.ENGLISH) + "."
+                + this.commandName + "." + this.ID;
     }
 
     public AbstractCommand getCommand() {
@@ -80,11 +81,13 @@ public abstract class SubCmd {
     protected BaseComponent[] craftFailFeedback(String params, List<String> desc) {
         if (params == null)
             params = "";
-        ComponentBuilder fail = new ComponentBuilder(ChatColor.RED + "/" + commandName + " " + this.name + " " + params)
+        ComponentBuilder fail = new ComponentBuilder(
+                ChatColor.RED + "/" + commandName + " " + this.name + " " + params)
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + commandName + " " + this.name + " " + params));
         if (desc != null && !desc.isEmpty()) {
-            fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(String.join("\n", desc)).create()));
+            fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                    new ComponentBuilder(String.join("\n", desc)).create()));
         }
         return fail.create();
     }
@@ -96,9 +99,17 @@ public abstract class SubCmd {
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + alias + " " + this.name + " " + params));
         if (desc != null && !desc.isEmpty()) {
-            fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(String.join("\n", desc)).create()));
+            fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                    new ComponentBuilder(String.join("\n", desc)).create()));
         }
         return fail.create();
+    }
+
+    protected void sendFailFeedbackForSub(CommandSender target, String alias, String subSubCommand) {
+        String params = getLanguageString(subSubCommand + ".params", null, target);
+        target.spigot().sendMessage(this.craftFailFeedback(alias, subSubCommand
+                        + ((params == null || params.isEmpty()) ? "" : " " + params),
+                getLanguageStringList(subSubCommand + ".description", null, target)));
     }
 
     protected <T> void onWrongAlias(String pathMessage, CommandSender sender, IAliasSet<T> set, String... holders) {
@@ -124,8 +135,10 @@ public abstract class SubCmd {
             } else
                 hover.append(" ");
         }
-        Util.sendMessage(sender, new ComponentBuilder(msg).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/itemedit "
-                        + ItemEdit.get().getConfig("commands.yml").getString("itemedit.listaliases.name") + " " + set.getID()))
+        Util.sendMessage(sender, new ComponentBuilder(msg).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
+                        "/" + ItemEditCommand.get().getName() + " "
+                                + ItemEdit.get().getConfig("commands.yml")
+                                .getString("itemedit.listaliases.name") + " " + set.getID()))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover.toString()).create())).create());
     }
 
@@ -175,7 +188,8 @@ public abstract class SubCmd {
     public ComponentBuilder getHelp(ComponentBuilder base, CommandSender sender, String alias) {
         String help = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + this.name + " ";
         base.append(help + getLanguageString("params", "", sender).replace(ChatColor.RESET.toString(),
-                        ChatColor.GREEN.toString())).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ChatColor.stripColor(help)))
+                        ChatColor.GREEN.toString()))
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ChatColor.stripColor(help)))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         new ComponentBuilder(getDescription(sender)).create()));
         return base;

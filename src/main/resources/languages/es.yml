@@ -45,15 +45,15 @@ itemedit:
       - '&eReplace <reemplazado> <reemplazo> &b- reemplazar todas las ocurrencias'
     params: '<add/set/remove...> [...]'
     set:
-      params: 'set <línea> <texto>'
+      params: '<línea> <texto>'
       description:
         - '&b&lEstablecer o reemplazar texto en la línea seleccionada'
     remove:
-      params: 'remove <línea>'
+      params: '<línea>'
       description:
         - '&b&lEliminar la línea seleccionada'
     insert:
-      params: 'insert <línea> <texto>'
+      params: '<línea> <texto>'
       description:
         - '&b&lAgregar texto en la línea seleccionada'
     copy:
@@ -69,7 +69,7 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aDescripción pegada'
       no-copy: '&4[&cItemEdit&4] &cPrimero copia una descripción'
     replace:
-      params: 'replace <reemplazado> <reemplazo>'
+      params: '<reemplazado> <reemplazo>'
       description:
         - '&b&lReemplazar todas las ocurrencias en la descripción'
         - ''
@@ -190,7 +190,7 @@ itemedit:
       - '&eReiniciar &b- eliminar todos los efectos'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <efecto> <duración> [nivel] [partículas] [ambientales] [ícono]'
+      params: '<efecto> <duración> [nivel] [partículas] [ambientales] [ícono]'
       description:
         - '&b&lAñadir/Sobrescribir efecto seleccionado'
         - ''
@@ -201,7 +201,7 @@ itemedit:
         - '&e[ambientales] &b¿Las partículas deberían tener la bandera ambiental? &etrue&b/&efalse'
         - '&e[ícono] &b¿Mostrar ícono en la esquina superior derecha? &etrue&b/&efalse &b(solo para 1.13+)'
     remove:
-      params: 'remove <efecto>'
+      params: '<efecto>'
       description:
         - '&b&lQuitar el efecto seleccionado'
   banner:
@@ -211,19 +211,19 @@ itemedit:
     description:
       - '&b&lEditar bandera'
     set:
-      params: 'set <tipo> <color> <línea>'
+      params: '<tipo> <color> <línea>'
       description:
         - '&b&lReemplazar el patrón en la línea seleccionada'
     add:
-      params: 'add <tipo> <color>'
+      params: '<tipo> <color>'
       description:
         - '&b&lAgregar un patrón'
     remove:
-      params: 'remove <línea>'
+      params: '<línea>'
       description:
         - '&b&lQuitar el patrón en la línea seleccionada'
     color:
-      params: 'color <línea> <color>'
+      params: '<línea> <color>'
       description:
         - '&b&lCambiar el color del patrón en la línea seleccionada'
   fireworkpower:
@@ -258,7 +258,7 @@ itemedit:
       - '&eQuitar <atributo/ranura> &b- quitar algunos modificadores'
     params: '<add/remove> [...]'
     add:
-      params: 'add <atributo> <cantidad> [operación] [ranura]'
+      params: '<atributo> <cantidad> [operación] [ranura]'
       description:
         - '&b&lAgregar modificador de atributo'
         - ''
@@ -268,7 +268,7 @@ itemedit:
         - '&e[ranura] &baplicar este modificador solo cuando el objeto esté en la ranura de'
         - '&b         equipo seleccionada o en cualquier ranura de equipo si no está seleccionada'
     remove:
-      params: 'remove <atributo/ranura>'
+      params: '<atributo/ranura>'
       description:
         - '&b&lQuitar modificadores'
         - ''
@@ -286,19 +286,19 @@ itemedit:
       - '&ebodycolor <color> &b- color del cuerpo del pez'
     params: '[...]'
     pattern:
-      params: 'pattern <tipo>'
+      params: '<tipo>'
       description:
         - '&b&lEstablecer el tipo de patrón del pez tropical'
         - ''
         - '&e<tipo> &btipo de patrón del pez'
     patterncolor:
-      params: 'patterncolor <color>'
+      params: '<color>'
       description:
         - '&b&lEstablecer el color del patrón del pez tropical'
         - ''
         - '&e<color> &bcolor del patrón del pez'
     bodycolor:
-      params: 'bodycolor <color>'
+      params: '<color>'
       description:
         - '&b&lEstablecer el color del cuerpo del pez tropical'
         - ''

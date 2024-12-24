@@ -45,15 +45,15 @@ itemedit:
       - '&eReplace <zamieniane> <zamiennik> &b- zamień wszystkie wystąpienia'
     params: '<add/set/remove...> [...]'
     set:
-      params: 'set <linia> <tekst>'
+      params: '<linia> <tekst>'
       description:
         - '&b&lUstaw lub zastąp tekst na wybranej linii'
     remove:
-      params: 'remove <linia>'
+      params: '<linia>'
       description:
         - '&b&lUsuń wybraną linię'
     insert:
-      params: 'insert <linia> <tekst>'
+      params: '<linia> <tekst>'
       description:
         - '&b&lDodaj tekst na wybranej linii'
     copy:
@@ -69,7 +69,7 @@ itemedit:
       feedback: '&9[&fItemEdit&9] &aOpis wklejony'
       no-copy: '&4[&cItemEdit&4] &cNajpierw skopiuj opis'
     replace:
-      params: 'replace <zamieniane> <zamiennik>'
+      params: '<zamieniane> <zamiennik>'
       description:
         - '&b&lZamień wszystkie wystąpienia na opisie'
         - ''
@@ -190,7 +190,7 @@ itemedit:
       - '&eReset &b- usuń wszystkie efekty'
     params: '<add/remove/reset> [...]'
     add:
-      params: 'add <efekt> <czas_trwania> [poziom] [cząsteczki] [otoczenie] [ikona]'
+      params: '<efekt> <czas_trwania> [poziom] [cząsteczki] [otoczenie] [ikona]'
       description:
         - '&b&lDodaje/Przywraca wybrany efekt'
         - ''
@@ -201,7 +201,7 @@ itemedit:
         - '&e[otoczenie] &bCząsteczki powinny mieć flagę otoczenia? &etrue&b/&efalse'
         - '&e[ikona] &bPokaż ikonę w prawym górnym rogu? &etrue&b/&efalse &b(tylko dla 1.13+)'
     remove:
-      params: 'remove <efekt>'
+      params: '<efekt>'
       description:
         - '&b&lUsuń wybrany efekt'
   banner:
@@ -211,19 +211,19 @@ itemedit:
     description:
       - '&b&lEdytuj banner'
     set:
-      params: 'set <typ> <kolor> <linia>'
+      params: '<typ> <kolor> <linia>'
       description:
         - '&b&lZamień wzór na wybranej linii'
     add:
-      params: 'add <typ> <kolor>'
+      params: '<typ> <kolor>'
       description:
         - '&b&lDodaj wzór'
     remove:
-      params: 'remove <linia>'
+      params: '<linia>'
       description:
         - '&b&lUsuń wzór z wybranej linii'
     color:
-      params: 'color <linia> <kolor>'
+      params: '<linia> <kolor>'
       description:
         - '&b&lZmień kolor wzoru na wybranej linii'
   fireworkpower:
@@ -258,7 +258,7 @@ itemedit:
       - '&eRemove <atrybut/slot> &b- usuń niektóre modyfikatory'
     params: '<add/remove> [...]'
     add:
-      params: 'add <atrybut> <ilość> [operacja] [slot]'
+      params: '<atrybut> <ilość> [operacja] [slot]'
       description:
         - '&b&lDodaj modyfikator atrybutu'
         - ''
@@ -268,7 +268,7 @@ itemedit:
         - '&e[slot] &bzastosuj ten modyfikator tylko gdy przedmiot jest na wybranym'
         - '&e       slocie ekwipunku lub na dowolnym slocie, jeśli nie wybrano'
     remove:
-      params: 'remove <atrybut/slot>'
+      params: '<atrybut/slot>'
       description:
         - '&b&lUsuń modyfikatory'
         - ''
@@ -286,19 +286,19 @@ itemedit:
       - '&ebodycolor <kolor> &b- kolor ciała ryby'
     params: '[...]'
     pattern:
-      params: 'pattern <typ>'
+      params: '<typ>'
       description:
         - '&b&lUstaw typ wzoru tropikalnej ryby'
         - ''
         - '&e<typ> &btyp wzoru ryby'
     patterncolor:
-      params: 'patterncolor <kolor>'
+      params: '<kolor>'
       description:
         - '&b&lUstaw kolor wzoru tropikalnej ryby'
         - ''
         - '&e<kolor> &bkolor wzoru ryby'
     bodycolor:
-      params: 'bodycolor <kolor>'
+      params: '<kolor>'
       description:
         - '&b&lUstaw kolor ciała tropikalnej ryby'
         - ''

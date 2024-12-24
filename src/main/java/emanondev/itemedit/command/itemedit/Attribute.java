@@ -40,10 +40,10 @@ public class Attribute extends SubCmd {
 
         switch (args[1].toLowerCase(Locale.ENGLISH)) {
             case "add":
-                attributeAdd(p, item, args);
+                attributeAdd(p, item, alias, args);
                 return;
             case "remove":
-                attributeRemove(p, item, args);
+                attributeRemove(p, item, alias, args);
                 return;
             default:
                 onFail(p, alias);
@@ -51,7 +51,7 @@ public class Attribute extends SubCmd {
     }
 
     // add <attribute> amount [operation] [equip]
-    private void attributeAdd(Player p, ItemStack item, String[] args) {
+    private void attributeAdd(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 4 || args.length > 6)
                 throw new IllegalArgumentException("Wrong param number");
@@ -59,8 +59,7 @@ public class Attribute extends SubCmd {
             org.bukkit.attribute.Attribute attr = Aliases.ATTRIBUTE.convertAlias(args[2]);
             if (attr == null) {
                 onWrongAlias("wrong-attribute", p, Aliases.ATTRIBUTE);
-                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
-                        getLanguageStringList("add.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"add");
                 return;
             }
             double amount = Double.parseDouble(args[3]);
@@ -72,8 +71,7 @@ public class Attribute extends SubCmd {
 
             if (op == null) {
                 onWrongAlias("wrong-operation", p, Aliases.OPERATIONS);
-                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
-                        getLanguageStringList("add.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"add");
                 return;
             }
 
@@ -85,16 +83,14 @@ public class Attribute extends SubCmd {
                     equip = Aliases.EQUIPMENT_SLOTGROUPS.convertAlias(args[5]).toString();
                     if (equip == null) {
                         onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTGROUPS);
-                        p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
-                                getLanguageStringList("add.description", null, p)));
+                        sendFailFeedbackForSub(p,alias,"add");
                         return;
                     }
                 } else {
                     equip = Aliases.EQUIPMENT_SLOTS.convertAlias(args[5]).toString();
                     if (equip == null) {
                         onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTS);
-                        p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
-                                getLanguageStringList("add.description", null, p)));
+                        sendFailFeedbackForSub(p,alias,"add");
                         return;
                     }
                 }
@@ -108,13 +104,12 @@ public class Attribute extends SubCmd {
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("add.params", null, p),
-                    getLanguageStringList("add.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"add");
         }
     }
 
     // remove [attribute/slot]
-    private void attributeRemove(Player p, ItemStack item, String[] args) {
+    private void attributeRemove(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -124,8 +119,7 @@ public class Attribute extends SubCmd {
             if (attr == null && equip == null) {
                 onWrongAlias("wrong-attribute", p, Aliases.ATTRIBUTE);
                 onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTS);
-                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("remove.params", null, p),
-                        getLanguageStringList("remove.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"remove");
                 return;
             }
 
@@ -140,8 +134,7 @@ public class Attribute extends SubCmd {
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("remove.params", null, p),
-                    getLanguageStringList("remove.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"remove");
         }
     }
 

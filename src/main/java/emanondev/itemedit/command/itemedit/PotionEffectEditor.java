@@ -53,13 +53,13 @@ public class PotionEffectEditor extends SubCmd {
 
             switch (args[1].toLowerCase(Locale.ENGLISH)) {
                 case "reset":
-                    potioneffectClear(p, item, args);
+                    potioneffectClear(p, item, alias, args);
                     return;
                 case "add":
-                    potioneffectAdd(p, item, args);
+                    potioneffectAdd(p, item, alias, args);
                     return;
                 case "remove":
-                    potioneffectRemove(p, item, args);
+                    potioneffectRemove(p, item, alias, args);
                     return;
                 default:
                     throw new IllegalArgumentException();
@@ -70,7 +70,7 @@ public class PotionEffectEditor extends SubCmd {
 
     }
 
-    private void potioneffectRemove(Player p, ItemStack item, String[] args) {
+    private void potioneffectRemove(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -78,8 +78,7 @@ public class PotionEffectEditor extends SubCmd {
 
             if (effect == null) {
                 onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
-                Util.sendMessage(p, this.craftFailFeedback(getLanguageString("remove.params", null, p),
-                        getLanguageStringList("remove.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"remove");
                 return;
             }
             if (item.getItemMeta() instanceof PotionMeta) {
@@ -93,8 +92,7 @@ public class PotionEffectEditor extends SubCmd {
             }
             updateView(p);
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(getLanguageString("remove.params", null, p),
-                    getLanguageStringList("remove.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"remove");
         }
     }
 
@@ -126,7 +124,7 @@ public class PotionEffectEditor extends SubCmd {
         }
     }
 
-    private void potioneffectAdd(Player p, ItemStack item, String[] args) {
+    private void potioneffectAdd(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 4 && args.length != 5 && args.length != 6 && args.length != 7 && args.length != 8)
                 throw new IllegalArgumentException("Wrong param number");
@@ -135,8 +133,7 @@ public class PotionEffectEditor extends SubCmd {
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2]);
             if (effect == null) {
                 onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
-                Util.sendMessage(p, this.craftFailFeedback(getLanguageString("add.params", null, p),
-                        getLanguageStringList("add.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"add");
                 return;
             }
             int duration = UtilLegacy.readPotionEffectDurationSecondsToTicks(args[3]);
@@ -172,12 +169,11 @@ public class PotionEffectEditor extends SubCmd {
             }
             updateView(p);
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(getLanguageString("add.params", null, p),
-                    getLanguageStringList("add.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"add");
         }
     }
 
-    private void potioneffectClear(Player p, ItemStack item, String[] args) {
+    private void potioneffectClear(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (item.getItemMeta() instanceof PotionMeta) {
                 PotionMeta meta = (PotionMeta) item.getItemMeta();

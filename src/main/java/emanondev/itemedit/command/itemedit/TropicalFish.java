@@ -39,13 +39,13 @@ public class TropicalFish extends SubCmd {
 
             switch (args[1].toLowerCase(Locale.ENGLISH)) {
                 case "pattern":
-                    pattern(p, item, args);
+                    pattern(p, item, alias, args);
                     return;
                 case "patterncolor":
-                    patternColor(p, item, args);
+                    patternColor(p, item, alias, args);
                     return;
                 case "bodycolor":
-                    bodyColor(p, item, args);
+                    bodyColor(p, item, alias, args);
                     return;
                 default:
                     throw new IllegalArgumentException();
@@ -56,7 +56,7 @@ public class TropicalFish extends SubCmd {
 
     }
 
-    private void bodyColor(Player p, ItemStack item, String[] args) {
+    private void bodyColor(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -66,22 +66,18 @@ public class TropicalFish extends SubCmd {
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
             if (color == null) {
                 onWrongAlias("wrong-color", p, Aliases.COLOR);
-                Util.sendMessage(p, this
-                        .craftFailFeedback(getLanguageString("bodycolor.params", null, p),
-                                getLanguageStringList("bodycolor.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"bodycolor");
                 return;
             }
             meta.setBodyColor(color);
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            Util.sendMessage(p, this
-                    .craftFailFeedback(getLanguageString("bodycolor.params", null, p),
-                            getLanguageStringList("bodycolor.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"bodycolor");
         }
     }
 
-    private void patternColor(Player p, ItemStack item, String[] args) {
+    private void patternColor(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -91,22 +87,18 @@ public class TropicalFish extends SubCmd {
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
             if (color == null) {
                 onWrongAlias("wrong-color", p, Aliases.COLOR);
-                Util.sendMessage(p, this
-                        .craftFailFeedback(getLanguageString("patterncolor.params", null, p),
-                                getLanguageStringList("patterncolor.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"patterncolor");
                 return;
             }
             meta.setPatternColor(color);
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            Util.sendMessage(p, this
-                    .craftFailFeedback(getLanguageString("patterncolor.params", null, p),
-                            getLanguageStringList("patterncolor.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"patterncolor");
         }
     }
 
-    private void pattern(Player p, ItemStack item, String[] args) {
+    private void pattern(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -116,16 +108,14 @@ public class TropicalFish extends SubCmd {
             Pattern pattern = Aliases.TROPICALPATTERN.convertAlias(args[2]);
             if (pattern == null) {
                 onWrongAlias("wrong-pattern", p, Aliases.TROPICALPATTERN);
-                Util.sendMessage(p, this.craftFailFeedback(getLanguageString("pattern.params", null, p),
-                        getLanguageStringList("pattern.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"pattern");
                 return;
             }
             meta.setPattern(pattern);
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            Util.sendMessage(p, this.craftFailFeedback(getLanguageString("pattern.params", null, p),
-                    getLanguageStringList("pattern.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"pattern");
         }
     }
 

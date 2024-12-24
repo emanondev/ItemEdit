@@ -61,48 +61,48 @@ public class Lore extends SubCmd {
             case "set":
                 if (!Util.isAllowedChangeLore(sender, item.getType()))
                     return;
-                loreSet(p, item, args);
+                loreSet(p, item, alias, args);
                 return;
             case "add":
                 if (!Util.isAllowedChangeLore(sender, item.getType()))
                     return;
-                loreAdd(p, item, args);
+                loreAdd(p, item, alias, args);
                 return;
             case "insert":
                 if (!Util.isAllowedChangeLore(sender, item.getType()))
                     return;
-                loreInsert(p, item, args);
+                loreInsert(p, item, alias, args);
                 return;
             case "reset":
                 if (!Util.isAllowedChangeLore(sender, item.getType()))
                     return;
-                loreReset(p, item, args);
+                loreReset(p, item, alias, args);
                 return;
             case "remove":
                 if (!Util.isAllowedChangeLore(sender, item.getType()))
                     return;
-                loreRemove(p, item, args);
+                loreRemove(p, item, alias, args);
                 return;
             case "copy":
                 if (!sender.hasPermission(getPermission() + ".copy")) {
                     getCommand().sendPermissionLackMessage(getPermission() + ".copy", sender);
                     return;
                 }
-                loreCopy(p, item, args);
+                loreCopy(p, item, alias, args);
                 return;
             case "copybook":
                 if (!sender.hasPermission(getPermission() + ".copy")) {
                     getCommand().sendPermissionLackMessage(getPermission() + ".copy", sender);
                     return;
                 }
-                loreCopyBook(p, item, args);
+                loreCopyBook(p, item, alias, args);
                 return;
             case "copyfile":
                 if (!sender.hasPermission(getPermission() + ".copy")) {
                     getCommand().sendPermissionLackMessage(getPermission() + ".copy", sender);
                     return;
                 }
-                loreCopyFile(p, item, args);
+                loreCopyFile(p, item, alias, args);
                 return;
             case "paste":
                 if (!sender.hasPermission(getPermission() + ".copy")) {
@@ -111,23 +111,22 @@ public class Lore extends SubCmd {
                 }
                 if (!Util.isAllowedChangeLore(sender, item.getType()))
                     return;
-                lorePaste(p, item, args);
+                lorePaste(p, item, alias, args);
                 return;
             case "replace":
                 if (!Util.isAllowedChangeLore(sender, item.getType()))
                     return;
-                loreReplace(p, item, args);
+                loreReplace(p, item, alias, args);
                 return;
             default:
                 onFail(p, alias);
         }
     }
 
-    private void loreReplace(Player p, ItemStack item, String[] args) {
+    private void loreReplace(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 4) {
-                p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("replace.params", null, p),
-                        getLanguageStringList("replace.description", null, p)));
+                sendFailFeedbackForSub(p,alias,"replace");
                 return;
             }
             if (!item.hasItemMeta())
@@ -148,22 +147,22 @@ public class Lore extends SubCmd {
                 String rawText = raw.substring(1);
                 int i1 = rawText.indexOf("{");
                 if (i1 != 0) {
-                    replaceBadFormat(p, args);
+                    sendFailFeedbackForSub(p,alias,"replace");
                     return;
                 }
                 int i2 = rawText.indexOf("}", i1);
                 if (i2 == -1) {
-                    replaceBadFormat(p, args);
+                    sendFailFeedbackForSub(p,alias,"replace");
                     return;
                 }
                 int i3 = rawText.indexOf("{", i2);
                 if (i3 == -1 || i2 + 2 != i3) {
-                    replaceBadFormat(p, args);
+                    sendFailFeedbackForSub(p,alias,"replace");
                     return;
                 }
                 int i4 = rawText.indexOf("}", i3);
                 if (i4 != rawText.length() - 1) {
-                    replaceBadFormat(p, args);
+                    sendFailFeedbackForSub(p,alias,"replace");
                     return;
                 }
                 from = rawText.substring(1, i2);
@@ -188,17 +187,11 @@ public class Lore extends SubCmd {
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("replace.params", null, p),
-                    getLanguageStringList("replace.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"replace");
         }
     }
 
-    private void replaceBadFormat(Player p, String[] args) {
-        Util.sendMessage(p, this.craftFailFeedback(getLanguageString("replace.params", null, p),
-                getLanguageStringList("replace.description", null, p)));
-    }
-
-    private void lorePaste(Player p, ItemStack item, String[] args) {
+    private void lorePaste(Player p, ItemStack item, String alias, String[] args) {
         if (!copies.containsKey(p.getUniqueId())) {
             Util.sendMessage(p, this.getLanguageString("paste.no-copy", null, p));
             return;
@@ -210,7 +203,7 @@ public class Lore extends SubCmd {
         updateView(p);
     }
 
-    private void loreCopy(Player p, ItemStack item, String[] args) {
+    private void loreCopy(Player p, ItemStack item, String alias, String[] args) {
 
         List<String> lore;
         if (item.hasItemMeta()) {
@@ -226,7 +219,7 @@ public class Lore extends SubCmd {
         Util.sendMessage(p, this.getLanguageString("copy.feedback", null, p));
     }
 
-    private void loreCopyBook(Player p, ItemStack item, String[] args) {
+    private void loreCopyBook(Player p, ItemStack item, String alias, String[] args) {
 
         List<String> lore;
         if (item.hasItemMeta()) {
@@ -252,7 +245,7 @@ public class Lore extends SubCmd {
         Util.sendMessage(p, this.getLanguageString("copyBook.feedback", null, p));
     }
 
-    private void loreCopyFile(Player p, ItemStack item, String[] args) {
+    private void loreCopyFile(Player p, ItemStack item, String alias, String[] args) {
         if (args.length < 2) {
             Util.sendMessage(p, this.getLanguageString("copyFile.no-path", null, p));
             return;
@@ -326,7 +319,7 @@ public class Lore extends SubCmd {
     }
 
     // /itemedit lore add
-    private void loreAdd(Player p, ItemStack item, String[] args) {
+    private void loreAdd(Player p, ItemStack item, String alias, String[] args) {
         StringBuilder text = new StringBuilder();
         if (args.length > 2) {
             text = new StringBuilder(args[2]);
@@ -364,7 +357,7 @@ public class Lore extends SubCmd {
     }
 
     // /itemedit lore insert [line] [text]
-    private void loreInsert(Player p, ItemStack item, String[] args) {
+    private void loreInsert(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -411,13 +404,12 @@ public class Lore extends SubCmd {
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("insert.params", null, p),
-                    getLanguageStringList("insert.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"insert");
         }
     }
 
     // lore set line text
-    private void loreSet(Player p, ItemStack item, String[] args) {
+    private void loreSet(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -464,12 +456,11 @@ public class Lore extends SubCmd {
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("set.params", null, p),
-                    getLanguageStringList("set.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"set");
         }
     }
 
-    private void loreRemove(Player p, ItemStack item, String[] args) {
+    private void loreRemove(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -495,12 +486,11 @@ public class Lore extends SubCmd {
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
-            p.spigot().sendMessage(this.craftFailFeedback(getLanguageString("remove.params", null, p),
-                    getLanguageStringList("remove.description", null, p)));
+            sendFailFeedbackForSub(p,alias,"remove");
         }
     }
 
-    private void loreReset(Player p, ItemStack item, String[] args) {
+    private void loreReset(Player p, ItemStack item, String alias, String[] args) {
         ItemMeta meta = item.getItemMeta();
         meta.setLore(null);
         item.setItemMeta(meta);
