@@ -11,6 +11,7 @@ blocked-by-rename-length-limit: '&4[&cItemEdit&4] &c您不能设置超过 %limit
 itemedit:
   help:
     header: "&9&lItemEdit - 帮助"
+    header-sub: "&9&lItemEdit %sub% - 帮助"
     footer: "%prev_clickable% &9&l帮助 [%page%/%max_page%] %next_clickable%"
     next_text: " &d&l>&m> >&r "
     prev_text: " &d&l&m< <&d&l< "
@@ -21,8 +22,9 @@ itemedit:
     description:
       - '&6&l显示帮助'
       - ''
-      - '[页码] &b- 帮助页'
-    params: '[页码]'
+      - '[页面] &b帮助页面'
+      - '[子命令] &b子命令的帮助'
+    params: '[页面/子命令]'
   rename:
     description:
       - '&b&l设置物品名称'

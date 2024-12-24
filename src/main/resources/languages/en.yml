@@ -11,6 +11,7 @@ blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cYou can''t set names longer 
 itemedit:
   help:
     header: "&9&lItemEdit - Help"
+    header-sub: "&9&lItemEdit %sub% - Help"
     footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
     next_text: " &d&l>&m> >&r "
     prev_text: " &d&l&m< <&d&l< "
@@ -21,8 +22,9 @@ itemedit:
     description:
       - '&6&lShows help'
       - ''
-      - '[page] &b- help page'
-    params: '[page]'
+      - '[page] &bhelp page'
+      - '[subcommand] &bhelp for subcommand'
+    params: '[page/subcommand]'
   rename:
     description:
       - '&6&lSet item''s name'

@@ -11,6 +11,7 @@ blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cВы не можете ус�
 itemedit:
   help:
     header: "&9&lItemEdit - Помощь"
+    header-sub: "&9&lItemEdit %sub% - Помощь"
     footer: "%prev_clickable% &9&lПомощь [%page%/%max_page%] %next_clickable%"
     next_text: " &d&l>&m> >&r "
     prev_text: " &d&l&m< <&d&l< "
@@ -21,8 +22,9 @@ itemedit:
     description:
       - '&6&lПоказывает помощь'
       - ''
-      - '[страница] &b- страница помощи'
-    params: '[страница]'
+      - '[страница] &bстраница помощи'
+      - '[подкоманда] &bпомощь по подкоманде'
+    params: '[страница/подкоманда]'
   rename:
     description:
       - '&b&lЗадать имя предмета'

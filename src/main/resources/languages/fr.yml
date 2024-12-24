@@ -13,6 +13,7 @@ blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cVous ne pouvez pas définir 
 itemedit:
   help:
     header: "&9&lItemEdit - Aide"
+    header-sub: "&9&lItemEdit %sub% - Aide"
     footer: "%prev_clickable% &9&lAide [%page%/%max_page%] %next_clickable%"
     next_text: " &d&l>&m> >&r "
     prev_text: " &d&l&m< <&d&l< "
@@ -21,10 +22,11 @@ itemedit:
     next_hover: "&6&lAller à la page %target%"
     prev_hover: "&6&lAller à la page %target%"
     description:
-      - '&6&lAfficher l''aide'
+      - '&6&lAffiche l’aide'
       - ''
-      - '[page] &b- page d''aide'
-    params: '[page]'
+      - '[page] &bpage d’aide'
+      - '[sous-commande] &baide pour la sous-commande'
+    params: '[page/sous-commande]'
   rename:
     description:
       - "&b&lDéfinir le nom de l'objet"

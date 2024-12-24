@@ -10,6 +10,7 @@ blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cNegalite redaguoti šio da
 itemedit:
   help:
     header: "&9&lItemEdit - Pagalba"
+    header-sub: "&9&lItemEdit %sub% - Pagalba"
     footer: "%prev_clickable% &9&lPagalba [%page%/%max_page%] %next_clickable%"
     next_text: " &d&l>&m> >&r "
     prev_text: " &d&l&m< <&d&l< "
@@ -20,14 +21,15 @@ itemedit:
     description:
       - '&6&lRodo pagalbą'
       - ''
-      - '[puslapis] &b- pagalbos puslapis'
-    params: '[puslapis]'
+      - '[puslapis] &bpagalbos puslapis'
+      - '[subkomanda] &bpagalba dėl subkomandos'
+    params: '[puslapis/subkomanda]'
   rename:
     description:
       - '&b&lNustatyti daikto pavadinimą'
       - ''
       - '&b&lPatarimas: &bįveskite &eclear &b, kad grąžintumėte pavadinimą į numatytąjį'
-    params: <name>
+    params: '<name>'
   lore:
     description:
       - '&b&lRedaguoti aprašymą'
@@ -91,7 +93,7 @@ itemedit:
       - ''
       - '&b&lPatarimas: &bpaslėpti vėliavos modelius su potion_effects vėliava'
       - '&b&lPatarimas: &bpaslėpti visas vėliavas vienu metu su &e/itemedit hideall'
-    params: <flag> [true/false]
+    params: '<flag> [true/false]'
   hideall:
     description:
       - '&b&lPaslėpti visus komponentus'
@@ -106,13 +108,13 @@ itemedit:
       - ''
       - '&e<durability> &bžala, kurią reikia pritaikyti'
       - '&b&lPastaba: &e0 &breiškia be žalos, pilnas patvarumas'
-    params: <durability>
+    params: '<durability>'
   type:
     description:
       - '&b&lNustatyti daikto tipą'
       - ''
       - '&b&lPastaba: &bkeli tipai, tokie kaip Air, neveiks'
-    params: <type>
+    params: '<type>'
   unbreakable:
     description:
       - '&b&lNustatyti nesulaužomą būseną'
@@ -127,7 +129,7 @@ itemedit:
       - '&e<amount> &bkiekis, kurį reikia nustatyti (iki 127)'
       - '&b&lPatarimas: &bNeigiami kiekiai atimami'
       - '&b iš dabartinio daikto kiekio'
-    params: <amount>
+    params: '<amount>'
   skullowner:
     wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti žaidėjo kaukolė'
     description:
@@ -137,7 +139,7 @@ itemedit:
       - '&e<name> &bsavininko vardas'
       - ''
       - '&b&lPatarimas: &bPadėkite ir sulaužykite kaukolę, kad atnaujintumėte odą'
-    params: <name>
+    params: '<name>'
   color:
     wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti spalvinamas tipas, pvz., odiniai šarvai,
       fejerverkų žvaigždės, potionai arba užnuodytos strėlės'
@@ -159,7 +161,7 @@ itemedit:
       - '&e[level] &bužkeikimo lygis, pagal numatytuosius nustatymus &e1'
       - ''
       - '&b&lPatarimas: &bNustatykite &e[level] &bį &e0 &b, kad pašalintumėte užkeikimą'
-    params: <enchant> [level]
+    params: '<enchant> [level]'
   booktype:
     wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti parašyta knyga'
     wrong-generation: '&4[&cItemEdit&4] &cNeteisinga knygos tipo reikšmė! &4[&6hover here&4]'
@@ -167,7 +169,7 @@ itemedit:
       - '&b&lNustatyti knygos tipą'
       - ''
       - '&bVeikia tik su parašytomis knygomis'
-    params: <booktype>
+    params: '<booktype>'
   bookauthor:
     wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti parašyta knyga'
     description:
@@ -175,7 +177,7 @@ itemedit:
       - ''
       - '&bAutoriaus vardas gali turėti tarpų ir būti spalvotas'
       - '&bVeikia tik su parašytomis knygomis'
-    params: <name>
+    params: '<name>'
   potioneffect:
     wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti potionas arba užnuodyta strėlė arba įtartina
       sriuba'
@@ -232,7 +234,7 @@ itemedit:
       - '&b&lNustatyti fejerverko galią'
       - ''
       - '&e<power> &bgalia fejerverko, reikšmė tarp &e0 &bir &e5'
-    params: <power>
+    params: '<power>'
   firework:
     wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti fejerverkas'
     description:
@@ -246,7 +248,7 @@ itemedit:
       - ''
       - '&e<type> &bbūtybės tipas'
       - '&bTik kai kurie būtybių tipai gali būti iššaukiami kiaušiniais'
-    params: <type>
+    params: '<type>'
   attribute:
     wrong-attribute: '&4[&cItemEdit&4] &cNeteisinga atributo reikšmė! &4[&6hover here&4]'
     wrong-operation: '&4[&cItemEdit&4] &cNeteisinga operacijos reikšmė! &4[&6hover here&4]'
@@ -312,14 +314,14 @@ itemedit:
       - '&b&lPastaba: &bši komanda nustato pagrindinę daikto taisymo kainą, galutinė lygių kaina
       priekale priklauso nuo to, ką darote'
       - '&bDaugiau informacijos rasite &eminecraft.gamepedia.com/Anvil/Mechanics'
-    params: <cost>
+    params: '<cost>'
   custommodeldata:
     description:
       - '&b&lRedaguoti pasirinktinių modelių duomenis'
       - ''
       - '&bNaudojama tekstūrų paketams'
       - '&e<value> &bteigiama int reikšmė tiksliniams duomenų modeliams'
-    params: <value>
+    params: '<value>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti aksolotlio kibiras'
     wrong-axolotl: '&4[&cItemEdit&4] &cNeteisinga aksolotlio reikšmė! &4[&6hover here&4]'
@@ -327,13 +329,13 @@ itemedit:
       - '&b&lRedaguoti aksolotlio variantą aksolotlio kibire'
       - ''
       - '&e<type> &baksotlio tipas'
-    params: <type>
+    params: '<type>'
   listaliases:
     description:
       - '&b&lRodyti leistinus alias parametrus'
       - ''
       - '&e<type> &bparametro tipas, kurį reikia rodyti'
-    params: <type>
+    params: '<type>'
     prefix_line: '&1 ◆  ◆  ◆  ◆  &9Aliasai  &1◆  ◆  ◆  ◆'
     postfix_line: '&1 ◆  ◆  ◆  ◆  &9Aliasai  &1◆  ◆  ◆  ◆'
     first_color: '&b'
@@ -348,7 +350,7 @@ itemedit:
       - ''
       - '&eNustatyti &b- nustatyti jūsų vietą kaip kompaso tikslą'
       - '&eIšvalyti &b- išvalyti kompaso tikslą'
-    params: <set/clear>
+    params: '<set/clear>'
     set:
       feedback: '&9[&fItemEdit&9] &aKompasas dabar rodo į &e%world% %x% %y% %z%'
     clear:
@@ -360,7 +362,7 @@ itemedit:
       - '&b&lNustatyti ožio rago garsą'
       - ''
       - '&e<type> &bgarso tipas'
-    params: <type>
+    params: '<type>'
   armortrim:
     wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti šarvai'
     wrong-material: '&4[&cItemEdit&4] &cNeteisinga apdailos medžiagos reikšmė! &4[&6hover here&4]'
@@ -370,7 +372,7 @@ itemedit:
       - ''
       - '&e<material> &bapdailos medžiaga'
       - '&e<pattern> &bapdailos raštas'
-    params: <material> <pattern>
+    params: '<material> <pattern>'
   bookenchant:
     wrong-type: '&4[&cItemEdit&4] &cItem must be a book or enchanted book'
     wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'

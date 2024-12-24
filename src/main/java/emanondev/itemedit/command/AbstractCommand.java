@@ -6,6 +6,7 @@ import emanondev.itemedit.YMLConfig;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -187,8 +189,8 @@ public abstract class AbstractCommand implements TabExecutor {
 
     public void completeCmd(List<String> l, String prefix, CommandSender sender) {
         final String text = prefix.toLowerCase(Locale.ENGLISH);
-        subCmds.forEach((cmd) -> {
-            if (cmd.getName().startsWith(text) && sender.hasPermission(cmd.getPermission()))
+        getAllowedSubCommands(sender).forEach((cmd) -> {
+            if (cmd.getName().startsWith(text))
                 l.add(cmd.getName());
         });
     }
@@ -239,9 +241,26 @@ public abstract class AbstractCommand implements TabExecutor {
                 try {
                     page = Integer.parseInt(args[1]);
                 } catch (Exception ignored) {
+                    SubCmd sub = getSubCmd(args[1], sender);
+                    if (sub != null) {
+                        help(sender, alias, sub);
+                        return;
+                    }
                 }
             }
             help(sender, alias, page);
+        }
+
+        public void help(CommandSender sender, String alias, SubCmd sub) {
+            ComponentBuilder help = new ComponentBuilder(this.getLanguageString("header-sub",
+                    "&3&l" + getName() + " %sub% - Help", sender, "%sub%", sub.getName()));
+            help.append("\n");
+            String helpTxt = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + sub.getName() + " ";
+            help.append(helpTxt + sub.getLanguageString("params", "", sender).replace(ChatColor.RESET.toString(),
+                    ChatColor.GREEN.toString()));
+            help.append("\n");
+            help.append(sub.getDescription(sender));
+            Util.sendMessage(sender, help.create());
         }
 
         public void help(CommandSender sender, String alias, int page) {
@@ -359,12 +378,19 @@ public abstract class AbstractCommand implements TabExecutor {
             }
         }
 
+
         @Override
         public List<String> onComplete(CommandSender sender, String[] args) {
+            if (args.length != 2)
+                return Collections.emptyList();
             ArrayList<String> tabs = new ArrayList<>();
-            for (int i = 0; i < getMaxPageFor(getAllowedSubCommands(sender).size()); i++)
+            List<SubCmd> subs = getAllowedSubCommands(sender);
+            for (int i = 0; i < getMaxPageFor(subs.size()); i++)
                 tabs.add(String.valueOf(i + 1));
-            return tabs;
+            for (SubCmd sub : subs) {
+                tabs.add(sub.getName());
+            }
+            return Util.complete(args[1], tabs);
         }
 
         public void reload() {

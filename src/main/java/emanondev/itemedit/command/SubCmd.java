@@ -208,7 +208,7 @@ public abstract class SubCmd {
                 .create());
     }
 
-    private String getDescription(CommandSender target) {
+    protected String getDescription(CommandSender target) {
         return String.join("\n", getLanguageStringList("description", null, target));
     }
 

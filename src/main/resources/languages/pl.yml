@@ -11,6 +11,7 @@ blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cNie możesz ustawiać nazw d
 itemedit:
   help:
     header: "&9&lItemEdit - Pomoc"
+    header-sub: "&9&lItemEdit %sub% - Pomoc"
     footer: "%prev_clickable% &9&lPomoc [%page%/%max_page%] %next_clickable%"
     next_text: " &d&l>&m> >&r "
     prev_text: " &d&l&m< <&d&l< "
@@ -19,10 +20,11 @@ itemedit:
     next_hover: "&6&lPrzejdź do strony %target%"
     prev_hover: "&6&lPrzejdź do strony %target%"
     description:
-      - '&6&lWyświetla pomoc'
+      - '&6&lPokazuje pomoc'
       - ''
-      - '[strona] &b- strona pomocy'
-    params: '[strona]'
+      - '[strona] &bstrona pomocy'
+      - '[podkomenda] &bpomoc dla podkomendy'
+    params: '[strona/podkomenda]'
   rename:
     description:
       - '&b&lUstaw nazwę przedmiotu'
