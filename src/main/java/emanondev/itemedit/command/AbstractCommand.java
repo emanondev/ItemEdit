@@ -6,7 +6,6 @@ import emanondev.itemedit.YMLConfig;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -26,7 +25,6 @@ public abstract class AbstractCommand implements TabExecutor {
     private final APlugin plugin;
     private final YMLConfig config;
     private final List<SubCmd> subCmds = new ArrayList<>();
-    //private final boolean multiPageHelp;
     private final HelpSubCommand helpSubCommand;
 
     public AbstractCommand(@NotNull String name, @NotNull APlugin plugin) {
@@ -282,8 +280,6 @@ public abstract class AbstractCommand implements TabExecutor {
                 text1 = text;
                 text2 = null;
             }
-            Bukkit.getConsoleSender().spigot().sendMessage(comp.create());
-            Bukkit.getConsoleSender().sendMessage("aaaa");
             String text11;
             String text12;
             String text21 = null;
