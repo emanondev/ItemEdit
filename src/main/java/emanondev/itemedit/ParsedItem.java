@@ -1,6 +1,5 @@
-package emanondev.itemedit.command.itemedit;
+package emanondev.itemedit;
 
-import emanondev.itemedit.ItemEdit;
 import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
@@ -661,6 +660,17 @@ public class ParsedItem {
         return new EatResult(index, value.toString());
     }
 
+    public List<Map<String, Object>> loadEmptyList(String... paths) {
+        Map<String, Object> map = components;
+        for (int i = 0; i < paths.length - 1; i++) {
+            if ((!map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map))
+                map.put(paths[i], new LinkedHashMap<String, Object>());
+            map = (Map<String, Object>) map.get(paths[i]);
+        }
+        if (!map.containsKey(paths[paths.length - 1]))
+            map.put(paths[paths.length - 1], new ArrayList<Map<String, Object>>());
+        return (List<Map<String, Object>>) map.get(paths[paths.length - 1]);
+    }
 
     private class EatResult {
         private final int newIndex;
