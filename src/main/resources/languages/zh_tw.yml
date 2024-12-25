@@ -315,6 +315,17 @@ itemedit:
       - '&b用於材質包'
       - '&e<值> &b目標數據模型的正整數'
     params: '<值>'
+  itemmodel:
+    description:
+      - '&6&l編輯物品模型'
+      - ''
+      - '&e<命名空間鍵> &b用於設置紋理引用的鍵'
+      - '&b範例：/ie itemmodel &eiron_sword'
+      - '&b範例：/ie itemmodel &eminecraft:iron_sword'
+      - ''
+      - '&e<命名空間>&b:&e<id> &b將引用模型：'
+      - '  /assets/&e<命名空間>&b/models/item/&e<id>'
+    params: '<命名空間鍵>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &c物品必須是水貂桶'
     wrong-axolotl: '&4[&cItemEdit&4] &c錯誤的水貂值！ &4[&6懸停這裡&4]'

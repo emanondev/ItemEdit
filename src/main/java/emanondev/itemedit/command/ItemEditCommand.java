@@ -63,6 +63,8 @@ public class ItemEditCommand extends AbstractCommand {
             if (Util.isVersionUpTo(1, 13))
                 return;
             this.registerSubCommand(new CustomModelData(this));// 1.14+
+            if (Util.isVersionAfter(1, 21, 2))
+                this.registerSubCommand(new ItemModel(this));// 1.21.2+
             if (Util.isVersionUpTo(1, 15))
                 return;
             this.registerSubCommand(new Compass(this));// 1.16+

@@ -321,6 +321,17 @@ itemedit:
       - '&bUsado para paquetes de texturas'
       - '&e<valor> &bentero positivo del modelo de datos objetivo'
     params: '<valor>'
+  itemmodel:
+    description:
+      - '&6&lEditar modelo del objeto'
+      - ''
+      - '&e<clave con espacio de nombres> &bclave para establecer como referencia de textura'
+      - '&bEjemplo: /ie itemmodel &eiron_sword'
+      - '&bEjemplo: /ie itemmodel &eminecraft:iron_sword'
+      - ''
+      - '&e<espacio_de_nombres>&b:&e<id> &breferenciará el modelo:'
+      - '  /assets/&e<espacio_de_nombres>&b/models/item/&e<id>'
+    params: '<clave con espacio de nombres>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &cEl objeto debe ser un cubo de axolote'
     wrong-axolotl: '&4[&cItemEdit&4] &c¡Valor de axolote incorrecto! &4[&6haz clic aquí&4]'

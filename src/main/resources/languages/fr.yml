@@ -324,6 +324,17 @@ itemedit:
       - '&bUtilisé pour les packs de textures'
       - '&e<valeur> &bentier positif de la donnée de modèle cible'
     params: '<valeur>'
+  itemmodel:
+    description:
+      - '&6&lModifier le modèle de l’objet'
+      - ''
+      - '&e<clé avec espace de noms> &bclé pour définir comme référence de texture'
+      - '&bExemple : /ie itemmodel &eiron_sword'
+      - '&bExemple : /ie itemmodel &eminecraft:iron_sword'
+      - ''
+      - '&e<espace_de_noms>&b:&e<id> &bfera référence au modèle :'
+      - '  /assets/&e<espace_de_noms>&b/models/item/&e<id>'
+    params: '<clé avec espace de noms>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &cL''objet doit être un seau d''axolotl'
     wrong-axolotl: '&4[&cItemEdit&4] &cMauvaise valeur d''axolotl ! &4[&6survoler ici&4]'

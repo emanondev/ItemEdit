@@ -320,6 +320,17 @@ itemedit:
       - '&bUsado para pacotes de textura'
       - '&e<valor> &binteiro positivo do modelo de dados de destino'
     params: '<valor>'
+  itemmodel:
+    description:
+      - '&6&lEditar modelo de item'
+      - ''
+      - '&e<chave com namespace> &bchave para definir como referência de textura'
+      - '&bExemplo: /ie itemmodel &eiron_sword'
+      - '&bExemplo: /ie itemmodel &eminecraft:iron_sword'
+      - ''
+      - '&e<namespace>&b:&e<id> &breferenciará o modelo:'
+      - '  /assets/&e<namespace>&b/models/item/&e<id>'
+    params: '<chave com namespace>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &cO item deve ser um balde de axolote'
     wrong-axolotl: '&4[&cItemEdit&4] &cValor de Axolote incorreto! &4[&6clique aqui&4]'

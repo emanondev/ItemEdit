@@ -321,6 +321,17 @@ itemedit:
       - '&bUsed for texture packs'
       - '&e<value> &bpositive int of target data model'
     params: '<value>'
+  itemmodel:
+    description:
+      - '&6&lEdit item model'
+      - ''
+      - '&e<namespaced key> &bkey to set for texture reference'
+      - '&bExample: /ie itemmodel &eiron_sword'
+      - '&bExample: /ie itemmodel &eminecraft:iron_sword'
+      - ''
+      - '&e<namespace>&b:&e<id> &bwill reference model:'
+      - '  /assets/&e<namespace>&b/models/item/&e<id>'
+    params: '<namespaced key>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &cItem must be a axolotl bucket'
     wrong-axolotl: '&4[&cItemEdit&4] &cWrong Axolotl Value! &4[&6hover here&4]'

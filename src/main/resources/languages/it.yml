@@ -322,6 +322,17 @@ itemedit:
       - '&bUsato per le texture pack'
       - '&e<valore> &bintero positivo del modello dati di destinazione'
     params: '<valore>'
+  itemmodel:
+    description:
+      - '&6&lModifica il modello dell’oggetto'
+      - ''
+      - '&e<chiave con spazio dei nomi> &bchiave da impostare come riferimento per la texture'
+      - '&bEsempio: /ie itemmodel &eiron_sword'
+      - '&bEsempio: /ie itemmodel &eminecraft:iron_sword'
+      - ''
+      - '&e<spazio_dei_nomi>&b:&e<id> &briferirà al modello:'
+      - '  /assets/&e<spazio_dei_nomi>&b/models/item/&e<id>'
+    params: '<chiave con spazio dei nomi>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &cL''oggetto deve essere un secchiello di axolotl'
     wrong-axolotl: '&4[&cItemEdit&4] &cValore di axolotl errato! &4[&6Passa il cursore qui&4]'

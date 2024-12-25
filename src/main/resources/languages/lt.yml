@@ -322,6 +322,17 @@ itemedit:
       - '&bNaudojama tekstūrų paketams'
       - '&e<value> &bteigiama int reikšmė tiksliniams duomenų modeliams'
     params: '<value>'
+  itemmodel:
+    description:
+      - '&6&lRedaguoti elemento modelį'
+      - ''
+      - '&e<vardų srities raktas> &braktas, skirtas tekstūros nuorodai nustatyti'
+      - '&bPavyzdys: /ie itemmodel &eiron_sword'
+      - '&bPavyzdys: /ie itemmodel &eminecraft:iron_sword'
+      - ''
+      - '&e<vardų_sritis>&b:&e<id> &bnurodys modelį:'
+      - '  /assets/&e<vardų_sritis>&b/models/item/&e<id>'
+    params: '<vardų srities raktas>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &cDaiktas turi būti aksolotlio kibiras'
     wrong-axolotl: '&4[&cItemEdit&4] &cNeteisinga aksolotlio reikšmė! &4[&6hover here&4]'

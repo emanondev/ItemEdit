@@ -320,6 +320,17 @@ itemedit:
       - '&bVerwendet für Texture-Packs'
       - '&e<value> &bpositive ganze Zahl des gewünschten Datenmodells'
     params: '<value>'
+  itemmodel:
+    description:
+      - '&6&lBearbeite das Gegenstandsmodell'
+      - ''
+      - '&e<Namespaced Key> &bSchlüssel für die Texturreferenz'
+      - '&bBeispiel: /ie itemmodel &eiron_sword'
+      - '&bBeispiel: /ie itemmodel &eminecraft:iron_sword'
+      - ''
+      - '&e<Namensraum>&b:&e<id> &bwird das Modell referenzieren:'
+      - '  /assets/&e<Namensraum>&b/models/item/&e<id>'
+    params: '<Namespaced Key>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &cDas Item muss ein Axolotl-Eimer sein'
     wrong-axolotl: '&4[&cItemEdit&4] &cUngültiger Axolotl-Wert! &4[&6Hier hovern&4]'

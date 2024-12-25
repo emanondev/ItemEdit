@@ -321,6 +321,17 @@ itemedit:
       - '&bUżywane w paczkach tekstur'
       - '&e<wartość> &bliczba całkowita dodatnia docelowego modelu danych'
     params: '<wartość>'
+  itemmodel:
+    description:
+      - '&6&lEdytuj model przedmiotu'
+      - ''
+      - '&e<klucz z przestrzenią nazw> &bklucz ustawiany jako odniesienie tekstury'
+      - '&bPrzykład: /ie itemmodel &eiron_sword'
+      - '&bPrzykład: /ie itemmodel &eminecraft:iron_sword'
+      - ''
+      - '&e<przestrzeń_nazw>&b:&e<id> &bodnosi się do modelu:'
+      - '  /assets/&e<przestrzeń_nazw>&b/models/item/&e<id>'
+    params: '<klucz z przestrzenią nazw>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &cPrzedmiot musi być kubełkiem z axolotlem'
     wrong-axolotl: '&4[&cItemEdit&4] &cNieprawidłowa wartość axolotla! &4[&6najedź tutaj&4]'

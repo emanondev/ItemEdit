@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -87,6 +88,22 @@ public class Util {
                 if (c > MAX_COMPLETES)
                     return results;
             }
+        return results;
+    }
+
+    public static @NotNull <T> List<String> complete(String prefix, Collection<T> list, Function<T,String> converter) {
+        prefix = prefix.toLowerCase(Locale.ENGLISH);
+        ArrayList<String> results = new ArrayList<>();
+        int c = 0;
+        for (T value : list) {
+            String textValue = converter.apply(value);
+            if (textValue.toLowerCase(Locale.ENGLISH).startsWith(prefix)) {
+                results.add(textValue);
+                c++;
+                if (c > MAX_COMPLETES)
+                    return results;
+            }
+        }
         return results;
     }
 

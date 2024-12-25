@@ -315,6 +315,17 @@ itemedit:
       - '&b用于材质包'
       - '&e<材质> &b目标数据模型的正整数'
     params: '<材质>'
+  itemmodel:
+    description:
+      - '&6&l编辑物品模型'
+      - ''
+      - '&e<命名空间键> &b用于设置纹理引用的键'
+      - '&b示例：/ie itemmodel &eiron_sword'
+      - '&b示例：/ie itemmodel &eminecraft:iron_sword'
+      - ''
+      - '&e<命名空间>&b:&e<id> &b将引用模型：'
+      - '  /assets/&e<命名空间>&b/models/item/&e<id>'
+    params: '<命名空间键>'
   axolotlvariant:
     wrong-type: '&4[&cItemEdit&4] &c物品必须为螺蛳桶'
     wrong-axolotl: '&4[&cItemEdit&4] &c螺蛳值错误！ &4[&6悬停此处&4]'
