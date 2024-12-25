@@ -234,8 +234,9 @@ public class UtilLegacy {
             if (Util.isVersionAfter(1, 20, 6))
                 return V1_20_6.createAttribute(attr, amount, op, slot);
         } catch (Throwable e) {
+            e.printStackTrace();
         }
-        return new AttributeModifier(UUID.randomUUID(), attr.toString(), amount, op, EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)));
+        return new AttributeModifier(UUID.randomUUID(), ((Enum) attr).toString(), amount, op, EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)));
     }
 
 
