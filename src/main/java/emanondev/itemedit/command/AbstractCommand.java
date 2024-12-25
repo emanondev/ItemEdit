@@ -225,13 +225,13 @@ public abstract class AbstractCommand implements TabExecutor {
 
         private int commandPerPage;
 
-        private int getMaxPageFor(int elements) {
-            return elements / commandPerPage + (elements % commandPerPage == 0 ? 0 : 1);
-        }
-
         public HelpSubCommand(@NotNull AbstractCommand cmd) {
             super("help", cmd, false, false);
             this.commandPerPage = Math.max(4, this.getConfigInt("commands_per_page"));
+        }
+
+        private int getMaxPageFor(int elements) {
+            return elements / commandPerPage + (elements % commandPerPage == 0 ? 0 : 1);
         }
 
         @Override

@@ -46,13 +46,13 @@ public class Trim extends SubCmd {
             TrimMaterial mat = Aliases.TRIM_MATERIAL.convertAlias(args[1]);
             if (mat == null) {
                 onWrongAlias("wrong-material", p, Aliases.TRIM_MATERIAL);
-                onFail(p,alias);
+                onFail(p, alias);
                 return;
             }
             TrimPattern patt = Aliases.TRIM_PATTERN.convertAlias(args[2]);
             if (patt == null) {
                 onWrongAlias("wrong-pattern", p, Aliases.TRIM_PATTERN);
-                onFail(p,alias);
+                onFail(p, alias);
                 return;
             }
             ArmorMeta armorMeta = (ArmorMeta) meta;

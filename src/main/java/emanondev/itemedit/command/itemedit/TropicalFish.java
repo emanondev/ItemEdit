@@ -66,14 +66,14 @@ public class TropicalFish extends SubCmd {
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
             if (color == null) {
                 onWrongAlias("wrong-color", p, Aliases.COLOR);
-                sendFailFeedbackForSub(p,alias,"bodycolor");
+                sendFailFeedbackForSub(p, alias, "bodycolor");
                 return;
             }
             meta.setBodyColor(color);
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p,alias,"bodycolor");
+            sendFailFeedbackForSub(p, alias, "bodycolor");
         }
     }
 
@@ -87,14 +87,14 @@ public class TropicalFish extends SubCmd {
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
             if (color == null) {
                 onWrongAlias("wrong-color", p, Aliases.COLOR);
-                sendFailFeedbackForSub(p,alias,"patterncolor");
+                sendFailFeedbackForSub(p, alias, "patterncolor");
                 return;
             }
             meta.setPatternColor(color);
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p,alias,"patterncolor");
+            sendFailFeedbackForSub(p, alias, "patterncolor");
         }
     }
 
@@ -108,14 +108,14 @@ public class TropicalFish extends SubCmd {
             Pattern pattern = Aliases.TROPICALPATTERN.convertAlias(args[2]);
             if (pattern == null) {
                 onWrongAlias("wrong-pattern", p, Aliases.TROPICALPATTERN);
-                sendFailFeedbackForSub(p,alias,"pattern");
+                sendFailFeedbackForSub(p, alias, "pattern");
                 return;
             }
             meta.setPattern(pattern);
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p,alias,"pattern");
+            sendFailFeedbackForSub(p, alias, "pattern");
         }
     }
 

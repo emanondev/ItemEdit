@@ -44,7 +44,7 @@ public class Aliases {
 
     };
     public static final AliasSet<DyeColor> COLOR = new EnumAliasSet<>("color", DyeColor.class);
-    public static final AliasSet<String> ANIMATION = new AliasSet<String>("animations"){
+    public static final AliasSet<String> ANIMATION = new AliasSet<String>("animations") {
 
         private final LinkedHashSet<String> values = new LinkedHashSet<>(craftValues());
 
@@ -53,9 +53,9 @@ public class Aliases {
             return type.toLowerCase(Locale.ENGLISH);
         }
 
-        private List<String> craftValues(){
-            return Arrays.asList("drink","eat","crossbow",
-                    "none","block","bow","spear","spyglass","toot_horn","brush");
+        private List<String> craftValues() {
+            return Arrays.asList("drink", "eat", "crossbow",
+                    "none", "block", "bow", "spear", "spyglass", "toot_horn", "brush");
         }
 
         @Override

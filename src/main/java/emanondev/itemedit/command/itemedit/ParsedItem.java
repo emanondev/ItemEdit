@@ -23,8 +23,8 @@ import java.util.regex.Pattern;
 public class ParsedItem {
 
     private final String type;
-    private int amount;
     private final Map<String, Object> components = new LinkedHashMap<>();
+    private int amount;
 
     public ParsedItem(ItemStack itemStack) {
         this(itemStack.getType(), itemStack.getItemMeta());
@@ -45,6 +45,154 @@ public class ParsedItem {
         type = mat.getKey().toString();
         raw = raw.substring(index);
         components.putAll((Map<String, Object>) eatMap(raw, 0, 0).payload);
+    }
+
+    public static Map<String, Object> loadMap(Map<String, Object> data, String path) {
+        data.putIfAbsent(path, new LinkedHashMap<>());
+        return (Map<String, Object>) data.get(path);
+    }
+
+    public static List<Object> loadList(Map<String, Object> data, String path) {
+        data.putIfAbsent(path, new ArrayList<>());
+        return (List<Object>) data.get(path);
+    }
+
+    public static Map<String, Object> getMap(Map<String, Object> data, String path) {
+        return (Map<String, Object>) data.getOrDefault(path, null);
+    }
+
+    public static List<Object> getListOfRaw(Map<String, Object> data, String path) {
+        return (List<Object>) data.getOrDefault(path, null);
+    }
+
+    public static List<Map<String, Object>> getListOfMap(Map<String, Object> data, String path) {
+        return (List<Map<String, Object>>) data.getOrDefault(path, null);
+    }
+
+    public static List<Object> loadListOfRaw(Map<String, Object> data, String path) {
+        data.putIfAbsent(path, new ArrayList<>());
+        return (List<Object>) data.get(path);
+    }
+
+    public static List<Map<String, Object>> loadListOfMap(Map<String, Object> data, String path) {
+        data.putIfAbsent(path, new ArrayList<>());
+        return (List<Map<String, Object>>) data.get(path);
+    }
+
+    public static NamespacedKey readNamespacedKey(Map<String, Object> data, String path, NamespacedKey defValue) {
+        String text = readString(data, path, null);
+        if (text == null)
+            return defValue;
+        return new NamespacedKey(text.split(":")[0], text.split(":")[1]);
+    }
+
+    public static NamespacedKey readNamespacedKey(Map<String, Object> data, String path) {
+        return readNamespacedKey(data, path, null);
+    }
+
+    public static String readString(Map<String, Object> data, String path, String defValue) {
+        if (!data.containsKey(path))
+            return defValue;
+        return (String) data.get(path);
+    }
+
+    public static String readString(Map<String, Object> data, String path) {
+        return readString(data, path, null);
+    }
+
+    public static Boolean readBoolean(Map<String, Object> data, String path, Boolean defValue) {
+        Integer value = readInt(data, path);
+        return value == null ? defValue : value != 0;
+    }
+
+    public static Boolean readBoolean(Map<String, Object> data, String path) {
+        return readBoolean(data, path, null);
+    }
+
+    public static Integer readInt(Map<String, Object> data, String path) {
+        return readInt(data, path, null);
+    }
+
+    public static Integer readInt(Map<String, Object> data, String path, Integer defValue) {
+        if (!data.containsKey(path))
+            return defValue;
+        String value = (String) data.get(path);
+        if (value.endsWith("b"))
+            value = value.substring(0, value.length() - 1);
+        return Integer.parseInt(value);
+    }
+
+    public static Double readDouble(Map<String, Object> data, String path) {
+        return readDouble(data, path, null);
+    }
+
+    public static Double readDouble(Map<String, Object> data, String path, Double defValue) {
+        if (!data.containsKey(path))
+            return defValue;
+        String value = (String) data.get(path);
+        if (value.endsWith("f"))
+            value = value.substring(0, value.length() - 1);
+        return Double.parseDouble(value);
+    }
+
+    public static Float readFloat(Map<String, Object> data, String path) {
+        return readFloat(data, path, null);
+    }
+
+    public static Float readFloat(Map<String, Object> data, String path, Float defValue) {
+        Double value = readDouble(data, path, null);
+        return value == null ? defValue : value.floatValue();
+    }
+
+    public static void setValue(Map<String, Object> data, String path, String value) {
+        if (value == null)
+            data.remove(path);
+        else if (!(value.startsWith("\"") && value.endsWith("\"")))
+            data.put(path, "\"" + value + "\"");
+        else
+            data.put(path, value);
+    }
+
+    public static void setValue(Map<String, Object> data, String path, Boolean value) {
+        if (value == null)
+            data.remove(path);
+        else
+            data.put(path, String.valueOf(value ? 1 : 0));
+    }
+
+    public static void setValue(Map<String, Object> data, String path, Integer value) {
+        if (value == null)
+            data.remove(path);
+        else
+            data.put(path, value.toString());
+    }
+
+    public static void setValue(Map<String, Object> data, String path, Double value) {
+        if (value == null)
+            data.remove(path);
+        else
+            data.put(path, value.toString());
+    }
+
+    public static void setValue(Map<String, Object> data, String path, Float value) {
+        if (value == null)
+            data.remove(path);
+        else
+            data.put(path, value.toString());
+    }
+
+    public static void setValue(Map<String, Object> data, String path, NamespacedKey value) {
+        if (value == null)
+            data.remove(path);
+        else
+            data.put(path, value.toString());
+    }
+
+    public static void setValue(Map<String, Object> data, String path, Keyed value) {
+        if (value == null)
+            data.remove(path);
+        else
+            data.put(path, value.getKey().toString());
     }
 
     public void set(@Nullable String value, String... paths) {
@@ -328,155 +476,6 @@ public class ParsedItem {
 
     public Map<String, Object> getMap() {
         return components;
-    }
-
-    public static Map<String, Object> loadMap(Map<String, Object> data, String path) {
-        data.putIfAbsent(path, new LinkedHashMap<>());
-        return (Map<String, Object>) data.get(path);
-    }
-
-    public static List<Object> loadList(Map<String, Object> data, String path) {
-        data.putIfAbsent(path, new ArrayList<>());
-        return (List<Object>) data.get(path);
-    }
-
-    public static Map<String, Object> getMap(Map<String, Object> data, String path) {
-        return (Map<String, Object>) data.getOrDefault(path, null);
-    }
-
-    public static List<Object> getListOfRaw(Map<String, Object> data, String path) {
-        return (List<Object>) data.getOrDefault(path, null);
-    }
-
-    public static List<Map<String, Object>> getListOfMap(Map<String, Object> data, String path) {
-        return (List<Map<String, Object>>) data.getOrDefault(path, null);
-    }
-
-    public static List<Object> loadListOfRaw(Map<String, Object> data, String path) {
-        data.putIfAbsent(path, new ArrayList<>());
-        return (List<Object>) data.get(path);
-    }
-
-    public static List<Map<String, Object>> loadListOfMap(Map<String, Object> data, String path) {
-        data.putIfAbsent(path, new ArrayList<>());
-        return (List<Map<String, Object>>) data.get(path);
-    }
-
-
-    public static NamespacedKey readNamespacedKey(Map<String, Object> data, String path, NamespacedKey defValue) {
-        String text = readString(data, path, null);
-        if (text == null)
-            return defValue;
-        return new NamespacedKey(text.split(":")[0], text.split(":")[1]);
-    }
-
-    public static NamespacedKey readNamespacedKey(Map<String, Object> data, String path) {
-        return readNamespacedKey(data, path, null);
-    }
-
-    public static String readString(Map<String, Object> data, String path, String defValue) {
-        if (!data.containsKey(path))
-            return defValue;
-        return (String) data.get(path);
-    }
-
-    public static String readString(Map<String, Object> data, String path) {
-        return readString(data, path, null);
-    }
-
-    public static Boolean readBoolean(Map<String, Object> data, String path, Boolean defValue) {
-        Integer value = readInt(data, path);
-        return value == null ? defValue : value != 0;
-    }
-
-    public static Boolean readBoolean(Map<String, Object> data, String path) {
-        return readBoolean(data, path, null);
-    }
-
-    public static Integer readInt(Map<String, Object> data, String path) {
-        return readInt(data, path, null);
-    }
-
-    public static Integer readInt(Map<String, Object> data, String path, Integer defValue) {
-        if (!data.containsKey(path))
-            return defValue;
-        String value = (String) data.get(path);
-        if (value.endsWith("b"))
-            value = value.substring(0, value.length() - 1);
-        return Integer.parseInt(value);
-    }
-
-    public static Double readDouble(Map<String, Object> data, String path) {
-        return readDouble(data, path, null);
-    }
-
-    public static Double readDouble(Map<String, Object> data, String path, Double defValue) {
-        if (!data.containsKey(path))
-            return defValue;
-        String value = (String) data.get(path);
-        if (value.endsWith("f"))
-            value = value.substring(0, value.length() - 1);
-        return Double.parseDouble(value);
-    }
-
-    public static Float readFloat(Map<String, Object> data, String path) {
-        return readFloat(data, path, null);
-    }
-
-    public static Float readFloat(Map<String, Object> data, String path, Float defValue) {
-        Double value = readDouble(data, path, null);
-        return value == null ? defValue : value.floatValue();
-    }
-
-    public static void setValue(Map<String, Object> data, String path, String value) {
-        if (value == null)
-            data.remove(path);
-        else if (!(value.startsWith("\"") && value.endsWith("\"")))
-            data.put(path, "\"" + value + "\"");
-        else
-            data.put(path, value);
-    }
-
-    public static void setValue(Map<String, Object> data, String path, Boolean value) {
-        if (value == null)
-            data.remove(path);
-        else
-            data.put(path, String.valueOf(value ? 1 : 0));
-    }
-
-    public static void setValue(Map<String, Object> data, String path, Integer value) {
-        if (value == null)
-            data.remove(path);
-        else
-            data.put(path, value.toString());
-    }
-
-    public static void setValue(Map<String, Object> data, String path, Double value) {
-        if (value == null)
-            data.remove(path);
-        else
-            data.put(path, value.toString());
-    }
-
-    public static void setValue(Map<String, Object> data, String path, Float value) {
-        if (value == null)
-            data.remove(path);
-        else
-            data.put(path, value.toString());
-    }
-
-    public static void setValue(Map<String, Object> data, String path, NamespacedKey value) {
-        if (value == null)
-            data.remove(path);
-        else
-            data.put(path, value.toString());
-    }
-
-    public static void setValue(Map<String, Object> data, String path, Keyed value) {
-        if (value == null)
-            data.remove(path);
-        else
-            data.put(path, value.getKey().toString());
     }
 
     public ItemStack toItemStack() {

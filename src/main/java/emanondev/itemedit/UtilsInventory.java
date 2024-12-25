@@ -94,17 +94,17 @@ public class UtilsInventory {
                     return amount;
                 else {
                     int left = map.get(0).getAmount();
-                    if (Util.isVersionAfter(1,9)){
+                    if (Util.isVersionAfter(1, 9)) {
                         ItemStack[] extras = player.getInventory().getExtraContents();
-                        for (int i = 0; i< extras.length;i++){
+                        for (int i = 0; i < extras.length; i++) {
                             ItemStack extra = extras[i];
-                            if (extra!=null && item.isSimilar(extra)){
-                                int toRemove = Math.min(left,extra.getAmount());
-                                left-=toRemove;
-                                if (toRemove==extra.getAmount())
+                            if (extra != null && item.isSimilar(extra)) {
+                                int toRemove = Math.min(left, extra.getAmount());
+                                left -= toRemove;
+                                if (toRemove == extra.getAmount())
                                     extras[i] = null;
                                 else {
-                                    extra.setAmount(extra.getAmount()-toRemove);
+                                    extra.setAmount(extra.getAmount() - toRemove);
                                     extras[i] = extra;
                                 }
                             }

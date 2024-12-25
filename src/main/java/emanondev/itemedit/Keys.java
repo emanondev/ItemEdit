@@ -14,7 +14,7 @@ import java.util.stream.StreamSupport;
 
 public class Keys {
 
-    private static NamespacedKey craftKey(String postfix){
+    private static NamespacedKey craftKey(String postfix) {
         return new NamespacedKey(NamespacedKey.MINECRAFT, postfix);
     }
 
@@ -32,7 +32,7 @@ public class Keys {
         public static final NamespacedKey FOOD = craftKey("food");
         public static final NamespacedKey CONSUMABLE = craftKey("consumable");
         public static final NamespacedKey USE_REMAINDER = craftKey("use_remainder");
-        public static final NamespacedKey CROSS_VERSION_CONSUMABLE = Util.isVersionUpTo(1, 21, 1)?FOOD:CONSUMABLE;
+        public static final NamespacedKey CROSS_VERSION_CONSUMABLE = Util.isVersionUpTo(1, 21, 1) ? FOOD : CONSUMABLE;
     }
 
 
