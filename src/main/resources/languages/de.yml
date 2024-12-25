@@ -22,8 +22,8 @@ itemedit:
     description:
       - '&6&lZeigt Hilfe an'
       - ''
-      - '[Seite] &bHilfeseite'
-      - '[Unterbefehl] &bHilfe für den Unterbefehl'
+      - '&e[Seite] &bHilfeseite'
+      - '&e[Unterbefehl] &bHilfe für den Unterbefehl'
     params: '[Seite/Unterbefehl]'
   rename:
     description:

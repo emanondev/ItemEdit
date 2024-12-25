@@ -24,15 +24,15 @@ itemedit:
     description:
       - '&6&lAffiche l’aide'
       - ''
-      - '[page] &bpage d’aide'
-      - '[sous-commande] &baide pour la sous-commande'
+      - '&e[page] &bpage d’aide'
+      - '&e[sous-commande] &baide pour la sous-commande'
     params: '[page/sous-commande]'
   rename:
     description:
       - "&b&lDéfinir le nom de l'objet"
       - ""
       - "&b&lAstuce : &bTapez &eclear &bpour rétablir le nom par défaut"
-    params: <nom>
+    params: '<nom>'
   lore:
     description:
       - "&b&lModifier les descriptions"

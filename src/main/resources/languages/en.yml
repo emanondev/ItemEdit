@@ -22,8 +22,8 @@ itemedit:
     description:
       - '&6&lShows help'
       - ''
-      - '[page] &bhelp page'
-      - '[subcommand] &bhelp for subcommand'
+      - '&e[page] &bhelp page'
+      - '&e[subcommand] &bhelp for subcommand'
     params: '[page/subcommand]'
   rename:
     description:

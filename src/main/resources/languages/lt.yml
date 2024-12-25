@@ -21,8 +21,8 @@ itemedit:
     description:
       - '&6&lRodo pagalbą'
       - ''
-      - '[puslapis] &bpagalbos puslapis'
-      - '[subkomanda] &bpagalba dėl subkomandos'
+      - '&e[puslapis] &bpagalbos puslapis'
+      - '&e[subkomanda] &bpagalba dėl subkomandos'
     params: '[puslapis/subkomanda]'
   rename:
     description:

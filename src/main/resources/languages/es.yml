@@ -22,8 +22,8 @@ itemedit:
     description:
       - '&6&lMuestra la ayuda'
       - ''
-      - '[página] &bpágina de ayuda'
-      - '[subcomando] &bayuda para el subcomando'
+      - '&e[página] &bpágina de ayuda'
+      - '&e[subcomando] &bayuda para el subcomando'
     params: '[página/subcomando]'
   rename:
     description:

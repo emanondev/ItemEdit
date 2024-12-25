@@ -22,8 +22,8 @@ itemedit:
     description:
       - '&6&l顯示幫助'
       - ''
-      - '[頁面] &b幫助頁面'
-      - '[子命令] &b子命令的幫助'
+      - '&e[頁面] &b幫助頁面'
+      - '&e[子命令] &b子命令的幫助'
     params: '[頁面/子命令]'
   rename:
     description:

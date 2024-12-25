@@ -22,8 +22,8 @@ itemedit:
     description:
       - '&6&lPokazuje pomoc'
       - ''
-      - '[strona] &bstrona pomocy'
-      - '[podkomenda] &bpomoc dla podkomendy'
+      - '&e[strona] &bstrona pomocy'
+      - '&e[podkomenda] &bpomoc dla podkomendy'
     params: '[strona/podkomenda]'
   rename:
     description:
