@@ -154,7 +154,11 @@ public class ItemEdit extends APlugin {
                 t.printStackTrace();
             }
         }
-        registerMetrics(BSTATS_PLUGIN_ID);
+        Metrics metrics = registerMetrics(BSTATS_PLUGIN_ID);
+        registerLanguagesMetrics(metrics, (p) -> p.hasPermission("itemedit.admin"), (p) -> p.hasPermission("itemedit.creativeuser")
+                || p.hasPermission("itemedit.itemedit.rename")
+                || p.hasPermission("itemedit.itemedit.lore")
+                || p.hasPermission("itemedit.itemedit.color"));
     }
 
     @Override

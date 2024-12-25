@@ -15,10 +15,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
 
 public abstract class APlugin extends JavaPlugin {
 
@@ -223,6 +221,41 @@ public abstract class APlugin extends JavaPlugin {
             e.printStackTrace();
             Bukkit.getServer().getPluginManager().disablePlugin(this);
         }
+    }
+
+    protected void registerLanguagesMetrics(Metrics metrics, Predicate<Player> isAdmin, Predicate<Player> isUser) {
+        if (metrics == null)
+            return;
+        if (!Util.isVersionAfter(1, 12))
+            return;
+        metrics.addCustomChart(new Metrics.DrilldownPie("admins_languages", () -> {
+            Map<String, Map<String, Integer>> mainMap = new HashMap<>();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (!isAdmin.test(player))
+                    continue;
+                String locale = player.getLocale();
+                String pre = locale.split("_")[0];
+                if (!mainMap.containsKey(pre))
+                    mainMap.put(pre, new HashMap<>());
+                Map<String, Integer> subMap = mainMap.get(pre);
+                subMap.put(locale, subMap.getOrDefault(locale, 0) + 1);
+            }
+            return mainMap;
+        }));
+        metrics.addCustomChart(new Metrics.DrilldownPie("users_languages", () -> {
+            Map<String, Map<String, Integer>> mainMap = new HashMap<>();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (!isUser.test(player))
+                    continue;
+                String locale = player.getLocale();
+                String pre = locale.split("_")[0];
+                if (!mainMap.containsKey(pre))
+                    mainMap.put(pre, new HashMap<>());
+                Map<String, Integer> subMap = mainMap.get(pre);
+                subMap.put(locale, subMap.getOrDefault(locale, 0) + 1);
+            }
+            return mainMap;
+        }));
     }
 
     protected void enableWithError(@NotNull String error) {
