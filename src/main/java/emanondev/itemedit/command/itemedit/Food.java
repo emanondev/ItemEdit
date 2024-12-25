@@ -706,12 +706,12 @@ public class Food extends SubCmd {
         return Collections.emptyList();
     }
 
-    private void setUseRemainder(ItemStack origin, ItemStack remainer) {
+    private void setUseRemainder(ItemStack origin, ItemStack d) {
+        ItemMeta meta = origin.getItemMeta();
         if (Util.isVersionUpTo(1, 21, 1)) {
-            ItemMeta meta = origin.getItemMeta();
             FoodComponent food = meta.getFood();
             try {
-                food.getClass().getMethod("setUsingConvertsTo", ItemStack.class).invoke(food, remainer);
+                food.getClass().getMethod("setUsingConvertsTo", ItemStack.class).invoke(food, d);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -719,7 +719,8 @@ public class Food extends SubCmd {
             origin.setItemMeta(meta);
             return;
         }
-        origin.getItemMeta().setUseRemainder(remainer);
+        meta.setUseRemainder(d);
+        origin.setItemMeta(meta);
     }
 
     @Nullable
