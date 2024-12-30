@@ -1,0 +1,970 @@
+player-only: '&4[&cItemEdit&4] &cLệnh này chỉ dành cho người chơi'
+no-item-on-hand: '&4[&cItemEdit&4] &cBạn cần cầm một vật phẩm trên tay'
+lack-permission: '&4[&cItemEdit&4] &cBạn thiếu quyền hạn %permission%'
+lack-permission-generic: '&4[&cItemEdit&4] &cBạn không có quyền sử dụng lệnh này'
+blocked-by-censure: '&4[&cItemEdit&4] &cBạn không thể sử dụng văn bản này, nó chứa từ bị chặn'
+blocked-by-type-restriction: '&4[&cItemEdit&4] &cBạn không thể đổi tên vật phẩm này'
+blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cBạn không thể chỉnh sửa lore của vật phẩm này'
+blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cBạn không thể thêm nhiều dòng lore hơn vào vật phẩm này'
+blocked-by-lore-length-limit: '&4[&cItemEdit&4] &cBạn không thể đặt dòng dài hơn %limit% ký tự'
+blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cBạn không thể đặt tên dài hơn %limit% ký tự'
+itemedit:
+  help:
+    header: "&9&lItemEdit - Trợ giúp"
+    header-sub: "&9&lItemEdit %sub% - Trợ giúp"
+    footer: "%prev_clickable% &9&lTrợ giúp [%page%/%max_page%] %next_clickable%"
+    next_text: " &d&l>&m> >&r "
+    prev_text: " &d&l&m< <&d&l< "
+    next_void: " &8&l>&m> >&r "
+    prev_void: " &8&l&m< <&8&l< "
+    next_hover: "&6&lChuyển đến trang %target%"
+    prev_hover: "&6&lQuay lại trang %target%"
+    description:
+      - '&6&lHiển thị trợ giúp'
+      - ''
+      - '&e[trang] &btrang trợ giúp'
+      - '&e[lệnh con] &btrợ giúp cho lệnh con'
+    params: '[trang/lệnh con]'
+  rename:
+    description:
+      - '&6&lĐặt tên cho vật phẩm'
+      - ''
+      - '&b&lGợi ý: &bgõ &exóa &bđể đặt lại tên về mặc định'
+    params: '<tên>'
+  lore:
+    description:
+      - '&6&lChỉnh sửa lore'
+      - ''
+      - '&eThêm <văn bản> &b- thêm văn bản vào dòng mới'
+      - '&eChèn <dòng> <văn bản> &b- thêm văn bản vào dòng được chọn'
+      - '&eĐặt <dòng> <văn bản> &b- đặt hoặc thay thế văn bản trên dòng đã chọn'
+      - '&eXóa <dòng> &b- xóa dòng đã chọn'
+      - '&eĐặt lại &b- xóa tất cả các dòng'
+      - '&eSao chép &b- sao chép lore của vật phẩm hiện tại để dán sau'
+      - '&eSao chép sách &b- giống sao chép nhưng từ trang sách thành dòng'
+      - '&eSao chép tệp <đường dẫn> &b- giống sao chép nhưng từ loreCopy.yml'
+      - '&eDán &b- dán lore đã sao chép gần nhất'
+      - '&eThay thế <thay thế> <bằng> &b- thay thế tất cả các xuất hiện'
+    params: '<thêm/đặt/xóa...> [...]'
+    set:
+      params: '<dòng> <văn bản>'
+      description:
+        - '&6&lĐặt hoặc thay thế văn bản trên dòng đã chọn'
+    remove:
+      params: '<dòng>'
+      description:
+        - '&6&lXóa dòng đã chọn'
+    insert:
+      params: '<dòng> <văn bản>'
+      description:
+        - '&6&lThêm văn bản vào dòng đã chọn'
+    copy:
+      feedback: '&9[&fItemEdit&9] &aĐã sao chép lore'
+    copyBook:
+      wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là sách viết hoặc sách và bút'
+      feedback: '&9[&fItemEdit&9] &aĐã sao chép trang sách, sẵn sàng để dán'
+    copyFile:
+      no-path: '&4[&cItemEdit&4] &cChọn một đường dẫn /ie lore copyfile &6<đường dẫn>'
+      wrong-path: '&9[&fItemEdit&9] &cĐường dẫn không hợp lệ, nhớ tải lại cấu hình và kiểm tra chữ hoa'
+      feedback: '&9[&fItemEdit&9] &aĐã sao chép cấu hình, sẵn sàng để dán'
+    paste:
+      feedback: '&9[&fItemEdit&9] &aĐã dán lore'
+      no-copy: '&4[&cItemEdit&4] &cSao chép một lore trước'
+    replace:
+      params: '<thay thế> <bằng>'
+      description:
+        - '&6&lThay thế tất cả các xuất hiện trong lore'
+        - ''
+        - '&bNếu bạn cần thay thế nhiều hơn một từ, bạn'
+        - '&b cần đặt chúng trong &e{ }'
+        - ''
+        - '&bVí dụ: &e/ie lore replace Mới Rỉ'
+        - '&b''&eThanh kiếm mới&b'' -> ''&eThanh kiếm rỉ&b'''
+        - ''
+        - '&bVí dụ 2: &e/ie lore replace {Nặng} {Rất nhẹ}'
+        - '&b''&eKiếm nặng&b'' -> ''&eKiếm rất nhẹ&b'''
+  hide:
+    wrong-flag: '&4[&cItemEdit&4] &cGiá trị Flag không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lẨn hoặc hiện các thành phần'
+      - ''
+      - '&e<flag> &bcờ mục cần chỉnh sửa'
+      - '&e[true/false] &bđặt giá trị của cờ, mặc định là chuyển đổi'
+      - ''
+      - '&b&lGợi ý: &bẩn các mẫu biểu ngữ với cờ potion_effects'
+      - '&b&lGợi ý: &bẩn tất cả các cờ cùng lúc với &e/itemedit hideall'
+    params: '<flag> [true/false]'
+  hideall:
+    description:
+      - '&6&lẨn tất cả các thành phần'
+      - ''
+      - '&bẨn: phù phép, hiệu ứng thuốc, lớp biểu ngữ, thuộc tính...'
+      - ''
+      - '&b&lGợi ý: &bẩn từng thành phần riêng lẻ với &e/itemedit hide <flag> true'
+    params: ''
+  damage:
+    description:
+      - '&6&lChỉnh sửa độ bền'
+      - ''
+      - '&e<durability> &bmức sát thương áp dụng'
+      - '&b&lLưu ý: &e0 &bnghĩa là không bị tổn hại, độ bền đầy đủ'
+    params: '<durability>'
+  type:
+    description:
+      - '&6&lĐặt loại vật phẩm'
+      - ''
+      - '&b&lLưu ý: &bmột số loại như Air sẽ không hoạt động'
+    params: '<type>'
+  unbreakable:
+    description:
+      - '&6&lĐặt trạng thái không thể phá vỡ'
+      - ''
+      - '&bCông cụ và áo giáp không thể phá vỡ sẽ không mất độ bền'
+      - '&e[true/false] &bđặt giá trị không thể phá vỡ, mặc định là chuyển đổi'
+    params: '[true/false]'
+  amount:
+    description:
+      - '&6&lĐặt số lượng'
+      - ''
+      - '&e<amount> &bsố lượng cần đặt (tối đa 127)'
+      - '&b&lGợi ý: &bSố lượng âm sẽ bị trừ khỏi'
+      - '&b số lượng hiện tại của vật phẩm'
+    params: '<amount>'
+  skullowner:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là đầu của người chơi'
+    description:
+      - '&6&lĐặt chủ sở hữu đầu'
+      - ''
+      - '&bChỉ hoạt động trên đầu của người chơi'
+      - '&e<name> &btên của chủ sở hữu'
+      - ''
+      - '&b&lGợi ý: &bĐặt và phá vỡ đầu để cập nhật skin'
+    params: '<name>'
+  color:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải thuộc loại có thể thay đổi màu như áo giáp da, sao pháo hoa, thuốc hoặc mũi tên được pha thuốc'
+    description:
+      - '&6&lĐặt màu'
+      - ''
+      - '&bHoạt động trên áo giáp da và sao pháo hoa, trên các máy chủ'
+      - '&b 1.11+ cũng hoạt động trên bất kỳ loại thuốc và mũi tên có pha thuốc!'
+      - '&e<đỏ (0-255)> <xanh lá cây (0-255)> <xanh dương (0-255)> &blà lượng của mỗi màu cần kết hợp'
+      - '&bMỗi màu là một giá trị số nguyên giữa 0 và 255'
+      - '&bNếu bạn bối rối, hãy google "&eRGB color picker&b"'
+    params: '<đỏ (0-255)> <xanh lá cây (0-255)> <xanh dương (0-255)>'
+  enchant:
+    wrong-enchant: '&4[&cItemEdit&4] &cGiá trị Phù phép không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lĐặt phù phép'
+      - ''
+      - '&e<enchant> &bloại phù phép'
+      - '&e[level] &blevel của phù phép, mặc định là &e1'
+      - ''
+      - '&b&lGợi ý: &bĐặt &e[level] &blà &e0 &bđể xóa một phù phép'
+    params: '<enchant> [level]'
+  booktype:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là một cuốn sách đã viết'
+    wrong-generation: '&4[&cItemEdit&4] &cGiá trị Loại sách không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lĐặt loại sách'
+      - ''
+      - '&bChỉ hoạt động trên sách đã viết'
+    params: '<booktype>'
+  bookauthor:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là một cuốn sách đã viết'
+    description:
+      - '&6&lĐặt tên tác giả'
+      - ''
+      - '&bTên tác giả có thể chứa khoảng trắng và có thể tô màu'
+      - '&bChỉ hoạt động trên sách đã viết'
+    params: '<name>'
+  potioneffect:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là thuốc, mũi tên được pha thuốc, hoặc món hầm đáng ngờ'
+    wrong-effect: '&4[&cItemEdit&4] &cGiá trị Hiệu ứng không hợp lệ! &4[&6di chuột ở đây&4]'
+    itemtag-tip: '&9[&fItemEdit&9] &bBạn cần thêm hiệu ứng thuốc vào vật phẩm thông thường? Hãy thử >ItemTag<'
+    itemtag-tip-hover:
+      - '&6Nhấp vào đây'
+    description:
+      - '&6&lChỉnh sửa hiệu ứng thuốc'
+      - ''
+      - '&bHoạt động trên mọi loại Thuốc, Mũi tên pha thuốc, và Món hầm đáng ngờ!'
+      - '&eAdd <effect> <duration> [level] &b- thêm hiệu ứng'
+      - '&eRemove <effect> &b- xóa hiệu ứng đã chọn'
+      - '&eReset &b- xóa tất cả hiệu ứng'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
+      description:
+        - '&6&lThêm/Ghi đè hiệu ứng đã chọn'
+        - ''
+        - '&e<effect> &bloại hiệu ứng'
+        - '&e<duration> &bthời gian tính bằng giây, &e0 &bcho hiệu ứng tức thời'
+        - '&e[level] &blên đến 127, mặc định là &e1'
+        - '&e[particles] &bCó hiển thị hạt không? &etrue&b/&efalse'
+        - '&e[ambient] &bHạt có gắn cờ môi trường không? &etrue&b/&efalse'
+        - '&e[icon] &bHiển thị biểu tượng ở góc trên bên phải? &etrue&b/&efalse &b(chỉ từ 1.13+)'
+    remove:
+      params: '<effect>'
+      description:
+        - '&6&lXóa hiệu ứng đã chọn'
+  banner:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là biểu ngữ'
+    wrong-color: '&4[&cItemEdit&4] &cGiá trị Màu không hợp lệ! &4[&6di chuột ở đây&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cGiá trị Mẫu không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lChỉnh sửa biểu ngữ'
+    set:
+      params: '<type> <color> <line>'
+      description:
+        - '&6&lThay thế mẫu trên dòng đã chọn'
+    add:
+      params: '<type> <color>'
+      description:
+        - '&6&lThêm một mẫu'
+    remove:
+      params: '<line>'
+      description:
+        - '&6&lXóa mẫu trên dòng đã chọn'
+    color:
+      params: '<line> <color>'
+      description:
+        - '&6&lThay đổi màu mẫu trên dòng đã chọn'
+  fireworkpower:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là pháo hoa'
+    description:
+      - '&6&lĐặt sức mạnh pháo hoa'
+      - ''
+      - '&e<power> &bsức mạnh của pháo hoa, giá trị từ &e0 &bđến &e5'
+    params: '<power>'
+  firework:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là pháo hoa'
+    description:
+      - '&6&lChỉnh sửa pháo hoa'
+    params: ''
+  spawnereggtype:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là trứng spawner'
+    wrong-entity: '&4[&cItemEdit&4] &cGiá trị loại Trứng không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lĐặt loại sinh vật mà trứng spawner tạo ra'
+      - ''
+      - '&e<type> &bloại sinh vật'
+      - '&bChỉ một số loại sinh vật có thể sinh sản từ trứng'
+    params: '<type>'
+  attribute:
+    wrong-attribute: '&4[&cItemEdit&4] &cGiá trị Thuộc tính không hợp lệ! &4[&6di chuột ở đây&4]'
+    wrong-operation: '&4[&cItemEdit&4] &cGiá trị Hoạt động không hợp lệ! &4[&6di chuột ở đây&4]'
+    wrong-equipment: '&4[&cItemEdit&4] &cGiá trị Thiết bị không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lChỉnh sửa bộ sửa đổi thuộc tính'
+      - ''
+      - '&eAdd <attribute> <amount> [operation] [slot] &b- thêm bộ sửa đổi mới'
+      - '&eRemove <attribute/slot> &b- xóa các bộ sửa đổi'
+    params: '<add/remove> [...]'
+    add:
+      params: '<attribute> <amount> [operation] [slot]'
+      description:
+        - '&6&lThêm bộ sửa đổi thuộc tính'
+        - ''
+        - '&e<attribute> &bloại thuộc tính'
+        - '&e<amount> &bsố lượng cần đặt'
+        - '&e[operation] &bcách thức thêm vào, mặc định là cộng'
+        - '&e[slot] &báp dụng bộ sửa đổi này khi vật phẩm nằm ở vị trí'
+        - '&b        thiết bị được chọn hoặc bất kỳ vị trí thiết bị nào nếu không được chọn'
+    remove:
+      params: '<attribute/slot>'
+      description:
+        - '&6&lXóa bộ sửa đổi'
+        - ''
+        - '&e<attribute/slot> &bloại cần xóa, bất kỳ bộ sửa đổi nào có giá trị'
+        - '&b                 đã chọn sẽ bị xóa'
+  tropicalfish:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là xô cá nhiệt đới'
+    wrong-color: '&4[&cItemEdit&4] &cGiá trị Màu không hợp lệ! &4[&6di chuột ở đây&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cGiá trị Mẫu không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lĐặt thuộc tính của xô cá nhiệt đới'
+      - ''
+      - '&emẫu <loại mẫu> &b- loại mẫu của cá'
+      - '&emàu mẫu <màu> &b- màu mẫu của cá'
+      - '&emàu cơ thể <màu> &b- màu cơ thể của cá'
+    params: '[...]'
+    pattern:
+      params: '<type>'
+      description:
+        - '&6&lĐặt loại mẫu cá nhiệt đới'
+        - ''
+        - '&e<type> &bloại mẫu của cá'
+    patterncolor:
+      params: '<color>'
+      description:
+        - '&6&lĐặt màu mẫu của cá nhiệt đới'
+        - ''
+        - '&e<color> &bmàu mẫu của cá'
+    bodycolor:
+      params: '<color>'
+      description:
+        - '&6&lĐặt màu cơ thể của cá nhiệt đới'
+        - ''
+        - '&e<color> &bmàu cơ thể của cá'
+  repaircost:
+    description:
+      - '&6&lChỉnh sửa Chi phí sửa chữa Đe'
+      - ''
+      - '&e<cost> &bsố cấp độ'
+      - '&b&lChú ý: &bgiá sửa chữa/đổi tên trên đe luôn ít nhất là &e1'
+      - '&b&lChú ý: &blệnh này đặt chi phí sửa chữa cơ bản của vật phẩm, chi phí cấp độ cuối cùng trên đe dựa trên hành động bạn thực hiện'
+      - '&bThêm thông tin tại &eminecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<cost>'
+  custommodeldata:
+    description:
+      - '&6&lChỉnh sửa dữ liệu mô hình tùy chỉnh'
+      - ''
+      - '&bSử dụng cho các gói kết cấu'
+      - '&e<value> &bsố nguyên dương của mô hình mục tiêu'
+    params: '<value>'
+  itemmodel:
+    description:
+      - '&6&lChỉnh sửa mô hình vật phẩm'
+      - ''
+      - '&e<khóa có tên> &bkhóa để đặt tham chiếu kết cấu'
+      - '&bVí dụ: /ie itemmodel &esword_sắt'
+      - '&bVí dụ: /ie itemmodel &eminecraft:sword_sắt'
+      - ''
+      - '&e<namespace>&b:&e<id> &bsẽ tham chiếu mô hình:'
+      - '  /assets/&e<namespace>&b/models/item/&e<id>'
+    params: '<khóa có tên>'
+  axolotlvariant:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là xô axolotl'
+    wrong-axolotl: '&4[&cItemEdit&4] &cGiá trị Axolotl không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lChỉnh sửa Biến thể Axolotl trong xô Axolotl'
+      - ''
+      - '&e<type> &bloại axolotl'
+    params: '<type>'
+  listaliases:
+    description:
+      - '&6&lHiển thị các tham số bí danh hợp lệ'
+      - ''
+      - '&e<type> &bloại tham số để hiển thị'
+    params: '<type>'
+    prefix_line: '&1 ◆  ◆  ◆  ◆  &9Bí danh  &1◆  ◆  ◆  ◆'
+    postfix_line: '&1 ◆  ◆  ◆  ◆  &9Bí danh  &1◆  ◆  ◆  ◆'
+    first_color: '&b'
+    second_color: '&e'
+    hover_info: '&9Giá trị gốc: &e%default%'
+    hover_type: '&6Nhấp để kiểm tra'
+    error-pre-hover: "&6&lBí danh:"
+  compass:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là la bàn'
+    description:
+      - '&6&lĐặt vị trí mục tiêu của la bàn'
+      - ''
+      - '&eSet &b- đặt vị trí của bạn làm mục tiêu la bàn'
+      - '&eClear &b- xóa mục tiêu la bàn'
+    params: '<set/clear>'
+    set:
+      feedback: '&9[&fItemEdit&9] &aLa bàn bây giờ chỉ đến &e%world% %x% %y% %z%'
+    clear:
+      feedback: '&9[&fItemEdit&9] &aMục tiêu la bàn đã được xóa'
+  goathornsound:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là sừng dê'
+    wrong-sound: '&4[&cItemEdit&4] &cGiá trị Âm thanh không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lĐặt âm thanh của sừng dê'
+      - ''
+      - '&e<type> &bloại âm thanh'
+    params: '<type>'
+  armortrim:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là áo giáp'
+    wrong-material: '&4[&cItemEdit&4] &cGiá trị Vật liệu viền không hợp lệ! &4[&6di chuột ở đây&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cGiá trị Mẫu viền không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lĐặt Viền Áo Giáp'
+      - ''
+      - '&e<material> &bvật liệu viền'
+      - '&e<pattern> &bmẫu viền'
+    params: '<material> <pattern>'
+  bookenchant:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải là sách hoặc sách phù phép'
+    wrong-enchant: '&4[&cItemEdit&4] &cGiá trị Phù phép không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lĐặt phù phép cho sách'
+      - '&bSự khác biệt giữa enchant và bookenchant là'
+      - '&bsách với phù phép lửa sẽ làm mục tiêu bị cháy'
+      - '&btrong khi sách với bookenchant không làm vậy'
+      - ''
+      - '&e<enchant> &bloại phù phép'
+      - '&e[level] &blevel của phù phép, mặc định &e1'
+      - ''
+      - '&b&lGợi ý: &bĐặt &e[level] &blà &e0 &bđể gỡ bỏ phù phép'
+    params: '<enchant> [level]'
+  hidetooltip:
+    description:
+      - '&6&lẨn hoặc hiển thị ghi chú'
+      - ''
+      - '&e[true/false] &bđặt giá trị cờ, mặc định sẽ chuyển đổi'
+    params: '[true/false]'
+  fireresistent:
+    description:
+      - '&6&lĐặt khả năng kháng lửa/lava của vật phẩm'
+      - ''
+      - '&e[true/false] &bđặt giá trị, mặc định sẽ chuyển đổi'
+      - ''
+      - '&bVật phẩm kháng lửa sẽ không bị phá hủy'
+      - '&bkhi rơi vào lửa và sẽ nổi trên lava'
+    params: '[true/false]'
+  glow:
+    description:
+      - '&6&lGhi đè hiệu ứng phát sáng của phù phép'
+      - ''
+      - '&e[true/false/default] &bđặt giá trị, mặc định sẽ chuyển đổi'
+      - ''
+      - '&b&lGợi ý: &edefault &bkế thừa hành vi mặc định'
+    params: '[true/false/default]'
+  maxstacksize:
+    description:
+      - '&6&lĐặt kích thước xếp chồng tối đa của vật phẩm'
+      - ''
+      - '&e[1-99/default] &bđặt giá trị cờ'
+      - ''
+      - '&edefault &bkhôi phục kích thước xếp chồng mặc định là &e64'
+      - '&bđối với hầu hết vật phẩm, &e1&b đối với áo giáp và công cụ, và giá trị'
+      - '&bkhác đối với một số vật phẩm cụ thể'
+    params: '[1-99/default]'
+  rarity:
+    wrong-rarity: '&4[&cItemEdit&4] &cGiá trị Độ Hiếm không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lĐặt độ hiếm của vật phẩm'
+      - ''
+      - '&e[rarity] &bđặt độ hiếm vật phẩm'
+      - ''
+      - '&b&lGợi ý: không đặt giá trị độ hiếm sẽ khôi phục mặc định'
+    params: '[rarity]'
+  maxdurability:
+    wrong-type: '&4[&cItemEdit&4] &cVật phẩm phải có độ bền như công cụ và áo giáp'
+    description:
+      - '&6&lĐặt độ bền tối đa của vật phẩm'
+      - ''
+      - '&e<max durability> &bgía trị độ bền mới của vật phẩm, phải lớn hơn 1'
+    params: '<max durability>'
+  food:
+    help-header: '&9&lItemEdit Food - Trợ giúp'
+    wrong-effect: '&4[&cItemEdit&4] &cGiá trị Hiệu ứng không hợp lệ! &4[&6di chuột ở đây&4]'
+    wrong-animation: '&4[&cItemEdit&4] &cGiá trị Hoạt ảnh không hợp lệ! &4[&6di chuột ở đây&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cGiá trị Âm thanh không hợp lệ! &4[&6di chuột ở đây&4]'
+    description:
+      - '&6&lThiết lập thuộc tính thức ăn cho vật phẩm'
+      - ''
+      - '&bChú ý: Các vật phẩm uống được không thể ăn'
+      - '&bGợi ý: nhập &e/ie food&b để biết thêm thông tin'
+    params: '[...]'
+    clear:
+      description:
+        - '&6&lXóa hoàn toàn thuộc tính thức ăn khỏi vật phẩm'
+        - ''
+        - '&bHoặc khôi phục mặc định nếu vật phẩm là thức ăn của Minecraft'
+      params: ''
+    canalwayseat:
+      description:
+        - '&6&lĐặt xem vật phẩm có thể ăn được bất kể no đói'
+        - ''
+        - '&e[true/false] &bGiá trị đặt, mặc định sẽ chuyển đổi'
+        - ''
+        - '&bThông thường thức ăn cần đói để ăn được,'
+        - '&bđặt giá trị true sẽ bắt chước hành vi của táo vàng'
+      params: '[true/false]'
+    consumeparticles:
+      description:
+        - '&6&lĐặt hiển thị hạt khi ăn vật phẩm'
+        - '&bChỉ cho &c1.21.2+'
+        - ''
+        - '&e[true/false] &bGiá trị đặt, mặc định sẽ chuyển đổi'
+      params: '[true/false]'
+    animation:
+      description:
+        - '&6&lThiết lập hoạt ảnh ăn'
+        - '&bChỉ cho &c1.21.2+'
+        - ''
+        - '&e<animation> &bGiá trị đặt, mặc định sẽ chuyển đổi'
+        - ''
+        - '&bMột số hoạt ảnh chỉ hiển thị ở chế độ người chơi thứ nhất,'
+        - '&bmột số hiển thị ở chế độ thứ ba,'
+        - '&bmột số hiển thị ở cả hai'
+      params: '<animation>'
+    sound:
+      description:
+        - '&6&lThiết lập âm thanh ăn'
+        - '&bChỉ cho &c1.21.2+'
+        - ''
+        - '&e<sound> &bGiá trị để đặt'
+      params: '<sound>'
+    eatticks:
+      description:
+        - '&6&lThiết lập thời gian ăn'
+        - ''
+        - '&e<ticks> &bThời gian để ăn vật phẩm'
+        - '  &bphải lớn hơn hoặc bằng &e1'
+        - ''
+        - '&e20 &bchu kỳ = &e1 &bgiây'
+      params: '<ticks>'
+    nutrition:
+      description:
+        - '&6&lThiết lập giá trị dinh dưỡng khôi phục'
+        - ''
+        - '&e<amount> &bLượng đói khôi phục'
+        - '  &bphải lớn hơn hoặc bằng &e0'
+        - ''
+        - '&bMột thanh đói đầy đủ là &e20'
+      params: '<amount>'
+    saturation:
+      description:
+        - '&6&lThiết lập độ bão hòa khôi phục'
+        - ''
+        - '&e<amount> &bLượng bão hòa để thêm'
+        - '  &bcó thể là giá trị âm'
+        - ''
+        - '&bĐộ bão hòa kiểm soát tốc độ giảm đói'
+      params: '<amount>'
+    addeffect:
+      description:
+        - '&6&lThêm hiệu ứng vào vật phẩm'
+        - ''
+        - '&e<type> &bLoại hiệu ứng thuốc'
+        - '&e<duration> &bThời gian hiệu ứng theo giây'
+        - '  &bgõ &einfinite &bđể hiệu ứng vĩnh viễn'
+        - '&e[level] &bCấp độ của hiệu ứng, mặc định &e1'
+        - '&e[particles] &bHiệu ứng hiển thị hạt?'
+        - '&e[ambient] &bHiệu ứng là môi trường?'
+        - '&e[icon] &bHiệu ứng hiển thị biểu tượng?'
+        - '&e[chance] &bTỉ lệ % áp dụng hiệu ứng?'
+        - '  &bphải lớn hơn &e0&b và nhỏ hơn hoặc bằng &e100'
+      params: '<type> <duration> [level] [particles] [ambient] [icon] [chance]'
+    removeeffect:
+      description:
+        - '&6&lXóa hiệu ứng khỏi vật phẩm'
+        - ''
+        - '&e<type> &bLoại hiệu ứng thuốc'
+        - '&e[level] &bCấp độ hiệu ứng cần xóa'
+        - '  &bnếu bỏ qua thì xóa tất cả hiệu ứng'
+        - '  &bthuộc loại đã chọn bất kể cấp độ'
+      params: '<type> [level]'
+    cleareffects:
+      description:
+        - '&6&lXóa tất cả hiệu ứng khỏi vật phẩm'
+      params: ''
+    info:
+      not_food: "&9[&fItemEdit&9] &bVật phẩm không có thuộc tính thức ăn hoặc có thuộc tính mặc định"
+      message:
+        - '&9[&fItemEdit&9] &2&lThuộc tính thức ăn của vật phẩm'
+        - '&aThời gian ăn: &e%eatseconds%&a s &8(&7%eatticks%&8 chu kỳ)'
+        - '&aKhôi phục đói: &e%nutrition% &8| &aBão hòa: &e%saturation%&a'
+        - '&aHoạt ảnh: &e%animation% &8| &aÂm thanh: &e%sound% &8| &aHạt: &e%consumeparticles%'
+        - '&aĂn được khi no: &e%canalwayseat% &8| &aKhi ăn sẽ nhận: &e%convertto%'
+      apply_effect_prefix:
+        - '&2&lChứa &e&l%effects%&2&l hiệu ứng thuốc có thể áp dụng:'
+      apply_effect:
+        - '&a%index%. Loại: &e&b%type% &8| &aCấp: &e%level% &8| &aThời gian: &e%duration_s%&a s &8(&7%duration_ticks%&8 chu kỳ)'
+        - '&a   Hạt: &e%hasparticle% &8| &aMôi trường: &e%isambient% &8| &aBiểu tượng: &e%hasicon% &8| &aTỉ lệ: &e%chance_perc%&a%'
+      description:
+        - '&6&lMô tả thông tin thức ăn hiện tại của vật phẩm'
+      params: ''
+    convertto:
+      description:
+        - '&6&lĐặt vật phẩm nhận được sau khi thức ăn được tiêu thụ'
+        - '&bChỉ cho &c1.21+'
+        - ''
+        - '&e[type/serveritem id] &bVật phẩm trả về'
+        - '  &bbạn có thể đặt một vật liệu hoặc'
+        - '  &bchọn một vật phẩm từ ServerItem'
+        - ''
+        - '&bBắt chước hành vi của xô sữa khi xô'
+        - '&bđược trả lại sau khi sữa được tiêu thụ'
+      params: '[type/serveritem id]'
+serveritem:
+  help-header: '&9&lServerItem - Trợ Giúp'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: '&aĐã nhận được &e%amount% &ađơn vị của &e%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][give] %player_name% đã nhận được %amount% đơn vị của %id% (%nick%)'
+    description:
+      - '&6&lCung cấp vật phẩm đã chọn cho người chơi'
+      - ''
+      - '&e<id> &bID của vật phẩm'
+      - '&e[amount] &bSố lượng vật phẩm để cho, mặc định là 1'
+      - '&e[player] &bNgười nhận vật phẩm, mặc định là bạn'
+      - '&e[silent] &btrue nếu không muốn gửi phản hồi cho người chơi'
+    params: '<id> [amount] [player] [silent]'
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '&aĐã nhận được &e%amount% &ađơn vị của &e%nick%'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets% đã nhận được %amount% đơn vị của %id% (%nick%)'
+    description:
+      - '&6&lCung cấp vật phẩm đã chọn cho tất cả người chơi trực tuyến'
+      - ''
+      - '&e<id> &bID của vật phẩm'
+      - '&e[amount] &bSố lượng vật phẩm để cho, mặc định là 1'
+      - '&e[silent] &btrue nếu không muốn gửi phản hồi cho người chơi'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] Đã thả %amount% đơn vị của %id% (%nick%) tại %world% %x% %y% %z%'
+    description:
+      - '&6&lThả vật phẩm đã chọn tại vị trí chỉ định'
+      - ''
+      - '&e<id> &bID của vật phẩm'
+      - '&e<amount> &bSố lượng vật phẩm để thả, từ 1 đến 2304'
+      - '&e<world> &bTên thế giới'
+      - '&e<x> <y> <z> &bTọa độ'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: '&aĐã mất &e%amount% &ađơn vị của &e%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][take] %player_name% đã đưa %amount% đơn vị của %id% (%nick%)'
+    description:
+      - '&6&lLấy vật phẩm đã chọn từ người chơi'
+      - ''
+      - '&e<id> &bID của vật phẩm'
+      - '&e[amount] &bSố lượng vật phẩm để lấy, mặc định là 1'
+      - '&e[player] &bNgười bị lấy vật phẩm, mặc định là bạn'
+      - '&e[silent] &btrue nếu không muốn gửi phản hồi cho người chơi'
+    params: '<id> [amount] [player] [silent]'
+  save:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aVật phẩm &e%id% &ađã được lưu'
+    already_used_id: '&4[&cItemEdit&4] &cID &e%id% &cđã được sử dụng, đổi ID hoặc dùng /si update để ghi đè'
+    description:
+      - '&bĐăng ký vật phẩm trong tay của bạn'
+      - ''
+      - '&e<id> &bĐịnh danh vật phẩm, không phân biệt chữ hoa thường và không'
+      - '&b     chứa khoảng trắng hoặc dấu chấm, cũng không được sử dụng ID đã tồn tại'
+      - ''
+      - '&b&lGợi ý: &bDùng &e/serveritem update <id>&b để thay đổi vật phẩm đã tồn tại'
+      - '&b&lGợi ý: &bLấy vật phẩm đã lưu với &e/serveritem give <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aVật phẩm &e%id% &ađã bị xóa'
+    description:
+      - '&6&lXóa vật phẩm đã chọn'
+      - ''
+      - '&e<id> &bID của vật phẩm'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aMục &e%id% &ađã được cập nhật'
+    description:
+      - '&6&lCập nhật mục đã chọn'
+      - ''
+      - '&bThay đổi mục liên kết với ID bằng mục trên tay bạn'
+      - '&e<id> &bID của mục'
+      - ''
+      - '&b&lMẹo: &bsử dụng &e/serveritem save <id>&b để tạo mục mới'
+      - '&b&lMẹo: &bsử dụng &e/serveritem delete <id>&b để xóa một mục'
+    params: '<id>'
+  show:
+    description:
+      - '&6&lMở giao diện với các mục đã lưu trên máy chủ'
+      - ''
+      - '&e[page] &bTrang của giao diện, mặc định là 1'
+    params: '[page]'
+  setnick:
+    #Holders: %id% %nick%
+    success: '&9[&fItemEdit&9] &aMục &e%id% &aa biệt danh đã được cập nhật thành &e%nick%'
+    description:
+      - '&bĐặt tên hiển thị cho mục đã chọn'
+      - ''
+      - '&bBiệt danh được sử dụng cho trình giữ chỗ &e%nick%&b trong các tin nhắn mua/bán,'
+      - '&b  mặc định là tên của mục, hoặc loại mục nếu không có tên'
+      - ''
+      - '&e<id> &bID của mục'
+      - '&e[nick] &bTên để đặt'
+      - ''
+      - '&b&lMẹo: &bĐể đặt lại mặc định, chỉ cần sử dụng &e/serveritem setnick <id>'
+    params: '<id> [nick]'
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aĐã mua &e%amount% &a của &e%nick% &avới giá &e%price%'
+    #Holders: %id% %nick% %amount%
+    not-enough-space: '&cBạn không có đủ không gian trong kho để mua &6%amount% &c của &6%nick%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: '&cBạn không có đủ &6%price% &c để mua &6%amount% &c của &6%nick%'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% đã trả %price% cho %amount% của %id% (%nick%)'
+    description:
+      - '&6&lBán mục cho người chơi'
+      - ''
+      - '&bSell khác với SellMax vì bạn bán toàn bộ số lượng'
+      - '&b  cho người chơi hoặc không bán gì cả'
+      - '&e<id> &bID của mục'
+      - '&e<amount> &bSố lượng mục'
+      - '&e<player> &bNgười trả tiền và nhận mục'
+      - '&e<price> &bGiá cho toàn bộ số lượng mục, phải là số dương'
+      - '&e[silent] &bTrue để gửi phản hồi cho người chơi'
+      - ''
+      - '&bGiao dịch sẽ thất bại nếu người chơi không có đủ tiền hoặc'
+      - '&b  không gian kho để chứa toàn bộ số lượng &e<amount>'
+      - '&bLưu ý: Số dư của người thực hiện lệnh không bị ảnh hưởng'
+    params: '<id> <amount> <player> <price> [silent]'
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aĐã bán &e%amount% &a của &e%nick% &avới giá &e%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '&cBạn không có &6%amount% &c của &6%nick% &c trong kho của mình'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% đã bán %amount% của %id% (%nick%) với tổng giá %price%'
+    description:
+      - '&6&lMua mục từ người chơi'
+      - ''
+      - '&bBuy khác với BuyMax vì bạn mua toàn bộ số lượng'
+      - '&b  từ người chơi hoặc không mua gì cả'
+      - '&e<id> &bID của mục'
+      - '&e<amount> &bSố lượng mục'
+      - '&e<player> &bNgười đưa mục và nhận tiền'
+      - '&e<price> &bGiá cho toàn bộ số lượng mục, phải là số dương'
+      - '&e[silent] &bTrue để gửi phản hồi cho người chơi'
+      - ''
+      - '&bGiao dịch sẽ thất bại nếu người chơi không có ít nhất &e<amount>&b'
+      - '&b  của mục &e<id>'
+      - '&bLưu ý: Số dư của người thực hiện lệnh không bị ảnh hưởng'
+    params: '<id> <amount> <player> <price> [silent]'
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aĐã mua &e%amount% &a của &e%nick% &avới giá &e%price%'
+    #Holders: %id% %nick%
+    not-enough-space: '&cBạn không có đủ không gian trong kho để mua bất kỳ &6%nick%'
+    #Holders: %id% %nick% %price%
+    not-enough-money: '&cBạn không có đủ tiền để mua bất kỳ &6%nick% &cvới giá &6%price% &cmỗi cái'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% đã trả %price% cho %amount% của %id% (%nick%)'
+    description:
+      - '&6&lBán mục cho người chơi'
+      - ''
+      - '&bSellMax khác với Sell vì bạn có thể bán số lượng ít hơn'
+      - '&b  cho người chơi nếu không đủ tiền hoặc không gian cho toàn bộ'
+      - '&e<id> &bID của mục'
+      - '&e<amount> &bSố lượng mục'
+      - '&e<player> &bNgười trả tiền và nhận mục'
+      - '&e<price> &bGiá cho toàn bộ số lượng mục, phải là số dương'
+      - '&e[silent] &bTrue để gửi phản hồi cho người chơi'
+      - ''
+      - '&bGiao dịch sẽ thất bại nếu người chơi không có đủ tiền hoặc'
+      - '&b  không gian kho để chứa ít nhất một mục'
+      - '&bNếu người chơi mua ít hơn, giá sẽ được điều chỉnh theo tỷ lệ'
+      - '&bLưu ý: Số dư của người thực hiện lệnh không bị ảnh hưởng'
+    params: '<id> <amount> <player> <price> [silent]'
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aĐã bán &e%amount% &a của &e%nick% &avới giá &e%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '&cBạn không có bất kỳ &6%nick% &cnào để bán trong kho của mình'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% đã bán %amount% của %id% (%nick%) với tổng giá %price%'
+    description:
+      - '&6&lMua mục từ người chơi'
+      - ''
+      - '&bBuyMax khác với Buy vì bạn có thể mua ít hơn'
+      - '&b  nếu người chơi không có đủ số lượng trong kho'
+      - '&e<id> &bID của mục'
+      - '&e<amount> &bSố lượng mục'
+      - '&e<player> &bNgười đưa mục và nhận tiền'
+      - '&e<price> &bGiá cho toàn bộ số lượng mục, phải là số dương'
+      - '&e[silent] &bTrue để gửi phản hồi cho người chơi'
+      - ''
+      - '&bGiao dịch sẽ thất bại nếu người chơi không có ít nhất một mục'
+      - '&b  &e<id>&b trong kho'
+      - '&bNếu người chơi bán ít hơn, giá sẽ được điều chỉnh theo tỷ lệ'
+      - '&bLưu ý: Số dư của người thực hiện lệnh không bị ảnh hưởng'
+    params: '<id> <amount> <player> <price> [silent]'
+itemstorage:
+  help-header: '&9&lItemStorage - Trợ Giúp'
+  get:
+    #Holders: %id% %amount%
+    success: '&9[&fItemEdit&9] &aĐã nhận được &e%amount% &acủa &e%id%'
+    no-inventory-space: '&4[&cItemEdit&4] &cBạn không có đủ chỗ trong kho'
+    description:
+      - '&6&lNhận mục đã chọn'
+      - ''
+      - '&e<id> &bID của mục'
+      - '&e[amount] &bSố lượng cần nhận, mặc định là 1'
+    params: '<id> [amount]'
+  save:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aMục &e%id% &ađã được lưu'
+    #Holders: %limit%
+    limit-reached: '&4[&cItemEdit&4] &cBạn đã đạt đến số lượng mục có thể lưu tối đa (%limit%)'
+    description:
+      - '&6&lLưu mục trong tay bạn'
+      - ''
+      - '&e<id> &bXác định mục của bạn, không phân biệt chữ hoa/thường và'
+      - '&b     không thể chứa khoảng trắng hoặc dấu chấm, cũng như không thể chọn'
+      - '&b     một ID đã được sử dụng'
+      - ''
+      - '&b&lMẹo: &bsử dụng &e/itemstorage update <id>&b để thay đổi mục hiện có'
+      - '&b&lMẹo: &blấy các mục đã lưu của bạn với &e/itemstorage get <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aMục &e%id% &ađã bị xóa'
+    description:
+      - '&6&lXóa mục đã chọn'
+      - ''
+      - '&e<id> &bID của mục'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aMục &e%id% &ađã được cập nhật'
+    description:
+      - '&6&lCập nhật mục đã chọn'
+      - ''
+      - '&bThay đổi mục liên kết với ID bằng mục trong tay bạn'
+      - '&e<id> &bID của mục'
+      - ''
+      - '&bMẹo: sử dụng &e/itemstorage save <id>&b để tạo mục mới'
+      - '&bMẹo: sử dụng &e/itemstorage delete <id>&b để xóa một mục'
+    params: '<id>'
+  show:
+    description:
+      - '&6&lMở giao diện với các mục đã lưu của bạn'
+      - ''
+      - '&e[page] &bTrang của giao diện, mặc định là 1'
+    params: '[page]'
+itemeditimport:
+  help:
+    - '&a/itemeditimport ItemEditor &2- nhập vật phẩm từ plugin ItemEditor'
+  itemeditor:
+    unable-to-get-item:
+      - '&4[&cItemEdit&4] &cKhông thể tải vật phẩm &6%id%'
+    already-used-id:
+      - '&4[&cItemEdit&4] &6%id% &cđã được sử dụng, có thể bạn đã thực hiện lệnh này trước đây hoặc bạn có thể đổi tên tệp ItemEditor/items/%id%.yml'
+    invalid-id:
+      - '&4[&cItemEdit&4] &6%id% &ckhông phải là một ID hợp lệ, bạn có thể đổi tên tệp ItemEditor/items/%id%.yml thành tên chữ số hoặc chữ cái'
+    import-unsuccess:
+      - '&4[&cItemEdit&4] &cKhông có vật phẩm nào trong &6%max% &cđược nhập, có thể bạn đã thực hiện lệnh này trước đây(?)'
+    import-success:
+      - '&9[&fItemEdit&9] &aĐã nhập &e%done% &acủa &e%max% &avật phẩm từ ItemEditor'
+      - '&9[&fItemEdit&9] &aCác vật phẩm đã nhập: &e%ids%'
+    import-empty:
+      - '&4[&cItemEdit&4] &cItemEditor không có vật phẩm nào để nhập'
+itemeditreload:
+  success: '&9[&fItemEdit&9] &aĐã tải lại'
+gui:
+  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
+    creative: 'Nhấn Chuột Giữa'
+    other: 'Nhấn Phím 1'
+  colorselector:
+    title: '&9Chọn màu'
+    buttons:
+      color:
+        - '&6Màu sắc:'
+        - '&e%colors%'
+        - '&7[&fChuột Phải&7]&b Thêm &e%color%'
+        - '&7[&fChuột Trái&7]&b Xóa màu cuối cùng'
+        - '&7[&fShift+Chuột Phải&7]&b Xóa toàn bộ màu'
+  banner:
+    title: '&9Trình Chỉnh Sửa Biểu Ngữ'
+    color_selector_title: '&9Trình Chọn Màu'
+    pattern_selector_title: '&9Trình Chọn Mẫu'
+    buttons:
+      pattern_selector_info:
+        - '&bChọn &6&l%type%'
+      color_selector_info:
+        - '&bChọn &6&l%color%'
+      position:
+        - '&6Bộ Điều Khiển Mẫu'
+        - ''
+        - '&7[&f%middle_click%&7] &bChuyển đổi mẫu'
+        - '&7[&fChuột Trái/Phải&7]&b << Di chuyển mẫu >>'
+      type:
+        - '&6Trình Chọn Loại'
+        - '&bLoại: &e%type%'
+        - ''
+        - '&7[&fNhấn&7]&b Thay đổi loại'
+      color:
+        - '&6Trình Chọn Màu'
+        - '&bMàu: &e%color%'
+        - ''
+        - '&7[&fNhấn&7]&b Thay đổi màu'
+  firework:
+    title: '&9Trình Chỉnh Sửa Pháo Hoa'
+    buttons:
+      type:
+        - '&6Trình Chọn Loại'
+        - '&bLoại: &e%type%'
+        - ''
+        - '&7[&fNhấn&7]&b Đổi loại'
+      colors:
+        - '&6Trình Chọn Màu'
+        - '&bMàu sắc: &e%colors%'
+        - ''
+        - '&7[&fNhấn&7]&b để đổi màu'
+      fadecolors:
+        - '&6Trình Chọn Màu Mờ'
+        - '&bMàu Mờ: &e%colors%'
+        - ''
+        - '&7[&fNhấn&7]&b để đổi màu'
+      flags:
+        none: '&cKhông có gì đang hoạt động'
+        trail: '&eDải Đuôi &aHoạt Động'
+        flicker: '&eNhấp Nháy &aHoạt Động'
+        both: '&eDải Đuôi&b và &eNhấp Nháy &aHoạt Động'
+        info:
+          - '&6Bộ Kích Hoạt Dải Đuôi và Nhấp Nháy'
+          - '%status%'
+          - ''
+          - '&7[&fChuột Phải&7]&b Bật/Tắt hiệu ứng Nhấp Nháy'
+          - '&7[&fChuột Trái&7]&b Bật/Tắt hiệu ứng Dải Đuôi'
+      position:
+        - '&bBộ Điều Khiển Hiệu Ứng'
+        - ''
+        - '&7[&f%middle_click%&7]&b Bật/Tắt hiệu ứng'
+        - '&7[&fChuột Trái/Phải&7]&b Di chuyển hiệu ứng này'
+      power:
+        - '&bSức Mạnh: &e%power%'
+        - ''
+        - '&7[&fChuột Trái/Phải&7]&b << Thay đổi >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '&6&lTrang Trước'
+      - ''
+      - '&7[&fNhấn&7]&b Đi đến trang &e%target_page%'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '&6&lTrang Tiếp Theo'
+      - ''
+      - '&7[&fNhấn&7]&b Đi đến trang &e%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '&6&lQuay Lại'
+      - ''
+      - '&7[&fNhấn&7]&b Quay lại GUI trước'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '&9Vật phẩm của %player_name% - trang &b%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '&6&lTrang &e&l%page%'
+        - '&7[&fNhấn&7]&b Chuyển đổi xem &eitem&b/&eID'
+        - ''
+        - '&bNhấn vào vật phẩm:'
+        - '&7> [&fNhấn Trái&7]&b Nhận &e1'
+        - '&7> [&fShift+Nhấn Trái&7]&b Nhận &e64'
+        - '&7> [&fShift+Nhấn Phải&7]&b Xóa vật phẩm'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '&9Vật phẩm máy chủ - trang &b%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '&6&lTrang &e&l%page%'
+        - '&7[&fNhấn&7]&b Chuyển đổi xem &eitem&b/&eID'
+        - ''
+        - '&bNhấn vào vật phẩm:'
+        - '&7> [&fNhấn Trái&7]&b Nhận &e1'
+        - '&7> [&fShift+Nhấn Trái&7]&b Nhận &e64'
+        - '&7> [&fShift+Nhấn Phải&7]&b Xóa vật phẩm'

@@ -1,0 +1,968 @@
+player-only: '&4[&cItemEdit&4] &cBu komut yalnızca oyuncular içindir'
+no-item-on-hand: '&4[&cItemEdit&4] &cElinizde bir eşya tutmanız gerekiyor'
+lack-permission: '&4[&cItemEdit&4] &c%permission% yetkiniz yok'
+lack-permission-generic: '&4[&cItemEdit&4] &cBu komutu kullanma yetkiniz yok'
+blocked-by-censure: '&4[&cItemEdit&4] &cBu metni kullanamazsınız, yasaklı kelimeler içeriyor'
+blocked-by-type-restriction: '&4[&cItemEdit&4] &cBu öğeyi yeniden adlandıramazsınız'
+blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cBu öğenin lore''unu düzenleyemezsiniz'
+blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cBu öğeye daha fazla lore satırı ekleyemezsiniz'
+blocked-by-lore-length-limit: '&4[&cItemEdit&4] &c%limit% karakterden daha uzun satırlar belirleyemezsiniz'
+blocked-by-rename-length-limit: '&4[&cItemEdit&4] &c%limit% karakterden daha uzun isimler belirleyemezsiniz'
+itemedit:
+  help:
+    header: "&9&lItemEdit - Yardım"
+    header-sub: "&9&lItemEdit %sub% - Yardım"
+    footer: "%prev_clickable% &9&lYardım [%page%/%max_page%] %next_clickable%"
+    next_text: " &d&l>&m> >&r "
+    prev_text: " &d&l&m< <&d&l< "
+    next_void: " &8&l>&m> >&r "
+    prev_void: " &8&l&m< <&8&l< "
+    next_hover: "&6&l%target% sayfasına git"
+    prev_hover: "&6&l%target% sayfasına geri dön"
+    description:
+      - '&6&lYardımı göster'
+      - ''
+      - '&e[sayfa] &byardım sayfası'
+      - '&e[alt komut] &balt komut için yardım'
+    params: '[sayfa/alt komut]'
+  rename:
+    description:
+      - '&6&lÖğenin adını ayarla'
+      - ''
+      - '&b&lİpucu: &badı varsayılana geri döndürmek için &esil &byazın'
+    params: '<ad>'
+  lore:
+    description:
+      - '&6&lLore düzenle'
+      - ''
+      - '&eEkle <metin> &b- yeni bir satıra metin ekle'
+      - '&eEkle <satır> <metin> &b- seçili satıra metin ekle'
+      - '&eAyarla <satır> <metin> &b- seçilen satırdaki metni ayarla veya değiştir'
+      - '&eKaldır <satır> &b- seçili satırı kaldır'
+      - '&eSıfırla &b- tüm satırları sil'
+      - '&eKopyala &b- mevcut öğenin lore''unu kopyala'
+      - '&eKitKopyala &b- kitap sayfalarını satır olarak kopyala'
+      - '&eDosyaKopyala <yol> &b- loreCopy.yml dosyasından kopyala'
+      - '&eYapıştır &b- en son kopyalanan lore''u yapıştır'
+      - '&eDeğiştir <değiştirilen> <değiştirilen ile> &b- tüm eşleşmeleri değiştir'
+    params: '<ekle/ayar/kaldır...> [...]'
+    set:
+      params: '<satır> <metin>'
+      description:
+        - '&6&lSeçilen satırdaki metni ayarla veya değiştir'
+    remove:
+      params: '<satır>'
+      description:
+        - '&6&lSeçilen satırı kaldır'
+    insert:
+      params: '<satır> <metin>'
+      description:
+        - '&6&lSeçilen satıra metin ekle'
+    copy:
+      feedback: '&9[&fItemEdit&9] &aLore kopyalandı'
+    copyBook:
+      wrong-type: '&4[&cItemEdit&4] &cEşya bir kitap veya tüy ve kitap olmalı'
+      feedback: '&9[&fItemEdit&9] &aKitap sayfaları kopyalandı ve yapıştırmaya hazır'
+    copyFile:
+      no-path: '&4[&cItemEdit&4] &cBir yol seçin /ie lore copyfile &6<yol>'
+      wrong-path: '&9[&fItemEdit&9] &cGeçersiz yol, yapılandırmayı yeniden yüklediğinizden ve yazımı kontrol ettiğinizden emin olun'
+      feedback: '&9[&fItemEdit&9] &aYapılandırma kopyalandı ve yapıştırmaya hazır'
+    paste:
+      feedback: '&9[&fItemEdit&9] &aLore yapıştırıldı'
+      no-copy: '&4[&cItemEdit&4] &cÖnce bir lore kopyalayın'
+    replace:
+      params: '<değiştirilen> <değiştirilen ile>'
+      description:
+        - '&6&lLore''daki tüm eşleşmeleri değiştir'
+        - ''
+        - '&bBirden fazla kelime değiştirmek istiyorsanız'
+        - '&b onları &e{ } içinde kapatmalısınız'
+        - ''
+        - '&bÖrnek: &e/ie lore replace Yeni Paslı'
+        - '&b''&eYeni kılıç&b'' -> ''&ePaslı kılıç&b'''
+        - ''
+        - '&bÖrnek 2: &e/ie lore replace {Ağır} {Çok hafif}'
+        - '&b''&eAğır kılıç&b'' -> ''&eÇok hafif kılıç&b'''
+  hide:
+    wrong-flag: '&4[&cItemEdit&4] &cHatalı Bayrak Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lBileşenleri gizle veya göster'
+      - ''
+      - '&e<flag> &bdüzenlenecek bayrak'
+      - '&e[true/false] &bbayrak değerini ayarla, varsayılan olarak geçiş yapar'
+      - ''
+      - '&b&lİpucu: &bpotion_effects bayrağı ile bayrak desenlerini gizleyin'
+      - '&b&lİpucu: &b&ee/itemedit hideall &bilgisiyle tüm bayrakları bir kerede gizleyin'
+    params: '<flag> [true/false]'
+  hideall:
+    description:
+      - '&6&lTüm bileşenleri gizle'
+      - ''
+      - '&bGizler: büyüler, iksir etkileri, bayrak katmanları, öznitellikler...'
+      - ''
+      - '&b&lİpucu: &bTek bileşenleri gizlemek için &e/itemedit hide <flag> true &bkullanın'
+    params: ''
+  damage:
+    description:
+      - '&6&lDayanıklılığı düzenle'
+      - ''
+      - '&e<durability> &buygulanacak hasar'
+      - '&b&lNot: &e0 &bhasar almaz, tam dayanıklılık'
+    params: '<durability>'
+  type:
+    description:
+      - '&6&lÖğenin türünü ayarla'
+      - ''
+      - '&b&lNot: &bAir gibi bazı türler çalışmaz'
+    params: '<type>'
+  unbreakable:
+    description:
+      - '&6&lKırılmaz durumu ayarla'
+      - ''
+      - '&bKırılmaz araçlar ve zırhlar dayanıklılık kaybetmez'
+      - '&e[true/false] &bkırılmaz değeri ayarla, varsayılan olarak geçiş yapar'
+    params: '[true/false]'
+  amount:
+    description:
+      - '&6&lMiktarı ayarla'
+      - ''
+      - '&e<amount> &bayarlanacak miktar (127''ye kadar)'
+      - '&b&lİpucu: &bNegatif miktarlar, öğenin'
+      - '&b mevcut miktarından çıkarılır'
+    params: '<amount>'
+  skullowner:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir oyuncu kafası olmalı'
+    description:
+      - '&6&lKafanın sahibini ayarla'
+      - ''
+      - '&bYalnızca oyuncu kafalarında çalışır'
+      - '&e<name> &bsahibin adı'
+      - ''
+      - '&b&lİpucu: &bCiltleri güncellemek için kafayı yerleştirip kırın'
+    params: '<name>'
+  color:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe deri zırh, havai fişek yıldızları, iksirler veya uçları boyalı oklar gibi renklendirilebilir bir tür olmalı'
+    description:
+      - '&6&lRenk ayarla'
+      - ''
+      - '&bDeri zırh ve havai fişek yıldızlarında çalışır, sunucularda'
+      - '&b 1.11+ sürümünde herhangi bir İksir ve Boyanmış oklar üzerinde de çalışır!'
+      - '&e<kırmızı (0-255)> <yeşil (0-255)> <mavi (0-255)> &bher rengin birleşimi için miktar'
+      - '&bHer renk 0 ile 255 arasında bir tam sayı değeridir'
+      - '&bKararsızsanız, "&eRGB renk seçici&b" yazıp aratın'
+    params: '<kırmızı (0-255)> <yeşil (0-255)> <mavi (0-255)>'
+  enchant:
+    wrong-enchant: '&4[&cItemEdit&4] &cHatalı Büyü Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lBüyüleri ayarla'
+      - ''
+      - '&e<enchant> &bbüyü türü'
+      - '&e[level] &bbüyü seviyesi, varsayılan olarak &e1'
+      - ''
+      - '&b&lİpucu: &b&ee[level] &bdeğerini &e0 &byaparak büyüyü kaldırın'
+    params: '<enchant> [level]'
+  booktype:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir yazılı kitap olmalı'
+    wrong-generation: '&4[&cItemEdit&4] &cHatalı Kitap Türü Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lKitap türünü ayarla'
+      - ''
+      - '&bYalnızca yazılı kitaplarda çalışır'
+    params: '<booktype>'
+  bookauthor:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir yazılı kitap olmalı'
+    description:
+      - '&6&lYazarı ayarla'
+      - ''
+      - '&bYazar adı boşluklar içerebilir ve renklendirilebilir'
+      - '&bYalnızca yazılı kitaplarda çalışır'
+    params: '<name>'
+  potioneffect:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir iksir, uçlu ok veya şüpheli çorba olmalı'
+    wrong-effect: '&4[&cItemEdit&4] &cHatalı Etki Değeri! &4[&6buraya tıklayın&4]'
+    itemtag-tip: '&9[&fItemEdit&9] &bNormal öğelere iksir etkileri mi eklemek istiyorsunuz? >ItemTag< deneyin'
+    itemtag-tip-hover:
+      - '&6Buraya tıklayın'
+    description:
+      - '&6&lİksir etkilerini düzenle'
+      - ''
+      - '&bHerhangi bir İksir, Uçlu ok ve Şüpheli çorba üzerinde çalışır!'
+      - '&eAdd <effect> <duration> [level] &b- etki ekle'
+      - '&eRemove <effect> &b- seçili etkiyi kaldırır'
+      - '&eReset &b- tüm etkileri kaldırır'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
+      description:
+        - '&6&lSeçilen etkiyi ekle veya üzerine yaz'
+        - ''
+        - '&e<effect> &betki türü'
+        - '&e<duration> &bsaniye cinsinden süre, &e0 &banlık etkiler için'
+        - '&e[level] &b127''ye kadar, varsayılan olarak &e1'
+        - '&e[particles] &bParçacıklar görünsün mü? &etrue&b/&efalse'
+        - '&e[ambient] &bParçacıklar çevresel bayrak taşısın mı? &etrue&b/&efalse'
+        - '&e[icon] &bSağ üst köşede simge gösterilsin mi? &etrue&b/&efalse &b(1.13+ için yalnızca)'
+    remove:
+      params: '<effect>'
+      description:
+        - '&6&lSeçilen etkiyi kaldır'
+  banner:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir bayrak olmalı'
+    wrong-color: '&4[&cItemEdit&4] &cHatalı Renk Değeri! &4[&6buraya tıklayın&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cHatalı Desen Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lBayrak düzenle'
+    set:
+      params: '<type> <color> <line>'
+      description:
+        - '&6&lSeçilen satırdaki deseni değiştir'
+    add:
+      params: '<type> <color>'
+      description:
+        - '&6&lBir desen ekle'
+    remove:
+      params: '<line>'
+      description:
+        - '&6&lSeçilen satırdaki deseni kaldır'
+    color:
+      params: '<line> <color>'
+      description:
+        - '&6&lSeçilen satırdaki desenin rengini değiştir'
+  fireworkpower:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir havai fişek olmalı'
+    description:
+      - '&6&lHavai fişek gücünü ayarla'
+      - ''
+      - '&e<power> &bhavai fişek gücü, &e0 &bile &e5 &barasında bir değer'
+    params: '<power>'
+  firework:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir havai fişek olmalı'
+    description:
+      - '&6&lHavai fişek düzenle'
+    params: ''
+  spawnereggtype:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir spawner yumurtası olmalı'
+    wrong-entity: '&4[&cItemEdit&4] &cYanlış Yumurta Türü Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lSpawner yumurtasının oluşturduğu varlık türünü ayarla'
+      - ''
+      - '&e<type> &bvarlık türü'
+      - '&bYalnızca bazı varlık türleri yumurtalardan çıkabilir'
+    params: '<type>'
+  attribute:
+    wrong-attribute: '&4[&cItemEdit&4] &cYanlış Özellik Değeri! &4[&6buraya tıklayın&4]'
+    wrong-operation: '&4[&cItemEdit&4] &cYanlış İşlem Değeri! &4[&6buraya tıklayın&4]'
+    wrong-equipment: '&4[&cItemEdit&4] &cYanlış Ekipman Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lÖzellik düzenleyicilerini düzenle'
+      - ''
+      - '&eAdd <attribute> <amount> [operation] [slot] &b- yeni düzenleyiciler ekle'
+      - '&eRemove <attribute/slot> &b- bazı düzenleyicileri kaldır'
+    params: '<add/remove> [...]'
+    add:
+      params: '<attribute> <amount> [operation] [slot]'
+      description:
+        - '&6&lÖzellik düzenleyici ekle'
+        - ''
+        - '&e<attribute> &bözellik türü'
+        - '&e<amount> &bbelirlenen miktar'
+        - '&e[operation] &bmodifikasyon ekleme yöntemi, varsayılan olarak toplar'
+        - '&e[slot] &bbu düzenleyiciyi yalnızca öğe belirli bir ekipman yuvasındayken uygular'
+    remove:
+      params: '<attribute/slot>'
+      description:
+        - '&6&lDüzenleyicileri Kaldır'
+        - ''
+        - '&e<attribute/slot> &bsilmek için tür, seçilen değer ile ilgili'
+        - '&bbelirtilen tüm düzenleyiciler kaldırılır'
+  tropicalfish:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir tropikal balık kovası olmalı'
+    wrong-color: '&4[&cItemEdit&4] &cYanlış Renk Değeri! &4[&6buraya tıklayın&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cYanlış Desen Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lTropikal balık kovasının özelliklerini ayarla'
+      - ''
+      - '&edesen <desen türü> &b- balık türü'
+      - '&edesenrenk <renk> &b- balığın desen rengi'
+      - '&egövderen <renk> &b- balığın gövde rengi'
+    params: '[...]'
+    pattern:
+      params: '<type>'
+      description:
+        - '&6&lTropikal balık desen türünü ayarla'
+        - ''
+        - '&e<type> &bbalığın desen türü'
+    patterncolor:
+      params: '<color>'
+      description:
+        - '&6&lTropikal balığın desen rengini ayarla'
+        - ''
+        - '&e<color> &bbalığın desen rengi'
+    bodycolor:
+      params: '<color>'
+      description:
+        - '&6&lTropikal balığın gövde rengini ayarla'
+        - ''
+        - '&e<color> &bbalığın gövde rengi'
+  repaircost:
+    description:
+      - '&6&lÖrs Tamir Maliyetini Düzenle'
+      - ''
+      - '&e<cost> &blevel miktarı'
+      - '&b&lDİKKAT: &börs tamir/yeniden adlandırma fiyatı her zaman en az &e1'
+      - '&b&lDİKKAT: &bbu komut, öğenin temel tamir maliyetini ayarlar, son seviye maliyeti örse göre değişir'
+      - '&bDaha fazla bilgi için &eminecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<cost>'
+  custommodeldata:
+    description:
+      - '&6&lÖzel model verilerini düzenle'
+      - ''
+      - '&bDoku paketleri için kullanılır'
+      - '&e<value> &bhedef modelin pozitif tam sayısı'
+    params: '<value>'
+  itemmodel:
+    description:
+      - '&6&lÖğe modelini düzenle'
+      - ''
+      - '&e<adlandırılmış anahtar> &bdoku referansı için anahtar'
+      - '&bÖrnek: /ie itemmodel &edemir_kılıç'
+      - '&bÖrnek: /ie itemmodel &eminecraft:demir_kılıç'
+      - ''
+      - '&e<namespace>&b:&e<id> &bşu modeli referans alır:'
+      - '  /assets/&e<namespace>&b/models/item/&e<id>'
+    params: '<adlandırılmış anahtar>'
+  axolotlvariant:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir axolotl kovası olmalı'
+    wrong-axolotl: '&4[&cItemEdit&4] &cYanlış Axolotl Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lAxolotl Kovası Üzerindeki Axolotl Türünü Düzenle'
+      - ''
+      - '&e<type> &baxolotl türü'
+    params: '<type>'
+  listaliases:
+    description:
+      - '&6&lGeçerli alias parametrelerini gösterir'
+      - ''
+      - '&e<type> &bgörüntülenecek parametre türü'
+    params: '<type>'
+    prefix_line: '&1 ◆  ◆  ◆  ◆  &9Aliaslar  &1◆  ◆  ◆  ◆'
+    postfix_line: '&1 ◆  ◆  ◆  ◆  &9Aliaslar  &1◆  ◆  ◆  ◆'
+    first_color: '&b'
+    second_color: '&e'
+    hover_info: '&9Orijinal değer: &e%default%'
+    hover_type: '&6İncelemek için tıklayın'
+    error-pre-hover: "&6&lAliaslar:"
+  compass:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir pusula olmalı'
+    description:
+      - '&6&lPusula hedef konumunu ayarla'
+      - ''
+      - '&eSet &b- pusulanın hedefini mevcut konumunuza ayarlar'
+      - '&eClear &b- pusula hedefini temizler'
+    params: '<set/clear>'
+    set:
+      feedback: '&9[&fItemEdit&9] &aPusula artık şurayı gösteriyor: &e%world% %x% %y% %z%'
+    clear:
+      feedback: '&9[&fItemEdit&9] &aPusula hedefi temizlendi'
+  goathornsound:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir keçi boynuzu olmalı'
+    wrong-sound: '&4[&cItemEdit&4] &cYanlış Ses Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lKeçi Boynuzunun sesini ayarla'
+      - ''
+      - '&e<type> &bses türü'
+    params: '<type>'
+  armortrim:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir zırh olmalı'
+    wrong-material: '&4[&cItemEdit&4] &cYanlış Trim Malzeme Değeri! &4[&6buraya tıklayın&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cYanlış Trim Deseni Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lZırh Trimi Ayarla'
+      - ''
+      - '&e<material> &btrim malzemesi'
+      - '&e<pattern> &btrim deseni'
+    params: '<material> <pattern>'
+  bookenchant:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe bir kitap veya büyülenmiş kitap olmalı'
+    wrong-enchant: '&4[&cItemEdit&4] &cYanlış Büyü Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lKitaba büyü ekle'
+      - '&bEnchant ve bookenchant arasındaki fark şudur:'
+      - '&benchant ile ateş büyüsü yapılan bir kitap,'
+      - '&bvurduğu hedefleri ateşe verirken, bookenchant yapmaz'
+      - ''
+      - '&e<enchant> &bbüyü türü'
+      - '&e[level] &bbüyü seviyesi, varsayılan olarak &e1'
+      - ''
+      - '&b&lİpucu: &b[level] &e0 &bolarak ayarlandığında büyü kaldırılır'
+    params: '<enchant> [level]'
+  hidetooltip:
+    description:
+      - '&6&lİpucu açıklamalarını gizle veya göster'
+      - ''
+      - '&e[true/false] &bdurumu ayarla, varsayılan olarak değiştirir'
+    params: '[true/false]'
+  fireresistent:
+    description:
+      - '&6&lÖğeyi ateş/lav dayanıklı hale getir'
+      - ''
+      - '&e[true/false] &bdurumu ayarla, varsayılan olarak değiştirir'
+      - ''
+      - '&bAteş dayanıklılığı olan bir öğe,'
+      - '&bateşe düştüğünde yok olmaz ve lav üzerinde yüzer'
+    params: '[true/false]'
+  glow:
+    description:
+      - '&6&lBüyü parlaması etkisini geçersiz kıl'
+      - ''
+      - '&e[true/false/default] &bdurumu ayarla, varsayılan olarak değiştirir'
+      - ''
+      - '&b&lİpucu: &edefault &bvanilla davranışını geri yükler'
+    params: '[true/false/default]'
+  maxstacksize:
+    description:
+      - '&6&lÖğenin maksimum yığın boyutunu ayarla'
+      - ''
+      - '&e[1-99/default] &bdurumu ayarla'
+      - ''
+      - '&edefault &bçoğu öğe için &e64&b,'
+      - '&bzırhlar ve araçlar için &e1&b ve birkaç öğe için farklı'
+      - '&bdeğerler olan varsayılan yığın boyutunu geri yükler'
+    params: '[1-99/default]'
+  rarity:
+    wrong-rarity: '&4[&cItemEdit&4] &cYanlış Nadirlik Değeri! &4[&6buraya tıklayın&4]'
+    description:
+      - '&6&lÖğenin nadirliğini ayarla'
+      - ''
+      - '&e[rarity] &bnadirlik değeri belirle'
+      - ''
+      - '&b&lİpucu: nadirlik değeri ayarlamamak varsayılan değeri geri yükler'
+    params: '[rarity]'
+  maxdurability:
+    wrong-type: '&4[&cItemEdit&4] &cÖğe araçlar ve zırhlar gibi dayanıklılığa sahip olmalı'
+    description:
+      - '&6&lÖğenin maksimum dayanıklılığını ayarla'
+      - ''
+      - '&e<max durability> &byeni dayanıklılık değeri, 1''den büyük olmalı'
+    params: '<max durability>'
+  food:
+    help-header: '&9&lItemEdit Food - Yardım'
+    wrong-effect: '&4[&cItemEdit&4] &cYanlış Etki Değeri! &4[&6Buraya tıklayın&4]'
+    wrong-animation: '&4[&cItemEdit&4] &cYanlış Animasyon Değeri! &4[&6Buraya tıklayın&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cYanlış Ses Değeri! &4[&6Buraya tıklayın&4]'
+    description:
+      - '&6&lÖğenin yemek özelliğini ayarlar'
+      - ''
+      - '&bNot: içilebilir öğeler yenemez'
+      - '&bİpucu: Daha fazla bilgi için &e/ie food&b yazınız'
+    params: '[...]'
+    clear:
+      description:
+        - '&6&lYemek özelliğini tamamen kaldırır'
+        - ''
+        - '&bVeya öğe bir vanilya yemeği ise varsayılanları geri getirir'
+      params: ''
+    canalwayseat:
+      description:
+        - '&6&lÖğenin her zaman yenip yenmeyeceğini ayarlar'
+        - ''
+        - '&e[true/false] &bDeğeri ayarlayın, varsayılan olarak geçiş yapar'
+        - ''
+        - '&bGenellikle yemekler açlık gerektirir,'
+        - '&btrue olarak ayarlamak, altın elma davranışını taklit eder'
+      params: '[true/false]'
+    consumeparticles:
+      description:
+        - '&6&lÖğenin yenildiğinde parçacık gösterip göstermediğini ayarlar'
+        - '&bSadece &c1.21.2+ için'
+        - ''
+        - '&e[true/false] &bDeğeri ayarlayın, varsayılan olarak geçiş yapar'
+      params: '[true/false]'
+    animation:
+      description:
+        - '&6&lYemek animasyonunu ayarlar'
+        - '&bSadece &c1.21.2+ için'
+        - ''
+        - '&e<animation> &bDeğeri ayarlayın, varsayılan olarak geçiş yapar'
+        - ''
+        - '&bBazı animasyonlar yalnızca birinci şahıs görünümünde gösterilir,'
+        - '&bBazı animasyonlar yalnızca üçüncü şahıs görünümünde gösterilir,'
+        - '&bBazı animasyonlar her iki görünümde de gösterilir'
+      params: '<animation>'
+    sound:
+      description:
+        - '&6&lYemek sesini ayarlar'
+        - '&bSadece &c1.21.2+ için'
+        - ''
+        - '&e<sound> &bDeğeri ayarlayın'
+      params: '<sound>'
+    eatticks:
+      description:
+        - '&6&lYemek için gereken süreyi ayarlar'
+        - ''
+        - '&e<ticks> &bYemek için geçen süreyi ayarlayın'
+        - '  &bEn az &e1&b olmalıdır'
+        - ''
+        - '&e20 &bgeçiş = &e1 &b saniye'
+      params: '<ticks>'
+    nutrition:
+      description:
+        - '&6&lGeri kazanılan beslenmeyi ayarlar'
+        - ''
+        - '&e<amount> &bGeri kazanılan açlık miktarı'
+        - '  &bEn az &e0&b olmalıdır'
+        - ''
+        - '&bDolu bir açlık çubuğu &e20&b’dir'
+      params: '<amount>'
+    saturation:
+      description:
+        - '&6&lGeri kazanılan doygunluğu ayarlar'
+        - ''
+        - '&e<amount> &bGeri kazanılan doygunluk miktarı'
+        - '  &bNegatif değerler de kabul edilir'
+        - ''
+        - '&bDoygunluk, yiyecek seviyesinin (beslenme) ne kadar hızlı azaldığını kontrol eder'
+      params: '<amount>'
+    addeffect:
+      description:
+        - '&6&lÖğeye bir etki ekler'
+        - ''
+        - '&e<type> &bPotion etkisi türü'
+        - '&e<duration> &bEtkisinin süresi saniye cinsinden'
+        - '  &bSonsuz etki için &einfinite&b yazın'
+        - '&e[level] &bEtkisinin seviyesi, varsayılan olarak &e1'
+        - '&e[particles] &bEtkisi parçacık gösteriyor mu?'
+        - '&e[ambient] &bEtkisi ambient mı?'
+        - '&e[icon] &bEtkisi sağ üst köşede simge gösteriyor mu?'
+        - '&e[chance] &bEtkisinin uygulanma olasılığı?'
+        - '  &b0 ile 100 arasında olmalıdır'
+      params: '<type> <duration> [level] [particles] [ambient] [icon] [chance]'
+    removeeffect:
+      description:
+        - '&6&lÖğeden bir etkiyi kaldırır'
+        - ''
+        - '&e<type> &bPotion etkisi türü'
+        - '&e[level] &bKaldırılacak etkinin seviyesi'
+        - '  &bSeviye belirtilmezse, tüm etkiler kaldırılır'
+        - '  &bSeviyeden bağımsız olarak seçilen türdeki etkiler kaldırılır'
+      params: '<type> [level]'
+    cleareffects:
+      description:
+        - '&6&lTüm etkileri öğeden kaldırır'
+      params: ''
+    info:
+      not_food: "&9[&fItemEdit&9] &bÖğede yemek özelliği yok veya varsayılan özellik mevcut"
+      message:
+        - '&9[&fItemEdit&9] &2&lÖğe Yemek Özelliği'
+        - '&aYemek Süresi: &e%eatseconds%&a s &8(&7%eatticks%&8 geçiş)'
+        - '&aAçlık: &e%nutrition% &8| &aDoygunluk: &e%saturation%&a'
+        - '&aAnimasyon: &e%animation% &8| &aSes: &e%sound% &8| &aParçacıklar: &e%consumeparticles%'
+        - '&aHer zaman yenebilir: &e%canalwayseat% &8| &aYenildiğinde al: &e%convertto%'
+      apply_effect_prefix:
+        - '&2&lİçeriyor &e&l%effects%&2&l uygulanabilir etkiler:'
+      apply_effect:
+        - '&a%index%. Tür: &e&b%type% &8| &aSeviyesi: &e%level% &8| &aSüre: &e%duration_s%&a s &8(&7%duration_ticks%&8 geçiş)'
+        - '&a   Parçacıklar: &e%hasparticle% &8| &aAmbient: &e%isambient% &8| &aSimge: &e%hasicon% &8| &aŞans: &e%chance_perc%&a%'
+      description:
+        - '&6&lÖğenin mevcut yemek bilgisini açıklar'
+      params: ''
+    convertto:
+      description:
+        - '&6&lYemek tüketildiğinde verilen öğeyi ayarlar'
+        - '&bSadece &c1.21+ için'
+        - ''
+        - '&e[type/serveritem id] &bDönüş yapılacak öğe'
+        - '  &bBir malzeme belirleyebilir veya'
+        - '  &bServerItem’dan öğe seçebilirsiniz'
+        - ''
+        - '&bSüt içildiğinde xoyun geri verildiği gibi davranır'
+      params: '[type/serveritem id]'
+serveritem:
+  help-header: '&9&lServerItem - Yardım'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: '&a%amount% adet &e%nick% &aalındı'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][give] %player_name%, %amount% adet %id% (%nick%) aldı'
+    description:
+      - '&6&lSeçilen öğeyi bir oyuncuya ver'
+      - ''
+      - '&e<id> &bÖğenin kimliği'
+      - '&e[amount] &bVerilecek öğe miktarı, varsayılan 1'
+      - '&e[player] &bÖğeyi alacak oyuncu, varsayılan olarak siz'
+      - '&e[silent] &bEğer oyuncuya geri bildirim gönderilmeyecekse true'
+    params: '<id> [amount] [player] [silent]'
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '&a%amount% adet &e%nick% &aalındı'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets%, %amount% adet %id% (%nick%) aldı'
+    description:
+      - '&6&lSeçilen öğeyi çevrimiçi tüm oyunculara ver'
+      - ''
+      - '&e<id> &bÖğenin kimliği'
+      - '&e[amount] &bVerilecek öğe miktarı, varsayılan 1'
+      - '&e[silent] &bEğer oyunculara geri bildirim gönderilmeyecekse true'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] %world% dünyasında %x% %y% %z% koordinatlarında %amount% adet %id% (%nick%) bırakıldı'
+    description:
+      - '&6&lSeçilen öğeyi belirli bir konuma bırak'
+      - ''
+      - '&e<id> &bÖğenin kimliği'
+      - '&e<amount> &bBırakılacak öğe miktarı, 1 ile 2304 arası'
+      - '&e<world> &bHangi dünya'
+      - '&e<x> <y> <z> &bKoordinatlar'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: '&a%amount% adet &e%nick% &akayıp'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][take] %player_name%, %amount% adet %id% (%nick%) verdi'
+    description:
+      - '&6&lSeçilen öğeyi bir oyuncudan al'
+      - ''
+      - '&e<id> &bÖğenin kimliği'
+      - '&e[amount] &bAlınacak öğe miktarı, varsayılan 1'
+      - '&e[player] &bÖğeyi alacak kişi, varsayılan olarak siz'
+      - '&e[silent] &bEğer oyuncuya geri bildirim gönderilmeyecekse true'
+    params: '<id> [amount] [player] [silent]'
+  save:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aÖğe &e%id% &akayıt edildi'
+    already_used_id: '&4[&cItemEdit&4] &cKimliği &e%id% &cile bir öğe zaten var, kimliği değiştirin veya üzerine yazmak için /si update kullanın'
+    description:
+      - '&bElinizdeki öğeyi kaydedin'
+      - ''
+      - '&e<id> &bÖğeyi tanımlayın, büyük/küçük harfe duyarsız ve boşluk veya'
+      - '&bnokta içeremez, ayrıca mevcut bir kimliği seçemezsiniz'
+      - ''
+      - '&b&lİpucu: &bVar olan bir öğeyi değiştirmek için &e/serveritem update <id>&b kullanın'
+      - '&b&lİpucu: &bKaydedilen öğeleri almak için &e/serveritem give <id>&b kullanın'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aÖğe &e%id% &akaldırıldı'
+    description:
+      - '&6&lSeçilen öğeyi sil'
+      - ''
+      - '&e<id> &bÖğenin kimliği'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aÖğe &e%id% &agüncellendi'
+    description:
+      - '&6&lSeçilen öğeyi güncelle'
+      - ''
+      - '&bID ile ilişkili öğeyi elinizdeki öğe ile değiştirin'
+      - '&e<id> &bÖğenin ID''si'
+      - ''
+      - '&b&lİpucu: &bYeni bir öğe oluşturmak için &e/serveritem save <id>&b kullanın'
+      - '&b&lİpucu: &bBir öğeyi silmek için &e/serveritem delete <id>&b kullanın'
+    params: '<id>'
+  show:
+    description:
+      - '&6&lSunucuda kayıtlı öğelerle bir GUI açın'
+      - ''
+      - '&e[page] &bGUI''nin sayfası, varsayılan olarak 1'
+    params: '[page]'
+  setnick:
+    #Holders: %id% %nick%
+    success: '&9[&fItemEdit&9] &aÖğe &e%id% &ainin takma adı &e%nick% &aolarak güncellendi'
+    description:
+      - '&bSeçilen öğenin görünen adını ayarlayın'
+      - ''
+      - '&bTakma ad, satın alma/satma mesajlarındaki &e%nick%&b yeri için kullanılır.'
+      - '&b  Varsayılan olarak, öğenin adı ya da adı yoksa türüdür.'
+      - ''
+      - '&e<id> &bÖğenin ID''si'
+      - '&e[nick] &bAyarlanacak ad'
+      - ''
+      - '&b&lİpucu: &bVarsayılana sıfırlamak için sadece &e/serveritem setnick <id>&b kullanın'
+    params: '<id> [nick]'
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aSatın alındı &e%amount% &aadet &e%nick% &a için &e%price%'
+    #Holders: %id% %nick% %amount%
+    not-enough-space: '&cEnvanterinizde &6%amount% &cadet &6%nick% &csatın almak için yeterli yer yok'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: '&c&6%amount% &cadet &6%nick% &csatın almak için &6%price% &cyeterli paranız yok'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name%, %id% (%nick%) için %price% ödedi'
+    description:
+      - '&6&lÖğeleri oyuncuya satın'
+      - ''
+      - '&bSell, SellMax''den farklıdır çünkü tüm miktarı'
+      - '&b  satarsınız ya da hiç satmazsınız.'
+      - '&e<id> &bÖğenin ID''si'
+      - '&e<amount> &bÖğelerin miktarı'
+      - '&e<player> &bParayı ödeyen ve öğeleri alan oyuncu'
+      - '&e<price> &bTüm öğeler için fiyat, pozitif olmalı'
+      - '&e[silent] &bOyuncuya geri bildirim göndermek için true'
+      - ''
+      - '&bİşlem başarısız olur, eğer oyuncunun yeterli parası'
+      - '&b  veya envanter alanı yoksa'
+      - '&bNot: Komut yürütücüsünün bakiyesi etkilenmez'
+    params: '<id> <amount> <player> <price> [silent]'
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aSatıldı &e%amount% &aadet &e%nick% &aiçin &e%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '&cEnvanterinizde &6%amount% &cadet &6%nick% &c yok'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name%, %id% (%nick%) için %price% ödedi'
+    description:
+      - '&6&lOyuncudan öğe satın al'
+      - ''
+      - '&bBuy, BuyMax''dan farklıdır çünkü tüm miktarı satın alırsınız'
+      - '&b  ya da hiç satın almazsınız'
+      - '&e<id> &bÖğenin ID''si'
+      - '&e<amount> &bÖğelerin miktarı'
+      - '&e<player> &bÖğeleri veren ve parayı alan oyuncu'
+      - '&e<price> &bTüm öğeler için fiyat, pozitif olmalı'
+      - '&e[silent] &bOyuncuya geri bildirim göndermek için true'
+      - ''
+      - '&bİşlem başarısız olur, eğer oyuncunun en az &e<amount>&b'
+      - '&b  öğesi yoksa'
+      - '&bNot: Komut yürütücüsünün bakiyesi etkilenmez'
+    params: '<id> <amount> <player> <price> [silent]'
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aSatın alındı: &e%amount% &aadet &e%nick% &aiçin &e%price%'
+    #Holders: %id% %nick%
+    not-enough-space: '&cEnvanterinizde &6%nick% &ciçin yeterli alan yok'
+    #Holders: %id% %nick% %price%
+    not-enough-money: '&cHer biri &6%price% &ciçin &6%nick% &csatın alacak kadar paranız yok'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% &e%id% (%nick%) &e%amount% miktarı için &e%price% ödedi'
+    description:
+      - '&6&lOyuncuya eşya sat'
+      - ''
+      - '&bSellMax, Sell komutundan farklıdır çünkü oyuncuya'
+      - '&b  yeterli para veya alan olmadığında daha az miktar satabilirsiniz'
+      - '&e<id> &bEşyanın kimliği'
+      - '&e<amount> &bEşyaların miktarı'
+      - '&e<player> &bEşyaları alan ve parayı ödeyen kişi'
+      - '&e<price> &bTüm eşyaların toplam fiyatı, pozitif olmalı'
+      - '&e[silent] &bOyuncuya bildirim göndermek için true'
+      - ''
+      - '&bEğer oyuncunun yeterli parası veya alanı yoksa'
+      - '&b  işlem başarısız olur.'
+      - '&bEğer oyuncu daha az miktar alırsa, fiyat orantılı olarak ayarlanır'
+      - '&bNot: Komutu çalıştıranın bakiyesi etkilenmez'
+    params: '<id> <amount> <player> <price> [silent]'
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '&aSatıldı: &e%amount% &aadet &e%nick% &aiçin &e%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '&cEnvanterinizde satılacak &6%nick% &cyok'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% &e%id% (%nick%) &e%amount% miktarını &e%price% karşılığında sattı'
+    description:
+      - '&6&lOyuncudan eşya satın al'
+      - ''
+      - '&bBuyMax, Buy komutundan farklıdır çünkü oyuncunun'
+      - '&b  envanterinde yeterince eşya yoksa daha az miktar alabilirsiniz'
+      - '&e<id> &bEşyanın kimliği'
+      - '&e<amount> &bEşyaların miktarı'
+      - '&e<player> &bEşyaları veren ve parayı alan kişi'
+      - '&e<price> &bTüm eşyaların toplam fiyatı, pozitif olmalı'
+      - '&e[silent] &bOyuncuya bildirim göndermek için true'
+      - ''
+      - '&bEğer oyuncunun envanterinde yeterli eşya yoksa'
+      - '&b  işlem başarısız olur.'
+      - '&bEğer oyuncu daha az miktar satarsa, fiyat orantılı olarak ayarlanır'
+      - '&bNot: Komutu çalıştıranın bakiyesi etkilenmez'
+    params: '<id> <amount> <player> <price> [silent]'
+itemstorage:
+  help-header: '&9&lItemStorage - Yardım'
+  get:
+    #Holders: %id% %amount%
+    success: '&9[&fItemEdit&9] &aAlındı: &e%amount% &aadet &e%id%'
+    no-inventory-space: '&4[&cItemEdit&4] &cEnvanterinizde yer yok'
+    description:
+      - '&6&lSeçilen eşyayı al'
+      - ''
+      - '&e<id> &bEşyanın kimliği'
+      - '&e[amount] &bAlınacak miktar, varsayılan olarak 1'
+    params: '<id> [amount]'
+  save:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aEşya &e%id% &akayıt edildi'
+    #Holders: %limit%
+    limit-reached: '&4[&cItemEdit&4] &cKayıt edilebilir eşya sayısına ulaştınız (%limit%)'
+    description:
+      - '&6&lElinizdeki eşyayı kaydedin'
+      - ''
+      - '&e<id> &bEşyanızın kimliği, büyük/küçük harfe duyarlı değildir ve'
+      - '&b     boşluk veya nokta içeremez, ayrıca kullanılan bir kimliği'
+      - '&b     seçemezsiniz'
+      - ''
+      - '&b&lİpucu: &bVar olan bir eşyayı değiştirmek için &e/itemstorage update <id>&b kullanın'
+      - '&b&lİpucu: &bKaydedilmiş eşyalarınızı almak için &e/itemstorage get <id>&b kullanın'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aEşya &e%id% &asilindi'
+    description:
+      - '&6&lSeçilen eşyayı sil'
+      - ''
+      - '&e<id> &bEşyanın kimliği'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '&9[&fItemEdit&9] &aEşya &e%id% &agüncellendi'
+    description:
+      - '&6&lSeçilen eşyayı güncelle'
+      - ''
+      - '&bKimliği olan eşyayı elinizdeki eşya ile değiştirin'
+      - '&e<id> &bEşyanın kimliği'
+      - ''
+      - '&bİpucu: Yeni bir eşya oluşturmak için &e/itemstorage save <id>&b kullanın'
+      - '&bİpucu: Bir eşyayı silmek için &e/itemstorage delete <id>&b kullanın'
+    params: '<id>'
+  show:
+    description:
+      - '&6&lKaydedilmiş eşyalarınızı içeren bir arayüz açar'
+      - ''
+      - '&e[page] &bArayüzün sayfası, varsayılan olarak 1'
+    params: '[page]'
+itemeditimport:
+  help:
+    - '&a/itemeditimport ItemEditor &2- ItemEditor eklentisinden eşyaları içe aktar'
+  itemeditor:
+    unable-to-get-item:
+      - '&4[&cItemEdit&4] &cEşya &6%id% &cyüklenemedi'
+    already-used-id:
+      - '&4[&cItemEdit&4] &6%id% &czaten kullanılıyor, belki bu komutu daha önce çalıştırmışsınızdır veya ItemEditor/items/%id%.yml dosyasını yeniden adlandırabilirsiniz'
+    invalid-id:
+      - '&4[&cItemEdit&4] &6%id% &cgeçerli bir kimlik değil, dosyayı ItemEditor/items/%id%.yml olarak alfanümerik bir adla yeniden adlandırabilirsiniz'
+    import-unsuccess:
+      - '&4[&cItemEdit&4] &cHiçbir eşya &6%max% &ciçin içe aktarılmadı, belki bu komutu daha önce çalıştırmışsınızdır(?)'
+    import-success:
+      - '&9[&fItemEdit&9] &a&6%max% &aeşyadan &e%done% &aağı başarıyla içe aktarıldı'
+      - '&9[&fItemEdit&9] &aİçe aktarılan eşyalar: &e%ids%'
+    import-empty:
+      - '&4[&cItemEdit&4] &cItemEditor içe aktarılacak eşya içermiyor'
+itemeditreload:
+  success: '&9[&fItemEdit&9] &aYeniden yüklendi'
+gui:
+  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
+    creative: 'Orta Tıkla'
+    other: '1 Tuşuna Bas'
+  colorselector:
+    title: '&9Renk Seç'
+    buttons:
+      color:
+        - '&6Renkler:'
+        - '&e%colors%'
+        - '&7[&fSağ Tık&7]&b Ekle &e%color%'
+        - '&7[&fSol Tık&7]&b Son Rengi Kaldır'
+        - '&7[&fShift+Sağ Tık&7]&b Renkleri Temizle'
+  banner:
+    title: '&9Bayrak Düzenleyici'
+    color_selector_title: '&9Renk Seçici'
+    pattern_selector_title: '&9Desen Seçici'
+    buttons:
+      pattern_selector_info:
+        - '&bSeç &6&l%type%'
+      color_selector_info:
+        - '&bSeç &6&l%color%'
+      position:
+        - '&6Desen Kontrolcüsü'
+        - ''
+        - '&7[&f%middle_click%&7] &bDeseni Değiştir'
+        - '&7[&fSol/Sağ Tık&7]&b << Deseni Taşı >>'
+      type:
+        - '&6Tip Seçici'
+        - '&bTip: &e%type%'
+        - ''
+        - '&7[&fTıkla&7]&b Tipi Değiştir'
+      color:
+        - '&6Renk Seçici'
+        - '&bRenk: &e%color%'
+        - ''
+        - '&7[&fTıkla&7]&b Rengi Değiştir'
+  firework:
+    title: '&9Havai Fişek Düzenleyici'
+    buttons:
+      type:
+        - '&6Tip Seçici'
+        - '&bTip: &e%type%'
+        - ''
+        - '&7[&fTıkla&7]&b Tipi değiştir'
+      colors:
+        - '&6Renk Seçici'
+        - '&bRenkler: &e%colors%'
+        - ''
+        - '&7[&fTıkla&7]&b Renkleri değiştir'
+      fadecolors:
+        - '&6Solma Renkleri Seçici'
+        - '&bSolma Renkleri: &e%colors%'
+        - ''
+        - '&7[&fTıkla&7]&b Renkleri değiştir'
+      flags:
+        none: '&cHiçbir şey etkin değil'
+        trail: '&eİz &aEtkin'
+        flicker: '&eTitreme &aEtkin'
+        both: '&eİz&b ve &eTitreme &aEtkin'
+        info:
+          - '&6İz ve Titreme Etkinleştirici'
+          - '%status%'
+          - ''
+          - '&7[&fSağ Tık&7]&b Titreme efektini değiştir'
+          - '&7[&fSol Tık&7]&b İz efektini değiştir'
+      position:
+        - '&bEfekt Kontrolcüsü'
+        - ''
+        - '&7[&f%middle_click%&7]&b Efekti değiştir'
+        - '&7[&fSol/Sağ Tık&7]&b Bu efekti taşı'
+      power:
+        - '&bGüç: &e%power%'
+        - ''
+        - '&7[&fSol/Sağ Tık&7]&b << Gücü değiştir >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '&6&lÖnceki Sayfa'
+      - ''
+      - '&7[&fTıkla&7]&b Sayfaya git &e%target_page%'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '&6&lSonraki Sayfa'
+      - ''
+      - '&7[&fTıkla&7]&b Sayfaya git &e%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '&6&lGeri Dön'
+      - ''
+      - '&7[&fTıkla&7]&b Önceki GUI''ye git'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '&9%player_name% eşyaları - sayfa &b%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '&6&lSayfa &e&l%page%'
+        - '&7[&fTıkla&7]&b Görünümü değiştir: &eitem&b/&eID'
+        - ''
+        - '&bEşyalara tıkla:'
+        - '&7> [&fSol Tık&7]&b Al &e1'
+        - '&7> [&fShift+Sol Tık&7]&b Al &e64'
+        - '&7> [&fShift+Sağ Tık&7]&b Eşyayı sil'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '&9Sunucu eşyaları - sayfa &b%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '&6&lSayfa &e&l%page%'
+        - '&7[&fTıkla&7]&b Görünümü değiştir: &eitem&b/&eID'
+        - ''
+        - '&bEşyalara tıkla:'
+        - '&7> [&fSol Tık&7]&b Al &e1'
+        - '&7> [&fShift+Sol Tık&7]&b Al &e64'
+        - '&7> [&fShift+Sağ Tık&7]&b Eşyayı sil'
