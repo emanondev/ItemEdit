@@ -44,7 +44,7 @@ public class Aliases {
 
     };
     public static final AliasSet<DyeColor> COLOR = new EnumAliasSet<>("color", DyeColor.class);
-    public static final AliasSet<String> ANIMATION = new AliasSet<String>("animations") {
+    public static final AliasSet<String> ANIMATION = Util.isVersionAfter(1,20,5)?new AliasSet<String>("animations") {
 
         private final LinkedHashSet<String> values = new LinkedHashSet<>(craftValues());
 
@@ -62,7 +62,7 @@ public class Aliases {
         public Collection<String> getValues() {
             return values;
         }
-    };
+    }:null;
     public static final EggTypeAliases EGG_TYPE = getEggTypeAliases();
     public static final AliasSet<ItemFlag> FLAG_TYPE = new EnumAliasSet<ItemFlag>("flag_type", ItemFlag.class) {
         @Override
@@ -264,7 +264,7 @@ public class Aliases {
     }
 
     private static SoundAliases getSoundAliases() {
-        if (Util.isVersionAfter(1, 17))
+        if (Util.isVersionAfter(1, 20, 5))
             return new SoundAliases();
         return null;
     }
