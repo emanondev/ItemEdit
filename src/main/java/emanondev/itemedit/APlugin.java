@@ -233,7 +233,7 @@ public abstract class APlugin extends JavaPlugin {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (!isAdmin.test(player))
                     continue;
-                String locale = player.getLocale();
+                String locale = player.getLocale().toLowerCase(Locale.ENGLISH);
                 String pre = locale.split("_")[0];
                 if (!mainMap.containsKey(pre))
                     mainMap.put(pre, new HashMap<>());
@@ -247,7 +247,7 @@ public abstract class APlugin extends JavaPlugin {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (!isUser.test(player))
                     continue;
-                String locale = player.getLocale();
+                String locale = player.getLocale().toLowerCase(Locale.ENGLISH);;
                 String pre = locale.split("_")[0];
                 if (!mainMap.containsKey(pre))
                     mainMap.put(pre, new HashMap<>());
