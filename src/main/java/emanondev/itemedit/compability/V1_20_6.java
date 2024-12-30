@@ -25,9 +25,9 @@ public class V1_20_6 {
             if (group == null)
                 group = EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)).getGroup();
         }
-        if (Util.isVersionAfter(1,21,2))
+        if (Util.isVersionAfter(1, 21, 2))
             return new AttributeModifier(UUID.randomUUID(), attr.getKey().toString(), amount, op, group);
-        return new AttributeModifier(UUID.randomUUID(),((Keyed) attr).getKey().toString(), amount, op, group);
+        return new AttributeModifier(UUID.randomUUID(), ((Keyed) attr).getKey().toString(), amount, op, group);
     }
 
     public static PatternType[] getPatternTypes() {

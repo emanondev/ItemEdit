@@ -91,7 +91,7 @@ public class Util {
         return results;
     }
 
-    public static @NotNull <T> List<String> complete(String prefix, Collection<T> list, Function<T,String> converter) {
+    public static @NotNull <T> List<String> complete(String prefix, Collection<T> list, Function<T, String> converter) {
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
         int c = 0;
