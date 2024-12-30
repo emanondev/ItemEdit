@@ -583,6 +583,13 @@ itemedit:
         - '&bImite le comportement du seau de lait où un seau'
         - '&best renvoyé lorsque le lait est consommé'
       params: '[type/serveritem id]'
+  glider:
+    description:
+      - '&6&lDéfinir l''état du planeur'
+      - ''
+      - '&bL''objet planeur devrait permettre de planer comme avec des élytres'
+      - '&e[true/false] &bdéfinir la valeur du planeur, par défaut alterne'
+    params: '[true/false]'
 serveritem:
   help-header: '&9&lServerItem - Aide'
   give:

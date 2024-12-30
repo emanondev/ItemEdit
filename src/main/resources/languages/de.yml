@@ -579,6 +579,13 @@ itemedit:
         - '&bImitiert das Verhalten des Milcheimers, bei dem ein Eimer'
         - '&bzurückgegeben wird, wenn Milch verbraucht wird'
       params: '[Typ/Serveritem ID]'
+  glider:
+    description:
+      - '&6&lGleiterstatus festlegen'
+      - ''
+      - '&bDas Gleiter-Item sollte das Gleiten wie bei Elytren ermöglichen'
+      - '&e[true/false] &bGleiterwert festlegen, standardmäßig umschalten'
+    params: '[true/false]'
 serveritem:
   help-header: '&9&lServerItem - Hilfe'
   give:

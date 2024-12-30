@@ -580,6 +580,13 @@ itemedit:
         - '&bMimic bucket milk behavior where a bucket is'
         - '&breturned when milk is consumed'
       params: '[type/serveritem id]'
+  glider:
+    description:
+      - '&6&lSet Glider state'
+      - ''
+      - '&bGlider item should allow gliding like on elytras'
+      - '&e[true/false] &bset glider value, by default toggle'
+    params: '[true/false]'
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:

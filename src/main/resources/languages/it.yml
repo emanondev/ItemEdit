@@ -581,6 +581,13 @@ itemedit:
         - '&bImita il comportamento del secchio di latte dove un secchio'
         - '&bviene restituito quando il latte viene consumato'
       params: '[tipo/id serveritem]'
+  glider:
+    description:
+      - '&6&lImposta stato del deltaplano'
+      - ''
+      - '&bL''oggetto deltaplano dovrebbe consentire di planare come con le elitre'
+      - '&e[true/false] &bimposta il valore del deltaplano, per impostazione predefinita alterna'
+    params: '[true/false]'
 serveritem:
   help-header: '&9&lServerItem - Guida'
   give:

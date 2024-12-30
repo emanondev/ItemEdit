@@ -580,6 +580,13 @@ itemedit:
         - '&bImituje zachowanie wiaderka z mlekiem, gdzie wiadro'
         - '&bzwracane jest po spożyciu mleka'
       params: '[typ/ID ServerItem]'
+  glider:
+    description:
+      - '&6&lUstaw stan szybowca'
+      - ''
+      - '&bPrzedmiot szybowiec powinien umożliwiać szybowanie jak na elytrach'
+      - '&e[true/false] &bustaw wartość szybowca, domyślnie przełącz'
+    params: '[true/false]'
 serveritem:
   help-header: '&9&lServerItem - Pomoc'
   give:

@@ -581,6 +581,13 @@ itemedit:
         - '&bMimic bucket milk behavior where a bucket is'
         - '&breturned when milk is consumed'
       params: '[type/serveritem id]'
+  glider:
+    description:
+      - '&6&lNustatyti sklandytuvo būseną'
+      - ''
+      - '&bSklandytuvo elementas turėtų leisti sklandyti kaip su elytromis'
+      - '&e[true/false] &bnustatyti sklandytuvo reikšmę, pagal numatymą perjungti'
+    params: '[true/false]'
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:

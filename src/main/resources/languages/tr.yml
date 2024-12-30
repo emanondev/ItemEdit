@@ -577,6 +577,13 @@ itemedit:
         - ''
         - '&bSüt içildiğinde xoyun geri verildiği gibi davranır'
       params: '[type/serveritem id]'
+  glider:
+    description:
+      - '&6&lPlanör durumunu ayarla'
+      - ''
+      - '&bPlanör eşyası elytra gibi süzülmeye izin vermelidir'
+      - '&e[true/false] &bplanör değerini ayarla, varsayılan olarak değiştir'
+    params: '[true/false]'
 serveritem:
   help-header: '&9&lServerItem - Yardım'
   give:

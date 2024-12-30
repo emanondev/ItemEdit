@@ -572,6 +572,13 @@ itemedit:
         - ''
         - '&b模擬牛奶桶的行為，當牛奶被消耗時返回一個桶'
       params: '[類型/ServerItem ID]'
+  glider:
+    description:
+      - '&6&l設置滑翔器狀態'
+      - ''
+      - '&b滑翔器物品應允許像鞘翅一樣滑翔'
+      - '&e[true/false] &b設定滑翔器的值，預設為切換'
+    params: '[true/false]'
 serveritem:
   help-header: '&9&lServerItem - 幫助'
   give:

@@ -579,6 +579,13 @@ itemedit:
         - '&bImita o comportamento do balde de leite, onde um balde'
         - '&bé retornado quando o leite é consumido'
       params: '[tipo/id ServerItem]'
+  glider:
+    description:
+      - '&6&lDefinir estado do planador'
+      - ''
+      - '&bO item planador deve permitir planar como nas élitras'
+      - '&e[true/false] &bdefinir o valor do planador, por padrão alternar'
+    params: '[true/false]'
 serveritem:
   help-header: '&9&lServerItem - Ajuda'
   give:

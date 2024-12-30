@@ -579,6 +579,13 @@ itemedit:
         - '&bBắt chước hành vi của xô sữa khi xô'
         - '&bđược trả lại sau khi sữa được tiêu thụ'
       params: '[type/serveritem id]'
+  glider:
+    description:
+      - '&6&lĐặt trạng thái Glider'
+      - ''
+      - '&bVật phẩm Glider nên cho phép lướt như elytra'
+      - '&e[true/false] &bđặt giá trị glider, mặc định là chuyển đổi'
+    params: '[true/false]'
 serveritem:
   help-header: '&9&lServerItem - Trợ Giúp'
   give:

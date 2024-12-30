@@ -580,6 +580,13 @@ itemedit:
         - '&bImita el comportamiento del cubo de leche donde un cubo es'
         - '&bdevuelto cuando se consume la leche'
       params: '[tipo/id ServerItem]'
+  glider:
+    description:
+      - '&6&lEstablecer estado de planeador'
+      - ''
+      - '&bEl artículo planeador debería permitir planear como con las élitras'
+      - '&e[true/false] &bestablecer el valor del planeador, por defecto alternar'
+    params: '[true/false]'
 serveritem:
   help-header: '&9&lServerItem - Ayuda'
   give:

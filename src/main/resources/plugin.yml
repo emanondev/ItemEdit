@@ -204,6 +204,8 @@ permissions:
       itemedit.itemedit.glow: true
       itemedit.itemedit.rarity: true
       itemedit.itemedit.food: true
+      itemedit.itemedit.glider: true
+      itemedit.itemedit.itemmodel: true
   itemedit.itemedit.rename:
     default: op
     description: Allow editing item name
@@ -563,3 +565,9 @@ permissions:
   itemedit.itemedit.food.bypass_limits:
     default: op
     description: Allow editing potion effects above level 2
+  itemedit.itemedit.glider:
+    default: op
+    description: Allow setting the item behavior
+  itemedit.itemedit.itemmodel:
+    default: op
+    description: Allow setting item texture model
