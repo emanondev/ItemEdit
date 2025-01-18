@@ -1,11 +1,17 @@
 package emanondev.itemedit.command.itemedit;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -34,16 +40,13 @@ public class Hide extends SubCmd {
                 onFail(p, alias);
                 return;
             }
-            if (args.length == 3) {
-                if (Aliases.BOOLEAN.convertAlias(args[2]))
-                    itemMeta.addItemFlags(flag);
-                else
-                    itemMeta.removeItemFlags(flag);
+            boolean add = args.length == 3 ? Aliases.BOOLEAN.convertAlias(args[2]) : !itemMeta.hasItemFlag(flag);
+            handleFlagChange(add, flag, item, itemMeta);
+
+            if (add) {
+                itemMeta.addItemFlags(flag);
             } else {
-                if (itemMeta.hasItemFlag(flag))
-                    itemMeta.removeItemFlags(flag);
-                else
-                    itemMeta.addItemFlags(flag);
+                itemMeta.removeItemFlags(flag);
             }
 
             item.setItemMeta(itemMeta);
@@ -51,7 +54,42 @@ public class Hide extends SubCmd {
         } catch (Exception e) {
             onFail(p, alias);
         }
+    }
 
+    private void handleFlagChange(boolean put, ItemFlag flag, ItemStack item, ItemMeta meta) {
+        if (!Util.hasPaperAPI() ||
+                !Util.isVersionAfter(1, 20, 5) ||
+                !ItemEdit.get().getConfig().loadBoolean("itemedit.paper_hide_fix", true)) {
+            return;
+        }
+        if (flag != ItemFlag.HIDE_ATTRIBUTES) {
+            return;
+        }
+        if (put) {
+            if (meta.getAttributeModifiers() != null) {
+                return;
+            }
+            for (EquipmentSlot slot : EquipmentSlot.values()) {
+                item.getType().getDefaultAttributeModifiers(slot).forEach(meta::addAttributeModifier);
+            }
+            return;
+        }
+
+        Multimap<Attribute, AttributeModifier> mods = meta.getAttributeModifiers();
+        if (mods == null) {
+            return;
+        }
+
+        HashMultimap<Attribute, AttributeModifier> mods2 = HashMultimap.create();
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            mods2.putAll(item.getType().getDefaultAttributeModifiers(slot));
+        }
+
+        if (mods.equals(mods2)) {
+            for (EquipmentSlot slot : EquipmentSlot.values()) {
+                meta.removeAttributeModifier(slot);
+            }
+        }
     }
 
     @Override

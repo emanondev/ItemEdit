@@ -19,6 +19,11 @@ language:
   # Regenerate language files on version change?
   # if true delete the files and replace them with latest version when game version change is detected
   regen_files: true
+itemedit:
+  # Since 1.20.6+ hiding default attributes on an item is impossible on Paper and Paper forks like Purpur
+  # due to a bug which is not planned to be fixed
+  #
+  paper_hide_fix: true
 serveritem:
   # If server saved items has placeholders inside displayname or lore should replace it?
   # Default placeholders: %player_name% %player_uuid%
