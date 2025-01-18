@@ -587,6 +587,21 @@ itemedit:
       - '&bGlider item should allow gliding like on elytras'
       - '&e[true/false] &bset glider value, by default toggle'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&lEdit item tooltip style'
+      - ''
+      - '&e<style> &bkey to set for texture reference'
+      - '&b  style is composed by <namespace>:<id>'
+      - '&bExample: /ie tooltipstyle &emy_style'
+      - '&bExample: /ie tooltipstyle &eminecraft:my_style'
+      - '&bwhere minecraft is the <namespace> and'
+      - '&bmy_style is the <id>'
+      - '&bwhen set, this item can use custom sprites for'
+      - '&bits tooltip background and frame.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&band <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:

@@ -586,6 +586,21 @@ itemedit:
       - '&bO item planador deve permitir planar como nas élitras'
       - '&e[true/false] &bdefinir o valor do planador, por padrão alternar'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&lEditar o estilo da dica de ferramenta do item'
+      - ''
+      - '&e<style> &bchave para definir a referência da textura'
+      - '&b  o estilo é composto por <namespace>:<id>'
+      - '&bExemplo: /ie tooltipstyle &emeu_estilo'
+      - '&bExemplo: /ie tooltipstyle &eminecraft:meu_estilo'
+      - '&bonde minecraft é o <namespace> e'
+      - '&bmeu_estilo é o <id>'
+      - '&bquando definido, este item pode usar sprites personalizados'
+      - '&bpara o fundo e a moldura da dica de ferramenta.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&be <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - Ajuda'
   give:

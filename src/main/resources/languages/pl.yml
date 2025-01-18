@@ -587,6 +587,21 @@ itemedit:
       - '&bPrzedmiot szybowiec powinien umożliwiać szybowanie jak na elytrach'
       - '&e[true/false] &bustaw wartość szybowca, domyślnie przełącz'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&lEdytuj styl podpowiedzi przedmiotu'
+      - ''
+      - '&e<style> &bklucz do ustawienia odwołania do tekstury'
+      - '&b  styl składa się z <namespace>:<id>'
+      - '&bPrzykład: /ie tooltipstyle &emój_styl'
+      - '&bPrzykład: /ie tooltipstyle &eminecraft:mój_styl'
+      - '&bgdzie minecraft to <namespace>, a'
+      - '&bmój_styl to <id>'
+      - '&bpo ustawieniu ten przedmiot może używać niestandardowych sprite''ów do'
+      - '&btła i ramki podpowiedzi.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&boraz <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - Pomoc'
   give:

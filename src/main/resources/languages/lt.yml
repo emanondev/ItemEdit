@@ -588,6 +588,21 @@ itemedit:
       - '&bSklandytuvo elementas turėtų leisti sklandyti kaip su elytromis'
       - '&e[true/false] &bnustatyti sklandytuvo reikšmę, pagal numatymą perjungti'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&lRedaguoti elemento patarimų stilių'
+      - ''
+      - '&e<style> &bklavišas tekstūros nuorodai nustatyti'
+      - '&b  stilius sudarytas iš <namespace>:<id>'
+      - '&bPavyzdys: /ie tooltipstyle &emano_stilius'
+      - '&bPavyzdys: /ie tooltipstyle &eminecraft:mano_stilius'
+      - '&bkur minecraft yra <namespace> ir'
+      - '&bmano_stilius yra <id>'
+      - '&bnustačius, šis elementas gali naudoti pritaikytus paveikslėlius'
+      - '&bpatarimų fono ir rėmo.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&bir <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:

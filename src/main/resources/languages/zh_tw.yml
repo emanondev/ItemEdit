@@ -579,6 +579,21 @@ itemedit:
       - '&b滑翔器物品應允許像鞘翅一樣滑翔'
       - '&e[true/false] &b設定滑翔器的值，預設為切換'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&l編輯物品提示樣式'
+      - ''
+      - '&e<style> &b用於設置材質參考的鍵值'
+      - '&b  樣式由 <namespace>:<id> 組成'
+      - '&b範例: /ie tooltipstyle &e我的樣式'
+      - '&b範例: /ie tooltipstyle &eminecraft:我的樣式'
+      - '&b其中 minecraft 是 <namespace> 而'
+      - '&b我的樣式 是 <id>'
+      - '&b設置後，此物品可以使用自定義的精靈圖像作為'
+      - '&b提示背景和邊框。'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&b以及 <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - 幫助'
   give:

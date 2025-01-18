@@ -590,6 +590,21 @@ itemedit:
       - '&bL''objet planeur devrait permettre de planer comme avec des élytres'
       - '&e[true/false] &bdéfinir la valeur du planeur, par défaut alterne'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&lModifier le style de l’info-bulle de l’objet'
+      - ''
+      - '&e<style> &bclé pour définir une référence de texture'
+      - '&b  le style est composé de <namespace>:<id>'
+      - '&bExemple: /ie tooltipstyle &emon_style'
+      - '&bExemple: /ie tooltipstyle &eminecraft:mon_style'
+      - '&bminecraft correspond au <namespace> et'
+      - '&bmon_style correspond au <id>'
+      - '&bLorsqu’il est défini, cet objet peut utiliser des sprites personnalisés'
+      - '&bpour l’arrière-plan et le cadre de l’info-bulle.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&bet <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - Aide'
   give:

@@ -583,6 +583,21 @@ itemedit:
       - '&bПредмет планер должен позволять планировать как элитры'
       - '&e[true/false] &bустановить значение планера, по умолчанию переключение'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&lРедактировать стиль подсказки предмета'
+      - ''
+      - '&e<style> &bключ для ссылки на текстуру'
+      - '&b  стиль состоит из <namespace>:<id>'
+      - '&bПример: /ie tooltipstyle &eмой_стиль'
+      - '&bПример: /ie tooltipstyle &eminecraft:мой_стиль'
+      - '&bгде minecraft — это <namespace>, а'
+      - '&bмой_стиль — это <id>'
+      - '&bПосле установки этот предмет может использовать'
+      - '&bпользовательские спрайты для фона и рамки подсказки.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&bи <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - Помощь'
   give:

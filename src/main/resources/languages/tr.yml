@@ -584,6 +584,21 @@ itemedit:
       - '&bPlanör eşyası elytra gibi süzülmeye izin vermelidir'
       - '&e[true/false] &bplanör değerini ayarla, varsayılan olarak değiştir'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&lÖğe ipucu stilini düzenle'
+      - ''
+      - '&e<style> &bDoku referansı için anahtar değer'
+      - '&b  stil, <namespace>:<id> şeklindedir'
+      - '&bÖrnek: /ie tooltipstyle &ebenim_stilim'
+      - '&bÖrnek: /ie tooltipstyle &eminecraft:benim_stilim'
+      - '&bminecraft <namespace> olarak,'
+      - '&bbenim_stilim ise <id> olarak kullanılır'
+      - '&bBelirlendiğinde, bu öğe özelleştirilmiş'
+      - '&bipuçları arka planı ve çerçevesi için sprite kullanabilir.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&bve <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - Yardım'
   give:

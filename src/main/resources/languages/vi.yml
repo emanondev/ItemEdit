@@ -586,6 +586,21 @@ itemedit:
       - '&bVật phẩm Glider nên cho phép lướt như elytra'
       - '&e[true/false] &bđặt giá trị glider, mặc định là chuyển đổi'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&lChỉnh sửa kiểu tooltip của vật phẩm'
+      - ''
+      - '&e<style> &bkhóa để thiết lập tham chiếu đến kết cấu'
+      - '&b  kiểu được tạo bởi <namespace>:<id>'
+      - '&bVí dụ: /ie tooltipstyle &ephong_cach_cua_toi'
+      - '&bVí dụ: /ie tooltipstyle &eminecraft:phong_cach_cua_toi'
+      - '&bminecraft là <namespace> và'
+      - '&bphong_cach_cua_toi là <id>'
+      - '&bKhi được thiết lập, vật phẩm này có thể sử dụng sprite tùy chỉnh'
+      - '&bcho nền và khung của tooltip.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&bvà <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - Trợ Giúp'
   give:

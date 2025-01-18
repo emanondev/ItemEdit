@@ -70,6 +70,8 @@ public class ItemEditCommand extends AbstractCommand {
                 this.registerSubCommand(new ItemModel(this));// 1.21.2+
             if (Util.isVersionUpTo(1, 15))
                 return;
+            if (Util.isVersionAfter(1, 21, 2))
+                this.registerSubCommand(new ToolTipStyle(this));
             this.registerSubCommand(new Compass(this));// 1.16+
             if (Util.isVersionUpTo(1, 16))
                 return;

@@ -586,6 +586,21 @@ itemedit:
       - '&bDas Gleiter-Item sollte das Gleiten wie bei Elytren ermöglichen'
       - '&e[true/false] &bGleiterwert festlegen, standardmäßig umschalten'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&lBearbeite den Tooltip-Stil eines Gegenstands'
+      - ''
+      - '&e<style> &bSchlüssel, um eine Texturreferenz festzulegen'
+      - '&b  Der Stil besteht aus <namespace>:<id>'
+      - '&bBeispiel: /ie tooltipstyle &emein_stil'
+      - '&bBeispiel: /ie tooltipstyle &eminecraft:mein_stil'
+      - '&bDabei ist minecraft das <namespace> und'
+      - '&bmein_stil ist die <id>'
+      - '&bWenn festgelegt, kann dieser Gegenstand benutzerdefinierte'
+      - '&bSprites für den Tooltip-Hintergrund und -Rahmen verwenden.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&bund <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - Hilfe'
   give:

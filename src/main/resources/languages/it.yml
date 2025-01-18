@@ -588,6 +588,21 @@ itemedit:
       - '&bL''oggetto deltaplano dovrebbe consentire di planare come con le elitre'
       - '&e[true/false] &bimposta il valore del deltaplano, per impostazione predefinita alterna'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&lModifica lo stile della descrizione oggetto'
+      - ''
+      - '&e<style> &bchiave da impostare per il riferimento alla texture'
+      - '&b  lo stile è composto da <namespace>:<id>'
+      - '&bEsempio: /ie tooltipstyle &emio_stile'
+      - '&bEsempio: /ie tooltipstyle &eminecraft:mio_stile'
+      - '&bdove minecraft è il <namespace> e'
+      - '&bmio_stile è l''<id>'
+      - '&bquando impostato, questo oggetto può usare sprite personalizzati per'
+      - '&blo sfondo e la cornice della sua descrizione.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&be <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - Guida'
   give:

@@ -587,6 +587,21 @@ itemedit:
       - '&bEl artículo planeador debería permitir planear como con las élitras'
       - '&e[true/false] &bestablecer el valor del planeador, por defecto alternar'
     params: '[true/false]'
+  tooltipstyle:
+    description:
+      - '&6&lEditar el estilo de la información sobre herramientas del objeto'
+      - ''
+      - '&e<style> &bclave para establecer la referencia de textura'
+      - '&b  el estilo se compone de <namespace>:<id>'
+      - '&bEjemplo: /ie tooltipstyle &emi_estilo'
+      - '&bEjemplo: /ie tooltipstyle &eminecraft:mi_estilo'
+      - '&bdonde minecraft es el <namespace> y'
+      - '&bmi_estilo es el <id>'
+      - '&bCuando está configurado, este objeto puede usar sprites personalizados'
+      - '&bpara el fondo y el marco de la información sobre herramientas.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&by <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
 serveritem:
   help-header: '&9&lServerItem - Ayuda'
   give:
