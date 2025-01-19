@@ -9,39 +9,62 @@ import org.bukkit.Bukkit;
 public final class VersionUtils {
 
     private static final String[] VERSION_PARTS = safeSplitVersion();
+
+    /**
+     * The main version of the game (e.g., the first number in the version string).
+     */
     public static final int GAME_MAIN_VERSION = Integer.parseInt(VERSION_PARTS[0]);
+
+    /**
+     * The minor version of the game (e.g., the second number in the version string).
+     */
     public static final int GAME_VERSION = Integer.parseInt(VERSION_PARTS[1]);
+
+    /**
+     * The sub-version of the game, or 0 if the version string has fewer than three parts.
+     */
     public static final int GAME_SUB_VERSION = VERSION_PARTS.length < 3 ? 0 : Integer.parseInt(VERSION_PARTS[2]);
-    private static final boolean hasPaper = ReflectionUtils
+
+    private static final boolean HAS_PAPER = ReflectionUtils
             .isClassPresent("com.destroystokyo.paper.VersionHistoryManager$VersionData");
-    private static final boolean hasFolia = ReflectionUtils
+    private static final boolean HAS_FOLIA = ReflectionUtils
             .isClassPresent("io.papermc.paper.threadedregions.RegionizedServer");
-    private static final boolean hasPurpur = ReflectionUtils
+    private static final boolean HAS_PURPUR = ReflectionUtils
             .isClassPresent("org.purpurmc.purpur.event.PlayerAFKEvent");
 
     private VersionUtils() {
         throw new UnsupportedOperationException("VersionUtils is a utility class and cannot be instantiated.");
     }
 
+    /**
+     * Determines the type of server (e.g., Folia, Purpur, Paper, or Spigot).
+     *
+     * @return the type of server as a string.
+     */
     public static String getVersionType() {
         return hasFoliaAPI() ? "Folia" :
                 (hasPurpurAPI() ? "Purpur" :
                         (hasPaperAPI() ? "Paper" : "Spigot"));
     }
 
+    /**
+     * Constructs the full version number as a string in the format "main.minor.sub".
+     *
+     * @return the version number as a string.
+     */
     public static String getVersionNumber() {
         return GAME_MAIN_VERSION + "." + GAME_VERSION + "." + GAME_SUB_VERSION;
     }
 
+    /**
+     * Constructs the full server version string, including type and version number.
+     *
+     * @return the full server version as a string.
+     */
     public static String getVersion() {
         return getVersionType() + " " + getVersionNumber();
     }
 
-    /**
-     * Safely splits the Bukkit version string into components.
-     *
-     * @return an array of version components.
-     */
     private static String[] safeSplitVersion() {
         try {
             return Bukkit.getBukkitVersion().split("-")[0].split("\\.");
@@ -153,7 +176,7 @@ public final class VersionUtils {
      * @return true if Paper API is present, false otherwise.
      */
     public static boolean hasPaperAPI() {
-        return hasPaper;
+        return HAS_PAPER;
     }
 
     /**
@@ -162,7 +185,7 @@ public final class VersionUtils {
      * @return true if Purpur API is present, false otherwise.
      */
     public static boolean hasPurpurAPI() {
-        return hasPurpur;
+        return HAS_PURPUR;
     }
 
     /**
@@ -171,6 +194,6 @@ public final class VersionUtils {
      * @return true if Folia API is present, false otherwise.
      */
     public static boolean hasFoliaAPI() {
-        return hasFolia;
+        return HAS_FOLIA;
     }
 }

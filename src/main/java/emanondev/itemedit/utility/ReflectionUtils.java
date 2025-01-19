@@ -12,9 +12,8 @@ import java.lang.reflect.Method;
  */
 public final class ReflectionUtils {
 
-    // Private constructor to prevent instantiation
     private ReflectionUtils() {
-        throw new UnsupportedOperationException("ReflectionUtils is a utility class and cannot be instantiated.");
+        throw new UnsupportedOperationException();
     }
 
     /**

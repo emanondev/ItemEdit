@@ -17,6 +17,10 @@ import java.util.function.Consumer;
  */
 public final class SchedulerUtils {
 
+    private SchedulerUtils() {
+        throw new UnsupportedOperationException();
+    }
+
     /**
      * Runs a task asynchronously.
      *
