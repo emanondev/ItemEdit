@@ -1,6 +1,6 @@
 package emanondev.itemedit.gui;
 
-import emanondev.itemedit.UtilLegacy;
+import emanondev.itemedit.utility.InventoryUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,7 +15,7 @@ public class GuiHandler implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     private static void onOpen(InventoryOpenEvent event) {
-        Inventory topInventory = UtilLegacy.getTopInventory(event);
+        Inventory topInventory = InventoryUtils.getTopInventory(event);
         if (!(topInventory.getHolder() instanceof Gui))
             return;
         if (!(event.getPlayer() instanceof Player))
@@ -25,7 +25,7 @@ public class GuiHandler implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     private static void onClose(InventoryCloseEvent event) {
-        Inventory topInventory = UtilLegacy.getTopInventory(event);
+        Inventory topInventory = InventoryUtils.getTopInventory(event);
         if (!(topInventory.getHolder() instanceof Gui))
             return;
         if (!(event.getPlayer() instanceof Player))
@@ -35,7 +35,7 @@ public class GuiHandler implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private static void onClick(InventoryClickEvent event) {
-        Inventory topInventory = UtilLegacy.getTopInventory(event);
+        Inventory topInventory = InventoryUtils.getTopInventory(event);
         if (!(topInventory.getHolder() instanceof Gui))
             return;
         event.setCancelled(true);
@@ -46,7 +46,7 @@ public class GuiHandler implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private static void onDrag(InventoryDragEvent event) {
-        Inventory topInventory = UtilLegacy.getTopInventory(event);
+        Inventory topInventory = InventoryUtils.getTopInventory(event);
         if (topInventory.getHolder() instanceof Gui) {
             event.setCancelled(true);
             ((Gui) topInventory.getHolder()).onDrag(event);

@@ -1,6 +1,6 @@
 package emanondev.itemedit.aliases;
 
-import emanondev.itemedit.Util;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect;
 import org.bukkit.block.banner.PatternType;
@@ -44,25 +44,26 @@ public class Aliases {
 
     };
     public static final AliasSet<DyeColor> COLOR = new EnumAliasSet<>("color", DyeColor.class);
-    public static final AliasSet<String> ANIMATION = Util.isVersionAfter(1,20,5)?new AliasSet<String>("animations") {
+    public static final AliasSet<String> ANIMATION = VersionUtils.isVersionAfter(1, 20, 5) ?
+            new AliasSet<String>("animations") {
 
-        private final LinkedHashSet<String> values = new LinkedHashSet<>(craftValues());
+                private final LinkedHashSet<String> values = new LinkedHashSet<>(craftValues());
 
-        @Override
-        public String getName(String type) {
-            return type.toLowerCase(Locale.ENGLISH);
-        }
+                @Override
+                public String getName(String type) {
+                    return type.toLowerCase(Locale.ENGLISH);
+                }
 
-        private List<String> craftValues() {
-            return Arrays.asList("drink", "eat", "crossbow",
-                    "none", "block", "bow", "spear", "spyglass", "toot_horn", "brush");
-        }
+                private List<String> craftValues() {
+                    return Arrays.asList("drink", "eat", "crossbow",
+                            "none", "block", "bow", "spear", "spyglass", "toot_horn", "brush");
+                }
 
-        @Override
-        public Collection<String> getValues() {
-            return values;
-        }
-    }:null;
+                @Override
+                public Collection<String> getValues() {
+                    return values;
+                }
+            } : null;
     public static final EggTypeAliases EGG_TYPE = getEggTypeAliases();
     public static final AliasSet<ItemFlag> FLAG_TYPE = new EnumAliasSet<ItemFlag>("flag_type", ItemFlag.class) {
         @Override
@@ -86,7 +87,8 @@ public class Aliases {
         }
 
     };
-    public static final AliasSet<EquipmentSlot> EQUIPMENT_SLOTS = new EnumAliasSet<>("equip_slot", EquipmentSlot.class);
+    public static final AliasSet<EquipmentSlot> EQUIPMENT_SLOTS =
+            new EnumAliasSet<>("equip_slot", EquipmentSlot.class);
     public static final AttributeAliases ATTRIBUTE = getAttributeAliases();
     public static final OperationAliases OPERATIONS = getAttributeOperationAliases();
     public static final RarityAliases RARITY = getRarityAliases();
@@ -97,8 +99,8 @@ public class Aliases {
             new EnumAliasSet<>("firework_type", FireworkEffect.Type.class);
     public static final AxolotlVariantAliases AXOLOTL_VARIANT = getAxolotlVariantAliases();
     public static final GoatHornSoundAliases GOAT_HORN_SOUND = getGoatHornSoundAliases();
-    public static final EquipmentSlotGroupAliases EQUIPMENT_SLOTGROUPS = Util.isVersionAfter(1, 21) ?
-            new EquipmentSlotGroupAliases() : null;
+    public static final EquipmentSlotGroupAliases EQUIPMENT_SLOTGROUPS =
+            VersionUtils.isVersionAfter(1, 21) ? new EquipmentSlotGroupAliases() : null;
     public static final SoundAliases SOUND = getSoundAliases();
 
 
@@ -107,7 +109,7 @@ public class Aliases {
 
     private static AliasSet<PatternType> getPatternAlias() {
         try {
-            if (Util.isVersionAfter(1, 20, 6))
+            if (VersionUtils.isVersionAfter(1, 20, 6))
                 return new BannerPatternAliasesNew();
         } catch (Throwable ignored) {
         }
@@ -115,10 +117,10 @@ public class Aliases {
     }
 
     private static TrimMaterialAliases getTrimMaterialAliases() {
-        if (Util.isVersionUpTo(1, 19, 4))
+        if (VersionUtils.isVersionUpTo(1, 19, 4))
             return null;
         try {
-            if (Util.isVersionAfter(1, 20, 2))
+            if (VersionUtils.isVersionAfter(1, 20, 2))
                 return new TrimMaterialAliasesNew();
             else
                 return new TrimMaterialAliasesOld();
@@ -129,10 +131,10 @@ public class Aliases {
     }
 
     private static TrimPatternAliases getTrimPatternAliases() {
-        if (Util.isVersionUpTo(1, 19, 4))
+        if (VersionUtils.isVersionUpTo(1, 19, 4))
             return null;
         try {
-            if (Util.isVersionAfter(1, 20, 2))
+            if (VersionUtils.isVersionAfter(1, 20, 2))
                 return new TrimPatternAliasesNew();
             else
                 return new TrimPatternAliasesOld();
@@ -197,46 +199,46 @@ public class Aliases {
     }
 
     private static EggTypeAliases getEggTypeAliases() {
-        if (Util.isVersionInRange(1, 11, 1, 12))
+        if (VersionUtils.isVersionInRange(1, 11, 1, 12))
             return new EggTypeAliases();
         return null;
     }
 
     private static TropicalFishPatternAliases getTropicalPatternAliases() {
-        if (Util.isVersionUpTo(1, 12))
+        if (VersionUtils.isVersionUpTo(1, 12))
             return null;
         return new TropicalFishPatternAliases();
     }
 
     private static GenAliases getGenAliases() {
-        if (Util.isVersionUpTo(1, 9))
+        if (VersionUtils.isVersionUpTo(1, 9))
             return null;
         return new GenAliases();
     }
 
     @NotNull
     private static EnchAliases getEnchAliases() {
-        if (Util.isVersionUpTo(1, 12))
+        if (VersionUtils.isVersionUpTo(1, 12))
             return new EnchAliasesOld();
         return new EnchAliases();
     }
 
     private static AttributeAliases getAttributeAliases() {
-        if (Util.isVersionUpTo(1, 11))
+        if (VersionUtils.isVersionUpTo(1, 11))
             return null;
-        if (Util.isVersionUpTo(1, 21, 2))
+        if (VersionUtils.isVersionUpTo(1, 21, 2))
             return new AttributeAliasesOld();
         return new AttributeAliasesNew();
     }
 
     private static OperationAliases getAttributeOperationAliases() {
-        if (Util.isVersionUpTo(1, 11))
+        if (VersionUtils.isVersionUpTo(1, 11))
             return null;
         return new OperationAliases();
     }
 
     private static RarityAliases getRarityAliases() {
-        if (Util.isVersionUpTo(1, 20, 4))
+        if (VersionUtils.isVersionUpTo(1, 20, 4))
             return null;
         try {
             return new RarityAliases();
@@ -247,14 +249,14 @@ public class Aliases {
     }
 
     private static AxolotlVariantAliases getAxolotlVariantAliases() {
-        if (Util.isVersionUpTo(1, 17))
+        if (VersionUtils.isVersionUpTo(1, 17))
             return null;
         return new AxolotlVariantAliases();
     }
 
 
     private static GoatHornSoundAliases getGoatHornSoundAliases() {
-        if (Util.isVersionUpTo(1, 19, 2))
+        if (VersionUtils.isVersionUpTo(1, 19, 2))
             return null;
         try {
             return new GoatHornSoundAliases();
@@ -264,7 +266,7 @@ public class Aliases {
     }
 
     private static SoundAliases getSoundAliases() {
-        if (Util.isVersionAfter(1, 20, 5))
+        if (VersionUtils.isVersionAfter(1, 20, 5))
             return new SoundAliases();
         return null;
     }

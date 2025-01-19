@@ -2,12 +2,11 @@ package emanondev.itemedit.command.serveritem;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsInventory;
-import emanondev.itemedit.UtilsInventory.ExcessManage;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.InventoryUtils;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -81,7 +80,7 @@ public class Sell extends SubCmd {
                 Util.logToFile("[transaction failed] no errors, is your Economy provider stable?");
                 return;
             }
-            int given = UtilsInventory.giveAmount(target, item, amount, ExcessManage.CANCEL);
+            int given = InventoryUtils.giveAmount(target, item, amount, InventoryUtils.ExcessMode.CANCEL);
             // received items?
             if (given == 0) {
                 // not enough space, aborting

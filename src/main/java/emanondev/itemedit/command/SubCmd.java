@@ -1,7 +1,11 @@
 package emanondev.itemedit.command;
 
-import emanondev.itemedit.*;
+import emanondev.itemedit.APlugin;
+import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.Util;
+import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.aliases.IAliasSet;
+import emanondev.itemedit.utility.InventoryUtils;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -217,7 +221,7 @@ public abstract class SubCmd {
     abstract public List<String> onComplete(CommandSender sender, String[] args);
 
     protected void updateView(Player player) {
-        UtilLegacy.updateView(player);
+        InventoryUtils.updateView(player);
     }
 
 }

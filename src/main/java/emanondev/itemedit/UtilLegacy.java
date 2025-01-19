@@ -1,7 +1,8 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.compability.V1_20_6;
-import org.bukkit.Bukkit;
+import emanondev.itemedit.utility.SchedulerUtils;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -33,7 +34,9 @@ public class UtilLegacy {
      *
      * @param event The generic InventoryEvent with an InventoryView to inspect.
      * @return The top Inventory object from the event's InventoryView.
+     * @see emanondev.itemedit.utility.InventoryUtils#getTopInventory(InventoryEvent) InventoryUtils.getTopInventory(InventoryEvent)
      */
+    @Deprecated
     public static Inventory getTopInventory(@NotNull InventoryEvent event) {
         if (Util.isVersionAfter(1, 21))
             return event.getView().getTopInventory();
@@ -48,7 +51,9 @@ public class UtilLegacy {
      *
      * @param player The player with an InventoryView to inspect.
      * @return The top Inventory object from the player's InventoryView.
+     * @see emanondev.itemedit.utility.InventoryUtils#getTopInventory(Player) InventoryUtils.getTopInventory(Player)
      */
+    @Deprecated
     public static Inventory getTopInventory(@NotNull Player player) {
         if (Util.isVersionAfter(1, 21))
             return player.getOpenInventory().getTopInventory();
@@ -78,7 +83,9 @@ public class UtilLegacy {
      *
      * @param event The generic InventoryEvent with an InventoryView to inspect.
      * @return The bottom Inventory object from the event's InventoryView.
+     * @see emanondev.itemedit.utility.InventoryUtils#getBottomInventory(InventoryEvent) InventoryUtils.getBottomInventory(InventoryEvent)
      */
+    @Deprecated
     public static Inventory getBottomInventory(@NotNull InventoryEvent event) {
         if (Util.isVersionAfter(1, 21))
             return event.getView().getBottomInventory();
@@ -107,7 +114,9 @@ public class UtilLegacy {
      * In API versions 1.19.4 and later, there is implicit consistency for inventory and changes.
      *
      * @param player The player which inventory view should be updated
+     * @see emanondev.itemedit.utility.InventoryUtils#updateView(Player) InventoryUtils.updateView(Player)
      */
+    @Deprecated
     public static void updateView(@NotNull Player player) {
         if (Util.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
             player.updateInventory();
@@ -121,10 +130,12 @@ public class UtilLegacy {
      * In API versions 1.19.4 and later, there is implicit consistency for inventory and changes.
      *
      * @param player The player which inventory view should be updated
+     * @see emanondev.itemedit.utility.InventoryUtils#updateViewDelayed(Player) InventoryUtils.updateViewDelayed(Player)
      */
+    @Deprecated
     public static void updateViewDelayed(@NotNull Player player) {
         if (Util.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
-            Bukkit.getScheduler().runTaskLater(ItemEdit.get(), player::updateInventory, 1L);
+            SchedulerUtils.runLater(ItemEdit.get(), 1L, player::updateInventory);
         }
     }
 
@@ -144,7 +155,7 @@ public class UtilLegacy {
                 -1 : (Integer.parseInt(value));
         if (duration >= 0)
             duration *= 20; //to ticks
-        else if (!Util.isVersionAfter(1, 19, 4))
+        else if (!VersionUtils.isVersionAfter(1, 19, 4))
             duration = Integer.MAX_VALUE;
         else
             duration = -1;
@@ -176,7 +187,7 @@ public class UtilLegacy {
     public static boolean isUnbreakable(@Nullable ItemMeta meta) {
         if (meta == null)
             return false;
-        if (Util.isVersionAfter(1, 11))
+        if (VersionUtils.isVersionAfter(1, 11))
             return meta.isUnbreakable();
         return meta.serialize().containsKey("Unbreakable");
     }
@@ -208,7 +219,7 @@ public class UtilLegacy {
     public static ItemMeta setUnbreakable(@Nullable ItemMeta meta, boolean value) {
         if (meta == null)
             return null;
-        if (Util.isVersionAfter(1, 11)) {
+        if (VersionUtils.isVersionAfter(1, 11)) {
             meta.setUnbreakable(value);
             return meta;
         }
@@ -231,7 +242,7 @@ public class UtilLegacy {
 
     public static AttributeModifier createAttributeModifier(org.bukkit.attribute.Attribute attr, double amount, AttributeModifier.Operation op, @Nullable String slot) {
         try {
-            if (Util.isVersionAfter(1, 20, 6))
+            if (VersionUtils.isVersionAfter(1, 20, 6))
                 return V1_20_6.createAttribute(attr, amount, op, slot);
         } catch (Throwable e) {
             e.printStackTrace();
@@ -242,7 +253,7 @@ public class UtilLegacy {
 
     public static PatternType[] getPatternTypes() {
         try {
-            if (Util.isVersionAfter(1, 20, 6))
+            if (VersionUtils.isVersionAfter(1, 20, 6))
                 return V1_20_6.getPatternTypes();
         } catch (Throwable e) {
         }
@@ -262,7 +273,8 @@ public class UtilLegacy {
         PatternType[] val = getPatternTypes();
         ArrayList<PatternType> list = new ArrayList<>(Arrays.asList(val));
         list.remove(PatternType.BASE);
-        if (Util.isVersionAfter(1, 20, 6) && !Util.isVersionAfter(1, 21)) { //those are not craftable items on 1.20.6
+        if (VersionUtils.isVersionAfter(1, 20, 6) &&
+                !VersionUtils.isVersionAfter(1, 21)) { //those are not craftable items on 1.20.6
             list.remove(PatternType.FLOW);
             list.remove(PatternType.GUSTER);
         }

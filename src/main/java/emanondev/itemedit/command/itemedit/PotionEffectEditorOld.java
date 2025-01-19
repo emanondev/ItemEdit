@@ -5,6 +5,7 @@ import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -136,7 +137,7 @@ public class PotionEffectEditorOld extends SubCmd {
                 ambient = Aliases.BOOLEAN.convertAlias(args[6]);
             }
             boolean icon = true;
-            if (Util.isVersionAfter(1, 13))
+            if (VersionUtils.isVersionAfter(1, 13))
                 if (args.length == 8) {
                     icon = Aliases.BOOLEAN.convertAlias(args[7]);
                 }
@@ -144,7 +145,7 @@ public class PotionEffectEditorOld extends SubCmd {
                 level = Math.min(level, 1);
 
 
-            if (Util.isVersionAfter(1, 13))
+            if (VersionUtils.isVersionAfter(1, 13))
                 meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles, icon), true);
             else
                 meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles), true);

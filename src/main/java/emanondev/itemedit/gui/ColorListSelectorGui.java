@@ -2,8 +2,9 @@ package emanondev.itemedit.gui;
 
 import emanondev.itemedit.APlugin;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.SchedulerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -59,11 +60,11 @@ public class ColorListSelectorGui implements Gui {
 
     @Override
     public void onClose(InventoryCloseEvent event) {
-        Bukkit.getScheduler().runTaskLater(getPlugin(),
+        SchedulerUtils.runLater(getPlugin(), 1L,
                 () -> {
-                    if (!UtilLegacy.getTopInventory(getTargetPlayer()).equals(parent.getInventory()))
+                    if (!InventoryUtils.getTopInventory(getTargetPlayer()).equals(parent.getInventory()))
                         getTargetPlayer().openInventory(parent.getInventory());
-                }, 1L);
+                });
     }
 
     @Override

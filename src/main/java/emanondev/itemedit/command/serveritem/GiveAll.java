@@ -2,12 +2,11 @@ package emanondev.itemedit.command.serveritem;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsInventory;
-import emanondev.itemedit.UtilsInventory.ExcessManage;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.InventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -57,8 +56,9 @@ public class GiveAll extends SubCmd {
                             "%player_uuid%", target.getUniqueId().toString()));
                     item.setItemMeta(meta);
                 }
-                int given = UtilsInventory.giveAmount(target, item, amount, ItemEdit.get().getConfig()
-                        .loadBoolean("serveritem.give-drops-excess", true) ? ExcessManage.DROP_EXCESS : ExcessManage.DELETE_EXCESS);
+                int given = InventoryUtils.giveAmount(target, item, amount, ItemEdit.get().getConfig()
+                        .loadBoolean("serveritem.give-drops-excess", true) ?
+                        InventoryUtils.ExcessMode.DROP_EXCESS : InventoryUtils.ExcessMode.DELETE_EXCESS);
                 total += given;
                 if (given > 0 && !silent)
                     sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),

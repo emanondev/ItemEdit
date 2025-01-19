@@ -2,13 +2,11 @@ package emanondev.itemedit.command.serveritem;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsInventory;
-import emanondev.itemedit.UtilsInventory.ExcessManage;
-import emanondev.itemedit.UtilsInventory.LackManage;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.InventoryUtils;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -66,7 +64,7 @@ public class BuyMax extends SubCmd {
                         "%player_uuid%", target.getUniqueId().toString()));
                 item.setItemMeta(meta);
             }
-            int removed = UtilsInventory.removeAmount(target, item, amount, LackManage.REMOVE_MAX_POSSIBLE);
+            int removed = InventoryUtils.removeAmount(target, item, amount, InventoryUtils.LackMode.REMOVE_MAX_POSSIBLE);
 
             // have enough items?
             if (removed == 0) {
@@ -84,7 +82,7 @@ public class BuyMax extends SubCmd {
             }
             if (!economy.depositPlayer(target, price).transactionSuccess()) {
                 // error
-                UtilsInventory.giveAmount(target, item, amount, ExcessManage.DROP_EXCESS);
+                InventoryUtils.giveAmount(target, item, amount, InventoryUtils.ExcessMode.DROP_EXCESS);
                 if (!silent)
                     Util.sendMessage(target,
                             "&cAn error occurred, try again, if this message shows again try to contact the server administrators");

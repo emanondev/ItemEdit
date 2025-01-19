@@ -1,9 +1,9 @@
 package emanondev.itemedit.command.itemedit;
 
 import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
@@ -38,8 +38,8 @@ public class HideAll extends SubCmd {
     }
 
     private void handleFlagChange(ItemStack item, ItemMeta meta) {
-        if (!Util.hasPaperAPI() ||
-                !Util.isVersionAfter(1, 20, 5) ||
+        if (!VersionUtils.hasPaperAPI() ||
+                !VersionUtils.isVersionAfter(1, 20, 5) ||
                 !ItemEdit.get().getConfig().loadBoolean("itemedit.paper_hide_fix", true)) {
             return;
         }

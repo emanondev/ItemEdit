@@ -13,6 +13,7 @@ import emanondev.itemedit.storage.mongo.MongoServerStorage;
 import emanondev.itemedit.storage.mongo.MongoStorage;
 import emanondev.itemedit.storage.yaml.YmlPlayerStorage;
 import emanondev.itemedit.storage.yaml.YmlServerStorage;
+import emanondev.itemedit.utility.InventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -164,7 +165,7 @@ public class ItemEdit extends APlugin {
     @Override
     public void disable() {
         for (Player p : Bukkit.getOnlinePlayers())
-            if (UtilLegacy.getTopInventory(p).getHolder() instanceof Gui)
+            if (InventoryUtils.getTopInventory(p).getHolder() instanceof Gui)
                 p.closeInventory();
 
         if (this.mongoStorage != null) this.mongoStorage.close();

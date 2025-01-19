@@ -2,6 +2,7 @@ package emanondev.itemedit;
 
 import emanondev.itemedit.command.AbstractCommand;
 import emanondev.itemedit.compability.Metrics;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -62,9 +63,9 @@ public abstract class APlugin extends JavaPlugin {
      */
     //TODO add minimessage?
     public void log(@NotNull String log) {
-        Bukkit.getConsoleSender().sendMessage(
-                ChatColor.translateAlternateColorCodes('&', ChatColor.DARK_BLUE + "["
-                        + ChatColor.WHITE + this.getName() + ChatColor.DARK_BLUE + "] " + ChatColor.WHITE + log));
+        Bukkit.getConsoleSender().sendMessage(UtilsString.fix(ChatColor.DARK_BLUE + "["
+                        + ChatColor.WHITE + this.getName() + ChatColor.DARK_BLUE + "] " + ChatColor.WHITE + log,
+                null, true));
     }
 
     public abstract @Nullable Integer getProjectId();
@@ -124,7 +125,7 @@ public abstract class APlugin extends JavaPlugin {
         String locale;
         if (!(sender instanceof Player))
             locale = this.defaultLanguage;
-        else if (Util.isVersionAfter(1, 12) && this.useMultiLanguage)
+        else if (VersionUtils.isVersionAfter(1, 12) && this.useMultiLanguage)
             locale = ((Player) sender).getLocale().equals("zh_tw") ? //apparently zh_tw and zh_cn are quite different, zh_cn and zh_hk will both fall under zh.yml
                     ((Player) sender).getLocale() : ((Player) sender).getLocale().split("_")[0];
         else
@@ -226,7 +227,7 @@ public abstract class APlugin extends JavaPlugin {
     protected void registerLanguagesMetrics(Metrics metrics, Predicate<Player> isAdmin, Predicate<Player> isUser) {
         if (metrics == null)
             return;
-        if (!Util.isVersionAfter(1, 12))
+        if (!VersionUtils.isVersionAfter(1, 12))
             return;
         metrics.addCustomChart(new Metrics.DrilldownPie("admins_languages", () -> {
             Map<String, Map<String, Integer>> mainMap = new HashMap<>();

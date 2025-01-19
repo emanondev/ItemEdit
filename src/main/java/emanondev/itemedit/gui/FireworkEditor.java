@@ -85,7 +85,6 @@ public class FireworkEditor implements Gui {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onClick(InventoryClickEvent event) {
         if (!event.getWhoClicked().equals(target))
@@ -272,7 +271,7 @@ public class FireworkEditor implements Gui {
         public ItemStack getColorsItem() {
             if (!active)
                 return null;
-            ItemStack item = Util.getDyeItemFromColor(colors.size() > 0 ? DyeColor.LIGHT_BLUE : DyeColor.RED);
+            ItemStack item = Util.getDyeItemFromColor(!colors.isEmpty() ? DyeColor.LIGHT_BLUE : DyeColor.RED);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.values());
             List<String> colorNames = new ArrayList<>();

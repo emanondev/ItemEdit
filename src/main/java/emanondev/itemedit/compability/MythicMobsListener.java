@@ -1,7 +1,8 @@
 package emanondev.itemedit.compability;
 
 import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.UtilsInventory;
+import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.SchedulerUtils;
 import io.lumine.mythic.api.adapters.AbstractEntity;
 import io.lumine.mythic.api.adapters.AbstractItemStack;
 import io.lumine.mythic.api.adapters.AbstractLocation;
@@ -87,7 +88,8 @@ class ServerItemDrop implements IItemDrop, ILocationDrop {
         if (item == null)
             return;
         Location l = BukkitAdapter.adapt(abstractLocation);
-        l.getWorld().dropItem(l, item);
+        SchedulerUtils.run(ItemEdit.get(), l, () ->
+                l.getWorld().dropItem(l, item));
     }
 
     @Override
@@ -277,6 +279,6 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
             return;
         }
         item.setAmount((int) (amount + Math.random() * diff));
-        UtilsInventory.giveAmount(player, item, amount, UtilsInventory.ExcessManage.DROP_EXCESS);
+        InventoryUtils.giveAmount(player, item, amount, InventoryUtils.ExcessMode.DROP_EXCESS);
     }
 }

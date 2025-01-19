@@ -5,6 +5,7 @@ import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -79,7 +80,7 @@ public class Attribute extends SubCmd {
             String equip = null;
 
             if (args.length > 5) {
-                if (Util.isVersionAfter(1, 21)) {
+                if (VersionUtils.isVersionAfter(1, 21)) {
                     equip = Aliases.EQUIPMENT_SLOTGROUPS.convertAlias(args[5]).toString();
                     if (equip == null) {
                         onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTGROUPS);
@@ -149,7 +150,7 @@ public class Attribute extends SubCmd {
             if (args.length == 5)
                 return Util.complete(args[4], Aliases.OPERATIONS);
             if (args.length == 6) {
-                if (Util.isVersionAfter(1, 21))
+                if (VersionUtils.isVersionAfter(1, 21))
                     return Util.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
                 return Util.complete(args[5], Aliases.EQUIPMENT_SLOTS);
             }

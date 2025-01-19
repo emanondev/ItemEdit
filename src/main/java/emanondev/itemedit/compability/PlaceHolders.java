@@ -1,7 +1,7 @@
 package emanondev.itemedit.compability;
 
 import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
+import emanondev.itemedit.utility.VersionUtils;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -205,7 +205,7 @@ public class PlaceHolders extends PlaceholderExpansion {
                 for (ItemStack copy : player.getInventory().getStorageContents())
                     if (item.isSimilar(copy))
                         amount += copy.getAmount();
-                if (Util.isVersionAfter(1, 9)) {
+                if (VersionUtils.isVersionAfter(1, 9)) {
                     if (item.isSimilar(player.getInventory().getItemInOffHand()))
                         amount += player.getInventory().getItemInOffHand().getAmount();
                 }
@@ -215,7 +215,7 @@ public class PlaceHolders extends PlaceholderExpansion {
                 for (ItemStack copy : player.getInventory().getArmorContents())
                     if (item.isSimilar(copy))
                         amount = amount + copy.getAmount();
-                if (Util.isVersionAfter(1, 9)) {
+                if (VersionUtils.isVersionAfter(1, 9)) {
                     if (item.isSimilar(player.getInventory().getItemInOffHand()))
                         amount += player.getInventory().getItemInOffHand().getAmount();
                 }
@@ -229,7 +229,7 @@ public class PlaceHolders extends PlaceholderExpansion {
                 for (ItemStack copy : player.getInventory().getArmorContents())
                     if (item.isSimilar(copy))
                         amount += copy.getAmount();
-                if (Util.isVersionAfter(1, 9)) {
+                if (VersionUtils.isVersionAfter(1, 9)) {
                     if (item.isSimilar(player.getInventory().getItemInOffHand()))
                         amount += player.getInventory().getItemInOffHand().getAmount();
                 }

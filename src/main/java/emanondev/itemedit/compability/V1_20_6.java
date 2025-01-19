@@ -1,6 +1,6 @@
 package emanondev.itemedit.compability;
 
-import emanondev.itemedit.Util;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Keyed;
 import org.bukkit.Registry;
 import org.bukkit.attribute.AttributeModifier;
@@ -25,7 +25,7 @@ public class V1_20_6 {
             if (group == null)
                 group = EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)).getGroup();
         }
-        if (Util.isVersionAfter(1, 21, 2))
+        if (VersionUtils.isVersionAfter(1, 21, 2))
             return new AttributeModifier(UUID.randomUUID(), attr.getKey().toString(), amount, op, group);
         return new AttributeModifier(UUID.randomUUID(), ((Keyed) attr).getKey().toString(), amount, op, group);
     }

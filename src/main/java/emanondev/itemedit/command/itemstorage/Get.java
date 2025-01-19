@@ -2,10 +2,9 @@ package emanondev.itemedit.command.itemstorage;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsInventory;
-import emanondev.itemedit.UtilsInventory.ExcessManage;
 import emanondev.itemedit.command.ItemStorageCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.InventoryUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -30,7 +29,7 @@ public class Get extends SubCmd {
             if (amount < 1)
                 throw new IllegalArgumentException("Wrong amount number");
             ItemStack item = ItemEdit.get().getPlayerStorage().getItem(p, args[1]);
-            int given = UtilsInventory.giveAmount(p, item, amount, ExcessManage.DELETE_EXCESS);
+            int given = InventoryUtils.giveAmount(p, item, amount, InventoryUtils.ExcessMode.DELETE_EXCESS);
             if (given == 0)
                 sendLanguageString("no-inventory-space", null, p);
             else

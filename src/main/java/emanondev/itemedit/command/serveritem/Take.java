@@ -2,12 +2,11 @@ package emanondev.itemedit.command.serveritem;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsInventory;
-import emanondev.itemedit.UtilsInventory.LackManage;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.InventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -45,7 +44,7 @@ public class Take extends SubCmd {
                 meta.setLore(UtilsString.fix(meta.getLore(), target, true, "%player_name%", target.getName(), "%player_uuid%", target.getUniqueId().toString()));
                 item.setItemMeta(meta);
             }
-            amount = UtilsInventory.removeAmount(target, item, amount, LackManage.REMOVE_MAX_POSSIBLE);
+            amount = InventoryUtils.removeAmount(target, item, amount, InventoryUtils.LackMode.REMOVE_MAX_POSSIBLE);
             if (!silent)
                 sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",

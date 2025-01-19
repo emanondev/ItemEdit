@@ -398,6 +398,7 @@ public class Util {
      * Inclusive
      * isVersionUpTo(1,9) on 1.9.0 is true
      */
+    @Deprecated
     public static boolean isVersionUpTo(int mainVersion, int version) {
         return isVersionUpTo(mainVersion, version, 99);
     }
@@ -406,6 +407,7 @@ public class Util {
      * Inclusive
      * isVersionUpTo(1,9,4) on 1.9.4 is true
      */
+    @Deprecated
     public static boolean isVersionUpTo(int mainVersion, int version, int subVersion) {
         if (GAME_MAIN_VERSION > mainVersion)
             return false;
@@ -422,6 +424,7 @@ public class Util {
      * Inclusive
      * isVersionAfter(1,9) on 1.9.0 is true
      */
+    @Deprecated
     public static boolean isVersionAfter(int mainVersion, int version) {
         return isVersionAfter(mainVersion, version, 0);
     }
@@ -430,6 +433,7 @@ public class Util {
      * Inclusive
      * isVersionAfter(1,9,4) on 1.9.4 is true
      */
+    @Deprecated
     public static boolean isVersionAfter(int mainVersion, int version, int subVersion) {
         if (GAME_MAIN_VERSION < mainVersion)
             return false;
@@ -445,6 +449,7 @@ public class Util {
     /**
      * Inclusive
      */
+    @Deprecated
     public static boolean isVersionInRange(int mainVersionMin, int versionMin,
                                            int mainVersionMax, int versionMax) {
         return isVersionInRange(mainVersionMin, versionMin, 0,
@@ -454,6 +459,7 @@ public class Util {
     /**
      * Inclusive
      */
+    @Deprecated
     public static boolean isVersionInRange(int mainVersionMin, int versionMin, int subVersionMin,
                                            int mainVersionMax, int versionMax, int subVersionMax) {
         return isVersionAfter(mainVersionMin, versionMin, subVersionMin)
@@ -465,7 +471,7 @@ public class Util {
             return true;
 
         List<String> values = ItemEdit.get().getConfig().getStringList("blocked.type-blocked-lore");
-        if (values == null || values.isEmpty())
+        if (values.isEmpty())
             return true;
         String id = type.name();
         for (String name : values)
@@ -486,6 +492,7 @@ public class Util {
         }
     }
 
+    @Deprecated
     public static boolean hasPaperAPI() {
         return hasPaper;
     }
@@ -508,10 +515,12 @@ public class Util {
         }
     }
 
+    @Deprecated
     public static boolean hasPurpurAPI() {
         return hasPurpur;
     }
 
+    @Deprecated
     public static boolean hasFoliaAPI() {
         return hasFolia;
     }

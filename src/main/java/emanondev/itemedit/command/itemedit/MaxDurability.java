@@ -18,7 +18,6 @@ public class MaxDurability extends SubCmd {
         super("maxdurability", cmd, true, true);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;

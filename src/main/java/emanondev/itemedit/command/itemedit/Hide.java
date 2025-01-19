@@ -7,6 +7,7 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.CommandSender;
@@ -57,8 +58,8 @@ public class Hide extends SubCmd {
     }
 
     private void handleFlagChange(boolean put, ItemFlag flag, ItemStack item, ItemMeta meta) {
-        if (!Util.hasPaperAPI() ||
-                !Util.isVersionAfter(1, 20, 5) ||
+        if (!VersionUtils.hasPaperAPI() ||
+                !VersionUtils.isVersionAfter(1, 20, 5) ||
                 !ItemEdit.get().getConfig().loadBoolean("itemedit.paper_hide_fix", true)) {
             return;
         }

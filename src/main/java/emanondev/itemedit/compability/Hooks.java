@@ -1,6 +1,6 @@
 package emanondev.itemedit.compability;
 
-import emanondev.itemedit.Util;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Bukkit;
 
 public class Hooks {
@@ -44,7 +44,7 @@ public class Hooks {
 
     private static MiniMessageUtil initMiniMessage() {
         try {
-            if (Util.hasPaperAPI() && Util.isVersionAfter(1, 16, 5)) {
+            if (VersionUtils.hasPaperAPI() && VersionUtils.isVersionAfter(1, 16, 5)) {
                 MiniMessagePaper inst = MiniMessagePaper.getInstance();
                 if (!inst.fromMiniToText("<red>this is a test</red>").equals("<red>this is a test</red>"))
                     return inst;
