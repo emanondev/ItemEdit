@@ -1,6 +1,7 @@
 package emanondev.itemedit.compability;
 
 import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.md_5.bungee.api.ChatColor;
@@ -160,12 +161,7 @@ public class PlaceHolders extends PlaceholderExpansion {
             case "main_hand":
             case "mainhand":
             case "hand": {
-                ItemStack copy;
-                try {
-                    copy = player.getEquipment().getItemInMainHand();
-                } catch (Throwable t) {
-                    copy = player.getEquipment().getItemInHand();
-                }
+                ItemStack copy = ItemUtils.getHandItem(player);
                 if (item.isSimilar(copy))
                     amount = amount + copy.getAmount();
                 break;

@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.Collections;
@@ -49,13 +50,14 @@ public class ColorOld extends SubCmd {
             }
             return;
         }
-        if (item.getItemMeta() instanceof FireworkEffectMeta) {
+        ItemMeta rawMeta = ItemUtils.getMeta(item);
+        if (rawMeta instanceof FireworkEffectMeta) {
             if (!sender.hasPermission(starsPerm)) {
                 this.getCommand().sendPermissionLackMessage(starsPerm, sender);
                 return;
             }
 
-            FireworkEffectMeta starMeta = (FireworkEffectMeta) item.getItemMeta();
+            FireworkEffectMeta starMeta = (FireworkEffectMeta) rawMeta;
             try {
                 if (args.length != 4)
                     throw new IllegalArgumentException("Wrong param number");

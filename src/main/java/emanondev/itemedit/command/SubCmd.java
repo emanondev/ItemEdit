@@ -6,6 +6,7 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.aliases.IAliasSet;
 import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.ItemUtils;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -63,9 +64,8 @@ public abstract class SubCmd {
         return this.checkNonNullItem;
     }
 
-    @SuppressWarnings("deprecation")
     protected ItemStack getItemInHand(Player p) {
-        return p.getInventory().getItemInHand();
+        return ItemUtils.getHandItem(p);
     }
 
     private void load() {

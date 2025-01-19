@@ -1,6 +1,7 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.compability.V1_20_6;
+import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.SchedulerUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.attribute.AttributeModifier;
@@ -173,7 +174,7 @@ public class UtilLegacy {
      * @see #isUnbreakable(ItemMeta)
      */
     public static boolean isUnbreakable(@NotNull ItemStack item) {
-        return isUnbreakable(item.getItemMeta());
+        return isUnbreakable(ItemUtils.getMeta(item));
     }
 
     /**
@@ -202,7 +203,7 @@ public class UtilLegacy {
      * @see #setUnbreakable(ItemMeta, boolean)
      */
     public static void setUnbreakable(@NotNull ItemStack item, boolean value) {
-        ItemMeta meta = setUnbreakable(item.getItemMeta(), value);
+        ItemMeta meta = setUnbreakable(ItemUtils.getMeta(item), value);
         item.setItemMeta(meta);
     }
 

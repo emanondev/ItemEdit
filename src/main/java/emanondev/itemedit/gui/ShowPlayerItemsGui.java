@@ -6,6 +6,7 @@ import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.command.ItemStorageCommand;
 import emanondev.itemedit.storage.PlayerStorage;
 import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -79,7 +80,7 @@ public class ShowPlayerItemsGui implements PagedGui {
                 this.inventory.setItem(i, item);
             } else {
                 ItemStack display = item.clone();
-                ItemMeta meta = display.getItemMeta();
+                ItemMeta meta = ItemUtils.getMeta(display);
                 meta.addItemFlags(ItemFlag.values());
                 meta.setDisplayName(UtilsString.fix("&9ID: &e" + list.get(slot), null, true));
                 display.setItemMeta(meta);

@@ -4,6 +4,7 @@ import emanondev.itemedit.APlugin;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -130,9 +131,8 @@ public abstract class AbstractCommand implements TabExecutor {
             return false;
         }
         if (sub.isPlayerOnly() && sub.checkNonNullItem()) {
-            @SuppressWarnings("deprecation")
-            ItemStack item = ((Player) sender).getInventory().getItemInHand();
-            if (Util.isAirOrNull(item)) {
+            ItemStack item = ItemUtils.getHandItem((Player) sender);
+            if (ItemUtils.isAirOrNull(item)) {
                 sendNoItemInHand(sender);
                 return false;
             }

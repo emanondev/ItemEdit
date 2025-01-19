@@ -2,6 +2,7 @@ package emanondev.itemedit.gui;
 
 import emanondev.itemedit.APlugin;
 import emanondev.itemedit.YMLConfig;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -131,7 +132,7 @@ public interface Gui extends InventoryHolder {
     default @NotNull ItemStack getGuiItem(@NotNull String path, @NotNull Material defMaterial, int defDurability) {
         YMLConfig config = getPlugin().getConfig("gui.yml");
         ItemStack item = new ItemStack(config.loadMaterial(path + ".material", defMaterial));
-        ItemMeta meta = item.getItemMeta();
+        ItemMeta meta = ItemUtils.getMeta(item);
         meta.addItemFlags(ItemFlag.values());
         if (config.getBoolean(path + ".glow", false)) {
             meta.addEnchant(Enchantment.LURE, 1, true);

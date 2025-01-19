@@ -1,6 +1,7 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.compability.Hooks;
+import emanondev.itemedit.utility.ItemUtils;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -72,7 +73,7 @@ public class UtilsString {
         lore = fix(lore, p, color, holders);
 
         // apply title and lore to item
-        ItemMeta meta = item.getItemMeta();
+        ItemMeta meta = ItemUtils.getMeta(item);
         meta.setDisplayName(title);
         meta.setLore(lore);
         item.setItemMeta(meta);

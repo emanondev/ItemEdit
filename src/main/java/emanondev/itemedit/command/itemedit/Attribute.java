@@ -125,7 +125,7 @@ public class Attribute extends SubCmd {
                 return;
             }
 
-            ItemMeta itemMeta = item.getItemMeta();
+            ItemMeta itemMeta = ItemUtils.getMeta(item);
             //TODO here
 
 
