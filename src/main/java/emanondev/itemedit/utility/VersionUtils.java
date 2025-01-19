@@ -12,7 +12,6 @@ public final class VersionUtils {
     public static final int GAME_MAIN_VERSION = Integer.parseInt(VERSION_PARTS[0]);
     public static final int GAME_VERSION = Integer.parseInt(VERSION_PARTS[1]);
     public static final int GAME_SUB_VERSION = VERSION_PARTS.length < 3 ? 0 : Integer.parseInt(VERSION_PARTS[2]);
-
     private static final boolean hasPaper = ReflectionUtils
             .isClassPresent("com.destroystokyo.paper.VersionHistoryManager$VersionData");
     private static final boolean hasFolia = ReflectionUtils
@@ -22,6 +21,20 @@ public final class VersionUtils {
 
     private VersionUtils() {
         throw new UnsupportedOperationException("VersionUtils is a utility class and cannot be instantiated.");
+    }
+
+    public static String getVersionType() {
+        return hasFoliaAPI() ? "Folia" :
+                (hasPurpurAPI() ? "Purpur" :
+                        (hasPaperAPI() ? "Paper" : "Spigot"));
+    }
+
+    public static String getVersionNumber() {
+        return GAME_MAIN_VERSION + "." + GAME_VERSION + "." + GAME_SUB_VERSION;
+    }
+
+    public static String getVersion() {
+        return getVersionType() + " " + getVersionNumber();
     }
 
     /**

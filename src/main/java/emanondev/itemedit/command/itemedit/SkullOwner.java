@@ -3,10 +3,14 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.VersionUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.Collections;
@@ -23,21 +27,22 @@ public class SkullOwner extends SubCmd {
     public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        if (!(item.getItemMeta() instanceof SkullMeta)) {
+        ItemMeta rawMeta = ItemUtils.getMeta(item);
+        if (!(rawMeta instanceof SkullMeta)) {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
-        if (Util.isVersionUpTo(1, 12) && item.getDurability() != 3) {
+        if (VersionUtils.isVersionUpTo(1, 12) && item.getDurability() != 3) {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
 
-        SkullMeta itemMeta = (SkullMeta) item.getItemMeta();
-        itemMeta.setOwner(null);
+        SkullMeta meta = (SkullMeta) rawMeta;
+        meta.setOwner(null);
 
         if (args.length == 1) {
 
-            item.setItemMeta(itemMeta);
+            item.setItemMeta(meta);
             updateView(p);
             return;
         }
@@ -46,8 +51,8 @@ public class SkullOwner extends SubCmd {
             for (int i = 2; i < args.length; i++)
                 name.append(" ").append(args[i]);
             name = new StringBuilder(ChatColor.translateAlternateColorCodes('&', name.toString()));
-            itemMeta.setOwner(name.toString());
-            item.setItemMeta(itemMeta);
+            meta.setOwner(name.toString());
+            item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
@@ -58,7 +63,7 @@ public class SkullOwner extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.completePlayers(args[1]);
+            return CompleteUtility.completePlayers(args[1]);
         return Collections.emptyList();
     }
 

@@ -1,8 +1,9 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -28,7 +29,7 @@ public class CustomModelData extends SubCmd {
             int amount = Integer.parseInt(args[1]);
             if (amount < 0)
                 throw new IllegalArgumentException("Wrong model value");
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             meta.setCustomModelData(amount);
             item.setItemMeta(meta);
             updateView(p);
@@ -40,7 +41,7 @@ public class CustomModelData extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+            return CompleteUtility.complete(args[1], Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
         return Collections.emptyList();
     }
 

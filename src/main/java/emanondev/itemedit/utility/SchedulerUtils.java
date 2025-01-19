@@ -15,7 +15,7 @@ import java.util.function.Consumer;
  * Utility class for scheduling tasks in a Bukkit/Spigot/Folia environment.
  * Provides compatibility with Folia API if available, falling back to standard Bukkit scheduling otherwise.
  */
-public class SchedulerUtils {
+public final class SchedulerUtils {
 
     /**
      * Runs a task asynchronously.

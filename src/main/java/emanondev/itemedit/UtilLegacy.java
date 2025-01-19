@@ -38,7 +38,7 @@ public class UtilLegacy {
      */
     @Deprecated
     public static Inventory getTopInventory(@NotNull InventoryEvent event) {
-        if (Util.isVersionAfter(1, 21))
+        if (VersionUtils.isVersionAfter(1, 21))
             return event.getView().getTopInventory();
         return getTopInventoryP(event.getView());
     }
@@ -55,7 +55,7 @@ public class UtilLegacy {
      */
     @Deprecated
     public static Inventory getTopInventory(@NotNull Player player) {
-        if (Util.isVersionAfter(1, 21))
+        if (VersionUtils.isVersionAfter(1, 21))
             return player.getOpenInventory().getTopInventory();
         return getTopInventoryP(player.getOpenInventory());
     }
@@ -87,7 +87,7 @@ public class UtilLegacy {
      */
     @Deprecated
     public static Inventory getBottomInventory(@NotNull InventoryEvent event) {
-        if (Util.isVersionAfter(1, 21))
+        if (VersionUtils.isVersionAfter(1, 21))
             return event.getView().getBottomInventory();
         return getBottomInventoryP(event.getView());
     }
@@ -118,7 +118,7 @@ public class UtilLegacy {
      */
     @Deprecated
     public static void updateView(@NotNull Player player) {
-        if (Util.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
+        if (VersionUtils.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
             player.updateInventory();
         }
     }
@@ -134,7 +134,7 @@ public class UtilLegacy {
      */
     @Deprecated
     public static void updateViewDelayed(@NotNull Player player) {
-        if (Util.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
+        if (VersionUtils.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
             SchedulerUtils.runLater(ItemEdit.get(), 1L, player::updateInventory);
         }
     }

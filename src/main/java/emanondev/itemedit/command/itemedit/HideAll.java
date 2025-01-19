@@ -3,6 +3,7 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,7 +28,7 @@ public class HideAll extends SubCmd {
         try {
             if (args.length != 1)
                 throw new IllegalArgumentException("Wrong param number");
-            ItemMeta itemMeta = item.getItemMeta();
+            ItemMeta itemMeta = ItemUtils.getMeta(item);
             handleFlagChange(item, itemMeta);
             itemMeta.addItemFlags(ItemFlag.values());
             item.setItemMeta(itemMeta);

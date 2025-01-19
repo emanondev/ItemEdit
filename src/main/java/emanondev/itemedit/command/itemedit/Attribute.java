@@ -1,10 +1,11 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.command.CommandSender;
@@ -97,7 +98,7 @@ public class Attribute extends SubCmd {
                 }
             }
 
-            ItemMeta itemMeta = item.getItemMeta();
+            ItemMeta itemMeta = ItemUtils.getMeta(item);
             //TODO here
 
 
@@ -143,20 +144,20 @@ public class Attribute extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], attributeSub);
+            return CompleteUtility.complete(args[1], attributeSub);
         if (args[1].equalsIgnoreCase("add")) {
             if (args.length == 3)
-                return Util.complete(args[2], Aliases.ATTRIBUTE);
+                return CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
             if (args.length == 5)
-                return Util.complete(args[4], Aliases.OPERATIONS);
+                return CompleteUtility.complete(args[4], Aliases.OPERATIONS);
             if (args.length == 6) {
                 if (VersionUtils.isVersionAfter(1, 21))
-                    return Util.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
-                return Util.complete(args[5], Aliases.EQUIPMENT_SLOTS);
+                    return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
+                return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTS);
             }
         } else if (args[1].equalsIgnoreCase("remove") && args.length == 3) {
-            List<String> l = Util.complete(args[2], Aliases.ATTRIBUTE);
-            l.addAll(Util.complete(args[2], Aliases.EQUIPMENT_SLOTS));
+            List<String> l = CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
+            l.addAll(CompleteUtility.complete(args[2], Aliases.EQUIPMENT_SLOTS));
             return l;
         }
         return Collections.emptyList();

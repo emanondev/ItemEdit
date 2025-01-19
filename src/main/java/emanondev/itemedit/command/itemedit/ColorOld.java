@@ -3,6 +3,7 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.command.CommandSender;
@@ -33,7 +34,7 @@ public class ColorOld extends SubCmd {
                 this.getCommand().sendPermissionLackMessage(leatherPerm, sender);
                 return;
             }
-            LeatherArmorMeta leatherMeta = (LeatherArmorMeta) item.getItemMeta();
+            LeatherArmorMeta leatherMeta = (LeatherArmorMeta) ItemUtils.getMeta(item);
             try {
                 if (args.length != 4)
                     throw new IllegalArgumentException("Wrong param number");

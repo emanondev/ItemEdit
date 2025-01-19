@@ -23,10 +23,13 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class Util {
+    @Deprecated
     public static final int GAME_MAIN_VERSION = Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[0]);
+    @Deprecated
     public static final int GAME_VERSION = Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[1]);
+    @Deprecated
     public static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length < 3 ? 0 : Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[2]);
     private static final int MAX_COMPLETES = 200;
@@ -34,6 +37,7 @@ public class Util {
     private static final boolean hasFolia = initFolia();
     private static final boolean hasPurpur = initPurpur();
 
+    @Deprecated
     public static <T extends Enum<T>> @NotNull List<String> complete(String prefix, @NotNull Class<T> enumClass) {
         prefix = prefix.toUpperCase();
         ArrayList<String> results = new ArrayList<>();
@@ -48,6 +52,7 @@ public class Util {
         return results;
     }
 
+    @Deprecated
     public static @NotNull <T extends Enum<T>> List<String> complete(String prefix, @NotNull Class<T> type,
                                                                      @NotNull Predicate<T> predicate) {
         prefix = prefix.toUpperCase();
@@ -63,6 +68,7 @@ public class Util {
         return results;
     }
 
+    @Deprecated
     public static @NotNull List<String> complete(String prefix, String... list) {
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
@@ -77,6 +83,7 @@ public class Util {
         return results;
     }
 
+    @Deprecated
     public static @NotNull List<String> complete(String prefix, Collection<String> list) {
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
@@ -91,6 +98,7 @@ public class Util {
         return results;
     }
 
+    @Deprecated
     public static @NotNull <T> List<String> complete(String prefix, Collection<T> list, Function<T, String> converter) {
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
@@ -107,6 +115,7 @@ public class Util {
         return results;
     }
 
+    @Deprecated
     public static @NotNull List<String> completePlayers(String prefix) {
         ArrayList<String> names = new ArrayList<>();
         final String text = prefix.toLowerCase(Locale.ENGLISH);
@@ -117,6 +126,7 @@ public class Util {
         return names;
     }
 
+    @Deprecated
     public static @NotNull List<String> complete(String prefix, IAliasSet<?> aliases) {
         ArrayList<String> results = new ArrayList<>();
         prefix = prefix.toLowerCase(Locale.ENGLISH);
@@ -390,6 +400,7 @@ public class Util {
         }
     }
 
+    @Deprecated
     public static boolean isAirOrNull(ItemStack item) {
         return item == null || item.getType() == Material.AIR;
     }

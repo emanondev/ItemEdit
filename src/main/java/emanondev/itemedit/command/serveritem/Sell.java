@@ -6,6 +6,7 @@ import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.InventoryUtils;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -126,15 +127,15 @@ public class Sell extends SubCmd {
             return Collections.emptyList();
         switch (args.length) {
             case 2:
-                return Util.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+                return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
             case 3:
-                return Util.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
             case 4:
-                return Util.completePlayers(args[3]);
+                return CompleteUtility.completePlayers(args[3]);
             case 5:
-                return Util.complete(args[2], Arrays.asList("10", "100", "1000", "10000"));
+                return CompleteUtility.complete(args[2], Arrays.asList("10", "100", "1000", "10000"));
             case 6:
-                return Util.complete(args[4], Aliases.BOOLEAN);
+                return CompleteUtility.complete(args[4], Aliases.BOOLEAN);
         }
         return Collections.emptyList();
     }

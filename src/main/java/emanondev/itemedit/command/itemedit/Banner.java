@@ -5,6 +5,8 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.gui.BannerEditor;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
@@ -60,7 +62,7 @@ public class Banner extends SubCmd {
     // itemedit banner color id color
     private void colorPattern(Player p, ItemStack item, String alias, String[] args) {
         try {
-            BannerMeta meta = (BannerMeta) item.getItemMeta();
+            BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             int id = Integer.parseInt(args[2]) - 1;
             PatternType type = meta.getPattern(id).getPattern();
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
@@ -80,7 +82,7 @@ public class Banner extends SubCmd {
 
     private void removePattern(Player p, ItemStack item, String alias, String[] args) {
         try {
-            BannerMeta meta = (BannerMeta) item.getItemMeta();
+            BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             int id = Integer.parseInt(args[2]) - 1;
             List<Pattern> list = new ArrayList<>(meta.getPatterns());
             list.remove(id);
@@ -94,7 +96,7 @@ public class Banner extends SubCmd {
 
     private void setPattern(Player p, ItemStack item, String alias, String[] args) {
         try {
-            BannerMeta meta = (BannerMeta) item.getItemMeta();
+            BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (type == null || color == null) {
@@ -114,7 +116,7 @@ public class Banner extends SubCmd {
 
     private void addPattern(Player p, ItemStack item, String alias, String[] args) {
         try {
-            BannerMeta meta = (BannerMeta) item.getItemMeta();
+            BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (type == null || color == null) {
@@ -134,15 +136,15 @@ public class Banner extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2) {
-            return Util.complete(args[1], subCommands);
+            return CompleteUtility.complete(args[1], subCommands);
         }
         if (args.length == 3 && (args[1].equalsIgnoreCase("add")
                 || args[1].equalsIgnoreCase("set")))
-            return Util.complete(args[2], Aliases.PATTERN_TYPE);
+            return CompleteUtility.complete(args[2], Aliases.PATTERN_TYPE);
         if (args.length == 4 && (args[1].equalsIgnoreCase("color")
                 || args[1].equalsIgnoreCase("add")
                 || args[1].equalsIgnoreCase("set")))
-            return Util.complete(args[3], Aliases.COLOR);
+            return CompleteUtility.complete(args[3], Aliases.COLOR);
         return Collections.emptyList();
     }
 

@@ -4,6 +4,8 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -28,7 +30,7 @@ public class Trim extends SubCmd {
     public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        ItemMeta meta = item.getItemMeta();
+        ItemMeta meta = ItemUtils.getMeta(item);
         if (!(meta instanceof ArmorMeta)) {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
@@ -68,13 +70,13 @@ public class Trim extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2) {
-            List<String> list = Util.complete(args[1], Aliases.TRIM_MATERIAL);
+            List<String> list = CompleteUtility.complete(args[1], Aliases.TRIM_MATERIAL);
             if ("clear".startsWith(args[1].toLowerCase(Locale.ENGLISH)))
                 list.add("CLEAR");
             return list;
         }
         if (args.length == 3 && !args[1].equalsIgnoreCase("clear"))
-            return Util.complete(args[2], Aliases.TRIM_PATTERN);
+            return CompleteUtility.complete(args[2], Aliases.TRIM_PATTERN);
         return Collections.emptyList();
     }
 }

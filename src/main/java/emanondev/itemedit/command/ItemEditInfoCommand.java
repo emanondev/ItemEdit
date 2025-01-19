@@ -49,42 +49,29 @@ public class ItemEditInfoCommand implements TabExecutor {
             StringBuilder copyText = new StringBuilder();
             if (sender instanceof Player)
                 copyText.append("Server: ").append(Bukkit.getVersion()).append("\n")
-                        .append("View: ").append(VersionUtils.hasFoliaAPI() ? "Folia" : (VersionUtils.hasPurpurAPI() ? "Purpur" : (VersionUtils.hasPaperAPI() ? "Paper" : "Spigot")))
-                        .append(" ").append(Util.GAME_MAIN_VERSION).append(".").append(Util.GAME_VERSION).append(".").append(Util.GAME_SUB_VERSION).append("\n")
+                        .append("View: ").append(VersionUtils.getVersion()).append("\n")
                         .append("Java: ").append(System.getProperty("java.version")).append("\n")
                         .append("ItemEdit: ").append(plugin.getDescription().getVersion())
                         .append(" Storage: ").append(plugin.getStorageType().name()).append("\n")
-                        .append("ItemTag: ").append(Hooks.isEnabled("ItemTag") ? Bukkit.getPluginManager().getPlugin("ItemTag").getDescription().getVersion() : "Nope").append("\n")
-                        .append("PAPI: ").append(Hooks.isPAPIEnabled() ? Bukkit.getPluginManager().getPlugin("PlaceholderAPI").getDescription().getVersion() : "Nope").append("\n")
-                        .append("NBTAPI: ").append(Hooks.isNBTAPIEnabled() ? Bukkit.getPluginManager().getPlugin("NBTAPI").getDescription().getVersion() : "Nope").append("\n")
-                        .append("Vault: ").append(Hooks.isVault() ? Bukkit.getPluginManager().getPlugin("Vault").getDescription().getVersion() : "Nope").append("\n")
-                        .append("MythicMobs: ").append(Hooks.isMythicMobsEnabled() ? Bukkit.getPluginManager().getPlugin("MythicMobs").getDescription().getVersion() : "Nope").append("\n")
-                        .append("ShopGuiPlus: ").append(Hooks.isShopGuiPlusEnabled() ? Bukkit.getPluginManager().getPlugin("ShopGuiPlus").getDescription().getVersion() : "Nope").append("\n")
-                        .append("Vanish: ").append(Hooks.isVanishEnabled() ? (Bukkit.getPluginManager().getPlugin("SuperVanish") == null ?
-                                Bukkit.getPluginManager().getPlugin("PremiumVanish") : Bukkit.getPluginManager().getPlugin("SuperVanish")).getDescription().getFullName() : "Nope");
+                        .append("ItemTag: ").append(Hooks.getPluginVersion("ItemTag", "Nope")).append("\n")
+                        .append("PAPI: ").append(Hooks.getPluginVersion("PlaceholderAPI", "Nope")).append("\n")
+                        .append("NBTAPI: ").append(Hooks.getPluginVersion("NBTAPI", "Nope")).append("\n")
+                        .append("Vault: ").append(Hooks.getPluginVersion("Vault", "Nope")).append("\n")
+                        .append("MythicMobs: ").append(Hooks.getPluginVersion("MythicMobs", "Nope")).append("\n")
+                        .append("ShopGuiPlus: ").append(Hooks.getPluginVersion("ShopGuiPlus", "Nope")).append("\n")
+                        .append("Vanish: ").append(Hooks.getPluginVersion("PremiumVanish", Hooks.getPluginVersion("SuperVanish", "Nope")));
             ComponentBuilder msg = new ComponentBuilder(
                     ChatColor.BLUE + "Server: " + ChatColor.AQUA + Bukkit.getVersion() + "\n" +
                             ChatColor.BLUE + "Java: " + ChatColor.AQUA + System.getProperty("java.version") + "\n" +
-                            ChatColor.BLUE + "View: " + ChatColor.AQUA + (VersionUtils.hasFoliaAPI() ? "Folia" :
-                            (VersionUtils.hasPurpurAPI() ? "Purpur" : (VersionUtils.hasPaperAPI() ? "Paper" : "Spigot")))
-                            + " " + Util.GAME_MAIN_VERSION + "." + Util.GAME_VERSION + "." + Util.GAME_SUB_VERSION + "\n" +
+                            ChatColor.BLUE + "View: " + ChatColor.AQUA + VersionUtils.getVersion() + "\n" +
                             ChatColor.BLUE + "ItemEdit: " + ChatColor.AQUA + plugin.getDescription().getVersion() + " Storage: " + plugin.getStorageType().name() + "\n" +
-                            ChatColor.BLUE + "ItemTag: " + ChatColor.AQUA + (Hooks.isEnabled("ItemTag") ?
-                            Bukkit.getPluginManager().getPlugin("ItemTag").getDescription().getVersion() : "Nope") + "\n" +
-                            ChatColor.BLUE + "PAPI: " + ChatColor.AQUA + (Hooks.isPAPIEnabled() ?
-                            Bukkit.getPluginManager().getPlugin("PlaceholderAPI").getDescription().getVersion() : "Nope") + "\n" +
-                            ChatColor.BLUE + "NBTAPI: " + ChatColor.AQUA + (Hooks.isNBTAPIEnabled() ?
-                            Bukkit.getPluginManager().getPlugin("NBTAPI").getDescription().getVersion() : "Nope") + "\n" +
-                            ChatColor.BLUE + "Vault: " + ChatColor.AQUA + (Hooks.isVault() ?
-                            Bukkit.getPluginManager().getPlugin("Vault").getDescription().getVersion() : "Nope") + "\n" +
-                            ChatColor.BLUE + "MythicMobs: " + ChatColor.AQUA + (Hooks.isMythicMobsEnabled() ?
-                            Bukkit.getPluginManager().getPlugin("MythicMobs").getDescription().getVersion() : "Nope") + "\n" +
-                            ChatColor.BLUE + "ShopGuiPlus: " + ChatColor.AQUA + (Hooks.isShopGuiPlusEnabled() ?
-                            Bukkit.getPluginManager().getPlugin("ShopGuiPlus").getDescription().getVersion() : "Nope") + "\n" +
-                            ChatColor.BLUE + "Vanish: " + ChatColor.AQUA + (Hooks.isVanishEnabled() ?
-                            (Bukkit.getPluginManager().getPlugin("SuperVanish") == null ?
-                                    Bukkit.getPluginManager().getPlugin("PremiumVanish") :
-                                    Bukkit.getPluginManager().getPlugin("SuperVanish")).getDescription().getFullName() : "Nope"));
+                            ChatColor.BLUE + "ItemTag: " + ChatColor.AQUA + Hooks.getPluginVersion("ItemTag", "Nope") + "\n" +
+                            ChatColor.BLUE + "PAPI: " + ChatColor.AQUA + Hooks.getPluginVersion("PlaceholderAPI", "Nope") + "\n" +
+                            ChatColor.BLUE + "NBTAPI: " + ChatColor.AQUA + Hooks.getPluginVersion("NBTAPI", "Nope") + "\n" +
+                            ChatColor.BLUE + "Vault: " + ChatColor.AQUA + Hooks.getPluginVersion("Vault", "Nope") + "\n" +
+                            ChatColor.BLUE + "MythicMobs: " + ChatColor.AQUA + Hooks.getPluginVersion("MythicMobs", "Nope") + "\n" +
+                            ChatColor.BLUE + "ShopGuiPlus: " + ChatColor.AQUA + Hooks.getPluginVersion("ShopGuiPlus", "Nope") + "\n" +
+                            ChatColor.BLUE + "Vanish: " + ChatColor.AQUA + Hooks.getPluginVersion("PremiumVanish", Hooks.getPluginVersion("SuperVanish", "Nope")));
             if (sender instanceof Player) {
                 msg.append("\n").append(new ComponentBuilder(ChatColor.GOLD + ChatColor.UNDERLINE.toString() + "Click To Copy\n")
                         .event(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD,
@@ -108,13 +95,4 @@ public class ItemEditInfoCommand implements TabExecutor {
             sendPermissionLackMessage(permission, sender);
         return true;
     }
-
-    /*public void register() {
-        try {
-            plugin.registerCommand(plugin.getName().toLowerCase(Locale.ENGLISH) + "info", this, null);
-        } catch (Exception e) {
-            plugin.log("Unable to register command " + ChatColor.YELLOW + plugin.getName().toLowerCase(Locale.ENGLISH) + "info");
-            e.printStackTrace();
-        }
-    }*/
 }

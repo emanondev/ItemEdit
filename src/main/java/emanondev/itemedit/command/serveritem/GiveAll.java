@@ -6,6 +6,7 @@ import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.InventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -91,11 +92,11 @@ public class GiveAll extends SubCmd {
         switch (args.length) {
             // <id> [amount] [silent]
             case 2:
-                return Util.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+                return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
             case 3:
-                return Util.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
             case 4:
-                return Util.complete(args[3], Aliases.BOOLEAN);
+                return CompleteUtility.complete(args[3], Aliases.BOOLEAN);
         }
         return Collections.emptyList();
     }

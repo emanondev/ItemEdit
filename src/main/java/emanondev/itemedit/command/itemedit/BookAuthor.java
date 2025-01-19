@@ -4,6 +4,8 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,11 +30,11 @@ public class BookAuthor extends SubCmd {
             return;
         }
 
-        BookMeta itemMeta = (BookMeta) item.getItemMeta();
+        BookMeta meta = (BookMeta) ItemUtils.getMeta(item);
 
         if (args.length == 1) {
-            itemMeta.setAuthor(null);
-            item.setItemMeta(itemMeta);
+            meta.setAuthor(null);
+            item.setItemMeta(meta);
             updateView(p);
             return;
         }
@@ -41,8 +43,8 @@ public class BookAuthor extends SubCmd {
             StringBuilder name = new StringBuilder(args[1]);
             for (int i = 2; i < args.length; i++)
                 name.append(" ").append(args[i]);
-            itemMeta.setAuthor(UtilsString.fix(name.toString(), null, true));
-            item.setItemMeta(itemMeta);
+            meta.setAuthor(UtilsString.fix(name.toString(), null, true));
+            item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
@@ -54,7 +56,7 @@ public class BookAuthor extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.completePlayers(args[1]);
+            return CompleteUtility.completePlayers(args[1]);
         return Collections.emptyList();
     }
 }

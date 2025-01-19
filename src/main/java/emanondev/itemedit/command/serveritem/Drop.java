@@ -5,6 +5,7 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.SchedulerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -73,26 +74,26 @@ public class Drop extends SubCmd {
             return Collections.emptyList();
         switch (args.length) {
             case 2:
-                return Util.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+                return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
             case 3:
-                return Util.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
             case 4: {
                 List<String> l = new ArrayList<>();
                 for (World w : Bukkit.getWorlds())
                     l.add(w.getName());
-                return Util.complete(args[3], l);
+                return CompleteUtility.complete(args[3], l);
             }
             case 5: {
                 Location loc = ((Player) sender).getLocation();
-                return Util.complete(args[4], Arrays.asList(String.valueOf(loc.getBlockX()), String.valueOf(loc.getX())));
+                return CompleteUtility.complete(args[4], Arrays.asList(String.valueOf(loc.getBlockX()), String.valueOf(loc.getX())));
             }
             case 6: {
                 Location loc = ((Player) sender).getLocation();
-                return Util.complete(args[5], Arrays.asList(String.valueOf(loc.getBlockY()), String.valueOf(loc.getY())));
+                return CompleteUtility.complete(args[5], Arrays.asList(String.valueOf(loc.getBlockY()), String.valueOf(loc.getY())));
             }
             case 7: {
                 Location loc = ((Player) sender).getLocation();
-                return Util.complete(args[6], Arrays.asList(String.valueOf(loc.getBlockZ()), String.valueOf(loc.getZ())));
+                return CompleteUtility.complete(args[6], Arrays.asList(String.valueOf(loc.getBlockZ()), String.valueOf(loc.getZ())));
             }
             default:
                 return Collections.emptyList();

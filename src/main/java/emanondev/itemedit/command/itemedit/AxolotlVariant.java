@@ -4,6 +4,8 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
@@ -36,7 +38,7 @@ public class AxolotlVariant extends SubCmd {
         try {
             if (args.length != 2)
                 throw new IllegalArgumentException("Wrong param number");
-            AxolotlBucketMeta meta = (AxolotlBucketMeta) item.getItemMeta();
+            AxolotlBucketMeta meta = (AxolotlBucketMeta) ItemUtils.getMeta(item);
             Axolotl.Variant type = Aliases.AXOLOTL_VARIANT.convertAlias(args[1]);
             if (type == null) {
                 onWrongAlias("wrong-axolotl", p, Aliases.AXOLOTL_VARIANT);
@@ -55,7 +57,7 @@ public class AxolotlVariant extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Aliases.AXOLOTL_VARIANT);
+            return CompleteUtility.complete(args[1], Aliases.AXOLOTL_VARIANT);
         return Collections.emptyList();
     }
 }

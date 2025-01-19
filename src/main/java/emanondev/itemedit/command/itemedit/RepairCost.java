@@ -1,8 +1,9 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -31,7 +32,7 @@ public class RepairCost extends SubCmd {
                 return;
             }
 
-            Repairable meta = (Repairable) item.getItemMeta();
+            Repairable meta = (Repairable) ItemUtils.getMeta(item);
             meta.setRepairCost(Integer.parseInt(args[1]));
             item.setItemMeta((ItemMeta) meta); //cast is required for old game version
             updateView(p);
@@ -44,7 +45,7 @@ public class RepairCost extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Arrays.asList("0", "1", "3", "7", "30", "40"));
+            return CompleteUtility.complete(args[1], Arrays.asList("0", "1", "3", "7", "30", "40"));
         return Collections.emptyList();
     }
 

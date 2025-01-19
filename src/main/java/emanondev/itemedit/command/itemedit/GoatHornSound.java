@@ -4,6 +4,8 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.MusicInstrument;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -31,7 +33,7 @@ public class GoatHornSound extends SubCmd {
         try {
             if (args.length != 2)
                 throw new IllegalArgumentException("Wrong param number");
-            MusicInstrumentMeta meta = (MusicInstrumentMeta) item.getItemMeta();
+            MusicInstrumentMeta meta = (MusicInstrumentMeta) ItemUtils.getMeta(item);
             MusicInstrument type = Aliases.GOAT_HORN_SOUND.convertAlias(args[1]);
             if (type == null) {
                 onWrongAlias("wrong-sound", player, Aliases.GOAT_HORN_SOUND);
@@ -49,7 +51,7 @@ public class GoatHornSound extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Aliases.GOAT_HORN_SOUND);
+            return CompleteUtility.complete(args[1], Aliases.GOAT_HORN_SOUND);
         return Collections.emptyList();
     }
 }

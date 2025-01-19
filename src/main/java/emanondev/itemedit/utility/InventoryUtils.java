@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Range;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-public class InventoryUtils {
+public final class InventoryUtils {
 
     private static final HashMap<Class<?>, Method> getTopInventory = new HashMap<>();
     private static final HashMap<Class<?>, Method> getBottomInventory = new HashMap<>();

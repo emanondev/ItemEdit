@@ -4,6 +4,8 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.DyeColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,7 +30,7 @@ public class TropicalFish extends SubCmd {
     public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        if (!(item.getItemMeta() instanceof TropicalFishBucketMeta)) {
+        if (!(ItemUtils.getMeta(item) instanceof TropicalFishBucketMeta)) {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
@@ -61,7 +63,7 @@ public class TropicalFish extends SubCmd {
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
 
-            TropicalFishBucketMeta meta = (TropicalFishBucketMeta) item.getItemMeta();
+            TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
 
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
             if (color == null) {
@@ -82,7 +84,7 @@ public class TropicalFish extends SubCmd {
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
 
-            TropicalFishBucketMeta meta = (TropicalFishBucketMeta) item.getItemMeta();
+            TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
 
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
             if (color == null) {
@@ -103,7 +105,7 @@ public class TropicalFish extends SubCmd {
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
 
-            TropicalFishBucketMeta meta = (TropicalFishBucketMeta) item.getItemMeta();
+            TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
 
             Pattern pattern = Aliases.TROPICALPATTERN.convertAlias(args[2]);
             if (pattern == null) {
@@ -122,12 +124,12 @@ public class TropicalFish extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], subCommands);
+            return CompleteUtility.complete(args[1], subCommands);
         if (args.length == 3)
             if (args[1].equalsIgnoreCase("patterncolor") || args[1].equalsIgnoreCase("bodycolor"))
-                return Util.complete(args[2], Aliases.COLOR);
+                return CompleteUtility.complete(args[2], Aliases.COLOR);
             else if (args[1].equalsIgnoreCase("pattern"))
-                return Util.complete(args[2], Aliases.TROPICALPATTERN);
+                return CompleteUtility.complete(args[2], Aliases.TROPICALPATTERN);
         return Collections.emptyList();
     }
 }

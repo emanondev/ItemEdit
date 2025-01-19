@@ -4,6 +4,7 @@ import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.GameMode;
@@ -289,7 +290,7 @@ public class BannerEditor implements Gui {
             if (data != null)
                 data.setColor(DyeColor.values()[event.getSlot()]);
             else {
-                if (Util.isVersionAfter(1, 13))
+                if (VersionUtils.isVersionAfter(1, 13))
                     banner.setType(Util.getBannerItemFromColor(DyeColor.values()[event.getSlot()]));
                 else
                     banner.setDurability(Util.getDataByColor(DyeColor.values()[event.getSlot()]));

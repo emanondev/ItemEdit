@@ -1,9 +1,9 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -50,7 +50,7 @@ public class Enchant extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Aliases.ENCHANT);
+            return CompleteUtility.complete(args[1], Aliases.ENCHANT);
         Enchantment ench = Aliases.ENCHANT.convertAlias(args[2]);
         if (ench == null)
             return Collections.emptyList();

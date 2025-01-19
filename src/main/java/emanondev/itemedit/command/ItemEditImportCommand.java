@@ -2,6 +2,7 @@ package emanondev.itemedit.command;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
+import emanondev.itemedit.utility.CompleteUtility;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -45,7 +46,7 @@ public class ItemEditImportCommand implements TabExecutor {
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length == 1)
-            return Util.complete(args[0], Collections.singletonList("itemeditor"));
+            return CompleteUtility.complete(args[0], Collections.singletonList("itemeditor"));
         return Collections.emptyList();
     }
 

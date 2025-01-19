@@ -3,6 +3,8 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -53,14 +55,13 @@ public class Compass extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], compassSub);
-
+            return CompleteUtility.complete(args[1], compassSub);
         return Collections.emptyList();
     }
 
     // lore set line text
     private void compassSet(Player p, ItemStack item, String[] args) {
-        CompassMeta meta = (CompassMeta) item.getItemMeta();
+        CompassMeta meta = (CompassMeta) ItemUtils.getMeta(item);
         meta.setLodestoneTracked(false);
         meta.setLodestone(p.getLocation());
         item.setItemMeta(meta);
@@ -74,7 +75,7 @@ public class Compass extends SubCmd {
     }
 
     private void compassClear(Player p, ItemStack item, String[] args) {
-        CompassMeta meta = (CompassMeta) item.getItemMeta();
+        CompassMeta meta = (CompassMeta) ItemUtils.getMeta(item);
         meta.setLodestoneTracked(true);
         meta.setLodestone(p.getLocation());
         item.setItemMeta(meta);

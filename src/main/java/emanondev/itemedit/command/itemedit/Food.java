@@ -4,6 +4,8 @@ import emanondev.itemedit.*;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -183,7 +185,7 @@ public class Food extends SubCmd {
     private void foodClear(Player p, ItemStack item, String alias, String[] args) {
         if (!item.hasItemMeta())
             return;
-        ItemMeta meta = item.getItemMeta();
+        ItemMeta meta = ItemUtils.getMeta(item);
         if (!meta.hasFood())
             return;
         ParsedItem parsed = new ParsedItem(item);
@@ -484,7 +486,7 @@ public class Food extends SubCmd {
     //ie food info
     private void foodInfo(Player p, ItemStack item, String alias, String[] args) {
         try {
-            ItemMeta meta = item.getItemMeta();
+            //ItemMeta meta = item.getItemMeta();
             ParsedItem parsedItem = new ParsedItem(item);
             if (!item.hasItemMeta() || !(parsedItem.getMap().containsKey(Keys.Component.CROSS_VERSION_CONSUMABLE.toString())
                     || parsedItem.getMap().containsKey("use_remainer"))) {
@@ -629,35 +631,35 @@ public class Food extends SubCmd {
             return Collections.emptyList();
         switch (args.length) {
             case 2:
-                List<String> list = Util.complete(args[1], foodSub);
+                List<String> list = CompleteUtility.complete(args[1], foodSub);
                 if (!VersionUtils.isVersionAfter(1, 21))
                     list.remove("convertto");
                 return list;
             case 3:
                 switch (args[1].toLowerCase(Locale.ENGLISH)) {
                     case "canalwayseat":
-                        return Util.complete(args[2], Aliases.BOOLEAN);
+                        return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
                     case "consumeparticles":
                         if (VersionUtils.isVersionAfter(1, 21, 2))
-                            return Util.complete(args[2], Aliases.BOOLEAN);
+                            return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
                         return Collections.emptyList();
                     case "animation":
                         if (VersionUtils.isVersionAfter(1, 21, 2))
-                            return Util.complete(args[2], Aliases.ANIMATION);
+                            return CompleteUtility.complete(args[2], Aliases.ANIMATION);
                         return Collections.emptyList();
                     case "sound":
                         if (VersionUtils.isVersionAfter(1, 21, 2))
-                            return Util.complete(args[2], Aliases.SOUND);
+                            return CompleteUtility.complete(args[2], Aliases.SOUND);
                         return Collections.emptyList();
                     case "eatticks":
-                        return Util.complete(args[2], "1", "20", "40");
+                        return CompleteUtility.complete(args[2], "1", "20", "40");
                     case "saturation":
-                        return Util.complete(args[2], "0", "1", "1.5", "2", "10");
+                        return CompleteUtility.complete(args[2], "0", "1", "1.5", "2", "10");
                     case "nutrition":
-                        return Util.complete(args[2], "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                        return CompleteUtility.complete(args[2], "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                                 "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20");
                     case "addeffect":
-                        return Util.complete(args[2], Aliases.POTION_EFFECT);
+                        return CompleteUtility.complete(args[2], Aliases.POTION_EFFECT);
                     case "removeeffect": {
                         ItemStack item = getItemInHand((Player) sender);
                         if (item == null || !item.hasItemMeta())
@@ -668,12 +670,12 @@ public class Food extends SubCmd {
                         List<String> list2 = new ArrayList<>();//Util.complete(args[2], Aliases.POTION_EFFECT);
                         for (PotionEffectType type : types)
                             list2.add(Aliases.POTION_EFFECT.getDefaultName(type));
-                        return Util.complete(args[2], list2);
+                        return CompleteUtility.complete(args[2], list2);
                     }
                     case "convertto":
                         if (VersionUtils.isVersionAfter(1, 21)) {
-                            List<String> list2 = Util.complete(args[2], Material.class);
-                            list2.addAll(Util.complete(args[2], ItemEdit.get().getServerStorage().getIds()));
+                            List<String> list2 = CompleteUtility.complete(args[2], Material.class);
+                            list2.addAll(CompleteUtility.complete(args[2], ItemEdit.get().getServerStorage().getIds()));
                             return list2;
                         }
                 }
@@ -681,34 +683,34 @@ public class Food extends SubCmd {
             case 4:
                 switch (args[1].toLowerCase(Locale.ENGLISH)) {
                     case "addeffect":
-                        return Util.complete(args[3], "infinite", "0", "90", "180", "480");
+                        return CompleteUtility.complete(args[3], "infinite", "0", "90", "180", "480");
                     case "removeeffect":
-                        return Util.complete(args[3], "1", "2", "3", "4", "5");
+                        return CompleteUtility.complete(args[3], "1", "2", "3", "4", "5");
                     case "convertto":
                         if (VersionUtils.isVersionAfter(1, 21))
-                            return Util.complete(args[3], "1", "10", "64");
+                            return CompleteUtility.complete(args[3], "1", "10", "64");
                 }
                 return Collections.emptyList();
             case 5:
                 if (args[1].toLowerCase(Locale.ENGLISH).equals("addeffect"))
-                    return Util.complete(args[4], "1", "2", "3", "4", "5");
+                    return CompleteUtility.complete(args[4], "1", "2", "3", "4", "5");
                 return Collections.emptyList();
             case 6:
             case 7:
             case 8:
                 if (args[1].toLowerCase(Locale.ENGLISH).equals("addeffect"))
-                    return Util.complete(args[args.length - 1], Aliases.BOOLEAN);
+                    return CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
                 return Collections.emptyList();
             case 9:
                 if (args[1].toLowerCase(Locale.ENGLISH).equals("addeffect"))
-                    return Util.complete(args[8], "0.01", "10.0", "50.0", "100.0");
+                    return CompleteUtility.complete(args[8], "0.01", "10.0", "50.0", "100.0");
                 return Collections.emptyList();
         }
         return Collections.emptyList();
     }
 
     private void setUseRemainder(ItemStack origin, ItemStack d) {
-        ItemMeta meta = origin.getItemMeta();
+        ItemMeta meta = ItemUtils.getMeta(origin);
         if (VersionUtils.isVersionUpTo(1, 21, 1)) {
             FoodComponent food = meta.getFood();
             try {
@@ -727,14 +729,14 @@ public class Food extends SubCmd {
     @Nullable
     private ItemStack getUseRemainder(ItemStack origin) {
         if (VersionUtils.isVersionUpTo(1, 21, 1)) {
-            FoodComponent food = origin.getItemMeta().getFood();
+            FoodComponent food = ItemUtils.getMeta(origin).getFood();
             try {
                 return (ItemStack) food.getClass().getMethod("getUsingConvertsTo").invoke(food);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
-        return origin.getItemMeta().getUseRemainder();
+        return ItemUtils.getMeta(origin).getUseRemainder();
     }
 
 

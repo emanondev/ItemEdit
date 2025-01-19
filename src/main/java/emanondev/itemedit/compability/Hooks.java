@@ -2,6 +2,7 @@ package emanondev.itemedit.compability;
 
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 
 public class Hooks {
     private static final MiniMessageUtil miniMessage = initMiniMessage();
@@ -28,6 +29,21 @@ public class Hooks {
 
     public static boolean isEnabled(String pluginName) {
         return Bukkit.getPluginManager().isPluginEnabled(pluginName);
+    }
+
+    public static Plugin getPlugin(String pluginName) {
+        return Bukkit.getPluginManager().getPlugin(pluginName);
+    }
+
+    public static String getPluginVersion(String pluginName) {
+        return getPluginVersion(pluginName, null);
+    }
+
+    public static String getPluginVersion(String pluginName, String ifMissing) {
+        Plugin plugin = getPlugin(pluginName);
+        if (plugin == null)
+            return ifMissing;
+        return plugin.getDescription().getVersion();
     }
 
     public static boolean isMythicMobsEnabled() {

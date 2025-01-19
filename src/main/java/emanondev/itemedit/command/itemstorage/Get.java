@@ -1,9 +1,9 @@
 package emanondev.itemedit.command.itemstorage;
 
 import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemStorageCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.InventoryUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -46,9 +46,9 @@ public class Get extends SubCmd {
             return new ArrayList<>();
         switch (args.length) {
             case 2:
-                return Util.complete(args[1], ItemEdit.get().getPlayerStorage().getIds((Player) sender));
+                return CompleteUtility.complete(args[1], ItemEdit.get().getPlayerStorage().getIds((Player) sender));
             case 3:
-                return Util.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
         }
         return Collections.emptyList();
     }

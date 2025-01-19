@@ -4,6 +4,8 @@ import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -40,7 +42,7 @@ public class Rename extends SubCmd {
         if (!Util.isAllowedRenameItem(sender, item.getType()))
             return;
 
-        ItemMeta itemMeta = item.getItemMeta();
+        ItemMeta itemMeta = ItemUtils.getMeta(item);
         if (args.length == 1) {
             itemMeta.setDisplayName(" ");
             item.setItemMeta(itemMeta);
@@ -81,9 +83,9 @@ public class Rename extends SubCmd {
             return Collections.emptyList();
         ItemStack item = this.getItemInHand((Player) sender);
         if (item != null && item.hasItemMeta()) {
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             if (meta.hasDisplayName())
-                return Util.complete(args[1], meta.getDisplayName().replace('§', '&'), "clear");
+                return CompleteUtility.complete(args[1], meta.getDisplayName().replace('§', '&'), "clear");
         }
         return Collections.emptyList();
     }
