@@ -27,7 +27,7 @@ import java.util.List;
 public class BannerEditor implements Gui {
 
     private static final String subPath = "gui.banner.";
-    private final static PatternType[] TYPES = UtilLegacy.getPatternTypesFilthered();
+    private final static PatternType[] TYPES = UtilLegacy.getPatternTypesFiltered();
     private final Player target;
     private final Inventory inventory;
     private final List<BannerData> layers = new ArrayList<>();

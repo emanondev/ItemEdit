@@ -15,13 +15,14 @@ import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class UtilLegacy {
 
-
-    private static final HashMap<Class<?>, Method> getTopInventory = new HashMap<>();
-    private static final HashMap<Class<?>, Method> getBottomInventory = new HashMap<>();
-
+    private static final Map<Class<?>, Method> getTopInventory =
+            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
+    private static final Map<Class<?>, Method> getBottomInventory =
+            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
 
     /**
      * This method uses reflection to get the top Inventory object from the
@@ -136,7 +137,6 @@ public class UtilLegacy {
         }
     }
 
-
     /**
      * This method accepts <code>infinite</code>,<code>∞</code> or any number as valid input.<br>
      * On versions before 1.19.4, infinite is turned to <code>Integer.MAX_VALUE</code>.<br><br>
@@ -169,7 +169,6 @@ public class UtilLegacy {
         return new AttributeModifier(UUID.randomUUID(), ((Enum) attr).toString(), amount, op, EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)));
     }
 
-
     public static PatternType[] getPatternTypes() {
         try {
             if (VersionUtils.isVersionAfter(1, 20, 6))
@@ -187,8 +186,7 @@ public class UtilLegacy {
 
     }
 
-
-    public static PatternType[] getPatternTypesFilthered() {
+    public static PatternType[] getPatternTypesFiltered() {
         PatternType[] val = getPatternTypes();
         ArrayList<PatternType> list = new ArrayList<>(Arrays.asList(val));
         list.remove(PatternType.BASE);
@@ -199,6 +197,5 @@ public class UtilLegacy {
         }
         return list.toArray(new PatternType[0]);
     }
-
 
 }

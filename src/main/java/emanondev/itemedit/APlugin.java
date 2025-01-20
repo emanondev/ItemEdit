@@ -20,12 +20,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 public abstract class APlugin extends JavaPlugin {
 
-    private final HashMap<String, YMLConfig> configs = new HashMap<>();
-    private final HashMap<String, YMLConfig> languageConfigs = new HashMap<>();
+    private final Map<String, YMLConfig> configs =
+            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
+    private final Map<String, YMLConfig> languageConfigs =
+            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
     private boolean useMultiLanguage;
     private String defaultLanguage;
     private CooldownAPI cooldownApi = null;

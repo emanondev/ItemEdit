@@ -12,11 +12,15 @@ import org.jetbrains.annotations.Range;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class InventoryUtils {
 
-    private static final HashMap<Class<?>, Method> getTopInventory = new HashMap<>();
-    private static final HashMap<Class<?>, Method> getBottomInventory = new HashMap<>();
+    private static final Map<Class<?>, Method> getTopInventory =
+            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
+    private static final Map<Class<?>, Method> getBottomInventory =
+            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
 
     private InventoryUtils() {
         throw new UnsupportedOperationException();

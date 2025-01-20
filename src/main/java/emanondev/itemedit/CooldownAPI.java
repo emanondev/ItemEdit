@@ -1,24 +1,28 @@
 package emanondev.itemedit;
 
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 public class CooldownAPI {
 
     private final YMLConfig conf;
-    private final HashMap<UUID, HashMap<String, Long>> cooldowns = new HashMap<>();
+    private final Map<UUID, Map<String, Long>> cooldowns =
+            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
 
     CooldownAPI(@NotNull APlugin plugin) {
         long now = System.currentTimeMillis();
         conf = plugin.getConfig("cooldownData.yml");
         for (String id : conf.getKeys(false)) {
-            HashMap<String, Long> map = new HashMap<>();
+            Map<String, Long> map = VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
             cooldowns.put(UUID.fromString(id), map);
             for (String cooldownId : conf.getKeys(id))
                 try {
@@ -36,7 +40,7 @@ public class CooldownAPI {
         long now = System.currentTimeMillis();
         conf.getKeys(false).forEach(path -> conf.set(path, null));
         for (UUID uuid : cooldowns.keySet()) {
-            HashMap<String, Long> values = cooldowns.get(uuid);
+            Map<String, Long> values = cooldowns.get(uuid);
             for (String id : values.keySet())
                 if (values.get(id) > now)
                     conf.getLong(uuid.toString() + "." + id, values.get(id));
@@ -246,8 +250,10 @@ public class CooldownAPI {
         if (duration <= 0 && cooldowns.containsKey(uuid))
             cooldowns.get(uuid).remove(cooldownId);
         else {
-            cooldowns.computeIfAbsent(uuid, k -> new HashMap<>());
-            cooldowns.get(uuid).put(cooldownId, System.currentTimeMillis() + TimeUnit.MILLISECONDS.convert(duration, timeUnit));
+            cooldowns.computeIfAbsent(uuid, k ->
+                    VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>());
+            cooldowns.get(uuid).put(cooldownId,
+                    System.currentTimeMillis() + TimeUnit.MILLISECONDS.convert(duration, timeUnit));
         }
     }
 
@@ -266,7 +272,8 @@ public class CooldownAPI {
                             @NotNull TimeUnit timeUnit) {
         if (timeUnit.compareTo(TimeUnit.MILLISECONDS) < 0)
             throw new UnsupportedOperationException("Time unit must be at least MILLISECONDS.");
-        setCooldown(uuid, cooldownId, getCooldown(uuid, cooldownId, TimeUnit.MILLISECONDS) + TimeUnit.MILLISECONDS.convert(duration, timeUnit), TimeUnit.MILLISECONDS);
+        setCooldown(uuid, cooldownId, getCooldown(uuid, cooldownId, TimeUnit.MILLISECONDS)
+                + TimeUnit.MILLISECONDS.convert(duration, timeUnit), TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -284,7 +291,8 @@ public class CooldownAPI {
                                @NotNull TimeUnit timeUnit) {
         if (timeUnit.compareTo(TimeUnit.MILLISECONDS) < 0)
             throw new UnsupportedOperationException();
-        setCooldown(uuid, cooldownId, getCooldown(uuid, cooldownId, TimeUnit.MILLISECONDS) - TimeUnit.MILLISECONDS.convert(duration, timeUnit), TimeUnit.MILLISECONDS);
+        setCooldown(uuid, cooldownId, getCooldown(uuid, cooldownId, TimeUnit.MILLISECONDS)
+                - TimeUnit.MILLISECONDS.convert(duration, timeUnit), TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -406,7 +414,8 @@ public class CooldownAPI {
         if (duration <= 0 && cooldowns.containsKey(player))
             cooldowns.get(player).remove(cooldownId);
         else {
-            cooldowns.computeIfAbsent(player, k -> new HashMap<>());
+            cooldowns.computeIfAbsent(player, k ->
+                    VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>());
             cooldowns.get(player).put(cooldownId, System.currentTimeMillis() + duration);
         }
     }
