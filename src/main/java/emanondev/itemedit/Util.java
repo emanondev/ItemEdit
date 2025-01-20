@@ -165,8 +165,6 @@ public class Util {
                     "logs" + File.separatorChar
                             + new SimpleDateFormat(ItemEdit.get().getConfig().loadMessage("log.file-format", "yyyy.MM.dd", false)
                             , Locale.ENGLISH).format(date)
-                            //+ DateFormatUtils.format(date,
-                            //ItemEdit.get().getConfig().loadMessage("log.file-format", "yyyy.MM.dd", false))
                             + ".log");
             if (!saveTo.getParentFile().exists()) { // Create parent folders if they don't exist
                 saveTo.getParentFile().mkdirs();

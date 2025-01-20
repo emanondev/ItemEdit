@@ -25,41 +25,41 @@ public class YmlPlayerStorage implements PlayerStorage {
     }
 
     @Override
-    public ItemStack getItem(@NotNull OfflinePlayer p, @NotNull String id) {
+    public ItemStack getItem(@NotNull OfflinePlayer player, @NotNull String id) {
         validateID(id);
         id = id.toLowerCase(Locale.ENGLISH);
-        ItemStack item = database.getItemStack(getBasePath(p) + "." + id + ".item", null);
+        ItemStack item = database.getItemStack(getBasePath(player) + "." + id + ".item", null);
         return item == null ? null : item.clone();
     }
 
     @Override
-    public void setItem(@NotNull OfflinePlayer p, @NotNull String id, @NotNull ItemStack item) {
+    public void setItem(@NotNull OfflinePlayer player, @NotNull String id, @NotNull ItemStack item) {
         validateID(id);
         id = id.toLowerCase(Locale.ENGLISH);
         if (item.getType() == Material.AIR)
             throw new IllegalArgumentException();
         item.setAmount(1);
-        database.set(getBasePath(p) + "." + id + ".item", item);
+        database.set(getBasePath(player) + "." + id + ".item", item);
         database.save();
     }
 
     @Override
-    public void remove(@NotNull OfflinePlayer p, @NotNull String id) {
+    public void remove(@NotNull OfflinePlayer player, @NotNull String id) {
         validateID(id);
         id = id.toLowerCase(Locale.ENGLISH);
-        database.set(getBasePath(p) + "." + id, null);
+        database.set(getBasePath(player) + "." + id, null);
         database.save();
     }
 
     @Override
-    public void clear(@NotNull OfflinePlayer p) {
-        database.set(getBasePath(p), null);
+    public void clear(@NotNull OfflinePlayer player) {
+        database.set(getBasePath(player), null);
         database.save();
     }
 
     @Override
-    public @NotNull Set<String> getIds(@NotNull OfflinePlayer p) {
-        return database.getKeys(getBasePath(p));
+    public @NotNull Set<String> getIds(@NotNull OfflinePlayer player) {
+        return database.getKeys(getBasePath(player));
     }
 
     @SuppressWarnings("deprecation")

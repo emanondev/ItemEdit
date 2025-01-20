@@ -129,15 +129,7 @@ public class FireworkEditor implements Gui {
             return;
         }
         if (event.getSlot() == 49) {
-            /*if (event.isLeftClick())
-                try {
-                    target.getInventory().setItemInMainHand(firework);
-                } catch (Throwable t) {
-                    target.getInventory().setItemInHand(firework);
-                }
-            else*/
             target.getInventory().addItem(firework);
-            return;
         }
     }
 
@@ -173,7 +165,6 @@ public class FireworkEditor implements Gui {
         }
         item.setAmount(meta.getPower() + 1);
         ItemMeta powerMeta = ItemUtils.getMeta(item);
-        ;
         powerMeta.addItemFlags(ItemFlag.values());
         loadLanguageDescription(powerMeta, subPath + "buttons.power", "%power%",
                 String.valueOf(meta.getPower() + 1));

@@ -81,7 +81,8 @@ public final class CompleteUtility {
      * @return A list of matching strings that start with the prefix.
      */
     @NotNull
-    public static List<String> complete(@NotNull String prefix, String... list) {
+    public static List<String> complete(@NotNull String prefix,
+                                        String... list) {
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
         int c = 0;

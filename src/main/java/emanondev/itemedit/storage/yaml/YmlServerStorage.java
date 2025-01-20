@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.HashMap;
@@ -94,6 +95,7 @@ public class YmlServerStorage implements ServerStorage {
     }
 
     @Override
+    @Nullable
     public String getId(ItemStack item) {
         if (item == null)
             return null;

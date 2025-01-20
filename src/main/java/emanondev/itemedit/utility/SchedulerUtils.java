@@ -227,7 +227,10 @@ public final class SchedulerUtils {
      * @param task          the task to be executed.
      * @param invoke        the method to execute the task on the scheduler.
      */
-    private static void foliaSchedulerInvoker(Object from, String schedulerName, Runnable task, BiConsumer<Object, Consumer<?>> invoke) {
+    private static void foliaSchedulerInvoker(Object from,
+                                              String schedulerName,
+                                              Runnable task,
+                                              BiConsumer<Object, Consumer<?>> invoke) {
         Object scheduler = ReflectionUtils.invokeMethod(from, schedulerName);
         Consumer<?> taskConsumer = (scheduledTask -> task.run());
         invoke.accept(scheduler, taskConsumer);

@@ -32,12 +32,12 @@ public class MongoPlayerStorage implements PlayerStorage {
     }
 
     @Override
-    public @Nullable ItemStack getItem(@NotNull OfflinePlayer p, @NotNull String id) {
+    public @Nullable ItemStack getItem(@NotNull OfflinePlayer player, @NotNull String id) {
         validateID(id);
         id = id.toLowerCase(Locale.ENGLISH);
 
         Document document = this.mongoStorage.getPlayerStorage()
-                .find(Filters.eq("store", this.getStore(p)))
+                .find(Filters.eq("store", this.getStore(player)))
                 .cursorType(CursorType.NonTailable)
                 .first();
         if (document == null) return null;
@@ -50,7 +50,7 @@ public class MongoPlayerStorage implements PlayerStorage {
     }
 
     @Override
-    public void setItem(@NotNull OfflinePlayer p, @NotNull String id, @NotNull ItemStack item) {
+    public void setItem(@NotNull OfflinePlayer player, @NotNull String id, @NotNull ItemStack item) {
         validateID(id);
         id = id.toLowerCase(Locale.ENGLISH);
         if (item.getType() == Material.AIR)
@@ -58,7 +58,7 @@ public class MongoPlayerStorage implements PlayerStorage {
         item.setAmount(1);
 
         final Map<String, Object> serializedItem = item.serialize();
-        final String store = this.getStore(p);
+        final String store = this.getStore(player);
         this.mongoStorage.getPlayerStorage().updateOne(
                 Filters.eq("store", store),
                 new Document()
@@ -69,25 +69,25 @@ public class MongoPlayerStorage implements PlayerStorage {
     }
 
     @Override
-    public void remove(@NotNull OfflinePlayer p, @NotNull String id) {
+    public void remove(@NotNull OfflinePlayer player, @NotNull String id) {
         validateID(id);
         id = id.toLowerCase(Locale.ENGLISH);
         this.mongoStorage.getPlayerStorage().updateOne(
-                Filters.eq("store", this.getStore(p)),
+                Filters.eq("store", this.getStore(player)),
                 new Document("$unset", new Document("items." + id, ""))
         );
     }
 
     @Override
-    public void clear(@NotNull OfflinePlayer p) {
-        String store = this.getStore(p);
+    public void clear(@NotNull OfflinePlayer player) {
+        String store = this.getStore(player);
         this.mongoStorage.getPlayerStorage().deleteOne(Filters.eq("store", store));
     }
 
     @Override
-    public @NotNull Set<String> getIds(@NotNull OfflinePlayer p) {
+    public @NotNull Set<String> getIds(@NotNull OfflinePlayer player) {
         Document document = this.mongoStorage.getPlayerStorage()
-                .find(Filters.eq("store", this.getStore(p)))
+                .find(Filters.eq("store", this.getStore(player)))
                 .cursorType(CursorType.NonTailable)
                 .first();
         if (document == null) return Collections.emptySet();

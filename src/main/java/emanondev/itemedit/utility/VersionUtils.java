@@ -81,7 +81,8 @@ public final class VersionUtils {
      * @param version the minor version (e.g., 9 in 1.9.4).
      * @return true if the current version is up to the specified version.
      */
-    public static boolean isVersionUpTo(int mainVersion, int version) {
+    public static boolean isVersionUpTo(int mainVersion,
+                                        int version) {
         return isVersionUpTo(mainVersion, version, 99);
     }
 
@@ -94,7 +95,9 @@ public final class VersionUtils {
      * @param subVersion the sub version.
      * @return true if the current version is up to the specified version.
      */
-    public static boolean isVersionUpTo(int mainVersion, int version, int subVersion) {
+    public static boolean isVersionUpTo(int mainVersion,
+                                        int version,
+                                        int subVersion) {
         if (GAME_MAIN_VERSION > mainVersion) return false;
         if (GAME_MAIN_VERSION < mainVersion) return true;
         if (GAME_VERSION > version) return false;
@@ -110,7 +113,8 @@ public final class VersionUtils {
      * @param version the minor version.
      * @return true if the current version is after the specified version.
      */
-    public static boolean isVersionAfter(int mainVersion, int version) {
+    public static boolean isVersionAfter(int mainVersion,
+                                         int version) {
         return isVersionAfter(mainVersion, version, 0);
     }
 
@@ -123,7 +127,9 @@ public final class VersionUtils {
      * @param subVersion the sub version.
      * @return true if the current version is after the specified version.
      */
-    public static boolean isVersionAfter(int mainVersion, int version, int subVersion) {
+    public static boolean isVersionAfter(int mainVersion,
+                                         int version,
+                                         int subVersion) {
         if (GAME_MAIN_VERSION < mainVersion) return false;
         if (GAME_MAIN_VERSION > mainVersion) return true;
         if (GAME_VERSION < version) return false;

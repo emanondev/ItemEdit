@@ -46,9 +46,72 @@ public final class ItemUtils {
      * Checks if an {@link ItemStack} is null or represents air.
      *
      * @param item the {@link ItemStack} to check.
-     * @return true if the item is null or its type is {@link Material#AIR}, false otherwise.
+     * @return {@code true} if the item is null or its type is {@link Material#AIR}, {@code false} otherwise.
      */
     public static boolean isAirOrNull(@Nullable ItemStack item) {
         return item == null || item.getType() == Material.AIR;
+    }
+
+    /**
+     * Returns true if the item has the unbreakable tag.
+     *
+     * @param item The {@link ItemStack} to check.
+     * @return {@code true} if the item has the unbreakable tag, {@code false} otherwise.
+     * @see #isUnbreakable(ItemMeta)
+     */
+    public static boolean isUnbreakable(@NotNull ItemStack item) {
+        return isUnbreakable(ItemUtils.getMeta(item));
+    }
+
+    /**
+     * Returns true if the {@link ItemMeta} has the unbreakable tag.
+     *
+     * @param meta The {@link ItemMeta} to check.
+     * @return {@code true} if the meta has the unbreakable tag, {@code false} otherwise.
+     */
+    public static boolean isUnbreakable(@Nullable ItemMeta meta) {
+        if (meta == null)
+            return false;
+        if (VersionUtils.isVersionAfter(1, 11))
+            return meta.isUnbreakable();
+
+        // For older versions, use reflection to access the unbreakable property.
+        Object spigotMeta = Objects.requireNonNull(ReflectionUtils.invokeMethod(meta, "spigot"));
+        Boolean result = (Boolean) ReflectionUtils.invokeMethod(spigotMeta, "isUnbreakable");
+        return result != null && result;
+    }
+
+    /**
+     * Sets the unbreakable tag on the item.
+     *
+     * @param item  The {@link ItemStack} to set the unbreakable tag on.
+     * @param value The value to set for the unbreakable tag.
+     * @see #setUnbreakable(ItemMeta, boolean)
+     */
+    public static void setUnbreakable(@NotNull ItemStack item,
+                                      boolean value) {
+        ItemMeta meta = ItemUtils.getMeta(item);
+        setUnbreakable(meta, value);
+        item.setItemMeta(meta);
+    }
+
+    /**
+     * Sets the unbreakable tag on the {@link ItemMeta}.
+     *
+     * @param meta  The {@link ItemMeta} to set the unbreakable tag on.
+     * @param value The value to set for the unbreakable tag.
+     * @see #setUnbreakable(ItemStack, boolean)
+     */
+    public static void setUnbreakable(@Nullable ItemMeta meta,
+                                      boolean value) {
+        if (meta == null)
+            return;
+        if (VersionUtils.isVersionAfter(1, 11)) {
+            meta.setUnbreakable(value);
+            return;
+        }
+        // For older versions, use reflection to set the unbreakable property.
+        Object spigotMeta = Objects.requireNonNull(ReflectionUtils.invokeMethod(meta, "spigot"));
+        ReflectionUtils.invokeMethod(spigotMeta, "setUnbreakable", boolean.class, value);
     }
 }

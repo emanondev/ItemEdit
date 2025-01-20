@@ -14,6 +14,7 @@ import java.util.Set;
  * this class allows interacting with server stored items
  */
 public interface ServerStorage {
+
     /**
      * Get ItemStack associated with given id.
      *
@@ -39,7 +40,8 @@ public interface ServerStorage {
      * @param id   unique identifier of the item, case insensitive
      * @param item item to associate to id
      */
-    void setItem(@NotNull String id, @NotNull ItemStack item);
+    void setItem(@NotNull String id,
+                 @NotNull ItemStack item);
 
     /**
      * Sets nick value for id.
@@ -47,7 +49,8 @@ public interface ServerStorage {
      * @param id   unique identifier of the item, case insensitive
      * @param nick nick of the item,
      */
-    void setNick(@NotNull String id, @Nullable String nick);
+    void setNick(@NotNull String id,
+                 @Nullable String nick);
 
     /**
      * Remove associations with id.
@@ -69,21 +72,24 @@ public interface ServerStorage {
     @NotNull
     Set<String> getIds();
 
-    default void validateID(String id) {
+    default void validateID(@Nullable String id) {
         if (id == null || id.contains(" ") || id.contains(".") || id.isEmpty())
             throw new IllegalArgumentException();
     }
 
-    default ItemStack getItem(String id, Player target) {
+    @Nullable
+    default ItemStack getItem(@NotNull String id,
+                              @Nullable Player player) {
         ItemStack item = getItem(id);
-        if (item == null || target == null)
+        if (item == null || player == null)
             return item;
-        if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
+        if (item.hasItemMeta() &&
+                ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
+            String[] holders = new String[]{"%player_name%", player.getName(),
+                    "%player_uuid%", player.getUniqueId().toString()};
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(UtilsString.fix(meta.getDisplayName(), target, true, "%player_name%", target.getName(),
-                    "%player_uuid%", target.getUniqueId().toString()));
-            meta.setLore(UtilsString.fix(meta.getLore(), target, true, "%player_name%", target.getName(),
-                    "%player_uuid%", target.getUniqueId().toString()));
+            meta.setDisplayName(UtilsString.fix(meta.getDisplayName(), player, true, holders));
+            meta.setLore(UtilsString.fix(meta.getLore(), player, true, holders));
             item.setItemMeta(meta);
         }
         return item;
@@ -95,7 +101,7 @@ public interface ServerStorage {
      * @param item item to check
      * @return true if the storage contains a similar item
      */
-    default boolean contains(ItemStack item) {
+    default boolean contains(@Nullable ItemStack item) {
         return getId(item) != null;
     }
 
@@ -105,7 +111,8 @@ public interface ServerStorage {
      * @param item item to check
      * @return the id of the item or null if not contained
      */
-    String getId(ItemStack item);
+    @Nullable
+    String getId(@Nullable ItemStack item);
 
     /**
      * Handle plugin reloads

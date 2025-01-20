@@ -1,18 +1,14 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.compability.V1_20_6;
-import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.SchedulerUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.banner.PatternType;
-import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -163,84 +159,6 @@ public class UtilLegacy {
         return duration;
     }
 
-
-    /**
-     * Returns true if the item has unbreakable tag.<br><br>
-     * In API versions 1.10.2 and earlier, there is no isUnbreakable method on ItemMeta, so we rely on serialization.<br>
-     * In API versions 1.11 and later, isUnbreakable method was added on ItemMeta.
-     *
-     * @param item The ItemStack to check
-     * @return true if the item has unbreakable tag
-     * @see #isUnbreakable(ItemMeta)
-     */
-    public static boolean isUnbreakable(@NotNull ItemStack item) {
-        return isUnbreakable(ItemUtils.getMeta(item));
-    }
-
-    /**
-     * Returns true if the meta has unbreakable tag.<br><br>
-     * In API versions 1.10.2 and earlier, there is no isUnbreakable method on ItemMeta, so we rely on serialization.<br>
-     * In API versions 1.11 and later, isUnbreakable method was added on ItemMeta.
-     *
-     * @param meta The ItemMeta to check
-     * @return true if the meta has unbreakable tag
-     */
-    public static boolean isUnbreakable(@Nullable ItemMeta meta) {
-        if (meta == null)
-            return false;
-        if (VersionUtils.isVersionAfter(1, 11))
-            return meta.isUnbreakable();
-        return meta.serialize().containsKey("Unbreakable");
-    }
-
-    /**
-     * Sets the item unbreakable tag.<br><br>
-     * In API versions 1.10.2 and earlier, there is no setUnbreakable method on ItemMeta, so we rely on serialization.<br>
-     * In API versions 1.11 and later, setUnbreakable method was added on ItemMeta.
-     *
-     * @param item  The ItemStack to set tag on
-     * @param value The value to set
-     * @see #setUnbreakable(ItemMeta, boolean)
-     */
-    public static void setUnbreakable(@NotNull ItemStack item, boolean value) {
-        ItemMeta meta = setUnbreakable(ItemUtils.getMeta(item), value);
-        item.setItemMeta(meta);
-    }
-
-    /**
-     * Returns meta with unbreakable tag.<br>
-     * N.B. returned value may or may not be different from meta parameter<br><br>
-     * In API versions 1.10.2 and earlier, there is no setUnbreakable method on ItemMeta, so we rely on serialization.<br>
-     * In API versions 1.11 and later, setUnbreakable method was added on ItemMeta.
-     *
-     * @param meta  The ItemMeta to set tag on
-     * @param value The value to set
-     * @see #setUnbreakable(ItemMeta, boolean)
-     */
-    public static ItemMeta setUnbreakable(@Nullable ItemMeta meta, boolean value) {
-        if (meta == null)
-            return null;
-        if (VersionUtils.isVersionAfter(1, 11)) {
-            meta.setUnbreakable(value);
-            return meta;
-        }
-        Map<String, Object> map = new LinkedHashMap<>(meta.serialize());
-        if (map.containsKey("Unbreakable")) {
-            if (value)
-                map.put("Unbreakable", true);
-            else
-                return meta;
-        } else {
-            if (!value)
-                return meta;
-            else
-                map.remove("Unbreakable");
-        }
-        map.put("==", "ItemMeta");
-        return (ItemMeta) ConfigurationSerialization.deserializeObject(map);
-    }
-
-
     public static AttributeModifier createAttributeModifier(org.bukkit.attribute.Attribute attr, double amount, AttributeModifier.Operation op, @Nullable String slot) {
         try {
             if (VersionUtils.isVersionAfter(1, 20, 6))
@@ -256,7 +174,7 @@ public class UtilLegacy {
         try {
             if (VersionUtils.isVersionAfter(1, 20, 6))
                 return V1_20_6.getPatternTypes();
-        } catch (Throwable e) {
+        } catch (Throwable ignored) {
         }
         try {
             Class<PatternType> clazz = PatternType.class;

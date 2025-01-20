@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -30,8 +29,8 @@ public class Unbreakable extends SubCmd {
         }
         try {
             ItemMeta meta = ItemUtils.getMeta(item);
-            boolean value = args.length == 2 ? Aliases.BOOLEAN.convertAlias(args[1]) : !UtilLegacy.isUnbreakable(meta);
-            meta = UtilLegacy.setUnbreakable(meta, value);
+            boolean value = args.length == 2 ? Aliases.BOOLEAN.convertAlias(args[1]) : !ItemUtils.isUnbreakable(meta);
+            ItemUtils.setUnbreakable(meta, value);
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
