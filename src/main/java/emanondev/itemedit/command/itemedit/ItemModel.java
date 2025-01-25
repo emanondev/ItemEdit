@@ -39,7 +39,7 @@ public class ItemModel extends SubCmd {
             String[] rawKey = args[1].toLowerCase(Locale.ENGLISH).split(":");
             NamespacedKey key = rawKey.length == 1 ? new NamespacedKey(NamespacedKey.MINECRAFT, rawKey[0]) :
                     new NamespacedKey(rawKey[0], rawKey[1]);
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             meta.setItemModel(key);
             item.setItemMeta(meta);
             updateView(p);

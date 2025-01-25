@@ -2,7 +2,6 @@ package emanondev.itemedit.gui;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.VersionUtils;
@@ -27,7 +26,7 @@ import java.util.List;
 public class BannerEditor implements Gui {
 
     private static final String subPath = "gui.banner.";
-    private final static PatternType[] TYPES = UtilLegacy.getPatternTypesFiltered();
+    private final static PatternType[] TYPES = ItemUtils.getPatternTypesFiltered();
     private final Player target;
     private final Inventory inventory;
     private final List<BannerData> layers = new ArrayList<>();
@@ -293,7 +292,7 @@ public class BannerEditor implements Gui {
                     banner.setType(Util.getBannerItemFromColor(DyeColor.values()[event.getSlot()]));
                 else
                     banner.setDurability(Util.getDataByColor(DyeColor.values()[event.getSlot()]));
-                meta = (BannerMeta) banner.getItemMeta();
+                meta = (BannerMeta) ItemUtils.getMeta(banner);
             }
             BannerEditor.this.updateInventory();
             BannerEditor.this.getTargetPlayer().openInventory(BannerEditor.this.getInventory());

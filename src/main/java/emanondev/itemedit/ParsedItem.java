@@ -673,7 +673,7 @@ public class ParsedItem {
         return (List<Map<String, Object>>) map.get(paths[paths.length - 1]);
     }
 
-    private class EatResult {
+    private static class EatResult {
         private final int newIndex;
         private final Object payload;
 

@@ -2,6 +2,7 @@ package emanondev.itemedit.storage;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.UtilsString;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -87,7 +88,7 @@ public interface ServerStorage {
                 ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
             String[] holders = new String[]{"%player_name%", player.getName(),
                     "%player_uuid%", player.getUniqueId().toString()};
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             meta.setDisplayName(UtilsString.fix(meta.getDisplayName(), player, true, holders));
             meta.setLore(UtilsString.fix(meta.getLore(), player, true, holders));
             item.setItemMeta(meta);

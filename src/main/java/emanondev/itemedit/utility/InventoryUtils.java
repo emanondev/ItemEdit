@@ -102,6 +102,7 @@ public final class InventoryUtils {
      *
      * @param player The player which inventory view should be updated
      */
+    @SuppressWarnings("UnstableApiUsage")
     public static void updateView(@NotNull Player player) {
         if (VersionUtils.isVersionUpTo(1, 19, 4) || VersionUtils.hasPurpurAPI()) {
             SchedulerUtils.run(ItemEdit.get(), player, player::updateInventory);
@@ -116,6 +117,7 @@ public final class InventoryUtils {
      *
      * @param player The player which inventory view should be updated
      */
+    @SuppressWarnings("UnstableApiUsage")
     public static void updateViewDelayed(@NotNull Player player) {
         if (VersionUtils.isVersionUpTo(1, 19, 4) || VersionUtils.hasPurpurAPI()) {
             SchedulerUtils.runLater(ItemEdit.get(), player, 1L, player::updateInventory);

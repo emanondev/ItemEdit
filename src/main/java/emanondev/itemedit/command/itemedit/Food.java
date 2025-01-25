@@ -23,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+@SuppressWarnings("UnstableApiUsage")
 public class Food extends SubCmd {
 
 
@@ -486,14 +487,12 @@ public class Food extends SubCmd {
     //ie food info
     private void foodInfo(Player p, ItemStack item, String alias, String[] args) {
         try {
-            //ItemMeta meta = item.getItemMeta();
             ParsedItem parsedItem = new ParsedItem(item);
             if (!item.hasItemMeta() || !(parsedItem.getMap().containsKey(Keys.Component.CROSS_VERSION_CONSUMABLE.toString())
                     || parsedItem.getMap().containsKey("use_remainer"))) {
                 sendLanguageString("info.not_food", "", p);
                 return;
             }
-            //FoodComponent food = meta.getFood();
             ItemStack remainer = VersionUtils.isVersionAfter(1, 21) ? getUseRemainder(item) : null;
             ArrayList<String> list = new ArrayList<>(this.getLanguageStringList("info.message", Collections.emptyList(), p,
                     "%eatseconds%", UtilsString.formatNumber(getEastSeconds(item), 2, false),

@@ -5,6 +5,7 @@ import org.bukkit.inventory.EquipmentSlotGroup;
 import java.util.Arrays;
 import java.util.Collection;
 
+@SuppressWarnings("UnstableApiUsage")
 public class EquipmentSlotGroupAliases extends AliasSet<EquipmentSlotGroup> {
     public EquipmentSlotGroupAliases() {
         super("equip_group");

@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -131,7 +132,6 @@ public final class ReflectionUtils {
             throw new RuntimeException(e);
         }
     }
-
 
     /**
      * Invokes a method on an object, including private methods.
@@ -285,6 +285,129 @@ public final class ReflectionUtils {
             return field.get(obj);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Creates an instance of the specified class using its default constructor.
+     *
+     * @param <T>   The type of the class.
+     * @param clazz The Class object representing the class to instantiate.
+     * @return An instance of the specified class.
+     * @throws RuntimeException if the class has no default constructor or if instantiation fails.
+     */
+    public static <T> T invokeConstructor(@NotNull Class<T> clazz) {
+        try {
+            Constructor<T> constructor = clazz.getConstructor();
+            return constructor.newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to invoke default constructor", e);
+        }
+    }
+
+    /**
+     * Creates an instance of the specified class using its default constructor.
+     *
+     * @param <T>   The type of the class.
+     * @param clazz The Class object representing the class to instantiate.
+     * @return An instance of the specified class.
+     * @throws RuntimeException if the class has no default constructor or if instantiation fails.
+     */
+    public static <T, P1> T invokeConstructor(@NotNull Class<T> clazz,
+                                              @NotNull Class<P1> clazzOne, @Nullable P1 paramOne) {
+        return invokeConstructor(clazz,
+                new Class<?>[]{clazzOne},
+                new Object[]{paramOne});
+    }
+
+    /**
+     * Creates an instance of the specified class using its default constructor.
+     *
+     * @param <T>   The type of the class.
+     * @param clazz The Class object representing the class to instantiate.
+     * @return An instance of the specified class.
+     * @throws RuntimeException if the class has no default constructor or if instantiation fails.
+     */
+    public static <T, P1, P2> T invokeConstructor(@NotNull Class<T> clazz,
+                                                  @NotNull Class<P1> clazzOne, @Nullable P1 paramOne,
+                                                  @NotNull Class<P2> clazzTwo, @Nullable P2 paramTwo) {
+        return invokeConstructor(clazz,
+                new Class<?>[]{clazzOne, clazzTwo},
+                new Object[]{paramOne, paramTwo});
+    }
+
+    /**
+     * Creates an instance of the specified class using its default constructor.
+     *
+     * @param <T>   The type of the class.
+     * @param clazz The Class object representing the class to instantiate.
+     * @return An instance of the specified class.
+     * @throws RuntimeException if the class has no default constructor or if instantiation fails.
+     */
+    public static <T, P1, P2, P3> T invokeConstructor(@NotNull Class<T> clazz,
+                                                      @NotNull Class<P1> clazzOne, @Nullable P1 paramOne,
+                                                      @NotNull Class<P2> clazzTwo, @Nullable P2 paramTwo,
+                                                      @NotNull Class<P3> clazzThree, @Nullable P3 paramThree) {
+        return invokeConstructor(clazz,
+                new Class<?>[]{clazzOne, clazzTwo, clazzThree},
+                new Object[]{paramOne, paramTwo, paramThree});
+    }
+
+    /**
+     * Creates an instance of the specified class using its default constructor.
+     *
+     * @param <T>   The type of the class.
+     * @param clazz The Class object representing the class to instantiate.
+     * @return An instance of the specified class.
+     * @throws RuntimeException if the class has no default constructor or if instantiation fails.
+     */
+    public static <T, P1, P2, P3, P4> T invokeConstructor(@NotNull Class<T> clazz,
+                                                          @NotNull Class<P1> clazzOne, @Nullable P1 paramOne,
+                                                          @NotNull Class<P2> clazzTwo, @Nullable P2 paramTwo,
+                                                          @NotNull Class<P3> clazzThree, @Nullable P3 paramThree,
+                                                          @NotNull Class<P4> clazzFour, @Nullable P4 paramFour) {
+        return invokeConstructor(clazz,
+                new Class<?>[]{clazzOne, clazzTwo, clazzThree, clazzFour},
+                new Object[]{paramOne, paramTwo, paramThree, paramFour});
+    }
+
+    /**
+     * Creates an instance of the specified class using its default constructor.
+     *
+     * @param <T>   The type of the class.
+     * @param clazz The Class object representing the class to instantiate.
+     * @return An instance of the specified class.
+     * @throws RuntimeException if the class has no default constructor or if instantiation fails.
+     */
+    public static <T, P1, P2, P3, P4, P5> T invokeConstructor(@NotNull Class<T> clazz,
+                                                              @NotNull Class<P1> clazzOne, @Nullable P1 paramOne,
+                                                              @NotNull Class<P2> clazzTwo, @Nullable P2 paramTwo,
+                                                              @NotNull Class<P3> clazzThree, @Nullable P3 paramThree,
+                                                              @NotNull Class<P4> clazzFour, @Nullable P4 paramFour,
+                                                              @NotNull Class<P5> clazzFive, @Nullable P5 paramFive) {
+        return invokeConstructor(clazz,
+                new Class<?>[]{clazzOne, clazzTwo, clazzThree, clazzFour, clazzFive},
+                new Object[]{paramOne, paramTwo, paramThree, paramFour, paramFive});
+    }
+
+    /**
+     * Creates an instance of the specified class using a parameterized constructor.
+     *
+     * @param <T>       The type of the class.
+     * @param clazz     The Class object representing the class to instantiate.
+     * @param paramTypes An array of Class objects representing the parameter types of the constructor.
+     * @param params     An array of Objects representing the arguments to pass to the constructor.
+     * @return An instance of the specified class.
+     * @throws RuntimeException if the constructor is not found or if instantiation fails.
+     */
+    public static <T> T invokeConstructor(@NotNull Class<T> clazz,
+                                          @NotNull Class<?>[] paramTypes,
+                                          @Nullable Object[] params) {
+        try {
+            Constructor<T> constructor = clazz.getConstructor(paramTypes);
+            return constructor.newInstance(params);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to invoke parameterized constructor", e);
         }
     }
 

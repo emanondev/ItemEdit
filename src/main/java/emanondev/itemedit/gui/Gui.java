@@ -94,17 +94,22 @@ public interface Gui extends InventoryHolder {
     @NotNull
     APlugin getPlugin();
 
-    default String getLanguageMessage(@NotNull String fullPath, String... holders) {
-        return getPlugin().getLanguageConfig(getTargetPlayer()).loadMessage(fullPath, "", null, true, holders);
+    default String getLanguageMessage(@NotNull String fullPath,
+                                      String... holders) {
+        return getPlugin().getLanguageConfig(getTargetPlayer())
+                .loadMessage(fullPath, "", null, true, holders);
     }
 
-    default List<String> getLanguageMultiMessage(@NotNull String fullPath, String... holders) {
+    default List<String> getLanguageMultiMessage(@NotNull String fullPath,
+                                                 String... holders) {
         return getPlugin().getLanguageConfig(getTargetPlayer())
                 .loadMultiMessage(fullPath, Collections.emptyList(), null, true, holders);
     }
 
     @Contract("null,_,_->null;!null,_,_->!null")
-    default ItemStack loadLanguageDescription(@Nullable ItemStack item, @NotNull String fullPath, String... holders) {
+    default ItemStack loadLanguageDescription(@Nullable ItemStack item,
+                                              @NotNull String fullPath,
+                                              String... holders) {
         if (item == null)
             return null;
         ItemMeta meta = item.getItemMeta();
@@ -114,7 +119,9 @@ public interface Gui extends InventoryHolder {
     }
 
     @Contract("null,_,_->null;!null,_,_->!null")
-    default ItemMeta loadLanguageDescription(@Nullable ItemMeta meta, @NotNull String fullPath, String... holders) {
+    default ItemMeta loadLanguageDescription(@Nullable ItemMeta meta,
+                                             @NotNull String fullPath,
+                                             String... holders) {
         if (meta == null)
             return null;
         List<String> list = getPlugin().getLanguageConfig(getTargetPlayer()).loadMultiMessage(fullPath,
@@ -125,11 +132,16 @@ public interface Gui extends InventoryHolder {
         return meta;
     }
 
-    default @NotNull ItemStack getGuiItem(@NotNull String path, @NotNull Material defMaterial) {
+    @NotNull
+    default ItemStack getGuiItem(@NotNull String path,
+                                 @NotNull Material defMaterial) {
         return getGuiItem(path, defMaterial, 0);
     }
 
-    default @NotNull ItemStack getGuiItem(@NotNull String path, @NotNull Material defMaterial, int defDurability) {
+    @NotNull
+    default ItemStack getGuiItem(@NotNull String path,
+                                 @NotNull Material defMaterial,
+                                 int defDurability) {
         YMLConfig config = getPlugin().getConfig("gui.yml");
         ItemStack item = new ItemStack(config.loadMaterial(path + ".material", defMaterial));
         ItemMeta meta = ItemUtils.getMeta(item);
@@ -145,7 +157,9 @@ public interface Gui extends InventoryHolder {
         return item;
     }
 
-    default @NotNull ItemStack getBackItem() {
-        return this.loadLanguageDescription(getGuiItem("buttons.back", Material.BARRIER), "gui.back.description");
+    @NotNull
+    default ItemStack getBackItem() {
+        return this.loadLanguageDescription(getGuiItem("buttons.back", Material.BARRIER),
+                "gui.back.description");
     }
 }

@@ -4,6 +4,7 @@ import emanondev.itemedit.APlugin;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.SchedulerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -46,7 +47,7 @@ public class ColorListSelectorGui implements Gui {
             list.add(Aliases.COLOR.getName(c));
         for (DyeColor color : DyeColor.values()) {
             ItemStack item = Util.getDyeItemFromColor(color);
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             loadLanguageDescription(meta, subPath + "buttons.color", "%colors%",
                     String.join("&b, &e", list), "%color%", Aliases.COLOR.getName(color));

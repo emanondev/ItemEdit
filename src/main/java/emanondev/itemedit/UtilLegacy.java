@@ -1,20 +1,16 @@
 package emanondev.itemedit;
 
-import emanondev.itemedit.compability.V1_20_6;
 import emanondev.itemedit.utility.SchedulerUtils;
 import emanondev.itemedit.utility.VersionUtils;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.block.banner.PatternType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UtilLegacy {
@@ -158,44 +154,4 @@ public class UtilLegacy {
             duration = -1;
         return duration;
     }
-
-    public static AttributeModifier createAttributeModifier(org.bukkit.attribute.Attribute attr, double amount, AttributeModifier.Operation op, @Nullable String slot) {
-        try {
-            if (VersionUtils.isVersionAfter(1, 20, 6))
-                return V1_20_6.createAttribute(attr, amount, op, slot);
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        return new AttributeModifier(UUID.randomUUID(), ((Enum) attr).toString(), amount, op, EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)));
-    }
-
-    public static PatternType[] getPatternTypes() {
-        try {
-            if (VersionUtils.isVersionAfter(1, 20, 6))
-                return V1_20_6.getPatternTypes();
-        } catch (Throwable ignored) {
-        }
-        try {
-            Class<PatternType> clazz = PatternType.class;
-            Method method = clazz.getMethod("values");
-            PatternType[] result = (PatternType[]) method.invoke(null);
-            return Arrays.copyOfRange(result, 1, result.length);
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public static PatternType[] getPatternTypesFiltered() {
-        PatternType[] val = getPatternTypes();
-        ArrayList<PatternType> list = new ArrayList<>(Arrays.asList(val));
-        list.remove(PatternType.BASE);
-        if (VersionUtils.isVersionAfter(1, 20, 6) &&
-                !VersionUtils.isVersionAfter(1, 21)) { //those are not craftable items on 1.20.6
-            list.remove(PatternType.FLOW);
-            list.remove(PatternType.GUSTER);
-        }
-        return list.toArray(new PatternType[0]);
-    }
-
 }

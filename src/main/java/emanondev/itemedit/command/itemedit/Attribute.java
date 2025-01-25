@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -53,6 +52,7 @@ public class Attribute extends SubCmd {
     }
 
     // add <attribute> amount [operation] [equip]
+    @SuppressWarnings("UnstableApiUsage")
     private void attributeAdd(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 4 || args.length > 6)
@@ -102,10 +102,11 @@ public class Attribute extends SubCmd {
             //TODO here
 
 
-            itemMeta.addAttributeModifier(attr, UtilLegacy.createAttributeModifier(attr, amount, op, equip));
+            itemMeta.addAttributeModifier(attr, ItemUtils.createAttributeModifier(amount, op, equip));
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
+            e.printStackTrace();
             sendFailFeedbackForSub(p, alias, "add");
         }
     }

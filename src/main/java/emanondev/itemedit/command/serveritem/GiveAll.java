@@ -8,6 +8,7 @@ import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -44,7 +45,7 @@ public class GiveAll extends SubCmd {
             List<String> lore = null;
             String title = null;
             if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
-                meta = item.getItemMeta();
+                meta = ItemUtils.getMeta(item);
                 lore = meta.hasLore() ? meta.getLore() : null;
                 title = meta.hasDisplayName() ? meta.getDisplayName() : null;
             }

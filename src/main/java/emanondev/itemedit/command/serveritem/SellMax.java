@@ -8,6 +8,7 @@ import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.ItemUtils;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -58,7 +59,7 @@ public class SellMax extends SubCmd {
             if (price <= 0)
                 throw new IllegalArgumentException();
             if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
-                ItemMeta meta = item.getItemMeta();
+                ItemMeta meta = ItemUtils.getMeta(item);
                 meta.setDisplayName(UtilsString.fix(meta.getDisplayName(), target, true, "%player_name%", target.getName(), "%player_uuid%", target.getUniqueId().toString()));
                 meta.setLore(UtilsString.fix(meta.getLore(), target, true, "%player_name%", target.getName(), "%player_uuid%", target.getUniqueId().toString()));
                 item.setItemMeta(meta);
