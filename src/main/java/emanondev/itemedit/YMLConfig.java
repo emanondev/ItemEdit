@@ -23,6 +23,7 @@ public class YMLConfig extends YamlConfiguration {
     private final JavaPlugin plugin;
     private final File file;
     private final String name;
+    private boolean multiThreadSupport = false;
 
     /**
      * Constructs a new Configuration File.<br>
@@ -42,6 +43,17 @@ public class YMLConfig extends YamlConfiguration {
         this.name = name;
         this.file = new File(plugin.getDataFolder(), name);
         reload();
+        if (VersionUtils.hasFoliaAPI()) {
+            multiThreadSupport = true;
+        }
+    }
+
+    public boolean isMultiThreadSupport() {
+        return multiThreadSupport;
+    }
+
+    public void setMultiThreadSupport(boolean multiThreadSupport) {
+        this.multiThreadSupport = multiThreadSupport;
     }
 
     /**
@@ -655,5 +667,97 @@ public class YMLConfig extends YamlConfiguration {
 
     private @NotNull String getError(String path) {
         return "Value has wrong type or wrong value at '" + path + ":' on file " + file.getName();
+    }
+
+    @Contract("_, !null -> !null")
+    @Nullable
+    public Object get(@NotNull String path, @Nullable Object def) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                return super.get(path, def);
+            }
+        }
+        return super.get(path, def);
+    }
+
+    public void set(@NotNull String path, @Nullable Object value) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.set(path, value);
+                return;
+            }
+        }
+        super.set(path, value);
+    }
+
+    @NotNull
+    public ConfigurationSection createSection(@NotNull String path) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                return super.createSection(path);
+            }
+        }
+        return super.createSection(path);
+    }
+
+
+    protected void mapChildrenKeys(@NotNull Set<String> output, @NotNull ConfigurationSection section, boolean deep) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.mapChildrenKeys(output, section, deep);
+                return;
+            }
+        }
+        super.mapChildrenKeys(output, section, deep);
+    }
+
+    protected void mapChildrenValues(@NotNull Map<String, Object> output, @NotNull ConfigurationSection section, boolean deep) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.mapChildrenValues(output, section, deep);
+                return;
+            }
+        }
+        super.mapChildrenValues(output, section, deep);
+    }
+
+    @NotNull
+    public List<String> getComments(@NotNull String path) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                return super.getComments(path);
+            }
+        }
+        return super.getComments(path);
+    }
+
+    @NotNull
+    public List<String> getInlineComments(@NotNull String path) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                return super.getInlineComments(path);
+            }
+        }
+        return super.getInlineComments(path);
+    }
+
+    public void setComments(@NotNull String path, @Nullable List<String> comments) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.setComments(path, comments);
+                return;
+            }
+        }
+        super.setComments(path, comments);
+    }
+
+    public void setInlineComments(@NotNull String path, @Nullable List<String> comments) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.setInlineComments(path, comments);
+                return;
+            }
+        }
+        super.setInlineComments(path, comments);
     }
 }
