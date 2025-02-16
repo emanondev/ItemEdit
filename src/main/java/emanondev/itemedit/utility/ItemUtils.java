@@ -49,6 +49,17 @@ public final class ItemUtils {
     }
 
     /**
+     * Sets the {@link ItemStack} currently held in the main hand of a {@link Player}.
+     *
+     * @param player the {@link Player} whose main hand item is to be set.
+     * @param item   the {@link ItemStack} to set in the player's main hand.
+     */
+    @SuppressWarnings("deprecation")
+    public static void setHandItem(@NotNull Player player, ItemStack item) {
+        player.getInventory().setItemInHand(item);
+    }
+
+    /**
      * Checks if an {@link ItemStack} is null or represents air.
      *
      * @param item the {@link ItemStack} to check.
