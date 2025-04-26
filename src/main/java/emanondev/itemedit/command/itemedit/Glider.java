@@ -28,7 +28,7 @@ public class Glider extends SubCmd {
                 throw new IllegalArgumentException("Wrong param number");
             ItemMeta meta = item.getItemMeta();
             boolean value = args.length == 1 ? !meta.isGlider(): Aliases.BOOLEAN.convertAlias(args[1]);
-            meta.setEnchantmentGlintOverride(value);
+            meta.setGlider(value);
             item.setItemMeta(meta);
         } catch (Exception e) {
             onFail(p, alias);
