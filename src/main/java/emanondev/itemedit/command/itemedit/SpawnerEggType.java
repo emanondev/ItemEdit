@@ -4,10 +4,13 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SpawnEggMeta;
 
 import java.util.Collections;
@@ -24,12 +27,13 @@ public class SpawnerEggType extends SubCmd {
     public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        if (!(item.getItemMeta() instanceof SpawnEggMeta)) {
+        ItemMeta rawMeta = ItemUtils.getMeta(item);
+        if (!(rawMeta instanceof SpawnEggMeta)) {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             return;
         }
 
-        SpawnEggMeta itemMeta = (SpawnEggMeta) item.getItemMeta();
+        SpawnEggMeta meta = (SpawnEggMeta) rawMeta;
 
         try {
             if (args.length != 2)
@@ -40,8 +44,8 @@ public class SpawnerEggType extends SubCmd {
                 onFail(p, alias);
                 return;
             }
-            itemMeta.setSpawnedType(type);
-            item.setItemMeta(itemMeta);
+            meta.setSpawnedType(type);
+            item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
@@ -52,7 +56,7 @@ public class SpawnerEggType extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Aliases.EGG_TYPE);
+            return CompleteUtility.complete(args[1], Aliases.EGG_TYPE);
         return Collections.emptyList();
     }
 

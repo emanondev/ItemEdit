@@ -1,8 +1,9 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.command.CommandSender;
@@ -27,7 +28,7 @@ public class ItemModel extends SubCmd {
         ItemStack item = this.getItemInHand(p);
         try {
             if (args.length == 1) {
-                ItemMeta meta = item.getItemMeta();
+                ItemMeta meta = ItemUtils.getMeta(item);
                 meta.setItemModel(null);
                 item.setItemMeta(meta);
                 updateView(p);
@@ -38,7 +39,7 @@ public class ItemModel extends SubCmd {
             String[] rawKey = args[1].toLowerCase(Locale.ENGLISH).split(":");
             NamespacedKey key = rawKey.length == 1 ? new NamespacedKey(NamespacedKey.MINECRAFT, rawKey[0]) :
                     new NamespacedKey(rawKey[0], rawKey[1]);
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             meta.setItemModel(key);
             item.setItemMeta(meta);
             updateView(p);
@@ -50,7 +51,7 @@ public class ItemModel extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Registry.ITEM.stream().collect(Collectors.toList()),
+            return CompleteUtility.complete(args[1], Registry.ITEM.stream().collect(Collectors.toList()),
                     args[1].contains(":") ? (type) -> type.getKey().toString() : (type) -> type.getKey().getKey());
         return Collections.emptyList();
     }

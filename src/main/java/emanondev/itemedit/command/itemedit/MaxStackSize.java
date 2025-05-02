@@ -1,8 +1,9 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -26,7 +27,7 @@ public class MaxStackSize extends SubCmd {
         try {
             if (args.length > 2)
                 throw new IllegalArgumentException("Wrong param number");
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             Integer value = args.length == 1 ? (meta.hasMaxStackSize() ? Integer.valueOf(item.getType().getMaxStackSize()) : Integer.valueOf(99)) :
                     (args[1].toLowerCase(Locale.ENGLISH).equalsIgnoreCase("default") ? null : Integer.valueOf(args[1]));
             meta.setMaxStackSize(value);
@@ -39,7 +40,7 @@ public class MaxStackSize extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2) {
-            List<String> list = Util.complete(args[1], "1", "32", "64", "99");
+            List<String> list = CompleteUtility.complete(args[1], "1", "32", "64", "99");
             if ("default".startsWith(args[1].toLowerCase(Locale.ENGLISH)))
                 list.add("default");
             return list;

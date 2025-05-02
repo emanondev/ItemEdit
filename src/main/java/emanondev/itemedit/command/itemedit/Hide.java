@@ -3,10 +3,12 @@ package emanondev.itemedit.command.itemedit;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.CommandSender;
@@ -33,7 +35,7 @@ public class Hide extends SubCmd {
             if ((args.length != 3) && (args.length != 2))
                 throw new IllegalArgumentException("Wrong param number");
 
-            ItemMeta itemMeta = item.getItemMeta();
+            ItemMeta itemMeta = ItemUtils.getMeta(item);
             ItemFlag flag = Aliases.FLAG_TYPE.convertAlias(args[1]);
             if (flag == null) {
                 onWrongAlias("wrong-flag", p, Aliases.FLAG_TYPE);
@@ -57,8 +59,8 @@ public class Hide extends SubCmd {
     }
 
     private void handleFlagChange(boolean put, ItemFlag flag, ItemStack item, ItemMeta meta) {
-        if (!Util.hasPaperAPI() ||
-                !Util.isVersionAfter(1, 20, 5) ||
+        if (!VersionUtils.hasPaperAPI() ||
+                !VersionUtils.isVersionAfter(1, 20, 5) ||
                 !ItemEdit.get().getConfig().loadBoolean("itemedit.paper_hide_fix", true)) {
             return;
         }
@@ -95,9 +97,9 @@ public class Hide extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Aliases.FLAG_TYPE);
+            return CompleteUtility.complete(args[1], Aliases.FLAG_TYPE);
         if (args.length == 3)
-            return Util.complete(args[2], Aliases.BOOLEAN);
+            return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
         return Collections.emptyList();
     }
 

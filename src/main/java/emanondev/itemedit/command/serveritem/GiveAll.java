@@ -2,12 +2,13 @@ package emanondev.itemedit.command.serveritem;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsInventory;
-import emanondev.itemedit.UtilsInventory.ExcessManage;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -44,7 +45,7 @@ public class GiveAll extends SubCmd {
             List<String> lore = null;
             String title = null;
             if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
-                meta = item.getItemMeta();
+                meta = ItemUtils.getMeta(item);
                 lore = meta.hasLore() ? meta.getLore() : null;
                 title = meta.hasDisplayName() ? meta.getDisplayName() : null;
             }
@@ -57,8 +58,9 @@ public class GiveAll extends SubCmd {
                             "%player_uuid%", target.getUniqueId().toString()));
                     item.setItemMeta(meta);
                 }
-                int given = UtilsInventory.giveAmount(target, item, amount, ItemEdit.get().getConfig()
-                        .loadBoolean("serveritem.give-drops-excess", true) ? ExcessManage.DROP_EXCESS : ExcessManage.DELETE_EXCESS);
+                int given = InventoryUtils.giveAmount(target, item, amount, ItemEdit.get().getConfig()
+                        .loadBoolean("serveritem.give-drops-excess", true) ?
+                        InventoryUtils.ExcessMode.DROP_EXCESS : InventoryUtils.ExcessMode.DELETE_EXCESS);
                 total += given;
                 if (given > 0 && !silent)
                     sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
@@ -91,11 +93,11 @@ public class GiveAll extends SubCmd {
         switch (args.length) {
             // <id> [amount] [silent]
             case 2:
-                return Util.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+                return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
             case 3:
-                return Util.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
             case 4:
-                return Util.complete(args[3], Aliases.BOOLEAN);
+                return CompleteUtility.complete(args[3], Aliases.BOOLEAN);
         }
         return Collections.emptyList();
     }

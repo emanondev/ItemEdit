@@ -1,29 +1,24 @@
 package emanondev.itemedit;
 
-import emanondev.itemedit.compability.V1_20_6;
-import org.bukkit.Bukkit;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.block.banner.PatternType;
-import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import emanondev.itemedit.utility.SchedulerUtils;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class UtilLegacy {
 
-
-    private static final HashMap<Class<?>, Method> getTopInventory = new HashMap<>();
-    private static final HashMap<Class<?>, Method> getBottomInventory = new HashMap<>();
-
+    private static final Map<Class<?>, Method> getTopInventory =
+            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
+    private static final Map<Class<?>, Method> getBottomInventory =
+            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
 
     /**
      * This method uses reflection to get the top Inventory object from the
@@ -33,9 +28,11 @@ public class UtilLegacy {
      *
      * @param event The generic InventoryEvent with an InventoryView to inspect.
      * @return The top Inventory object from the event's InventoryView.
+     * @see emanondev.itemedit.utility.InventoryUtils#getTopInventory(InventoryEvent) InventoryUtils.getTopInventory(InventoryEvent)
      */
+    @Deprecated
     public static Inventory getTopInventory(@NotNull InventoryEvent event) {
-        if (Util.isVersionAfter(1, 21))
+        if (VersionUtils.isVersionAfter(1, 21))
             return event.getView().getTopInventory();
         return getTopInventoryP(event.getView());
     }
@@ -48,9 +45,11 @@ public class UtilLegacy {
      *
      * @param player The player with an InventoryView to inspect.
      * @return The top Inventory object from the player's InventoryView.
+     * @see emanondev.itemedit.utility.InventoryUtils#getTopInventory(Player) InventoryUtils.getTopInventory(Player)
      */
+    @Deprecated
     public static Inventory getTopInventory(@NotNull Player player) {
-        if (Util.isVersionAfter(1, 21))
+        if (VersionUtils.isVersionAfter(1, 21))
             return player.getOpenInventory().getTopInventory();
         return getTopInventoryP(player.getOpenInventory());
     }
@@ -78,9 +77,11 @@ public class UtilLegacy {
      *
      * @param event The generic InventoryEvent with an InventoryView to inspect.
      * @return The bottom Inventory object from the event's InventoryView.
+     * @see emanondev.itemedit.utility.InventoryUtils#getBottomInventory(InventoryEvent) InventoryUtils.getBottomInventory(InventoryEvent)
      */
+    @Deprecated
     public static Inventory getBottomInventory(@NotNull InventoryEvent event) {
-        if (Util.isVersionAfter(1, 21))
+        if (VersionUtils.isVersionAfter(1, 21))
             return event.getView().getBottomInventory();
         return getBottomInventoryP(event.getView());
     }
@@ -107,9 +108,11 @@ public class UtilLegacy {
      * In API versions 1.19.4 and later, there is implicit consistency for inventory and changes.
      *
      * @param player The player which inventory view should be updated
+     * @see emanondev.itemedit.utility.InventoryUtils#updateView(Player) InventoryUtils.updateView(Player)
      */
+    @Deprecated
     public static void updateView(@NotNull Player player) {
-        if (Util.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
+        if (VersionUtils.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
             player.updateInventory();
         }
     }
@@ -121,13 +124,14 @@ public class UtilLegacy {
      * In API versions 1.19.4 and later, there is implicit consistency for inventory and changes.
      *
      * @param player The player which inventory view should be updated
+     * @see emanondev.itemedit.utility.InventoryUtils#updateViewDelayed(Player) InventoryUtils.updateViewDelayed(Player)
      */
+    @Deprecated
     public static void updateViewDelayed(@NotNull Player player) {
-        if (Util.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
-            Bukkit.getScheduler().runTaskLater(ItemEdit.get(), player::updateInventory, 1L);
+        if (VersionUtils.isVersionUpTo(1, 19, 4) || Util.hasPurpurAPI()) {
+            SchedulerUtils.runLater(ItemEdit.get(), 1L, player::updateInventory);
         }
     }
-
 
     /**
      * This method accepts <code>infinite</code>,<code>∞</code> or any number as valid input.<br>
@@ -144,130 +148,10 @@ public class UtilLegacy {
                 -1 : (Integer.parseInt(value));
         if (duration >= 0)
             duration *= 20; //to ticks
-        else if (!Util.isVersionAfter(1, 19, 4))
+        else if (!VersionUtils.isVersionAfter(1, 19, 4))
             duration = Integer.MAX_VALUE;
         else
             duration = -1;
         return duration;
     }
-
-
-    /**
-     * Returns true if the item has unbreakable tag.<br><br>
-     * In API versions 1.10.2 and earlier, there is no isUnbreakable method on ItemMeta, so we rely on serialization.<br>
-     * In API versions 1.11 and later, isUnbreakable method was added on ItemMeta.
-     *
-     * @param item The ItemStack to check
-     * @return true if the item has unbreakable tag
-     * @see #isUnbreakable(ItemMeta)
-     */
-    public static boolean isUnbreakable(@NotNull ItemStack item) {
-        return isUnbreakable(item.getItemMeta());
-    }
-
-    /**
-     * Returns true if the meta has unbreakable tag.<br><br>
-     * In API versions 1.10.2 and earlier, there is no isUnbreakable method on ItemMeta, so we rely on serialization.<br>
-     * In API versions 1.11 and later, isUnbreakable method was added on ItemMeta.
-     *
-     * @param meta The ItemMeta to check
-     * @return true if the meta has unbreakable tag
-     */
-    public static boolean isUnbreakable(@Nullable ItemMeta meta) {
-        if (meta == null)
-            return false;
-        if (Util.isVersionAfter(1, 11))
-            return meta.isUnbreakable();
-        return meta.serialize().containsKey("Unbreakable");
-    }
-
-    /**
-     * Sets the item unbreakable tag.<br><br>
-     * In API versions 1.10.2 and earlier, there is no setUnbreakable method on ItemMeta, so we rely on serialization.<br>
-     * In API versions 1.11 and later, setUnbreakable method was added on ItemMeta.
-     *
-     * @param item  The ItemStack to set tag on
-     * @param value The value to set
-     * @see #setUnbreakable(ItemMeta, boolean)
-     */
-    public static void setUnbreakable(@NotNull ItemStack item, boolean value) {
-        ItemMeta meta = setUnbreakable(item.getItemMeta(), value);
-        item.setItemMeta(meta);
-    }
-
-    /**
-     * Returns meta with unbreakable tag.<br>
-     * N.B. returned value may or may not be different from meta parameter<br><br>
-     * In API versions 1.10.2 and earlier, there is no setUnbreakable method on ItemMeta, so we rely on serialization.<br>
-     * In API versions 1.11 and later, setUnbreakable method was added on ItemMeta.
-     *
-     * @param meta  The ItemMeta to set tag on
-     * @param value The value to set
-     * @see #setUnbreakable(ItemMeta, boolean)
-     */
-    public static ItemMeta setUnbreakable(@Nullable ItemMeta meta, boolean value) {
-        if (meta == null)
-            return null;
-        if (Util.isVersionAfter(1, 11)) {
-            meta.setUnbreakable(value);
-            return meta;
-        }
-        Map<String, Object> map = new LinkedHashMap<>(meta.serialize());
-        if (map.containsKey("Unbreakable")) {
-            if (value)
-                map.put("Unbreakable", true);
-            else
-                return meta;
-        } else {
-            if (!value)
-                return meta;
-            else
-                map.remove("Unbreakable");
-        }
-        map.put("==", "ItemMeta");
-        return (ItemMeta) ConfigurationSerialization.deserializeObject(map);
-    }
-
-
-    public static AttributeModifier createAttributeModifier(org.bukkit.attribute.Attribute attr, double amount, AttributeModifier.Operation op, @Nullable String slot) {
-        try {
-            if (Util.isVersionAfter(1, 20, 6))
-                return V1_20_6.createAttribute(attr, amount, op, slot);
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        return new AttributeModifier(UUID.randomUUID(), ((Enum) attr).toString(), amount, op, EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)));
-    }
-
-
-    public static PatternType[] getPatternTypes() {
-        try {
-            if (Util.isVersionAfter(1, 20, 6))
-                return V1_20_6.getPatternTypes();
-        } catch (Throwable e) {
-        }
-        try {
-            Class<PatternType> clazz = PatternType.class;
-            Method method = clazz.getMethod("values");
-            PatternType[] result = (PatternType[]) method.invoke(null);
-            return Arrays.copyOfRange(result, 1, result.length);
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-
-    public static PatternType[] getPatternTypesFilthered() {
-        PatternType[] val = getPatternTypes();
-        ArrayList<PatternType> list = new ArrayList<>(Arrays.asList(val));
-        list.remove(PatternType.BASE);
-        if (Util.isVersionAfter(1, 20, 6) && !Util.isVersionAfter(1, 21)) { //those are not craftable items on 1.20.6
-            list.remove(PatternType.FLOW);
-            list.remove(PatternType.GUSTER);
-        }
-        return list.toArray(new PatternType[0]);
-    }
-
-
 }

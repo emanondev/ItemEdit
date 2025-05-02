@@ -23,10 +23,13 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class Util {
+    @Deprecated
     public static final int GAME_MAIN_VERSION = Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[0]);
+    @Deprecated
     public static final int GAME_VERSION = Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[1]);
+    @Deprecated
     public static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length < 3 ? 0 : Integer.parseInt(
             Bukkit.getBukkitVersion().split("-")[0].split("\\.")[2]);
     private static final int MAX_COMPLETES = 200;
@@ -34,6 +37,7 @@ public class Util {
     private static final boolean hasFolia = initFolia();
     private static final boolean hasPurpur = initPurpur();
 
+    @Deprecated
     public static <T extends Enum<T>> @NotNull List<String> complete(String prefix, @NotNull Class<T> enumClass) {
         prefix = prefix.toUpperCase();
         ArrayList<String> results = new ArrayList<>();
@@ -48,6 +52,7 @@ public class Util {
         return results;
     }
 
+    @Deprecated
     public static @NotNull <T extends Enum<T>> List<String> complete(String prefix, @NotNull Class<T> type,
                                                                      @NotNull Predicate<T> predicate) {
         prefix = prefix.toUpperCase();
@@ -63,6 +68,7 @@ public class Util {
         return results;
     }
 
+    @Deprecated
     public static @NotNull List<String> complete(String prefix, String... list) {
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
@@ -77,6 +83,7 @@ public class Util {
         return results;
     }
 
+    @Deprecated
     public static @NotNull List<String> complete(String prefix, Collection<String> list) {
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
@@ -91,6 +98,7 @@ public class Util {
         return results;
     }
 
+    @Deprecated
     public static @NotNull <T> List<String> complete(String prefix, Collection<T> list, Function<T, String> converter) {
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
@@ -107,6 +115,7 @@ public class Util {
         return results;
     }
 
+    @Deprecated
     public static @NotNull List<String> completePlayers(String prefix) {
         ArrayList<String> names = new ArrayList<>();
         final String text = prefix.toLowerCase(Locale.ENGLISH);
@@ -117,6 +126,7 @@ public class Util {
         return names;
     }
 
+    @Deprecated
     public static @NotNull List<String> complete(String prefix, IAliasSet<?> aliases) {
         ArrayList<String> results = new ArrayList<>();
         prefix = prefix.toLowerCase(Locale.ENGLISH);
@@ -155,8 +165,6 @@ public class Util {
                     "logs" + File.separatorChar
                             + new SimpleDateFormat(ItemEdit.get().getConfig().loadMessage("log.file-format", "yyyy.MM.dd", false)
                             , Locale.ENGLISH).format(date)
-                            //+ DateFormatUtils.format(date,
-                            //ItemEdit.get().getConfig().loadMessage("log.file-format", "yyyy.MM.dd", false))
                             + ".log");
             if (!saveTo.getParentFile().exists()) { // Create parent folders if they don't exist
                 saveTo.getParentFile().mkdirs();
@@ -390,6 +398,7 @@ public class Util {
         }
     }
 
+    @Deprecated
     public static boolean isAirOrNull(ItemStack item) {
         return item == null || item.getType() == Material.AIR;
     }
@@ -398,6 +407,7 @@ public class Util {
      * Inclusive
      * isVersionUpTo(1,9) on 1.9.0 is true
      */
+    @Deprecated
     public static boolean isVersionUpTo(int mainVersion, int version) {
         return isVersionUpTo(mainVersion, version, 99);
     }
@@ -406,6 +416,7 @@ public class Util {
      * Inclusive
      * isVersionUpTo(1,9,4) on 1.9.4 is true
      */
+    @Deprecated
     public static boolean isVersionUpTo(int mainVersion, int version, int subVersion) {
         if (GAME_MAIN_VERSION > mainVersion)
             return false;
@@ -422,6 +433,7 @@ public class Util {
      * Inclusive
      * isVersionAfter(1,9) on 1.9.0 is true
      */
+    @Deprecated
     public static boolean isVersionAfter(int mainVersion, int version) {
         return isVersionAfter(mainVersion, version, 0);
     }
@@ -430,6 +442,7 @@ public class Util {
      * Inclusive
      * isVersionAfter(1,9,4) on 1.9.4 is true
      */
+    @Deprecated
     public static boolean isVersionAfter(int mainVersion, int version, int subVersion) {
         if (GAME_MAIN_VERSION < mainVersion)
             return false;
@@ -445,6 +458,7 @@ public class Util {
     /**
      * Inclusive
      */
+    @Deprecated
     public static boolean isVersionInRange(int mainVersionMin, int versionMin,
                                            int mainVersionMax, int versionMax) {
         return isVersionInRange(mainVersionMin, versionMin, 0,
@@ -454,6 +468,7 @@ public class Util {
     /**
      * Inclusive
      */
+    @Deprecated
     public static boolean isVersionInRange(int mainVersionMin, int versionMin, int subVersionMin,
                                            int mainVersionMax, int versionMax, int subVersionMax) {
         return isVersionAfter(mainVersionMin, versionMin, subVersionMin)
@@ -465,7 +480,7 @@ public class Util {
             return true;
 
         List<String> values = ItemEdit.get().getConfig().getStringList("blocked.type-blocked-lore");
-        if (values == null || values.isEmpty())
+        if (values.isEmpty())
             return true;
         String id = type.name();
         for (String name : values)
@@ -486,6 +501,7 @@ public class Util {
         }
     }
 
+    @Deprecated
     public static boolean hasPaperAPI() {
         return hasPaper;
     }
@@ -508,10 +524,12 @@ public class Util {
         }
     }
 
+    @Deprecated
     public static boolean hasPurpurAPI() {
         return hasPurpur;
     }
 
+    @Deprecated
     public static boolean hasFoliaAPI() {
         return hasFolia;
     }

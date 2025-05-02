@@ -1,8 +1,9 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,7 +29,7 @@ public class ToolTipStyle extends SubCmd {
             if (args.length != 2)
                 throw new IllegalArgumentException("Wrong param number");
 
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
 
             String value = args[1].toLowerCase(Locale.ENGLISH);
             if (value.equals("clear")) {
@@ -51,15 +52,11 @@ public class ToolTipStyle extends SubCmd {
             onFail(p, alias);
         }
     }
-        /*
-        If present, this item can use custom sprites for its tooltip background and frame.
-         {{namespace}}:tooltip/{{path}}_background and {{namespace}}:tooltip/{{path}}_frame
-         */
 
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2) {
-            return Util.complete(args[1], "clear");
+            return CompleteUtility.complete(args[1], "clear");
         }
         return Collections.emptyList();
     }

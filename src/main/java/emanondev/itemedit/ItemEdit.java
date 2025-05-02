@@ -13,44 +13,25 @@ import emanondev.itemedit.storage.mongo.MongoServerStorage;
 import emanondev.itemedit.storage.mongo.MongoStorage;
 import emanondev.itemedit.storage.yaml.YmlPlayerStorage;
 import emanondev.itemedit.storage.yaml.YmlServerStorage;
+import emanondev.itemedit.utility.InventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
+import java.util.Locale;
+import java.util.function.Predicate;
 
 public class ItemEdit extends APlugin {
-    /**
-     * @see Util#isVersionUpTo(int, int, int)
-     * @see Util#isVersionAfter(int, int, int)
-     * @see Util#isVersionInRange(int, int, int, int, int, int)
-     */
-    @Deprecated
-    public static final int GAME_MAIN_VERSION = Integer.parseInt(
-            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[0]);
-    /**
-     * @see Util#isVersionUpTo(int, int, int)
-     * @see Util#isVersionAfter(int, int, int)
-     * @see Util#isVersionInRange(int, int, int, int, int, int)
-     */
-    @Deprecated
-    public static final int GAME_VERSION = Integer.parseInt(
-            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[1]);
-    /**
-     * @see Util#isVersionUpTo(int, int, int)
-     * @see Util#isVersionAfter(int, int, int)
-     * @see Util#isVersionInRange(int, int, int, int, int, int)
-     */
-    @Deprecated
-    public static final int GAME_SUB_VERSION = Bukkit.getBukkitVersion().split("-")[0].split("\\.").length < 3 ? 0 : Integer.parseInt(
-            Bukkit.getBukkitVersion().split("-")[0].split("\\.")[2]);
+
     private final static int PROJECT_ID = 40993;
     private static final int BSTATS_PLUGIN_ID = 15076;
     private static ItemEdit plugin = null;
-    private @Nullable MongoStorage mongoStorage;
     private PlayerStorage pStorage;
     private ServerStorage sStorage;
+    @Nullable
+    private MongoStorage mongoStorage;
 
     public static ItemEdit get() {
         return plugin;
@@ -68,17 +49,70 @@ public class ItemEdit extends APlugin {
     }
 
     @Override
+    protected void updateConfigurations(int oldConfigVersion) {
+        final YMLConfig conf = this.getConfig();
+        final YMLConfig aliases = this.getConfig("aliases.yml");
+        if (oldConfigVersion <= 3) {
+            conf.set("check-updates", true);
+        }
+        if (oldConfigVersion <= 4) {
+            conf.set("storage.type", "YAML");
+            conf.set("storage.mongodb.uri", "mongodb://127.0.0.1:27017");
+            conf.set("storage.mongodb.database", "itemedit");
+            conf.set("storage.mongodb.collection_prefix", "itemedit");
+
+            for (String name : new String[]{"quartz", "redstone", "emerald", "copper", "iron", "lapis",
+                    "diamond", "gold", "netherite", "amethyst"})
+                aliases.set("trim_material.minecraft:" + name.toLowerCase(Locale.ENGLISH), name.toLowerCase(Locale.ENGLISH));
+            for (String name : new String[]{"rib", "snout", "wild", "coast", "spire", "wayfinder", "shaper", "tide",
+                    "silence", "vex", "sentry", "dune", "raiser", "eye", "host", "ward"})
+                aliases.set("trim_pattern.minecraft:" + name.toLowerCase(Locale.ENGLISH), name.toLowerCase(Locale.ENGLISH));
+        }
+
+        if (oldConfigVersion <= 6) {
+            conf.set("blocked.lore-line-limit", 16);
+        }
+
+        if (oldConfigVersion <= 7) {
+            aliases.set("attribute.generic_max_absorption", "max_absorption");
+        }
+    }
+
+    @Override
+    protected boolean addLanguagesMetrics() {
+        return true;
+    }
+
+    @Override
+    @NotNull
+    protected Predicate<Player> languagesMetricsIsAdmin() {
+        return p -> p.hasPermission("itemedit.admin");
+    }
+
+    @Override
+    @NotNull
+    protected Predicate<Player> languagesMetricsIsUser() {
+        return p -> p.hasPermission("itemedit.creativeuser")
+                || p.hasPermission("itemedit.itemedit.rename")
+                || p.hasPermission("itemedit.itemedit.lore")
+                || p.hasPermission("itemedit.itemedit.color");
+    }
+
+    @Override
     public Integer getProjectId() {
         return PROJECT_ID;
     }
 
     @Override
+    public Integer getMetricsId() {
+        return BSTATS_PLUGIN_ID;
+    }
+
+    @Override
     public void enable() {
         if (Util.hasMiniMessageAPI()) {
-            ItemEdit.get().log("Hooking into " + UtilsString.fix("<rainbow>MiniMessageAPI</rainbow>", null, true) + "&f see https://webui.advntr.dev/");
+            ItemEdit.get().log("Hooking into <rainbow>MiniMessageAPI</rainbow><white> see https://webui.advntr.dev/");
         }
-
-        ConfigurationUpdater.update();
         Aliases.reload();
         Bukkit.getPluginManager().registerEvents(new GuiHandler(), this);
 
@@ -105,15 +139,12 @@ public class ItemEdit extends APlugin {
             }
         }
 
-        registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
-        registerCommand(new ItemStorageCommand(), Collections.singletonList("is"));
-        registerCommand(new ServerItemCommand(), Collections.singletonList("si"));
-        registerCommand("itemeditinfo", new ItemEditInfoCommand(), null);
-        new ReloadCommand(this).register();
-        registerCommand("itemeditimport", new ItemEditImportCommand(), null);
-        //TODO add a command to change storage type (aka conversion)
+        initCommands();
+        initHooks();
 
-        //hooks
+    }
+
+    private void initHooks() {
         if (Hooks.isPAPIEnabled()) {
             try {
                 this.log("Hooking into PlaceHolderAPI");
@@ -154,17 +185,22 @@ public class ItemEdit extends APlugin {
                 t.printStackTrace();
             }
         }
-        Metrics metrics = registerMetrics(BSTATS_PLUGIN_ID);
-        registerLanguagesMetrics(metrics, (p) -> p.hasPermission("itemedit.admin"), (p) -> p.hasPermission("itemedit.creativeuser")
-                || p.hasPermission("itemedit.itemedit.rename")
-                || p.hasPermission("itemedit.itemedit.lore")
-                || p.hasPermission("itemedit.itemedit.color"));
+    }
+
+    private void initCommands() {
+        registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
+        registerCommand(new ItemStorageCommand(), Collections.singletonList("is"));
+        registerCommand(new ServerItemCommand(), Collections.singletonList("si"));
+        registerCommand("itemeditinfo", new ItemEditInfoCommand(), null);
+        new ReloadCommand(this).register();
+        registerCommand("itemeditimport", new ItemEditImportCommand(), null);
+        //TODO add a command to change storage type (aka conversion)
     }
 
     @Override
     public void disable() {
         for (Player p : Bukkit.getOnlinePlayers())
-            if (UtilLegacy.getTopInventory(p).getHolder() instanceof Gui)
+            if (InventoryUtils.getTopInventory(p).getHolder() instanceof Gui)
                 p.closeInventory();
 
         if (this.mongoStorage != null) this.mongoStorage.close();

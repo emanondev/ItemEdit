@@ -1,5 +1,6 @@
 package emanondev.itemedit;
 
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
@@ -26,7 +27,7 @@ public class ParsedItem {
     private int amount;
 
     public ParsedItem(ItemStack itemStack) {
-        this(itemStack.getType(), itemStack.getItemMeta());
+        this(itemStack.getType(), ItemUtils.getMeta(itemStack));
         amount = itemStack.getAmount();
     }
 
@@ -672,7 +673,7 @@ public class ParsedItem {
         return (List<Map<String, Object>>) map.get(paths[paths.length - 1]);
     }
 
-    private class EatResult {
+    private static class EatResult {
         private final int newIndex;
         private final Object payload;
 

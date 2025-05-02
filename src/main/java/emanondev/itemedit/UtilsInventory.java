@@ -1,5 +1,8 @@
 package emanondev.itemedit;
 
+import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.SchedulerUtils;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -7,9 +10,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
+/**
+ * @see emanondev.itemedit.utility.InventoryUtils InventoryUtils
+ */
+@Deprecated
 public class UtilsInventory {
 
-    UtilsInventory() {
+    private UtilsInventory() {
         throw new UnsupportedOperationException();
     }
 
@@ -42,7 +49,7 @@ public class UtilsInventory {
             break;
         }
 
-        UtilLegacy.updateViewDelayed((Player) player);
+        InventoryUtils.updateViewDelayed((Player) player);
 
         if (remains == 0)
             return amount;
@@ -54,7 +61,9 @@ public class UtilsInventory {
                 while (remains > 0) {
                     int drop = Math.min(remains, 64);
                     item.setAmount(drop);
-                    player.getWorld().dropItem(player.getEyeLocation(), item);
+                    @NotNull ItemStack finalItem = item;
+                    SchedulerUtils.run(ItemEdit.get(), player.getEyeLocation(), () -> player.getWorld().dropItem(player.getEyeLocation(), finalItem));
+
                     remains -= drop;
                 }
                 return amount;
@@ -88,13 +97,13 @@ public class UtilsInventory {
                 item.setAmount(amount);
                 HashMap<Integer, ItemStack> map = player.getInventory().removeItem(item);
 
-                UtilLegacy.updateViewDelayed((Player) player);
+                InventoryUtils.updateViewDelayed((Player) player);
 
                 if (map.isEmpty())
                     return amount;
                 else {
                     int left = map.get(0).getAmount();
-                    if (Util.isVersionAfter(1, 9)) {
+                    if (VersionUtils.isVersionAfter(1, 9)) {
                         ItemStack[] extras = player.getInventory().getExtraContents();
                         for (int i = 0; i < extras.length; i++) {
                             ItemStack extra = extras[i];
@@ -120,7 +129,7 @@ public class UtilsInventory {
                     item.setAmount(amount);
                     HashMap<Integer, ItemStack> map = player.getInventory().removeItem(item);
 
-                    UtilLegacy.updateViewDelayed((Player) player);
+                    InventoryUtils.updateViewDelayed((Player) player);
 
                     if (map.isEmpty())
                         return amount;

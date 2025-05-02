@@ -1,9 +1,10 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -29,7 +30,7 @@ public class Glow extends SubCmd {
 
             if (args.length > 2)
                 throw new IllegalArgumentException("Wrong param number");
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             Boolean value = args.length == 1 ? (meta.hasEnchantmentGlintOverride() ? !meta.getEnchantmentGlintOverride() : Boolean.TRUE) : Aliases.BOOLEAN.convertAlias(args[1]);
             meta.setEnchantmentGlintOverride(value);
             item.setItemMeta(meta);
@@ -41,7 +42,7 @@ public class Glow extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2) {
-            List<String> list = Util.complete(args[1], Aliases.BOOLEAN);
+            List<String> list = CompleteUtility.complete(args[1], Aliases.BOOLEAN);
             if ("default".startsWith(args[1].toLowerCase(Locale.ENGLISH)))
                 list.add("default");
             return list;

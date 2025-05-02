@@ -1,10 +1,10 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -28,9 +28,9 @@ public class Unbreakable extends SubCmd {
             return;
         }
         try {
-            ItemMeta meta = item.getItemMeta();
-            boolean value = args.length == 2 ? Aliases.BOOLEAN.convertAlias(args[1]) : !UtilLegacy.isUnbreakable(meta);
-            meta = UtilLegacy.setUnbreakable(meta, value);
+            ItemMeta meta = ItemUtils.getMeta(item);
+            boolean value = args.length == 2 ? Aliases.BOOLEAN.convertAlias(args[1]) : !ItemUtils.isUnbreakable(meta);
+            ItemUtils.setUnbreakable(meta, value);
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class Unbreakable extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Aliases.BOOLEAN);
+            return CompleteUtility.complete(args[1], Aliases.BOOLEAN);
         return Collections.emptyList();
     }
 }

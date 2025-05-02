@@ -3,6 +3,8 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,7 +20,6 @@ public class MaxDurability extends SubCmd {
         super("maxdurability", cmd, true, true);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
@@ -26,7 +27,7 @@ public class MaxDurability extends SubCmd {
         try {
             if (args.length != 2)
                 throw new IllegalArgumentException("Wrong param number");
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             if (!(meta instanceof Damageable)) {
                 Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
                 return;
@@ -47,7 +48,7 @@ public class MaxDurability extends SubCmd {
                 ItemStack item = this.getItemInHand((Player) sender);
                 if (item != null && item.getType().getMaxDurability() > 1) {
                     int max = item.getType().getMaxDurability();
-                    return Util.complete(args[1], "1", String.valueOf(max), String.valueOf(max / 2), String.valueOf(max / 4), String.valueOf(max / 4 * 3));
+                    return CompleteUtility.complete(args[1], "1", String.valueOf(max), String.valueOf(max / 2), String.valueOf(max / 4), String.valueOf(max / 4 * 3));
                 }
             }
         }

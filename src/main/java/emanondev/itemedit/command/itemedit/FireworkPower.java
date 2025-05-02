@@ -3,6 +3,7 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -27,7 +28,7 @@ public class FireworkPower extends SubCmd {
             return;
         }
 
-        FireworkMeta itemMeta = (FireworkMeta) item.getItemMeta();
+        FireworkMeta itemMeta = (FireworkMeta) ItemUtils.getMeta(item);
 
         try {
             if (args.length != 2)

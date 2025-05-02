@@ -3,6 +3,7 @@ package emanondev.itemedit.gui;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -34,7 +35,7 @@ public class FireworkEditor implements Gui {
                 item = new ItemStack(Material.valueOf("FIREWORK"));
             }
         this.firework = item.clone();
-        this.meta = (FireworkMeta) firework.getItemMeta();
+        this.meta = (FireworkMeta) ItemUtils.getMeta(firework);
         this.target = target;
         String title = getLanguageMessage(subPath + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
@@ -85,7 +86,6 @@ public class FireworkEditor implements Gui {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onClick(InventoryClickEvent event) {
         if (!event.getWhoClicked().equals(target))
@@ -129,15 +129,7 @@ public class FireworkEditor implements Gui {
             return;
         }
         if (event.getSlot() == 49) {
-            /*if (event.isLeftClick())
-                try {
-                    target.getInventory().setItemInMainHand(firework);
-                } catch (Throwable t) {
-                    target.getInventory().setItemInHand(firework);
-                }
-            else*/
             target.getInventory().addItem(firework);
-            return;
         }
     }
 
@@ -172,7 +164,7 @@ public class FireworkEditor implements Gui {
             item = new ItemStack(Material.valueOf("SULPHUR"));
         }
         item.setAmount(meta.getPower() + 1);
-        ItemMeta powerMeta = item.getItemMeta();
+        ItemMeta powerMeta = ItemUtils.getMeta(item);
         powerMeta.addItemFlags(ItemFlag.values());
         loadLanguageDescription(powerMeta, subPath + "buttons.power", "%power%",
                 String.valueOf(meta.getPower() + 1));
@@ -262,7 +254,7 @@ public class FireworkEditor implements Gui {
                     item = new ItemStack(Material.ARROW);
                     break;
             }
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             loadLanguageDescription(meta, subPath + "buttons.type", "%type%", Aliases.FIREWORK_TYPE.getName(type));
             item.setItemMeta(meta);
@@ -272,8 +264,8 @@ public class FireworkEditor implements Gui {
         public ItemStack getColorsItem() {
             if (!active)
                 return null;
-            ItemStack item = Util.getDyeItemFromColor(colors.size() > 0 ? DyeColor.LIGHT_BLUE : DyeColor.RED);
-            ItemMeta meta = item.getItemMeta();
+            ItemStack item = Util.getDyeItemFromColor(!colors.isEmpty() ? DyeColor.LIGHT_BLUE : DyeColor.RED);
+            ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             List<String> colorNames = new ArrayList<>();
             for (DyeColor color : colors)
@@ -289,7 +281,7 @@ public class FireworkEditor implements Gui {
             if (!active)
                 return null;
             ItemStack item = Util.getDyeItemFromColor(DyeColor.BLUE);
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             List<String> colorNames = new ArrayList<>();
             for (DyeColor color : fadeColors)
@@ -307,7 +299,7 @@ public class FireworkEditor implements Gui {
             if (!active)
                 return null;
             ItemStack item = trail ? new ItemStack(Material.DIAMOND) : Util.getDyeItemFromColor(DyeColor.GRAY);
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             if (flicker)
                 meta.addEnchant(Enchantment.LURE, 1, true);
@@ -324,7 +316,7 @@ public class FireworkEditor implements Gui {
             ItemStack item = Util
                     .getDyeItemFromColor(active ? (colors.isEmpty() ? DyeColor.RED : DyeColor.LIME) : DyeColor.GRAY);
 
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
 
             meta.addItemFlags(ItemFlag.values());
             loadLanguageDescription(meta, subPath + "buttons.position", "%middle_click%",

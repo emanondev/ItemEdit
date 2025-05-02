@@ -2,12 +2,13 @@ package emanondev.itemedit.command.serveritem;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsInventory;
-import emanondev.itemedit.UtilsInventory.LackManage;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -40,12 +41,12 @@ public class Take extends SubCmd {
             ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1]);
             Player target = args.length >= 4 ? Bukkit.getPlayer(args[3]) : (Player) sender;
             if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
-                ItemMeta meta = item.getItemMeta();
+                ItemMeta meta = ItemUtils.getMeta(item);
                 meta.setDisplayName(UtilsString.fix(meta.getDisplayName(), target, true, "%player_name%", target.getName(), "%player_uuid%", target.getUniqueId().toString()));
                 meta.setLore(UtilsString.fix(meta.getLore(), target, true, "%player_name%", target.getName(), "%player_uuid%", target.getUniqueId().toString()));
                 item.setItemMeta(meta);
             }
-            amount = UtilsInventory.removeAmount(target, item, amount, LackManage.REMOVE_MAX_POSSIBLE);
+            amount = InventoryUtils.removeAmount(target, item, amount, InventoryUtils.LackMode.REMOVE_MAX_POSSIBLE);
             if (!silent)
                 sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
@@ -71,13 +72,13 @@ public class Take extends SubCmd {
             return Collections.emptyList();
         switch (args.length) {
             case 2:
-                return Util.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+                return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
             case 3:
-                return Util.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
             case 4:
-                return Util.completePlayers(args[3]);
+                return CompleteUtility.completePlayers(args[3]);
             case 5:
-                return Util.complete(args[4], Aliases.BOOLEAN);
+                return CompleteUtility.complete(args[4], Aliases.BOOLEAN);
         }
         return Collections.emptyList();
     }

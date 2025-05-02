@@ -5,6 +5,7 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.aliases.IAliasSet;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.ComponentBuilder.FormatRetention;
@@ -93,7 +94,7 @@ public class ListAliases extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Aliases.getTypes().keySet());
+            return CompleteUtility.complete(args[1], Aliases.getTypes().keySet());
         return Collections.emptyList();
     }
 

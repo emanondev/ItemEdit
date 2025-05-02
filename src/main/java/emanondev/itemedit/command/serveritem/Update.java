@@ -1,9 +1,9 @@
 package emanondev.itemedit.command.serveritem;
 
 import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -38,7 +38,7 @@ public class Update extends SubCmd {
         if (!(sender instanceof Player))
             return Collections.emptyList();
         if (args.length == 2)
-            return Util.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+            return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
         return Collections.emptyList();
     }
 

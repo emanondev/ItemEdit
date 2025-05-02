@@ -5,7 +5,7 @@
 # Spigot https://www.spigotmc.org/resources/40993/
 #
 # Do not change config-version
-config-version: 7
+config-version: 8
 #Notify console when a plugin update is available
 check-updates: true
 language:

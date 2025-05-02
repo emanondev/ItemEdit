@@ -2,12 +2,13 @@ package emanondev.itemedit.command.serveritem;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsInventory;
-import emanondev.itemedit.UtilsInventory.ExcessManage;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.ItemUtils;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -58,7 +59,7 @@ public class SellMax extends SubCmd {
             if (price <= 0)
                 throw new IllegalArgumentException();
             if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
-                ItemMeta meta = item.getItemMeta();
+                ItemMeta meta = ItemUtils.getMeta(item);
                 meta.setDisplayName(UtilsString.fix(meta.getDisplayName(), target, true, "%player_name%", target.getName(), "%player_uuid%", target.getUniqueId().toString()));
                 meta.setLore(UtilsString.fix(meta.getLore(), target, true, "%player_name%", target.getName(), "%player_uuid%", target.getUniqueId().toString()));
                 item.setItemMeta(meta);
@@ -87,7 +88,7 @@ public class SellMax extends SubCmd {
                 Util.logToFile("[transaction failed] no errors, is your Economy provider stable?");
                 return;
             }
-            int given = UtilsInventory.giveAmount(target, item, amount, ExcessManage.DELETE_EXCESS);
+            int given = InventoryUtils.giveAmount(target, item, amount, InventoryUtils.ExcessMode.DELETE_EXCESS);
             // received items?
             if (given == 0) {
                 // not enough space, aborting
@@ -146,15 +147,15 @@ public class SellMax extends SubCmd {
             return Collections.emptyList();
         switch (args.length) {
             case 2:
-                return Util.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+                return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
             case 3:
-                return Util.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
             case 4:
-                return Util.completePlayers(args[3]);
+                return CompleteUtility.completePlayers(args[3]);
             case 5:
-                return Util.complete(args[2], Arrays.asList("10", "100", "1000", "10000"));
+                return CompleteUtility.complete(args[2], Arrays.asList("10", "100", "1000", "10000"));
             case 6:
-                return Util.complete(args[4], Aliases.BOOLEAN);
+                return CompleteUtility.complete(args[4], Aliases.BOOLEAN);
         }
         return Collections.emptyList();
     }

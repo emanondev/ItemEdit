@@ -5,12 +5,15 @@ import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
@@ -32,7 +35,8 @@ public class PotionEffectEditor extends SubCmd {
     public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        if (!(item.getItemMeta() instanceof PotionMeta) && !(item.getItemMeta() instanceof SuspiciousStewMeta)) {
+        ItemMeta meta = ItemUtils.getMeta(item);
+        if (!(meta instanceof PotionMeta) && !(meta instanceof SuspiciousStewMeta)) {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
             if (p.hasPermission("itemedit.admin")) {
                 String msg = this.getLanguageString("itemtag-tip", null, sender);
@@ -81,12 +85,13 @@ public class PotionEffectEditor extends SubCmd {
                 sendFailFeedbackForSub(p, alias, "remove");
                 return;
             }
-            if (item.getItemMeta() instanceof PotionMeta) {
-                PotionMeta meta = (PotionMeta) item.getItemMeta();
+            ItemMeta rawMeta = ItemUtils.getMeta(item);
+            if (rawMeta instanceof PotionMeta) {
+                PotionMeta meta = (PotionMeta) rawMeta;
                 meta.removeCustomEffect(effect);
                 item.setItemMeta(meta);
             } else {
-                SuspiciousStewMeta meta = (SuspiciousStewMeta) item.getItemMeta();
+                SuspiciousStewMeta meta = (SuspiciousStewMeta) rawMeta;
                 meta.removeCustomEffect(effect);
                 item.setItemMeta(meta);
             }
@@ -100,24 +105,24 @@ public class PotionEffectEditor extends SubCmd {
     public List<String> onComplete(CommandSender sender, String[] args) {
         switch (args.length) {
             case 2:
-                return Util.complete(args[1], subCommands);
+                return CompleteUtility.complete(args[1], subCommands);
             case 3:
                 if (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove"))
-                    return Util.complete(args[2], Aliases.POTION_EFFECT);
+                    return CompleteUtility.complete(args[2], Aliases.POTION_EFFECT);
                 return Collections.emptyList();
             case 4:
                 if (args[1].equalsIgnoreCase("add"))
-                    return Util.complete(args[3], "infinite", "0", "90", "180", "480");
+                    return CompleteUtility.complete(args[3], "infinite", "0", "90", "180", "480");
                 return Collections.emptyList();
             case 5:
                 if (args[1].equalsIgnoreCase("add"))
-                    return Util.complete(args[4], "1", "2", "3");
+                    return CompleteUtility.complete(args[4], "1", "2", "3");
                 return Collections.emptyList();
             case 6:
             case 7:
             case 8:
                 if (args[1].equalsIgnoreCase("add"))
-                    return Util.complete(args[args.length - 1], Aliases.BOOLEAN);
+                    return CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
                 return Collections.emptyList();
             default:
                 return Collections.emptyList();
@@ -158,12 +163,13 @@ public class PotionEffectEditor extends SubCmd {
 
             if (!p.hasPermission(this.getPermission() + ".bypass_limits"))
                 level = Math.min(level, 1);
-            if (item.getItemMeta() instanceof PotionMeta) {
-                PotionMeta meta = (PotionMeta) item.getItemMeta();
+            ItemMeta rawMeta = ItemUtils.getMeta(item);
+            if (rawMeta instanceof PotionMeta) {
+                PotionMeta meta = (PotionMeta) rawMeta;
                 meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles, icon), true);
                 item.setItemMeta(meta);
             } else {
-                SuspiciousStewMeta meta = (SuspiciousStewMeta) item.getItemMeta();
+                SuspiciousStewMeta meta = (SuspiciousStewMeta) rawMeta;
                 meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles, icon), true);
                 item.setItemMeta(meta);
             }
@@ -175,12 +181,13 @@ public class PotionEffectEditor extends SubCmd {
 
     private void potioneffectClear(Player p, ItemStack item, String alias, String[] args) {
         try {
-            if (item.getItemMeta() instanceof PotionMeta) {
-                PotionMeta meta = (PotionMeta) item.getItemMeta();
+            ItemMeta rawMeta = ItemUtils.getMeta(item);
+            if (rawMeta instanceof PotionMeta) {
+                PotionMeta meta = (PotionMeta) rawMeta;
                 meta.clearCustomEffects();
                 item.setItemMeta(meta);
             } else {
-                SuspiciousStewMeta meta = (SuspiciousStewMeta) item.getItemMeta();
+                SuspiciousStewMeta meta = (SuspiciousStewMeta) rawMeta;
                 meta.clearCustomEffects();
                 item.setItemMeta(meta);
             }

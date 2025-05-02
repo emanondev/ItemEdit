@@ -1,5 +1,6 @@
 package emanondev.itemedit;
 
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,6 +23,7 @@ public class YMLConfig extends YamlConfiguration {
     private final JavaPlugin plugin;
     private final File file;
     private final String name;
+    private boolean multiThreadSupport = false;
 
     /**
      * Constructs a new Configuration File.<br>
@@ -41,6 +43,17 @@ public class YMLConfig extends YamlConfiguration {
         this.name = name;
         this.file = new File(plugin.getDataFolder(), name);
         reload();
+        if (VersionUtils.hasFoliaAPI()) {
+            multiThreadSupport = true;
+        }
+    }
+
+    public boolean isMultiThreadSupport() {
+        return multiThreadSupport;
+    }
+
+    public void setMultiThreadSupport(boolean multiThreadSupport) {
+        this.multiThreadSupport = multiThreadSupport;
     }
 
     /**
@@ -310,7 +323,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable String loadMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
                                         boolean color, String... args) {
         if (args.length > 0) {
-            if (Util.isVersionAfter(1, 18, 1)) {
+            if (VersionUtils.isVersionAfter(1, 18, 1)) {
                 if (getComments(path).isEmpty()) {
                     StringBuilder build = new StringBuilder();
                     for (int i = 0; i < args.length; i += 2)
@@ -337,7 +350,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable String getMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
                                        boolean color, String... args) {
         if (args.length > 0) {
-            if (Util.isVersionAfter(1, 18, 1)) {
+            if (VersionUtils.isVersionAfter(1, 18, 1)) {
                 if (getComments(path).isEmpty()) {
                     StringBuilder build = new StringBuilder();
                     for (int i = 0; i < args.length; i += 2)
@@ -425,7 +438,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable List<String> loadMultiMessage(@NotNull String path, @Nullable List<String> def,
                                                    @Nullable Player target, boolean color, String... holders) {
         if (holders.length > 0) {
-            if (Util.isVersionAfter(1, 18, 1)) {
+            if (VersionUtils.isVersionAfter(1, 18, 1)) {
                 if (getComments(path).isEmpty()) {
                     if (this.contains(path + "_HOLDERS"))
                         this.set(path + "_HOLDERS", null);
@@ -485,7 +498,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable List<String> getMultiMessage(@NotNull String path, @Nullable List<String> def,
                                                   @Nullable Player target, boolean color, String... holders) {
         if (holders.length > 0) {
-            if (Util.isVersionAfter(1, 18, 1)) {
+            if (VersionUtils.isVersionAfter(1, 18, 1)) {
                 if (getComments(path).isEmpty()) {
                     if (this.contains(path + "_HOLDERS"))
                         this.set(path + "_HOLDERS", null);
@@ -654,5 +667,97 @@ public class YMLConfig extends YamlConfiguration {
 
     private @NotNull String getError(String path) {
         return "Value has wrong type or wrong value at '" + path + ":' on file " + file.getName();
+    }
+
+    @Contract("_, !null -> !null")
+    @Nullable
+    public Object get(@NotNull String path, @Nullable Object def) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                return super.get(path, def);
+            }
+        }
+        return super.get(path, def);
+    }
+
+    public void set(@NotNull String path, @Nullable Object value) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.set(path, value);
+                return;
+            }
+        }
+        super.set(path, value);
+    }
+
+    @NotNull
+    public ConfigurationSection createSection(@NotNull String path) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                return super.createSection(path);
+            }
+        }
+        return super.createSection(path);
+    }
+
+
+    protected void mapChildrenKeys(@NotNull Set<String> output, @NotNull ConfigurationSection section, boolean deep) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.mapChildrenKeys(output, section, deep);
+                return;
+            }
+        }
+        super.mapChildrenKeys(output, section, deep);
+    }
+
+    protected void mapChildrenValues(@NotNull Map<String, Object> output, @NotNull ConfigurationSection section, boolean deep) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.mapChildrenValues(output, section, deep);
+                return;
+            }
+        }
+        super.mapChildrenValues(output, section, deep);
+    }
+
+    @NotNull
+    public List<String> getComments(@NotNull String path) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                return super.getComments(path);
+            }
+        }
+        return super.getComments(path);
+    }
+
+    @NotNull
+    public List<String> getInlineComments(@NotNull String path) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                return super.getInlineComments(path);
+            }
+        }
+        return super.getInlineComments(path);
+    }
+
+    public void setComments(@NotNull String path, @Nullable List<String> comments) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.setComments(path, comments);
+                return;
+            }
+        }
+        super.setComments(path, comments);
+    }
+
+    public void setInlineComments(@NotNull String path, @Nullable List<String> comments) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.setInlineComments(path, comments);
+                return;
+            }
+        }
+        super.setInlineComments(path, comments);
     }
 }

@@ -1,10 +1,11 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -51,6 +52,7 @@ public class Attribute extends SubCmd {
     }
 
     // add <attribute> amount [operation] [equip]
+    @SuppressWarnings("UnstableApiUsage")
     private void attributeAdd(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 4 || args.length > 6)
@@ -79,7 +81,7 @@ public class Attribute extends SubCmd {
             String equip = null;
 
             if (args.length > 5) {
-                if (Util.isVersionAfter(1, 21)) {
+                if (VersionUtils.isVersionAfter(1, 21)) {
                     equip = Aliases.EQUIPMENT_SLOTGROUPS.convertAlias(args[5]).toString();
                     if (equip == null) {
                         onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTGROUPS);
@@ -96,14 +98,15 @@ public class Attribute extends SubCmd {
                 }
             }
 
-            ItemMeta itemMeta = item.getItemMeta();
+            ItemMeta itemMeta = ItemUtils.getMeta(item);
             //TODO here
 
 
-            itemMeta.addAttributeModifier(attr, UtilLegacy.createAttributeModifier(attr, amount, op, equip));
+            itemMeta.addAttributeModifier(attr, ItemUtils.createAttributeModifier(amount, op, equip));
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
+            e.printStackTrace();
             sendFailFeedbackForSub(p, alias, "add");
         }
     }
@@ -123,7 +126,7 @@ public class Attribute extends SubCmd {
                 return;
             }
 
-            ItemMeta itemMeta = item.getItemMeta();
+            ItemMeta itemMeta = ItemUtils.getMeta(item);
             //TODO here
 
 
@@ -142,20 +145,20 @@ public class Attribute extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], attributeSub);
+            return CompleteUtility.complete(args[1], attributeSub);
         if (args[1].equalsIgnoreCase("add")) {
             if (args.length == 3)
-                return Util.complete(args[2], Aliases.ATTRIBUTE);
+                return CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
             if (args.length == 5)
-                return Util.complete(args[4], Aliases.OPERATIONS);
+                return CompleteUtility.complete(args[4], Aliases.OPERATIONS);
             if (args.length == 6) {
-                if (Util.isVersionAfter(1, 21))
-                    return Util.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
-                return Util.complete(args[5], Aliases.EQUIPMENT_SLOTS);
+                if (VersionUtils.isVersionAfter(1, 21))
+                    return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
+                return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTS);
             }
         } else if (args[1].equalsIgnoreCase("remove") && args.length == 3) {
-            List<String> l = Util.complete(args[2], Aliases.ATTRIBUTE);
-            l.addAll(Util.complete(args[2], Aliases.EQUIPMENT_SLOTS));
+            List<String> l = CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
+            l.addAll(CompleteUtility.complete(args[2], Aliases.EQUIPMENT_SLOTS));
             return l;
         }
         return Collections.emptyList();

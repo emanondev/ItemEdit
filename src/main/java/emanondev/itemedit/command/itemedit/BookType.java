@@ -4,6 +4,8 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -29,7 +31,7 @@ public class BookType extends SubCmd {
         }
 
         try {
-            BookMeta itemMeta = (BookMeta) item.getItemMeta();
+            BookMeta itemMeta = (BookMeta) ItemUtils.getMeta(item);
 
             if (args.length == 1) {
                 itemMeta.setGeneration(null);
@@ -58,7 +60,7 @@ public class BookType extends SubCmd {
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
         if (args.length == 2)
-            return Util.complete(args[1], Aliases.BOOK_TYPE);
+            return CompleteUtility.complete(args[1], Aliases.BOOK_TYPE);
         return Collections.emptyList();
     }
 }

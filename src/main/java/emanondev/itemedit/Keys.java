@@ -1,5 +1,6 @@
 package emanondev.itemedit;
 
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -32,7 +33,8 @@ public class Keys {
         public static final NamespacedKey FOOD = craftKey("food");
         public static final NamespacedKey CONSUMABLE = craftKey("consumable");
         public static final NamespacedKey USE_REMAINDER = craftKey("use_remainder");
-        public static final NamespacedKey CROSS_VERSION_CONSUMABLE = Util.isVersionUpTo(1, 21, 1) ? FOOD : CONSUMABLE;
+        public static final NamespacedKey CROSS_VERSION_CONSUMABLE =
+                VersionUtils.isVersionUpTo(1, 21, 1) ? FOOD : CONSUMABLE;
     }
 
 

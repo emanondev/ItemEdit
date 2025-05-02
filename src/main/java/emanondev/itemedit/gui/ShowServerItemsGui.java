@@ -1,12 +1,12 @@
 package emanondev.itemedit.gui;
 
 import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.UtilsInventory;
-import emanondev.itemedit.UtilsInventory.ExcessManage;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.storage.ServerStorage;
+import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -82,7 +82,7 @@ public class ShowServerItemsGui implements PagedGui {
                 this.inventory.setItem(i, item);
             } else {
                 ItemStack display = item.clone();
-                ItemMeta meta = display.getItemMeta();
+                ItemMeta meta = ItemUtils.getMeta(display);
                 meta.addItemFlags(ItemFlag.values());
                 meta.setLore(Collections.singletonList(UtilsString.fix("&9Nick: &e" + storage.getNick(list.get(slot)), null, true)));
                 meta.setDisplayName(UtilsString.fix("&9ID: &e" + list.get(slot), null, true));
@@ -140,10 +140,10 @@ public class ShowServerItemsGui implements PagedGui {
         }
         switch (event.getClick()) {
             case LEFT:
-                UtilsInventory.giveAmount(target, item, 1, ExcessManage.DELETE_EXCESS);
+                InventoryUtils.giveAmount(target, item, 1, InventoryUtils.ExcessMode.DELETE_EXCESS);
                 return;
             case SHIFT_LEFT:
-                UtilsInventory.giveAmount(target, item, 64, ExcessManage.DELETE_EXCESS);
+                InventoryUtils.giveAmount(target, item, 64, InventoryUtils.ExcessMode.DELETE_EXCESS);
                 return;
             case SHIFT_RIGHT:
                 if (!event.getWhoClicked().hasPermission("itemedit.serveritem.delete")) {

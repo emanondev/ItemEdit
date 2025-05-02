@@ -3,6 +3,7 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -34,7 +35,7 @@ public class Color extends SubCmd {
     public void onCommand(CommandSender sender, String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        ItemMeta meta = item.getItemMeta();
+        ItemMeta meta = ItemUtils.getMeta(item);
         if ((meta instanceof PotionMeta)) {
 
             if (item.getType() == Material.TIPPED_ARROW && !sender.hasPermission(tippedArrowPerm)) {

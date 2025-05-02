@@ -2,8 +2,9 @@ package emanondev.itemedit.gui;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilLegacy;
 import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.GameMode;
@@ -25,7 +26,7 @@ import java.util.List;
 public class BannerEditor implements Gui {
 
     private static final String subPath = "gui.banner.";
-    private final static PatternType[] TYPES = UtilLegacy.getPatternTypesFilthered();
+    private final static PatternType[] TYPES = ItemUtils.getPatternTypesFiltered();
     private final Player target;
     private final Inventory inventory;
     private final List<BannerData> layers = new ArrayList<>();
@@ -40,7 +41,7 @@ public class BannerEditor implements Gui {
                 item = new ItemStack(Material.valueOf("BANNER"));
             }
         this.banner = item;
-        this.meta = (BannerMeta) banner.getItemMeta();
+        this.meta = (BannerMeta) ItemUtils.getMeta(banner);
         this.target = target;
         String title = getLanguageMessage(subPath + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
@@ -127,12 +128,12 @@ public class BannerEditor implements Gui {
         meta.setPatterns(new ArrayList<>());
         ItemStack item = banner.clone();
         item.setItemMeta(meta);
-        meta = (BannerMeta) item.getItemMeta();
+        meta = (BannerMeta) ItemUtils.getMeta(item);
         item.setAmount(1);
         this.getInventory().setItem(0, item);
         DyeColor bcolor = Util.getColorFromBanner(item);
         item = Util.getDyeItemFromColor(bcolor);
-        ItemMeta bmeta = item.getItemMeta();
+        ItemMeta bmeta = ItemUtils.getMeta(item);
         bmeta.addItemFlags(ItemFlag.values());
         loadLanguageDescription(bmeta, subPath + "buttons.color", "%color%", Aliases.COLOR.getName(bcolor));
         item.setItemMeta(bmeta);
@@ -149,7 +150,7 @@ public class BannerEditor implements Gui {
                 meta.addPattern(layer.getPattern());
                 item = banner.clone();
                 item.setItemMeta(meta);
-                meta = (BannerMeta) item.getItemMeta();
+                meta = (BannerMeta) ItemUtils.getMeta(item);
                 this.getInventory().setItem(i, item);
             } else
                 this.getInventory().setItem(i, null);
@@ -157,7 +158,7 @@ public class BannerEditor implements Gui {
         item = banner.clone();
         item.setItemMeta(meta);
         this.getInventory().setItem(49, item);
-        getTargetPlayer().getInventory().getItemInMainHand().setItemMeta(meta);
+        ItemUtils.getHandItem(getTargetPlayer()).setItemMeta(meta);
     }
 
     @Override
@@ -188,7 +189,7 @@ public class BannerEditor implements Gui {
             if (!active)
                 return null;
             ItemStack item = new ItemStack(Material.WHITE_BANNER);
-            BannerMeta bMeta = (BannerMeta) item.getItemMeta();
+            BannerMeta bMeta = (BannerMeta) ItemUtils.getMeta(item);
             bMeta.addPattern(new Pattern(DyeColor.BLACK, pattern.getPattern()));
             bMeta.addItemFlags(ItemFlag.values());
             loadLanguageDescription(bMeta, subPath + "buttons.type", "%type%",
@@ -205,7 +206,7 @@ public class BannerEditor implements Gui {
             if (!active)
                 return null;
             ItemStack item = Util.getDyeItemFromColor(pattern.getColor());
-            ItemMeta meta = item.getItemMeta();
+            ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             loadLanguageDescription(meta, subPath + "buttons.color", "%color%",
                     Aliases.COLOR.getName(pattern.getColor()));
@@ -215,9 +216,7 @@ public class BannerEditor implements Gui {
 
         public ItemStack getPositionItem() {
             ItemStack item = active ? new ItemStack(Material.ITEM_FRAME) : Util.getDyeItemFromColor(DyeColor.GRAY);
-
-            ItemMeta meta = item.getItemMeta();
-
+            ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             loadLanguageDescription(meta, subPath + "buttons.position", "%middle_click%",
                     getLanguageMessage("gui.middleclick." + (getTargetPlayer().getGameMode() == GameMode.CREATIVE ? "creative" : "other")));
@@ -258,7 +257,7 @@ public class BannerEditor implements Gui {
             int i = 0;
             for (DyeColor color : DyeColor.values()) {
                 ItemStack item = Util.getDyeItemFromColor(color);
-                ItemMeta meta = item.getItemMeta();
+                ItemMeta meta = ItemUtils.getMeta(item);
                 loadLanguageDescription(meta, subPath + "buttons.color_selector_info", "%color%",
                         Aliases.COLOR.getName(color));
                 item.setItemMeta(meta);
@@ -289,11 +288,11 @@ public class BannerEditor implements Gui {
             if (data != null)
                 data.setColor(DyeColor.values()[event.getSlot()]);
             else {
-                if (Util.isVersionAfter(1, 13))
+                if (VersionUtils.isVersionAfter(1, 13))
                     banner.setType(Util.getBannerItemFromColor(DyeColor.values()[event.getSlot()]));
                 else
                     banner.setDurability(Util.getDataByColor(DyeColor.values()[event.getSlot()]));
-                meta = (BannerMeta) banner.getItemMeta();
+                meta = (BannerMeta) ItemUtils.getMeta(banner);
             }
             BannerEditor.this.updateInventory();
             BannerEditor.this.getTargetPlayer().openInventory(BannerEditor.this.getInventory());
@@ -338,7 +337,7 @@ public class BannerEditor implements Gui {
                 } catch (Throwable t) {
                     item = new ItemStack(Material.valueOf("BANNER"));
                 }
-                BannerMeta bMeta = (BannerMeta) item.getItemMeta();
+                BannerMeta bMeta = (BannerMeta) ItemUtils.getMeta(item);
                 bMeta.addPattern(new Pattern(DyeColor.BLACK, type));
                 loadLanguageDescription(bMeta, subPath + "buttons.pattern_selector_info", "%type%",
                         Aliases.PATTERN_TYPE.getName(type));

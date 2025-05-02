@@ -3,21 +3,27 @@ package emanondev.itemedit.storage.yaml;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.storage.ServerStorage;
+import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class YmlServerStorage implements ServerStorage {
 
     private final YMLConfig database = ItemEdit.get()
             .getConfig("database" + File.separatorChar + "server-database.yml");
-    private final HashMap<ItemStack, String> reversedMap = new HashMap<>();
+    private final Map<ItemStack, String> reversedMap =
+            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
 
     public YmlServerStorage() {
         reload();
@@ -43,7 +49,7 @@ public class YmlServerStorage implements ServerStorage {
         ItemStack item = getItem(id);
         if (!item.hasItemMeta())
             return item.getType().name().toLowerCase(Locale.ENGLISH);
-        ItemMeta meta = item.getItemMeta();
+        ItemMeta meta = ItemUtils.getMeta(item);
         if (!meta.hasDisplayName())
             return item.getType().name().toLowerCase(Locale.ENGLISH);
         return meta.getDisplayName();
@@ -94,6 +100,7 @@ public class YmlServerStorage implements ServerStorage {
     }
 
     @Override
+    @Nullable
     public String getId(ItemStack item) {
         if (item == null)
             return null;
