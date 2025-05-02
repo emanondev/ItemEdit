@@ -5,14 +5,14 @@ import org.bukkit.Location;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class InventoryUtils {
@@ -266,5 +266,26 @@ public final class InventoryUtils {
          * if there aren't enough items to remove, nothing is removed
          */
         CANCEL,
+    }
+
+    private static final EnumSet<EquipmentSlot> playerEquipmentSlots = loadPlayerEquipmentSlot();
+
+    private static EnumSet<EquipmentSlot> loadPlayerEquipmentSlot() {
+        EnumSet<EquipmentSlot> slots = EnumSet.noneOf(EquipmentSlot.class);
+        slots.add(EquipmentSlot.HEAD);
+        slots.add(EquipmentSlot.CHEST);
+        slots.add(EquipmentSlot.LEGS);
+        slots.add(EquipmentSlot.FEET);
+        slots.add(EquipmentSlot.HAND);
+        try {
+            slots.add(EquipmentSlot.OFF_HAND);
+        } catch (Exception ignored) {
+            //1.8
+        }
+        return slots;
+    }
+
+    public static Set<EquipmentSlot> getPlayerEquipmentSlots() {
+        return Collections.unmodifiableSet(playerEquipmentSlots);
     }
 }
