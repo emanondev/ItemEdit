@@ -72,7 +72,7 @@ public class ItemEditInfoCommand implements TabExecutor {
                             ChatColor.BLUE + "MythicMobs: " + ChatColor.AQUA + Hooks.getPluginVersion("MythicMobs", "Nope") + "\n" +
                             ChatColor.BLUE + "ShopGuiPlus: " + ChatColor.AQUA + Hooks.getPluginVersion("ShopGuiPlus", "Nope") + "\n" +
                             ChatColor.BLUE + "Vanish: " + ChatColor.AQUA + Hooks.getPluginVersion("PremiumVanish", Hooks.getPluginVersion("SuperVanish", "Nope")));
-            if (sender instanceof Player) {
+            if (sender instanceof Player && VersionUtils.isVersionAfter(1,9)) {
                 msg.append("\n").append(new ComponentBuilder(ChatColor.GOLD + ChatColor.UNDERLINE.toString() + "Click To Copy\n")
                         .event(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD,
                                 copyText.toString())).create());
