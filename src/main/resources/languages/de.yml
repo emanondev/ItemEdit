@@ -601,6 +601,16 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&bund <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  netherite:
+    wrong-type: '&4[&cItemEdit&4] &cDas Item muss ein Helm, eine Brustplatte, Hose oder Schuhe sein'
+    description:
+      - '&6&lFügt Netherite-Rüstungsattribute hinzu'
+      - ''
+      - '&bFunktioniert nur bei Rüstungsteilen, die in der Haupt-Hand gehalten werden.'
+      - '&bSetzt Haltbarkeit, Rüstung, Zähigkeit, Rückstoßresistenz'
+      - '&bund macht das Item feuerresistent.'
+      - '&bDie Werte hängen vom Rüstungstyp ab (Helm, Brustplatte, etc.).'
+    params: ''
 serveritem:
   help-header: '&9&lServerItem - Hilfe'
   give:

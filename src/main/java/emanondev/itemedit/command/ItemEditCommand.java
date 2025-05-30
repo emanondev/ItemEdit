@@ -16,6 +16,7 @@ public class ItemEditCommand extends AbstractCommand {
             this.registerSubCommand(new Enchant(this));
             this.registerSubCommand(new Hide(this));
             this.registerSubCommand(new HideAll(this));
+            this.registerSubCommand(new Netherite(this));
             if (VersionUtils.isVersionAfter(1, 20, 5))
                 this.registerSubCommand(new HideToolTip(this));
             if (VersionUtils.isVersionAfter(1, 20, 5))

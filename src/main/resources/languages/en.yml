@@ -602,6 +602,16 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&band <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  netherite:
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a helmet, chestplate, leggings or boots'
+    description:
+      - '&6&lApply Netherite armor attributes'
+      - ''
+      - '&bOnly works on armor items held in the main hand.'
+      - '&bApplies durability, armor, toughness, knockback resistance,'
+      - '&band makes the item fire-resistant.'
+      - '&bValues depend on the armor type (helmet, chestplate, etc).'
+    params: ''
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:
