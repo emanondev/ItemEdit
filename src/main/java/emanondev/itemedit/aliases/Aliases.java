@@ -22,18 +22,21 @@ public class Aliases {
         private final Collection<PotionEffectType> values = grabValues();
 
         @Override
-        public String getName(PotionEffectType type) {
+        public String getName(final PotionEffectType type) {
             String name = type.getName().toLowerCase(Locale.ENGLISH);
-            if (name.startsWith("minecraft:"))
+            if (name.startsWith("minecraft:")) {
                 name = name.substring(10);
+            }
             return name;
         }
 
         private Collection<PotionEffectType> grabValues() {
             HashSet<PotionEffectType> set = new HashSet<>();
-            for (PotionEffectType val : PotionEffectType.values())
-                if (val != null)
+            for (PotionEffectType val : PotionEffectType.values()) {
+                if (val != null) {
                     set.add(val);
+                }
+            }
             return set;
         }
 
@@ -50,7 +53,7 @@ public class Aliases {
                 private final LinkedHashSet<String> values = new LinkedHashSet<>(craftValues());
 
                 @Override
-                public String getName(String type) {
+                public String getName(final String type) {
                     return type.toLowerCase(Locale.ENGLISH);
                 }
 
@@ -67,17 +70,18 @@ public class Aliases {
     public static final EggTypeAliases EGG_TYPE = getEggTypeAliases();
     public static final AliasSet<ItemFlag> FLAG_TYPE = new EnumAliasSet<ItemFlag>("flag_type", ItemFlag.class) {
         @Override
-        public String getName(ItemFlag type) {
+        public String getName(final ItemFlag type) {
             String name = type.name().toLowerCase(Locale.ENGLISH);
-            if (name.startsWith("hide_"))
+            if (name.startsWith("hide_")) {
                 name = name.substring("hide_".length());
+            }
             return name;
         }
     };
     public static final AliasSet<Boolean> BOOLEAN = new AliasSet<Boolean>("boolean") {
 
         @Override
-        public String getName(Boolean value) {
+        public String getName(final Boolean value) {
             return value ? "true" : "false";
         }
 
@@ -109,21 +113,24 @@ public class Aliases {
 
     private static AliasSet<PatternType> getPatternAlias() {
         try {
-            if (VersionUtils.isVersionAfter(1, 20, 6))
+            if (VersionUtils.isVersionAfter(1, 20, 6)) {
                 return new BannerPatternAliasesNew();
+            }
         } catch (Throwable ignored) {
         }
         return new BannerPatternAliasesOld();
     }
 
     private static TrimMaterialAliases getTrimMaterialAliases() {
-        if (VersionUtils.isVersionUpTo(1, 19, 4))
+        if (VersionUtils.isVersionUpTo(1, 19, 4)) {
             return null;
+        }
         try {
-            if (VersionUtils.isVersionAfter(1, 20, 2))
+            if (VersionUtils.isVersionAfter(1, 20, 2)) {
                 return new TrimMaterialAliasesNew();
-            else
+            }            else {
                 return new TrimMaterialAliasesOld();
+            }
         } catch (Throwable e) {
             e.printStackTrace();
             return null;
@@ -131,13 +138,15 @@ public class Aliases {
     }
 
     private static TrimPatternAliases getTrimPatternAliases() {
-        if (VersionUtils.isVersionUpTo(1, 19, 4))
+        if (VersionUtils.isVersionUpTo(1, 19, 4)) {
             return null;
+        }
         try {
-            if (VersionUtils.isVersionAfter(1, 20, 2))
+            if (VersionUtils.isVersionAfter(1, 20, 2)) {
                 return new TrimPatternAliasesNew();
-            else
+            }             else {
                 return new TrimPatternAliasesOld();
+            }
         } catch (Throwable e) {
             e.printStackTrace();
             return null;
@@ -168,19 +177,20 @@ public class Aliases {
         registerAliasType(SOUND);
     }
 
-    public static <T> void registerAliasType(@Nullable IAliasSet<T> set) {
+    public static <T> void registerAliasType(final @Nullable IAliasSet<T> set) {
         registerAliasType(set, false);
     }
 
-    public static <T> void registerAliasType(@Nullable IAliasSet<T> set, boolean forced) {
-        if (set == null)
+    public static <T> void registerAliasType(final @Nullable IAliasSet<T> set, final boolean forced) {
+        if (set == null) {
             return;
+        }
         if (!forced && types.containsKey(set.getID()))
             throw new IllegalArgumentException("Duplicate id");
         types.put(set.getID(), set);
     }
 
-    public static IAliasSet<?> getAliasType(@NotNull String id) {
+    public static IAliasSet<?> getAliasType(final @NotNull String id) {
         return types.get(id);
     }
 
@@ -199,47 +209,55 @@ public class Aliases {
     }
 
     private static EggTypeAliases getEggTypeAliases() {
-        if (VersionUtils.isVersionInRange(1, 11, 1, 12))
+        if (VersionUtils.isVersionInRange(1, 11, 1, 12)) {
             return new EggTypeAliases();
+        }
         return null;
     }
 
     private static TropicalFishPatternAliases getTropicalPatternAliases() {
-        if (VersionUtils.isVersionUpTo(1, 12))
+        if (VersionUtils.isVersionUpTo(1, 12)) {
             return null;
+        }
         return new TropicalFishPatternAliases();
     }
 
     private static GenAliases getGenAliases() {
-        if (VersionUtils.isVersionUpTo(1, 9))
+        if (VersionUtils.isVersionUpTo(1, 9)) {
             return null;
+        }
         return new GenAliases();
     }
 
     @NotNull
     private static EnchAliases getEnchAliases() {
-        if (VersionUtils.isVersionUpTo(1, 12))
+        if (VersionUtils.isVersionUpTo(1, 12)) {
             return new EnchAliasesOld();
+        }
         return new EnchAliases();
     }
 
     private static AttributeAliases getAttributeAliases() {
-        if (VersionUtils.isVersionUpTo(1, 11))
+        if (VersionUtils.isVersionUpTo(1, 11)) {
             return null;
-        if (VersionUtils.isVersionUpTo(1, 21, 2))
+        }
+        if (VersionUtils.isVersionUpTo(1, 21, 2)) {
             return new AttributeAliasesOld();
+        }
         return new AttributeAliasesNew();
     }
 
     private static OperationAliases getAttributeOperationAliases() {
-        if (VersionUtils.isVersionUpTo(1, 11))
+        if (VersionUtils.isVersionUpTo(1, 11)) {
             return null;
+        }
         return new OperationAliases();
     }
 
     private static RarityAliases getRarityAliases() {
-        if (VersionUtils.isVersionUpTo(1, 20, 4))
+        if (VersionUtils.isVersionUpTo(1, 20, 4)) {
             return null;
+        }
         try {
             return new RarityAliases();
         } catch (Throwable t) {
@@ -249,15 +267,17 @@ public class Aliases {
     }
 
     private static AxolotlVariantAliases getAxolotlVariantAliases() {
-        if (VersionUtils.isVersionUpTo(1, 17))
+        if (VersionUtils.isVersionUpTo(1, 17)) {
             return null;
+        }
         return new AxolotlVariantAliases();
     }
 
 
     private static GoatHornSoundAliases getGoatHornSoundAliases() {
-        if (VersionUtils.isVersionUpTo(1, 19, 2))
+        if (VersionUtils.isVersionUpTo(1, 19, 2)) {
             return null;
+        }
         try {
             return new GoatHornSoundAliases();
         } catch (Throwable e) {
@@ -266,8 +286,9 @@ public class Aliases {
     }
 
     private static SoundAliases getSoundAliases() {
-        if (VersionUtils.isVersionAfter(1, 20, 5))
+        if (VersionUtils.isVersionAfter(1, 20, 5)) {
             return new SoundAliases();
+        }
         return null;
     }
 

@@ -21,12 +21,12 @@ import java.util.List;
 
 public class GiveAll extends SubCmd {
 
-    public GiveAll(ServerItemCommand cmd) {
+    public GiveAll(final ServerItemCommand cmd) {
         super("giveall", cmd, false, false);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         try {
             if (Bukkit.getOnlinePlayers().isEmpty())
                 return;
@@ -70,16 +70,19 @@ public class GiveAll extends SubCmd {
 
             if (total > 0 && ItemEdit.get().getConfig().loadBoolean("log.action.giveall", true)) {
                 StringBuilder sb = new StringBuilder("[");
-                for (Player target : Bukkit.getOnlinePlayers())
+                for (Player target : Bukkit.getOnlinePlayers()) {
                     sb.append(target.getName()).append(", ");
+                }
 
                 String msg = UtilsString.fix(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         amount + " (for a total of " + total + " given)", "%targets%", sb.delete(sb.length() - 2, sb.length()).append("]").toString());
-                if (ItemEdit.get().getConfig().loadBoolean("log.console", true))
+                if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
                     Util.sendMessage(Bukkit.getConsoleSender(), msg);
-                if (ItemEdit.get().getConfig().loadBoolean("log.file", true))
+                }
+                if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
                     Util.logToFile(msg);
+                }
             }
         } catch (Exception e) {
             onFail(sender, alias);
@@ -87,19 +90,17 @@ public class GiveAll extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        if (!(sender instanceof Player))
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        if (!(sender instanceof Player)) {
             return Collections.emptyList();
-        switch (args.length) {
-            // <id> [amount] [silent]
-            case 2:
-                return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
-            case 3:
-                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
-            case 4:
-                return CompleteUtility.complete(args[3], Aliases.BOOLEAN);
         }
-        return Collections.emptyList();
+        return switch (args.length) {
+            // <id> [amount] [silent]
+            case 2 -> CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+            case 3 -> CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+            case 4 -> CompleteUtility.complete(args[3], Aliases.BOOLEAN);
+            default -> Collections.emptyList();
+        };
     }
 
 }

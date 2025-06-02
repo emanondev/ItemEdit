@@ -31,7 +31,7 @@ public class Attribute extends SubCmd {
     // add <attribute> amount [operation] [equip]
     // remove [attribute/slot]
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (args.length == 1) {
@@ -40,23 +40,19 @@ public class Attribute extends SubCmd {
         }
 
         switch (args[1].toLowerCase(Locale.ENGLISH)) {
-            case "add":
-                attributeAdd(p, item, alias, args);
-                return;
-            case "remove":
-                attributeRemove(p, item, alias, args);
-                return;
-            default:
-                onFail(p, alias);
+            case "add" -> attributeAdd(p, item, alias, args);
+            case "remove" -> attributeRemove(p, item, alias, args);
+            default -> onFail(p, alias);
         }
     }
 
     // add <attribute> amount [operation] [equip]
     @SuppressWarnings("UnstableApiUsage")
-    private void attributeAdd(Player p, ItemStack item, String alias, String[] args) {
+    private void attributeAdd(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
-            if (args.length < 4 || args.length > 6)
+            if (args.length < 4 || args.length > 6) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             org.bukkit.attribute.Attribute attr = Aliases.ATTRIBUTE.convertAlias(args[2]);
             if (attr == null) {
@@ -66,10 +62,11 @@ public class Attribute extends SubCmd {
             }
             double amount = Double.parseDouble(args[3]);
             Operation op;
-            if (args.length > 4)
+            if (args.length > 4) {
                 op = Aliases.OPERATIONS.convertAlias(args[4]);
-            else
+            } else {
                 op = Operation.ADD_NUMBER;
+            }
 
             if (op == null) {
                 onWrongAlias("wrong-operation", p, Aliases.OPERATIONS);
@@ -114,8 +111,9 @@ public class Attribute extends SubCmd {
     // remove [attribute/slot]
     private void attributeRemove(Player p, ItemStack item, String alias, String[] args) {
         try {
-            if (args.length != 3)
+            if (args.length != 3) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             org.bukkit.attribute.Attribute attr = Aliases.ATTRIBUTE.convertAlias(args[2]);
             EquipmentSlot equip = Aliases.EQUIPMENT_SLOTS.convertAlias(args[2]);
@@ -144,24 +142,31 @@ public class Attribute extends SubCmd {
     // attribute add/rem attr amount op slot
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
-            return CompleteUtility.complete(args[1], attributeSub);
-        if (args[1].equalsIgnoreCase("add")) {
-            if (args.length == 3)
-                return CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
-            if (args.length == 5)
-                return CompleteUtility.complete(args[4], Aliases.OPERATIONS);
-            if (args.length == 6) {
-                if (VersionUtils.isVersionAfter(1, 21))
-                    return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
-                return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTS);
-            }
-        } else if (args[1].equalsIgnoreCase("remove") && args.length == 3) {
-            List<String> l = CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
-            l.addAll(CompleteUtility.complete(args[2], Aliases.EQUIPMENT_SLOTS));
-            return l;
-        }
-        return Collections.emptyList();
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], attributeSub);
+            case 3 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "add" -> CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
+                case "delete" -> {
+                    List<String> matches = CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
+                    matches.addAll(CompleteUtility.complete(args[2], Aliases.EQUIPMENT_SLOTS));
+                    yield matches;
+                }
+                default -> List.of();
+            };
+            case 5 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "add" -> CompleteUtility.complete(args[4], Aliases.OPERATIONS);
+                default -> List.of();
+            };
+            case 6 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "add" -> {
+                    if (VersionUtils.isVersionAfter(1, 21))
+                        yield CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
+                    yield CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTS);
+                }
+                default -> List.of();
+            };
+            default -> List.of();
+        };
     }
 
 }

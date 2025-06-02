@@ -12,16 +12,18 @@ public class EnchAliases extends AliasSet<Enchantment> {
     }
 
     @Override
-    public String getName(Enchantment ench) {
+    public String getName(final Enchantment ench) {
         return ench.getKey().getKey();
     }
 
     @Override
     public Collection<Enchantment> getValues() {
         HashSet<Enchantment> set = new HashSet<>();
-        for (Enchantment ench : Enchantment.values())
-            if (ench != null)
+        for (Enchantment ench : Enchantment.values()) {
+            if (ench != null) {
                 set.add(ench);
+            }
+        }
         return set;
     }
 }

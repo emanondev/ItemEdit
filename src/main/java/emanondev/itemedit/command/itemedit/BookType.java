@@ -17,12 +17,12 @@ import java.util.List;
 
 public class BookType extends SubCmd {
 
-    public BookType(ItemEditCommand cmd) {
+    public BookType(final ItemEditCommand cmd) {
         super("booktype", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getType() == Material.WRITTEN_BOOK)) {
@@ -39,9 +39,9 @@ public class BookType extends SubCmd {
                 updateView(p);
                 return;
             }
-
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException();
+            }
             BookMeta.Generation type = Aliases.BOOK_TYPE.convertAlias(args[1]);
             if (type == null) {
                 onWrongAlias("wrong-generation", p, Aliases.BOOK_TYPE);
@@ -59,8 +59,9 @@ public class BookType extends SubCmd {
 
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
-            return CompleteUtility.complete(args[1], Aliases.BOOK_TYPE);
-        return Collections.emptyList();
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], Aliases.BOOK_TYPE);
+            default -> List.of();
+        };
     }
 }

@@ -16,13 +16,13 @@ import java.util.Locale;
 
 public class ToolTipStyle extends SubCmd {
 
-    public ToolTipStyle(ItemEditCommand cmd) {
+    public ToolTipStyle(final ItemEditCommand cmd) {
         super("tooltipstyle", cmd, true, true);
     }
 
     //ie tooltipstyle <style/clear>
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
@@ -54,7 +54,7 @@ public class ToolTipStyle extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], "clear");
         }

@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 
 public class ItemModel extends SubCmd {
 
-    public ItemModel(ItemEditCommand cmd) {//1.21.2+
+    public ItemModel(final ItemEditCommand cmd) {//1.21.2+
         super("itemmodel", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
@@ -34,8 +34,9 @@ public class ItemModel extends SubCmd {
                 updateView(p);
                 return;
             }
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             String[] rawKey = args[1].toLowerCase(Locale.ENGLISH).split(":");
             NamespacedKey key = rawKey.length == 1 ? new NamespacedKey(NamespacedKey.MINECRAFT, rawKey[0]) :
                     new NamespacedKey(rawKey[0], rawKey[1]);
@@ -49,10 +50,11 @@ public class ItemModel extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Registry.ITEM.stream().collect(Collectors.toList()),
                     args[1].contains(":") ? (type) -> type.getKey().toString() : (type) -> type.getKey().getKey());
+        }
         return Collections.emptyList();
     }
 

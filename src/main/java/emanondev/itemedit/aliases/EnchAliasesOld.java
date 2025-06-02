@@ -44,9 +44,10 @@ public class EnchAliasesOld extends EnchAliases {
 
     @SuppressWarnings("deprecation")
     @Override
-    public String getName(Enchantment ench) {
-        if (enchNick.containsKey(ench.getName()))
+    public String getName(final Enchantment ench) {
+        if (enchNick.containsKey(ench.getName())) {
             return enchNick.get(ench.getName());
+        }
         //Mohist compability
         try {
             return ench.getName().toLowerCase(Locale.ENGLISH);

@@ -21,12 +21,13 @@ public class MaxDurability extends SubCmd {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemMeta meta = ItemUtils.getMeta(item);
             if (!(meta instanceof Damageable)) {
                 Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
@@ -42,7 +43,7 @@ public class MaxDurability extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (args.length == 2) {
             if (sender instanceof Player) {
                 ItemStack item = this.getItemInHand((Player) sender);

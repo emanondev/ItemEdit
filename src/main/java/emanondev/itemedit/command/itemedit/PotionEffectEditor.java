@@ -27,12 +27,12 @@ public class PotionEffectEditor extends SubCmd {
 
     private static final String[] subCommands = new String[]{"add", "remove", "reset"};
 
-    public PotionEffectEditor(ItemEditCommand cmd) {
+    public PotionEffectEditor(final ItemEditCommand cmd) {
         super("potioneffect", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         ItemMeta meta = ItemUtils.getMeta(item);
@@ -74,7 +74,7 @@ public class PotionEffectEditor extends SubCmd {
 
     }
 
-    private void potioneffectRemove(Player p, ItemStack item, String alias, String[] args) {
+    private void potioneffectRemove(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -102,37 +102,38 @@ public class PotionEffectEditor extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        switch (args.length) {
-            case 2:
-                return CompleteUtility.complete(args[1], subCommands);
-            case 3:
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], subCommands);
+            case 3 -> {
                 if (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove"))
-                    return CompleteUtility.complete(args[2], Aliases.POTION_EFFECT);
-                return Collections.emptyList();
-            case 4:
+                    yield CompleteUtility.complete(args[2], Aliases.POTION_EFFECT);
+                yield Collections.emptyList();
+            }
+            case 4 -> {
                 if (args[1].equalsIgnoreCase("add"))
-                    return CompleteUtility.complete(args[3], "infinite", "0", "90", "180", "480");
-                return Collections.emptyList();
-            case 5:
+                    yield CompleteUtility.complete(args[3], "infinite", "0", "90", "180", "480");
+                yield Collections.emptyList();
+            }
+            case 5 -> {
                 if (args[1].equalsIgnoreCase("add"))
-                    return CompleteUtility.complete(args[4], "1", "2", "3");
-                return Collections.emptyList();
-            case 6:
-            case 7:
-            case 8:
+                    yield CompleteUtility.complete(args[4], "1", "2", "3");
+                yield Collections.emptyList();
+            }
+            case 6, 7, 8 -> {
                 if (args[1].equalsIgnoreCase("add"))
-                    return CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
-                return Collections.emptyList();
-            default:
-                return Collections.emptyList();
-        }
+                    yield CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
+                yield Collections.emptyList();
+            }
+            default -> Collections.emptyList();
+        };
     }
 
-    private void potioneffectAdd(Player p, ItemStack item, String alias, String[] args) {
+    private void potioneffectAdd(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
-            if (args.length != 4 && args.length != 5 && args.length != 6 && args.length != 7 && args.length != 8)
+            if (args.length != 4 && args.length != 5 && args.length != 6 && args.length != 7 && args.length != 8) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             int level = 0;
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2]);
@@ -145,8 +146,9 @@ public class PotionEffectEditor extends SubCmd {
 
             if (args.length >= 5) {
                 level = Integer.parseInt(args[4]) - 1;
-                if ((level < 0) || (level > 127))
+                if ((level < 0) || (level > 127)) {
                     throw new IllegalArgumentException();
+                }
             }
             boolean particles = true;
             if (args.length >= 6) {
@@ -161,8 +163,9 @@ public class PotionEffectEditor extends SubCmd {
                 icon = Aliases.BOOLEAN.convertAlias(args[7]);
             }
 
-            if (!p.hasPermission(this.getPermission() + ".bypass_limits"))
+            if (!p.hasPermission(this.getPermission() + ".bypass_limits")) {
                 level = Math.min(level, 1);
+            }
             ItemMeta rawMeta = ItemUtils.getMeta(item);
             if (rawMeta instanceof PotionMeta) {
                 PotionMeta meta = (PotionMeta) rawMeta;
@@ -179,7 +182,7 @@ public class PotionEffectEditor extends SubCmd {
         }
     }
 
-    private void potioneffectClear(Player p, ItemStack item, String alias, String[] args) {
+    private void potioneffectClear(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             ItemMeta rawMeta = ItemUtils.getMeta(item);
             if (rawMeta instanceof PotionMeta) {

@@ -14,12 +14,12 @@ import java.util.Locale;
 
 public class Delete extends SubCmd {
 
-    public Delete(ItemStorageCommand cmd) {
+    public Delete(final ItemStorageCommand cmd) {
         super("delete", cmd, true, false);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         try {
             if (args.length != 2)
@@ -36,7 +36,7 @@ public class Delete extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (!(sender instanceof Player))
             return new ArrayList<>();
         if (args.length == 2)

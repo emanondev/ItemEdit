@@ -15,20 +15,22 @@ import java.util.List;
 
 public class CustomModelData extends SubCmd {
 
-    public CustomModelData(ItemEditCommand cmd) {//1.14+
+    public CustomModelData(final ItemEditCommand cmd) {//1.14+
         super("custommodeldata", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             int amount = Integer.parseInt(args[1]);
-            if (amount < 0)
+            if (amount < 0) {
                 throw new IllegalArgumentException("Wrong model value");
+            }
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.setCustomModelData(amount);
             item.setItemMeta(meta);
@@ -39,9 +41,10 @@ public class CustomModelData extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        }
         return Collections.emptyList();
     }
 

@@ -15,18 +15,19 @@ import java.util.List;
 
 public class Glider extends SubCmd {
 
-    public Glider(ItemEditCommand cmd) {
+    public Glider(final ItemEditCommand cmd) {
         super("glider", cmd, true, true);
     }
 
     //ie glider [true/false]
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length > 2)
+            if (args.length > 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemMeta meta = ItemUtils.getMeta(item);
             boolean value = args.length == 1 ? !meta.isGlider() : Aliases.BOOLEAN.convertAlias(args[1]);
             meta.setGlider(value);
@@ -37,7 +38,7 @@ public class Glider extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.BOOLEAN);
         }

@@ -15,12 +15,12 @@ import java.util.List;
 
 public class FireworkPower extends SubCmd {
 
-    public FireworkPower(ItemEditCommand cmd) {
+    public FireworkPower(final ItemEditCommand cmd) {
         super("fireworkpower", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof FireworkMeta)) {
@@ -31,11 +31,13 @@ public class FireworkPower extends SubCmd {
         FireworkMeta itemMeta = (FireworkMeta) ItemUtils.getMeta(item);
 
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException();
+            }
             int power = Integer.parseInt(args[1]);
-            if (power < 0 || power > 5)
+            if (power < 0 || power > 5) {
                 throw new IllegalArgumentException();
+            }
             itemMeta.setPower(power);
             item.setItemMeta(itemMeta);
             updateView(p);
@@ -46,11 +48,12 @@ public class FireworkPower extends SubCmd {
 
     // itemedit fireworkpower <power>
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (args.length == 2) {
             ArrayList<String> list = new ArrayList<>();
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++) {
                 list.add(String.valueOf(i));
+            }
             return list;
         }
         return Collections.emptyList();

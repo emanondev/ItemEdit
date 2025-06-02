@@ -17,17 +17,18 @@ import java.util.List;
 
 public class HideAll extends SubCmd {
 
-    public HideAll(ItemEditCommand cmd) {
+    public HideAll(final ItemEditCommand cmd) {
         super("hideall", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length != 1)
+            if (args.length != 1) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             handleFlagChange(item, itemMeta);
             itemMeta.addItemFlags(ItemFlag.values());
@@ -38,7 +39,7 @@ public class HideAll extends SubCmd {
         }
     }
 
-    private void handleFlagChange(ItemStack item, ItemMeta meta) {
+    private void handleFlagChange(final ItemStack item, final ItemMeta meta) {
         if (!VersionUtils.hasPaperAPI() ||
                 !VersionUtils.isVersionAfter(1, 20, 5) ||
                 !ItemEdit.get().getConfig().loadBoolean("itemedit.paper_hide_fix", true)) {
@@ -53,7 +54,7 @@ public class HideAll extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         return Collections.emptyList();
     }
 

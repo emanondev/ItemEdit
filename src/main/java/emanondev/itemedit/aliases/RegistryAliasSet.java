@@ -12,13 +12,13 @@ public class RegistryAliasSet<T extends Keyed> extends AliasSet<T> {
 
     private final Registry<T> registry;
 
-    public RegistryAliasSet(String path, Registry<T> registry) {
+    public RegistryAliasSet(final String path, final Registry<T> registry) {
         super(path);
         this.registry = registry;
     }
 
     @Override
-    public String getName(T type) {
+    public String getName(final T type) {
         return (type.getKey().getNamespace().equals(NamespacedKey.MINECRAFT) ?
                 type.getKey().getKey() : type.getKey().toString()).replace(".", "_");
     }

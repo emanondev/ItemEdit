@@ -21,13 +21,13 @@ public class TropicalFish extends SubCmd {
 
     private static final String[] subCommands = new String[]{"pattern", "patterncolor", "bodycolor"};
 
-    public TropicalFish(ItemEditCommand cmd) {
+    public TropicalFish(final ItemEditCommand cmd) {
         super("tropicalfish",
                 cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(ItemUtils.getMeta(item) instanceof TropicalFishBucketMeta)) {
@@ -36,21 +36,15 @@ public class TropicalFish extends SubCmd {
         }
 
         try {
-            if (args.length < 2)
+            if (args.length < 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                case "pattern":
-                    pattern(p, item, alias, args);
-                    return;
-                case "patterncolor":
-                    patternColor(p, item, alias, args);
-                    return;
-                case "bodycolor":
-                    bodyColor(p, item, alias, args);
-                    return;
-                default:
-                    throw new IllegalArgumentException();
+                case "pattern" -> pattern(p, item, alias, args);
+                case "patterncolor" -> patternColor(p, item, alias, args);
+                case "bodycolor" -> bodyColor(p, item, alias, args);
+                default -> throw new IllegalArgumentException();
             }
         } catch (Exception e) {
             onFail(p, alias);
@@ -58,10 +52,11 @@ public class TropicalFish extends SubCmd {
 
     }
 
-    private void bodyColor(Player p, ItemStack item, String alias, String[] args) {
+    private void bodyColor(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
-            if (args.length != 3)
+            if (args.length != 3) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
 
@@ -79,10 +74,11 @@ public class TropicalFish extends SubCmd {
         }
     }
 
-    private void patternColor(Player p, ItemStack item, String alias, String[] args) {
+    private void patternColor(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
-            if (args.length != 3)
+            if (args.length != 3) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
 
@@ -100,10 +96,11 @@ public class TropicalFish extends SubCmd {
         }
     }
 
-    private void pattern(Player p, ItemStack item, String alias, String[] args) {
+    private void pattern(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
-            if (args.length != 3)
+            if (args.length != 3) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
 
@@ -122,14 +119,17 @@ public class TropicalFish extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
-            return CompleteUtility.complete(args[1], subCommands);
-        if (args.length == 3)
-            if (args[1].equalsIgnoreCase("patterncolor") || args[1].equalsIgnoreCase("bodycolor"))
-                return CompleteUtility.complete(args[2], Aliases.COLOR);
-            else if (args[1].equalsIgnoreCase("pattern"))
-                return CompleteUtility.complete(args[2], Aliases.TROPICALPATTERN);
-        return Collections.emptyList();
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        return switch (args.length){
+            case 2 ->CompleteUtility.complete(args[1], subCommands);
+            case 3 -> {
+                if (args[1].equalsIgnoreCase("patterncolor") || args[1].equalsIgnoreCase("bodycolor"))
+                    yield  CompleteUtility.complete(args[2], Aliases.COLOR);
+                else if (args[1].equalsIgnoreCase("pattern"))
+                    yield CompleteUtility.complete(args[2], Aliases.TROPICALPATTERN);
+                yield List.of();
+            }
+            default -> Collections.emptyList();
+        } ;
     }
 }

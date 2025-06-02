@@ -21,7 +21,7 @@ public class MaxStackSize extends SubCmd {
 
     //ie MaxStackSize <1-99/default>
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
@@ -38,7 +38,7 @@ public class MaxStackSize extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (args.length == 2) {
             List<String> list = CompleteUtility.complete(args[1], "1", "32", "64", "99");
             if ("default".startsWith(args[1].toLowerCase(Locale.ENGLISH)))

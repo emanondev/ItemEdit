@@ -12,21 +12,22 @@ import java.util.List;
 
 public class Update extends SubCmd {
 
-    public Update(ServerItemCommand cmd) {
+    public Update(final ServerItemCommand cmd) {
         super("update", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         try {
-            if (args.length < 2)
+            if (args.length < 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             if (ItemEdit.get().getServerStorage().getItem(args[1]) != null) {
-
                 ItemEdit.get().getServerStorage().setItem(args[1], this.getItemInHand(p).clone());
-            } else
+            } else {
                 throw new IllegalArgumentException();
+            }
             //TODO feedback
         } catch (Exception e) {
             onFail(p, alias);
@@ -34,11 +35,13 @@ public class Update extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        if (!(sender instanceof Player))
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        if (!(sender instanceof Player)) {
             return Collections.emptyList();
-        if (args.length == 2)
+        }
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+        }
         return Collections.emptyList();
     }
 

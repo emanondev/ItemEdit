@@ -19,7 +19,7 @@ public class GoatHornSoundAliases extends AliasSet<MusicInstrument> {
     }
 
     @Override
-    public String getName(MusicInstrument type) {
+    public String getName(final MusicInstrument type) {
         return type.getKey().getNamespace().equals(NamespacedKey.MINECRAFT) ?
                 type.getKey().getKey() : type.getKey().toString();
     }

@@ -13,12 +13,12 @@ import java.util.*;
 
 public class Get extends SubCmd {
 
-    public Get(ItemStorageCommand cmd) {
+    public Get(final ItemStorageCommand cmd) {
         super("get", cmd, true, false);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         try {
             if (args.length != 2 && args.length != 3)
@@ -41,16 +41,14 @@ public class Get extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (!(sender instanceof Player))
             return new ArrayList<>();
-        switch (args.length) {
-            case 2:
-                return CompleteUtility.complete(args[1], ItemEdit.get().getPlayerStorage().getIds((Player) sender));
-            case 3:
-                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
-        }
-        return Collections.emptyList();
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], ItemEdit.get().getPlayerStorage().getIds((Player) sender));
+            case 3 -> CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+            default -> Collections.emptyList();
+        };
     }
 
 }

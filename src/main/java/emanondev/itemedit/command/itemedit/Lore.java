@@ -26,10 +26,9 @@ public class Lore extends SubCmd {
     private int lineLimit;
     private int lengthLimit;
 
-    public Lore(ItemEditCommand cmd) {
+    public Lore(final ItemEditCommand cmd) {
         super("lore", cmd, true, true);
-        lineLimit = getPlugin().getConfig().getInt("blocked.lore-line-limit", 16);
-        lengthLimit = getPlugin().getConfig().getInt("blocked.lore-length-limit", 120);
+        reload();
     }
 
     public void reload() {
@@ -38,20 +37,20 @@ public class Lore extends SubCmd {
         lengthLimit = getPlugin().getConfig().getInt("blocked.lore-length-limit", 120);
     }
 
-    private boolean allowedLineLimit(Player who, int lines) {
+    private boolean allowedLineLimit(final Player who, final int lines) {
         if (lineLimit < 0 || who.hasPermission("itemedit.bypass.lore_line_limit"))
             return true;
         return lines <= lineLimit;
     }
 
-    private boolean allowedLengthLimit(Player who, String text) {
+    private boolean allowedLengthLimit(final Player who, final String text) {
         if (lengthLimit < 0 || who.hasPermission("itemedit.bypass.lore_length_limit"))
             return true;
         return text.length() <= lengthLimit;
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (args.length == 1) {
@@ -125,7 +124,7 @@ public class Lore extends SubCmd {
         }
     }
 
-    private void loreReplace(Player p, ItemStack item, String alias, String[] args) {
+    private void loreReplace(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             if (args.length < 4) {
                 sendFailFeedbackForSub(p, alias, "replace");
@@ -193,7 +192,7 @@ public class Lore extends SubCmd {
         }
     }
 
-    private void lorePaste(Player p, ItemStack item, String alias, String[] args) {
+    private void lorePaste(final Player p, final ItemStack item, final String alias, final String[] args) {
         if (!copies.containsKey(p.getUniqueId())) {
             Util.sendMessage(p, this.getLanguageString("paste.no-copy", null, p));
             return;
@@ -205,7 +204,7 @@ public class Lore extends SubCmd {
         updateView(p);
     }
 
-    private void loreCopy(Player p, ItemStack item, String alias, String[] args) {
+    private void loreCopy(final Player p, final ItemStack item, final String alias, final String[] args) {
 
         List<String> lore;
         if (item.hasItemMeta()) {
@@ -221,7 +220,7 @@ public class Lore extends SubCmd {
         Util.sendMessage(p, this.getLanguageString("copy.feedback", null, p));
     }
 
-    private void loreCopyBook(Player p, ItemStack item, String alias, String[] args) {
+    private void loreCopyBook(final Player p, final ItemStack item, final String alias, final String[] args) {
 
         List<String> lore;
         if (item.hasItemMeta()) {
@@ -247,7 +246,7 @@ public class Lore extends SubCmd {
         Util.sendMessage(p, this.getLanguageString("copyBook.feedback", null, p));
     }
 
-    private void loreCopyFile(Player p, ItemStack item, String alias, String[] args) {
+    private void loreCopyFile(final Player p, final ItemStack item, final String alias, final String[] args) {
         if (args.length < 2) {
             Util.sendMessage(p, this.getLanguageString("copyFile.no-path", null, p));
             return;
@@ -257,14 +256,15 @@ public class Lore extends SubCmd {
             return;
         }
         List<String> lore = new ArrayList<>(loreCopy.getStringList(args[2]));
-        for (int i = 0; i < lore.size(); i++)
+        for (int i = 0; i < lore.size(); i++) {
             lore.set(i, Util.formatText(p, lore.get(i), getPermission()));
+        }
         copies.put(p.getUniqueId(), lore);
         Util.sendMessage(p, this.getLanguageString("copyFile.feedback", null, p));
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         switch (args.length) {
             case 2:
                 return CompleteUtility.complete(args[1], loreSub);
@@ -321,7 +321,7 @@ public class Lore extends SubCmd {
     }
 
     // /itemedit lore add
-    private void loreAdd(Player p, ItemStack item, String alias, String[] args) {
+    private void loreAdd(final Player p, final ItemStack item, final String alias, final String[] args) {
         StringBuilder text = new StringBuilder();
         if (args.length > 2) {
             text = new StringBuilder(args[2]);
@@ -359,7 +359,7 @@ public class Lore extends SubCmd {
     }
 
     // /itemedit lore insert [line] [text]
-    private void loreInsert(Player p, ItemStack item, String alias, String[] args) {
+    private void loreInsert(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             if (args.length < 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -411,7 +411,7 @@ public class Lore extends SubCmd {
     }
 
     // lore set line text
-    private void loreSet(Player p, ItemStack item, String alias, String[] args) {
+    private void loreSet(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             if (args.length < 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -462,7 +462,7 @@ public class Lore extends SubCmd {
         }
     }
 
-    private void loreRemove(Player p, ItemStack item, String alias, String[] args) {
+    private void loreRemove(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             if (args.length < 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -492,7 +492,7 @@ public class Lore extends SubCmd {
         }
     }
 
-    private void loreReset(Player p, ItemStack item, String alias, String[] args) {
+    private void loreReset(final Player p, final ItemStack item, final String alias, final String[] args) {
         ItemMeta meta = ItemUtils.getMeta(item);
         meta.setLore(null);
         item.setItemMeta(meta);

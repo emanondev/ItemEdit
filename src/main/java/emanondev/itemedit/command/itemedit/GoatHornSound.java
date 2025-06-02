@@ -16,13 +16,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class GoatHornSound extends SubCmd {
-    public GoatHornSound(ItemEditCommand cmd) {
+    public GoatHornSound(final ItemEditCommand cmd) {
         super("goathornsound", cmd, true, true);
         MusicInstrument.values(); //force load the class or throw an exception if absent
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player player = (Player) sender;
         ItemStack item = this.getItemInHand(player);
         if (!(item.getItemMeta() instanceof MusicInstrumentMeta)) {
@@ -31,8 +31,9 @@ public class GoatHornSound extends SubCmd {
         }
 
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             MusicInstrumentMeta meta = (MusicInstrumentMeta) ItemUtils.getMeta(item);
             MusicInstrument type = Aliases.GOAT_HORN_SOUND.convertAlias(args[1]);
             if (type == null) {

@@ -15,18 +15,19 @@ import java.util.List;
 
 public class HideToolTip extends SubCmd {
 
-    public HideToolTip(ItemEditCommand cmd) {
+    public HideToolTip(final ItemEditCommand cmd) {
         super("hidetooltip", cmd, true, true);
     }
 
     //ie hidetooltip <true/false>
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length > 2)
+            if (args.length > 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemMeta meta = ItemUtils.getMeta(item);
             boolean value = args.length == 1 ? !meta.isHideTooltip() : Aliases.BOOLEAN.convertAlias(args[1]);
             meta.setHideTooltip(value);
@@ -37,7 +38,7 @@ public class HideToolTip extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (args.length == 2)
             return CompleteUtility.complete(args[1], Aliases.BOOLEAN);
         return Collections.emptyList();

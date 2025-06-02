@@ -24,11 +24,11 @@ public class TrimMaterialAliasesOld extends AliasSet<TrimMaterial> implements Tr
     }
 
     @Override
-    public String getName(TrimMaterial value) {
+    public String getName(final TrimMaterial value) {
         return value.getKey().toString();
     }
 
-    public void registerValue(TrimMaterial pattern) {
+    public void registerValue(final TrimMaterial pattern) {
         values.add(pattern);
     }
 

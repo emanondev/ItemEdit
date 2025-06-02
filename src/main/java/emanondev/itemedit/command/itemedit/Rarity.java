@@ -16,17 +16,18 @@ import java.util.List;
 
 public class Rarity extends SubCmd {
 
-    public Rarity(ItemEditCommand cmd) {
+    public Rarity(final ItemEditCommand cmd) {
         super("rarity", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length > 2)
+            if (args.length > 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemRarity rarity = args.length == 1 ? null : Aliases.RARITY.convertAlias(args[1]);
             if (rarity == null && args.length != 1) {
                 onWrongAlias("wrong-rarity", p, Aliases.RARITY);
@@ -44,9 +45,10 @@ public class Rarity extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.RARITY);
+        }
         return Collections.emptyList();
     }
 

@@ -15,12 +15,12 @@ import java.util.List;
 
 public class Unbreakable extends SubCmd {
 
-    public Unbreakable(ItemEditCommand cmd) {
+    public Unbreakable(final ItemEditCommand cmd) {
         super("unbreakable", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (args.length > 2) {
@@ -39,7 +39,7 @@ public class Unbreakable extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (args.length == 2)
             return CompleteUtility.complete(args[1], Aliases.BOOLEAN);
         return Collections.emptyList();

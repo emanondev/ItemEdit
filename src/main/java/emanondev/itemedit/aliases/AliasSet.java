@@ -11,7 +11,7 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
     private final String path;
     private final HashMap<String, T> map = new HashMap<>();
 
-    public AliasSet(String path) {
+    public AliasSet(final String path) {
         this.path = path.toLowerCase(Locale.ENGLISH);
     }
 
@@ -58,7 +58,7 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
     /**
      * @return default name, for autogeneration
      */
-    public String getDefaultName(T value) {
+    public String getDefaultName(final T value) {
         return getPathName(value);
     }
 
@@ -67,36 +67,37 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
      * @see #getPathName(Object)
      */
     @Deprecated
-    public abstract String getName(T value);
+    public abstract String getName(final T value);
 
     /**
      * @return path for specified value (set path not included)
      */
-    public String getPathName(T value) {
+    public String getPathName(final T value) {
         return getName(value);
     }
 
     public abstract Collection<T> getValues();
 
-    protected void set(String alias, T obj) {
+    protected void set(final String alias, final T obj) {
         if (obj == null || alias == null)
             throw new NullPointerException();
         if (alias.isEmpty())
             throw new IllegalArgumentException();
-        alias = alias.replace(" ", "_").toLowerCase(Locale.ENGLISH);
+        String formattedAlias = alias.replace(" ", "_").toLowerCase(Locale.ENGLISH);
 
         String path = this.path + "." + getPathName(obj);
         if (alias.equals(config.get(path)))
             return;
 
-        if (map.containsKey(alias))
-            throw new IllegalArgumentException("Alias " + alias
+        if (map.containsKey(formattedAlias)) {
+            throw new IllegalArgumentException("Alias " + formattedAlias
                     + " is already used, check aliases.yml avoid using the same alias for different things");
+        }
 
         map.remove(config.get(path)); //TODO to fix
-        map.put(alias, obj);
+        map.put(formattedAlias, obj);
 
-        config.set(path, alias);
+        config.set(path, formattedAlias);
         config.save();
     }
 
@@ -104,7 +105,7 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
         return new ArrayList<>(map.keySet());
     }
 
-    public T convertAlias(String alias) {
+    public T convertAlias(final String alias) {
         return map.get(alias.toLowerCase(Locale.ENGLISH));
     }
 

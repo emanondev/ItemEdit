@@ -14,12 +14,12 @@ import java.util.List;
 
 public class Firework extends SubCmd {
 
-    public Firework(ItemEditCommand cmd) {
+    public Firework(final ItemEditCommand cmd) {
         super("firework", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof FireworkMeta)) {
@@ -37,7 +37,7 @@ public class Firework extends SubCmd {
 
     // itemedit firework
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         return Collections.emptyList();
     }
 

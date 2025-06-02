@@ -23,17 +23,18 @@ import java.util.List;
 
 public class Hide extends SubCmd {
 
-    public Hide(ItemEditCommand cmd) {
+    public Hide(final ItemEditCommand cmd) {
         super("hide", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if ((args.length != 3) && (args.length != 2))
+            if ((args.length != 3) && (args.length != 2)) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             ItemFlag flag = Aliases.FLAG_TYPE.convertAlias(args[1]);
@@ -58,7 +59,7 @@ public class Hide extends SubCmd {
         }
     }
 
-    private void handleFlagChange(boolean put, ItemFlag flag, ItemStack item, ItemMeta meta) {
+    private void handleFlagChange(final boolean put, final ItemFlag flag, final ItemStack item, final ItemMeta meta) {
         if (!VersionUtils.hasPaperAPI() ||
                 !VersionUtils.isVersionAfter(1, 20, 5) ||
                 !ItemEdit.get().getConfig().loadBoolean("itemedit.paper_hide_fix", true)) {
@@ -95,12 +96,12 @@ public class Hide extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
-            return CompleteUtility.complete(args[1], Aliases.FLAG_TYPE);
-        if (args.length == 3)
-            return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
-        return Collections.emptyList();
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        return switch (args.length){
+            case 2 ->  CompleteUtility.complete(args[1], Aliases.FLAG_TYPE);
+            case 3 -> CompleteUtility.complete(args[2], Aliases.BOOLEAN);
+            default -> List.of();
+        };
     }
 
 }

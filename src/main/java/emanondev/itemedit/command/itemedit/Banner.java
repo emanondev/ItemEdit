@@ -24,12 +24,12 @@ public class Banner extends SubCmd {
 
     private static final String[] subCommands = new String[]{"add", "set", "remove", "color"};
 
-    public Banner(ItemEditCommand cmd) {
+    public Banner(final ItemEditCommand cmd) {
         super("banner", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof BannerMeta)) {
@@ -42,25 +42,16 @@ public class Banner extends SubCmd {
         }
 
         switch (args[1].toLowerCase(Locale.ENGLISH)) {
-            case "add":
-                addPattern(p, item, alias, args);
-                return;
-            case "set":
-                setPattern(p, item, alias, args);
-                return;
-            case "remove":
-                removePattern(p, item, alias, args);
-                return;
-            case "color":
-                colorPattern(p, item, alias, args);
-                return;
-            default:
-                onFail(p, alias);
+            case "add" -> addPattern(p, item, alias, args);
+            case "set" -> setPattern(p, item, alias, args);
+            case "remove" -> removePattern(p, item, alias, args);
+            case "color" -> colorPattern(p, item, alias, args);
+            default -> onFail(p, alias);
         }
     }
 
     // itemedit banner color id color
-    private void colorPattern(Player p, ItemStack item, String alias, String[] args) {
+    private void colorPattern(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             int id = Integer.parseInt(args[2]) - 1;
@@ -80,7 +71,7 @@ public class Banner extends SubCmd {
 
     }
 
-    private void removePattern(Player p, ItemStack item, String alias, String[] args) {
+    private void removePattern(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             int id = Integer.parseInt(args[2]) - 1;
@@ -94,14 +85,18 @@ public class Banner extends SubCmd {
         }
     }
 
-    private void setPattern(Player p, ItemStack item, String alias, String[] args) {
+    private void setPattern(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (type == null || color == null) {
-                if (type == null) onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
-                if (color == null) onWrongAlias("wrong-color", p, Aliases.COLOR);
+                if (type == null) {
+                    onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
+                }
+                if (color == null) {
+                    onWrongAlias("wrong-color", p, Aliases.COLOR);
+                }
                 sendFailFeedbackForSub(p, alias, "set");
                 return;
             }
@@ -114,14 +109,18 @@ public class Banner extends SubCmd {
         }
     }
 
-    private void addPattern(Player p, ItemStack item, String alias, String[] args) {
+    private void addPattern(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (type == null || color == null) {
-                if (type == null) onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
-                if (color == null) onWrongAlias("wrong-color", p, Aliases.COLOR);
+                if (type == null) {
+                    onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
+                }
+                if (color == null) {
+                    onWrongAlias("wrong-color", p, Aliases.COLOR);
+                }
                 sendFailFeedbackForSub(p, alias, "add");
                 return;
             }
@@ -134,18 +133,19 @@ public class Banner extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2) {
-            return CompleteUtility.complete(args[1], subCommands);
-        }
-        if (args.length == 3 && (args[1].equalsIgnoreCase("add")
-                || args[1].equalsIgnoreCase("set")))
-            return CompleteUtility.complete(args[2], Aliases.PATTERN_TYPE);
-        if (args.length == 4 && (args[1].equalsIgnoreCase("color")
-                || args[1].equalsIgnoreCase("add")
-                || args[1].equalsIgnoreCase("set")))
-            return CompleteUtility.complete(args[3], Aliases.COLOR);
-        return Collections.emptyList();
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        return switch (args.length){
+            case 2 -> CompleteUtility.complete(args[1], subCommands);
+            case 3 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "add", "set" -> CompleteUtility.complete(args[2], Aliases.PATTERN_TYPE);
+                default -> List.of();
+            };
+            case 4 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "add", "set", "color" -> CompleteUtility.complete(args[3], Aliases.COLOR);
+                default -> List.of();
+            };
+            default -> List.of();
+        };
     }
 
 }

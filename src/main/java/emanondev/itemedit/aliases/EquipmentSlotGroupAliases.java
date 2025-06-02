@@ -12,7 +12,7 @@ public class EquipmentSlotGroupAliases extends AliasSet<EquipmentSlotGroup> {
     }
 
     @Override
-    public String getName(EquipmentSlotGroup value) {
+    public String getName(final EquipmentSlotGroup value) {
         return value.toString();
     }
 

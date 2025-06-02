@@ -18,7 +18,7 @@ public class Compass extends SubCmd {
 
     private static final String[] compassSub = new String[]{"clear", "set"};
 
-    public Compass(ItemEditCommand cmd) {
+    public Compass(final ItemEditCommand cmd) {
         super("compass", cmd, true, true);
     }
 
@@ -28,7 +28,7 @@ public class Compass extends SubCmd {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof CompassMeta)) {
@@ -41,26 +41,22 @@ public class Compass extends SubCmd {
         }
 
         switch (args[1].toLowerCase(Locale.ENGLISH)) {
-            case "set":
-                compassSet(p, item, args);
-                return;
-            case "clear":
-                compassClear(p, item, args);
-                return;
-            default:
-                onFail(p, alias);
+            case "set" -> compassSet(p, item, args);
+            case "clear" -> compassClear(p, item, args);
+            default -> onFail(p, alias);
         }
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], compassSub);
+        }
         return Collections.emptyList();
     }
 
     // lore set line text
-    private void compassSet(Player p, ItemStack item, String[] args) {
+    private void compassSet(final Player p, final ItemStack item, final String[] args) {
         CompassMeta meta = (CompassMeta) ItemUtils.getMeta(item);
         meta.setLodestoneTracked(false);
         meta.setLodestone(p.getLocation());
@@ -74,7 +70,7 @@ public class Compass extends SubCmd {
         updateView(p);
     }
 
-    private void compassClear(Player p, ItemStack item, String[] args) {
+    private void compassClear(final Player p, final ItemStack item, final String[] args) {
         CompassMeta meta = (CompassMeta) ItemUtils.getMeta(item);
         meta.setLodestoneTracked(true);
         meta.setLodestone(p.getLocation());

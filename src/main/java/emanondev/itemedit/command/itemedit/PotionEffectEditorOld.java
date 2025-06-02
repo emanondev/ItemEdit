@@ -22,14 +22,13 @@ import java.util.Locale;
 public class PotionEffectEditorOld extends SubCmd {
     private static final String[] subCommands = new String[]{"add", "remove", "reset"};
 
-    public PotionEffectEditorOld(ItemEditCommand cmd) {
-        super("potioneffect",
-                cmd, true, true);
+    public PotionEffectEditorOld(final ItemEditCommand cmd) {
+        super("potioneffect",                cmd, true, true);
 
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(ItemUtils.getMeta(item) instanceof PotionMeta)) {
@@ -60,7 +59,7 @@ public class PotionEffectEditorOld extends SubCmd {
 
     }
 
-    private void potioneffectRemove(Player p, ItemStack item, String alias, String[] args) {
+    private void potioneffectRemove(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             if (args.length != 3)
                 throw new IllegalArgumentException("Wrong param number");
@@ -83,7 +82,7 @@ public class PotionEffectEditorOld extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         switch (args.length) {
             case 2:
                 return CompleteUtility.complete(args[1], subCommands);
@@ -110,7 +109,7 @@ public class PotionEffectEditorOld extends SubCmd {
         }
     }
 
-    private void potioneffectAdd(Player p, ItemStack item, String alias, String[] args) {
+    private void potioneffectAdd(final Player p, final ItemStack item, final String alias, final String[] args) {
         try {
             if (args.length != 4 && args.length != 5 && args.length != 6 && args.length != 7 && args.length != 8)
                 throw new IllegalArgumentException("Wrong param number");
@@ -159,7 +158,7 @@ public class PotionEffectEditorOld extends SubCmd {
         }
     }
 
-    private void potioneffectClear(Player p, ItemStack item, String alias, String[] args) {
+    private void potioneffectClear(final Player p, final ItemStack item, final String alias, final String[] args) {
         PotionMeta meta = (PotionMeta) ItemUtils.getMeta(item);
         meta.clearCustomEffects();
         item.setItemMeta(meta);

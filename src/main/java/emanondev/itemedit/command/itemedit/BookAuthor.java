@@ -6,6 +6,7 @@ import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemUtils;
+import io.lumine.mythic.bukkit.utils.lib.jooq.CreateTableAsStep;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -22,7 +23,7 @@ public class BookAuthor extends SubCmd {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getType() == Material.WRITTEN_BOOK)) {
@@ -41,8 +42,9 @@ public class BookAuthor extends SubCmd {
 
         try {
             StringBuilder name = new StringBuilder(args[1]);
-            for (int i = 2; i < args.length; i++)
+            for (int i = 2; i < args.length; i++) {
                 name.append(" ").append(args[i]);
+            }
             meta.setAuthor(UtilsString.fix(name.toString(), null, true));
             item.setItemMeta(meta);
             updateView(p);
@@ -55,8 +57,9 @@ public class BookAuthor extends SubCmd {
     // itemedit bookauthor <name>
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
-            return CompleteUtility.completePlayers(args[1]);
-        return Collections.emptyList();
+        return switch (args.length){
+            case 2 -> CompleteUtility.completePlayers(args[1]);
+            default -> List.of();
+        };
     }
 }

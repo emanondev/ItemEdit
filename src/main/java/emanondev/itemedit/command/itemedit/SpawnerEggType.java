@@ -18,13 +18,13 @@ import java.util.List;
 
 public class SpawnerEggType extends SubCmd {
 
-    public SpawnerEggType(ItemEditCommand cmd) {
+    public SpawnerEggType(final ItemEditCommand cmd) {
         super("spawnereggtype", cmd, true, true);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         ItemMeta rawMeta = ItemUtils.getMeta(item);
@@ -36,8 +36,9 @@ public class SpawnerEggType extends SubCmd {
         SpawnEggMeta meta = (SpawnEggMeta) rawMeta;
 
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException();
+            }
             EntityType type = Aliases.EGG_TYPE.convertAlias(args[1]);
             if (type == null) {
                 onWrongAlias("wrong-entity", p, Aliases.EGG_TYPE);
@@ -54,7 +55,7 @@ public class SpawnerEggType extends SubCmd {
 
     // itemedit bookauthor <name>
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (args.length == 2)
             return CompleteUtility.complete(args[1], Aliases.EGG_TYPE);
         return Collections.emptyList();

@@ -27,7 +27,7 @@ public class AxolotlVariant extends SubCmd {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof AxolotlBucketMeta)) {
@@ -36,8 +36,9 @@ public class AxolotlVariant extends SubCmd {
         }
 
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             AxolotlBucketMeta meta = (AxolotlBucketMeta) ItemUtils.getMeta(item);
             Axolotl.Variant type = Aliases.AXOLOTL_VARIANT.convertAlias(args[1]);
             if (type == null) {
@@ -51,13 +52,13 @@ public class AxolotlVariant extends SubCmd {
         } catch (Exception e) {
             onFail(p, alias);
         }
-
     }
 
     @Override
     public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.AXOLOTL_VARIANT);
+        }
         return Collections.emptyList();
     }
 }

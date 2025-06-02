@@ -12,23 +12,23 @@ public interface IAliasSet<T> {
     /**
      * @return default name, for autogeneration
      */
-    String getDefaultName(T value);
+    String getDefaultName(final T value);
 
     /**
      * @see #getDefaultName(Object)
      * @see #getPathName(Object)
      */
     @Deprecated
-    String getName(T value);
+    String getName(final T value);
 
     /**
      * @return path for specified value (set path not included)
      */
-    String getPathName(T value);
+    String getPathName(final T value);
 
     Collection<T> getValues();
 
     List<String> getAliases();
 
-    T convertAlias(String alias);
+    T convertAlias(final String alias);
 }

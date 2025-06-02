@@ -21,13 +21,13 @@ import java.util.Locale;
 
 public class Trim extends SubCmd {
 
-    public Trim(ItemEditCommand cmd) {
+    public Trim(final ItemEditCommand cmd) {
         super("armortrim", cmd, true, true);
 
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         ItemMeta meta = ItemUtils.getMeta(item);
@@ -43,9 +43,9 @@ public class Trim extends SubCmd {
                 updateView(p);
                 return;
             }
-            if (args.length != 3)
+            if (args.length != 3) {
                 throw new IllegalArgumentException("Wrong param number");
-            TrimMaterial mat = Aliases.TRIM_MATERIAL.convertAlias(args[1]);
+            }            TrimMaterial mat = Aliases.TRIM_MATERIAL.convertAlias(args[1]);
             if (mat == null) {
                 onWrongAlias("wrong-material", p, Aliases.TRIM_MATERIAL);
                 onFail(p, alias);
@@ -68,15 +68,17 @@ public class Trim extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (args.length == 2) {
             List<String> list = CompleteUtility.complete(args[1], Aliases.TRIM_MATERIAL);
-            if ("clear".startsWith(args[1].toLowerCase(Locale.ENGLISH)))
+            if ("clear".startsWith(args[1].toLowerCase(Locale.ENGLISH))) {
                 list.add("CLEAR");
+            }
             return list;
         }
-        if (args.length == 3 && !args[1].equalsIgnoreCase("clear"))
+        if (args.length == 3 && !args[1].equalsIgnoreCase("clear")) {
             return CompleteUtility.complete(args[2], Aliases.TRIM_PATTERN);
+        }
         return Collections.emptyList();
     }
 }

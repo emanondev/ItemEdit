@@ -20,14 +20,14 @@ public class ColorOld extends SubCmd {
     private final String leatherPerm;
     private final String starsPerm;
 
-    public ColorOld(ItemEditCommand cmd) {
+    public ColorOld(final ItemEditCommand cmd) {
         super("color", cmd, true, true);
         leatherPerm = getPermission() + ".leather";
         starsPerm = getPermission() + ".firework_star";
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if ((item.getItemMeta() instanceof LeatherArmorMeta)) {
@@ -37,10 +37,13 @@ public class ColorOld extends SubCmd {
             }
             LeatherArmorMeta leatherMeta = (LeatherArmorMeta) ItemUtils.getMeta(item);
             try {
-                if (args.length != 4)
+                if (args.length != 4) {
                     throw new IllegalArgumentException("Wrong param number");
+                }
 
-                Color color = Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]),
+                Color color = Color.fromRGB(
+                        Integer.parseInt(args[1]),
+                        Integer.parseInt(args[2]),
                         Integer.parseInt(args[3]));
                 leatherMeta.setColor(color);
                 item.setItemMeta(leatherMeta);
@@ -59,16 +62,20 @@ public class ColorOld extends SubCmd {
 
             FireworkEffectMeta starMeta = (FireworkEffectMeta) rawMeta;
             try {
-                if (args.length != 4)
+                if (args.length != 4) {
                     throw new IllegalArgumentException("Wrong param number");
+                }
 
-                org.bukkit.Color color = org.bukkit.Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]),
+                org.bukkit.Color color = org.bukkit.Color.fromRGB(
+                        Integer.parseInt(args[1]),
+                        Integer.parseInt(args[2]),
                         Integer.parseInt(args[3]));
                 FireworkEffect oldEffect = starMeta.getEffect();
                 FireworkEffect.Builder newEffect = FireworkEffect.builder().flicker(oldEffect != null && oldEffect.hasFlicker())
                         .trail(oldEffect != null && oldEffect.hasTrail()).withColor(color);
-                if (oldEffect != null && oldEffect.getFadeColors() != null)
+                if (oldEffect != null && oldEffect.getFadeColors() != null) {
                     newEffect.withFade(oldEffect.getFadeColors());
+                }
                 starMeta.setEffect(newEffect.build());
                 item.setItemMeta(starMeta);
                 updateView(p);
@@ -83,7 +90,7 @@ public class ColorOld extends SubCmd {
 
     // itemedit bookauthor <name>
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        return Collections.emptyList();
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        return List.of();
     }
 }

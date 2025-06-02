@@ -25,7 +25,7 @@ public class BuyMax extends SubCmd {
 
     private static Economy economy = null;
 
-    public BuyMax(ServerItemCommand cmd) {
+    public BuyMax(final ServerItemCommand cmd) {
         super("buymax", cmd, false, false);
         setupEconomy();
     }
@@ -36,12 +36,13 @@ public class BuyMax extends SubCmd {
         if (economyProvider != null) {
             economy = economyProvider.getProvider();
         }
-        if (economy == null)
+        if (economy == null) {
             throw new IllegalStateException();
+        }
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         try {
             // <id> <amount> <player> <price> [silent]
             if (args.length < 5 || args.length > 6) {
@@ -93,10 +94,11 @@ public class BuyMax extends SubCmd {
             }
 
             // success, giving some feedback
-            if (!silent)
+            if (!silent) {
                 sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%price%", economy.format(price));
+            }
 
             if (ItemEdit.get().getConfig().loadBoolean("log.action.buy", true)) {
                 String msg = this.getConfigString("log", "%id%", args[1].toLowerCase(),
@@ -113,21 +115,16 @@ public class BuyMax extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         if (!(sender instanceof Player))
             return Collections.emptyList();
-        switch (args.length) {
-            case 2:
-                return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
-            case 3:
-                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
-            case 4:
-                return CompleteUtility.completePlayers(args[3]);
-            case 5:
-                return CompleteUtility.complete(args[2], Arrays.asList("10", "100", "1000", "10000"));
-            case 6:
-                return CompleteUtility.complete(args[4], Aliases.BOOLEAN);
-        }
-        return Collections.emptyList();
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+            case 3 -> CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+            case 4 -> CompleteUtility.completePlayers(args[3]);
+            case 5 -> CompleteUtility.complete(args[2], Arrays.asList("10", "100", "1000", "10000"));
+            case 6 -> CompleteUtility.complete(args[4], Aliases.BOOLEAN);
+            default -> Collections.emptyList();
+        };
     }
 }

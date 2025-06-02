@@ -12,27 +12,27 @@ import java.util.Locale;
 
 public class Save extends SubCmd {
 
-    public Save(ItemStorageCommand cmd) {
+    public Save(final ItemStorageCommand cmd) {
         super("save", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender,final  String alias, final String[] args) {
         Player p = (Player) sender;
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
-            int limit = ItemEdit.get().getConfig().loadInteger("storage.player-item-limit", 45);
+            }            int limit = ItemEdit.get().getConfig().loadInteger("storage.player-item-limit", 45);
             if (limit >= 0 && ItemEdit.get().getPlayerStorage().getIds(p).size() >= limit) {
                 sendLanguageString("limit-reached", null, p, "%limit%",
                         String.valueOf(limit));
                 return;
             }
-            if (ItemEdit.get().getPlayerStorage().getItem(p, args[1]) == null)
+            if (ItemEdit.get().getPlayerStorage().getItem(p, args[1]) == null) {
                 ItemEdit.get().getPlayerStorage().setItem(p, args[1], this.getItemInHand(p).clone());
-            else
+            }            else {
                 throw new IllegalArgumentException();
-            sendLanguageString("success", null, p, "%id%",
+            }            sendLanguageString("success", null, p, "%id%",
                     args[1].toLowerCase(Locale.ENGLISH));
         } catch (Exception e) {
             onFail(p, alias);
@@ -40,7 +40,7 @@ public class Save extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
         return Collections.emptyList();
     }
 

@@ -30,11 +30,11 @@ public class TrimPatternAliasesOld extends AliasSet<TrimPattern> implements Trim
     }
 
     @Override
-    public String getName(TrimPattern value) {
+    public String getName(final TrimPattern value) {
         return value.getKey().toString();
     }
 
-    public void registerValue(TrimPattern pattern) {
+    public void registerValue(final TrimPattern pattern) {
         values.add(pattern);
     }
 

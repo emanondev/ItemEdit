@@ -15,18 +15,19 @@ import java.util.List;
 
 public class FireResistent extends SubCmd {
 
-    public FireResistent(ItemEditCommand cmd) {
+    public FireResistent(final ItemEditCommand cmd) {
         super("fireresistent", cmd, true, true);
     }
 
     //ie fireresistent <true/false>
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(final CommandSender sender, final String alias, final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length > 2)
+            if (args.length > 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemMeta meta = ItemUtils.getMeta(item);
             boolean value = args.length == 1 ? !meta.isFireResistant() : Aliases.BOOLEAN.convertAlias(args[1]);
             meta.setFireResistant(value);
@@ -37,9 +38,10 @@ public class FireResistent extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
-        if (args.length == 2)
+    public List<String> onComplete(final CommandSender sender, final String[] args) {
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.BOOLEAN);
+        }
         return Collections.emptyList();
     }
 }
