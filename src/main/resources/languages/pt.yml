@@ -29,7 +29,9 @@ itemedit:
     description:
       - '&b&lDefinir nome do item'
       - ''
-      - '&b&lDica: &bdigite &eclear &bpara reverter o nome para o padrão'
+      - '&b&lDica: &bdigita &e-clear &bpara repor o nome para o padrão'
+      - '&b&lDica: &bdigita &e-copy &bpara copiar o nome'
+      - '&b&lDica: &bdigita &e-paste &bpara colar o valor copiado anteriormente'
     params: '<nome>'
   lore:
     description:

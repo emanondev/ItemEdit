@@ -31,7 +31,9 @@ itemedit:
     description:
       - "&b&lDéfinir le nom de l'objet"
       - ""
-      - "&b&lAstuce : &bTapez &eclear &bpour rétablir le nom par défaut"
+      - '&b&lAstuce : &btapez &e-clear &bpour réinitialiser le nom par défaut'
+      - '&b&lAstuce : &btapez &e-copy &bpour copier le nom'
+      - '&b&lAstuce : &btapez &e-paste &bpour coller la valeur copiée précédemment'
     params: '<nom>'
   lore:
     description:

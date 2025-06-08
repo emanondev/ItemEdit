@@ -28,7 +28,9 @@ itemedit:
     description:
       - '&b&lNustatyti daikto pavadinimą'
       - ''
-      - '&b&lPatarimas: &bįveskite &eclear &b, kad grąžintumėte pavadinimą į numatytąjį'
+      - '&b&lPatarimas: &bįrašyk &e-clear &bnorėdami grąžinti numatytąjį pavadinimą'
+      - '&b&lPatarimas: &bįrašyk &e-copy &bnorėdami nukopijuoti pavadinimą'
+      - '&b&lPatarimas: &bįrašyk &e-paste &bnorėdami įklijuoti anksčiau nukopijuotą reikšmę'
     params: '<name>'
   lore:
     description:

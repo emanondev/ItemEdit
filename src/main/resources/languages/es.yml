@@ -29,7 +29,9 @@ itemedit:
     description:
       - '&b&lEstablecer el nombre del objeto'
       - ''
-      - '&b&lConsejo: &bescribe &eclear &bpara volver al nombre predeterminado'
+      - '&b&lConsejo: &bescribe &e-clear &bpara restablecer el nombre por defecto'
+      - '&b&lConsejo: &bescribe &e-copy &bpara copiar el nombre'
+      - '&b&lConsejo: &bescribe &e-paste &bpara pegar el valor copiado previamente'
     params: '<nombre>'
   lore:
     description:

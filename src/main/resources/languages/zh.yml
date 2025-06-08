@@ -29,7 +29,9 @@ itemedit:
     description:
       - '&b&l设置物品名称'
       - ''
-      - '&b&l提示: &b输入 &eclear &b恢复默认名称'
+      - '&b&l提示：&b输入 &e-clear &b可恢复默认名称'
+      - '&b&l提示：&b输入 &e-copy &b可复制名称'
+      - '&b&l提示：&b输入 &e-paste &b可粘贴之前复制的值'
     params: '<名称>'
   lore:
     description:

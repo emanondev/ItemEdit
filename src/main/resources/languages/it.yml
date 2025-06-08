@@ -29,7 +29,9 @@ itemedit:
     description:
       - '&b&lImposta il nome dell''oggetto'
       - ''
-      - '&b&lTip: &bscrivi &eclear &bper tornare al nome default'
+      - '&b&lTip: &bdigita &e-clear &bper ripristinare il nome predefinito'
+      - '&b&lTip: &bdigita &e-copy &bper copiare il nome'
+      - '&b&lTip: &bdigita &e-paste &bper incollare il valore copiato in precedenza'
     params: '<name>'
   lore:
     description:

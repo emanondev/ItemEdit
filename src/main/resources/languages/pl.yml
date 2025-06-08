@@ -29,7 +29,9 @@ itemedit:
     description:
       - '&b&lUstaw nazwę przedmiotu'
       - ''
-      - '&b&lWskazówka: &bwpisz &eclear &bby przywrócić domyślną nazwę'
+      - '&b&lWskazówka: &bwpisz &e-clear &baby przywrócić domyślną nazwę'
+      - '&b&lWskazówka: &bwpisz &e-copy &baby skopiować nazwę'
+      - '&b&lWskazówka: &bwpisz &e-paste &baby wkleić wcześniej skopiowaną wartość'
     params: '<nazwa>'
   lore:
     description:

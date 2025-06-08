@@ -29,7 +29,9 @@ itemedit:
     description:
       - '&b&lSetze den Namen des Items'
       - ''
-      - '&b&lTipp: &bGib &e"clear" &bein, um den Namen auf den Standard zurückzusetzen'
+      - '&b&lTipp: &bGib &e-clear &bein, um den Namen auf Standard zurückzusetzen'
+      - '&b&lTipp: &bGib &e-copy &bein, um den Namen zu kopieren'
+      - '&b&lTipp: &bGib &e-paste &bein, um den zuvor kopierten Wert einzufügen'
     params: '<name>'
   lore:
     description:

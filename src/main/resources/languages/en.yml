@@ -29,7 +29,9 @@ itemedit:
     description:
       - '&6&lSet item''s name'
       - ''
-      - '&b&lTip: &btype &eclear &bto revert name to default'
+      - '&b&lTip: &btype &e-clear &bto revert name to default'
+      - '&b&lTip: &btype &e-copy &bto copy the name'
+      - '&b&lTip: &btype &e-clear &bto paste previously copied value'
     params: '<name>'
   lore:
     description:

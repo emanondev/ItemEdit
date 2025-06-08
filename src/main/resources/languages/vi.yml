@@ -29,7 +29,9 @@ itemedit:
     description:
       - '&6&lĐặt tên cho vật phẩm'
       - ''
-      - '&b&lGợi ý: &bgõ &exóa &bđể đặt lại tên về mặc định'
+      - '&b&lMẹo: &bgõ &e-clear &bđể đặt lại tên về mặc định'
+      - '&b&lMẹo: &bgõ &e-copy &bđể sao chép tên'
+      - '&b&lMẹo: &bgõ &e-paste &bđể dán giá trị đã sao chép trước đó'
     params: '<tên>'
   lore:
     description:

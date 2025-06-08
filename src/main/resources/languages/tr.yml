@@ -29,7 +29,9 @@ itemedit:
     description:
       - '&6&lÖğenin adını ayarla'
       - ''
-      - '&b&lİpucu: &badı varsayılana geri döndürmek için &esil &byazın'
+      - '&b&lİpucu: &bvarsayılan isme dönmek için &e-clear &byazın'
+      - '&b&lİpucu: &bismini kopyalamak için &e-copy &byazın'
+      - '&b&lİpucu: &bdaha önce kopyalanan değeri yapıştırmak için &e-paste &byazın'
     params: '<ad>'
   lore:
     description:
