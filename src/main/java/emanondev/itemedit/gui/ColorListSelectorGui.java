@@ -36,7 +36,6 @@ public class ColorListSelectorGui implements Gui {
         this.parent = parent;
         String title = getLanguageMessage(subPath + "title");
         this.inventory = Bukkit.createInventory(this, (2) * 9, title);
-        //updateInventory();
         inventory.setItem(inventory.getSize() - 1, this.getBackItem());
     }
 

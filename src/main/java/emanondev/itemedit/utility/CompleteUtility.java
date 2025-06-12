@@ -133,13 +133,16 @@ public final class CompleteUtility {
      */
     @NotNull
     public static <T> List<String> complete(@NotNull String prefix,
-                                            @NotNull Collection<T> list,
+                                            @NotNull Iterable<T> list,
                                             @NotNull Function<T, String> converter) {
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         ArrayList<String> results = new ArrayList<>();
         int c = 0;
         for (T value : list) {
             String textValue = converter.apply(value);
+            if (textValue==null){ //skip nulls
+                continue;
+            }
             if (textValue.toLowerCase(Locale.ENGLISH).startsWith(prefix)) {
                 results.add(textValue);
                 c++;
