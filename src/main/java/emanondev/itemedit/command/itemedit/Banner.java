@@ -14,6 +14,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,12 +25,14 @@ public class Banner extends SubCmd {
 
     private static final String[] subCommands = new String[]{"add", "set", "remove", "color"};
 
-    public Banner(ItemEditCommand cmd) {
+    public Banner(@NotNull final ItemEditCommand cmd) {
         super("banner", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(@NotNull final CommandSender sender,
+                          @NotNull final String alias,
+                          final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof BannerMeta)) {
@@ -60,7 +63,10 @@ public class Banner extends SubCmd {
     }
 
     // itemedit banner color id color
-    private void colorPattern(Player p, ItemStack item, String alias, String[] args) {
+    private void colorPattern(@NotNull final Player p,
+                              @NotNull final ItemStack item,
+                              @NotNull final String alias,
+                              final String[] args) {
         try {
             BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             int id = Integer.parseInt(args[2]) - 1;
@@ -80,7 +86,10 @@ public class Banner extends SubCmd {
 
     }
 
-    private void removePattern(Player p, ItemStack item, String alias, String[] args) {
+    private void removePattern(@NotNull final Player p,
+                               @NotNull final ItemStack item,
+                               @NotNull final String alias,
+                               final String[] args) {
         try {
             BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             int id = Integer.parseInt(args[2]) - 1;
@@ -94,7 +103,10 @@ public class Banner extends SubCmd {
         }
     }
 
-    private void setPattern(Player p, ItemStack item, String alias, String[] args) {
+    private void setPattern(@NotNull final Player p,
+                            @NotNull final ItemStack item,
+                            @NotNull final String alias,
+                            final String[] args) {
         try {
             BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
@@ -114,7 +126,10 @@ public class Banner extends SubCmd {
         }
     }
 
-    private void addPattern(Player p, ItemStack item, String alias, String[] args) {
+    private void addPattern(@NotNull final Player p,
+                            @NotNull final ItemStack item,
+                            @NotNull final String alias,
+                            final String[] args) {
         try {
             BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
@@ -134,7 +149,8 @@ public class Banner extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(@NotNull final CommandSender sender,
+                                   final String[] args) {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], subCommands);
         }

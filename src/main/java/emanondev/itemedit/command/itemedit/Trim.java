@@ -14,6 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +28,7 @@ public class Trim extends SubCmd {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         ItemMeta meta = ItemUtils.getMeta(item);
@@ -68,7 +69,7 @@ public class Trim extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2) {
             List<String> list = CompleteUtility.complete(args[1], Aliases.TRIM_MATERIAL);
             if ("clear".startsWith(args[1].toLowerCase(Locale.ENGLISH)))

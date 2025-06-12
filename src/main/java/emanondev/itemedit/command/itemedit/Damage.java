@@ -6,6 +6,7 @@ import emanondev.itemedit.utility.CompleteUtility;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Damage extends SubCmd {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
@@ -34,7 +35,7 @@ public class Damage extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2) {
             if (sender instanceof Player) {
                 ItemStack item = this.getItemInHand((Player) sender);

@@ -13,6 +13,7 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +27,7 @@ public class Drop extends SubCmd {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         try {
             // <id> <amount> <world> <x> <y> <z>
             if (args.length != 7) {
@@ -69,7 +70,7 @@ public class Drop extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (!(sender instanceof Player))
             return Collections.emptyList();
         switch (args.length) {

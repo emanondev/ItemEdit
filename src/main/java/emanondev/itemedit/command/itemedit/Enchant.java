@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +20,7 @@ public class Enchant extends SubCmd {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
@@ -48,7 +49,7 @@ public class Enchant extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2)
             return CompleteUtility.complete(args[1], Aliases.ENCHANT);
         Enchantment ench = Aliases.ENCHANT.convertAlias(args[2]);

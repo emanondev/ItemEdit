@@ -8,6 +8,7 @@ import emanondev.itemedit.utility.InventoryUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -18,7 +19,7 @@ public class Get extends SubCmd {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         try {
             if (args.length != 2 && args.length != 3)
@@ -41,7 +42,7 @@ public class Get extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (!(sender instanceof Player))
             return new ArrayList<>();
         switch (args.length) {

@@ -42,7 +42,7 @@ public class ItemEditCommand extends AbstractCommand {
             if (VersionUtils.isVersionUpTo(1, 10))
                 this.registerSubCommand(new ColorOld(this));
             else
-                this.registerSubCommand(new Color(this));// 1.11+ add potions and tipped arrows
+                this.registerSubCommand(new ColorSubcommand(this));// 1.11+ add potions and tipped arrows
             this.registerSubCommand(new SkullOwner(this));
             this.registerSubCommand(new FireworkPower(this));
             this.registerSubCommand(new Firework(this));

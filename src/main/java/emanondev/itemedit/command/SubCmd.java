@@ -33,7 +33,10 @@ public abstract class SubCmd {
     private final AbstractCommand cmd;
     private String name;
 
-    public SubCmd(@NotNull String id, @NotNull AbstractCommand cmd, boolean playerOnly, boolean checkNonNullItem) {
+    public SubCmd(@NotNull final String id,
+                  @NotNull final AbstractCommand cmd,
+                  final boolean playerOnly,
+                  final boolean checkNonNullItem) {
         if (id.isEmpty() || id.contains(" "))
             throw new IllegalArgumentException();
         this.ID = id.toLowerCase(Locale.ENGLISH);
@@ -48,11 +51,11 @@ public abstract class SubCmd {
                 + this.commandName + "." + this.ID;
     }
 
-    public AbstractCommand getCommand() {
+    public @NotNull AbstractCommand getCommand() {
         return cmd;
     }
 
-    public APlugin getPlugin() {
+    public @NotNull APlugin getPlugin() {
         return cmd.getPlugin();
     }
 
@@ -64,7 +67,7 @@ public abstract class SubCmd {
         return this.checkNonNullItem;
     }
 
-    protected ItemStack getItemInHand(Player p) {
+    protected @NotNull ItemStack getItemInHand(@NotNull final Player p) {
         return ItemUtils.getHandItem(p);
     }
 
@@ -180,16 +183,18 @@ public abstract class SubCmd {
         return config.loadMultiMessage(this.PATH + path, new ArrayList<>(), null, true, holders);
     }
 
-    public String getName() {
+    public @NotNull String getName() {
         return this.name;
     }
 
-    public String getPermission() {
+    public @NotNull String getPermission() {
         return this.permission;
     }
 
     @SuppressWarnings("deprecation")
-    public ComponentBuilder getHelp(ComponentBuilder base, CommandSender sender, String alias) {
+    public @NotNull ComponentBuilder getHelp(@NotNull final ComponentBuilder base,
+                                    @NotNull final CommandSender sender,
+                                    @NotNull final String alias) {
         String help = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + this.name + " ";
         base.append(help + getLanguageString("params", "", sender).replace(ChatColor.RESET.toString(),
                         ChatColor.GREEN.toString()))
@@ -199,7 +204,8 @@ public abstract class SubCmd {
         return base;
     }
 
-    public void onFail(CommandSender target, String alias) {
+    public void onFail(@NotNull final CommandSender target,
+                       @NotNull final String alias) {
         String params = getLanguageString("params", "", target);
 
         Util.sendMessage(target, new ComponentBuilder(
@@ -212,15 +218,18 @@ public abstract class SubCmd {
                 .create());
     }
 
-    protected String getDescription(CommandSender target) {
+    protected String getDescription(@NotNull final CommandSender target) {
         return String.join("\n", getLanguageStringList("description", null, target));
     }
 
-    abstract public void onCommand(CommandSender sender, String alias, String[] args);
+    abstract public void onCommand(@NotNull final CommandSender sender,
+                                   @NotNull final String alias,
+                                   final String[] args);
 
-    abstract public List<String> onComplete(CommandSender sender, String[] args);
+    abstract public List<String> onComplete(@NotNull final CommandSender sender,
+                                            final String[] args);
 
-    protected void updateView(Player player) {
+    protected void updateView(@NotNull final Player player) {
         InventoryUtils.updateView(player);
     }
 

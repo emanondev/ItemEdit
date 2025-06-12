@@ -11,6 +11,7 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.ComponentBuilder.FormatRetention;
 import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +27,7 @@ public class ListAliases extends SubCmd {
     // ie listaliases [type]
     @SuppressWarnings({"deprecation", "unchecked", "rawtypes"})
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         try {
             if ((args.length != 1) && (args.length != 2))
                 throw new IllegalArgumentException("Wrong param number");
@@ -92,7 +93,7 @@ public class ListAliases extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2)
             return CompleteUtility.complete(args[1], Aliases.getTypes().keySet());
         return Collections.emptyList();

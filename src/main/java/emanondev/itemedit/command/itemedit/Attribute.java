@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.Locale;
 public class Attribute extends SubCmd {
     private static final String[] attributeSub = new String[]{"add", "remove"};
 
-    public Attribute(ItemEditCommand cmd) {
+    public Attribute(@NotNull final ItemEditCommand cmd) {
         super("attribute", cmd, true, true);
     }
 
@@ -31,7 +32,9 @@ public class Attribute extends SubCmd {
     // add <attribute> amount [operation] [equip]
     // remove [attribute/slot]
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(@NotNull final CommandSender sender,
+                          @NotNull final String alias,
+                          final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (args.length == 1) {
@@ -143,7 +146,7 @@ public class Attribute extends SubCmd {
 
     // attribute add/rem attr amount op slot
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2)
             return CompleteUtility.complete(args[1], attributeSub);
         if (args[1].equalsIgnoreCase("add")) {

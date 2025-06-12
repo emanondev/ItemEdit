@@ -19,6 +19,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -54,7 +55,7 @@ public class Food extends SubCmd {
     food convertto <type/serveritem id>
      */
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (args.length == 1) {
@@ -169,7 +170,7 @@ public class Food extends SubCmd {
     }
 
 
-    public void onFail(CommandSender target, String alias) {
+    public void onFail(@NotNull CommandSender target, @NotNull String alias) {
         Util.sendMessage(target, new ComponentBuilder(getLanguageString("help-header", "", target)).create());
         for (String sub : foodSub)
             Util.sendMessage(target, new ComponentBuilder(
@@ -588,8 +589,9 @@ public class Food extends SubCmd {
                 if (target == null) {
                     try {
                         Material mat = Material.valueOf(name.toUpperCase(Locale.ENGLISH));
-                        if (!mat.isItem())
+                        if (!ItemUtils.isItem(mat)) {
                             throw new IllegalArgumentException();
+                        }
                         target = new ItemStack(mat);
                     } catch (IllegalArgumentException e2) {
                         sendFailFeedbackForSub(p, alias, "convertto");
@@ -625,7 +627,7 @@ public class Food extends SubCmd {
         food convertto <type/serveritem id> [amount]
          */
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (!(sender instanceof Player))
             return Collections.emptyList();
         switch (args.length) {

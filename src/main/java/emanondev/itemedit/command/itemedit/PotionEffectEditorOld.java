@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +30,7 @@ public class PotionEffectEditorOld extends SubCmd {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(ItemUtils.getMeta(item) instanceof PotionMeta)) {
@@ -83,7 +84,7 @@ public class PotionEffectEditorOld extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         switch (args.length) {
             case 2:
                 return CompleteUtility.complete(args[1], subCommands);

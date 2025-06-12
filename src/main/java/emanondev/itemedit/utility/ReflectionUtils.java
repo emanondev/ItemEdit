@@ -26,8 +26,8 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the field is not found
      */
     @NotNull
-    public static Field getDeclaredField(@NotNull Class<?> clazz,
-                                         @NotNull String fieldName) {
+    public static Field getDeclaredField(@NotNull final Class<?> clazz,
+                                         @NotNull final String fieldName) {
         try {
             Field field = clazz.getDeclaredField(fieldName);
             field.setAccessible(true);
@@ -43,7 +43,7 @@ public final class ReflectionUtils {
      * @param className the fully qualified name of the class.
      * @return true if the class is present, false otherwise.
      */
-    public static boolean isClassPresent(@NotNull String className) {
+    public static boolean isClassPresent(@NotNull final String className) {
         try {
             Class.forName(className);
             return true;
@@ -62,9 +62,9 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the method is not found
      */
     @NotNull
-    public static Method getDeclaredMethod(@NotNull Class<?> clazz,
-                                           @NotNull String methodName,
-                                           @Nullable Class<?>... parameterTypes) {
+    public static Method getDeclaredMethod(@NotNull final Class<?> clazz,
+                                           @NotNull final String methodName,
+                                           @Nullable final Class<?>... parameterTypes) {
         try {
             Method method = clazz.getDeclaredMethod(methodName, parameterTypes);
             method.setAccessible(true);
@@ -84,9 +84,9 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the method is not found
      */
     @NotNull
-    public static Method getMethod(@NotNull Class<?> clazz,
-                                   @NotNull String methodName,
-                                   @Nullable Class<?>... parameterTypes) {
+    public static Method getMethod(@NotNull final Class<?> clazz,
+                                   @NotNull final String methodName,
+                                   @Nullable final Class<?>... parameterTypes) {
         try {
             return clazz.getMethod(methodName, parameterTypes);
         } catch (Exception e) {
@@ -104,9 +104,9 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the method cannot be invoked
      */
     @Nullable
-    public static Object invokeMethod(@Nullable Object obj,
-                                      @NotNull Method method,
-                                      @Nullable Object... args) {
+    public static Object invokeMethod(@Nullable final Object obj,
+                                      @NotNull final Method method,
+                                      @Nullable final Object... args) {
         try {
             method.setAccessible(true); // Ensure the method is accessible
             return method.invoke(obj, args); // Invoke the method
@@ -124,7 +124,8 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the method cannot be invoked
      */
     @Nullable
-    public static Object invokeMethod(@NotNull Object obj, @NotNull String methodName) {
+    public static Object invokeMethod(@NotNull final Object obj,
+                                      @NotNull final String methodName) {
         try {
             Method method = obj.getClass().getMethod(methodName);
             return method.invoke(obj);
@@ -142,8 +143,8 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the method cannot be invoked
      */
     @Nullable
-    public static <P1> Object invokeMethod(@NotNull Object obj, @NotNull String methodName,
-                                           @NotNull Class<P1> clazzOne, @Nullable P1 paramOne) {
+    public static <P1> Object invokeMethod(@NotNull final Object obj, @NotNull final String methodName,
+                                           @NotNull final Class<P1> clazzOne, @Nullable final P1 paramOne) {
         return invokeMethod(obj, methodName,
                 new Class[]{clazzOne},
                 paramOne);
@@ -159,9 +160,9 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the method cannot be invoked
      */
     @Nullable
-    public static <P1, P2> Object invokeMethod(@NotNull Object obj, @NotNull String methodName,
-                                               @NotNull Class<P1> clazzOne, @Nullable P1 paramOne,
-                                               @NotNull Class<P2> clazzTwo, @Nullable P2 paramTwo) {
+    public static <P1, P2> Object invokeMethod(@NotNull final Object obj, @NotNull final String methodName,
+                                               @NotNull final Class<P1> clazzOne, @Nullable final P1 paramOne,
+                                               @NotNull final Class<P2> clazzTwo, @Nullable final P2 paramTwo) {
         return invokeMethod(obj, methodName,
                 new Class[]{clazzOne, clazzTwo},
                 paramOne, paramTwo);
@@ -176,10 +177,10 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the method cannot be invoked
      */
     @Nullable
-    public static <P1, P2, P3> Object invokeMethod(@NotNull Object obj, @NotNull String methodName,
-                                                   @NotNull Class<P1> clazzOne, @Nullable P1 paramOne,
-                                                   @NotNull Class<P2> clazzTwo, @Nullable P2 paramTwo,
-                                                   @NotNull Class<P3> clazzThree, @Nullable P3 paramThree) {
+    public static <P1, P2, P3> Object invokeMethod(@NotNull Object obj, @NotNull final String methodName,
+                                                   @NotNull final Class<P1> clazzOne, @Nullable final P1 paramOne,
+                                                   @NotNull final Class<P2> clazzTwo, @Nullable final P2 paramTwo,
+                                                   @NotNull final Class<P3> clazzThree, @Nullable final P3 paramThree) {
         return invokeMethod(obj, methodName,
                 new Class[]{clazzOne, clazzTwo, clazzThree},
                 paramOne, paramTwo, paramThree);
@@ -194,11 +195,11 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the method cannot be invoked
      */
     @Nullable
-    public static <P1, P2, P3, P4> Object invokeMethod(@NotNull Object obj, @NotNull String methodName,
-                                                       @NotNull Class<P1> clazzOne, @Nullable P1 paramOne,
-                                                       @NotNull Class<P2> clazzTwo, @Nullable P2 paramTwo,
-                                                       @NotNull Class<P3> clazzThree, @Nullable P3 paramThree,
-                                                       @NotNull Class<P4> clazzFour, @Nullable P4 paramFour) {
+    public static <P1, P2, P3, P4> Object invokeMethod(@NotNull final Object obj, @NotNull final String methodName,
+                                                       @NotNull final Class<P1> clazzOne, @Nullable final P1 paramOne,
+                                                       @NotNull final Class<P2> clazzTwo, @Nullable final P2 paramTwo,
+                                                       @NotNull final Class<P3> clazzThree, @Nullable final P3 paramThree,
+                                                       @NotNull final Class<P4> clazzFour, @Nullable final P4 paramFour) {
         return invokeMethod(obj, methodName,
                 new Class[]{clazzOne, clazzTwo, clazzThree, clazzFour},
                 paramOne, paramTwo, paramThree, paramFour);
@@ -215,9 +216,9 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the method cannot be invoked
      */
     @Nullable
-    public static Object invokeMethod(@NotNull Object obj, @NotNull String methodName,
-                                      @NotNull Class<?>[] parameterTypes,
-                                      Object... args) {
+    public static Object invokeMethod(@NotNull final Object obj, @NotNull final String methodName,
+                                      @NotNull final Class<?>[] parameterTypes,
+                                      final Object... args) {
         try {
             Method method = obj.getClass().getMethod(methodName, parameterTypes);
             return method.invoke(obj, args);
@@ -236,9 +237,9 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the method or class cannot be found or invoked.
      */
     @Nullable
-    public static Object invokeStaticMethod(@NotNull Class<?> clazz,
-                                            @NotNull String methodName,
-                                            Object... args) {
+    public static Object invokeStaticMethod(@NotNull final Class<?> clazz,
+                                            @NotNull final String methodName,
+                                            final Object... args) {
         try {
             Class<?>[] argTypes = new Class[args.length];
             for (int i = 0; i < args.length; i++) {
@@ -258,9 +259,9 @@ public final class ReflectionUtils {
      * @param value the new value to set
      * @throws RuntimeException if the field cannot be set
      */
-    public static void setFieldValue(@NotNull Object obj,
-                                     @NotNull String fieldName,
-                                     @Nullable Object value) {
+    public static void setFieldValue(@NotNull final Object obj,
+                                     @NotNull final String fieldName,
+                                     @Nullable final Object value) {
         try {
             Field field = getDeclaredField(obj.getClass(), fieldName);
             field.set(obj, value);
@@ -278,8 +279,8 @@ public final class ReflectionUtils {
      * @throws RuntimeException if the field cannot be accessed
      */
     @Nullable
-    public static Object getFieldValue(@NotNull Object obj,
-                                       @NotNull String fieldName) {
+    public static Object getFieldValue(@NotNull final Object obj,
+                                       @NotNull final String fieldName) {
         try {
             Field field = getDeclaredField(obj.getClass(), fieldName);
             return field.get(obj);
@@ -296,7 +297,7 @@ public final class ReflectionUtils {
      * @return An instance of the specified class.
      * @throws RuntimeException if the class has no default constructor or if instantiation fails.
      */
-    public static <T> T invokeConstructor(@NotNull Class<T> clazz) {
+    public static <T> T invokeConstructor(@NotNull final Class<T> clazz) {
         try {
             Constructor<T> constructor = clazz.getConstructor();
             return constructor.newInstance();
@@ -313,8 +314,8 @@ public final class ReflectionUtils {
      * @return An instance of the specified class.
      * @throws RuntimeException if the class has no default constructor or if instantiation fails.
      */
-    public static <T, P1> T invokeConstructor(@NotNull Class<T> clazz,
-                                              @NotNull Class<P1> clazzOne, @Nullable P1 paramOne) {
+    public static <T, P1> T invokeConstructor(@NotNull final Class<T> clazz,
+                                              @NotNull final Class<P1> clazzOne, @Nullable final P1 paramOne) {
         return invokeConstructor(clazz,
                 new Class<?>[]{clazzOne},
                 new Object[]{paramOne});
@@ -328,9 +329,9 @@ public final class ReflectionUtils {
      * @return An instance of the specified class.
      * @throws RuntimeException if the class has no default constructor or if instantiation fails.
      */
-    public static <T, P1, P2> T invokeConstructor(@NotNull Class<T> clazz,
-                                                  @NotNull Class<P1> clazzOne, @Nullable P1 paramOne,
-                                                  @NotNull Class<P2> clazzTwo, @Nullable P2 paramTwo) {
+    public static <T, P1, P2> T invokeConstructor(@NotNull final Class<T> clazz,
+                                                  @NotNull final Class<P1> clazzOne, @Nullable final P1 paramOne,
+                                                  @NotNull final Class<P2> clazzTwo, @Nullable final P2 paramTwo) {
         return invokeConstructor(clazz,
                 new Class<?>[]{clazzOne, clazzTwo},
                 new Object[]{paramOne, paramTwo});
@@ -344,10 +345,10 @@ public final class ReflectionUtils {
      * @return An instance of the specified class.
      * @throws RuntimeException if the class has no default constructor or if instantiation fails.
      */
-    public static <T, P1, P2, P3> T invokeConstructor(@NotNull Class<T> clazz,
-                                                      @NotNull Class<P1> clazzOne, @Nullable P1 paramOne,
-                                                      @NotNull Class<P2> clazzTwo, @Nullable P2 paramTwo,
-                                                      @NotNull Class<P3> clazzThree, @Nullable P3 paramThree) {
+    public static <T, P1, P2, P3> T invokeConstructor(@NotNull final Class<T> clazz,
+                                                      @NotNull final Class<P1> clazzOne, @Nullable final P1 paramOne,
+                                                      @NotNull final Class<P2> clazzTwo, @Nullable final P2 paramTwo,
+                                                      @NotNull final Class<P3> clazzThree, @Nullable final P3 paramThree) {
         return invokeConstructor(clazz,
                 new Class<?>[]{clazzOne, clazzTwo, clazzThree},
                 new Object[]{paramOne, paramTwo, paramThree});
@@ -361,11 +362,11 @@ public final class ReflectionUtils {
      * @return An instance of the specified class.
      * @throws RuntimeException if the class has no default constructor or if instantiation fails.
      */
-    public static <T, P1, P2, P3, P4> T invokeConstructor(@NotNull Class<T> clazz,
-                                                          @NotNull Class<P1> clazzOne, @Nullable P1 paramOne,
-                                                          @NotNull Class<P2> clazzTwo, @Nullable P2 paramTwo,
-                                                          @NotNull Class<P3> clazzThree, @Nullable P3 paramThree,
-                                                          @NotNull Class<P4> clazzFour, @Nullable P4 paramFour) {
+    public static <T, P1, P2, P3, P4> T invokeConstructor(@NotNull final Class<T> clazz,
+                                                          @NotNull final Class<P1> clazzOne, @Nullable final P1 paramOne,
+                                                          @NotNull final Class<P2> clazzTwo, @Nullable final P2 paramTwo,
+                                                          @NotNull final Class<P3> clazzThree, @Nullable final P3 paramThree,
+                                                          @NotNull final Class<P4> clazzFour, @Nullable final P4 paramFour) {
         return invokeConstructor(clazz,
                 new Class<?>[]{clazzOne, clazzTwo, clazzThree, clazzFour},
                 new Object[]{paramOne, paramTwo, paramThree, paramFour});
@@ -379,12 +380,12 @@ public final class ReflectionUtils {
      * @return An instance of the specified class.
      * @throws RuntimeException if the class has no default constructor or if instantiation fails.
      */
-    public static <T, P1, P2, P3, P4, P5> T invokeConstructor(@NotNull Class<T> clazz,
-                                                              @NotNull Class<P1> clazzOne, @Nullable P1 paramOne,
-                                                              @NotNull Class<P2> clazzTwo, @Nullable P2 paramTwo,
-                                                              @NotNull Class<P3> clazzThree, @Nullable P3 paramThree,
-                                                              @NotNull Class<P4> clazzFour, @Nullable P4 paramFour,
-                                                              @NotNull Class<P5> clazzFive, @Nullable P5 paramFive) {
+    public static <T, P1, P2, P3, P4, P5> T invokeConstructor(@NotNull final Class<T> clazz,
+                                                              @NotNull final Class<P1> clazzOne, final @Nullable P1 paramOne,
+                                                              @NotNull final Class<P2> clazzTwo, final @Nullable P2 paramTwo,
+                                                              @NotNull final Class<P3> clazzThree, final @Nullable P3 paramThree,
+                                                              @NotNull final Class<P4> clazzFour, final @Nullable P4 paramFour,
+                                                              @NotNull final Class<P5> clazzFive, final @Nullable P5 paramFive) {
         return invokeConstructor(clazz,
                 new Class<?>[]{clazzOne, clazzTwo, clazzThree, clazzFour, clazzFive},
                 new Object[]{paramOne, paramTwo, paramThree, paramFour, paramFive});
@@ -400,9 +401,9 @@ public final class ReflectionUtils {
      * @return An instance of the specified class.
      * @throws RuntimeException if the constructor is not found or if instantiation fails.
      */
-    public static <T> T invokeConstructor(@NotNull Class<T> clazz,
-                                          @NotNull Class<?>[] paramTypes,
-                                          @Nullable Object[] params) {
+    public static <T> T invokeConstructor(@NotNull final Class<T> clazz,
+                                          @NotNull final Class<?>[] paramTypes,
+                                          @Nullable final Object[] params) {
         try {
             Constructor<T> constructor = clazz.getConstructor(paramTypes);
             return constructor.newInstance(params);
@@ -418,8 +419,8 @@ public final class ReflectionUtils {
      * @param annotationClass the annotation class
      * @return true if the class is annotated with the annotation, false otherwise
      */
-    public static boolean isAnnotatedWith(@NotNull Class<?> clazz,
-                                          @NotNull Class<? extends Annotation> annotationClass) {
+    public static boolean isAnnotatedWith(@NotNull final Class<?> clazz,
+                                          @NotNull final Class<? extends Annotation> annotationClass) {
         return clazz.isAnnotationPresent(annotationClass);
     }
 
@@ -429,7 +430,7 @@ public final class ReflectionUtils {
      * @param clazz the class to search
      * @return an array of Annotations
      */
-    public static @NotNull Annotation[] getClassAnnotations(@NotNull Class<?> clazz) {
+    public static @NotNull Annotation[] getClassAnnotations(@NotNull final Class<?> clazz) {
         return clazz.getAnnotations();
     }
 }

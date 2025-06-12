@@ -11,18 +11,21 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
 
 public class BookType extends SubCmd {
 
-    public BookType(ItemEditCommand cmd) {
+    public BookType(@NotNull final ItemEditCommand cmd) {
         super("booktype", cmd, true, true);
     }
 
     @Override
-    public void onCommand(CommandSender sender, String alias, String[] args) {
+    public void onCommand(@NotNull final CommandSender sender,
+                          @NotNull final String alias,
+                          final String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getType() == Material.WRITTEN_BOOK)) {
@@ -58,7 +61,8 @@ public class BookType extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(CommandSender sender, String[] args) {
+    public List<String> onComplete(@NotNull final CommandSender sender,
+                                   final String[] args) {
         if (args.length == 2)
             return CompleteUtility.complete(args[1], Aliases.BOOK_TYPE);
         return Collections.emptyList();

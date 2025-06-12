@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,19 +32,19 @@ public abstract class AbstractCommand implements TabExecutor {
     private final List<SubCmd> subCmds = new ArrayList<>();
     private final HelpSubCommand helpSubCommand;
 
-    public AbstractCommand(@NotNull String name, @NotNull APlugin plugin) {
+    public AbstractCommand(@NotNull final String name,
+                           @NotNull final APlugin plugin) {
         this(name, plugin, false);
     }
 
-    public AbstractCommand(@NotNull String name, @NotNull APlugin plugin, boolean multiPageHelp) {
+    public AbstractCommand(@NotNull final String name,
+                           @NotNull final APlugin plugin,
+                           final boolean multiPageHelp) {
         this.name = name.toLowerCase(Locale.ENGLISH);
         this.plugin = plugin;
         this.PATH = getName();
         config = plugin.getConfig("commands.yml");
-        //this.multiPageHelp = multiPageHelp;
         if (multiPageHelp) {
-            //HelpSubCommand sub = ;
-            //registerSubCommand(sub);
             helpSubCommand = new HelpSubCommand(this);
         } else {
             helpSubCommand = null;
@@ -66,7 +67,7 @@ public abstract class AbstractCommand implements TabExecutor {
             helpSubCommand.reload();
     }
 
-    public List<SubCmd> getAllowedSubCommands(CommandSender sender) {
+    public @NotNull List<SubCmd> getAllowedSubCommands(@NotNull final CommandSender sender) {
         List<SubCmd> list = new ArrayList<>();
         subCmds.forEach(sub -> {
             if (sender.hasPermission(sub.getPermission()))
@@ -77,46 +78,52 @@ public abstract class AbstractCommand implements TabExecutor {
         return list;
     }
 
-    public void registerSubCommand(@NotNull SubCmd sub) {
+    public void registerSubCommand(@NotNull final SubCmd sub) {
         subCmds.add(sub);
     }
 
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+    public boolean onCommand(@NotNull final CommandSender sender,
+                             @NotNull final Command cmd,
+                             @NotNull final String label,
+                             final String[] args) {
         SubCmd subCmd = args.length > 0 ? getSubCmd(args[0], sender) : null;
-        if (!validateRequires(subCmd, sender, label))
-            return true;
-        subCmd.onCommand(sender, label, args);
+        if (validateRequires(subCmd, sender, label)) {
+            subCmd.onCommand(sender, label, args);
+        }
         return true;
     }
 
-    public void sendPermissionLackMessage(@NotNull String permission, CommandSender sender) {
+    public void sendPermissionLackMessage(@NotNull final String permission,
+                                          @NotNull final CommandSender sender) {
         Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("lack-permission", "&cYou lack of permission %permission%",
                 sender instanceof Player ? (Player) sender : null, true
                 , "%permission%",
                 permission));
     }
 
-    public void sendPermissionLackGenericMessage(CommandSender sender) {
+    public void sendPermissionLackGenericMessage(@NotNull final CommandSender sender) {
         Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("lack-permission-generic",
                 "&cYou don't have permission to use this command",
                 sender instanceof Player ? (Player) sender : null, true
         ));
     }
 
-    public void sendPlayerOnly(CommandSender sender) {
+    public void sendPlayerOnly(@NotNull final CommandSender sender) {
         Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("player-only", "&cCommand for Players only",
                 sender instanceof Player ? (Player) sender : null, true
         ));
     }
 
-    public void sendNoItemInHand(CommandSender sender) {
+    public void sendNoItemInHand(@NotNull final CommandSender sender) {
         Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("no-item-on-hand", "&cYou need to hold an item in hand",
                 sender instanceof Player ? (Player) sender : null, true
         ));
     }
 
     @Contract("null,_,_-> false")
-    private boolean validateRequires(SubCmd sub, @NotNull CommandSender sender, String alias) {
+    private boolean validateRequires(@Nullable final SubCmd sub,
+                                     @NotNull final CommandSender sender,
+                                     @NotNull final String alias) {
         if (sub == null) {
             help(sender, alias);
             return false;
@@ -140,7 +147,7 @@ public abstract class AbstractCommand implements TabExecutor {
         return true;
     }
 
-    private void help(CommandSender sender, String alias) {
+    private void help(@NotNull CommandSender sender, @NotNull String alias) {
         if (helpSubCommand != null) {
             helpSubCommand.help(sender, alias, 1);
             return;
@@ -163,7 +170,10 @@ public abstract class AbstractCommand implements TabExecutor {
             sendPermissionLackGenericMessage(sender);
     }
 
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
+    public List<String> onTabComplete(@NotNull final CommandSender sender,
+                                      @NotNull final Command command,
+                                      @NotNull final String label,
+                                      final String[] args) {
         List<String> l = new ArrayList<>();
 
         if (args.length == 1) {
@@ -172,27 +182,33 @@ public abstract class AbstractCommand implements TabExecutor {
         }
         if (args.length > 1) {
             SubCmd subCmd = getSubCmd(args[0], sender);
-            if (subCmd != null && sender.hasPermission(subCmd.getPermission()))
+            if (subCmd != null && sender.hasPermission(subCmd.getPermission())) {
                 l = subCmd.onComplete(sender, args);
+            }
         }
         return l;
     }
 
-    public SubCmd getSubCmd(String cmd, CommandSender sender) {
+    public SubCmd getSubCmd(@NotNull final String cmd, @NotNull final CommandSender sender) {
         for (SubCmd subCmd : subCmds) {
-            if (subCmd.getName().equalsIgnoreCase(cmd))
+            if (subCmd.getName().equalsIgnoreCase(cmd)) {
                 return subCmd;
+            }
         }
-        if (helpSubCommand != null && helpSubCommand.getName().equalsIgnoreCase(cmd) && !getAllowedSubCommands(sender).isEmpty())
+        if (helpSubCommand != null && helpSubCommand.getName().equalsIgnoreCase(cmd) && !getAllowedSubCommands(sender).isEmpty()) {
             return helpSubCommand;
+        }
         return null;
     }
 
-    public void completeCmd(List<String> l, String prefix, CommandSender sender) {
+    public void completeCmd(@NotNull final List<String> l,
+                            @NotNull final String prefix,
+                            @NotNull final CommandSender sender) {
         final String text = prefix.toLowerCase(Locale.ENGLISH);
         getAllowedSubCommands(sender).forEach((cmd) -> {
-            if (cmd.getName().startsWith(text))
+            if (cmd.getName().startsWith(text)) {
                 l.add(cmd.getName());
+            }
         });
     }
 
@@ -236,7 +252,7 @@ public abstract class AbstractCommand implements TabExecutor {
         }
 
         @Override
-        public void onCommand(CommandSender sender, String alias, String[] args) {
+        public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
             int page = 1;
             if (args.length > 1) {
                 try {
@@ -381,7 +397,7 @@ public abstract class AbstractCommand implements TabExecutor {
 
 
         @Override
-        public List<String> onComplete(CommandSender sender, String[] args) {
+        public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
             if (args.length != 2)
                 return Collections.emptyList();
             ArrayList<String> tabs = new ArrayList<>();
