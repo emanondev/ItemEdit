@@ -3,6 +3,7 @@ main: ${groupId}.${project.name}
 version: "${project.version}"
 author: emanon
 api-version: 1.13
+modrinth-project-id: "yx81EHRu"
 folia-supported: true
 softdepend: [ SCore,Vault,SuperVanish,PremiumVanish,PlaceholderAPI,ShopGUIPlus,ItemBridge,MythicMobs,IridiumSkyblock,ASkyBlock,BentoBox-BSkyBlock,uSkyBlock,IslandWorld,FabledSkyBlock,SimpleSkyblock,SkyBlock,SuperiorSkyblock2,SuperiorSkyblock,DungeonMMO ]
 
