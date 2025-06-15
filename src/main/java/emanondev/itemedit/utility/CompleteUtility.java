@@ -23,9 +23,9 @@ public final class CompleteUtility {
      * Completes a prefix based on an enum class. This method returns a list of enum constant names
      * (in lowercase) that start with the provided prefix. The comparison is case-insensitive.
      *
-     * @param prefix     The prefix to match against the enum constant names.
-     * @param enumClass  The enum class to extract the values from.
-     * @param <T>        The type of the enum.
+     * @param prefix    The prefix to match against the enum constant names.
+     * @param enumClass The enum class to extract the values from.
+     * @param <T>       The type of the enum.
      * @return A list of matching enum constant names (in lowercase).
      */
     @NotNull
@@ -49,10 +49,10 @@ public final class CompleteUtility {
      * This method returns a list of enum constant names (in lowercase) that start with the provided prefix
      * and satisfy the predicate condition. The comparison is case-insensitive.
      *
-     * @param prefix     The prefix to match against the enum constant names.
-     * @param type       The enum class to extract the values from.
-     * @param predicate  A predicate used to filter the enum constants.
-     * @param <T>        The type of the enum.
+     * @param prefix    The prefix to match against the enum constant names.
+     * @param type      The enum class to extract the values from.
+     * @param predicate A predicate used to filter the enum constants.
+     * @param <T>       The type of the enum.
      * @return A list of matching enum constant names (in lowercase) that satisfy the predicate.
      */
     @NotNull
@@ -140,7 +140,7 @@ public final class CompleteUtility {
         int c = 0;
         for (T value : list) {
             String textValue = converter.apply(value);
-            if (textValue==null){ //skip nulls
+            if (textValue == null) { //skip nulls
                 continue;
             }
             if (textValue.toLowerCase(Locale.ENGLISH).startsWith(prefix)) {
@@ -175,7 +175,7 @@ public final class CompleteUtility {
      * Completes a prefix based on the aliases in an alias set. This method returns a list of aliases from the
      * provided alias set that start with the prefix. The comparison is case-insensitive.
      *
-     * @param prefix The prefix to match against the aliases in the alias set.
+     * @param prefix  The prefix to match against the aliases in the alias set.
      * @param aliases The alias set containing the aliases to search through.
      * @return A list of matching aliases that start with the prefix.
      */

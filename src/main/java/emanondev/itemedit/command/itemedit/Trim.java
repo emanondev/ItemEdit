@@ -44,8 +44,9 @@ public class Trim extends SubCmd {
                 updateView(p);
                 return;
             }
-            if (args.length != 3)
+            if (args.length != 3) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             TrimMaterial mat = Aliases.TRIM_MATERIAL.convertAlias(args[1]);
             if (mat == null) {
                 onWrongAlias("wrong-material", p, Aliases.TRIM_MATERIAL);
@@ -72,12 +73,14 @@ public class Trim extends SubCmd {
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2) {
             List<String> list = CompleteUtility.complete(args[1], Aliases.TRIM_MATERIAL);
-            if ("clear".startsWith(args[1].toLowerCase(Locale.ENGLISH)))
+            if ("clear".startsWith(args[1].toLowerCase(Locale.ENGLISH))) {
                 list.add("CLEAR");
+            }
             return list;
         }
-        if (args.length == 3 && !args[1].equalsIgnoreCase("clear"))
+        if (args.length == 3 && !args[1].equalsIgnoreCase("clear")) {
             return CompleteUtility.complete(args[2], Aliases.TRIM_PATTERN);
+        }
         return Collections.emptyList();
     }
 }

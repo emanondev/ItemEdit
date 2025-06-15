@@ -1,7 +1,8 @@
 package emanondev.itemedit.utility;
 
-import java.awt.Color;
 import net.md_5.bungee.api.ChatColor;
+
+import java.awt.*;
 
 /**
  * A utility class for building and manipulating RGBA colors.
@@ -100,10 +101,21 @@ public class ColorBuilder implements Cloneable {
 
     // ======= Getters =======
 
-    public int getRed() { return red; }
-    public int getGreen() { return green; }
-    public int getBlue() { return blue; }
-    public int getAlpha() { return alpha; }
+    public int getRed() {
+        return red;
+    }
+
+    public int getGreen() {
+        return green;
+    }
+
+    public int getBlue() {
+        return blue;
+    }
+
+    public int getAlpha() {
+        return alpha;
+    }
 
     // ======= Setters with chaining =======
 
@@ -144,7 +156,7 @@ public class ColorBuilder implements Cloneable {
         return this;
     }
 
-    public ColorBuilder inc(int red,int green,int blue) {
+    public ColorBuilder inc(int red, int green, int blue) {
         this.red = clamp(this.red + red);
         this.green = clamp(this.green + green);
         this.blue = clamp(this.blue + blue);

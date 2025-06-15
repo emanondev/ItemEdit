@@ -32,14 +32,11 @@ public abstract class AbstractCommand implements TabExecutor {
     private final List<SubCmd> subCmds = new ArrayList<>();
     private final HelpSubCommand helpSubCommand;
 
-    public AbstractCommand(@NotNull final String name,
-                           @NotNull final APlugin plugin) {
+    public AbstractCommand(@NotNull String name, @NotNull APlugin plugin) {
         this(name, plugin, false);
     }
 
-    public AbstractCommand(@NotNull final String name,
-                           @NotNull final APlugin plugin,
-                           final boolean multiPageHelp) {
+    public AbstractCommand(@NotNull String name, @NotNull APlugin plugin, boolean multiPageHelp) {
         this.name = name.toLowerCase(Locale.ENGLISH);
         this.plugin = plugin;
         this.PATH = getName();
@@ -67,7 +64,7 @@ public abstract class AbstractCommand implements TabExecutor {
             helpSubCommand.reload();
     }
 
-    public @NotNull List<SubCmd> getAllowedSubCommands(@NotNull final CommandSender sender) {
+    public @NotNull List<SubCmd> getAllowedSubCommands(@NotNull CommandSender sender) {
         List<SubCmd> list = new ArrayList<>();
         subCmds.forEach(sub -> {
             if (sender.hasPermission(sub.getPermission()))
@@ -78,14 +75,11 @@ public abstract class AbstractCommand implements TabExecutor {
         return list;
     }
 
-    public void registerSubCommand(@NotNull final SubCmd sub) {
+    public void registerSubCommand(@NotNull SubCmd sub) {
         subCmds.add(sub);
     }
 
-    public boolean onCommand(@NotNull final CommandSender sender,
-                             @NotNull final Command cmd,
-                             @NotNull final String label,
-                             final String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         SubCmd subCmd = args.length > 0 ? getSubCmd(args[0], sender) : null;
         if (validateRequires(subCmd, sender, label)) {
             subCmd.onCommand(sender, label, args);
@@ -93,37 +87,34 @@ public abstract class AbstractCommand implements TabExecutor {
         return true;
     }
 
-    public void sendPermissionLackMessage(@NotNull final String permission,
-                                          @NotNull final CommandSender sender) {
+    public void sendPermissionLackMessage(@NotNull String permission, @NotNull CommandSender sender) {
         Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("lack-permission", "&cYou lack of permission %permission%",
                 sender instanceof Player ? (Player) sender : null, true
                 , "%permission%",
                 permission));
     }
 
-    public void sendPermissionLackGenericMessage(@NotNull final CommandSender sender) {
+    public void sendPermissionLackGenericMessage(@NotNull CommandSender sender) {
         Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("lack-permission-generic",
                 "&cYou don't have permission to use this command",
                 sender instanceof Player ? (Player) sender : null, true
         ));
     }
 
-    public void sendPlayerOnly(@NotNull final CommandSender sender) {
+    public void sendPlayerOnly(@NotNull CommandSender sender) {
         Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("player-only", "&cCommand for Players only",
                 sender instanceof Player ? (Player) sender : null, true
         ));
     }
 
-    public void sendNoItemInHand(@NotNull final CommandSender sender) {
+    public void sendNoItemInHand(@NotNull CommandSender sender) {
         Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("no-item-on-hand", "&cYou need to hold an item in hand",
                 sender instanceof Player ? (Player) sender : null, true
         ));
     }
 
     @Contract("null,_,_-> false")
-    private boolean validateRequires(@Nullable final SubCmd sub,
-                                     @NotNull final CommandSender sender,
-                                     @NotNull final String alias) {
+    private boolean validateRequires(@Nullable SubCmd sub, @NotNull CommandSender sender, @NotNull String alias) {
         if (sub == null) {
             help(sender, alias);
             return false;
@@ -170,10 +161,7 @@ public abstract class AbstractCommand implements TabExecutor {
             sendPermissionLackGenericMessage(sender);
     }
 
-    public List<String> onTabComplete(@NotNull final CommandSender sender,
-                                      @NotNull final Command command,
-                                      @NotNull final String label,
-                                      final String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         List<String> l = new ArrayList<>();
 
         if (args.length == 1) {
@@ -189,7 +177,7 @@ public abstract class AbstractCommand implements TabExecutor {
         return l;
     }
 
-    public SubCmd getSubCmd(@NotNull final String cmd, @NotNull final CommandSender sender) {
+    public SubCmd getSubCmd(@NotNull String cmd, @NotNull CommandSender sender) {
         for (SubCmd subCmd : subCmds) {
             if (subCmd.getName().equalsIgnoreCase(cmd)) {
                 return subCmd;
@@ -201,10 +189,10 @@ public abstract class AbstractCommand implements TabExecutor {
         return null;
     }
 
-    public void completeCmd(@NotNull final List<String> l,
-                            @NotNull final String prefix,
-                            @NotNull final CommandSender sender) {
-        final String text = prefix.toLowerCase(Locale.ENGLISH);
+    public void completeCmd(@NotNull List<String> l,
+                            @NotNull String prefix,
+                            @NotNull CommandSender sender) {
+        String text = prefix.toLowerCase(Locale.ENGLISH);
         getAllowedSubCommands(sender).forEach((cmd) -> {
             if (cmd.getName().startsWith(text)) {
                 l.add(cmd.getName());

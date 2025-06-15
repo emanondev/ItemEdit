@@ -3,9 +3,14 @@ main: ${groupId}.${project.name}
 version: "${project.version}"
 author: emanon
 api-version: 1.13
-modrinth-project-id: "yx81EHRu"
-folia-supported: true
 softdepend: [ SCore,Vault,SuperVanish,PremiumVanish,PlaceholderAPI,ShopGUIPlus,ItemBridge,MythicMobs,IridiumSkyblock,ASkyBlock,BentoBox-BSkyBlock,uSkyBlock,IslandWorld,FabledSkyBlock,SimpleSkyblock,SkyBlock,SuperiorSkyblock2,SuperiorSkyblock,DungeonMMO ]
+
+# Additional info
+modrinth-project-id: "yx81EHRu"
+modrinth-project-name: "itemedit"
+spigot-resource-id: 40993
+bstats-plugin-id: 15076
+folia-supported: true
 
 libraries:
   - net.kyori:adventure-api:4.20.0

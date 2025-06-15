@@ -7,6 +7,7 @@ import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.aliases.IAliasSet;
 import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.ItemUtils;
+import lombok.Getter;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -24,24 +25,24 @@ import java.util.Locale;
 public abstract class SubCmd {
 
     public final String ID;
+    @Getter
     private final String permission;
     private final String PATH;
     private final YMLConfig config;
     private final String commandName;
+    @Getter
     private final boolean playerOnly;
     private final boolean checkNonNullItem;
-    private final AbstractCommand cmd;
-    private String name;
+    private final AbstractCommand command;
+    @Getter
+    private @NotNull String name;
 
-    public SubCmd(@NotNull final String id,
-                  @NotNull final AbstractCommand cmd,
-                  final boolean playerOnly,
-                  final boolean checkNonNullItem) {
+    public SubCmd(@NotNull String id, @NotNull AbstractCommand command, boolean playerOnly, boolean checkNonNullItem) {
         if (id.isEmpty() || id.contains(" "))
             throw new IllegalArgumentException();
         this.ID = id.toLowerCase(Locale.ENGLISH);
-        this.cmd = cmd;
-        this.commandName = cmd.getName();
+        this.command = command;
+        this.commandName = command.getName();
         this.playerOnly = playerOnly;
         this.checkNonNullItem = checkNonNullItem;
         this.PATH = getCommand().getName() + "." + this.ID + ".";
@@ -52,51 +53,30 @@ public abstract class SubCmd {
     }
 
     public @NotNull AbstractCommand getCommand() {
-        return cmd;
+        return command;
     }
 
     public @NotNull APlugin getPlugin() {
-        return cmd.getPlugin();
-    }
-
-    public boolean isPlayerOnly() {
-        return this.playerOnly;
+        return command.getPlugin();
     }
 
     public boolean checkNonNullItem() {
         return this.checkNonNullItem;
     }
 
-    protected @NotNull ItemStack getItemInHand(@NotNull final Player p) {
+    protected @NotNull ItemStack getItemInHand(@NotNull Player p) {
         return ItemUtils.getHandItem(p);
     }
 
     private void load() {
         name = this.getConfigString("name").toLowerCase(Locale.ENGLISH);
-        if (name.isEmpty() || name.contains(" "))
+        if (name.isEmpty() || name.contains(" ")) {
             name = ID;
+        }
     }
 
     public void reload() {
         load();
-    }
-
-    /**
-     * @see #craftFailFeedback(String, String, List)
-     */
-    @Deprecated
-    protected BaseComponent[] craftFailFeedback(String params, List<String> desc) {
-        if (params == null)
-            params = "";
-        ComponentBuilder fail = new ComponentBuilder(
-                ChatColor.RED + "/" + commandName + " " + this.name + " " + params)
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
-                        "/" + commandName + " " + this.name + " " + params));
-        if (desc != null && !desc.isEmpty()) {
-            fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                    new ComponentBuilder(String.join("\n", desc)).create()));
-        }
-        return fail.create();
     }
 
     protected BaseComponent[] craftFailFeedback(String alias, String params, List<String> desc) {
@@ -183,18 +163,8 @@ public abstract class SubCmd {
         return config.loadMultiMessage(this.PATH + path, new ArrayList<>(), null, true, holders);
     }
 
-    public @NotNull String getName() {
-        return this.name;
-    }
-
-    public @NotNull String getPermission() {
-        return this.permission;
-    }
-
     @SuppressWarnings("deprecation")
-    public @NotNull ComponentBuilder getHelp(@NotNull final ComponentBuilder base,
-                                    @NotNull final CommandSender sender,
-                                    @NotNull final String alias) {
+    public @NotNull ComponentBuilder getHelp(@NotNull ComponentBuilder base, @NotNull CommandSender sender, @NotNull String alias) {
         String help = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + this.name + " ";
         base.append(help + getLanguageString("params", "", sender).replace(ChatColor.RESET.toString(),
                         ChatColor.GREEN.toString()))
@@ -204,8 +174,7 @@ public abstract class SubCmd {
         return base;
     }
 
-    public void onFail(@NotNull final CommandSender target,
-                       @NotNull final String alias) {
+    public void onFail(@NotNull CommandSender target, @NotNull String alias) {
         String params = getLanguageString("params", "", target);
 
         Util.sendMessage(target, new ComponentBuilder(
@@ -218,18 +187,15 @@ public abstract class SubCmd {
                 .create());
     }
 
-    protected String getDescription(@NotNull final CommandSender target) {
+    protected String getDescription(@NotNull CommandSender target) {
         return String.join("\n", getLanguageStringList("description", null, target));
     }
 
-    abstract public void onCommand(@NotNull final CommandSender sender,
-                                   @NotNull final String alias,
-                                   final String[] args);
+    abstract public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args);
 
-    abstract public List<String> onComplete(@NotNull final CommandSender sender,
-                                            final String[] args);
+    abstract public List<String> onComplete(@NotNull CommandSender sender, String[] args);
 
-    protected void updateView(@NotNull final Player player) {
+    protected void updateView(@NotNull Player player) {
         InventoryUtils.updateView(player);
     }
 

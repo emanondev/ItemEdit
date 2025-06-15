@@ -17,10 +17,10 @@ import java.util.*;
 
 public class Rename extends SubCmd {
 
-    private int lengthLimit;
     private final Map<UUID, String> copies = new HashMap<>();
+    private int lengthLimit;
 
-    public Rename(@NotNull final ItemEditCommand cmd) {
+    public Rename(@NotNull ItemEditCommand cmd) {
         super("rename", cmd, true, true);
         lengthLimit = getPlugin().getConfig().getInt("blocked.rename-length-limit", 120);
     }
@@ -32,9 +32,7 @@ public class Rename extends SubCmd {
     }
 
     @Override
-    public void onCommand(@NotNull final CommandSender sender,
-                          @NotNull final String alias,
-                          final String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!Util.isAllowedRenameItem(sender, item.getType()))
@@ -95,8 +93,7 @@ public class Rename extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(@NotNull final CommandSender sender,
-                                   final String[] args) {
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {
             return Collections.emptyList();
         }
@@ -114,8 +111,7 @@ public class Rename extends SubCmd {
         return Collections.emptyList();
     }
 
-    private boolean allowedLengthLimit(final Player who,
-                                       final String text) {
+    private boolean allowedLengthLimit(Player who, String text) {
         if (lengthLimit < 0 || who.hasPermission("itemedit.bypass.rename_length_limit"))
             return true;
         return text.length() <= lengthLimit;

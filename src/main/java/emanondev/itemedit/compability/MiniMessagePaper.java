@@ -1,6 +1,7 @@
 package emanondev.itemedit.compability;
 
 import emanondev.itemedit.ItemEdit;
+import lombok.Getter;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
@@ -8,11 +9,8 @@ import org.bukkit.Bukkit;
 public class MiniMessagePaper implements MiniMessageUtil {
 
     private static final LegacyComponentSerializer UNGLY_LEGACY = LegacyComponentSerializer.legacySection().toBuilder().hexColors().useUnusualXRepeatedCharacterHexFormat().build();
+    @Getter
     private static final MiniMessagePaper instance = new MiniMessagePaper();
-
-    public static MiniMessagePaper getInstance() {
-        return instance;
-    }
 
     @Override
     public String fromMiniToText(String text) {

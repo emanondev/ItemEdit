@@ -31,7 +31,7 @@ public class ColorGui implements Gui {
     private final ItemMeta cleanColorableMeta;
 
 
-    public ColorGui(@NotNull final Player target) {
+    public ColorGui(@NotNull Player target) {
         String title = getLanguageMessage(subPath + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
         this.target = target;

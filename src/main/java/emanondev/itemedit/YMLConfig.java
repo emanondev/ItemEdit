@@ -1,6 +1,8 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.utility.VersionUtils;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -19,10 +21,27 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+@Getter
 public class YMLConfig extends YamlConfiguration {
+
+    /**
+     * -- GETTER --
+     * Return the plugin associated with this Config.
+     *
+     * @return the plugin associated with this Config
+     */
     private final JavaPlugin plugin;
     private final File file;
-    private final String name;
+    /**
+     * -- GETTER --
+     * Returns the file path of this config.
+     *
+     * @return the file path starting by
+     * {@link #getPlugin()}.{@link JavaPlugin#getDataFolder()
+     * getDataFolder()}.
+     */
+    private final String fileName;
+    @Setter
     private boolean multiThreadSupport = false;
 
     /**
@@ -32,28 +51,20 @@ public class YMLConfig extends YamlConfiguration {
      * If the plugin jar has a file on name path, that file is used to generate the
      * config file.
      *
-     * @param plugin associated plugin to grab the folder
-     * @param name   raw name of the file sub path
+     * @param plugin   associated plugin to grab the folder
+     * @param fileName raw name of the file sub path
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is empty
      */
-    public YMLConfig(@NotNull JavaPlugin plugin, @NotNull String name) {
+    public YMLConfig(@NotNull JavaPlugin plugin, @NotNull String fileName) {
         this.plugin = plugin;
-        name = fixName(name);
-        this.name = name;
-        this.file = new File(plugin.getDataFolder(), name);
+        fileName = fixName(fileName);
+        this.fileName = fileName;
+        this.file = new File(plugin.getDataFolder(), fileName);
         reload();
         if (VersionUtils.hasFoliaAPI()) {
             multiThreadSupport = true;
         }
-    }
-
-    public boolean isMultiThreadSupport() {
-        return multiThreadSupport;
-    }
-
-    public void setMultiThreadSupport(boolean multiThreadSupport) {
-        this.multiThreadSupport = multiThreadSupport;
     }
 
     /**
@@ -73,26 +84,6 @@ public class YMLConfig extends YamlConfiguration {
     }
 
     /**
-     * Returns the file path of this config.
-     *
-     * @return the file path starting by
-     * {@link #getPlugin()}.{@link JavaPlugin#getDataFolder()
-     * getDataFolder()}.
-     */
-    public String getFileName() {
-        return name;
-    }
-
-    /**
-     * Return the plugin associated with this Config.
-     *
-     * @return the plugin associated with this Config
-     */
-    public @NotNull JavaPlugin getPlugin() {
-        return plugin;
-    }
-
-    /**
      * Reload config object in RAM to that of the file.<br>
      * Lose any unsaved changes.<br>
      *
@@ -105,8 +96,8 @@ public class YMLConfig extends YamlConfiguration {
                 if (!file.getParentFile().mkdirs())
                     new Exception("unable to create parent folder").printStackTrace();
 
-            if (plugin.getResource(name.replace('\\', '/')) != null) {
-                plugin.saveResource(name, true); // Save the one from the JAR if possible
+            if (plugin.getResource(fileName.replace('\\', '/')) != null) {
+                plugin.saveResource(fileName, true); // Save the one from the JAR if possible
             } else
                 try {
                     if (!file.createNewFile())
@@ -121,7 +112,7 @@ public class YMLConfig extends YamlConfiguration {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        InputStream resource = plugin.getResource(name.replace('\\', '/'));
+        InputStream resource = plugin.getResource(fileName.replace('\\', '/'));
         if (resource != null)
             // Set up defaults in case their config is broken.
             this.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(resource, StandardCharsets.UTF_8)));
@@ -140,15 +131,6 @@ public class YMLConfig extends YamlConfiguration {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Get the file of the config.
-     *
-     * @return the file associated to the config
-     */
-    public @NotNull File getFile() {
-        return file;
     }
 
     /**

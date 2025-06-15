@@ -25,7 +25,7 @@ public class ColorSubcommand extends SubCmd {
     private final String leatherPerm;
     private final String starsPerm;
 
-    public ColorSubcommand(@NotNull final ItemEditCommand cmd) {
+    public ColorSubcommand(@NotNull ItemEditCommand cmd) {
         super("color", cmd, true, true);
         tippedArrowPerm = getPermission() + ".tipped_arrow";
         potionPerm = getPermission() + ".potion";
@@ -34,9 +34,7 @@ public class ColorSubcommand extends SubCmd {
     }
 
     @Override
-    public void onCommand(@NotNull final CommandSender sender,
-                          @NotNull final String alias,
-                          final String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         ItemMeta meta = ItemUtils.getMeta(item);
@@ -53,7 +51,7 @@ public class ColorSubcommand extends SubCmd {
             }
             PotionMeta potionMeta = (PotionMeta) meta;
             try {
-                if (args.length==1){
+                if (args.length == 1) {
                     p.openInventory(new ColorGui(p).getInventory());
                     return;
                 }
@@ -79,7 +77,7 @@ public class ColorSubcommand extends SubCmd {
 
             LeatherArmorMeta leatherMeta = (LeatherArmorMeta) meta;
             try {
-                if (args.length==1){
+                if (args.length == 1) {
                     p.openInventory(new ColorGui(p).getInventory());
                     return;
                 }
@@ -128,8 +126,7 @@ public class ColorSubcommand extends SubCmd {
 
     // itemedit bookauthor <name>
     @Override
-    public List<String> onComplete(@NotNull final CommandSender sender,
-                                   final String[] args) {
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         return Collections.emptyList();
     }
 }

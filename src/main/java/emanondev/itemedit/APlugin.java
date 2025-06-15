@@ -2,8 +2,10 @@ package emanondev.itemedit;
 
 import emanondev.itemedit.command.AbstractCommand;
 import emanondev.itemedit.compability.Metrics;
+import emanondev.itemedit.plugin.PluginAdditionalInfo;
 import emanondev.itemedit.utility.ReflectionUtils;
 import emanondev.itemedit.utility.VersionUtils;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -29,14 +31,16 @@ public abstract class APlugin extends JavaPlugin {
             VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
     private final Map<String, YMLConfig> languageConfigs =
             VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
+    @Getter
+    private final PluginAdditionalInfo pluginAdditionalInfo;
     private boolean useMultiLanguage;
     private String defaultLanguage;
     private CooldownAPI cooldownApi = null;
-    private Metrics metrics;
+    @Getter
+    private Metrics bstatsMetrics;
 
-    @Nullable
-    public Metrics getMetrics() {
-        return metrics;
+    protected APlugin() {
+        this.pluginAdditionalInfo = new PluginAdditionalInfo(this);
     }
 
     /**
@@ -186,22 +190,16 @@ public abstract class APlugin extends JavaPlugin {
      * You can update configuration by overriding this method.
      * configuration version is saved as int on {@code config.yml} at path {@code config-version},
      * if not specified it's {@code 1}.
+     *
      * @param oldConfigVersion old configuration version you update from
      */
     protected void updateConfigurations(int oldConfigVersion) {
     }
 
     /**
-     * Retrieve the spigot project ID of the plugin.
-     *
-     * @return The project ID or null if not applicable.
+     * @see #languagesMetricsIsAdmin()
+     * @see #languagesMetricsIsUser()
      */
-    @Nullable
-    public abstract Integer getProjectId();
-
-    @Nullable
-    public abstract Integer getMetricsId();
-
     protected boolean addLanguagesMetrics() {
         return false;
     }
@@ -277,8 +275,8 @@ public abstract class APlugin extends JavaPlugin {
                 return;
             }
             initLanguages();
-            if (getProjectId() != null && getConfig().getBoolean("check-updates", true))
-                new UpdateChecker(this, getProjectId()).logUpdates();
+            if (getPluginAdditionalInfo().getSpigotResourceId() != null && getConfig().getBoolean("check-updates", true))
+                new UpdateChecker(this).logUpdates();
             initConfigUpdater();
             initMetrics();
 
@@ -341,13 +339,13 @@ public abstract class APlugin extends JavaPlugin {
     }
 
     private void initMetrics() {
-        Integer pluginId = getMetricsId();
+        Integer pluginId = getPluginAdditionalInfo().getBstatsPluginId();
         if (pluginId == null) {
-            metrics = null;
+            bstatsMetrics = null;
             return;
         }
         try {
-            metrics = new Metrics(this, pluginId);
+            bstatsMetrics = new Metrics(this, pluginId);
             if (addLanguagesMetrics()) {
                 Predicate<Player> isAdmin = languagesMetricsIsAdmin();
                 Predicate<Player> isUser = languagesMetricsIsUser();
@@ -355,7 +353,7 @@ public abstract class APlugin extends JavaPlugin {
                 if (!VersionUtils.isVersionAfter(1, 12)) {
                     return;
                 }
-                metrics.addCustomChart(new Metrics.DrilldownPie("admins_languages", () -> {
+                bstatsMetrics.addCustomChart(new Metrics.DrilldownPie("admins_languages", () -> {
                     Map<String, Map<String, Integer>> mainMap = new HashMap<>();
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         if (!isAdmin.test(player))
@@ -369,7 +367,7 @@ public abstract class APlugin extends JavaPlugin {
                     }
                     return mainMap;
                 }));
-                metrics.addCustomChart(new Metrics.DrilldownPie("users_languages", () -> {
+                bstatsMetrics.addCustomChart(new Metrics.DrilldownPie("users_languages", () -> {
                     Map<String, Map<String, Integer>> mainMap = new HashMap<>();
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         if (!isUser.test(player))
@@ -387,7 +385,7 @@ public abstract class APlugin extends JavaPlugin {
         } catch (Throwable t) {
             t.printStackTrace();
         }
-        metrics = null;
+        bstatsMetrics = null;
     }
 
     private void initConfigUpdater() {

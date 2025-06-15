@@ -16,9 +16,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UtilsString {
+public final class UtilsString {
 
-    UtilsString() {
+    private UtilsString() {
         throw new UnsupportedOperationException();
     }
 

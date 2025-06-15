@@ -23,9 +23,7 @@ public class BookType extends SubCmd {
     }
 
     @Override
-    public void onCommand(@NotNull final CommandSender sender,
-                          @NotNull final String alias,
-                          final String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getType() == Material.WRITTEN_BOOK)) {
@@ -61,10 +59,10 @@ public class BookType extends SubCmd {
     }
 
     @Override
-    public List<String> onComplete(@NotNull final CommandSender sender,
-                                   final String[] args) {
-        if (args.length == 2)
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.BOOK_TYPE);
+        }
         return Collections.emptyList();
     }
 }

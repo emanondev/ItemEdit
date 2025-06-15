@@ -3,6 +3,8 @@ package emanondev.itemedit.compability;
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Hooks {
     private static final MiniMessageUtil miniMessage = initMiniMessage();
@@ -27,19 +29,19 @@ public class Hooks {
         return isEnabled("ShopGuiPlus");
     }
 
-    public static boolean isEnabled(String pluginName) {
+    public static boolean isEnabled(@NotNull String pluginName) {
         return Bukkit.getPluginManager().isPluginEnabled(pluginName);
     }
 
-    public static Plugin getPlugin(String pluginName) {
+    public static Plugin getPlugin(@NotNull String pluginName) {
         return Bukkit.getPluginManager().getPlugin(pluginName);
     }
 
-    public static String getPluginVersion(String pluginName) {
+    public static String getPluginVersion(@NotNull String pluginName) {
         return getPluginVersion(pluginName, null);
     }
 
-    public static String getPluginVersion(String pluginName, String ifMissing) {
+    public static String getPluginVersion(@NotNull String pluginName, @Nullable String ifMissing) {
         Plugin plugin = getPlugin(pluginName);
         if (plugin == null)
             return ifMissing;

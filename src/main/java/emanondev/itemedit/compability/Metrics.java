@@ -228,7 +228,7 @@ public class Metrics {
          * @param str The string to gzip.
          * @return The gzipped string.
          */
-        private static byte[] compress(final String str) throws IOException {
+        private static byte[] compress(String str) throws IOException {
             if (str == null) {
                 return null;
             }

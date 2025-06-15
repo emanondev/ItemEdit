@@ -21,7 +21,7 @@ import java.util.Locale;
 public class Attribute extends SubCmd {
     private static final String[] attributeSub = new String[]{"add", "remove"};
 
-    public Attribute(@NotNull final ItemEditCommand cmd) {
+    public Attribute(@NotNull ItemEditCommand cmd) {
         super("attribute", cmd, true, true);
     }
 
@@ -32,9 +32,7 @@ public class Attribute extends SubCmd {
     // add <attribute> amount [operation] [equip]
     // remove [attribute/slot]
     @Override
-    public void onCommand(@NotNull final CommandSender sender,
-                          @NotNull final String alias,
-                          final String[] args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (args.length == 1) {

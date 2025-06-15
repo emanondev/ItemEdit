@@ -39,7 +39,7 @@ public class MongoServerStorage implements ServerStorage {
         return this.mapToItem(serializedItem);
     }
 
-    private @Nullable ItemStack mapToItem(final @Nullable Map<String, Object> serializedItem) {
+    private @Nullable ItemStack mapToItem(@Nullable Map<String, Object> serializedItem) {
         if (serializedItem == null) return null;
 
         ItemStack item = ItemStack.deserialize(serializedItem);

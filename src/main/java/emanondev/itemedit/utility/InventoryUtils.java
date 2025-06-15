@@ -23,6 +23,7 @@ public final class InventoryUtils {
             VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
     private static final Map<Class<?>, Method> getBottomInventory =
             VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
+    private static final Set<EquipmentSlot> playerEquipmentSlots = loadPlayerEquipmentSlot();
 
     private InventoryUtils() {
         throw new UnsupportedOperationException();
@@ -38,7 +39,7 @@ public final class InventoryUtils {
      * @param event The generic InventoryEvent with an InventoryView to inspect.
      * @return The top Inventory object from the event's InventoryView.
      */
-    public static Inventory getTopInventory(@NotNull final InventoryEvent event) {
+    public static Inventory getTopInventory(@NotNull InventoryEvent event) {
         if (VersionUtils.isVersionAfter(1, 21)) {
             return event.getView().getTopInventory();
         }
@@ -55,14 +56,14 @@ public final class InventoryUtils {
      * @param player The player with an InventoryView to inspect.
      * @return The top Inventory object from the player's InventoryView.
      */
-    public static Inventory getTopInventory(@NotNull final Player player) {
+    public static Inventory getTopInventory(@NotNull Player player) {
         if (VersionUtils.isVersionAfter(1, 21)) {
             return player.getOpenInventory().getTopInventory();
         }
         return getTopInventoryP(player.getOpenInventory());
     }
 
-    private static Inventory getTopInventoryP(@NotNull final Object view) {
+    private static Inventory getTopInventoryP(@NotNull Object view) {
         Method method = getTopInventory.get(view.getClass());
         if (method == null) {
             method = ReflectionUtils.getMethod(view.getClass(), "getTopInventory");
@@ -70,7 +71,6 @@ public final class InventoryUtils {
         }
         return (Inventory) ReflectionUtils.invokeMethod(view, method);
     }
-
 
     /**
      * Returns the bottom Inventory object from the event's InventoryView.<br><br>
@@ -82,14 +82,14 @@ public final class InventoryUtils {
      * @param event The generic InventoryEvent with an InventoryView to inspect.
      * @return The bottom Inventory object from the event's InventoryView.
      */
-    public static Inventory getBottomInventory(@NotNull final InventoryEvent event) {
+    public static Inventory getBottomInventory(@NotNull InventoryEvent event) {
         if (VersionUtils.isVersionAfter(1, 21)) {
             return event.getView().getBottomInventory();
         }
         return getBottomInventoryP(event.getView());
     }
 
-    private static Inventory getBottomInventoryP(@NotNull final Object view) {
+    private static Inventory getBottomInventoryP(@NotNull Object view) {
         Method method = getBottomInventory.get(view.getClass());
         if (method == null) {
             method = ReflectionUtils.getMethod(view.getClass(), "getBottomInventory");
@@ -97,7 +97,6 @@ public final class InventoryUtils {
         }
         return (Inventory) ReflectionUtils.invokeMethod(view, method);
     }
-
 
     /**
      * Update InventoryView for player.<br><br>
@@ -108,7 +107,7 @@ public final class InventoryUtils {
      * @param player The player which inventory view should be updated
      */
     @SuppressWarnings("UnstableApiUsage")
-    public static void updateView(@NotNull final Player player) {
+    public static void updateView(@NotNull Player player) {
         if (VersionUtils.isVersionUpTo(1, 19, 4) || VersionUtils.hasPurpurAPI()) {
             SchedulerUtils.run(ItemEdit.get(), player, player::updateInventory);
         }
@@ -123,7 +122,7 @@ public final class InventoryUtils {
      * @param player The player which inventory view should be updated
      */
     @SuppressWarnings("UnstableApiUsage")
-    public static void updateViewDelayed(@NotNull final Player player) {
+    public static void updateViewDelayed(@NotNull Player player) {
         if (VersionUtils.isVersionUpTo(1, 19, 4) || VersionUtils.hasPurpurAPI()) {
             SchedulerUtils.runLater(ItemEdit.get(), player, 1L, player::updateInventory);
         }
@@ -136,10 +135,10 @@ public final class InventoryUtils {
      * @param mode   how to handle special cases
      * @return the amount given (or given + dropped)
      */
-    public static int giveAmount(@NotNull final HumanEntity player,
-                                 @NotNull final ItemStack item,
-                                 @Range(from = 0, to = Integer.MAX_VALUE) final int amount,
-                                 @NotNull final InventoryUtils.ExcessMode mode) {
+    public static int giveAmount(@NotNull HumanEntity player,
+                                 @NotNull ItemStack item,
+                                 @Range(from = 0, to = Integer.MAX_VALUE) int amount,
+                                 @NotNull InventoryUtils.ExcessMode mode) {
         final ItemStack itemClone = item.clone();
         if (amount == 0) {
             return 0;
@@ -197,10 +196,10 @@ public final class InventoryUtils {
      * @param mode   how to handle special cases
      * @return the removed amount
      */
-    public static int removeAmount(@NotNull final HumanEntity player,
-                                   @NotNull final ItemStack item,
-                                   @Range(from = 0, to = Integer.MAX_VALUE) final int amount,
-                                   @NotNull final InventoryUtils.LackMode mode) {
+    public static int removeAmount(@NotNull HumanEntity player,
+                                   @NotNull ItemStack item,
+                                   @Range(from = 0, to = Integer.MAX_VALUE) int amount,
+                                   @NotNull InventoryUtils.LackMode mode) {
         final ItemStack itemClone = item.clone();
         if (amount == 0) {
             return 0;
@@ -256,34 +255,6 @@ public final class InventoryUtils {
         }
     }
 
-    public enum ExcessMode {
-        /**
-         * drops if front of the player any items that can't be hold by the player
-         */
-        DROP_EXCESS,
-        /**
-         * remove any items that can't be hold by the player
-         */
-        DELETE_EXCESS,
-        /**
-         * if player has not enough space nothing is given to the player
-         */
-        CANCEL,
-    }
-
-    public enum LackMode {
-        /**
-         * remove the max number of items up to amount
-         */
-        REMOVE_MAX_POSSIBLE,
-        /**
-         * if there aren't enough items to remove, nothing is removed
-         */
-        CANCEL,
-    }
-
-    private static final Set<EquipmentSlot> playerEquipmentSlots = loadPlayerEquipmentSlot();
-
     private static Set<EquipmentSlot> loadPlayerEquipmentSlot() {
         EnumSet<EquipmentSlot> slots = EnumSet.noneOf(EquipmentSlot.class);
         slots.add(EquipmentSlot.HEAD);
@@ -303,8 +274,7 @@ public final class InventoryUtils {
         return playerEquipmentSlots;
     }
 
-    public static @Nullable ItemStack getItem(@NotNull final Player player,
-                                              @NotNull final EquipmentSlot slot) {
+    public static @Nullable ItemStack getItem(@NotNull Player player, @NotNull EquipmentSlot slot) {
         try {
             return player.getInventory().getItem(slot);
         } catch (Throwable ignored) {
@@ -329,6 +299,32 @@ public final class InventoryUtils {
             }
         }
         return null;
+    }
+
+    public enum ExcessMode {
+        /**
+         * drops if front of the player any items that can't be hold by the player
+         */
+        DROP_EXCESS,
+        /**
+         * remove any items that can't be hold by the player
+         */
+        DELETE_EXCESS,
+        /**
+         * if player has not enough space nothing is given to the player
+         */
+        CANCEL,
+    }
+
+    public enum LackMode {
+        /**
+         * remove the max number of items up to amount
+         */
+        REMOVE_MAX_POSSIBLE,
+        /**
+         * if there aren't enough items to remove, nothing is removed
+         */
+        CANCEL,
     }
 
 }

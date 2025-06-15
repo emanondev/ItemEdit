@@ -104,7 +104,7 @@ public class Aliases {
     public static final SoundAliases SOUND = getSoundAliases();
 
 
-    private final static Map<String, IAliasSet<?>> types = new HashMap<>();
+    private static final Map<String, IAliasSet<?>> types = new HashMap<>();
     private static boolean loaded = false;
 
     private static AliasSet<PatternType> getPatternAlias() {

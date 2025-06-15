@@ -21,8 +21,8 @@ import java.util.Locale;
  * manually in your plugins {@code onEnable()} by using
  * {@code new YourExpansionClass().register();}
  */
-public class PlaceHolders extends PlaceholderExpansion {
-    public PlaceHolders() {
+public class Placeholders extends PlaceholderExpansion {
+    public Placeholders() {
 
         //ItemEdit.get().log("Hooked into PlaceHolderAPI:");
         ItemEdit.get().log("placeholders:");

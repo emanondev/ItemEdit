@@ -15,8 +15,8 @@ public interface PlayerStorage {
     /**
      * Get ItemStack associated with given id for player.
      *
-     * @param player  player
-     * @param id unique identifier of the item, case insensitive
+     * @param player player
+     * @param id     unique identifier of the item, case insensitive
      * @return item associated with id
      */
     @Nullable
@@ -26,9 +26,9 @@ public interface PlayerStorage {
     /**
      * Set association for id and item for player.
      *
-     * @param player    player
-     * @param id   unique identifier of the item, case insensitive
-     * @param item item to associate to id
+     * @param player player
+     * @param id     unique identifier of the item, case insensitive
+     * @param item   item to associate to id
      */
     void setItem(@NotNull OfflinePlayer player,
                  @NotNull String id,
@@ -37,8 +37,8 @@ public interface PlayerStorage {
     /**
      * Remove associations with id for player.
      *
-     * @param player  player
-     * @param id unique identifier of the item, case insensitive
+     * @param player player
+     * @param id     unique identifier of the item, case insensitive
      */
     void remove(@NotNull OfflinePlayer player,
                 @NotNull String id);

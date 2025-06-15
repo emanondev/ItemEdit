@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public interface Button {
 
-    default Player getTargetPlayer(){
+    default Player getTargetPlayer() {
         return getGui().getTargetPlayer();
     }
 
