@@ -102,30 +102,28 @@ public final class InventoryUtils {
      * Update InventoryView for player.<br><br>
      * In API versions 1.19.3 and earlier, there is no implicit consistency for inventory and
      * changes, so it has to be done manually (also Purpur has similar issue in later versions too).<br>
-     * In API versions 1.19.4 and later, there is implicit consistency for inventory and changes.
+     * In API versions 1.19.4 and later, there is implicit consistency for inventory and changes.<br>
+     * Also, ViaBackwards and ViaVersion may cause desyncronization of inventory
      *
      * @param player The player which inventory view should be updated
      */
     @SuppressWarnings("UnstableApiUsage")
     public static void updateView(@NotNull Player player) {
-        if (VersionUtils.isVersionUpTo(1, 19, 4) || VersionUtils.hasPurpurAPI()) {
-            SchedulerUtils.run(ItemEdit.get(), player, player::updateInventory);
-        }
+        SchedulerUtils.run(ItemEdit.get(), player, player::updateInventory);
     }
 
     /**
      * Update InventoryView for player.<br><br>
      * In API versions 1.19.3 and earlier, there is no implicit consistency for inventory and
      * changes, so it has to be done manually (also Purpur has similar issue in later versions too).<br>
-     * In API versions 1.19.4 and later, there is implicit consistency for inventory and changes.
+     * In API versions 1.19.4 and later, there is implicit consistency for inventory and changes.<br>
+     * Also, ViaBackwards and ViaVersion may cause desyncronization of inventory
      *
      * @param player The player which inventory view should be updated
      */
     @SuppressWarnings("UnstableApiUsage")
     public static void updateViewDelayed(@NotNull Player player) {
-        if (VersionUtils.isVersionUpTo(1, 19, 4) || VersionUtils.hasPurpurAPI()) {
-            SchedulerUtils.runLater(ItemEdit.get(), player, 1L, player::updateInventory);
-        }
+        SchedulerUtils.runLater(ItemEdit.get(), player, 1L, player::updateInventory);
     }
 
     /**
