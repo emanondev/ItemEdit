@@ -33,10 +33,12 @@ public class ShowServerItemsGui implements PagedGui {
     private boolean showItems = true;
 
     public ShowServerItemsGui(Player player, int page) {
-        if (player == null)
+        if (player == null) {
             throw new NullPointerException();
-        if (page < 1)
+        }
+        if (page < 1) {
             throw new NullPointerException();
+        }
 
         this.target = player;
         rows = GUI_CONFIG.loadInteger("gui.serveritems.rows", 6);
@@ -47,8 +49,9 @@ public class ShowServerItemsGui implements PagedGui {
         ArrayList<String> list = new ArrayList<>(storage.getIds());
         Collections.sort(list);
         int maxPages = (list.size()) / (rows * 9) + ((list.size()) % (rows * 9) == 0 ? 0 : 1);
-        if (page > maxPages)
+        if (page > maxPages) {
             page = maxPages;
+        }
         this.page = page;
 
         String title = UtilsString.fix(GUI_CONFIG.loadMessage("gui.serveritems.title", "", false), player, true,
@@ -56,10 +59,12 @@ public class ShowServerItemsGui implements PagedGui {
         this.inventory = Bukkit.createInventory(this, (rows + 1) * 9, title);
         updateInventory();
         this.inventory.setItem(rows * 9 + 4, getPageInfoItem());
-        if (page > 1)
+        if (page > 1) {
             this.inventory.setItem(rows * 9 + 1, getPreviousPageItem());
-        if (page < maxPages)
+        }
+        if (page < maxPages) {
             this.inventory.setItem(rows * 9 + 7, getNextPageItem());
+        }
     }
 
     public void updateInventory() {
@@ -110,12 +115,15 @@ public class ShowServerItemsGui implements PagedGui {
 
     @Override
     public void onClick(InventoryClickEvent event) {
-        if (!event.getWhoClicked().equals(target))
+        if (!event.getWhoClicked().equals(target)) {
             return;
-        if (!inventory.equals(event.getClickedInventory()))
+        }
+        if (!inventory.equals(event.getClickedInventory())) {
             return;
-        if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR)
+        }
+        if (ItemUtils.isAirOrNull(event.getCurrentItem())) {
             return;
+        }
         if (event.getSlot() > inventory.getSize() - 9) {
             switch (inventory.getSize() - event.getSlot()) {
                 case 2:
@@ -134,7 +142,7 @@ public class ShowServerItemsGui implements PagedGui {
         String id = ids.get(slot);
         ServerStorage storage = ItemEdit.get().getServerStorage();
         ItemStack item = storage.getItem(id);
-        if (item == null || item.getType() == Material.AIR) {
+        if (ItemUtils.isAirOrNull(item)) {
             updateInventory();
             return;
         }

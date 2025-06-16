@@ -37,8 +37,9 @@ public class SpawnerEggType extends SubCmd {
         SpawnEggMeta meta = (SpawnEggMeta) rawMeta;
 
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException();
+            }
             EntityType type = Aliases.EGG_TYPE.convertAlias(args[1]);
             if (type == null) {
                 onWrongAlias("wrong-entity", p, Aliases.EGG_TYPE);
@@ -56,8 +57,9 @@ public class SpawnerEggType extends SubCmd {
     // itemedit bookauthor <name>
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.EGG_TYPE);
+        }
         return Collections.emptyList();
     }
 

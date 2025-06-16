@@ -37,8 +37,9 @@ public class BuyMax extends SubCmd {
         if (economyProvider != null) {
             economy = economyProvider.getProvider();
         }
-        if (economy == null)
+        if (economy == null) {
             throw new IllegalStateException();
+        }
     }
 
     @Override
@@ -49,16 +50,19 @@ public class BuyMax extends SubCmd {
                 throw new IllegalArgumentException("Wrong param number");
             }
             Boolean silent = args.length == 6 ? (Aliases.BOOLEAN.convertAlias(args[5])) : ((Boolean) false);
-            if (silent == null)
+            if (silent == null) {
                 silent = Boolean.valueOf(args[5]);
+            }
             int amount = Integer.parseInt(args[2]);
-            if (amount < 1)
+            if (amount < 1) {
                 throw new IllegalArgumentException("Wrong amount number");
+            }
             ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1]);
             Player target = Bukkit.getPlayer(args[3]);
             double price = Double.parseDouble(args[4]);
-            if (price <= 0)
+            if (price <= 0) {
                 throw new IllegalArgumentException();
+            }
             if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
                 ItemMeta meta = ItemUtils.getMeta(item);
                 meta.setDisplayName(UtilsString.fix(meta.getDisplayName(), target, true, "%player_name%",
@@ -72,10 +76,11 @@ public class BuyMax extends SubCmd {
             // have enough items?
             if (removed == 0) {
                 // not enough items, aborting
-                if (!silent)
+                if (!silent) {
                     sendLanguageString("not-enough-items", null, target, "%id%",
                             args[1].toLowerCase(), "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
                             "%amount%", String.valueOf(amount), "%price%", economy.format(price));
+                }
                 return;
             }
             if (removed < amount) {
@@ -86,27 +91,31 @@ public class BuyMax extends SubCmd {
             if (!economy.depositPlayer(target, price).transactionSuccess()) {
                 // error
                 InventoryUtils.giveAmount(target, item, amount, InventoryUtils.ExcessMode.DROP_EXCESS);
-                if (!silent)
+                if (!silent) {
                     Util.sendMessage(target,
                             "&cAn error occurred, try again, if this message shows again try to contact the server administrators");
+                }
                 Util.logToFile("[transaction failed] no errors, is your Economy provider stable?");
                 return;
             }
 
             // success, giving some feedback
-            if (!silent)
+            if (!silent) {
                 sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%price%", economy.format(price));
+            }
 
             if (ItemEdit.get().getConfig().loadBoolean("log.action.buy", true)) {
                 String msg = this.getConfigString("log", "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%player_name%", target.getName(), "%price%", economy.format(price));
-                if (ItemEdit.get().getConfig().loadBoolean("log.console", true))
+                if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
                     Util.sendMessage(Bukkit.getConsoleSender(), msg);
-                if (ItemEdit.get().getConfig().loadBoolean("log.file", true))
+                }
+                if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
                     Util.logToFile(msg);
+                }
             }
         } catch (Exception e) {
             onFail(sender, alias);
@@ -115,8 +124,9 @@ public class BuyMax extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player)) {
             return Collections.emptyList();
+        }
         switch (args.length) {
             case 2:
                 return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());

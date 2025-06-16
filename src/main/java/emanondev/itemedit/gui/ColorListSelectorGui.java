@@ -8,7 +8,6 @@ import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.SchedulerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
@@ -42,8 +41,9 @@ public class ColorListSelectorGui implements Gui {
     public void updateInventory() {
         int i = 0;
         List<String> list = new ArrayList<>();
-        for (DyeColor c : colors)
+        for (DyeColor c : colors) {
             list.add(Aliases.COLOR.getName(c));
+        }
         for (DyeColor color : DyeColor.values()) {
             ItemStack item = Util.getDyeItemFromColor(color);
             ItemMeta meta = ItemUtils.getMeta(item);
@@ -69,14 +69,18 @@ public class ColorListSelectorGui implements Gui {
 
     @Override
     public void onClick(InventoryClickEvent event) {
-        if (!event.getWhoClicked().equals(parent.getTargetPlayer()))
+        if (!event.getWhoClicked().equals(parent.getTargetPlayer())) {
             return;
-        if (!inventory.equals(event.getClickedInventory()))
+        }
+        if (!inventory.equals(event.getClickedInventory())) {
             return;
-        if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR)
+        }
+        if (ItemUtils.isAirOrNull(event.getCurrentItem())) {
             return;
-        if (event.getClick() == ClickType.DOUBLE_CLICK)
+        }
+        if (event.getClick() == ClickType.DOUBLE_CLICK) {
             return;
+        }
         if (event.getSlot() < DyeColor.values().length) {
             switch (event.getClick()) {
                 case LEFT:
@@ -94,8 +98,9 @@ public class ColorListSelectorGui implements Gui {
             }
             return;
         }
-        if (event.getSlot() == inventory.getSize() - 1)
+        if (event.getSlot() == inventory.getSize() - 1) {
             getTargetPlayer().openInventory(parent.getInventory());
+        }
     }
 
     @Override

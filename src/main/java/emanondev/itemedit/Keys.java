@@ -46,8 +46,9 @@ public class Keys {
         }
 
         public KeyRegistry(T... collection) {
-            for (T value : collection)
+            for (T value : collection) {
                 this.values.put(value.getKey(), value);
+            }
         }
 
         @Nullable
@@ -59,8 +60,9 @@ public class Keys {
         @NotNull
         @Override
         public T getOrThrow(@NotNull NamespacedKey namespacedKey) {
-            if (!values.containsKey(namespacedKey))
+            if (!values.containsKey(namespacedKey)) {
                 throw new IllegalArgumentException();
+            }
             return values.get(namespacedKey);
         }
 

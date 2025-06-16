@@ -26,8 +26,9 @@ public class RepairCost extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length > 2)
+            if (args.length > 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             if (!sender.hasPermission(this.getPermission() + ".without_durability") && item.getType().getMaxDurability() <= 1) {
                 this.getCommand().sendPermissionLackMessage(this.getPermission() + ".without_durability", sender);
                 return;
@@ -45,8 +46,9 @@ public class RepairCost extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Arrays.asList("0", "1", "3", "7", "30", "40"));
+        }
         return Collections.emptyList();
     }
 

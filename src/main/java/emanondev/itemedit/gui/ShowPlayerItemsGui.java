@@ -35,10 +35,12 @@ public class ShowPlayerItemsGui implements PagedGui {
     private boolean showItems = true;
 
     public ShowPlayerItemsGui(Player player, int page) {
-        if (player == null)
+        if (player == null) {
             throw new NullPointerException();
-        if (page < 1)
+        }
+        if (page < 1) {
             throw new NullPointerException();
+        }
 
         this.target = player;
         rows = GUI_CONFIG.loadInteger("gui.playeritems.rows", 6);
@@ -49,8 +51,9 @@ public class ShowPlayerItemsGui implements PagedGui {
         ArrayList<String> list = new ArrayList<>(storage.getIds(target));
         Collections.sort(list);
         int maxPages = (list.size() - 1) / (rows * 9) + 1;
-        if (page > maxPages)
+        if (page > maxPages) {
             page = maxPages;
+        }
         this.page = page;
 
         String title = this.getLanguageMessage("gui.playeritems.title",
@@ -58,10 +61,12 @@ public class ShowPlayerItemsGui implements PagedGui {
         this.inventory = Bukkit.createInventory(this, (rows + 1) * 9, title);
         updateInventory();
         this.inventory.setItem(rows * 9 + 4, getPageInfoItem());
-        if (page > 1)
+        if (page > 1) {
             this.inventory.setItem(rows * 9 + 1, getPreviousPageItem());
-        if (page < maxPages)
+        }
+        if (page < maxPages) {
             this.inventory.setItem(rows * 9 + 7, getNextPageItem());
+        }
     }
 
     public void updateInventory() {
@@ -107,27 +112,31 @@ public class ShowPlayerItemsGui implements PagedGui {
 
     @Override
     public void onClick(InventoryClickEvent event) {
-        if (!event.getWhoClicked().equals(target))
+        if (!event.getWhoClicked().equals(target)) {
             return;
-        if (!inventory.equals(event.getClickedInventory()))
+        }
+        if (!inventory.equals(event.getClickedInventory())) {
             return;
-        if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR)
+        }
+        if (ItemUtils.isAirOrNull(event.getCurrentItem())) {
             return;
+        }
         if (event.getSlot() > inventory.getSize() - 9) {
-            if (event.getSlot() == inventory.getSize() - 2)
+            if (event.getSlot() == inventory.getSize() - 2) {
                 target.openInventory(new ShowPlayerItemsGui(target, page + 1).getInventory());
-            else if (event.getSlot() == inventory.getSize() - 5) {
+            } else if (event.getSlot() == inventory.getSize() - 5) {
                 showItems = !showItems;
                 updateInventory();
-            } else
+            } else {
                 target.openInventory(new ShowPlayerItemsGui(target, page - 1).getInventory());
+            }
             return;
         }
         int slot = rows * 9 * (page - 1) + event.getSlot();
         String id = ids.get(slot);
         PlayerStorage storage = ItemEdit.get().getPlayerStorage();
         ItemStack item = storage.getItem(target, id);
-        if (item == null || item.getType() == Material.AIR) {
+        if (ItemUtils.isAirOrNull(item)) {
             updateInventory();
             return;
         }

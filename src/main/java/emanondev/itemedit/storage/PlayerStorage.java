@@ -72,8 +72,9 @@ public interface PlayerStorage {
     }
 
     default void validateID(@Nullable String id) {
-        if (id == null || id.contains(" ") || id.contains(".") || id.isEmpty())
+        if (id == null || id.contains(" ") || id.contains(".") || id.isEmpty()) {
             throw new IllegalArgumentException();
+        }
     }
 
     /**

@@ -16,32 +16,39 @@ public class GuiHandler implements Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     private static void onOpen(InventoryOpenEvent event) {
         Inventory topInventory = InventoryUtils.getTopInventory(event);
-        if (!(topInventory.getHolder() instanceof Gui))
+        if (!(topInventory.getHolder() instanceof Gui)) {
             return;
-        if (!(event.getPlayer() instanceof Player))
+        }
+        if (!(event.getPlayer() instanceof Player)) {
             return;
+        }
         ((Gui) topInventory.getHolder()).onOpen(event);
     }
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     private static void onClose(InventoryCloseEvent event) {
         Inventory topInventory = InventoryUtils.getTopInventory(event);
-        if (!(topInventory.getHolder() instanceof Gui))
+        if (!(topInventory.getHolder() instanceof Gui)) {
             return;
-        if (!(event.getPlayer() instanceof Player))
+        }
+        if (!(event.getPlayer() instanceof Player)) {
             return;
+        }
         ((Gui) topInventory.getHolder()).onClose(event);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private static void onClick(InventoryClickEvent event) {
         Inventory topInventory = InventoryUtils.getTopInventory(event);
-        if (!(topInventory.getHolder() instanceof Gui))
+        if (!(topInventory.getHolder() instanceof Gui)) {
             return;
+        }
         event.setCancelled(true);
-        if (event.getClickedInventory() != null && event.getClickedInventory().equals(topInventory))
-            if (event.getWhoClicked() instanceof Player)
+        if (event.getClickedInventory() != null && event.getClickedInventory().equals(topInventory)) {
+            if (event.getWhoClicked() instanceof Player) {
                 ((Gui) topInventory.getHolder()).onClick(event);
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

@@ -79,19 +79,23 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
     public abstract Collection<T> getValues();
 
     protected void set(String alias, T obj) {
-        if (obj == null || alias == null)
+        if (obj == null || alias == null) {
             throw new NullPointerException();
-        if (alias.isEmpty())
+        }
+        if (alias.isEmpty()) {
             throw new IllegalArgumentException();
+        }
         alias = alias.replace(" ", "_").toLowerCase(Locale.ENGLISH);
 
         String path = this.path + "." + getPathName(obj);
-        if (alias.equals(config.get(path)))
+        if (alias.equals(config.get(path))) {
             return;
+        }
 
-        if (map.containsKey(alias))
+        if (map.containsKey(alias)) {
             throw new IllegalArgumentException("Alias " + alias
                     + " is already used, check aliases.yml avoid using the same alias for different things");
+        }
 
         map.remove(config.get(path)); //TODO to fix
         map.put(alias, obj);

@@ -67,8 +67,9 @@ public abstract class APlugin extends JavaPlugin {
     @NotNull
     public YMLConfig getConfig(@NotNull String fileName) {
         fileName = YMLConfig.fixName(fileName);
-        if (configs.containsKey(fileName))
+        if (configs.containsKey(fileName)) {
             return configs.get(fileName);
+        }
         YMLConfig conf = new YMLConfig(this, fileName);
         configs.put(fileName, conf);
         return conf;
@@ -135,8 +136,9 @@ public abstract class APlugin extends JavaPlugin {
         }
         command.setExecutor(executor);
         command.setTabCompleter(executor);
-        if (aliases != null)
+        if (aliases != null) {
             command.setAliases(aliases);
+        }
     }
 
     /**
@@ -219,10 +221,11 @@ public abstract class APlugin extends JavaPlugin {
         boolean check = false;
         for (YMLConfig conf : configs.values())
             try {
-                if (conf.getFile().exists())
+                if (conf.getFile().exists()) {
                     conf.reload();
-                else
+                } else {
                     check = true;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -230,13 +233,15 @@ public abstract class APlugin extends JavaPlugin {
             ArrayList<String> toRemove = new ArrayList<>();
             configs.forEach((k, v) -> {
                 try {
-                    if (!v.getFile().exists())
+                    if (!v.getFile().exists()) {
                         toRemove.add(k);
+                    }
                 } catch (Exception ignored) {
                 }
             });
-            for (String key : toRemove)
+            for (String key : toRemove) {
                 configs.remove(key);
+            }
         }
         languageConfigs.clear();
         getLanguageConfig(null);
@@ -249,8 +254,9 @@ public abstract class APlugin extends JavaPlugin {
      * @return The CooldownAPI instance.
      */
     public @NotNull CooldownAPI getCooldownAPI() {
-        if (cooldownApi == null)
+        if (cooldownApi == null) {
             cooldownApi = new CooldownAPI(this);
+        }
         return cooldownApi;
     }
 
@@ -275,8 +281,10 @@ public abstract class APlugin extends JavaPlugin {
                 return;
             }
             initLanguages();
-            if (getPluginAdditionalInfo().getSpigotResourceId() != null && getConfig().getBoolean("check-updates", true))
+            if (getPluginAdditionalInfo().getSpigotResourceId() != null
+                    && getConfig().getBoolean("check-updates", true)) {
                 new UpdateChecker(this).logUpdates();
+            }
             initConfigUpdater();
             initMetrics();
 
@@ -318,17 +326,18 @@ public abstract class APlugin extends JavaPlugin {
      */
     protected final void enableWithError(@NotNull String error) {
         TabExecutorError exec = new TabExecutorError(ChatColor.RED + error);
-        for (String command : this.getDescription().getCommands().keySet())
+        for (String command : this.getDescription().getCommands().keySet()) {
             registerCommand(command, exec, null);
+        }
         log(ChatColor.RED + error);
     }
 
     @NotNull
     private String getLocale(@Nullable CommandSender sender) {
         String locale;
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player)) {
             locale = this.defaultLanguage;
-        else if (VersionUtils.isVersionAfter(1, 12) && this.useMultiLanguage) {
+        } else if (VersionUtils.isVersionAfter(1, 12) && this.useMultiLanguage) {
             //apparently zh_tw and zh_cn are quite different, zh_cn and zh_hk will both fall under zh.yml
             locale = ((Player) sender).getLocale().equals("zh_tw") ?
                     ((Player) sender).getLocale() : ((Player) sender).getLocale().split("_")[0];
@@ -356,12 +365,14 @@ public abstract class APlugin extends JavaPlugin {
                 bstatsMetrics.addCustomChart(new Metrics.DrilldownPie("admins_languages", () -> {
                     Map<String, Map<String, Integer>> mainMap = new HashMap<>();
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        if (!isAdmin.test(player))
+                        if (!isAdmin.test(player)) {
                             continue;
+                        }
                         String locale = player.getLocale().toLowerCase(Locale.ENGLISH);
                         String pre = locale.split("_")[0];
-                        if (!mainMap.containsKey(pre))
+                        if (!mainMap.containsKey(pre)) {
                             mainMap.put(pre, new HashMap<>());
+                        }
                         Map<String, Integer> subMap = mainMap.get(pre);
                         subMap.put(locale, subMap.getOrDefault(locale, 0) + 1);
                     }
@@ -370,12 +381,14 @@ public abstract class APlugin extends JavaPlugin {
                 bstatsMetrics.addCustomChart(new Metrics.DrilldownPie("users_languages", () -> {
                     Map<String, Map<String, Integer>> mainMap = new HashMap<>();
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        if (!isUser.test(player))
+                        if (!isUser.test(player)) {
                             continue;
+                        }
                         String locale = player.getLocale().toLowerCase(Locale.ENGLISH);
                         String pre = locale.split("_")[0];
-                        if (!mainMap.containsKey(pre))
+                        if (!mainMap.containsKey(pre)) {
                             mainMap.put(pre, new HashMap<>());
+                        }
                         Map<String, Integer> subMap = mainMap.get(pre);
                         subMap.put(locale, subMap.getOrDefault(locale, 0) + 1);
                     }
@@ -392,8 +405,9 @@ public abstract class APlugin extends JavaPlugin {
         ConfigurationSection def = this.getConfig().getDefaultSection();
         int currentVersion = def == null ? 1 : def.getInt("config-version", 1);
         int oldVersion = this.getConfig().getInt("config-version", 1);
-        if (oldVersion >= currentVersion)
+        if (oldVersion >= currentVersion) {
             return;
+        }
         this.log("Updating configuration version (" + oldVersion + " -> " + currentVersion + ")");
         updateConfigurations(oldVersion);
         this.getConfig().set("config-version", currentVersion);
@@ -413,10 +427,11 @@ public abstract class APlugin extends JavaPlugin {
                 if (langFolder.exists()) {
                     File[] list = langFolder.listFiles();
                     if (list != null) {
-                        for (File file : list)
+                        for (File file : list) {
                             if (getResource("languages/" + file.getName()) != null) {
                                 saveResource("languages/" + file.getName(), true);
                             }
+                        }
                     }
                 }
             }
@@ -434,8 +449,9 @@ public abstract class APlugin extends JavaPlugin {
 
         public TabExecutorError(@NotNull String msg) {
             this.msg = msg;
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 20; i++) {
                 APlugin.this.log(msg);
+            }
         }
 
         @Override

@@ -4,7 +4,6 @@ import emanondev.itemedit.compability.Hooks;
 import emanondev.itemedit.utility.ItemUtils;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -34,8 +33,9 @@ public final class UtilsString {
      */
     public static void updateDescription(@Nullable ItemStack item, @Nullable List<String> desc, @Nullable Player p, boolean color,
                                          String... holders) {
-        if (item == null)
+        if (item == null) {
             return;
+        }
 
         // prepare title and lore
         String title;
@@ -44,28 +44,34 @@ public final class UtilsString {
             title = " ";
             lore = null;
         } else if (desc.size() == 1) {
-            if (desc.get(0) != null)
-                if (!desc.get(0).startsWith(ChatColor.RESET + ""))
+            if (desc.get(0) != null) {
+                if (!desc.get(0).startsWith(ChatColor.RESET + "")) {
                     title = ChatColor.RESET + desc.get(0);
-                else
+                } else {
                     title = desc.get(0);
-            else
+                }
+            } else {
                 title = null;
+            }
             lore = null;
         } else {
-            if (!desc.get(0).startsWith(ChatColor.RESET + ""))
+            if (!desc.get(0).startsWith(ChatColor.RESET + "")) {
                 title = ChatColor.RESET + desc.get(0);
-            else
+            } else {
                 title = desc.get(0);
+            }
             lore = new ArrayList<>();
-            for (int i = 1; i < desc.size(); i++)
-                if (desc.get(i) != null)
-                    if (!desc.get(i).startsWith(ChatColor.RESET + ""))
+            for (int i = 1; i < desc.size(); i++) {
+                if (desc.get(i) != null) {
+                    if (!desc.get(i).startsWith(ChatColor.RESET + "")) {
                         lore.add(ChatColor.RESET + desc.get(i));
-                    else
+                    } else {
                         lore.add(desc.get(i));
-                else
+                    }
+                } else {
                     lore.add("");
+                }
+            }
         }
 
         // apply holders and colors for title and lore
@@ -90,11 +96,13 @@ public final class UtilsString {
      */
     @Contract("!null, _, _, _ -> !null")
     public static @Nullable ArrayList<String> fix(@Nullable List<String> list, @Nullable Player player, boolean color, String... holders) {
-        if (list == null)
+        if (list == null) {
             return null;
+        }
         ArrayList<String> newList = new ArrayList<>();
-        for (String line : list)
+        for (String line : list) {
             newList.add(fix(line, player, color, holders));
+        }
         return newList;
     }
 
@@ -112,8 +120,9 @@ public final class UtilsString {
      */
     public static ItemStack setDescription(@Nullable ItemStack item, @Nullable List<String> description, @Nullable Player player, boolean color,
                                            String... holders) {
-        if (item == null || item.getType() == Material.AIR)
+        if (ItemUtils.isAirOrNull(item)) {
             return null;
+        }
 
         ItemStack itemCopy = new ItemStack(item);
         updateDescription(itemCopy, description, player, color, holders);

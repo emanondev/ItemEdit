@@ -24,15 +24,17 @@ public class CooldownAPI {
         for (String id : conf.getKeys(false)) {
             Map<String, Long> map = VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
             cooldowns.put(UUID.fromString(id), map);
-            for (String cooldownId : conf.getKeys(id))
+            for (String cooldownId : conf.getKeys(id)) {
                 try {
                     long value = conf.getLong(id + "." + cooldownId, 0L);
-                    if (value > now)
+                    if (value > now) {
                         map.put(cooldownId, value);
+                    }
                 } catch (Exception e) {
                     plugin.log("Corrupted path value for cooldown data on ");
                     e.printStackTrace();
                 }
+            }
         }
     }
 
@@ -41,9 +43,11 @@ public class CooldownAPI {
         conf.getKeys(false).forEach(path -> conf.set(path, null));
         for (UUID uuid : cooldowns.keySet()) {
             Map<String, Long> values = cooldowns.get(uuid);
-            for (String id : values.keySet())
-                if (values.get(id) > now)
+            for (String id : values.keySet()) {
+                if (values.get(id) > now) {
                     conf.getLong(uuid.toString() + "." + id, values.get(id));
+                }
+            }
         }
         conf.save();
     }
@@ -245,11 +249,12 @@ public class CooldownAPI {
                             @NotNull String cooldownId,
                             @Range(from = 0, to = Long.MAX_VALUE) long duration,
                             @NotNull TimeUnit timeUnit) {
-        if (timeUnit.compareTo(TimeUnit.MILLISECONDS) < 0)
+        if (timeUnit.compareTo(TimeUnit.MILLISECONDS) < 0) {
             throw new UnsupportedOperationException("Time unit must be at least MILLISECONDS.");
-        if (duration <= 0 && cooldowns.containsKey(uuid))
+        }
+        if (duration <= 0 && cooldowns.containsKey(uuid)) {
             cooldowns.get(uuid).remove(cooldownId);
-        else {
+        } else {
             cooldowns.computeIfAbsent(uuid, k ->
                     VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>());
             cooldowns.get(uuid).put(cooldownId,
@@ -270,8 +275,9 @@ public class CooldownAPI {
                             @NotNull String cooldownId,
                             @Range(from = 0, to = Long.MAX_VALUE) long duration,
                             @NotNull TimeUnit timeUnit) {
-        if (timeUnit.compareTo(TimeUnit.MILLISECONDS) < 0)
+        if (timeUnit.compareTo(TimeUnit.MILLISECONDS) < 0) {
             throw new UnsupportedOperationException("Time unit must be at least MILLISECONDS.");
+        }
         setCooldown(uuid, cooldownId, getCooldown(uuid, cooldownId, TimeUnit.MILLISECONDS)
                 + TimeUnit.MILLISECONDS.convert(duration, timeUnit), TimeUnit.MILLISECONDS);
     }
@@ -289,8 +295,9 @@ public class CooldownAPI {
                                @NotNull String cooldownId,
                                @Range(from = 0, to = Long.MAX_VALUE) long duration,
                                @NotNull TimeUnit timeUnit) {
-        if (timeUnit.compareTo(TimeUnit.MILLISECONDS) < 0)
+        if (timeUnit.compareTo(TimeUnit.MILLISECONDS) < 0) {
             throw new UnsupportedOperationException();
+        }
         setCooldown(uuid, cooldownId, getCooldown(uuid, cooldownId, TimeUnit.MILLISECONDS)
                 - TimeUnit.MILLISECONDS.convert(duration, timeUnit), TimeUnit.MILLISECONDS);
     }
@@ -303,8 +310,9 @@ public class CooldownAPI {
      */
     public void removeCooldown(@NotNull UUID uuid,
                                @NotNull String cooldownId) {
-        if (cooldowns.get(uuid) != null)
+        if (cooldowns.get(uuid) != null) {
             cooldowns.get(uuid).remove(cooldownId);
+        }
     }
 
     /**
@@ -331,8 +339,9 @@ public class CooldownAPI {
     public long getCooldown(@NotNull UUID uuid,
                             @NotNull String cooldownId,
                             @NotNull TimeUnit timeUnit) {
-        if (timeUnit.compareTo(TimeUnit.MILLISECONDS) < 0)
+        if (timeUnit.compareTo(TimeUnit.MILLISECONDS) < 0) {
             throw new UnsupportedOperationException("Time unit must be at least MILLISECONDS.");
+        }
         long cooldownMS = cooldowns.containsKey(uuid) ?
                 Math.max(0L, cooldowns.get(uuid).getOrDefault(cooldownId, 0L) - System.currentTimeMillis()) :
                 0L;

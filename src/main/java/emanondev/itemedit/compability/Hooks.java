@@ -43,8 +43,9 @@ public class Hooks {
 
     public static String getPluginVersion(@NotNull String pluginName, @Nullable String ifMissing) {
         Plugin plugin = getPlugin(pluginName);
-        if (plugin == null)
+        if (plugin == null) {
             return ifMissing;
+        }
         return plugin.getDescription().getVersion();
     }
 
@@ -64,8 +65,9 @@ public class Hooks {
         try {
             if (VersionUtils.hasPaperAPI() && VersionUtils.isVersionAfter(1, 16, 5)) {
                 MiniMessagePaper inst = MiniMessagePaper.getInstance();
-                if (!inst.fromMiniToText("<red>this is a test</red>").equals("<red>this is a test</red>"))
+                if (!inst.fromMiniToText("<red>this is a test</red>").equals("<red>this is a test</red>")) {
                     return inst;
+                }
             }
         } catch (Throwable ignored) {
         }

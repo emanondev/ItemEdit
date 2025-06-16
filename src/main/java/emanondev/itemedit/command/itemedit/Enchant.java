@@ -24,8 +24,9 @@ public class Enchant extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length != 2 && args.length != 3)
+            if (args.length != 2 && args.length != 3) {
                 throw new IllegalArgumentException("Wrong argument Number");
+            }
             int lv = 1;
             Enchantment ench = Aliases.ENCHANT.convertAlias(args[1]);
             if (ench == null) {
@@ -33,13 +34,15 @@ public class Enchant extends SubCmd {
                 onFail(p, alias);
                 return;
             }
-            if (args.length == 3)
+            if (args.length == 3) {
                 lv = Integer.parseInt(args[2]);
-            if (lv == 0)
+            }
+            if (lv == 0) {
                 item.removeEnchantment(ench);
-            else {
-                if (!p.hasPermission(this.getPermission() + ".bypass_max_level"))
+            } else {
+                if (!p.hasPermission(this.getPermission() + ".bypass_max_level")) {
                     lv = Math.min(ench.getMaxLevel(), lv);
+                }
                 item.addUnsafeEnchantment(ench, lv);
             }
             updateView(p);
@@ -50,14 +53,17 @@ public class Enchant extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.ENCHANT);
+        }
         Enchantment ench = Aliases.ENCHANT.convertAlias(args[2]);
-        if (ench == null)
+        if (ench == null) {
             return Collections.emptyList();
+        }
         ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i <= ench.getMaxLevel(); i++)
+        for (int i = 0; i <= ench.getMaxLevel(); i++) {
             list.add(String.valueOf(i));
+        }
         return list;
     }
 

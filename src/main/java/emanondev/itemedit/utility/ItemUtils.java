@@ -92,10 +92,12 @@ public final class ItemUtils {
      * @return {@code true} if the meta has the unbreakable tag, {@code false} otherwise.
      */
     public static boolean isUnbreakable(@Nullable ItemMeta meta) {
-        if (meta == null)
+        if (meta == null) {
             return false;
-        if (VersionUtils.isVersionAfter(1, 11))
+        }
+        if (VersionUtils.isVersionAfter(1, 11)) {
             return meta.isUnbreakable();
+        }
 
         // For older versions, use reflection to access the unbreakable property.
         Object spigotMeta = Objects.requireNonNull(ReflectionUtils.invokeMethod(meta, "spigot"));
@@ -126,8 +128,9 @@ public final class ItemUtils {
      */
     public static void setUnbreakable(@Nullable ItemMeta meta,
                                       boolean value) {
-        if (meta == null)
+        if (meta == null) {
             return;
+        }
         if (VersionUtils.isVersionAfter(1, 11)) {
             meta.setUnbreakable(value);
             return;
@@ -152,17 +155,18 @@ public final class ItemUtils {
                                                             @Nullable String slot) {
         if (VersionUtils.isVersionAfter(1, 20, 6)) {
             EquipmentSlotGroup group;
-            if (slot == null)
+            if (slot == null) {
                 group = EquipmentSlotGroup.ANY;
-            else {
+            } else {
                 group = EquipmentSlotGroup.getByName(slot.toUpperCase(Locale.ENGLISH));
                 if (group == null) {
                     group = EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)).getGroup();
                 }
             }
-            if (VersionUtils.isVersionAfter(1, 21, 2))
+            if (VersionUtils.isVersionAfter(1, 21, 2)) {
                 return new AttributeModifier(Objects.requireNonNull(NamespacedKey.fromString(UUID.randomUUID().toString())),
                         amount, operation, group);
+            }
             UUID uuid = UUID.randomUUID();
             return ReflectionUtils.invokeConstructor(AttributeModifier.class,
                     UUID.class, uuid,

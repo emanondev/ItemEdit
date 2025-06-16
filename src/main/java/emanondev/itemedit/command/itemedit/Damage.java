@@ -23,8 +23,9 @@ public class Damage extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             short amount = Short.parseShort(args[1]);
             amount = (short) Math.max(0, Math.min(amount, item.getType().getMaxDurability()));
             item.setDurability(amount);

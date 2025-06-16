@@ -32,11 +32,13 @@ public class FireworkPower extends SubCmd {
         FireworkMeta itemMeta = (FireworkMeta) ItemUtils.getMeta(item);
 
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException();
+            }
             int power = Integer.parseInt(args[1]);
-            if (power < 0 || power > 5)
+            if (power < 0 || power > 5) {
                 throw new IllegalArgumentException();
+            }
             itemMeta.setPower(power);
             item.setItemMeta(itemMeta);
             updateView(p);
@@ -50,8 +52,9 @@ public class FireworkPower extends SubCmd {
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2) {
             ArrayList<String> list = new ArrayList<>();
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++) {
                 list.add(String.valueOf(i));
+            }
             return list;
         }
         return Collections.emptyList();

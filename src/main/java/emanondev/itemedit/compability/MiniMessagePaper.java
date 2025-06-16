@@ -14,15 +14,17 @@ public class MiniMessagePaper implements MiniMessageUtil {
 
     @Override
     public String fromMiniToText(String text) {
-        if (text == null || text.isEmpty())
+        if (text == null || text.isEmpty()) {
             return text;
+        }
         try {
             return UNGLY_LEGACY.serialize(MiniMessage.miniMessage().deserialize(text.replace("§", "&")));
         } catch (NoSuchMethodError e) {
-            if (Bukkit.getPluginManager().isPluginEnabled("SCore"))
+            if (Bukkit.getPluginManager().isPluginEnabled("SCore")) {
                 ItemEdit.get().log("SCore is disabling MiniMessage compability?");
-            else
+            } else {
                 e.printStackTrace();
+            }
             return text;
         } catch (Throwable e) {
             e.printStackTrace();

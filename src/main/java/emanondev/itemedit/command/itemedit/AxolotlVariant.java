@@ -37,8 +37,9 @@ public class AxolotlVariant extends SubCmd {
         }
 
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             AxolotlBucketMeta meta = (AxolotlBucketMeta) ItemUtils.getMeta(item);
             Axolotl.Variant type = Aliases.AXOLOTL_VARIANT.convertAlias(args[1]);
             if (type == null) {
@@ -57,8 +58,9 @@ public class AxolotlVariant extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.AXOLOTL_VARIANT);
+        }
         return Collections.emptyList();
     }
 }

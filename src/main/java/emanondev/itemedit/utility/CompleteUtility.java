@@ -34,13 +34,15 @@ public final class CompleteUtility {
         prefix = prefix.toUpperCase();
         ArrayList<String> results = new ArrayList<>();
         int c = 0;
-        for (T el : enumClass.getEnumConstants())
+        for (T el : enumClass.getEnumConstants()) {
             if (el.toString().startsWith(prefix)) {
                 results.add(el.toString().toLowerCase(Locale.ENGLISH));
                 c++;
-                if (c > MAX_COMPLETES)
+                if (c > MAX_COMPLETES) {
                     return results;
+                }
             }
+        }
         return results;
     }
 
@@ -66,8 +68,9 @@ public final class CompleteUtility {
             if (predicate.test(el) && el.toString().startsWith(prefix)) {
                 results.add(el.toString().toLowerCase(Locale.ENGLISH));
                 c++;
-                if (c > MAX_COMPLETES)
+                if (c > MAX_COMPLETES) {
                     return results;
+                }
             }
         return results;
     }
@@ -90,8 +93,9 @@ public final class CompleteUtility {
             if (value.toLowerCase(Locale.ENGLISH).startsWith(prefix)) {
                 results.add(value);
                 c++;
-                if (c > MAX_COMPLETES)
+                if (c > MAX_COMPLETES) {
                     return results;
+                }
             }
         return results;
     }
@@ -114,8 +118,9 @@ public final class CompleteUtility {
             if (value.toLowerCase(Locale.ENGLISH).startsWith(prefix)) {
                 results.add(value);
                 c++;
-                if (c > MAX_COMPLETES)
+                if (c > MAX_COMPLETES) {
                     return results;
+                }
             }
         return results;
     }
@@ -146,8 +151,9 @@ public final class CompleteUtility {
             if (textValue.toLowerCase(Locale.ENGLISH).startsWith(prefix)) {
                 results.add(textValue);
                 c++;
-                if (c > MAX_COMPLETES)
+                if (c > MAX_COMPLETES) {
                     return results;
+                }
             }
         }
         return results;
@@ -165,8 +171,9 @@ public final class CompleteUtility {
         ArrayList<String> names = new ArrayList<>();
         final String text = prefix.toLowerCase(Locale.ENGLISH);
         Bukkit.getOnlinePlayers().forEach((p) -> {
-            if (p.getName().toLowerCase(Locale.ENGLISH).startsWith(text))
+            if (p.getName().toLowerCase(Locale.ENGLISH).startsWith(text)) {
                 names.add(p.getName());
+            }
         });
         return names;
     }
@@ -189,8 +196,9 @@ public final class CompleteUtility {
             if (alias.startsWith(prefix)) {
                 results.add(alias);
                 c++;
-                if (c > MAX_COMPLETES)
+                if (c > MAX_COMPLETES) {
                     return results;
+                }
             }
         }
         return results;

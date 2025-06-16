@@ -138,23 +138,28 @@ public class Placeholders extends PlaceholderExpansion {
         if (!value.isEmpty()) {  //has slot
             indexStart = value.indexOf("{");
             indexEnd = value.indexOf("}");
-            if (indexStart != 1)
+            if (indexStart != 1) {
                 throw new IllegalStateException("bad formatting");
-            if (indexEnd == -1) //_{..}?..
+            }
+            if (indexEnd == -1) { //_{..}?..
                 throw new IllegalStateException("slot value not closed inside { }");
+            }
             slot = value.substring(indexStart + 1, indexEnd).toLowerCase(Locale.ENGLISH);
             ItemEdit.get().log(id + " " + slot + " " + player.getName());
             value = value.substring(indexEnd + 1);
 
             indexStart = value.indexOf("{", indexEnd);
             indexEnd = value.indexOf("}", indexStart);
-            if (indexStart > indexEnd)
+            if (indexStart > indexEnd) {
                 throw new IllegalStateException();
-            if (indexStart != -1)
+            }
+            if (indexStart != -1) {
                 player = Bukkit.getPlayer(value.substring(indexStart + 1, indexEnd));
+            }
 
-            if (player == null)
+            if (player == null) {
                 throw new IllegalStateException();
+            }
         }
 
         switch (slot.toLowerCase(Locale.ENGLISH)) {
@@ -162,72 +167,89 @@ public class Placeholders extends PlaceholderExpansion {
             case "mainhand":
             case "hand": {
                 ItemStack copy = ItemUtils.getHandItem(player);
-                if (item.isSimilar(copy))
+                if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
+                }
                 break;
             }
             case "off_hand":
             case "offhand": {
                 ItemStack copy = player.getEquipment().getItemInOffHand();
-                if (item.isSimilar(copy))
+                if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
+                }
                 break;
             }
             case "legs": {
                 ItemStack copy = player.getEquipment().getLeggings();
-                if (item.isSimilar(copy))
+                if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
+                }
                 break;
             }
             case "chest": {
                 ItemStack copy = player.getEquipment().getChestplate();
-                if (item.isSimilar(copy))
+                if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
+                }
                 break;
             }
             case "head": {
                 ItemStack copy = player.getEquipment().getHelmet();
-                if (item.isSimilar(copy))
+                if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
+                }
                 break;
             }
             case "feet": {
                 ItemStack copy = player.getEquipment().getBoots();
-                if (item.isSimilar(copy))
+                if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
+                }
                 break;
             }
             case "inventory": {
-                for (ItemStack copy : player.getInventory().getStorageContents())
-                    if (item.isSimilar(copy))
+                for (ItemStack copy : player.getInventory().getStorageContents()) {
+                    if (item.isSimilar(copy)) {
                         amount += copy.getAmount();
+                    }
+                }
                 if (VersionUtils.isVersionAfter(1, 9)) {
-                    if (item.isSimilar(player.getInventory().getItemInOffHand()))
+                    if (item.isSimilar(player.getInventory().getItemInOffHand())) {
                         amount += player.getInventory().getItemInOffHand().getAmount();
+                    }
                 }
                 break;
             }
             case "equip": {
-                for (ItemStack copy : player.getInventory().getArmorContents())
-                    if (item.isSimilar(copy))
+                for (ItemStack copy : player.getInventory().getArmorContents()) {
+                    if (item.isSimilar(copy)) {
                         amount = amount + copy.getAmount();
+                    }
+                }
                 if (VersionUtils.isVersionAfter(1, 9)) {
-                    if (item.isSimilar(player.getInventory().getItemInOffHand()))
+                    if (item.isSimilar(player.getInventory().getItemInOffHand())) {
                         amount += player.getInventory().getItemInOffHand().getAmount();
+                    }
                 }
                 break;
             }
             case "inventoryandequip": {
-                for (ItemStack copy : player.getInventory().getStorageContents())
-                    if (item.isSimilar(copy))
+                for (ItemStack copy : player.getInventory().getStorageContents()) {
+                    if (item.isSimilar(copy)) {
                         amount += copy.getAmount();
+                    }
+                }
 
-                for (ItemStack copy : player.getInventory().getArmorContents())
-                    if (item.isSimilar(copy))
+                for (ItemStack copy : player.getInventory().getArmorContents()) {
+                    if (item.isSimilar(copy)) {
                         amount += copy.getAmount();
+                    }
+                }
                 if (VersionUtils.isVersionAfter(1, 9)) {
-                    if (item.isSimilar(player.getInventory().getItemInOffHand()))
+                    if (item.isSimilar(player.getInventory().getItemInOffHand())) {
                         amount += player.getInventory().getItemInOffHand().getAmount();
+                    }
                 }
 
                 break;

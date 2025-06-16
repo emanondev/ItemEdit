@@ -27,10 +27,9 @@ public class Glow extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-
-
-            if (args.length > 2)
+            if (args.length > 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemMeta meta = ItemUtils.getMeta(item);
             Boolean value = args.length == 1 ? (meta.hasEnchantmentGlintOverride() ? !meta.getEnchantmentGlintOverride() : Boolean.TRUE) : Aliases.BOOLEAN.convertAlias(args[1]);
             meta.setEnchantmentGlintOverride(value);
@@ -44,8 +43,9 @@ public class Glow extends SubCmd {
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2) {
             List<String> list = CompleteUtility.complete(args[1], Aliases.BOOLEAN);
-            if ("default".startsWith(args[1].toLowerCase(Locale.ENGLISH)))
+            if ("default".startsWith(args[1].toLowerCase(Locale.ENGLISH))) {
                 list.add("default");
+            }
             return list;
         }
         return Collections.emptyList();

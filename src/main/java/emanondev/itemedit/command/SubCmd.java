@@ -80,8 +80,9 @@ public abstract class SubCmd {
     }
 
     protected BaseComponent[] craftFailFeedback(String alias, String params, List<String> desc) {
-        if (params == null)
+        if (params == null) {
             params = "";
+        }
         ComponentBuilder fail = new ComponentBuilder(ChatColor.RED + "/" + alias + " " + this.name + " " + params)
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + alias + " " + this.name + " " + params));
@@ -101,8 +102,9 @@ public abstract class SubCmd {
 
     protected <T> void onWrongAlias(String pathMessage, CommandSender sender, IAliasSet<T> set, String... holders) {
         String msg = getLanguageString(pathMessage, null, sender, holders);
-        if (msg == null || msg.isEmpty())
+        if (msg == null || msg.isEmpty()) {
             return;
+        }
         YMLConfig language = ItemEdit.get().getLanguageConfig(sender);
         StringBuilder hover = new StringBuilder(language
                 .getMessage("itemedit.listaliases.error-pre-hover", "")).append("\n");
@@ -119,8 +121,9 @@ public abstract class SubCmd {
             if (counter > 30) {
                 counter = 0;
                 hover.append("\n");
-            } else
+            } else {
                 hover.append(" ");
+            }
         }
         Util.sendMessage(sender, new ComponentBuilder(msg).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + ItemEditCommand.get().getName() + " "

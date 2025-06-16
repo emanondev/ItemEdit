@@ -24,8 +24,7 @@ public class PotionEffectEditorOld extends SubCmd {
     private static final String[] subCommands = new String[]{"add", "remove", "reset"};
 
     public PotionEffectEditorOld(ItemEditCommand cmd) {
-        super("potioneffect",
-                cmd, true, true);
+        super("potioneffect", cmd, true, true);
 
     }
 
@@ -39,8 +38,9 @@ public class PotionEffectEditorOld extends SubCmd {
         }
 
         try {
-            if (args.length < 2)
+            if (args.length < 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             switch (args[1].toLowerCase(Locale.ENGLISH)) {
                 case "reset":
@@ -63,8 +63,9 @@ public class PotionEffectEditorOld extends SubCmd {
 
     private void potioneffectRemove(Player p, ItemStack item, String alias, String[] args) {
         try {
-            if (args.length != 3)
+            if (args.length != 3) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             PotionMeta meta = (PotionMeta) ItemUtils.getMeta(item);
 
@@ -89,22 +90,26 @@ public class PotionEffectEditorOld extends SubCmd {
             case 2:
                 return CompleteUtility.complete(args[1], subCommands);
             case 3:
-                if (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove"))
+                if (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove")) {
                     return CompleteUtility.complete(args[2], Aliases.POTION_EFFECT);
+                }
                 return Collections.emptyList();
             case 4:
-                if (args[1].equalsIgnoreCase("add"))
+                if (args[1].equalsIgnoreCase("add")) {
                     return CompleteUtility.complete(args[3], "-1", "0", "90", "180", "480");
+                }
                 return Collections.emptyList();
             case 5:
-                if (args[1].equalsIgnoreCase("add"))
+                if (args[1].equalsIgnoreCase("add")) {
                     return CompleteUtility.complete(args[4], "1", "2", "3");
+                }
                 return Collections.emptyList();
             case 6:
             case 7:
             case 8:
-                if (args[1].equalsIgnoreCase("add"))
+                if (args[1].equalsIgnoreCase("add")) {
                     return CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
+                }
                 return Collections.emptyList();
             default:
                 return Collections.emptyList();
@@ -113,8 +118,9 @@ public class PotionEffectEditorOld extends SubCmd {
 
     private void potioneffectAdd(Player p, ItemStack item, String alias, String[] args) {
         try {
-            if (args.length != 4 && args.length != 5 && args.length != 6 && args.length != 7 && args.length != 8)
+            if (args.length != 4 && args.length != 5 && args.length != 6 && args.length != 7 && args.length != 8) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             PotionMeta meta = (PotionMeta) ItemUtils.getMeta(item);
             int level = 0;
@@ -128,8 +134,9 @@ public class PotionEffectEditorOld extends SubCmd {
 
             if (args.length >= 5) {
                 level = Integer.parseInt(args[4]) - 1;
-                if ((level < 0) || (level > 127))
+                if ((level < 0) || (level > 127)) {
                     throw new IllegalArgumentException();
+                }
             }
             boolean particles = true;
             if (args.length >= 6) {
@@ -144,14 +151,16 @@ public class PotionEffectEditorOld extends SubCmd {
                 if (args.length == 8) {
                     icon = Aliases.BOOLEAN.convertAlias(args[7]);
                 }
-            if (!p.hasPermission(this.getPermission() + ".bypass_limits"))
+            if (!p.hasPermission(this.getPermission() + ".bypass_limits")) {
                 level = Math.min(level, 1);
+            }
 
 
-            if (VersionUtils.isVersionAfter(1, 13))
+            if (VersionUtils.isVersionAfter(1, 13)) {
                 meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles, icon), true);
-            else
+            } else {
                 meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles), true);
+            }
 
             item.setItemMeta(meta);
             updateView(p);

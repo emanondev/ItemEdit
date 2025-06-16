@@ -21,12 +21,14 @@ public class Delete extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
-            if (ItemEdit.get().getServerStorage().getItem(args[1]) != null)
+            }
+            if (ItemEdit.get().getServerStorage().getItem(args[1]) != null) {
                 ItemEdit.get().getServerStorage().remove(args[1]);
-            else
+            } else {
                 throw new IllegalArgumentException();
+            }
             //TODO feedback
         } catch (Exception e) {
             onFail(p, alias);
@@ -35,10 +37,12 @@ public class Delete extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player)) {
             return Collections.emptyList();
-        if (args.length == 2)
+        }
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], ItemEdit.get().getPlayerStorage().getIds((Player) sender));
+        }
         return Collections.emptyList();
     }
 

@@ -40,7 +40,7 @@ public class PluginAdditionalInfo {
             modrinthResourceName = (String) data.get("modrinth-project-name");
             foliaSupported = (Boolean) data.getOrDefault("folia-supported", false);
             bstatsPluginId = (Integer) data.get("bstats-plugin-id");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             e.printStackTrace();
         }
         this.spigotResourceId = spigotResourceId;

@@ -22,20 +22,24 @@ public class Get extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         try {
-            if (args.length != 2 && args.length != 3)
+            if (args.length != 2 && args.length != 3) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             int amount = 1;
-            if (args.length == 3)
+            if (args.length == 3) {
                 amount = Integer.parseInt(args[2]);
-            if (amount < 1)
+            }
+            if (amount < 1) {
                 throw new IllegalArgumentException("Wrong amount number");
+            }
             ItemStack item = ItemEdit.get().getPlayerStorage().getItem(p, args[1]);
             int given = InventoryUtils.giveAmount(p, item, amount, InventoryUtils.ExcessMode.DELETE_EXCESS);
-            if (given == 0)
+            if (given == 0) {
                 sendLanguageString("no-inventory-space", null, p);
-            else
+            } else {
                 sendLanguageString("success", null, p, "%id%",
                         args[1].toLowerCase(Locale.ENGLISH), "%amount%", String.valueOf(given));
+            }
         } catch (Exception e) {
             onFail(p, alias);
         }
@@ -43,8 +47,9 @@ public class Get extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player)) {
             return new ArrayList<>();
+        }
         switch (args.length) {
             case 2:
                 return CompleteUtility.complete(args[1], ItemEdit.get().getPlayerStorage().getIds((Player) sender));

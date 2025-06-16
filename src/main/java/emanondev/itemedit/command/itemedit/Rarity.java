@@ -26,8 +26,9 @@ public class Rarity extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length > 2)
+            if (args.length > 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemRarity rarity = args.length == 1 ? null : Aliases.RARITY.convertAlias(args[1]);
             if (rarity == null && args.length != 1) {
                 onWrongAlias("wrong-rarity", p, Aliases.RARITY);
@@ -46,8 +47,9 @@ public class Rarity extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.RARITY);
+        }
         return Collections.emptyList();
     }
 

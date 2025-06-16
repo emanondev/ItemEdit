@@ -53,8 +53,9 @@ public class PotionEffectEditor extends SubCmd {
         }
 
         try {
-            if (args.length < 2)
+            if (args.length < 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             switch (args[1].toLowerCase(Locale.ENGLISH)) {
                 case "reset":
@@ -77,8 +78,9 @@ public class PotionEffectEditor extends SubCmd {
 
     private void potioneffectRemove(Player p, ItemStack item, String alias, String[] args) {
         try {
-            if (args.length != 3)
+            if (args.length != 3) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2].toUpperCase());
 
             if (effect == null) {
@@ -108,22 +110,26 @@ public class PotionEffectEditor extends SubCmd {
             case 2:
                 return CompleteUtility.complete(args[1], subCommands);
             case 3:
-                if (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove"))
+                if (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove")) {
                     return CompleteUtility.complete(args[2], Aliases.POTION_EFFECT);
+                }
                 return Collections.emptyList();
             case 4:
-                if (args[1].equalsIgnoreCase("add"))
+                if (args[1].equalsIgnoreCase("add")) {
                     return CompleteUtility.complete(args[3], "infinite", "0", "90", "180", "480");
+                }
                 return Collections.emptyList();
             case 5:
-                if (args[1].equalsIgnoreCase("add"))
+                if (args[1].equalsIgnoreCase("add")) {
                     return CompleteUtility.complete(args[4], "1", "2", "3");
+                }
                 return Collections.emptyList();
             case 6:
             case 7:
             case 8:
-                if (args[1].equalsIgnoreCase("add"))
+                if (args[1].equalsIgnoreCase("add")) {
                     return CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
+                }
                 return Collections.emptyList();
             default:
                 return Collections.emptyList();
@@ -132,8 +138,9 @@ public class PotionEffectEditor extends SubCmd {
 
     private void potioneffectAdd(Player p, ItemStack item, String alias, String[] args) {
         try {
-            if (args.length != 4 && args.length != 5 && args.length != 6 && args.length != 7 && args.length != 8)
+            if (args.length != 4 && args.length != 5 && args.length != 6 && args.length != 7 && args.length != 8) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             int level = 0;
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2]);
@@ -146,8 +153,9 @@ public class PotionEffectEditor extends SubCmd {
 
             if (args.length >= 5) {
                 level = Integer.parseInt(args[4]) - 1;
-                if ((level < 0) || (level > 127))
+                if ((level < 0) || (level > 127)) {
                     throw new IllegalArgumentException();
+                }
             }
             boolean particles = true;
             if (args.length >= 6) {
@@ -162,8 +170,9 @@ public class PotionEffectEditor extends SubCmd {
                 icon = Aliases.BOOLEAN.convertAlias(args[7]);
             }
 
-            if (!p.hasPermission(this.getPermission() + ".bypass_limits"))
+            if (!p.hasPermission(this.getPermission() + ".bypass_limits")) {
                 level = Math.min(level, 1);
+            }
             ItemMeta rawMeta = ItemUtils.getMeta(item);
             if (rawMeta instanceof PotionMeta) {
                 PotionMeta meta = (PotionMeta) rawMeta;

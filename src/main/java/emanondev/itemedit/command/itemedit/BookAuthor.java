@@ -42,8 +42,9 @@ public class BookAuthor extends SubCmd {
 
         try {
             StringBuilder name = new StringBuilder(args[1]);
-            for (int i = 2; i < args.length; i++)
+            for (int i = 2; i < args.length; i++) {
                 name.append(" ").append(args[i]);
+            }
             meta.setAuthor(UtilsString.fix(name.toString(), null, true));
             item.setItemMeta(meta);
             updateView(p);
@@ -56,8 +57,9 @@ public class BookAuthor extends SubCmd {
     // itemedit bookauthor <name>
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.completePlayers(args[1]);
+        }
         return Collections.emptyList();
     }
 }

@@ -178,16 +178,18 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, IT
 
     @Override
     public SkillResult castAtEntity(SkillMetadata data, AbstractEntity target) {
-        if (Math.random() > chance)
+        if (Math.random() > chance) {
             return SkillResult.CONDITION_FAILED;
-        if (Bukkit.isPrimaryThread())
+        }
+        if (Bukkit.isPrimaryThread()) {
             drop(target.getLocation());
-        else
+        } else {//TODO folia compability
             new BukkitRunnable() {
                 public void run() {
                     drop(target.getLocation());
                 }
             }.runTask(ItemEdit.get());
+        }
         return SkillResult.SUCCESS;
     }
 
@@ -204,16 +206,18 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, IT
 
     @Override
     public SkillResult castAtLocation(SkillMetadata data, AbstractLocation location) {
-        if (Math.random() > chance)
+        if (Math.random() > chance) {
             return SkillResult.CONDITION_FAILED;
-        if (Bukkit.isPrimaryThread())
+        }
+        if (Bukkit.isPrimaryThread()) {
             drop(location);
-        else
+        } else { //TODO folia compability
             new BukkitRunnable() {
                 public void run() {
                     drop(location);
                 }
             }.runTask(ItemEdit.get());
+        }
         return SkillResult.SUCCESS;
     }
 }
@@ -258,16 +262,18 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
 
     @Override
     public SkillResult castAtEntity(SkillMetadata data, AbstractEntity target) {
-        if (Math.random() > chance || !(target instanceof AbstractPlayer))
+        if (Math.random() > chance || !(target instanceof AbstractPlayer)) {
             return SkillResult.CONDITION_FAILED;
-        if (Bukkit.isPrimaryThread())
+        }
+        if (Bukkit.isPrimaryThread()) {
             give((AbstractPlayer) target);
-        else
+        } else {
             new BukkitRunnable() {
                 public void run() {
                     give((AbstractPlayer) target);
                 }
             }.runTask(ItemEdit.get());
+        }
         return SkillResult.SUCCESS;
     }
 

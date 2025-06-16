@@ -27,8 +27,9 @@ public class HideAll extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length != 1)
+            if (args.length != 1) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             handleFlagChange(item, itemMeta);
             itemMeta.addItemFlags(ItemFlag.values());

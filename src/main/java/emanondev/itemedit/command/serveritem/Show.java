@@ -21,8 +21,9 @@ public class Show extends SubCmd {
         Player p = (Player) sender;
         try {
             int page = 1;
-            if (args.length >= 2)
+            if (args.length >= 2) {
                 page = Integer.parseInt(args[1]);
+            }
             p.openInventory(new ShowServerItemsGui(p, page).getInventory());
         } catch (Exception e) {
             onFail(sender, alias);

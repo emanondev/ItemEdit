@@ -26,8 +26,9 @@ public class MaxDurability extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemMeta meta = ItemUtils.getMeta(item);
             if (!(meta instanceof Damageable)) {
                 Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));

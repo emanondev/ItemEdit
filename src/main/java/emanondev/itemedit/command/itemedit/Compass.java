@@ -55,8 +55,9 @@ public class Compass extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], compassSub);
+        }
         return Collections.emptyList();
     }
 

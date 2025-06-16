@@ -33,8 +33,9 @@ public class Hide extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if ((args.length != 3) && (args.length != 2))
+            if ((args.length != 3) && (args.length != 2)) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             ItemFlag flag = Aliases.FLAG_TYPE.convertAlias(args[1]);
@@ -97,10 +98,12 @@ public class Hide extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.FLAG_TYPE);
-        if (args.length == 3)
+        }
+        if (args.length == 3) {
             return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
+        }
         return Collections.emptyList();
     }
 

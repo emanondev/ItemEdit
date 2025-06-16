@@ -21,18 +21,20 @@ public class Save extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             int limit = ItemEdit.get().getConfig().loadInteger("storage.player-item-limit", 45);
             if (limit >= 0 && ItemEdit.get().getPlayerStorage().getIds(p).size() >= limit) {
                 sendLanguageString("limit-reached", null, p, "%limit%",
                         String.valueOf(limit));
                 return;
             }
-            if (ItemEdit.get().getPlayerStorage().getItem(p, args[1]) == null)
+            if (ItemEdit.get().getPlayerStorage().getItem(p, args[1]) == null) {
                 ItemEdit.get().getPlayerStorage().setItem(p, args[1], this.getItemInHand(p).clone());
-            else
+            } else {
                 throw new IllegalArgumentException();
+            }
             sendLanguageString("success", null, p, "%id%",
                     args[1].toLowerCase(Locale.ENGLISH));
         } catch (Exception e) {

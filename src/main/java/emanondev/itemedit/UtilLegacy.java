@@ -18,12 +18,13 @@ public final class UtilLegacy {
         int duration = (value.equalsIgnoreCase("infinite")
                 || (value.equalsIgnoreCase("∞"))) ?
                 -1 : (Integer.parseInt(value));
-        if (duration >= 0)
+        if (duration >= 0) {
             duration *= 20; //to ticks
-        else if (!VersionUtils.isVersionAfter(1, 19, 4))
+        } else if (!VersionUtils.isVersionAfter(1, 19, 4)) {
             duration = Integer.MAX_VALUE;
-        else
+        } else {
             duration = -1;
+        }
         return duration;
     }
 }

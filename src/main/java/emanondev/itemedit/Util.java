@@ -23,33 +23,31 @@ import java.util.regex.Pattern;
 
 public final class Util {
 
-    private static final int MAX_COMPLETES = 200;
-    private static final boolean hasPaper = initPaper();
-    private static final boolean hasFolia = initFolia();
-    private static final boolean hasPurpur = initPurpur();
-
     private Util() {
         throw new UnsupportedOperationException();
     }
 
     public static void sendMessage(@NotNull CommandSender sender, String message) {
-        if (message == null || message.isEmpty())
+        if (message == null || message.isEmpty()) {
             return;
+        }
         sender.sendMessage(message);
     }
 
     public static void sendMessage(@NotNull CommandSender sender, BaseComponent... message) {
-        if (sender instanceof Player)
+        if (sender instanceof Player) {
             ((Player) sender).spigot().sendMessage(message);
-        else
+        } else {
             sender.sendMessage(BaseComponent.toPlainText(message));
+        }
     }
 
     public static void logToFile(String message) {
         try {
             File dataFolder = ItemEdit.get().getDataFolder();
-            if (!dataFolder.exists())
+            if (!dataFolder.exists()) {
                 dataFolder.mkdir();
+            }
             Date date = new Date();
             File saveTo = new File(ItemEdit.get().getDataFolder(),
                     "logs" + File.separatorChar
@@ -59,8 +57,9 @@ public final class Util {
             if (!saveTo.getParentFile().exists()) { // Create parent folders if they don't exist
                 saveTo.getParentFile().mkdirs();
             }
-            if (!saveTo.exists())
+            if (!saveTo.exists()) {
                 saveTo.createNewFile();
+            }
 
             FileWriter fw = new FileWriter(saveTo, true);
             PrintWriter pw = new PrintWriter(fw);
@@ -139,12 +138,14 @@ public final class Util {
     }
 
     public static boolean isAllowedRenameItem(CommandSender sender, Material type) {
-        if (sender.hasPermission("itemedit.bypass.rename_type_restriction"))
+        if (sender.hasPermission("itemedit.bypass.rename_type_restriction")) {
             return true;
+        }
 
         List<String> values = ItemEdit.get().getConfig().getStringList("blocked.type-blocked-rename");
-        if (values.isEmpty())
+        if (values.isEmpty()) {
             return true;
+        }
         String id = type.name();
         for (String name : values)
             if (id.equalsIgnoreCase(name)) {
@@ -289,8 +290,9 @@ public final class Util {
     }
 
     public static boolean isAllowedChangeLore(CommandSender sender, Material type) {
-        if (sender.hasPermission("itemedit.bypass.lore_type_restriction"))
+        if (sender.hasPermission("itemedit.bypass.lore_type_restriction")) {
             return true;
+        }
 
         List<String> values = ItemEdit.get().getConfig().getStringList("blocked.type-blocked-lore");
         if (values.isEmpty())
@@ -307,32 +309,5 @@ public final class Util {
 
     public static boolean hasMiniMessageAPI() {
         return Hooks.hasMiniMessage();
-    }
-
-    private static boolean initPaper() {
-        try {
-            Class.forName("com.destroystokyo.paper.VersionHistoryManager$VersionData");
-            return true;
-        } catch (NoClassDefFoundError | ClassNotFoundException ex) {
-            return false;
-        }
-    }
-
-    private static boolean initPurpur() {
-        try {
-            Class.forName("org.purpurmc.purpur.event.PlayerAFKEvent");
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-    }
-
-    private static boolean initFolia() {
-        try {
-            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
     }
 }

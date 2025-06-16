@@ -58,20 +58,24 @@ public abstract class AbstractCommand implements TabExecutor {
 
     public void reload() {
         config.reload();
-        for (SubCmd sub : subCmds)
+        for (SubCmd sub : subCmds) {
             sub.reload();
-        if (helpSubCommand != null)
+        }
+        if (helpSubCommand != null) {
             helpSubCommand.reload();
+        }
     }
 
     public @NotNull List<SubCmd> getAllowedSubCommands(@NotNull CommandSender sender) {
         List<SubCmd> list = new ArrayList<>();
         subCmds.forEach(sub -> {
-            if (sender.hasPermission(sub.getPermission()))
+            if (sender.hasPermission(sub.getPermission())) {
                 list.add(sub);
+            }
         });
-        if (helpSubCommand != null && !subCmds.isEmpty())
+        if (helpSubCommand != null && !subCmds.isEmpty()) {
             list.add(helpSubCommand);
+        }
         return list;
     }
 
@@ -148,17 +152,19 @@ public abstract class AbstractCommand implements TabExecutor {
         boolean c = false;
         for (SubCmd cmd : subCmds) {
             if (sender.hasPermission(cmd.getPermission())) {
-                if (c)
+                if (c) {
                     help.append("\n");
-                else
+                } else {
                     c = true;
+                }
                 help = cmd.getHelp(help, sender, alias);
             }
         }
-        if (c)
+        if (c) {
             Util.sendMessage(sender, help.create());
-        else
+        } else {
             sendPermissionLackGenericMessage(sender);
+        }
     }
 
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
@@ -386,12 +392,14 @@ public abstract class AbstractCommand implements TabExecutor {
 
         @Override
         public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-            if (args.length != 2)
+            if (args.length != 2) {
                 return Collections.emptyList();
+            }
             ArrayList<String> tabs = new ArrayList<>();
             List<SubCmd> subs = getAllowedSubCommands(sender);
-            for (int i = 0; i < getMaxPageFor(subs.size()); i++)
+            for (int i = 0; i < getMaxPageFor(subs.size()); i++) {
                 tabs.add(String.valueOf(i + 1));
+            }
             for (SubCmd sub : subs) {
                 tabs.add(sub.getName());
             }

@@ -24,12 +24,14 @@ public class Type extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             Material mat = Material.valueOf(args[1].toUpperCase());
-            if (mat == Material.AIR)
+            if (mat == Material.AIR) {
                 throw new IllegalArgumentException();
+            }
             item.setType(mat);
             updateView(p);
         } catch (Exception e) {

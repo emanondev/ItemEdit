@@ -20,11 +20,12 @@ public class Save extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
-            if (ItemEdit.get().getServerStorage().getItem(args[1]) == null)
+            }
+            if (ItemEdit.get().getServerStorage().getItem(args[1]) == null) {
                 ItemEdit.get().getServerStorage().setItem(args[1], this.getItemInHand(p).clone());
-            else {
+            } else {
                 sendLanguageString("already_used_id", null, p, "%id%", args[1].toLowerCase());
                 return;
             }

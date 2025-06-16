@@ -87,11 +87,15 @@ public class ItemEdit extends APlugin {
 
     @Override
     public void disable() {
-        for (Player p : Bukkit.getOnlinePlayers())
-            if (InventoryUtils.getTopInventory(p).getHolder() instanceof Gui)
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (InventoryUtils.getTopInventory(p).getHolder() instanceof Gui) {
                 p.closeInventory();
+            }
+        }
 
-        if (this.mongoStorage != null) this.mongoStorage.close();
+        if (this.mongoStorage != null) {
+            this.mongoStorage.close();
+        }
     }
 
     @Override
@@ -118,11 +122,13 @@ public class ItemEdit extends APlugin {
             conf.set("storage.mongodb.collection_prefix", "itemedit");
 
             for (String name : new String[]{"quartz", "redstone", "emerald", "copper", "iron", "lapis",
-                    "diamond", "gold", "netherite", "amethyst"})
+                    "diamond", "gold", "netherite", "amethyst"}) {
                 aliases.set("trim_material.minecraft:" + name.toLowerCase(Locale.ENGLISH), name.toLowerCase(Locale.ENGLISH));
+            }
             for (String name : new String[]{"rib", "snout", "wild", "coast", "spire", "wayfinder", "shaper", "tide",
-                    "silence", "vex", "sentry", "dune", "raiser", "eye", "host", "ward"})
+                    "silence", "vex", "sentry", "dune", "raiser", "eye", "host", "ward"}) {
                 aliases.set("trim_pattern.minecraft:" + name.toLowerCase(Locale.ENGLISH), name.toLowerCase(Locale.ENGLISH));
+            }
         }
 
         if (oldConfigVersion <= 6) {

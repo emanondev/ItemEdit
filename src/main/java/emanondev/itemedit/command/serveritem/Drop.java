@@ -34,8 +34,9 @@ public class Drop extends SubCmd {
                 throw new IllegalArgumentException("Wrong param number");
             }
             int amount = Integer.parseInt(args[2]);
-            if (amount < 1 || amount > 2304)
+            if (amount < 1 || amount > 2304) {
                 throw new IllegalArgumentException("Wrong amount number");
+            }
 
             ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1]);
             World world = Bukkit.getWorld(args[3]);
@@ -58,10 +59,12 @@ public class Drop extends SubCmd {
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%world%", world.getName(), "%x%", args[4], "%y%", args[5], "%z%",
                         args[6]);
-                if (ItemEdit.get().getConfig().loadBoolean("log.console", true))
+                if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
                     Util.sendMessage(Bukkit.getConsoleSender(), msg);
-                if (ItemEdit.get().getConfig().loadBoolean("log.file", true))
+                }
+                if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
                     Util.logToFile(msg);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,8 +74,9 @@ public class Drop extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player)) {
             return Collections.emptyList();
+        }
         switch (args.length) {
             case 2:
                 return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
@@ -80,8 +84,9 @@ public class Drop extends SubCmd {
                 return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
             case 4: {
                 List<String> l = new ArrayList<>();
-                for (World w : Bukkit.getWorlds())
+                for (World w : Bukkit.getWorlds()) {
                     l.add(w.getName());
+                }
                 return CompleteUtility.complete(args[3], l);
             }
             case 5: {

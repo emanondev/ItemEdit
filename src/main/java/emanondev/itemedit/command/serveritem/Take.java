@@ -34,11 +34,13 @@ public class Take extends SubCmd {
                 throw new IllegalArgumentException("Wrong param number");
             }
             Boolean silent = args.length == 5 ? (Aliases.BOOLEAN.convertAlias(args[4])) : ((Boolean) false);
-            if (silent == null)
+            if (silent == null) {
                 silent = Boolean.valueOf(args[4]);
+            }
             int amount = args.length >= 3 ? Integer.parseInt(args[2]) : 1;
-            if (amount < 1)
+            if (amount < 1) {
                 throw new IllegalArgumentException("Wrong amount number");
+            }
             ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1]);
             Player target = args.length >= 4 ? Bukkit.getPlayer(args[3]) : (Player) sender;
             if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
@@ -48,19 +50,22 @@ public class Take extends SubCmd {
                 item.setItemMeta(meta);
             }
             amount = InventoryUtils.removeAmount(target, item, amount, InventoryUtils.LackMode.REMOVE_MAX_POSSIBLE);
-            if (!silent)
+            if (!silent) {
                 sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount));
+            }
 
             if (ItemEdit.get().getConfig().loadBoolean("log.action.take", true)) {
                 String msg = UtilsString.fix(this.getConfigString("log"), target, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%player_name%", target.getName());
-                if (ItemEdit.get().getConfig().loadBoolean("log.console", true))
+                if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
                     Util.sendMessage(Bukkit.getConsoleSender(), msg);
-                if (ItemEdit.get().getConfig().loadBoolean("log.file", true))
+                }
+                if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
                     Util.logToFile(msg);
+                }
             }
         } catch (Exception e) {
             onFail(sender, alias);
@@ -69,8 +74,9 @@ public class Take extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player)) {
             return Collections.emptyList();
+        }
         switch (args.length) {
             case 2:
                 return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());

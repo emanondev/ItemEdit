@@ -35,8 +35,9 @@ public class Rename extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        if (!Util.isAllowedRenameItem(sender, item.getType()))
+        if (!Util.isAllowedRenameItem(sender, item.getType())) {
             return;
+        }
 
         ItemMeta itemMeta = ItemUtils.getMeta(item);
         if (args.length == 1) {
@@ -112,8 +113,9 @@ public class Rename extends SubCmd {
     }
 
     private boolean allowedLengthLimit(Player who, String text) {
-        if (lengthLimit < 0 || who.hasPermission("itemedit.bypass.rename_length_limit"))
+        if (lengthLimit < 0 || who.hasPermission("itemedit.bypass.rename_length_limit")) {
             return true;
+        }
         return text.length() <= lengthLimit;
     }
 }

@@ -3,8 +3,8 @@ package emanondev.itemedit.storage.yaml;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.storage.PlayerStorage;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -36,8 +36,9 @@ public class YmlPlayerStorage implements PlayerStorage {
     public void setItem(@NotNull OfflinePlayer player, @NotNull String id, @NotNull ItemStack item) {
         validateID(id);
         id = id.toLowerCase(Locale.ENGLISH);
-        if (item.getType() == Material.AIR)
+        if (ItemUtils.isAirOrNull(item)) {
             throw new IllegalArgumentException();
+        }
         item.setAmount(1);
         database.set(getBasePath(player) + "." + id + ".item", item);
         database.save();
@@ -69,10 +70,11 @@ public class YmlPlayerStorage implements PlayerStorage {
         Set<OfflinePlayer> players = new HashSet<>();
         boolean uuid = storeByUUID();
         for (String val : playersData) {
-            if (uuid)
+            if (uuid) {
                 players.add(Bukkit.getOfflinePlayer(UUID.fromString(val)));
-            else
+            } else {
                 players.add(Bukkit.getOfflinePlayer(val));
+            }
         }
         return players;
     }

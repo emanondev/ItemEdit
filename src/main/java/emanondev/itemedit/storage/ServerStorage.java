@@ -74,16 +74,18 @@ public interface ServerStorage {
     Set<String> getIds();
 
     default void validateID(@Nullable String id) {
-        if (id == null || id.contains(" ") || id.contains(".") || id.isEmpty())
+        if (id == null || id.contains(" ") || id.contains(".") || id.isEmpty()) {
             throw new IllegalArgumentException();
+        }
     }
 
     @Nullable
     default ItemStack getItem(@NotNull String id,
                               @Nullable Player player) {
         ItemStack item = getItem(id);
-        if (item == null || player == null)
+        if (item == null || player == null) {
             return item;
+        }
         if (item.hasItemMeta() &&
                 ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
             String[] holders = new String[]{"%player_name%", player.getName(),

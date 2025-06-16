@@ -13,9 +13,11 @@ public class EggTypeAliases extends EnumAliasSet<EntityType> {
 
     public Collection<EntityType> getValues() {
         EnumSet<EntityType> set = EnumSet.noneOf(EntityType.class);
-        for (EntityType type : EntityType.values())
-            if (type.isAlive() && type.isSpawnable())
+        for (EntityType type : EntityType.values()) {
+            if (type.isAlive() && type.isSpawnable()) {
                 set.add(type);
+            }
+        }
         return set;
     }
 }

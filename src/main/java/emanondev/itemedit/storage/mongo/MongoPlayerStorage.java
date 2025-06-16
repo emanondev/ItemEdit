@@ -5,9 +5,9 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.UpdateOptions;
 import emanondev.itemedit.storage.PlayerStorage;
+import emanondev.itemedit.utility.ItemUtils;
 import org.bson.Document;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -53,8 +53,9 @@ public class MongoPlayerStorage implements PlayerStorage {
     public void setItem(@NotNull OfflinePlayer player, @NotNull String id, @NotNull ItemStack item) {
         validateID(id);
         id = id.toLowerCase(Locale.ENGLISH);
-        if (item.getType() == Material.AIR)
+        if (ItemUtils.isAirOrNull(item)) {
             throw new IllegalArgumentException();
+        }
         item.setAmount(1);
 
         final Map<String, Object> serializedItem = item.serialize();

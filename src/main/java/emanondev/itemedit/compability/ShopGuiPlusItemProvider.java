@@ -1,9 +1,9 @@
 package emanondev.itemedit.compability;
 
 import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.utility.ItemUtils;
 import net.brcdev.shopgui.ShopGuiPlusApi;
 import net.brcdev.shopgui.provider.item.ItemProvider;
-import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,8 +27,9 @@ public class ShopGuiPlusItemProvider extends ItemProvider {
                     id = section.getString(key);
                     break;
                 }
-            if (id == null)
+            if (id == null) {
                 return null;
+            }
         }
         try {
             ItemStack result = ItemEdit.get().getServerStorage().getItem(id);
@@ -49,14 +50,16 @@ public class ShopGuiPlusItemProvider extends ItemProvider {
     @Override
     public boolean compare(ItemStack item1, ItemStack item2) {
         String id1 = getCustomId(item1);
-        if (id1 == null)
+        if (id1 == null) {
             return false;
+        }
         return id1.equals(getCustomId(item2));
     }
 
     private String getCustomId(ItemStack item) {
-        if (item == null || item.getType() == Material.AIR)
+        if (ItemUtils.isAirOrNull(item)) {
             return null;
+        }
         return ItemEdit.get().getServerStorage().getId(item);
     }
 

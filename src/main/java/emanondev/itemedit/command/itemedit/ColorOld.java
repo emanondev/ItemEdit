@@ -38,8 +38,9 @@ public class ColorOld extends SubCmd {
             }
             LeatherArmorMeta leatherMeta = (LeatherArmorMeta) ItemUtils.getMeta(item);
             try {
-                if (args.length != 4)
+                if (args.length != 4) {
                     throw new IllegalArgumentException("Wrong param number");
+                }
 
                 Color color = Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]),
                         Integer.parseInt(args[3]));
@@ -60,16 +61,18 @@ public class ColorOld extends SubCmd {
 
             FireworkEffectMeta starMeta = (FireworkEffectMeta) rawMeta;
             try {
-                if (args.length != 4)
+                if (args.length != 4) {
                     throw new IllegalArgumentException("Wrong param number");
+                }
 
                 org.bukkit.Color color = org.bukkit.Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]),
                         Integer.parseInt(args[3]));
                 FireworkEffect oldEffect = starMeta.getEffect();
                 FireworkEffect.Builder newEffect = FireworkEffect.builder().flicker(oldEffect != null && oldEffect.hasFlicker())
                         .trail(oldEffect != null && oldEffect.hasTrail()).withColor(color);
-                if (oldEffect != null && oldEffect.getFadeColors() != null)
+                if (oldEffect != null && oldEffect.getFadeColors() != null) {
                     newEffect.withFade(oldEffect.getFadeColors());
+                }
                 starMeta.setEffect(newEffect.build());
                 item.setItemMeta(starMeta);
                 updateView(p);

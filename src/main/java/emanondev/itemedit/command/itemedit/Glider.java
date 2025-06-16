@@ -26,8 +26,9 @@ public class Glider extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length > 2)
+            if (args.length > 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemMeta meta = ItemUtils.getMeta(item);
             boolean value = args.length == 1 ? !meta.isGlider() : Aliases.BOOLEAN.convertAlias(args[1]);
             meta.setGlider(value);

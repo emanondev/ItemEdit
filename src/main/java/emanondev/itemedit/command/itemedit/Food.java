@@ -89,26 +89,34 @@ public class Food extends SubCmd {
                 foodClearEffects(p, item, alias, args);
                 return;
             case "consumeparticles":
-                if (!VersionUtils.isVersionAfter(1, 21, 2))
+                if (!VersionUtils.isVersionAfter(1, 21, 2)) {
                     onFail(p, alias);
+                    return;
+                }
                 foodConsumeParticles(p, item, alias, args);
                 return;
             case "animation":
-                if (!VersionUtils.isVersionAfter(1, 21, 2))
+                if (!VersionUtils.isVersionAfter(1, 21, 2)) {
                     onFail(p, alias);
+                    return;
+                }
                 foodAnimation(p, item, alias, args);
                 return;
             case "sound":
-                if (!VersionUtils.isVersionAfter(1, 21, 2))
+                if (!VersionUtils.isVersionAfter(1, 21, 2)) {
                     onFail(p, alias);
+                    return;
+                }
                 foodSound(p, item, alias, args);
                 return;
             case "info":
                 foodInfo(p, item, alias, args);
                 return;
             case "convertto":
-                if (!VersionUtils.isVersionAfter(1, 21))
+                if (!VersionUtils.isVersionAfter(1, 21)) {
                     onFail(p, alias);
+                    return;
+                }
                 foodConvertTo(p, item, alias, args);
                 return;
             default:
@@ -172,7 +180,7 @@ public class Food extends SubCmd {
 
     public void onFail(@NotNull CommandSender target, @NotNull String alias) {
         Util.sendMessage(target, new ComponentBuilder(getLanguageString("help-header", "", target)).create());
-        for (String sub : foodSub)
+        for (String sub : foodSub) {
             Util.sendMessage(target, new ComponentBuilder(
                     ChatColor.DARK_GREEN + "/" + alias + " " + this.getName() + ChatColor.GREEN + " " + sub + " "
                             + getLanguageString(sub + ".params", "", target))
@@ -182,14 +190,17 @@ public class Food extends SubCmd {
                             new Text(String.join("\n",
                                     getLanguageStringList(sub + ".description", null, target)))))
                     .create());
+        }
     }
 
     private void foodClear(Player p, ItemStack item, String alias, String[] args) {
-        if (!item.hasItemMeta())
+        if (!item.hasItemMeta()) {
             return;
+        }
         ItemMeta meta = ItemUtils.getMeta(item);
-        if (!meta.hasFood())
+        if (!meta.hasFood()) {
             return;
+        }
         ParsedItem parsed = new ParsedItem(item);
         parsed.remove(Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
         parsed.remove(Keys.Component.FOOD.toString());
@@ -222,11 +233,13 @@ public class Food extends SubCmd {
         ParsedItem parsed = new ParsedItem(stack);
         Map<String, Object> componentMap = value == null ? ParsedItem.getMap(parsed.getMap(), Keys.Component.CROSS_VERSION_CONSUMABLE.toString()) :
                 ParsedItem.loadMap(parsed.getMap(), Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
-        if (componentMap == null)
+        if (componentMap == null) {
             return stack;
+        }
         if (VersionUtils.isVersionUpTo(1, 21, 1)) {
-            if (value == null)
+            if (value == null) {
                 componentMap.remove("effects");
+            }
             List<Map<String, Object>> effects = parsed.loadEmptyList(Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "effects");
             //ParsedItem.loadListOfMap(componentMap, "effects");
             value.forEach((foodPojo -> {
@@ -276,12 +289,14 @@ public class Food extends SubCmd {
     private List<FoodPojo> getFoodEffects(ItemStack stack) {
         ParsedItem parsed = new ParsedItem(stack);
         Map<String, Object> componentMap = ParsedItem.getMap(parsed.getMap(), Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
-        if (componentMap == null)
+        if (componentMap == null) {
             return new ArrayList<>();
+        }
         if (VersionUtils.isVersionUpTo(1, 21, 1)) {
             List<Map<String, Object>> effects = ParsedItem.getListOfMap(componentMap, "effects");
-            if (effects == null)
+            if (effects == null) {
                 return new ArrayList<>();
+            }
             //{effect:{id:wither,duration:1,amplifier:2,ambient:1b,show_particles:0b,show_icon:0b},probability:0.01f}
             List<FoodPojo> list = new ArrayList<>();
             effects.forEach((map) -> {
@@ -299,12 +314,14 @@ public class Food extends SubCmd {
         }
         //{on_consume_effects:[{type:apply_effects,effects:[{id:wither,duration:1,amplifier:1,ambient:1b,show_particles:0b,show_icon:0b}]}],nutrition:1,saturation:1}
         List<Map<String, Object>> consumeEffects = ParsedItem.getListOfMap(componentMap, "on_consume_effects");
-        if (consumeEffects == null || consumeEffects.isEmpty())
+        if (consumeEffects == null || consumeEffects.isEmpty()) {
             return new ArrayList<>();
+        }
         List<FoodPojo> list = new ArrayList<>();
         consumeEffects.forEach((map) -> {
-            if (!Objects.equals(ParsedItem.readNamespacedKey(map, "type"), Keys.EffectType.APPLY_EFFECTS))
+            if (!Objects.equals(ParsedItem.readNamespacedKey(map, "type"), Keys.EffectType.APPLY_EFFECTS)) {
                 return;
+            }
             float probability = ParsedItem.readFloat(map, "probability", 1f);
             ParsedItem.loadListOfMap(map, "effects").forEach(effect -> list.add(new FoodPojo(
                     new PotionEffect(Registry.EFFECT.get(ParsedItem.readNamespacedKey(effect, "id")),
@@ -333,8 +350,9 @@ public class Food extends SubCmd {
                 return;
             }
             int val = Integer.parseInt(args[2]);
-            if (val < 0)
+            if (val < 0) {
                 val = 0;
+            }
 
             ParsedItem parsedItem = new ParsedItem(item);
             parsedItem.loadEmptyMap(Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
@@ -410,8 +428,9 @@ public class Food extends SubCmd {
             int level = 0;
             if (args.length >= 5) {
                 level = Integer.parseInt(args[4]) - 1;
-                if ((level < 0) || (level > 127))
+                if ((level < 0) || (level > 127)) {
                     throw new IllegalArgumentException();
+                }
             }
 
             boolean particles = true;
@@ -429,11 +448,13 @@ public class Food extends SubCmd {
             float chance = 1;
             if (args.length == 9) {
                 chance = Float.parseFloat(args[8]) / 100;
-                if (chance <= 0 || chance > 1)
+                if (chance <= 0 || chance > 1) {
                     throw new IllegalArgumentException();
+                }
             }
-            if (!p.hasPermission(this.getPermission() + ".bypass_limits"))
+            if (!p.hasPermission(this.getPermission() + ".bypass_limits")) {
                 level = Math.min(level, 1);
+            }
             List<FoodPojo> values = getFoodEffects(item);
             values.add(new FoodPojo(new PotionEffect(effect, duration, level, ambient, particles, icon), chance));
             p.getInventory().setItemInMainHand(setFoodEffects(item, values));
@@ -460,8 +481,9 @@ public class Food extends SubCmd {
             Integer level;
             if (args.length == 4) {
                 level = Integer.parseInt(args[3]) - 1;
-                if ((level < 0) || (level > 127))
+                if ((level < 0) || (level > 127)) {
                     throw new IllegalArgumentException();
+                }
             } else {
                 level = null;
             }
@@ -544,8 +566,9 @@ public class Food extends SubCmd {
     private Sound sound(ItemStack item) {
         ParsedItem parsedItem = new ParsedItem(item);
         String val = parsedItem.readString((String) null, Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "sound");
-        if (val == null)
+        if (val == null) {
             return Sound.ENTITY_GENERIC_EAT;
+        }
         try {
             Sound value = Registry.SOUNDS.get(new NamespacedKey(val.split(":")[0], val.split(":")[1]));
             return value == null ? Sound.ENTITY_GENERIC_EAT : value;
@@ -562,16 +585,18 @@ public class Food extends SubCmd {
     private float getSaturation(ItemStack item) {
         ParsedItem parsedItem = new ParsedItem(item);
         Map<String, Object> food = ParsedItem.getMap(parsedItem.getMap(), "food");
-        if (food == null || !food.containsKey("saturation"))
+        if (food == null || !food.containsKey("saturation")) {
             return 0;
+        }
         return ParsedItem.readFloat(food, "saturation", 0f);
     }
 
     private int getNutrition(ItemStack item) {
         ParsedItem parsedItem = new ParsedItem(item);
         Map<String, Object> food = ParsedItem.getMap(parsedItem.getMap(), "food");
-        if (food == null || !food.containsKey("nutrition"))
+        if (food == null || !food.containsKey("nutrition")) {
             return 0;
+        }
         return ParsedItem.readInt(food, "nutrition", 0);
     }
 
@@ -600,13 +625,16 @@ public class Food extends SubCmd {
                 }
             }
             int amount = 1;
-            if (args.length == 4)
+            if (args.length == 4) {
                 amount = Integer.parseInt(args[3]);
+            }
 
-            if (target.getType().isAir())
+            if (target.getType().isAir()) {
                 target = null;
-            if (target != null)
+            }
+            if (target != null) {
                 target.setAmount(amount);
+            }
             setUseRemainder(item, target);
             updateView(p);
         } catch (Exception e) {
@@ -628,29 +656,34 @@ public class Food extends SubCmd {
          */
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player)) {
             return Collections.emptyList();
+        }
         switch (args.length) {
             case 2:
                 List<String> list = CompleteUtility.complete(args[1], foodSub);
-                if (!VersionUtils.isVersionAfter(1, 21))
+                if (!VersionUtils.isVersionAfter(1, 21)) {
                     list.remove("convertto");
+                }
                 return list;
             case 3:
                 switch (args[1].toLowerCase(Locale.ENGLISH)) {
                     case "canalwayseat":
                         return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
                     case "consumeparticles":
-                        if (VersionUtils.isVersionAfter(1, 21, 2))
+                        if (VersionUtils.isVersionAfter(1, 21, 2)) {
                             return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
+                        }
                         return Collections.emptyList();
                     case "animation":
-                        if (VersionUtils.isVersionAfter(1, 21, 2))
+                        if (VersionUtils.isVersionAfter(1, 21, 2)) {
                             return CompleteUtility.complete(args[2], Aliases.ANIMATION);
+                        }
                         return Collections.emptyList();
                     case "sound":
-                        if (VersionUtils.isVersionAfter(1, 21, 2))
+                        if (VersionUtils.isVersionAfter(1, 21, 2)) {
                             return CompleteUtility.complete(args[2], Aliases.SOUND);
+                        }
                         return Collections.emptyList();
                     case "eatticks":
                         return CompleteUtility.complete(args[2], "1", "20", "40");
@@ -663,14 +696,17 @@ public class Food extends SubCmd {
                         return CompleteUtility.complete(args[2], Aliases.POTION_EFFECT);
                     case "removeeffect": {
                         ItemStack item = getItemInHand((Player) sender);
-                        if (item == null || !item.hasItemMeta())
+                        if (item == null || !item.hasItemMeta()) {
                             return Collections.emptyList();
+                        }
                         HashSet<PotionEffectType> types = new HashSet<>();
-                        for (FoodPojo food : getFoodEffects(item))
+                        for (FoodPojo food : getFoodEffects(item)) {
                             types.add(food.getPotionEffect().getType());
+                        }
                         List<String> list2 = new ArrayList<>();//Util.complete(args[2], Aliases.POTION_EFFECT);
-                        for (PotionEffectType type : types)
+                        for (PotionEffectType type : types) {
                             list2.add(Aliases.POTION_EFFECT.getDefaultName(type));
+                        }
                         return CompleteUtility.complete(args[2], list2);
                     }
                     case "convertto":
@@ -688,23 +724,27 @@ public class Food extends SubCmd {
                     case "removeeffect":
                         return CompleteUtility.complete(args[3], "1", "2", "3", "4", "5");
                     case "convertto":
-                        if (VersionUtils.isVersionAfter(1, 21))
+                        if (VersionUtils.isVersionAfter(1, 21)) {
                             return CompleteUtility.complete(args[3], "1", "10", "64");
+                        }
                 }
                 return Collections.emptyList();
             case 5:
-                if (args[1].toLowerCase(Locale.ENGLISH).equals("addeffect"))
+                if (args[1].toLowerCase(Locale.ENGLISH).equals("addeffect")) {
                     return CompleteUtility.complete(args[4], "1", "2", "3", "4", "5");
+                }
                 return Collections.emptyList();
             case 6:
             case 7:
             case 8:
-                if (args[1].toLowerCase(Locale.ENGLISH).equals("addeffect"))
+                if (args[1].toLowerCase(Locale.ENGLISH).equals("addeffect")) {
                     return CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
+                }
                 return Collections.emptyList();
             case 9:
-                if (args[1].toLowerCase(Locale.ENGLISH).equals("addeffect"))
+                if (args[1].toLowerCase(Locale.ENGLISH).equals("addeffect")) {
                     return CompleteUtility.complete(args[8], "0.01", "10.0", "50.0", "100.0");
+                }
                 return Collections.emptyList();
         }
         return Collections.emptyList();

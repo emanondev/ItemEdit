@@ -20,8 +20,9 @@ public class AttributeAliasesOld extends AliasSet<Attribute> implements Attribut
     @Override
     public String getName(Attribute type) {
         String name = ((Enum<?>) type).name().toLowerCase(Locale.ENGLISH);
-        if (name.startsWith("generic_"))
+        if (name.startsWith("generic_")) {
             name = name.substring("generic_".length());
+        }
         return name;
     }
 }

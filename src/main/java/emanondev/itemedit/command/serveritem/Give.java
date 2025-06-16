@@ -34,11 +34,13 @@ public class Give extends SubCmd {
                 throw new IllegalArgumentException("Wrong param number");
             }
             Boolean silent = args.length == 5 ? (Aliases.BOOLEAN.convertAlias(args[4])) : ((Boolean) false);
-            if (silent == null)
+            if (silent == null) {
                 silent = Boolean.valueOf(args[4]);
+            }
             int amount = args.length >= 3 ? Integer.parseInt(args[2]) : 1;
-            if (amount < 1)
+            if (amount < 1) {
                 throw new IllegalArgumentException("Wrong amount number");
+            }
             ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1]);
             Player target = args.length >= 4 ? Bukkit.getPlayer(args[3]) : (Player) sender;
             if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
@@ -52,19 +54,22 @@ public class Give extends SubCmd {
             int given = InventoryUtils.giveAmount(target, item, amount, ItemEdit.get().getConfig()
                     .loadBoolean("serveritem.give-drops-excess", true) ?
                     InventoryUtils.ExcessMode.DROP_EXCESS : InventoryUtils.ExcessMode.DELETE_EXCESS);
-            if (given > 0 && !silent)
+            if (given > 0 && !silent) {
                 sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(given));
+            }
 
             if (given > 0 && ItemEdit.get().getConfig().loadBoolean("log.action.give", true)) {
                 String msg = UtilsString.fix(this.getConfigString("log"), target, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(given), "%player_name%", target.getName());
-                if (ItemEdit.get().getConfig().loadBoolean("log.console", true))
+                if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
                     Util.sendMessage(Bukkit.getConsoleSender(), msg);
-                if (ItemEdit.get().getConfig().loadBoolean("log.file", true))
+                }
+                if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
                     Util.logToFile(msg);
+                }
             }
         } catch (Exception e) {
             onFail(sender, alias);
@@ -73,8 +78,9 @@ public class Give extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player)) {
             return Collections.emptyList();
+        }
         switch (args.length) {
             case 2:
                 return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());

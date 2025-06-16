@@ -45,8 +45,9 @@ public class ItemEditImportCommand implements TabExecutor {
 
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        if (args.length == 1)
+        if (args.length == 1) {
             return CompleteUtility.complete(args[0], Collections.singletonList("itemeditor"));
+        }
         return Collections.emptyList();
     }
 

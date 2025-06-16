@@ -114,11 +114,13 @@ public class ParsedItem {
     }
 
     public static Integer readInt(Map<String, Object> data, String path, Integer defValue) {
-        if (!data.containsKey(path))
+        if (!data.containsKey(path)) {
             return defValue;
+        }
         String value = (String) data.get(path);
-        if (value.endsWith("b"))
+        if (value.endsWith("b")) {
             value = value.substring(0, value.length() - 1);
+        }
         return Integer.parseInt(value);
     }
 
@@ -127,11 +129,13 @@ public class ParsedItem {
     }
 
     public static Double readDouble(Map<String, Object> data, String path, Double defValue) {
-        if (!data.containsKey(path))
+        if (!data.containsKey(path)) {
             return defValue;
+        }
         String value = (String) data.get(path);
-        if (value.endsWith("f"))
+        if (value.endsWith("f")) {
             value = value.substring(0, value.length() - 1);
+        }
         return Double.parseDouble(value);
     }
 
@@ -145,77 +149,87 @@ public class ParsedItem {
     }
 
     public static void setValue(Map<String, Object> data, String path, String value) {
-        if (value == null)
+        if (value == null) {
             data.remove(path);
-        else if (!(value.startsWith("\"") && value.endsWith("\"")))
+        } else if (!(value.startsWith("\"") && value.endsWith("\""))) {
             data.put(path, "\"" + value + "\"");
-        else
+        } else {
             data.put(path, value);
+        }
     }
 
     public static void setValue(Map<String, Object> data, String path, Boolean value) {
-        if (value == null)
+        if (value == null) {
             data.remove(path);
-        else
+        } else {
             data.put(path, String.valueOf(value ? 1 : 0));
+        }
     }
 
     public static void setValue(Map<String, Object> data, String path, Integer value) {
-        if (value == null)
+        if (value == null) {
             data.remove(path);
-        else
+        } else {
             data.put(path, value.toString());
+        }
     }
 
     public static void setValue(Map<String, Object> data, String path, Double value) {
-        if (value == null)
+        if (value == null) {
             data.remove(path);
-        else
+        } else {
             data.put(path, value.toString());
+        }
     }
 
     public static void setValue(Map<String, Object> data, String path, Float value) {
-        if (value == null)
+        if (value == null) {
             data.remove(path);
-        else
+        } else {
             data.put(path, value.toString());
+        }
     }
 
     public static void setValue(Map<String, Object> data, String path, NamespacedKey value) {
-        if (value == null)
+        if (value == null) {
             data.remove(path);
-        else
+        } else {
             data.put(path, value.toString());
+        }
     }
 
     public static void setValue(Map<String, Object> data, String path, Keyed value) {
-        if (value == null)
+        if (value == null) {
             data.remove(path);
-        else
+        } else {
             data.put(path, value.getKey().toString());
+        }
     }
 
     public void set(@Nullable String value, String... paths) {
         Map<String, Object> map = components;
         for (int i = 0; i < paths.length - 1; i++) {
             if (!(map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map)) {
-                if (value == null)
+                if (value == null) {
                     return;
+                }
                 map.put(paths[i], new LinkedHashMap<String, Object>());
             }
             map = (Map<String, Object>) map.get(paths[i]);
         }
-        if (value == null)
+        if (value == null) {
             map.remove(paths[paths.length - 1]);
-        else
+        } else {
             map.put(paths[paths.length - 1], value);
+        }
     }
 
     public void set(@NotNull Map<String, Object> value, String... paths) {
         Map<String, Object> map = components;
         for (int i = 0; i < paths.length - 1; i++) {
-            if (!(map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map))
+            if (!(map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map)) {
                 map.put(paths[i], new LinkedHashMap<String, Object>());
+            }
             map = (Map<String, Object>) map.get(paths[i]);
         }
         fixValue(value);
@@ -225,10 +239,11 @@ public class ParsedItem {
     public void remove(String... paths) {
         Map<String, Object> map = components;
         for (int i = 0; i < paths.length - 1; i++) {
-            if (map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map)
+            if (map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map) {
                 map = (Map<String, Object>) map.get(paths[i]);
-            else
+            } else {
                 return;
+            }
         }
         map.remove(paths[paths.length - 1], new LinkedHashMap<>());
     }
@@ -236,19 +251,22 @@ public class ParsedItem {
     public void loadEmptyMap(String... paths) {
         Map<String, Object> map = components;
         for (int i = 0; i < paths.length - 1; i++) {
-            if ((!map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map))
+            if ((!map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map)) {
                 map.put(paths[i], new LinkedHashMap<String, Object>());
+            }
             map = (Map<String, Object>) map.get(paths[i]);
         }
-        if (!map.containsKey(paths[paths.length - 1]))
+        if (!map.containsKey(paths[paths.length - 1])) {
             map.put(paths[paths.length - 1], new LinkedHashMap<>());
+        }
     }
 
     public void set(@NotNull List<Map<String, Object>> value, String... paths) {
         Map<String, Object> map = components;
         for (int i = 0; i < paths.length - 1; i++) {
-            if (!(map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map))
+            if (!(map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map)) {
                 map.put(paths[i], new LinkedHashMap<String, Object>());
+            }
             map = (Map<String, Object>) map.get(paths[i]);
         }
         fixValue(value);
@@ -378,10 +396,11 @@ public class ParsedItem {
     private String read(String[] paths) {
         Map<String, Object> map = components;
         for (int i = 0; i < paths.length - 1; i++) {
-            if (map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map)
+            if (map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map) {
                 map = (Map<String, Object>) map.get(paths[i]);
-            else
+            } else {
                 return null;
+            }
         }
         return map.get(paths[paths.length - 1]) instanceof String ? (String) map.get(paths[paths.length - 1]) : null;
     }
@@ -389,10 +408,11 @@ public class ParsedItem {
     public Map<String, Object> readMap(String... paths) {
         Map<String, Object> map = components;
         for (int i = 0; i < paths.length - 1; i++) {
-            if (map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map)
+            if (map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map) {
                 map = (Map<String, Object>) map.get(paths[i]);
-            else
+            } else {
                 return null;
+            }
         }
         return map.get(paths[paths.length - 1]) instanceof Map ? (Map<String, Object>) map.get(paths[paths.length - 1]) : null;
     }
@@ -400,73 +420,87 @@ public class ParsedItem {
     public List<Map<String, Object>> readList(String... paths) {
         Map<String, Object> map = components;
         for (int i = 0; i < paths.length - 1; i++) {
-            if (map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map)
+            if (map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map) {
                 map = (Map<String, Object>) map.get(paths[i]);
-            else
+            } else {
                 return null;
+            }
         }
         return map.get(paths[paths.length - 1]) instanceof List ? (List<Map<String, Object>>) map.get(paths[paths.length - 1]) : null;
     }
 
     public Integer readInteger(Integer defValue, String... paths) {
         String value = read(paths);
-        if (value == null)
+        if (value == null) {
             return defValue;
-        if (value.endsWith("b") || value.endsWith("f"))
+        }
+        if (value.endsWith("b") || value.endsWith("f")) {
             value = value.substring(0, value.length() - 1);
+        }
         return Integer.valueOf(value);
     }
 
     public String readString(String defValue, String... paths) {
         String value = read(paths);
-        if (value == null)
+        if (value == null) {
             return defValue;
+        }
         return value;
     }
 
     public Double readDouble(Double defValue, String... paths) {
         String value = read(paths);
-        if (value == null)
+        if (value == null) {
             return defValue;
-        if (value.endsWith("b") || value.endsWith("f"))
+        }
+        if (value.endsWith("b") || value.endsWith("f")) {
             value = value.substring(0, value.length() - 1);
+        }
         return Double.valueOf(value);
     }
 
     public Float readFloat(Float defValue, String... paths) {
         String value = read(paths);
-        if (value == null)
+        if (value == null) {
             return defValue;
-        if (value.endsWith("b") || value.endsWith("f"))
+        }
+        if (value.endsWith("b") || value.endsWith("f")) {
             value = value.substring(0, value.length() - 1);
+        }
         return Float.valueOf(value);
     }
 
     public Long readLong(Long defValue, String... paths) {
         String value = read(paths);
-        if (value == null)
+        if (value == null) {
             return defValue;
-        if (value.endsWith("b") || value.endsWith("f"))
+        }
+        if (value.endsWith("b") || value.endsWith("f")) {
             value = value.substring(0, value.length() - 1);
+        }
         return Long.valueOf(value);
     }
 
     public Byte readByte(Byte defValue, String... paths) {
         String value = read(paths);
-        if (value == null)
+        if (value == null) {
             return defValue;
-        if (value.endsWith("b") || value.endsWith("f"))
+        }
+        if (value.endsWith("b") || value.endsWith("f")) {
             value = value.substring(0, value.length() - 1);
+        }
         return Byte.valueOf(value);
     }
 
     public NamespacedKey readNamespacedKey(NamespacedKey defValue, String... paths) {
         String value = read(paths);
-        if (value == null)
+        if (value == null) {
             return defValue;
+        }
         String[] split = value.split(":");
-        if (split.length != 2)
+        if (split.length != 2) {
             return defValue;
+        }
         return new NamespacedKey(split[0], split[1]);
     }
 
@@ -490,8 +524,9 @@ public class ParsedItem {
 
     public String toString() {
         StringBuilder text = new StringBuilder(type);
-        if (components.isEmpty())
+        if (components.isEmpty()) {
             return text.toString();
+        }
         text.append("[");
         components.forEach((key, value) -> text.append(key)
                 .append("=").append(writeComponent(value)).append(","));
@@ -517,16 +552,18 @@ public class ParsedItem {
         }
         if (value instanceof List) {
             List<Object> list = (List<Object>) value;
-            if (list.isEmpty())
+            if (list.isEmpty()) {
                 return "[]";
+            }
             StringBuilder text = new StringBuilder("[");
             list.forEach((el) -> text.append(writeComponent(el)).append(","));
             return text.substring(0, text.length() - 1) + "]";
         }
         if (value instanceof Map) {
             Map<String, Object> map = ((Map<String, Object>) value);
-            if (map.isEmpty())
+            if (map.isEmpty()) {
                 return "{}";
+            }
             StringBuilder text = new StringBuilder("{");
             map.forEach((key, val) -> text.append(needBrackets(key) ? "\"" + key + "\"" : key).append(":").append(writeComponent(val)).append(","));
             return text.substring(0, text.length() - 1) + "}";
@@ -565,8 +602,9 @@ public class ParsedItem {
             }
             value.add(tmp.payload);
             index = tmp.newIndex;
-            if (raw.charAt(index) == ',')
+            if (raw.charAt(index) == ',') {
                 index++;
+            }
         }
 
         return new EatResult(index + 1, value);
@@ -664,12 +702,14 @@ public class ParsedItem {
     public List<Map<String, Object>> loadEmptyList(String... paths) {
         Map<String, Object> map = components;
         for (int i = 0; i < paths.length - 1; i++) {
-            if ((!map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map))
+            if ((!map.containsKey(paths[i]) && map.get(paths[i]) instanceof Map)) {
                 map.put(paths[i], new LinkedHashMap<String, Object>());
+            }
             map = (Map<String, Object>) map.get(paths[i]);
         }
-        if (!map.containsKey(paths[paths.length - 1]))
+        if (!map.containsKey(paths[paths.length - 1])) {
             map.put(paths[paths.length - 1], new ArrayList<Map<String, Object>>());
+        }
         return (List<Map<String, Object>>) map.get(paths[paths.length - 1]);
     }
 

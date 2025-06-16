@@ -12,8 +12,9 @@ public class BannerPatternAliasesOld extends AliasSet<PatternType> implements Ba
 
     public BannerPatternAliasesOld() {
         super("banner_pattern");
-        for (PatternType type : ItemUtils.getPatternTypesFiltered())
+        for (PatternType type : ItemUtils.getPatternTypesFiltered()) {
             registerValue(type);
+        }
     }
 
     @Override

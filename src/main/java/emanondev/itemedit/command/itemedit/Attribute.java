@@ -56,8 +56,9 @@ public class Attribute extends SubCmd {
     @SuppressWarnings("UnstableApiUsage")
     private void attributeAdd(Player p, ItemStack item, String alias, String[] args) {
         try {
-            if (args.length < 4 || args.length > 6)
+            if (args.length < 4 || args.length > 6) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             org.bukkit.attribute.Attribute attr = Aliases.ATTRIBUTE.convertAlias(args[2]);
             if (attr == null) {
@@ -67,10 +68,11 @@ public class Attribute extends SubCmd {
             }
             double amount = Double.parseDouble(args[3]);
             Operation op;
-            if (args.length > 4)
+            if (args.length > 4) {
                 op = Aliases.OPERATIONS.convertAlias(args[4]);
-            else
+            } else {
                 op = Operation.ADD_NUMBER;
+            }
 
             if (op == null) {
                 onWrongAlias("wrong-operation", p, Aliases.OPERATIONS);
@@ -115,8 +117,9 @@ public class Attribute extends SubCmd {
     // remove [attribute/slot]
     private void attributeRemove(Player p, ItemStack item, String alias, String[] args) {
         try {
-            if (args.length != 3)
+            if (args.length != 3) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
 
             org.bukkit.attribute.Attribute attr = Aliases.ATTRIBUTE.convertAlias(args[2]);
             EquipmentSlot equip = Aliases.EQUIPMENT_SLOTS.convertAlias(args[2]);
@@ -131,10 +134,12 @@ public class Attribute extends SubCmd {
             //TODO here
 
 
-            if (attr != null)
+            if (attr != null) {
                 itemMeta.removeAttributeModifier(attr);
-            if (equip != null)
+            }
+            if (equip != null) {
                 itemMeta.removeAttributeModifier(equip);
+            }
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
@@ -145,16 +150,20 @@ public class Attribute extends SubCmd {
     // attribute add/rem attr amount op slot
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], attributeSub);
+        }
         if (args[1].equalsIgnoreCase("add")) {
-            if (args.length == 3)
+            if (args.length == 3) {
                 return CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
-            if (args.length == 5)
+            }
+            if (args.length == 5) {
                 return CompleteUtility.complete(args[4], Aliases.OPERATIONS);
+            }
             if (args.length == 6) {
-                if (VersionUtils.isVersionAfter(1, 21))
+                if (VersionUtils.isVersionAfter(1, 21)) {
                     return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
+                }
                 return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTS);
             }
         } else if (args[1].equalsIgnoreCase("remove") && args.length == 3) {

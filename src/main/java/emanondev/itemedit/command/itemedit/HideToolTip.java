@@ -26,8 +26,9 @@ public class HideToolTip extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length > 2)
+            if (args.length > 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             ItemMeta meta = ItemUtils.getMeta(item);
             boolean value = args.length == 1 ? !meta.isHideTooltip() : Aliases.BOOLEAN.convertAlias(args[1]);
             meta.setHideTooltip(value);
@@ -39,8 +40,9 @@ public class HideToolTip extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.BOOLEAN);
+        }
         return Collections.emptyList();
     }
 }

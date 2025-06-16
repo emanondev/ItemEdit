@@ -23,15 +23,17 @@ public class Amount extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             int amount = Integer.parseInt(args[1]);
-            if (amount < 0) //remove this amount
+            if (amount < 0) {//remove this amount
                 item.setAmount(Math.max(0, item.getAmount() + amount));
-            else if ((amount > 127) || (amount < 1))
+            } else if ((amount > 127) || (amount < 1)) {
                 throw new IllegalArgumentException("Wrong amount number");
-            else
+            } else {
                 item.setAmount(amount);
+            }
             updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
@@ -41,8 +43,9 @@ public class Amount extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Arrays.asList("1", "10", "64", "100", "127"));
+        }
         return Collections.emptyList();
     }
 }

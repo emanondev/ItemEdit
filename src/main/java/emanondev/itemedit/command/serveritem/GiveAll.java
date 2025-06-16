@@ -29,18 +29,21 @@ public class GiveAll extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         try {
-            if (Bukkit.getOnlinePlayers().isEmpty())
+            if (Bukkit.getOnlinePlayers().isEmpty()) {
                 return;
+            }
             // <id> [amount] [silent]
             if (args.length < 2 || args.length > 4) {
                 throw new IllegalArgumentException("Wrong param number");
             }
             Boolean silent = args.length == 4 ? (Aliases.BOOLEAN.convertAlias(args[3])) : ((Boolean) false);
-            if (silent == null)
+            if (silent == null) {
                 silent = Boolean.valueOf(args[3]);
+            }
             int amount = args.length >= 3 ? Integer.parseInt(args[2]) : 1;
-            if (amount < 1)
+            if (amount < 1) {
                 throw new IllegalArgumentException("Wrong amount number");
+            }
             ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1]);
             ItemMeta meta = null;
             List<String> lore = null;
@@ -63,24 +66,28 @@ public class GiveAll extends SubCmd {
                         .loadBoolean("serveritem.give-drops-excess", true) ?
                         InventoryUtils.ExcessMode.DROP_EXCESS : InventoryUtils.ExcessMode.DELETE_EXCESS);
                 total += given;
-                if (given > 0 && !silent)
+                if (given > 0 && !silent) {
                     sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
                             "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                             String.valueOf(given));
+                }
             }
 
             if (total > 0 && ItemEdit.get().getConfig().loadBoolean("log.action.giveall", true)) {
                 StringBuilder sb = new StringBuilder("[");
-                for (Player target : Bukkit.getOnlinePlayers())
+                for (Player target : Bukkit.getOnlinePlayers()) {
                     sb.append(target.getName()).append(", ");
+                }
 
                 String msg = UtilsString.fix(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         amount + " (for a total of " + total + " given)", "%targets%", sb.delete(sb.length() - 2, sb.length()).append("]").toString());
-                if (ItemEdit.get().getConfig().loadBoolean("log.console", true))
+                if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
                     Util.sendMessage(Bukkit.getConsoleSender(), msg);
-                if (ItemEdit.get().getConfig().loadBoolean("log.file", true))
+                }
+                if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
                     Util.logToFile(msg);
+                }
             }
         } catch (Exception e) {
             onFail(sender, alias);
@@ -89,8 +96,9 @@ public class GiveAll extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player)) {
             return Collections.emptyList();
+        }
         switch (args.length) {
             // <id> [amount] [silent]
             case 2:

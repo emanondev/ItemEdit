@@ -11,8 +11,9 @@ public class AttributeAliasesNew extends RegistryAliasSet<Attribute> implements 
     @Override
     public String getName(Attribute type) {
         String name = super.getName(type);
-        if (name.startsWith("generic_"))
+        if (name.startsWith("generic_")) {
             name = name.substring("generic_".length());
+        }
         return name;
     }
 }

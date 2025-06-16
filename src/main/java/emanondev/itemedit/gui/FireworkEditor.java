@@ -28,45 +28,51 @@ public class FireworkEditor implements Gui {
     private final ItemStack firework;
 
     public FireworkEditor(Player target, ItemStack item) {
-        if (item == null || !(item.getItemMeta() instanceof FireworkMeta))
+        if (item == null || !(item.getItemMeta() instanceof FireworkMeta)) {
             try {
                 item = new ItemStack(Material.FIREWORK_ROCKET);
             } catch (Exception e) {
                 item = new ItemStack(Material.valueOf("FIREWORK"));
             }
+        }
         this.firework = item.clone();
         this.meta = (FireworkMeta) ItemUtils.getMeta(firework);
         this.target = target;
         String title = getLanguageMessage(subPath + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
         for (int i = 0; i < 9; i++) {
-            if (i < meta.getEffects().size())
+            if (i < meta.getEffects().size()) {
                 effects.add(new FireworkEffectData(meta.getEffects().get(i)));
-            else
+            } else {
                 effects.add(new FireworkEffectData());
+            }
         }
     }
 
     private static List<DyeColor> translateToDyeColor(List<Color> colors) {
-        if (colors == null)
+        if (colors == null) {
             return null;
+        }
         List<DyeColor> list = new ArrayList<>();
         for (Color color : colors) {
             DyeColor col = DyeColor.getByFireworkColor(color);
-            if (col != null)
+            if (col != null) {
                 list.add(col);
+            }
         }
         return list;
     }
 
     private static List<Color> translateToColor(List<DyeColor> colors) {
-        if (colors == null)
+        if (colors == null) {
             return null;
+        }
         List<Color> list = new ArrayList<>();
         for (DyeColor color : colors) {
             Color col = color.getFireworkColor();
-            if (col != null)
+            if (col != null) {
                 list.add(col);
+            }
         }
         return list;
     }
@@ -88,43 +94,51 @@ public class FireworkEditor implements Gui {
 
     @Override
     public void onClick(InventoryClickEvent event) {
-        if (!event.getWhoClicked().equals(target))
+        if (!event.getWhoClicked().equals(target)) {
             return;
-        if (!inventory.equals(event.getClickedInventory()))
+        }
+        if (!inventory.equals(event.getClickedInventory())) {
             return;
-        if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR)
+        }
+        if (ItemUtils.isAirOrNull(event.getCurrentItem())) {
             return;
-        if (event.getClick() == ClickType.DOUBLE_CLICK)
+        }
+        if (event.getClick() == ClickType.DOUBLE_CLICK) {
             return;
+        }
         if (event.getSlot() < 9) {
             if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE
                     || (event.getClick() == ClickType.NUMBER_KEY && event.getHotbarButton() == 0)) {
                 effects.get(event.getSlot()).active = !effects.get(event.getSlot()).active;
             }
             if (event.isLeftClick()) {
-                if (event.getSlot() == 0)
+                if (event.getSlot() == 0) {
                     return;
+                }
                 effects.add(event.getSlot() - 1, effects.remove(event.getSlot()));
             } else if (event.isRightClick()) {
-                if (event.getSlot() == 8)
+                if (event.getSlot() == 8) {
                     return;
+                }
                 effects.add(event.getSlot() + 1, effects.remove(event.getSlot()));
             }
             updateInventory();
             return;
         }
         if (event.getSlot() < 45) {
-            if (!effects.get(event.getSlot() % 9).active)
+            if (!effects.get(event.getSlot() % 9).active) {
                 return;
+            }
             effects.get(event.getSlot() % 9).onClick(event.getSlot() / 9, event);
             updateInventory();
             return;
         }
         if (event.getSlot() == 47) {
-            if (event.isLeftClick())
+            if (event.isLeftClick()) {
                 meta.setPower((meta.getPower() + 1) % 6);
-            else
+            } else {
                 meta.setPower((meta.getPower() - 1 + 6) % 6);
+            }
             updateInventory();
             return;
         }
@@ -152,8 +166,9 @@ public class FireworkEditor implements Gui {
             this.getInventory().setItem(i + 18, effects.get(i).getColorsItem());
             this.getInventory().setItem(i + 27, effects.get(i).getFadeColorsItem());
             this.getInventory().setItem(i + 36, effects.get(i).getTrailFlickerItem());
-            if (effects.get(i).active && !effects.get(i).colors.isEmpty())
+            if (effects.get(i).active && !effects.get(i).colors.isEmpty()) {
                 meta.addEffect(effects.get(i).getEffect());
+            }
         }
         firework.setItemMeta(meta);
         this.getInventory().setItem(49, firework);
@@ -202,24 +217,29 @@ public class FireworkEditor implements Gui {
 
         private FireworkEffectData(FireworkEffect.Type type, List<DyeColor> colors, List<DyeColor> fadeColors,
                                    boolean flicker, boolean trail) {
-            if (type != null)
+            if (type != null) {
                 this.type = type;
-            else
+            } else {
                 this.type = FireworkEffect.Type.values()[(int) (Math.random() * FireworkEffect.Type.values().length)];
-            if (colors != null)
+            }
+            if (colors != null) {
                 this.colors.addAll(colors);
-            if (this.colors.isEmpty())
+            }
+            if (this.colors.isEmpty()) {
                 this.colors.add(DyeColor.values()[(int) (Math.random() * DyeColor.values().length)]);
-            if (fadeColors != null)
+            }
+            if (fadeColors != null) {
                 this.fadeColors.addAll(fadeColors);
+            }
             this.flicker = flicker;
             this.trail = trail;
         }
 
         @SuppressWarnings("deprecation")
         public ItemStack getTypeItem() {
-            if (!active)
+            if (!active) {
                 return null;
+            }
             ItemStack item;
             switch (type) {
                 case BALL:
@@ -262,14 +282,16 @@ public class FireworkEditor implements Gui {
         }
 
         public ItemStack getColorsItem() {
-            if (!active)
+            if (!active) {
                 return null;
+            }
             ItemStack item = Util.getDyeItemFromColor(!colors.isEmpty() ? DyeColor.LIGHT_BLUE : DyeColor.RED);
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             List<String> colorNames = new ArrayList<>();
-            for (DyeColor color : colors)
+            for (DyeColor color : colors) {
                 colorNames.add(Aliases.COLOR.getName(color));
+            }
             loadLanguageDescription(meta, subPath + "buttons.colors",
                     "%colors%", String.join("&b, &e", colorNames));
             item.setItemMeta(meta);
@@ -278,14 +300,16 @@ public class FireworkEditor implements Gui {
         }
 
         public ItemStack getFadeColorsItem() {
-            if (!active)
+            if (!active) {
                 return null;
+            }
             ItemStack item = Util.getDyeItemFromColor(DyeColor.BLUE);
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             List<String> colorNames = new ArrayList<>();
-            for (DyeColor color : fadeColors)
+            for (DyeColor color : fadeColors) {
                 colorNames.add(Aliases.COLOR.getName(color));
+            }
 
             loadLanguageDescription(meta, subPath + "buttons.fadecolors",
                     "%colors%", String.join("&b, &e", colorNames));
@@ -296,13 +320,15 @@ public class FireworkEditor implements Gui {
         }
 
         public ItemStack getTrailFlickerItem() {
-            if (!active)
+            if (!active) {
                 return null;
+            }
             ItemStack item = trail ? new ItemStack(Material.DIAMOND) : Util.getDyeItemFromColor(DyeColor.GRAY);
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
-            if (flicker)
+            if (flicker) {
                 meta.addEnchant(Enchantment.LURE, 1, true);
+            }
             loadLanguageDescription(meta, subPath + "buttons.flags.info",
                     "%status%",
                     getLanguageMessage(subPath + "buttons.flags."
@@ -333,11 +359,12 @@ public class FireworkEditor implements Gui {
         public void onClick(int line, InventoryClickEvent event) {
             switch (line) {
                 case 1: {// type
-                    if (event.isLeftClick())
+                    if (event.isLeftClick()) {
                         type = FireworkEffect.Type.values()[(type.ordinal() + 1) % FireworkEffect.Type.values().length];
-                    else
+                    } else {
                         type = FireworkEffect.Type.values()[(type.ordinal() - 1 + FireworkEffect.Type.values().length)
                                 % FireworkEffect.Type.values().length];
+                    }
                 }
                 return;
                 case 2: {// color
@@ -374,10 +401,12 @@ public class FireworkEditor implements Gui {
                 }
                 return;
                 case 4: {// flags
-                    if (event.isLeftClick())
+                    if (event.isLeftClick()) {
                         trail = !trail;
-                    if (event.isRightClick())
+                    }
+                    if (event.isRightClick()) {
                         flicker = !flicker;
+                    }
                 }
                 return;
             }

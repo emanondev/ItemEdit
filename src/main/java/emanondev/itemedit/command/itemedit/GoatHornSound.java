@@ -32,8 +32,9 @@ public class GoatHornSound extends SubCmd {
         }
 
         try {
-            if (args.length != 2)
+            if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
+            }
             MusicInstrumentMeta meta = (MusicInstrumentMeta) ItemUtils.getMeta(item);
             MusicInstrument type = Aliases.GOAT_HORN_SOUND.convertAlias(args[1]);
             if (type == null) {
@@ -51,8 +52,9 @@ public class GoatHornSound extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2)
+        if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.GOAT_HORN_SOUND);
+        }
         return Collections.emptyList();
     }
 }

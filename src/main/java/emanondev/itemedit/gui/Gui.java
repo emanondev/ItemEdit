@@ -110,8 +110,9 @@ public interface Gui extends InventoryHolder {
     default ItemStack loadLanguageDescription(@Nullable ItemStack item,
                                               @NotNull String fullPath,
                                               String... holders) {
-        if (item == null)
+        if (item == null) {
             return null;
+        }
         ItemMeta meta = item.getItemMeta();
         loadLanguageDescription(meta, fullPath, holders);
         item.setItemMeta(meta);
@@ -122,13 +123,15 @@ public interface Gui extends InventoryHolder {
     default ItemMeta loadLanguageDescription(@Nullable ItemMeta meta,
                                              @NotNull String fullPath,
                                              String... holders) {
-        if (meta == null)
+        if (meta == null) {
             return null;
+        }
         List<String> list = getPlugin().getLanguageConfig(getTargetPlayer()).loadMultiMessage(fullPath,
                 null, getTargetPlayer(), true, holders);
         meta.setDisplayName(list == null || list.isEmpty() ? " " : list.get(0));
-        if (list != null && !list.isEmpty())
+        if (list != null && !list.isEmpty()) {
             meta.setLore(list.subList(1, list.size()));
+        }
         return meta;
     }
 
@@ -152,8 +155,9 @@ public interface Gui extends InventoryHolder {
 
         item.setItemMeta(meta);
         int dur = config.loadInteger(path + ".durability", defDurability);
-        if (dur > 0)
+        if (dur > 0) {
             item.setDurability((short) dur);
+        }
         return item;
     }
 

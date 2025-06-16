@@ -19,9 +19,11 @@ public class EnchAliases extends AliasSet<Enchantment> {
     @Override
     public Collection<Enchantment> getValues() {
         HashSet<Enchantment> set = new HashSet<>();
-        for (Enchantment ench : Enchantment.values())
-            if (ench != null)
+        for (Enchantment ench : Enchantment.values()) {
+            if (ench != null) {
                 set.add(ench);
+            }
+        }
         return set;
     }
 }
