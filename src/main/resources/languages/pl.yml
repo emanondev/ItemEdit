@@ -149,10 +149,10 @@ itemedit:
       - ''
       - '&bDziała na zbrojach skórzanych, na serwerach 1.11+ działa również na'
       - '&bmiksturach i strzałach z efektem!'
-      - '&e<czerwony> <zielony> <niebieski> &bsą wartościami każdego koloru do połączenia'
+      - '&e[czerwony] [zielony] [niebieski] &bsą wartościami każdego koloru do połączenia'
       - '&bKażdy kolor to wartość całkowita między 0 a 255'
       - '&bJeśli jesteś zdezorientowany, poszukaj \"&eRGB color picker&b\" w Google'
-    params: '<czerwony> <zielony> <niebieski>'
+    params: '[czerwony] [zielony] [niebieski]'
   enchant:
     wrong-enchant: '&4[&cItemEdit&4] &cNieprawidłowa wartość czaru! &4[&6najedź tutaj&4]'
     description:

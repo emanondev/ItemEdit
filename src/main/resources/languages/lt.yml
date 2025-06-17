@@ -150,10 +150,10 @@ itemedit:
       - ''
       - '&bVeikia su odiniais šarvais ir fejerverkų žvaigždėmis, serveriuose'
       - '&b 1.11+ veikia su bet kokiais potionais ir užnuodytomis strėlėmis!'
-      - '&e<red (0-255)> <green (0-255)> <blue (0-255)> &byra kiekvienos spalvos kiekis, kurį reikia sujungti'
+      - '&e[red (0-255)] [green (0-255)] [blue (0-255)] &byra kiekvienos spalvos kiekis, kurį reikia sujungti'
       - '&bKiekviena spalva yra int reikšmė nuo 0 iki 255'
       - '&bJei nesuprantate, ieškokite „&eRGB color picker&b“'
-    params: "<red (0-255)> <green (0-255)> <blue (0-255)>"
+    params: "[red (0-255)] [green (0-255)] [blue (0-255)]"
   enchant:
     wrong-enchant: '&4[&cItemEdit&4] &cNeteisinga užkeikimo reikšmė! &4[&6hover here&4]'
     description:

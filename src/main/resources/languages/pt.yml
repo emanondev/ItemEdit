@@ -149,10 +149,10 @@ itemedit:
       - ''
       - '&bFunciona em armaduras de couro, em servidores 1.11+ funciona em'
       - '&bqualquer poção e flechas encantadas também!'
-      - '&e<vermelho> <verde> <azul> &bsão as quantidades de cada cor para combinar'
+      - '&e[vermelho] [verde] [azul] &bsão as quantidades de cada cor para combinar'
       - '&bCada cor é um valor int entre 0 e 255'
       - '&bSe você está confuso, pesquise "seletor de cor RGB"'
-    params: '<vermelho> <verde> <azul>'
+    params: '[vermelho] [verde] [azul]'
   enchant:
     wrong-enchant: '&4[&cItemEdit&4] &cValor de encantamento incorreto! &4[&6clique aqui&4]'
     description:

@@ -154,10 +154,10 @@ itemedit:
       - ''
       - "&bFonctionne sur les armures en cuir, sur les serveurs 1.11+, fonctionne aussi sur"
       - "&b n'importe quelle potion et flèche spéciale !"
-      - "&e<rouge> <vert> <bleu> &bsont les quantités de chaque couleur à combiner"
+      - "&e[rouge] [vert] [bleu] &bsont les quantités de chaque couleur à combiner"
       - "&bChaque couleur est une valeur entière entre 0 et 255"
       - "&bSi vous êtes confus, cherchez \"&eSélecteur de couleurs RVB&b\" sur Google"
-    params: '<rouge> <vert> <bleu>'
+    params: '[rouge] [vert] [bleu]'
   enchant:
     wrong-enchant: '&4[&cItemEdit&4] &cMauvaise valeur d''enchantement ! &4[&6survoler ici&4]'
     description:

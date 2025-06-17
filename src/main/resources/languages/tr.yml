@@ -149,10 +149,10 @@ itemedit:
       - ''
       - '&bDeri zırh ve havai fişek yıldızlarında çalışır, sunucularda'
       - '&b 1.11+ sürümünde herhangi bir İksir ve Boyanmış oklar üzerinde de çalışır!'
-      - '&e<kırmızı (0-255)> <yeşil (0-255)> <mavi (0-255)> &bher rengin birleşimi için miktar'
+      - '&e[kırmızı (0-255)] [yeşil (0-255)] [mavi (0-255)] &bher rengin birleşimi için miktar'
       - '&bHer renk 0 ile 255 arasında bir tam sayı değeridir'
       - '&bKararsızsanız, "&eRGB renk seçici&b" yazıp aratın'
-    params: '<kırmızı (0-255)> <yeşil (0-255)> <mavi (0-255)>'
+    params: '[kırmızı (0-255)] [yeşil (0-255)] [mavi (0-255)]'
   enchant:
     wrong-enchant: '&4[&cItemEdit&4] &cHatalı Büyü Değeri! &4[&6buraya tıklayın&4]'
     description:

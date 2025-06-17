@@ -149,10 +149,10 @@ itemedit:
       - ''
       - '&bFunziona su armature in pelle, nei server 1.11+ funziona'
       - '&b anche su pozioni e frecce imbevute!'
-      - '&e<rosso> <verde> <blu> &bla quantità di ogni colore da combinare'
+      - '&e[rosso] [verde] [blu] &bla quantità di ogni colore da combinare'
       - '&bOgni colore è un numero fra 0 e 255'
       - '&bSe sei confuso googla \"&eRGB color picker&b\"'
-    params: '<rosso> <verde> <blu>'
+    params: '[rosso] [verde] [blu]'
   enchant:
     wrong-enchant: '&4[&cItemEdit&4] &cValore dell''incanto errato! &4[&6Passa il cursore qui&4]'
     description:

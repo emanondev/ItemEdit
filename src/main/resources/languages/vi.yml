@@ -149,10 +149,10 @@ itemedit:
       - ''
       - '&bHoạt động trên áo giáp da và sao pháo hoa, trên các máy chủ'
       - '&b 1.11+ cũng hoạt động trên bất kỳ loại thuốc và mũi tên có pha thuốc!'
-      - '&e<đỏ (0-255)> <xanh lá cây (0-255)> <xanh dương (0-255)> &blà lượng của mỗi màu cần kết hợp'
+      - '&e[đỏ (0-255)] [xanh lá cây (0-255)] [xanh dương (0-255)] &blà lượng của mỗi màu cần kết hợp'
       - '&bMỗi màu là một giá trị số nguyên giữa 0 và 255'
       - '&bNếu bạn bối rối, hãy google "&eRGB color picker&b"'
-    params: '<đỏ (0-255)> <xanh lá cây (0-255)> <xanh dương (0-255)>'
+    params: '[đỏ (0-255)] [xanh lá cây (0-255)] [xanh dương (0-255)]'
   enchant:
     wrong-enchant: '&4[&cItemEdit&4] &cGiá trị Phù phép không hợp lệ! &4[&6di chuột ở đây&4]'
     description:

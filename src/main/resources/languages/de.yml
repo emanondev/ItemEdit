@@ -148,10 +148,10 @@ itemedit:
       - ''
       - '&bFunktioniert bei Leder-Rüstung und ab Servers 1.11 bei'
       - '&ballen Tränken und gefärbten Pfeilen!'
-      - '&e<rot> <grün> <blau> &bsind die Anteile jeder Farbe, die kombiniert werden sollen'
+      - '&e[rot] [grün] [blau] &bsind die Anteile jeder Farbe, die kombiniert werden sollen'
       - '&bJede Farbe ist ein Integer-Wert zwischen 0 und 255'
       - '&bWenn du unsicher bist, google "RGB-Farbwähler"'
-    params: '<rot> <grün> <blau>'
+    params: '[rot] [grün] [blau]'
   enchant:
     wrong-enchant: '&4[&cItemEdit&4] &cUngültiger Verzauberungswert! &4[&6Hier hovern&4]'
     description:
