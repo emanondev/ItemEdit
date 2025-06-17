@@ -11,7 +11,7 @@ public final class VersionUtils {
     private static final String[] VERSION_PARTS = safeSplitVersion();
 
     /**
-     * The main version of the game (e.g., the first number in the version string).
+     * The major version of the game (e.g., the first number in the version string).
      */
     public static final int GAME_MAIN_VERSION = Integer.parseInt(VERSION_PARTS[0]);
 
@@ -21,7 +21,7 @@ public final class VersionUtils {
     public static final int GAME_VERSION = Integer.parseInt(VERSION_PARTS[1]);
 
     /**
-     * The sub-version of the game, or 0 if the version string has fewer than three parts.
+     * The patch version of the game, or 0 if the version string has fewer than three parts.
      */
     public static final int GAME_SUB_VERSION = VERSION_PARTS.length < 3 ? 0 : Integer.parseInt(VERSION_PARTS[2]);
 
@@ -77,103 +77,103 @@ public final class VersionUtils {
      * Checks if the current version is up to (or equal to) the specified version.
      * Inclusive comparison.
      *
-     * @param mainVersion the main version (e.g., 1 in 1.9.4).
-     * @param version     the minor version (e.g., 9 in 1.9.4).
+     * @param major the main version (e.g., 1 in 1.9.4).
+     * @param minor     the minor version (e.g., 9 in 1.9.4).
      * @return true if the current version is up to the specified version.
      */
-    public static boolean isVersionUpTo(int mainVersion,
-                                        int version) {
-        return isVersionUpTo(mainVersion, version, 99);
+    public static boolean isVersionUpTo(int major,
+                                        int minor) {
+        return isVersionUpTo(major, minor, 99);
     }
 
     /**
      * Checks if the current version is up to (or equal to) the specified version.
      * Inclusive comparison.
      *
-     * @param mainVersion the main version.
-     * @param version     the minor version.
-     * @param subVersion  the sub version.
+     * @param major the main version.
+     * @param minor     the minor version.
+     * @param patch  the sub version.
      * @return true if the current version is up to the specified version.
      */
-    public static boolean isVersionUpTo(int mainVersion,
-                                        int version,
-                                        int subVersion) {
-        if (GAME_MAIN_VERSION > mainVersion) return false;
-        if (GAME_MAIN_VERSION < mainVersion) return true;
-        if (GAME_VERSION > version) return false;
-        if (GAME_VERSION < version) return true;
-        return GAME_SUB_VERSION <= subVersion;
+    public static boolean isVersionUpTo(int major,
+                                        int minor,
+                                        int patch) {
+        if (GAME_MAIN_VERSION > major) return false;
+        if (GAME_MAIN_VERSION < major) return true;
+        if (GAME_VERSION > minor) return false;
+        if (GAME_VERSION < minor) return true;
+        return GAME_SUB_VERSION <= patch;
     }
 
     /**
      * Checks if the current version is after (or equal to) the specified version.
      * Inclusive comparison.
      *
-     * @param mainVersion the main version.
-     * @param version     the minor version.
+     * @param major the main version.
+     * @param minor     the minor version.
      * @return true if the current version is after the specified version.
      */
-    public static boolean isVersionAfter(int mainVersion,
-                                         int version) {
-        return isVersionAfter(mainVersion, version, 0);
+    public static boolean isVersionAfter(int major,
+                                         int minor) {
+        return isVersionAfter(major, minor, 0);
     }
 
     /**
      * Checks if the current version is after (or equal to) the specified version.
      * Inclusive comparison.
      *
-     * @param mainVersion the main version.
-     * @param version     the minor version.
-     * @param subVersion  the sub version.
+     * @param major the main version.
+     * @param minor     the minor version.
+     * @param patch  the sub version.
      * @return true if the current version is after the specified version.
      */
-    public static boolean isVersionAfter(int mainVersion,
-                                         int version,
-                                         int subVersion) {
-        if (GAME_MAIN_VERSION < mainVersion) return false;
-        if (GAME_MAIN_VERSION > mainVersion) return true;
-        if (GAME_VERSION < version) return false;
-        if (GAME_VERSION > version) return true;
-        return GAME_SUB_VERSION >= subVersion;
+    public static boolean isVersionAfter(int major,
+                                         int minor,
+                                         int patch) {
+        if (GAME_MAIN_VERSION < major) return false;
+        if (GAME_MAIN_VERSION > major) return true;
+        if (GAME_VERSION < minor) return false;
+        if (GAME_VERSION > minor) return true;
+        return GAME_SUB_VERSION >= patch;
     }
 
     /**
      * Checks if the current version is within the specified range.
      * Inclusive comparison.
      *
-     * @param mainVersionMin the minimum main version.
-     * @param versionMin     the minimum minor version.
-     * @param mainVersionMax the maximum main version.
-     * @param versionMax     the maximum minor version.
+     * @param majorMin the minimum main version.
+     * @param minorMin     the minimum minor version.
+     * @param majorMax the maximum main version.
+     * @param minorMax     the maximum minor version.
      * @return true if the current version is within the range.
      */
-    public static boolean isVersionInRange(int mainVersionMin,
-                                           int versionMin,
-                                           int mainVersionMax,
-                                           int versionMax) {
-        return isVersionInRange(mainVersionMin, versionMin, 0, mainVersionMax, versionMax, 99);
+    public static boolean isVersionInRange(int majorMin,
+                                           int minorMin,
+                                           int majorMax,
+                                           int minorMax) {
+        return isVersionInRange(majorMin, minorMin, 0, majorMax, minorMax, 99);
     }
 
     /**
      * Checks if the current version is within the specified range.
      * Inclusive comparison.
      *
-     * @param mainVersionMin the minimum main version.
-     * @param versionMin     the minimum minor version.
-     * @param subVersionMin  the minimum sub version.
-     * @param mainVersionMax the maximum main version.
-     * @param versionMax     the maximum minor version.
-     * @param subVersionMax  the maximum sub version.
+     * @param majorMin the minimum main version.
+     * @param minorMin     the minimum minor version.
+     * @param patchMin  the minimum sub version.
+     * @param majorMax the maximum main version.
+     * @param minorMax     the maximum minor version.
+     * @param patchMax  the maximum sub version.
      * @return true if the current version is within the range.
      */
-    public static boolean isVersionInRange(int mainVersionMin,
-                                           int versionMin,
-                                           int subVersionMin,
-                                           int mainVersionMax,
-                                           int versionMax,
-                                           int subVersionMax) {
-        return isVersionAfter(mainVersionMin, versionMin, subVersionMin) &&
-                isVersionUpTo(mainVersionMax, versionMax, subVersionMax);
+    public static boolean isVersionInRange(int majorMin,
+                                           int minorMin,
+                                           int patchMin,
+                                           int majorMax,
+                                           int minorMax,
+                                           int patchMax) {
+        return isVersionAfter(majorMin, minorMin, patchMin) &&
+                isVersionUpTo(majorMax, minorMax, patchMax);
     }
 
     /**
