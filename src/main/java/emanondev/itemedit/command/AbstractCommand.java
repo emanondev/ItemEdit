@@ -5,6 +5,7 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemUtils;
+import lombok.Getter;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -22,20 +23,36 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Supplier;
 
 public abstract class AbstractCommand implements TabExecutor {
 
     private final String PATH;
+    @Getter
     private final String name;
+    @Getter
     private final APlugin plugin;
     private final YMLConfig config;
     private final List<SubCmd> subCmds = new ArrayList<>();
     private final HelpSubCommand helpSubCommand;
 
+    /**
+     * Creates an AbstractCommand with help support disabled.
+     *
+     * @param name   command name (used as label)
+     * @param plugin plugin instance
+     */
     public AbstractCommand(@NotNull String name, @NotNull APlugin plugin) {
         this(name, plugin, false);
     }
 
+    /**
+     * Creates an AbstractCommand with an optional paginated help system.
+     *
+     * @param name         command name (used as label)
+     * @param plugin       plugin instance
+     * @param multiPageHelp whether to enable multi-page help system
+     */
     public AbstractCommand(@NotNull String name, @NotNull APlugin plugin, boolean multiPageHelp) {
         this.name = name.toLowerCase(Locale.ENGLISH);
         this.plugin = plugin;
@@ -48,14 +65,9 @@ public abstract class AbstractCommand implements TabExecutor {
         }
     }
 
-    public final @NotNull String getName() {
-        return name;
-    }
-
-    public final @NotNull APlugin getPlugin() {
-        return plugin;
-    }
-
+    /**
+     * Reloads the command's configuration and all registered sub-commands.
+     */
     public void reload() {
         config.reload();
         for (SubCmd sub : subCmds) {
@@ -66,6 +78,12 @@ public abstract class AbstractCommand implements TabExecutor {
         }
     }
 
+    /**
+     * Returns sub-commands available to a specific sender based on permission.
+     *
+     * @param sender The command sender
+     * @return A list of sub-commands the sender has permission to use
+     */
     public @NotNull List<SubCmd> getAllowedSubCommands(@NotNull CommandSender sender) {
         List<SubCmd> list = new ArrayList<>();
         subCmds.forEach(sub -> {
@@ -78,9 +96,47 @@ public abstract class AbstractCommand implements TabExecutor {
         }
         return list;
     }
-
+    /**
+     * Registers a sub-command.
+     *
+     * @param sub the sub-command to register
+     */
     public void registerSubCommand(@NotNull SubCmd sub) {
         subCmds.add(sub);
+    }
+
+    /**
+     * Registers a sub-command from a supplier.
+     * Catches and logs exceptions thrown by the supplier.
+     *
+     * @param sub the supplier of a sub-command
+     * @return true if registration was successful
+     */
+    public boolean registerSubCommand(@NotNull Supplier<SubCmd> sub) {
+        try {
+            SubCmd subCommand = sub.get();
+            if (subCommand != null) {
+                subCmds.add(subCommand);
+                return true;
+            }
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Registers a sub-command conditionally.
+     *
+     * @param sub      the supplier of a sub-command
+     * @param condition if true, the command will be registered
+     * @return true if the command was registered
+     */
+    public boolean registerSubCommand(@NotNull Supplier<SubCmd> sub, boolean condition) {
+        if (!condition) {
+            return false;
+        }
+        return registerSubCommand(sub);
     }
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
