@@ -116,7 +116,7 @@ public class PotionEffectEditor extends SubCmd {
                 return Collections.emptyList();
             case 4:
                 if (args[1].equalsIgnoreCase("add")) {
-                    return CompleteUtility.complete(args[3], "infinite", "0", "90", "180", "480");
+                    return CompleteUtility.complete(args[3], "infinite", "instant", "1", "90", "180", "480");
                 }
                 return Collections.emptyList();
             case 5:

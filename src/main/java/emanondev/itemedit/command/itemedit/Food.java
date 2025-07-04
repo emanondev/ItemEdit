@@ -720,7 +720,7 @@ public class Food extends SubCmd {
             case 4:
                 switch (args[1].toLowerCase(Locale.ENGLISH)) {
                     case "addeffect":
-                        return CompleteUtility.complete(args[3], "infinite", "0", "90", "180", "480");
+                        return CompleteUtility.complete(args[3], "infinite", "instant", "1", "90", "180", "480");
                     case "removeeffect":
                         return CompleteUtility.complete(args[3], "1", "2", "3", "4", "5");
                     case "convertto":
