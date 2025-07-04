@@ -1,5 +1,6 @@
 package emanondev.itemedit;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import emanondev.itemedit.utility.SchedulerUtils;
 import org.jetbrains.annotations.NotNull;
@@ -82,12 +83,23 @@ public class UpdateChecker {
         URL checkURL = new URL("https://api.modrinth.com/v2/project/" + plugin.getPluginAdditionalInfo().getModrinthProjectId() + "/version");
         URLConnection con = checkURL.openConnection();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
-            newVersion = JsonParser.parseString(reader.readLine())
-                    .getAsJsonArray()
-                    .get(0)
-                    .getAsJsonObject()
-                    .get("version_number")
-                    .getAsString();
+            String json  = reader.readLine();
+            try {
+                newVersion = JsonParser.parseString(json)
+                        .getAsJsonArray()
+                        .get(0)
+                        .getAsJsonObject()
+                        .get("version_number")
+                        .getAsString();
+            }catch (NoSuchMethodError e){
+                JsonElement element = new JsonParser().parse(json); // Compatible with old Gson
+                newVersion = element
+                        .getAsJsonArray()
+                        .get(0)
+                        .getAsJsonObject()
+                        .get("version_number")
+                        .getAsString();
+            }
         }
         return true;
     }
