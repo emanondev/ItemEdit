@@ -235,20 +235,10 @@ public final class ItemUtils {
         if (VersionUtils.isVersionUpTo(1, 12, 99)) {
             return true; //limited support
         }
-        if (VersionUtils.isVersionUpTo(1, 20, 5)) {
-            return material.isItem(); //heavy legacy code loading
+        if (material.name().startsWith("LEGACY_")) {
+            return false;
         }
-        if (VersionUtils.isVersionUpTo(1, 21, 3)) {
-            return Registry.ITEM.get(material.getKey()) != null;
-        }
-        try {
-            NamespacedKey key = material.getKeyOrNull();
-            return key != null && Registry.ITEM.get(key) != null;
-        } catch (Throwable t) {
-            //unstable api may break
-            t.printStackTrace();
-            return true;
-        }
+        return material.isItem();
     }
 
 
