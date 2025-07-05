@@ -17,13 +17,8 @@ public final class UtilLegacy {
     public static int readPotionEffectDurationSecondsToTicks(@NotNull String value) {
         double durationSecs = readPotionDurationSeconds(value);
 
-        // Zero should be 1 tick.
-        if(durationSecs == 0) {
-            return 1;
-        }
-
         // Seconds to ticks : *20
-        if(durationSecs > 0) {
+        if(durationSecs >= 0) {
             return (int) (durationSecs * 20);
         }
 

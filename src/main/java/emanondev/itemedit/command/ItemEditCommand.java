@@ -37,8 +37,7 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new SkullOwner(this));
         this.registerSubCommand(() -> new FireworkPower(this));
         this.registerSubCommand(() -> new Firework(this));
-        this.registerSubCommand(() -> VersionUtils.isVersionUpTo(1, 14) ?
-                new PotionEffectEditorOld(this) : new PotionEffectEditor(this)); // 1.15+ adds suspicious stew
+        this.registerSubCommand(() -> new PotionEffectEditor(this)); // 1.15+ adds suspicious stew
 
         this.registerSubCommand(() -> new BookAuthor(this));
         this.registerSubCommand(() -> new BookType(this), VersionUtils.isVersionAfter(1, 10));
