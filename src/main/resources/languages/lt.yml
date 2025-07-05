@@ -202,7 +202,7 @@ itemedit:
         - '&b&lPridėti/Pakeisti pasirinktą efektą'
         - ''
         - '&e<effect> &befekto tipas'
-        - '&e<duration> &btrukmė sekundėmis, &e0 &bskirta momentiniams efektams'
+        - '&e<duration> &btrukmė sekundėmis'
         - '&e[level] &bIki 127, pagal numatytuosius nustatymus &e1'
     remove:
       params: '<effect>'

@@ -199,7 +199,7 @@ itemedit:
         - '&6&lThêm/Ghi đè hiệu ứng đã chọn'
         - ''
         - '&e<effect> &bloại hiệu ứng'
-        - '&e<duration> &bthời gian tính bằng giây, &e0 &bcho hiệu ứng tức thời'
+        - '&e<duration> &bthời gian tính bằng giây'
         - '&e[level] &blên đến 127, mặc định là &e1'
         - '&e[particles] &bCó hiển thị hạt không? &etrue&b/&efalse'
         - '&e[ambient] &bHạt có gắn cờ môi trường không? &etrue&b/&efalse'

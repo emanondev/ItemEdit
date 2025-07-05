@@ -199,7 +199,7 @@ itemedit:
         - '&b&lAggiunge/Sovrascrive l''effetto selezionato'
         - ''
         - '&e<effetto> &btipo dell''effetto'
-        - '&e<durata> &bdurata in secondi, &e0 &bper effetti istantanei'
+        - '&e<durata> &bdurata in secondi'
         - '&e[lv] &bFino a 127, per default &e1'
         - '&e[particelle] &bDovrebbero mostrare le particelle? &etrue&b/&efalse'
         - '&e[ambientale] &bLe particelle dovrebbero avere la flag ambientale? &etrue&b/&efalse'

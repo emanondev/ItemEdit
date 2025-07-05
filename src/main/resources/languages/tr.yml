@@ -199,7 +199,7 @@ itemedit:
         - '&6&lSeçilen etkiyi ekle veya üzerine yaz'
         - ''
         - '&e<effect> &betki türü'
-        - '&e<duration> &bsaniye cinsinden süre, &e0 &banlık etkiler için'
+        - '&e<duration> &bsaniye cinsinden süre'
         - '&e[level] &b127''ye kadar, varsayılan olarak &e1'
         - '&e[particles] &bParçacıklar görünsün mü? &etrue&b/&efalse'
         - '&e[ambient] &bParçacıklar çevresel bayrak taşısın mı? &etrue&b/&efalse'

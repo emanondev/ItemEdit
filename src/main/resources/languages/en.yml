@@ -199,7 +199,7 @@ itemedit:
         - '&6&lAdds/Override selected effect'
         - ''
         - '&e<effect> &beffect type'
-        - '&e<duration> &bduration in seconds, &e0 &bfor instant effects'
+        - '&e<duration> &bduration in seconds'
         - '&e[level] &bUp to 127, by default &e1'
         - '&e[particles] &bShould show particles? &etrue&b/&efalse'
         - '&e[ambient] &bParticles should have ambient flag? &etrue&b/&efalse'

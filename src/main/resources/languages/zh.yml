@@ -195,7 +195,7 @@ itemedit:
         - '&b&l添加/覆盖所选效果'
         - ''
         - '&e<effect> &b效果类型'
-        - '&e<duration> &b持续时间（秒），&e0 &b表示即时效果'
+        - '&e<duration> &b持续时间（秒'
         - '&e[level] &b最高为127，默认为&e1'
         - '&e[粒子] &b是否显示粒子？ &etrue&b/&efalse'
         - '&e[环境] &b粒子应有环境标志？ &etrue&b/&efalse'

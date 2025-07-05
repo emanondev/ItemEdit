@@ -204,7 +204,7 @@ itemedit:
         - '&b&lAjoute/remplace l''effet sélectionné'
         - ''
         - "&e<effet> &btype d'effet"
-        - '&e<durée> &bdurée en secondes, &e0 &bpour les effets instantanés'
+        - '&e<durée> &bdurée en secondes'
         - '&e[niveau] &bJusqu''à 127, par défaut &e1'
         - '&e[particules] &bAfficher les particules? &etrue&b/&efalse'
         - '&e[ambiant] &bLes particules doivent-elles avoir le drapeau ambiant? &etrue&b/&efalse'
