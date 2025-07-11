@@ -111,7 +111,7 @@ potion_effect:
   jump: jump_boost
   confusion: confusion
   regeneration: regeneration
-  damage_resistance: damage_resistance
+  damage_resistance: resistance
   fire_resistance: fire_resistance
   water_breathing: water_breathing
   invisibility: invisibility
