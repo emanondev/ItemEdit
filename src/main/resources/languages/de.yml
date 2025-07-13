@@ -603,6 +603,114 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&bund <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  equipment:
+    wrong-boolean: '&4[&cItemEdit&4] &cUngültiger Boolean-Wert! &4[&6hier hovern&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cUngültiger Sound-Wert! &4[&6hier hovern&4]'
+    wrong-slot: '&4[&cItemEdit&4] &cUngültiger Ausrüstungswert! &4[&6hier hovern&4]'
+    wrong-entitytype: '&4[&cItemEdit&4] &cUngültiger EntityType-Wert! &4[&6hier hovern&4]'
+    wrong-entitygroup: '&4[&cItemEdit&4] &cUngültiger EntityGroup-Wert! &4[&6hier hovern&4]'
+    description:
+      - '&6&lSetzt die Ausrüstungseigenschaft des Items'
+      - ''
+      - '&bTipp: /ie equipment für weitere Infos'
+    params: '<slot/...>'
+    help-header: '&9&lItemEdit Ausrüstung – Hilfe'
+    slot:
+      description:
+        - '&6&lSetzt den Ausrüstungs-Slot'
+        - ''
+        - '&e<slot> &bin welchem Slot das Item getragen wird'
+      params: "<slot>"
+      feedback: "&aAusrüstungs-Slot ist jetzt &e%value%"
+    swappable:
+      description:
+        - '&6&lMacht das Item tauschbar'
+        - ''
+        - '&e[true/false] &btrue macht das Item tauschbar'
+      params: "[true/false]"
+      feedback: "&aTauschbarkeit ist jetzt &e%value%"
+    allowedentities:
+      invalid-type: '&4[&cItemEdit&4] &cDer Wert &6%value% &cist weder gültige Entität noch Gruppe'
+      description:
+        - '&6&lSetzt erlaubte Entitätstypen für diese Ausrüstung'
+        - ''
+        - '&e[entity] &bwelcher Entitätstyp'
+        - '&e[group] &bwelche Entitätsgruppe'
+        - ''
+        - '&bAlle ausgewählten Typen werden hinzugefügt'
+      params: "[entity/group] [entity/group] ..."
+      feedback: "&aErlaubte Entitäten: &e%value%"
+      feedback-reset: "&aErlaubte Entitäten wurden zurückgesetzt"
+    equipsound:
+      description:
+        - '&6&lSetzt Sound beim Ausrüsten'
+        - ''
+        - '&e[sound] &bwelcher Sound wiedergegeben wird'
+      params: "[sound]"
+      feedback: "&aAusrüstungs-Sound ist jetzt &e%value%"
+      feedback-reset: "&aAusrüstungs-Sound auf Standard zurückgesetzt"
+    equiponinteract:
+      description:
+        - '&6&lRüstet beim Interagieren aus'
+        - ''
+        - '&e[true/false] &btrue rüstet beim Interagieren aus'
+      params: "[true/false]"
+      feedback: "&aAusrüstung bei Interaktion ist jetzt &e%value%"
+    shearsound:
+      description:
+        - '&6&lSetzt Sound beim Entfernen mit Schere'
+        - ''
+        - '&e[sound] &bwelcher Sound abgespielt wird'
+        - '&bwenn z. B. Kürbis oder Schneemann geschoren'
+      params: "[sound]"
+      feedback: "&aScheren-Sound ist jetzt &e%value%"
+      feedback-reset: "&aScheren-Sound auf Standard zurückgesetzt"
+    canshear:
+      unsupported-version: '&4[&cItemEdit&4] &cDeine Server-Version (&6%value%&c) unterstützt dieses Feature nicht'
+      description:
+        - '&6&lErlaubt Entfernen per Schere'
+        - ''
+        - '&e[true/false] &btrue erlaubt Schneiden der Ausrüstung'
+        - '&bwenn man auf z. B. Kürbis oder Schneemann klickt'
+      params: "[true/false]"
+      feedback: "&aSchneidbarkeit ist jetzt &e%value%"
+    dispensable:
+      description:
+        - '&6&lErmöglicht Ausrüstung per Dispenser'
+        - ''
+        - '&e[true/false] &btrue erlaubt Ausrüstung via Dispenser'
+      params: "[true/false]"
+      feedback: "&aDispenser-Funktion ist jetzt &e%value%"
+    damageonhurt:
+      description:
+        - '&6&lMacht das Item zerstörbar'
+        - ''
+        - '&e[true/false] &btrue reduziert Haltbarkeit bei Schaden'
+        - ''
+        - '&bHinweis: nur Items mit Stack‑Size 1 können Schaden nehmen'
+        - '&bnutze &e/ie maxstacksize 1'
+        - '&bTipp: Setze maximale Haltbarkeit mit'
+        - '  &e/ie maxdurability <amount>'
+      params: "[true/false]"
+      feedback: "&aBeschädigungs-Funktion ist jetzt &e%value%"
+      warning-maxstacksize: '&4[&cItemEdit&4] &cItem‑Stackgröße muss &61 sein, damit es beschädigt werden kann &4[&6klicke zum Reparieren&4]'
+    cameraoverlay:
+      description:
+        - '&6&lSetzt Kamera‑Overlay'
+        - ''
+        - '&e[namespacedkey] &bwelches Overlay verwendet wird'
+        - '&bOverlays in Resource‑Packs gesetzt, Standard: minecraft:misc/pumpkinblur'
+      params: "[namespacedkey]"
+      feedback: "&aKamera‑Overlay aktualisiert"
+      feedback-reset: "&aKamera‑Overlay entfernt"
+      invalid-namespacedkey: "&cNamespacedkey &6%value% &cist ungültig"
+    clear:
+      description:
+        - '&6&lEntfernt alle Ausrüstungseigenschaften komplett'
+        - ''
+        - '&bOder stellt Standard wieder her, falls Vanilla‑Item'
+      params: ""
+      feedback: "&aAusrüstungseigenschaften auf Standard zurückgesetzt"
 serveritem:
   help-header: '&9&lServerItem - Hilfe'
   give:

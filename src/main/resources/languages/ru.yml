@@ -600,6 +600,114 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&bи <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  equipment:
+    wrong-boolean: '&4[&cItemEdit&4] &cНеверное булево значение! &4[&6наведите сюда&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cНеверное значение звука! &4[&6наведите сюда&4]'
+    wrong-slot: '&4[&cItemEdit&4] &cНеверное значение экипировки! &4[&6наведите сюда&4]'
+    wrong-entitytype: '&4[&cItemEdit&4] &cНеверный тип сущности! &4[&6наведите сюда&4]'
+    wrong-entitygroup: '&4[&cItemEdit&4] &cНеверная группа сущностей! &4[&6наведите сюда&4]'
+    description:
+      - '&6&lУстанавливает свойства экипировки предмета'
+      - ''
+      - '&bПодсказка: введите &e/ie equipment&b для получения информации'
+    params: '<слот/...>'
+    help-header: '&9&lItemEdit Экипировка - Помощь'
+    slot:
+      description:
+        - '&6&lУстанавливает слот для экипировки'
+        - ''
+        - '&e<слот> &bкуда может быть надет предмет'
+      params: "<слот>"
+      feedback: "&aСлот экипировки теперь &e%value%"
+    swappable:
+      description:
+        - '&6&lДелает предмет заменяемым'
+        - ''
+        - '&e[true/false] &btrue — предмет можно менять местами'
+      params: "[true/false]"
+      feedback: "&aСвойство заменяемости теперь &e%value%"
+    allowedentities:
+      invalid-type: '&4[&cItemEdit&4] &cЗначение &6%value% &cне является допустимой сущностью или группой'
+      description:
+        - '&6&lУстанавливает сущности, которые могут носить экипировку'
+        - ''
+        - '&e[сущность] &bкакой тип сущности'
+        - '&e[группа] &bкакая группа сущностей'
+        - ''
+        - '&bВсе выбранные типы будут добавлены'
+      params: "[сущность/группа] [сущность/группа] ..."
+      feedback: "&aДопустимые сущности: &e%value%"
+      feedback-reset: "&aДопустимые сущности были сброшены"
+    equipsound:
+      description:
+        - '&6&lУстанавливает звук при экипировке'
+        - ''
+        - '&e[звук] &bкакой звук должен воспроизводиться'
+      params: "[звук]"
+      feedback: "&aЗвук экипировки теперь &e%value%"
+      feedback-reset: "&aЗвук экипировки сброшен по умолчанию"
+    equiponinteract:
+      description:
+        - '&6&lЭкипировка при взаимодействии'
+        - ''
+        - '&e[true/false] &btrue — экипировать при взаимодействии'
+      params: "[true/false]"
+      feedback: "&aСвойство экипировки при взаимодействии теперь &e%value%"
+    shearsound:
+      description:
+        - '&6&lУстанавливает звук при снятии ножницами'
+        - ''
+        - '&e[звук] &bкакой звук должен воспроизводиться'
+        - '&bнапример, при снятии тыквы или с снеговика'
+      params: "[звук]"
+      feedback: "&aЗвук ножниц теперь &e%value%"
+      feedback-reset: "&aЗвук ножниц сброшен по умолчанию"
+    canshear:
+      unsupported-version: '&4[&cItemEdit&4] &cВерсия сервера (&6%value%&c) не поддерживает эту функцию'
+      description:
+        - '&6&lРазрешает снятие экипировки ножницами'
+        - ''
+        - '&e[true/false] &btrue — позволяет снять экипировку'
+        - '&bс сущностей, например с тыквы или снеговика'
+      params: "[true/false]"
+      feedback: "&aСвойство снятия ножницами теперь &e%value%"
+    dispensable:
+      description:
+        - '&6&lРазрешает надевание через раздатчик'
+        - ''
+        - '&e[true/false] &btrue — надевание через раздатчик'
+      params: "[true/false]"
+      feedback: "&aСвойство раздатчика теперь &e%value%"
+    damageonhurt:
+      description:
+        - '&6&lДелает предмет повреждаемым'
+        - ''
+        - '&e[true/false] &btrue — прочность будет снижаться при уроне'
+        - ''
+        - '&bВнимание: только предметы с максимальным стеком 1 могут быть повреждены'
+        - '&b  используйте &e/ie maxstacksize 1'
+        - '&bПодсказка: не забудьте установить максимальную прочность предмета:'
+        - '  &e/ie maxdurability <значение>'
+      params: "[true/false]"
+      feedback: "&aСвойство повреждения теперь &e%value%"
+      warning-maxstacksize: '&4[&cItemEdit&4] &cМаксимальный стек предмета должен быть &61 &cдля получения урона &4[&6нажмите для исправления&4]'
+    cameraoverlay:
+      description:
+        - '&6&lУстанавливает наложение камеры'
+        - ''
+        - '&e[namespacedkey] &bкакое наложение использовать'
+        - '&bНаложения задаются в текстурпаках, стандартное — minecraft:misc/pumpkinblur'
+      params: "[namespacedkey]"
+      feedback: "&aНаложение камеры обновлено"
+      feedback-reset: "&aНаложение камеры удалено"
+      invalid-namespacedkey: "&cNamespacedkey &6%value% &c недействителен"
+    clear:
+      description:
+        - '&6&lПолностью удалить свойства экипировки'
+        - ''
+        - '&bИли восстановить по умолчанию, если это ванильная экипировка'
+      params: ""
+      feedback: "&aСвойства экипировки сброшены по умолчанию"
 serveritem:
   help-header: '&9&lServerItem - Помощь'
   give:

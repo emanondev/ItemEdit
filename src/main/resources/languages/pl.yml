@@ -604,6 +604,113 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&boraz <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  equipment:
+    wrong-boolean: '&4[&cItemEdit&4] &cNieprawidłowa wartość logiczna! &4[&6najedź tutaj&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cNieprawidłowa wartość dźwięku! &4[&6najedź tutaj&4]'
+    wrong-slot: '&4[&cItemEdit&4] &cNieprawidłowa wartość wyposażenia! &4[&6najedź tutaj&4]'
+    wrong-entitytype: '&4[&cItemEdit&4] &cNieprawidłowy typ bytu! &4[&6najedź tutaj&4]'
+    wrong-entitygroup: '&4[&cItemEdit&4] &cNieprawidłowa grupa bytów! &4[&6najedź tutaj&4]'
+    description:
+      - '&6&lUstawia właściwość wyposażenia przedmiotu'
+      - ''
+      - '&bWskazówka: wpisz &e/ie equipment&b po więcej info'
+    params: '<slot/...>'
+    help-header: '&9&lPomoc ItemEdit Equipment'
+    slot:
+      description:
+        - '&6&lUstawia dostępny slot wyposażenia'
+        - ''
+        - '&e<slot> &bgdzie można wyposażyć przedmiot'
+      params: "<slot>"
+      feedback: "&aSlot wyposażenia ustawiony na &e%value%"
+    swappable:
+      description:
+        - '&6&lUstawia, czy przedmiot jest wymienialny'
+        - ''
+        - '&e[true/false] &btrue = wymienialny'
+      params: "[true/false]"
+      feedback: "&aWłaściwość wymienialności teraz to &e%value%"
+    allowedentities:
+      invalid-type: '&4[&cItemEdit&4] &cWartość &6%value% &cnie jest poprawną nazwą bytu ani grupy'
+      description:
+        - '&6&lUstawia dozwolone byty do noszenia tego wyposażenia'
+        - ''
+        - '&e[entity] &btyp bytu'
+        - '&e[group] &bgrupa bytów'
+        - ''
+        - '&bWszystkie wybrane typy zostaną dodane'
+      params: "[entity/group] [entity/group] ..."
+      feedback: "&aDozwolone typy bytów: &e%value%"
+      feedback-reset: "&aDozwolone typy bytów zostały zresetowane"
+    equipsound:
+      description:
+        - '&6&lUstawia dźwięk przy zakładaniu'
+        - ''
+        - '&e[sound] &bojaki dźwięk ma być odtworzony'
+      params: "[sound]"
+      feedback: "&aDźwięk zakładania ustawiony na &e%value%"
+      feedback-reset: "&aDźwięk zakładania został zresetowany"
+    equiponinteract:
+      description:
+        - '&6&lUstawia zakładanie przy interakcji'
+        - ''
+        - '&e[true/false] &btrue = zakłada przy interakcji'
+      params: "[true/false]"
+      feedback: "&aWłaściwość zakładania przy interakcji teraz to &e%value%"
+    shearsound:
+      description:
+        - '&6&lUstawia dźwięk przy obcinaniu'
+        - ''
+        - '&e[sound] &bjaki dźwięk ma być odtworzony'
+        - '&bprzykładowo dynia lub bałwan'
+      params: "[sound]"
+      feedback: "&aDźwięk obcinania ustawiony na &e%value%"
+      feedback-reset: "&aDźwięk obcinania zresetowany"
+    canshear:
+      unsupported-version: '&4[&cItemEdit&4] &cTwoja wersja serwera (&6%value%&c) nie obsługuje tej funkcji'
+      description:
+        - '&6&lUstawia możliwość obcinania interakcją'
+        - ''
+        - '&e[true/false] &btrue = można obcinać'
+        - '&bnp. dynię lub bałwana'
+      params: "[true/false]"
+      feedback: "&aPole „możliwość obcinania” teraz to &e%value%"
+    dispensable:
+      description:
+        - '&6&lUstawia możliwość użycia przez dyspenser'
+        - ''
+        - '&e[true/false] &btrue = można użyć dyspensera'
+      params: "[true/false]"
+      feedback: "&aDyspenserowa możliwość teraz to &e%value%"
+    damageonhurt:
+      description:
+        - '&6&lUstawia, czy przedmiot może się zniszczyć'
+        - ''
+        - '&e[true/false] &btrue = traci trwałość przy uszkodzeniu'
+        - ''
+        - '&bUwaga: tylko przedmioty o stosie 1 mogą się niszczyć'
+        - '&b  użyj &e/ie maxstacksize 1'
+        - '&bWskazówka: ustaw maksymalną trwałość:'
+        - '  &e/ie maxdurability <amount>'
+      params: "[true/false]"
+      feedback: "&aWłaściwość niszczenia przy obrażeniach teraz to &e%value%"
+      warning-maxstacksize: '&4[&cItemEdit&4] &cStack size musi być &61&c aby mogło się niszczyć &4[&6kliknij, aby naprawić&4]'
+    cameraoverlay:
+      description:
+        - '&6&lUstawia nakładkę kamery'
+        - ''
+        - '&e[namespacedkey] &bk'
+      params: "[namespacedkey]"
+      feedback: "&aNakładka kamery została zaktualizowana"
+      feedback-reset: "&aNakładka kamery została usunięta"
+      invalid-namespacedkey: "&cNazwany klucz &6%value% &cjest nieprawidłowy"
+    clear:
+      description:
+        - "&6&lCałkowicie usuwa właściwość wyposażenia"
+        - ''
+        - '&bPrzywróć ustawienia domyślne, jeśli to przedmiot z Vanilli'
+      params: ""
+      feedback: "&aWłaściwości wyposażenia przywrócone do domyślnych"
 serveritem:
   help-header: '&9&lServerItem - Pomoc'
   give:

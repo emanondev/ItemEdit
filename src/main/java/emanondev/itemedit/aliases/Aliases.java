@@ -1,9 +1,12 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.utility.TagContainer;
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect;
+import org.bukkit.Tag;
 import org.bukkit.block.banner.PatternType;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.potion.PotionEffectType;
@@ -106,7 +109,10 @@ public class Aliases {
     public static final EquipmentSlotGroupAliases EQUIPMENT_SLOTGROUPS =
             VersionUtils.isVersionAfter(1, 21) ? new EquipmentSlotGroupAliases() : null;
     public static final SoundAliases SOUND = getSoundAliases();
-
+    public static final AliasSet<EntityType> ENTITY_TYPE = new EnumAliasSet<>(EntityType.class);
+    public static final AliasSet<TagContainer<EntityType>> ENTITY_GROUPS =
+            VersionUtils.isVersionAfter(1,21)?
+                    new TagAliasSet<>("entitygroups", EntityType.class, Tag.REGISTRY_ENTITY_TYPES):null;
 
     private static final Map<String, IAliasSet<?>> types = new HashMap<>();
     private static boolean loaded = false;
@@ -174,6 +180,8 @@ public class Aliases {
         registerAliasType(EQUIPMENT_SLOTGROUPS);
         registerAliasType(ANIMATION);
         registerAliasType(SOUND);
+        registerAliasType(ENTITY_TYPE);
+        registerAliasType(ENTITY_GROUPS);
     }
 
     public static <T> void registerAliasType(@Nullable IAliasSet<T> set) {

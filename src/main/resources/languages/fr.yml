@@ -607,6 +607,117 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&bet <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  equipment:
+    wrong-boolean: '&4[&cItemEdit&4] &cValeur booléenne incorrecte ! &4[&6survolez ici&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cValeur de son incorrecte ! &4[&6survolez ici&4]'
+    wrong-slot: '&4[&cItemEdit&4] &cValeur d''équipement incorrecte ! &4[&6survolez ici&4]'
+    wrong-entitytype: '&4[&cItemEdit&4] &cType d''entité incorrect ! &4[&6survolez ici&4]'
+    wrong-entitygroup: '&4[&cItemEdit&4] &cGroupe d''entités incorrect ! &4[&6survolez ici&4]'
+    description:
+      - '&6&lDéfinit les propriétés d''équipement de l''objet'
+      - ''
+      - '&bAstuce : tapez &e/ie equipment&b pour plus d''infos'
+    params: '<slot/...>'
+    help-header: '&9&lItemEdit Équipement - Aide'
+    slot:
+      description:
+        - '&6&lDéfinit l''emplacement où l''objet peut être équipé'
+        - ''
+        - '&e<slot> &blà où l''objet peut être équipé'
+      params: "<slot>"
+      feedback: "&aL''emplacement d''équipement est maintenant &e%value%"
+    swappable:
+      description:
+        - '&6&lDéfinit si l''objet est échangeable'
+        - ''
+        - '&e[true/false] &btrue pour qu''il soit échangeable'
+      params: "[true/false]"
+      feedback: "&aLa propriété échangeable est maintenant &e%value%"
+    allowedentities:
+      invalid-type: '&4[&cItemEdit&4] &cLa valeur &6%value% &cn''est ni une entité ni un groupe d''entités valide'
+      description:
+        - '&6&lDéfinit les entités pouvant porter cet équipement'
+        - ''
+        - '&e[entité] &bquel type d''entité'
+        - '&e[groupe] &bquel groupe d''entités'
+        - ''
+        - '&bTous les types sélectionnés seront ajoutés'
+      params: "[entité/groupe] [entité/groupe] ..."
+      feedback: "&aLes types d''entités autorisées sont désormais : &e%value%"
+      feedback-reset: "&aLes types d''entités autorisées ont été réinitialisés"
+    equipsound:
+      description:
+        - '&6&lDéfinit le son d''équipement'
+        - ''
+        - '&e[son] &bquel son doit être joué'
+      params: "[son]"
+      feedback: "&aLe son d''équipement est maintenant &e%value%"
+      feedback-reset: "&aLe son d''équipement a été réinitialisé par défaut"
+    equiponinteract:
+      description:
+        - '&6&lDéfinit l''équipement à l''interaction'
+        - ''
+        - '&e[true/false] &btrue pour équiper via interaction'
+      params: "[true/false]"
+      feedback: "&aLa propriété d''équipement à l''interaction est maintenant &e%value%"
+    shearsound:
+      description:
+        - '&6&lDéfinit le son lors du retrait avec des cisailles'
+        - ''
+        - '&e[son] &bquel son doit être joué'
+        - '&blorsqu''il est retiré avec des cisailles, comme une citrouille'
+        - '&bchez le bonhomme de neige'
+      params: "[son]"
+      feedback: "&aLe son de cisaillement est maintenant &e%value%"
+      feedback-reset: "&aLe son de cisaillement a été réinitialisé"
+    canshear:
+      unsupported-version: '&4[&cItemEdit&4] &cVotre version du serveur (&6%value%&c) ne supporte pas cette fonctionnalité'
+      description:
+        - '&6&lDéfinit si l''objet peut être cisaillé'
+        - ''
+        - '&e[true/false] &btrue pour permettre de cisailer'
+        - '&bl''équipement d''une entité, comme une citrouille'
+        - '&bou un bonhomme de neige'
+      params: "[true/false]"
+      feedback: "&aLa propriété de cisaillement est maintenant &e%value%"
+    dispensable:
+      description:
+        - '&6&lDéfinit si l''objet est éjectable'
+        - ''
+        - '&e[true/false] &btrue pour équiper via un distributeur'
+      params: "[true/false]"
+      feedback: "&aLa propriété éjectable est maintenant &e%value%"
+    damageonhurt:
+      description:
+        - '&6&lDéfinit si l''objet prend des dégâts'
+        - ''
+        - '&e[true/false] &btrue pour réduire la durabilité avec les dégâts'
+        - ''
+        - '&bRemarque : seul un objet avec une pile maximale de 1 peut être endommagé'
+        - '&b  utilisez &e/ie maxstacksize 1'
+        - '&bAstuce : définissez aussi la durabilité max avec'
+        - '  &e/ie maxdurability <valeur>'
+      params: "[true/false]"
+      feedback: "&aLa propriété de dégâts est maintenant &e%value%"
+      warning-maxstacksize: '&4[&cItemEdit&4] &cLa taille de pile maximale doit être &61 &cpour être endommageable &4[&6cliquer pour corriger&4]'
+    cameraoverlay:
+      description:
+        - '&6&lDéfinit la superposition de la caméra'
+        - ''
+        - '&e[namespacedkey] &bquelle superposition utiliser'
+        - '&bLes superpositions sont définies via les packs de textures'
+        - '&bla seule superposition par défaut est minecraft:misc/pumpkinblur'
+      params: "[namespacedkey]"
+      feedback: "&aLa superposition caméra a été mise à jour"
+      feedback-reset: "&aLa superposition caméra a été supprimée"
+      invalid-namespacedkey: "&cLe namespacedkey &6%value% &c est invalide"
+    clear:
+      description:
+        - '&6&lSupprime complètement les propriétés d''équipement'
+        - ''
+        - '&bou restaure les valeurs par défaut si équipement vanilla'
+      params: ""
+      feedback: "&aLes propriétés d''équipement ont été réinitialisées"
 serveritem:
   help-header: '&9&lServerItem - Aide'
   give:

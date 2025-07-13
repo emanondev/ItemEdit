@@ -596,6 +596,115 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&b以及 <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  equipment:
+    wrong-boolean: '&4[&cItemEdit&4] &c布尔值错误！ &4[&6将鼠标悬停此处&4]'
+    wrong-sound: '&4[&cItemEdit&4] &c声音值错误！ &4[&6将鼠标悬停此处&4]'
+    wrong-slot: '&4[&cItemEdit&4] &c装备槽位值错误！ &4[&6将鼠标悬停此处&4]'
+    wrong-entitytype: '&4[&cItemEdit&4] &c实体类型值错误！ &4[&6将鼠标悬停此处&4]'
+    wrong-entitygroup: '&4[&cItemEdit&4] &c实体组值错误！ &4[&6将鼠标悬停此处&4]'
+    description:
+      - '&6&l设置物品的装备属性'
+      - ''
+      - '&b提示：输入 &e/ie equipment&b 获取更多信息'
+    params: '<slot/...>'
+    help-header: '&9&lItemEdit 装备 - 帮助'
+    slot:
+      description:
+        - '&6&l设置可装备的槽位'
+        - ''
+        - '&e<slot> &b物品可被装备的位置'
+      params: "<slot>"
+      feedback: "&a装备槽位已设置为 &e%value%"
+    swappable:
+      description:
+        - '&6&l设置物品是否可交换'
+        - ''
+        - '&e[true/false] &btrue 表示可交换'
+      params: "[true/false]"
+      feedback: "&a可交换属性现在是 &e%value%"
+    allowedentities:
+      invalid-type: '&4[&cItemEdit&4] &c值 &6%value% &c既不是有效实体也不是有效实体组'
+      description:
+        - '&6&l设置允许装备此物品的实体类型'
+        - ''
+        - '&e[entity] &b指定的实体类型'
+        - '&e[group] &b指定的实体组'
+        - ''
+        - '&b所有选择的类型都会添加'
+      params: "[entity/group] [entity/group] ..."
+      feedback: "&a允许的实体类型为：&e%value%"
+      feedback-reset: "&a已重置允许的实体类型"
+    equipsound:
+      description:
+        - '&6&l设置装备时的声音'
+        - ''
+        - '&e[sound] &b播放的声音'
+      params: "[sound]"
+      feedback: "&a装备声音已设置为 &e%value%"
+      feedback-reset: "&a装备声音已重置为默认"
+    equiponinteract:
+      description:
+        - '&6&l设置互动时装备'
+        - ''
+        - '&e[true/false] &btrue 表示互动时自动装备'
+      params: "[true/false]"
+      feedback: "&a互动装备属性现在是 &e%value%"
+    shearsound:
+      description:
+        - '&6&l设置被剪刀移除时的声音'
+        - ''
+        - '&e[sound] &b播放的声音'
+        - '&b例如剪南瓜或雪人时'
+      params: "[sound]"
+      feedback: "&a剪刀声音已设置为 &e%value%"
+      feedback-reset: "&a剪刀声音已重置为默认"
+    canshear:
+      unsupported-version: '&4[&cItemEdit&4] &c你的服务器版本 (&6%value%&c) 不支持此功能'
+      description:
+        - '&6&l设置互动时是否可剪'
+        - ''
+        - '&e[true/false] &btrue 表示可用剪刀移除装备'
+        - '&b例如剪南瓜或雪人'
+      params: "[true/false]"
+      feedback: "&a可剪属性现在是 &e%value%"
+    dispensable:
+      description:
+        - '&6&l设置是否可由发射器装备'
+        - ''
+        - '&e[true/false] &btrue 表示可由发射器装备'
+      params: "[true/false]"
+      feedback: "&a发射器装备属性现在是 &e%value%"
+    damageonhurt:
+      description:
+        - '&6&l设置是否可损坏'
+        - ''
+        - '&e[true/false] &btrue 表示受伤时降低耐久'
+        - ''
+        - '&b注意：只有最大堆叠数为 1 的物品才可损坏'
+        - '&b  使用 &e/ie maxstacksize 1'
+        - '&b提示：记得设置物品最大耐久：'
+        - '  &e/ie maxdurability <amount>'
+      params: "[true/false]"
+      feedback: "&a受伤损坏属性现在是 &e%value%"
+      warning-maxstacksize: '&4[&cItemEdit&4] &c物品最大堆叠数必须为 &61 &c才可损坏 &4[&6点击修复&4]'
+    cameraoverlay:
+      description:
+        - '&6&l设置摄像头叠加效果'
+        - ''
+        - '&e[namespacedkey] &b所需的叠加名称'
+        - '&b叠加效果需由材质包设置，原版中只有'
+        - '&bminecraft:misc/pumpkinblur'
+      params: "[namespacedkey]"
+      feedback: "&a摄像头叠加效果已更新"
+      feedback-reset: "&a摄像头叠加效果已移除"
+      invalid-namespacedkey: "&c命名空间键 &6%value% &c无效"
+    clear:
+      description:
+        - '&6&l完全移除物品的装备属性'
+        - ''
+        - '&b若是原版装备则恢复默认属性'
+      params: ""
+      feedback: "&a装备属性已重置为默认"
 serveritem:
   help-header: '&9&lServerItem - 帮助'
   give:

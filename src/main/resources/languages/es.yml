@@ -604,6 +604,114 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&by <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  equipment:
+    wrong-boolean: '&4[&cItemEdit&4] &c¡Valor booleano incorrecto! &4[&6pasa el ratón aquí&4]'
+    wrong-sound: '&4[&cItemEdit&4] &c¡Valor de sonido incorrecto! &4[&6pasa el ratón aquí&4]'
+    wrong-slot: '&4[&cItemEdit&4] &c¡Valor de equipamiento incorrecto! &4[&6pasa el ratón aquí&4]'
+    wrong-entitytype: '&4[&cItemEdit&4] &c¡Tipo de entidad incorrecto! &4[&6pasa el ratón aquí&4]'
+    wrong-entitygroup: '&4[&cItemEdit&4] &c¡Grupo de entidades incorrecto! &4[&6pasa el ratón aquí&4]'
+    description:
+      - '&6&lDefine la propiedad de equipamiento del objeto'
+      - ''
+      - '&bConsejo: escribe &e/ie equipment&b para más información'
+    params: '<ranura/...>'
+    help-header: '&9&lItemEdit Equipamiento – Ayuda'
+    slot:
+      description:
+        - '&6&lDefine la ranura donde se puede equipar'
+        - ''
+        - '&e<ranura> &bdónde puede equiparse el objeto'
+      params: '<ranura>'
+      feedback: "&aLa ranura de equipamiento ahora es &e%value%"
+    swappable:
+      description:
+        - '&6&lDefine si el objeto es intercambiable'
+        - ''
+        - '&e[true/false] &btrue si puede intercambiarse'
+      params: "[true/false]"
+      feedback: "&aLa propiedad intercambiable ahora es &e%value%"
+    allowedentities:
+      invalid-type: '&4[&cItemEdit&4] &cEl valor &6%value% &cno es una entidad ni un grupo válido'
+      description:
+        - '&6&lDefine los tipos de entidad que pueden usar este equipamiento'
+        - ''
+        - '&e[entidad] &bqué tipo de entidad'
+        - '&e[grupo] &bqué grupo de entidades'
+        - ''
+        - '&bTodos los seleccionados se añaden'
+      params: "[entidad/grupo] [entidad/grupo] ..."
+      feedback: "&aLos tipos permitidos ahora son: &e%value%"
+      feedback-reset: "&aLos tipos de entidad permitidos se han restablecido"
+    equipsound:
+      description:
+        - '&6&lDefine el sonido al equipar'
+        - ''
+        - '&e[sonido] &bqué sonido debe reproducirse'
+      params: "[sonido]"
+      feedback: "&aEl sonido de equipamiento ahora es &e%value%"
+      feedback-reset: "&aEl sonido de equipamiento se ha restablecido"
+    equiponinteract:
+      description:
+        - '&6&lDefine equipar al interactuar'
+        - ''
+        - '&e[true/false] &btrue para equipar con interacción'
+      params: "[true/false]"
+      feedback: "&aEquipar al interactuar ahora es &e%value%"
+    shearsound:
+      description:
+        - '&6&lDefine el sonido al quitar con tijeras'
+        - ''
+        - '&e[sonido] &bqué sonido debe reproducirse'
+        - '&bal quitarse, como al quitar calabaza o muñeco de nieve'
+      params: "[sonido]"
+      feedback: "&aEl sonido de corte ahora es &e%value%"
+      feedback-reset: "&aEl sonido de corte se ha restablecido"
+    canshear:
+      unsupported-version: '&4[&cItemEdit&4] &cLa versión del servidor (&6%value%&c) no admite esta función'
+      description:
+        - '&6&lDefine capacidad de cortar con tijeras'
+        - ''
+        - '&e[true/false] &btrue para permitir cortar equipamiento de entidades'
+      params: "[true/false]"
+      feedback: "&aLa propiedad cortar ahora es &e%value%"
+    dispensable:
+      description:
+        - '&6&lDefine si puede usarse con dispensador'
+        - ''
+        - '&e[true/false] &btrue para equipar con dispensador'
+      params: "[true/false]"
+      feedback: "&aLa propiedad dispensable ahora es &e%value%"
+    damageonhurt:
+      description:
+        - '&6&lDefine si se daña al recibir daño'
+        - ''
+        - '&e[true/false] &btrue para reducir durabilidad al recibir daño'
+        - ''
+        - '&bN.B. solo para objetos con pila máxima de 1'
+        - '&busa &e/ie maxstacksize 1'
+        - '&bConsejo: asegúrate de establecer durabilidad máxima con'
+        - '  &e/ie maxdurability <cantidad>'
+      params: "[true/false]"
+      feedback: "&aLa propiedad daño al recibir daño ahora es &e%value%"
+      warning-maxstacksize: '&4[&cItemEdit&4] &cLa pila máxima debe ser &61 &cpara que pueda dañarse &4[&6clic para corregir&4]'
+    cameraoverlay:
+      description:
+        - '&6&lDefine una superposición de cámara'
+        - ''
+        - '&e[namespacedkey] &bqué superposición usar'
+        - '&blas superposiciones se definen en paquetes de texturas'
+        - '&bla única predeterminada es minecraft:misc/pumpkinblur'
+      params: "[namespacedkey]"
+      feedback: "&aLa superposición de cámara se ha actualizado"
+      feedback-reset: "&aLa superposición de cámara se ha eliminado"
+      invalid-namespacedkey: "&cEl namespacedkey &6%value% &cno es válido"
+    clear:
+      description:
+        - '&6&lElimina completamente la propiedad de equipamiento'
+        - ''
+        - '&bO restaura valores predeterminados si es equipamiento de Minecraft'
+      params: ""
+      feedback: "&aLas propiedades de equipamiento se han restablecido"
 serveritem:
   help-header: '&9&lServerItem - Ayuda'
   give:

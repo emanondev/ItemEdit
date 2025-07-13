@@ -3,11 +3,9 @@ package emanondev.itemedit.utility;
 import emanondev.itemedit.aliases.IAliasSet;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -188,17 +186,39 @@ public final class CompleteUtility {
      */
     @NotNull
     public static List<String> complete(@NotNull String prefix,
-                                        @NotNull IAliasSet<?> aliases) {
+                                        @Nullable IAliasSet<?> aliases) {
+        return complete(prefix,aliases,null);
+    }
+
+    /**
+     * Completes a prefix based on the aliases in an alias set. This method returns a list of aliases from the
+     * provided alias set that start with the prefix. The comparison is case-insensitive.
+     *
+     * @param prefix  The prefix to match against the aliases in the alias set.
+     * @param aliases The alias set containing the aliases to search through.
+     * @return A list of matching aliases that start with the prefix.
+     */
+    @NotNull
+    public static <T> List<String> complete(@NotNull String prefix,
+                                            @Nullable IAliasSet<T> aliases,
+                                            @Nullable Predicate<T> filter) {
+        if (aliases == null) {
+            return Collections.emptyList();
+        }
         ArrayList<String> results = new ArrayList<>();
         prefix = prefix.toLowerCase(Locale.ENGLISH);
         int c = 0;
         for (String alias : aliases.getAliases()) {
-            if (alias.startsWith(prefix)) {
-                results.add(alias);
-                c++;
-                if (c > MAX_COMPLETES) {
-                    return results;
-                }
+            if (filter != null && !filter.test(aliases.convertAlias(alias))) {
+                continue;
+            }
+            if (!alias.startsWith(prefix)) {
+                continue;
+            }
+            results.add(alias);
+            c++;
+            if (c > MAX_COMPLETES) {
+                return results;
             }
         }
         return results;

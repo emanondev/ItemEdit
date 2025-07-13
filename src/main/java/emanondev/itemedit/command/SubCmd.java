@@ -93,6 +93,19 @@ public abstract class SubCmd {
         return fail.create();
     }
 
+    protected void sendFeedbackForSub(CommandSender target,
+                                      @NotNull String subSubCommand,
+                                      String... holders) {
+        sendCustomFeedbackForSub(target, subSubCommand, "feedback", holders);
+    }
+
+    protected void sendCustomFeedbackForSub(CommandSender target,
+                                      @NotNull String subSubCommand,
+                                      @NotNull String feedbackPath,
+                                      String... holders) {
+        Util.sendMessage(target, this.getLanguageString(subSubCommand + "." + feedbackPath, null, target, holders));
+    }
+
     protected void sendFailFeedbackForSub(CommandSender target, String alias, String subSubCommand) {
         String params = getLanguageString(subSubCommand + ".params", null, target);
         target.spigot().sendMessage(this.craftFailFeedback(alias, subSubCommand

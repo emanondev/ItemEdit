@@ -2,6 +2,7 @@ package emanondev.itemedit.aliases;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.YMLConfig;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -108,7 +109,7 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
         return new ArrayList<>(map.keySet());
     }
 
-    public T convertAlias(String alias) {
+    public @Nullable T convertAlias(String alias) {
         return map.get(alias.toLowerCase(Locale.ENGLISH));
     }
 

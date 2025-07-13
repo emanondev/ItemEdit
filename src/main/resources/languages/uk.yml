@@ -604,6 +604,114 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&bта <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  equipment:
+    wrong-boolean: '&4[&cItemEdit&4] &cНевірне логічне значення! &4[&6наведіть сюди&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cНевірне значення звуку! &4[&6наведіть сюди&4]'
+    wrong-slot: '&4[&cItemEdit&4] &cНевірне значення спорядження! &4[&6наведіть сюди&4]'
+    wrong-entitytype: '&4[&cItemEdit&4] &cНевірний тип сутності! &4[&6наведіть сюди&4]'
+    wrong-entitygroup: '&4[&cItemEdit&4] &cНевірна група сутностей! &4[&6наведіть сюди&4]'
+    description:
+      - '&6&lВстановлює властивості спорядження предмета'
+      - ''
+      - '&bПорада: введіть &e/ie equipment&b для отримання додаткової інформації'
+    params: '<слот/...>'
+    help-header: '&9&lItemEdit Спорядження - Допомога'
+    slot:
+      description:
+        - '&6&lВстановлює слот спорядження'
+        - ''
+        - '&e<слот> &bкуди можна одягнути предмет'
+      params: "<слот>"
+      feedback: "&aСлот спорядження встановлено як &e%value%"
+    swappable:
+      description:
+        - '&6&lРобить предмет змінним'
+        - ''
+        - '&e[true/false] &btrue — дозволяє замінювати предмет'
+      params: "[true/false]"
+      feedback: "&aВластивість змінності встановлено як &e%value%"
+    allowedentities:
+      invalid-type: '&4[&cItemEdit&4] &cЗначення &6%value% &cне є допустимою сутністю або групою'
+      description:
+        - '&6&lВстановлює типи сутностей, які можуть носити спорядження'
+        - ''
+        - '&e[сутність] &bякий тип сутності'
+        - '&e[група] &bяка група сутностей'
+        - ''
+        - '&bУсі вибрані типи буде додано'
+      params: "[сутність/група] [сутність/група] ..."
+      feedback: "&aДозволені типи сутностей: &e%value%"
+      feedback-reset: "&aСписок дозволених сутностей скинуто"
+    equipsound:
+      description:
+        - '&6&lВстановлює звук спорядження'
+        - ''
+        - '&e[звук] &bякий звук має відтворюватися'
+      params: "[звук]"
+      feedback: "&aЗвук спорядження встановлено як &e%value%"
+      feedback-reset: "&aЗвук спорядження скинуто до стандартного"
+    equiponinteract:
+      description:
+        - '&6&lОдягає при взаємодії'
+        - ''
+        - '&e[true/false] &btrue — дозволяє одягати при взаємодії'
+      params: "[true/false]"
+      feedback: "&aВластивість одягання при взаємодії встановлено як &e%value%"
+    shearsound:
+      description:
+        - '&6&lВстановлює звук при знятті ножицями'
+        - ''
+        - '&e[звук] &bякий звук має відтворюватися'
+        - '&bнаприклад, коли знімають гарбуз або з сніговика'
+      params: "[звук]"
+      feedback: "&aЗвук ножиць встановлено як &e%value%"
+      feedback-reset: "&aЗвук ножиць скинуто до стандартного"
+    canshear:
+      unsupported-version: '&4[&cItemEdit&4] &cВерсія сервера (&6%value%&c) не підтримує цю функцію'
+      description:
+        - '&6&lДозволяє знімати ножицями'
+        - ''
+        - '&e[true/false] &btrue — дозволяє знімати спорядження'
+        - '&bнаприклад, з гарбуза або сніговика'
+      params: "[true/false]"
+      feedback: "&aВластивість зняття ножицями встановлено як &e%value%"
+    dispensable:
+      description:
+        - '&6&lДозволяє одягати через роздавач'
+        - ''
+        - '&e[true/false] &btrue — дозволяє використовувати роздавач'
+      params: "[true/false]"
+      feedback: "&aВластивість роздавача встановлено як &e%value%"
+    damageonhurt:
+      description:
+        - '&6&lРобить предмет пошкоджуваним'
+        - ''
+        - '&e[true/false] &btrue — знижує міцність при пошкодженні'
+        - ''
+        - '&bПримітка: лише предмети з максимальною кількістю в стаку 1 можна пошкодити'
+        - '&b  використовуйте &e/ie maxstacksize 1'
+        - '&bПорада: встановіть максимальну міцність предмета через'
+        - '  &e/ie maxdurability <значення>'
+      params: "[true/false]"
+      feedback: "&aВластивість пошкодження при ударі встановлено як &e%value%"
+      warning-maxstacksize: '&4[&cItemEdit&4] &cМаксимальний розмір стека повинен бути &61 &cщоб предмет можна було пошкодити &4[&6натисніть для виправлення&4]'
+    cameraoverlay:
+      description:
+        - '&6&lВстановлює накладення камери'
+        - ''
+        - '&e[namespacedkey] &bяке накладення ви хочете'
+        - '&bНакладення задаються в текстурпаках, стандартне — minecraft:misc/pumpkinblur'
+      params: "[namespacedkey]"
+      feedback: "&aНакладення камери оновлено"
+      feedback-reset: "&aНакладення камери видалено"
+      invalid-namespacedkey: "&cNamespacedkey &6%value% &c є недійсним"
+    clear:
+      description:
+        - '&6&lПовністю видаляє властивості спорядження'
+        - ''
+        - '&bАбо відновлює стандартні, якщо це ванільне спорядження'
+      params: ""
+      feedback: "&aВластивості спорядження скинуто до стандартних"
 serveritem:
   help-header: '&9&lServerItem - Довідка'
   give:

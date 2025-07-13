@@ -101,8 +101,12 @@ public class Banner extends SubCmd {
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (type == null || color == null) {
-                if (type == null) onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
-                if (color == null) onWrongAlias("wrong-color", p, Aliases.COLOR);
+                if (type == null) {
+                    onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
+                }
+                if (color == null) {
+                    onWrongAlias("wrong-color", p, Aliases.COLOR);
+                }
                 sendFailFeedbackForSub(p, alias, "set");
                 return;
             }
@@ -121,8 +125,12 @@ public class Banner extends SubCmd {
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (type == null || color == null) {
-                if (type == null) onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
-                if (color == null) onWrongAlias("wrong-color", p, Aliases.COLOR);
+                if (type == null) {
+                    onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
+                }
+                if (color == null) {
+                    onWrongAlias("wrong-color", p, Aliases.COLOR);
+                }
                 sendFailFeedbackForSub(p, alias, "add");
                 return;
             }

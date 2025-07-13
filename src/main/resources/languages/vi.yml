@@ -603,6 +603,114 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&bvà <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  equipment:
+    wrong-boolean: '&4[&cItemEdit&4] &cGiá trị Boolean không hợp lệ! &4[&6di chuột đây&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cGiá trị âm thanh không hợp lệ! &4[&6di chuột đây&4]'
+    wrong-slot: '&4[&cItemEdit&4] &cGiá trị vị trí trang bị không hợp lệ! &4[&6di chuột đây&4]'
+    wrong-entitytype: '&4[&cItemEdit&4] &cGiá trị Loại Thực Thể không hợp lệ! &4[&6di chuột đây&4]'
+    wrong-entitygroup: '&4[&cItemEdit&4] &cGiá trị Nhóm Thực Thể không hợp lệ! &4[&6di chuột đây&4]'
+    description:
+      - '&6&lThiết lập tính chất trang bị của mục'
+      - ''
+      - '&bMẹo: gõ &e/ie equipment&b để xem thêm thông tin'
+    params: '<slot/...>'
+    help-header: '&9&lItemEdit Trang bị – Trợ giúp'
+    slot:
+      description:
+        - '&6&lThiết lập vị trí trang bị'
+        - ''
+        - '&e<slot> &bnơi mục có thể được trang bị'
+      params: "<slot>"
+      feedback: "&aVị trí trang bị hiện là &e%value%"
+    swappable:
+      description:
+        - '&6&lCho phép mục hoán đổi'
+        - ''
+        - '&e[true/false] &btrue để bật hoán đổi'
+      params: "[true/false]"
+      feedback: "&aTính năng hoán đổi hiện là &e%value%"
+    allowedentities:
+      invalid-type: '&4[&cItemEdit&4] &cGiá trị &6%value% &ckhông phải thực thể hoặc nhóm hợp lệ'
+      description:
+        - '&6&lThiết lập thực thể được phép trang bị'
+        - ''
+        - '&e[entity] &bthứ loại thực thể'
+        - '&e[group] &bnhóm thực thể'
+        - ''
+        - '&bTất cả kiểu đã chọn sẽ được thêm'
+      params: "[entity/group] [entity/group] ..."
+      feedback: "&aThực thể được phép: &e%value%"
+      feedback-reset: "&aDanh sách thực thể đã được thiết lập lại"
+    equipsound:
+      description:
+        - '&6&lThiết lập âm thanh khi trang bị'
+        - ''
+        - '&e[sound] &bâm thanh sẽ phát'
+      params: "[sound]"
+      feedback: "&aÂm thanh trang bị hiện là &e%value%"
+      feedback-reset: "&aÂm thanh trang bị đã được đặt lại"
+    equiponinteract:
+      description:
+        - '&6&lTrang bị khi tương tác'
+        - ''
+        - '&e[true/false] &btrue để trang bị khi tương tác'
+      params: "[true/false]"
+      feedback: "&aTính năng trang bị khi tương tác hiện là &e%value%"
+    shearsound:
+      description:
+        - '&6&lThiết lập âm thanh khi dùng kéo'
+        - ''
+        - '&e[sound] &bâm thanh sẽ phát'
+        - '&bnếu dùng kéo, ví dụ như bí ngô, người tuyết'
+      params: "[sound]"
+      feedback: "&aÂm thanh kéo hiện là &e%value%"
+      feedback-reset: "&aÂm thanh kéo đã được đặt lại"
+    canshear:
+      unsupported-version: '&4[&cItemEdit&4] &cPhiên bản máy chủ (&6%value%&c) không hỗ trợ tính năng này'
+      description:
+        - '&6&lCho phép dùng kéo để bỏ trang bị'
+        - ''
+        - '&e[true/false] &btrue bỏ được mục bằng kéo'
+        - '&bnếu dùng trên thực thể như bí ngô, người tuyết'
+      params: "[true/false]"
+      feedback: "&aTính năng bỏ bằng kéo hiện là &e%value%"
+    dispensable:
+      description:
+        - '&6&lCho phép trang bị qua dispenser'
+        - ''
+        - '&e[true/false] &btrue cho phép máy phát đồ'
+      params: "[true/false]"
+      feedback: "&aTính năng dispenser hiện là &e%value%"
+    damageonhurt:
+      description:
+        - '&6&lThiết lập mục có thể hư hại'
+        - ''
+        - '&e[true/false] &btrue để giảm độ bền khi chịu sát thương'
+        - ''
+        - '&bLưu ý: chỉ mục có stack tối đa 1 mới có thể hư hại'
+        - '&bsử dụng &e/ie maxstacksize 1'
+        - '&bMẹo: nhớ thiết lập độ bền tối đa:'
+        - '  &e/ie maxdurability <amount>'
+      params: "[true/false]"
+      feedback: "&aTính năng hư hại khi bị tấn công hiện là &e%value%"
+      warning-maxstacksize: '&4[&cItemEdit&4] &cStack tối đa phải là &61 để có thể hư hại &4[&6bấm để sửa&4]'
+    cameraoverlay:
+      description:
+        - '&6&lThiết lập hiệu ứng camera'
+        - ''
+        - '&e[namespacedkey] &bhe hiệu ứng muốn dùng'
+        - '&bHiệu ứng mặc định: minecraft:misc/pumpkinblur'
+      params: "[namespacedkey]"
+      feedback: "&aHiệu ứng camera đã được cập nhật"
+      feedback-reset: "&aHiệu ứng camera đã được gỡ"
+      invalid-namespacedkey: "&cNamespacedkey &6%value% &ckhông hợp lệ"
+    clear:
+      description:
+        - '&6&lXóa hoàn toàn thuộc tính trang bị'
+        - ''
+        - '&bHoặc khôi phục mặc định nếu là mục vanilla'
+      params: ""
+      feedback: "&aThuộc tính trang bị đã được đặt lại"
 serveritem:
   help-header: '&9&lServerItem - Trợ Giúp'
   give:

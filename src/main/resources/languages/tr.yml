@@ -601,6 +601,113 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&bve <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  equipment:
+    wrong-boolean: '&4[&cItemEdit&4] &cYanlış Boolean Değeri! &4[&6üzerine gelin&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cYanlış Ses Değeri! &4[&6üzerine gelin&4]'
+    wrong-slot: '&4[&cItemEdit&4] &cYanlış Ekipman Değeri! &4[&6üzerine gelin&4]'
+    wrong-entitytype: '&4[&cItemEdit&4] &cYanlış EntityType Değeri! &4[&6üzerine gelin&4]'
+    wrong-entitygroup: '&4[&cItemEdit&4] &cYanlış EntityGroup Değeri! &4[&6üzerine gelin&4]'
+    description:
+      - '&6&lÖğe için ekipman özelliğini ayarlar'
+      - ''
+      - '&bİpucu: daha fazla bilgi için &e/ie equipment&b yazın'
+    params: '<slot/...>'
+    help-header: '&9&lItemEdit Ekipman - Yardım'
+    slot:
+      description:
+        - '&6&lTakılabilir yuva ayarlar'
+        - ''
+        - '&e<slot> &bolayak yerleştirilebilir'
+      params: "<slot>"
+      feedback: "&aEkipman yuvası artık &e%value%"
+    swappable:
+      description:
+        - '&6&lÖğeyi değiştirilebilir yapar'
+        - ''
+        - '&e[true/false] &btrue ise öğe değiştirilebilir olur'
+      params: "[true/false]"
+      feedback: "&aSwappable özelliği artık &e%value%"
+    allowedentities:
+      invalid-type: '&4[&cItemEdit&4] &cDeğer &6%value% &cgeçerli bir varlık veya grup değil'
+      description:
+        - '&6&lBu ekipmanı takabilecek varlık türlerini ayarlar'
+        - ''
+        - '&e[entity] &bhangi varlık türü'
+        - '&e[group] &bhangi varlık grubu'
+        - ''
+        - '&bSeçilen tüm türler eklenir'
+      params: "[entity/group] [entity/group] ..."
+      feedback: "&aİzin verilen varlık türleri artık: &e%value%"
+      feedback-reset: "&aİzin verilen varlık türleri sıfırlandı"
+    equipsound:
+      description:
+        - '&6&lEkipman sesi ayarlar'
+        - ''
+        - '&e[sound] &bhangi ses çalınmalı'
+      params: "[sound]"
+      feedback: "&aEquip sesi artık &e%value%"
+      feedback-reset: "&aEquip sesi varsayılan olarak sıfırlandı"
+    equiponinteract:
+      description:
+        - '&6&lEtkileşimle ekipman sağlar'
+        - ''
+        - '&e[true/false] &btrue ise etkileşim ile ekipman sağlanır'
+      params: "[true/false]"
+      feedback: "&aEquip on interact özelliği artık &e%value%"
+    shearsound:
+      description:
+        - '&6&lÖğe makasla çıkarıldığında çalınacak sesi ayarlar'
+        - ''
+        - '&e[sound] &bhangi ses çalınmalı'
+        - '&bbir kabak veya kar adamından çıkarıldığında'
+      params: "[sound]"
+      feedback: "&aShear sesi artık &e%value%"
+      feedback-reset: "&aShear sesi varsayılan olarak sıfırlandı"
+    canshear:
+      unsupported-version: '&4[&cItemEdit&4] &cSunucu sürümünüz (&6%value%&c) bu özelliği desteklemiyor'
+      description:
+        - '&6&lEkipmanı makasla kesilebilir yapar'
+        - ''
+        - '&e[true/false] &btrue ise varlıktan ekipman kesilebilir'
+      params: "[true/false]"
+      feedback: "&aCan shear özelliği artık &e%value%"
+    dispensable:
+      description:
+        - '&6&lDispenser ile ekipman takılabilir'
+        - ''
+        - '&e[true/false] &btrue ise dispenser ile takılabilir'
+      params: "[true/false]"
+      feedback: "&aDispensable özelliği artık &e%value%"
+    damageonhurt:
+      description:
+        - '&6&lHasarla bozulabilir yapar'
+        - ''
+        - '&e[true/false] &btrue ise hasar alındığında dayanıklılık azalır'
+        - ''
+        - '&bNot: sadece maksimum yığını 1 olan öğeler zarar görebilir'
+        - '&b/ie maxstacksize 1 komutunu kullanın'
+        - '&bİpucu: maksimum dayanıklılığı ayarlamayı unutmayın'
+        - '  &e/ie maxdurability <amount>'
+      params: "[true/false]"
+      feedback: "&aDamage on hurt özelliği artık &e%value%"
+      warning-maxstacksize: '&4[&cItemEdit&4] &cÖğe yığın boyutu &61 &colmalıdır &4[&6düzeltmek için tıklayın&4]'
+    cameraoverlay:
+      description:
+        - '&6&lKamera üstü kaplamasını ayarlar'
+        - ''
+        - '&e[namespacedkey] &bhangi kaplamayı istiyorsunuz'
+        - '&bKaplamalar texture pack ile belirlenir, tek vanilla kaplama minecraft:misc/pumpkinblur'
+      params: "[namespacedkey]"
+      feedback: "&aKamera kaplaması güncellendi"
+      feedback-reset: "&aKamera kaplaması kaldırıldı"
+      invalid-namespacedkey: "&cNamespacedkey &6%value% &c geçersiz"
+    clear:
+      description:
+        - '&6&lEquip özelliğini tamamen kaldırır'
+        - ''
+        - '&bVeya vanilla ekipman ise varsayılanları geri yükler'
+      params: ""
+      feedback: "&aEkipman özellikleri varsayılanlara sıfırlandı"
 serveritem:
   help-header: '&9&lServerItem - Yardım'
   give:

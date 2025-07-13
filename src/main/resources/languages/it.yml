@@ -605,6 +605,113 @@ itemedit:
       - '&b<namespace>:tooltip/<id>_background'
       - '&be <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
+  equipment:
+    wrong-boolean: '&4[&cItemEdit&4] &cValore booleano errato! &4[&6passa qui&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cValore del suono errato! &4[&6passa qui&4]'
+    wrong-slot: '&4[&cItemEdit&4] &cValore dell''equipaggiamento errato! &4[&6passa qui&4]'
+    wrong-entitytype: '&4[&cItemEdit&4] &cValore EntityType errato! &4[&6passa qui&4]'
+    wrong-entitygroup: '&4[&cItemEdit&4] &cValore EntityGroup errato! &4[&6passa qui&4]'
+    description:
+      - '&6&lImposta la proprietà di equipaggiamento dell''oggetto'
+      - ''
+      - '&bSuggerimento: digita &e/ie equipment&b per ulteriori informazioni'
+    params: '<slot/...>'
+    help-header: '&9&lItemEdit Equipaggiamento - Aiuto'
+    slot:
+      description:
+        - '&6&lImposta lo slot equipaggiabile'
+        - ''
+        - '&e<slot> &bdove può essere equipaggiato l''oggetto'
+      params: "<slot>"
+      feedback: "&aLo slot equipaggiabile ora è &e%value%"
+    swappable:
+      description:
+        - '&6&lRende l''oggetto scambiabile'
+        - ''
+        - '&e[true/false] &btrue se l''oggetto è scambiabile'
+      params: "[true/false]"
+      feedback: "&aLa proprietà scambiabile ora è &e%value%"
+    allowedentities:
+      invalid-type: '&4[&cItemEdit&4] &cIl valore &6%value% &cnon è né una entità valida né un gruppo di entità'
+      description:
+        - '&6&lImposta i tipi di entità autorizzati a indossare questo equipaggiamento'
+        - ''
+        - '&e[entity] &bquale tipo di entità'
+        - '&e[group] &bquale gruppo di entità'
+        - ''
+        - '&bTutti i tipi selezionati verranno aggiunti'
+      params: "[entity/group] [entity/group] ..."
+      feedback: "&aI tipi di entità ora autorizzati sono: &e%value%"
+      feedback-reset: "&aI tipi di entità autorizzati sono stati reimpostati"
+    equipsound:
+      description:
+        - '&6&lImposta il suono di equipaggiamento'
+        - ''
+        - '&e[sound] &bquale suono deve essere riprodotto'
+      params: "[sound]"
+      feedback: "&aIl suono di equip è ora &e%value%"
+      feedback-reset: "&aIl suono di equip è stato reimpostato sul valore predefinito"
+    equiponinteract:
+      description:
+        - '&6&lEquipaggia al click'
+        - ''
+        - '&e[true/false] &btrue per equipaggiare con interazione'
+      params: "[true/false]"
+      feedback: "&aEquip on interact ora è &e%value%"
+    shearsound:
+      description:
+        - '&6&lImposta il suono quando l''oggetto viene rimosso con le cesoie'
+        - ''
+        - '&e[sound] &bquale suono deve essere riprodotto'
+        - '&bquando viene tolto con cesoie, come la zucca o il pupazzo di neve'
+      params: "[sound]"
+      feedback: "&aIl suono di taglio ora è &e%value%"
+      feedback-reset: "&aIl suono di taglio è stato reimpostato sul valore predefinito"
+    canshear:
+      unsupported-version: '&4[&cItemEdit&4] &cLa versione del server (&6%value%&c) non supporta questa funzione'
+      description:
+        - '&6&lConsente il taglio con cesoie'
+        - ''
+        - '&e[true/false] &btrue per permettere di tagliare l''equipaggiamento da un''entità'
+      params: "[true/false]"
+      feedback: "&aLa proprietà can‑shear ora è &e%value%"
+    dispensable:
+      description:
+        - '&6&lRende il dispenser in grado di equipaggiare'
+        - ''
+        - '&e[true/false] &btrue per equipaggiare con dispenser'
+      params: "[true/false]"
+      feedback: "&aLa proprietà dispensable ora è &e%value%"
+    damageonhurt:
+      description:
+        - '&6&lRende l''oggetto danneggiabile'
+        - ''
+        - '&e[true/false] &btrue per ridurre la durabilità con i danni'
+        - ''
+        - '&bNota: solo oggetti con stack massimo pari a 1 possono essere danneggiati'
+        - '&busa &e/ie maxstacksize 1'
+        - '&bSuggerimento: imposta anche max durability con'
+        - '  &e/ie maxdurability <amount>'
+      params: "[true/false]"
+      feedback: "&aLa proprietà damage‑on‑hurt ora è &e%value%"
+      warning-maxstacksize: '&4[&cItemEdit&4] &cLo stack massimo deve essere &61 &cper permettere danni &4[&6clicca per correggere&4]'
+    cameraoverlay:
+      description:
+        - '&6&lImposta l''overlay della telecamera'
+        - ''
+        - '&e[namespacedkey] &bquale overlay usare'
+        - '&bGli overlay si definiscono nei texture pack, l''unico vanilla è minecraft:misc/pumpkinblur'
+      params: "[namespacedkey]"
+      feedback: "&aL\'overlay della camera è stato aggiornato"
+      feedback-reset: "&aL\'overlay della camera è stato rimosso"
+      invalid-namespacedkey: "&cNamespacedkey &6%value% &cnon è valido"
+    clear:
+      description:
+        - '&6&lRimuove completamente la proprietà equipaggiabile'
+        - ''
+        - '&bOppure ripristina le impostazioni predefinite se l''oggetto è vanilla'
+      params: ""
+      feedback: "&aLe proprietà equipaggiabili sono state ripristinate ai valori predefiniti"
 serveritem:
   help-header: '&9&lServerItem - Guida'
   give:
