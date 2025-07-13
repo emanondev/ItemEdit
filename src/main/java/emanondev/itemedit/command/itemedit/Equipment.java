@@ -207,9 +207,6 @@ public class Equipment extends SubCmd {
             meta.setEquippable(comp);
             item.setItemMeta(meta);
             sendFeedbackForSub(p, "damageonhurt", "%value%", String.valueOf(value));
-            boolean a = meta.hasMaxStackSize() && meta.getMaxStackSize() > 1;
-            boolean b = !meta.hasMaxStackSize() && item.getType().getMaxStackSize() > 1;
-            ItemEdit.get().log("AA " + a + " " + b);
             if (value && (meta.hasMaxStackSize() ? meta.getMaxStackSize() > 1 : item.getType().getMaxStackSize() > 1)) {
                 String msg = getLanguageString("damageonhurt.warning-maxstacksize", null, p);
                 if (msg != null && !msg.isEmpty()) {
