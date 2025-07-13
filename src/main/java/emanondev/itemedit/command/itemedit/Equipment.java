@@ -271,6 +271,9 @@ public class Equipment extends SubCmd {
             meta.setEquippable(comp);
             item.setItemMeta(meta);
             sendFeedbackForSub(p, "equiponinteract", "%value%", String.valueOf(value));
+        } catch (NoSuchMethodError e) {
+            sendCustomFeedbackForSub(p, "canshear", "unsupported-version",
+                    "%value%", Bukkit.getVersion());
         } catch (Throwable t) {
             t.printStackTrace();
             sendFailFeedbackForSub(p, alias, "equiponinteract");
