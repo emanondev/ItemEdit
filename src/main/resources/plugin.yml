@@ -212,6 +212,7 @@ permissions:
       itemedit.itemedit.food: true
       itemedit.itemedit.glider: true
       itemedit.itemedit.itemmodel: true
+      itemedit.itemedit.equipment: true
   itemedit.itemedit.rename:
     default: op
     description: Allow editing item name
@@ -577,3 +578,6 @@ permissions:
   itemedit.itemedit.itemmodel:
     default: op
     description: Allow setting item texture model
+  itemedit.itemedit.equipment:
+    default: op
+    description: Allow setting equipment properties
