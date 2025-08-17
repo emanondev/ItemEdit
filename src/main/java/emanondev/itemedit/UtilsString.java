@@ -143,17 +143,19 @@ public final class UtilsString {
                 text = text.replace(holders[i], holders[i + 1]);
 
         // papi
-        if (player != null && Hooks.isPAPIEnabled())
+        if (player != null && Hooks.isPAPIEnabled()) {
             text = PlaceholderAPI.setPlaceholders(player, text);
+        }
 
         //minimessage
-        if (Hooks.hasMiniMessage())
+        if (Hooks.hasMiniMessage()) {
             text = Hooks.getMiniMessageUtil().fromMiniToText(text);
-
+        }
 
         // color
-        if (color)
+        if (color) {
             text = ChatColor.translateAlternateColorCodes('&', text);
+        }
 
         return text;
     }

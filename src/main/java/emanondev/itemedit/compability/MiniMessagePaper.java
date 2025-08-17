@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 public class MiniMessagePaper implements MiniMessageUtil {
 
     private static final LegacyComponentSerializer UNGLY_LEGACY = LegacyComponentSerializer.legacySection().toBuilder().hexColors().useUnusualXRepeatedCharacterHexFormat().build();
+
     @Getter
     private static final MiniMessagePaper instance = new MiniMessagePaper();
 
