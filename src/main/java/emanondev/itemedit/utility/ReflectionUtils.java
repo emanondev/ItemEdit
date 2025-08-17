@@ -126,6 +126,7 @@ public final class ReflectionUtils {
     public static Object invokeMethod(@NotNull Object obj, @NotNull String methodName) {
         try {
             Method method = obj.getClass().getMethod(methodName);
+            method.setAccessible(true);
             return method.invoke(obj);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -219,6 +220,7 @@ public final class ReflectionUtils {
                                       Object... args) {
         try {
             Method method = obj.getClass().getMethod(methodName, parameterTypes);
+            method.setAccessible(true);
             return method.invoke(obj, args);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -241,7 +243,9 @@ public final class ReflectionUtils {
             for (int i = 0; i < args.length; i++) {
                 argTypes[i] = args[i].getClass();
             }
-            return clazz.getMethod(methodName, argTypes).invoke(null, args);
+            Method method = clazz.getMethod(methodName, argTypes);
+            method.setAccessible(true);
+            return method.invoke(null, args);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -260,6 +264,7 @@ public final class ReflectionUtils {
                                      @Nullable Object value) {
         try {
             Field field = getDeclaredField(obj.getClass(), fieldName);
+            field.setAccessible(true);
             field.set(obj, value);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -279,6 +284,7 @@ public final class ReflectionUtils {
                                        @NotNull String fieldName) {
         try {
             Field field = getDeclaredField(obj.getClass(), fieldName);
+            field.setAccessible(true);
             return field.get(obj);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -296,6 +302,7 @@ public final class ReflectionUtils {
     public static <T> T invokeConstructor(@NotNull Class<T> clazz) {
         try {
             Constructor<T> constructor = clazz.getConstructor();
+            constructor.setAccessible(true);
             return constructor.newInstance();
         } catch (Exception e) {
             throw new RuntimeException("Failed to invoke default constructor", e);
@@ -402,6 +409,7 @@ public final class ReflectionUtils {
                                           @Nullable Object[] params) {
         try {
             Constructor<T> constructor = clazz.getConstructor(paramTypes);
+            constructor.setAccessible(true);
             return constructor.newInstance(params);
         } catch (Exception e) {
             throw new RuntimeException("Failed to invoke parameterized constructor", e);
