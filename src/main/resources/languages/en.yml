@@ -616,6 +616,14 @@ itemedit:
       - '&bTip: type &e/ie equipment&b for more info'
     params: '<slot/...>'
     help-header: '&9&lItemEdit Equipment - Help'
+    model:
+      description:
+        - '&6&lSets texture model'
+        - ''
+        - '&e[key] &bNamespaced ID of the equipment model to use when equipped'
+      params: "[key]"
+      feedback: "&aEquipment model is now &e%key%"
+      feedback-reset: "&aEquipment model has been reset"
     slot:
       description:
         - '&6&lSets equippable slot'

@@ -615,6 +615,14 @@ itemedit:
       - '&bMẹo: gõ &e/ie equipment&b để xem thêm thông tin'
     params: '<slot/...>'
     help-header: '&9&lItemEdit Trang bị – Trợ giúp'
+    model:
+      description:
+        - '&6&lĐặt mô hình texture'
+        - ''
+        - '&e[key] &bID Namespaced của mô hình trang bị được dùng khi trang bị'
+      params: "[key]"
+      feedback: "&aMô hình trang bị bây giờ là &e%key%"
+      feedback-reset: "&aMô hình trang bị đã được đặt lại"
     slot:
       description:
         - '&6&lThiết lập vị trí trang bị'

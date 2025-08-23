@@ -616,6 +616,14 @@ itemedit:
       - '&bWskazówka: wpisz &e/ie equipment&b po więcej info'
     params: '<slot/...>'
     help-header: '&9&lPomoc ItemEdit Equipment'
+    model:
+      description:
+        - '&6&lUstawia model tekstury'
+        - ''
+        - '&e[key] &bIdentyfikator Namespaced modelu ekwipunku używanego po założeniu'
+      params: "[key]"
+      feedback: "&aModel ekwipunku został ustawiony na &e%key%"
+      feedback-reset: "&aModel ekwipunku został zresetowany"
     slot:
       description:
         - '&6&lUstawia dostępny slot wyposażenia'

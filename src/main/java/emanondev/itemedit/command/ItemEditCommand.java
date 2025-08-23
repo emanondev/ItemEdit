@@ -18,7 +18,7 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new HideAll(this));
         this.registerSubCommand(() -> new HideToolTip(this), VersionUtils.isVersionAfter(1, 20, 5));
         this.registerSubCommand(() -> new Unbreakable(this));
-        this.registerSubCommand(() -> new Equipment(this), VersionUtils.isVersionAfter(1, 21,2)); // 1.20+
+        this.registerSubCommand(() -> new Equipment(this), VersionUtils.isVersionAfter(1, 21, 2)); // 1.20+
         this.registerSubCommand(() -> new RepairCost(this));
 
         this.registerSubCommand(() -> new Food(this), VersionUtils.isVersionAfter(1, 20, 5));
@@ -39,7 +39,6 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new Firework(this));
         this.registerSubCommand(() -> new PotionEffectEditor(this)); // 1.15+ adds suspicious stew
         this.registerSubCommand(() -> new BookAuthor(this));
-
         this.registerSubCommand(() -> new BookType(this), VersionUtils.isVersionAfter(1, 10));
         this.registerSubCommand(() -> new SpawnerEggType(this), VersionUtils.isVersionInRange(1, 11, 1, 12)); // 1.11 & 1.12 only
         this.registerSubCommand(() -> new Attribute(this), VersionUtils.isVersionAfter(1, 13)); // 1.13+

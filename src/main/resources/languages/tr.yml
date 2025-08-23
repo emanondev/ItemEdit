@@ -613,6 +613,14 @@ itemedit:
       - '&bİpucu: daha fazla bilgi için &e/ie equipment&b yazın'
     params: '<slot/...>'
     help-header: '&9&lItemEdit Ekipman - Yardım'
+    model:
+      description:
+        - '&6&lDoku modelini ayarlar'
+        - ''
+        - '&e[key] &bEkipman modeli için Namespaced ID (takıldığında kullanılacak)'
+      params: "[key]"
+      feedback: "&aEkipman modeli artık &e%key%"
+      feedback-reset: "&aEkipman modeli sıfırlandı"
     slot:
       description:
         - '&6&lTakılabilir yuva ayarlar'

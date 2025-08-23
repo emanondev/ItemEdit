@@ -615,6 +615,14 @@ itemedit:
       - '&bTipp: /ie equipment für weitere Infos'
     params: '<slot/...>'
     help-header: '&9&lItemEdit Ausrüstung – Hilfe'
+    model:
+      description:
+        - '&6&lSetzt das Texturmodell'
+        - ''
+        - '&e[key] &bNamespaced-ID des Ausrüstungsmodells, das beim Ausrüsten verwendet wird'
+      params: "[key]"
+      feedback: "&aAusrüstungsmodell ist jetzt &e%key%"
+      feedback-reset: "&aAusrüstungsmodell wurde zurückgesetzt"
     slot:
       description:
         - '&6&lSetzt den Ausrüstungs-Slot'

@@ -617,6 +617,14 @@ itemedit:
       - '&bSuggerimento: digita &e/ie equipment&b per ulteriori informazioni'
     params: '<slot/...>'
     help-header: '&9&lItemEdit Equipaggiamento - Aiuto'
+    model:
+      description:
+        - '&6&lImposta il modello di texture'
+        - ''
+        - '&e[key] &bID Namespaced del modello di equipaggiamento da usare quando equipaggiato'
+      params: "[key]"
+      feedback: "&aIl modello di equipaggiamento è ora &e%key%"
+      feedback-reset: "&aIl modello di equipaggiamento è stato ripristinato"
     slot:
       description:
         - '&6&lImposta lo slot equipaggiabile'

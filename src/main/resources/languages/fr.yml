@@ -619,6 +619,14 @@ itemedit:
       - '&bAstuce : tapez &e/ie equipment&b pour plus d''infos'
     params: '<slot/...>'
     help-header: '&9&lItemEdit Équipement - Aide'
+    model:
+      description:
+        - '&6&lDéfinit le modèle de texture'
+        - ''
+        - '&e[key] &bID Namespaced du modèle d''équipement à utiliser lorsqu''il est équipé'
+      params: "[key]"
+      feedback: "&aLe modèle d''équipement est maintenant &e%key%"
+      feedback-reset: "&aLe modèle d''équipement a été réinitialisé"
     slot:
       description:
         - '&6&lDéfinit l''emplacement où l''objet peut être équipé'

@@ -608,6 +608,14 @@ itemedit:
       - '&b提示：输入 &e/ie equipment&b 获取更多信息'
     params: '<slot/...>'
     help-header: '&9&lItemEdit 装备 - 帮助'
+    model:
+      description:
+        - '&6&l设置材质模型'
+        - ''
+        - '&e[key] &b装备模型的命名空间 ID，在装备时使用'
+      params: "[key]"
+      feedback: "&a装备模型已设置为 &e%key%"
+      feedback-reset: "&a装备模型已重置"
     slot:
       description:
         - '&6&l设置可装备的槽位'

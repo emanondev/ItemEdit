@@ -617,6 +617,14 @@ itemedit:
       - '&bPatarimas: įveskite &e/ie equipment&b daugiau informacijos'
     params: '<slot/...>'
     help-header: '&9&lItemEdit Įranga – Pagalba'
+    model:
+      description:
+        - '&6&lNustato tekstūros modelį'
+        - ''
+        - '&e[key] &bVardų srities ID įrangos modelio, naudojamo uždėjus'
+      params: "[key]"
+      feedback: "&aĮrangos modelis dabar yra &e%key%"
+      feedback-reset: "&aĮrangos modelis buvo atstatytas"
     slot:
       description:
         - '&6&lNustato kur ant kūno dėti daiktą'

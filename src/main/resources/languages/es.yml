@@ -616,6 +616,14 @@ itemedit:
       - '&bConsejo: escribe &e/ie equipment&b para más información'
     params: '<ranura/...>'
     help-header: '&9&lItemEdit Equipamiento – Ayuda'
+    model:
+      description:
+        - '&6&lEstablece el modelo de textura'
+        - ''
+        - '&e[key] &bID con espacio de nombres del modelo de equipo a usar al equipar'
+      params: "[key]"
+      feedback: "&aEl modelo de equipo ahora es &e%key%"
+      feedback-reset: "&aEl modelo de equipo se ha restablecido"
     slot:
       description:
         - '&6&lDefine la ranura donde se puede equipar'

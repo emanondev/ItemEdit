@@ -608,6 +608,14 @@ itemedit:
       - '&b提示：輸入 &e/ie equipment&b 取得更多資訊'
     params: '<slot/...>'
     help-header: '&9&lItemEdit 裝備 - 幫助'
+    model:
+      description:
+        - '&6&l設定材質模型'
+        - ''
+        - '&e[key] &b裝備模型的命名空間 ID，於裝備時使用'
+      params: "[key]"
+      feedback: "&a裝備模型已設為 &e%key%"
+      feedback-reset: "&a裝備模型已重設"
     slot:
       description:
         - '&6&l設定可裝備的位置'

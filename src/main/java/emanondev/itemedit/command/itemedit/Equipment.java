@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 public class Equipment extends SubCmd {
 
     private final String[] subCommands = new String[]{"slot", "swappable", "allowedentities", "equipsound",
-            "equiponinteract", "dispensable", "damageonhurt", "cameraoverlay", "canshear", "shearsound", "clear"};
+            "equiponinteract", "dispensable", "damageonhurt", "cameraoverlay", "canshear", "shearsound", "clear", "model"};
 
     public Equipment(@NotNull ItemEditCommand command) {
         super("equipment", command, true, true);
@@ -93,8 +93,46 @@ public class Equipment extends SubCmd {
             case "shearsound":
                 equipmentShearSound(p, item, alias, args);
                 return;
+            case "model":
+                equipmentModel(p, item, alias, args);
+                return;
             default:
                 onFail(p, alias);
+        }
+    }
+
+    private void equipmentModel(Player p, ItemStack item, @NotNull String alias, String[] args) {
+        try {
+            if (args.length == 1) {
+                ItemMeta meta = ItemUtils.getMeta(item);
+                if (!meta.hasEquippable()){
+                    sendCustomFeedbackForSub(p, "model", "feedback-reset");
+                    return;
+                }
+                EquippableComponent comp = meta.getEquippable();
+                comp.setModel(null);
+                meta.setEquippable(comp);
+                item.setItemMeta(meta);
+                updateView(p);
+                sendCustomFeedbackForSub(p, "model", "feedback-reset");
+                return;
+            }
+            if (args.length != 2) {
+                throw new IllegalArgumentException("Wrong param number");
+            }
+            String[] rawKey = args[1].toLowerCase(Locale.ENGLISH).split(":");
+            NamespacedKey key = rawKey.length == 1 ? new NamespacedKey(NamespacedKey.MINECRAFT, rawKey[0]) :
+                    new NamespacedKey(rawKey[0], rawKey[1]);
+            ItemMeta meta = ItemUtils.getMeta(item);
+            EquippableComponent comp = meta.getEquippable();
+            comp.setModel(key);
+            meta.setEquippable(comp);
+            item.setItemMeta(meta);
+            updateView(p);
+            sendFeedbackForSub(p, "model", "%key%", key.toString());
+        } catch (Throwable t) {
+            t.printStackTrace();
+            sendFailFeedbackForSub(p, alias, "model");
         }
     }
 
