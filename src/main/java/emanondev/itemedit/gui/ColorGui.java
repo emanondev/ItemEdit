@@ -30,13 +30,12 @@ public class ColorGui implements Gui {
     private final ItemMeta colorableMeta;
     private final ItemMeta cleanColorableMeta;
 
-
-    public ColorGui(@NotNull Player target) {
+    public ColorGui(@NotNull Player target, @NotNull ItemStack item) {
         String title = getLanguageMessage(subPath + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
         this.target = target;
-        this.colorable = ItemUtils.getHandItem(getTargetPlayer());
-        this.colorableMeta = ItemUtils.getMeta(this.colorable);
+        this.colorable = item;
+        this.colorableMeta = ItemUtils.getMeta(item);
         cleanColorableMeta = colorableMeta.clone();
         cleanColorableMeta.addItemFlags(ItemFlag.values());
         cleanColorableMeta.setDisplayName(null);
@@ -50,6 +49,7 @@ public class ColorGui implements Gui {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void onClose(InventoryCloseEvent event) {
         try {
             target.getInventory().setItemInMainHand(colorable);
@@ -59,7 +59,7 @@ public class ColorGui implements Gui {
     }
 
     @Override
-    public void onClick(InventoryClickEvent event) {
+    public void onClick(@NotNull InventoryClickEvent event) {
         Color original = ItemUtils.getColor(colorableMeta);
         int[] colors = fromColor(original);
         switch (event.getSlot()) {

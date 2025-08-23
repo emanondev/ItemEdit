@@ -32,8 +32,7 @@ public class ItemEditCommand extends AbstractCommand {
 
         this.registerSubCommand(() -> new Damage(this));
         this.registerSubCommand(() -> new Banner(this));
-        this.registerSubCommand(() -> VersionUtils.isVersionUpTo(1, 10) ?
-                new ColorOld(this) : new ColorSubcommand(this));
+        this.registerSubCommand(() -> new ColorSubcommand(this));
         this.registerSubCommand(() -> new SkullOwner(this));
         this.registerSubCommand(() -> new FireworkPower(this));
         this.registerSubCommand(() -> new Firework(this));
