@@ -43,6 +43,8 @@ public class ColorSubcommand extends SubCmd {
         ItemStack item = getItemInHand(p);
 
         // Get meta type
+        // We use this wrapper to have a clean code afterward, without having to fear any
+        // missing class due to an older game version.
         ColoredMeta meta = ColoredMeta.of(item);
         if(meta == null) {
             Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));

@@ -37,8 +37,10 @@ public class ColoredMeta {
      */
     public static @Nullable ColoredMeta of(@NotNull ItemMeta meta) {
         // Potion
-        if(meta instanceof PotionMeta)
-            return new ColoredMeta(Type.POTION, meta);
+        try {
+            if(meta instanceof PotionMeta)
+                return new ColoredMeta(Type.POTION, meta);
+        } catch(Throwable t) {/* Missing class, old game version. */}
 
         // Leather armor
         try {
