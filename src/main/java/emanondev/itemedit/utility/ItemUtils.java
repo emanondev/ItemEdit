@@ -1,15 +1,13 @@
 package emanondev.itemedit.utility;
 
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
+import org.bukkit.*;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -242,35 +240,71 @@ public final class ItemUtils {
     }
 
 
-    public static ItemMeta setColor(@NotNull ItemMeta meta, @NotNull Color color) {
+    public static @NotNull ItemMeta setColor(@NotNull ItemMeta meta, @NotNull Color color) {
         if ((meta instanceof PotionMeta)) {
             ((PotionMeta) meta).setColor(color);
             return meta;
         }
+
         try {
             if ((meta instanceof LeatherArmorMeta)) {
-                LeatherArmorMeta leatherArmorMeta = ((LeatherArmorMeta) meta);
-                leatherArmorMeta.setColor(color);
+                ((LeatherArmorMeta) meta).setColor(color);
                 return meta;
             }
-        } catch (Throwable ignored) { //might be old game version without LeatherArmorMeta
+        } catch (Throwable ignored) {
+            // Might be an old game version without LeatherArmorMeta
         }
+
+        try {
+            if ((meta instanceof FireworkEffectMeta)) {
+                FireworkEffectMeta fireworkMeta = (FireworkEffectMeta) meta;
+
+                // Clone the firework with a new
+                FireworkEffect oldEffect = fireworkMeta.getEffect();
+                FireworkEffect.Builder newEffect = FireworkEffect.builder()
+                        .flicker(oldEffect != null && oldEffect.hasFlicker())
+                        .trail(oldEffect != null && oldEffect.hasTrail())
+                        .withColor(color);
+                if(oldEffect != null) {
+                    newEffect.with(oldEffect.getType())
+                            .withFade(oldEffect.getFadeColors());
+                }
+
+                fireworkMeta.setEffect(newEffect.build());
+                return meta;
+            }
+        } catch (Throwable ignored) {
+            // Might be an old game version without FireworkEffectMeta
+        }
+
         return meta;
     }
 
-    public static Color getColor(@NotNull ItemMeta meta) {
+    public static @NotNull Color getColor(@NotNull ItemMeta meta) {
         if ((meta instanceof PotionMeta)) {
             PotionMeta potionMeta = ((PotionMeta) meta);
             return potionMeta.getColor() == null ? toColor(65, 85, 255) : potionMeta.getColor();
         }
+
         try {
             if ((meta instanceof LeatherArmorMeta)) {
-                LeatherArmorMeta leatherArmorMeta = ((LeatherArmorMeta) meta);
-                leatherArmorMeta.getColor();
-                return leatherArmorMeta.getColor();
+                return ((LeatherArmorMeta) meta).getColor();
             }
-        } catch (Throwable ignored) { //might be old game version without LeatherArmorMeta
+        } catch (Throwable ignored) {
+            // Might be an old game version without LeatherArmorMeta
         }
+
+        try {
+            if ((meta instanceof FireworkEffectMeta)) {
+                FireworkEffect effect = ((FireworkEffectMeta) meta).getEffect();
+                if(effect == null || effect.getColors().isEmpty())
+                    return Color.WHITE;
+                return effect.getColors().get(0);
+            }
+        } catch (Throwable ignored) {
+            // Might be an old game version without FireworkEffectMeta
+        }
+
         return toColor(0, 0, 0);
     }
 
