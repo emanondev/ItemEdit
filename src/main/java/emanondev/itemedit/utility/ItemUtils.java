@@ -7,10 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.FireworkEffectMeta;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.inventory.meta.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -281,6 +278,15 @@ public final class ItemUtils {
             // Might be an old game version without FireworkEffectMeta
         }
 
+        try {
+            if ((meta instanceof MapMeta)) {
+                ((MapMeta) meta).setColor(color);
+                return meta;
+            }
+        } catch (Throwable ignored) {
+            // Might be an old game version without MapMeta
+        }
+
         return meta;
     }
 
@@ -311,6 +317,15 @@ public final class ItemUtils {
             }
         } catch (Throwable ignored) {
             // Might be an old game version without FireworkEffectMeta
+        }
+
+        try {
+            if ((meta instanceof MapMeta)) {
+                Color color = ((MapMeta)meta).getColor();
+                return color == null ? Color.GRAY : color;
+            }
+        } catch (Throwable ignored) {
+            // Might be an old game version without MapMeta
         }
 
         return toColor(0, 0, 0);

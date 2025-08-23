@@ -3,10 +3,7 @@ package emanondev.itemedit.utility;
 import lombok.Getter;
 import org.bukkit.Color;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.FireworkEffectMeta;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.inventory.meta.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,10 +46,16 @@ public class ColoredMeta {
                 return new ColoredMeta(Type.LEATHER_ARMOR, meta);
         } catch(Throwable t) {/* Missing class, old game version. */}
 
-        // Leather armor
+        // Firework meta
         try {
             if(meta instanceof FireworkEffectMeta)
                 return new ColoredMeta(Type.FIREWORK, meta);
+        } catch(Throwable t) {/* Missing class, old game version. */}
+
+        // Filled map
+        try {
+            if(meta instanceof MapMeta)
+                return new ColoredMeta(Type.FILLED_MAP, meta);
         } catch(Throwable t) {/* Missing class, old game version. */}
 
         // No match
@@ -89,7 +92,8 @@ public class ColoredMeta {
     public enum Type {
         POTION,
         LEATHER_ARMOR,
-        FIREWORK
+        FIREWORK,
+        FILLED_MAP
     }
 
 }

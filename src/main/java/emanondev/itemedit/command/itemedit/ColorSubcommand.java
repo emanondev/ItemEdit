@@ -25,6 +25,7 @@ public class ColorSubcommand extends SubCmd {
     private final String potionPerm;
     private final String leatherPerm;
     private final String starsPerm;
+    private final String mapPerm;
 
     public ColorSubcommand(@NotNull ItemEditCommand cmd) {
         super("color", cmd, true, true);
@@ -33,6 +34,7 @@ public class ColorSubcommand extends SubCmd {
         potionPerm = getPermission() + ".potion";
         leatherPerm = getPermission() + ".leather";
         starsPerm = getPermission() + ".firework_star";
+        mapPerm = getPermission() + ".map";
     }
 
     @Override
@@ -67,7 +69,13 @@ public class ColorSubcommand extends SubCmd {
                 break;
             case FIREWORK:
                 if (!sender.hasPermission(starsPerm)) {
-                    this.getCommand().sendPermissionLackMessage(starsPerm, sender);
+                    getCommand().sendPermissionLackMessage(starsPerm, sender);
+                    return;
+                }
+                break;
+            case FILLED_MAP:
+                if (!sender.hasPermission(mapPerm)) {
+                    getCommand().sendPermissionLackMessage(mapPerm, sender);
                     return;
                 }
                 break;
