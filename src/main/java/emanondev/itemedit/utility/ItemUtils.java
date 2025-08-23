@@ -241,9 +241,13 @@ public final class ItemUtils {
 
 
     public static @NotNull ItemMeta setColor(@NotNull ItemMeta meta, @NotNull Color color) {
-        if ((meta instanceof PotionMeta)) {
-            ((PotionMeta) meta).setColor(color);
-            return meta;
+        try {
+            if ((meta instanceof PotionMeta)) {
+                ((PotionMeta) meta).setColor(color);
+                return meta;
+            }
+        } catch (Throwable ignored) {
+            // Might be an old game version without PotionMeta
         }
 
         try {
@@ -281,9 +285,13 @@ public final class ItemUtils {
     }
 
     public static @NotNull Color getColor(@NotNull ItemMeta meta) {
-        if ((meta instanceof PotionMeta)) {
-            PotionMeta potionMeta = ((PotionMeta) meta);
-            return potionMeta.getColor() == null ? toColor(65, 85, 255) : potionMeta.getColor();
+        try {
+            if ((meta instanceof PotionMeta)) {
+                PotionMeta potionMeta = ((PotionMeta) meta);
+                return potionMeta.getColor() == null ? toColor(65, 85, 255) : potionMeta.getColor();
+            }
+        } catch(Throwable ignored) {
+            // Might be an old game version without PotionMeta
         }
 
         try {

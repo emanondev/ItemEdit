@@ -6,6 +6,7 @@ import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.gui.ColorGui;
 import emanondev.itemedit.utility.ColoredMeta;
+import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -18,6 +19,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class ColorSubcommand extends SubCmd {
+
+    private final boolean supportsGui;
     private final String tippedArrowPerm;
     private final String potionPerm;
     private final String leatherPerm;
@@ -25,6 +28,7 @@ public class ColorSubcommand extends SubCmd {
 
     public ColorSubcommand(@NotNull ItemEditCommand cmd) {
         super("color", cmd, true, true);
+        supportsGui = VersionUtils.isVersionAfter(1, 10);
         tippedArrowPerm = getPermission() + ".tipped_arrow";
         potionPerm = getPermission() + ".potion";
         leatherPerm = getPermission() + ".leather";
@@ -71,7 +75,7 @@ public class ColorSubcommand extends SubCmd {
 
         // Change the color or open a GUI, according to the type and args count.
         try {
-            if (args.length == 1) {
+            if (supportsGui && args.length == 1) {
                 p.openInventory(new ColorGui(p, item).getInventory());
                 return;
             }
