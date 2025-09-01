@@ -101,9 +101,11 @@ public class Equipment extends SubCmd {
         }
     }
 
+
+    //ie equip model <value>
     private void equipmentModel(Player p, ItemStack item, @NotNull String alias, String[] args) {
         try {
-            if (args.length == 1) {
+            if (args.length == 2) {
                 ItemMeta meta = ItemUtils.getMeta(item);
                 if (!meta.hasEquippable()){
                     sendCustomFeedbackForSub(p, "model", "feedback-reset");
@@ -117,10 +119,10 @@ public class Equipment extends SubCmd {
                 sendCustomFeedbackForSub(p, "model", "feedback-reset");
                 return;
             }
-            if (args.length != 2) {
+            if (args.length != 3) {
                 throw new IllegalArgumentException("Wrong param number");
             }
-            String[] rawKey = args[1].toLowerCase(Locale.ENGLISH).split(":");
+            String[] rawKey = args[2].toLowerCase(Locale.ENGLISH).split(":");
             NamespacedKey key = rawKey.length == 1 ? new NamespacedKey(NamespacedKey.MINECRAFT, rawKey[0]) :
                     new NamespacedKey(rawKey[0], rawKey[1]);
             ItemMeta meta = ItemUtils.getMeta(item);
