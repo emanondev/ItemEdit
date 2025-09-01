@@ -29,7 +29,6 @@ public abstract class SubCmd {
     private final String permission;
     private final String PATH;
     private final YMLConfig config;
-    private final String commandName;
     @Getter
     private final boolean playerOnly;
     private final boolean checkNonNullItem;
@@ -42,14 +41,13 @@ public abstract class SubCmd {
             throw new IllegalArgumentException();
         this.ID = id.toLowerCase(Locale.ENGLISH);
         this.command = command;
-        this.commandName = command.getName();
         this.playerOnly = playerOnly;
         this.checkNonNullItem = checkNonNullItem;
         this.PATH = getCommand().getName() + "." + this.ID + ".";
         config = this.getPlugin().getConfig("commands.yml");
         load();
         this.permission = this.getPlugin().getName().toLowerCase(Locale.ENGLISH) + "."
-                + this.commandName + "." + this.ID;
+                + command.getName() + "." + this.ID;
     }
 
     public @NotNull AbstractCommand getCommand() {
@@ -66,6 +64,10 @@ public abstract class SubCmd {
 
     protected @NotNull ItemStack getItemInHand(@NotNull Player p) {
         return ItemUtils.getHandItem(p);
+    }
+
+    protected void setItemInHand(@NotNull Player p, ItemStack item) {
+        ItemUtils.setHandItem(p, item);
     }
 
     private void load() {
@@ -113,17 +115,18 @@ public abstract class SubCmd {
                 getLanguageStringList(subSubCommand + ".description", null, target)));
     }
 
-    protected <T> void onWrongAlias(String pathMessage, CommandSender sender, IAliasSet<T> set, String... holders) {
-        String msg = getLanguageString(pathMessage, null, sender, holders);
+
+    protected <T> void onWrongAlias(CommandSender sender, IAliasSet<T> set, String... holders) {
+        YMLConfig language = ItemEdit.get().getLanguageConfig(sender);
+        String msg = language.getMessage("generic.wrongalias."+set.getID(),null, holders);
         if (msg == null || msg.isEmpty()) {
             return;
         }
-        YMLConfig language = ItemEdit.get().getLanguageConfig(sender);
         StringBuilder hover = new StringBuilder(language
-                .getMessage("itemedit.listaliases.error-pre-hover", "")).append("\n");
+                .getMessage("generic.wrongalias.error-pre-hover", "")).append("\n");
 
-        String color1 = language.getMessage("itemedit.listaliases.first_color", "");
-        String color2 = language.getMessage("itemedit.listaliases.second_color", "");
+        String color1 = language.getMessage("generic.wrongalias.first_color", "");
+        String color2 = language.getMessage("generic.wrongalias.second_color", "");
         boolean color = true;
         int counter = 0;
         for (T value : set.getValues()) {
@@ -142,7 +145,40 @@ public abstract class SubCmd {
                         "/" + ItemEditCommand.get().getName() + " "
                                 + ItemEdit.get().getConfig("commands.yml")
                                 .getString("itemedit.listaliases.name") + " " + set.getID()))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover.toString()).create())).create());
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover.toString()).create())).create());//TODO fix
+    }
+
+    @Deprecated
+    protected <T> void onWrongAlias(String pathMessage, CommandSender sender, IAliasSet<T> set, String... holders) {
+        String msg = getLanguageString(pathMessage, null, sender, holders);
+        if (msg == null || msg.isEmpty()) {
+            return;
+        }
+        YMLConfig language = ItemEdit.get().getLanguageConfig(sender);
+        StringBuilder hover = new StringBuilder(language
+                .getMessage("wrongalias.error-pre-hover", "")).append("\n");
+
+        String color1 = language.getMessage("wrongalias.first_color", "");
+        String color2 = language.getMessage("wrongalias.second_color", "");
+        boolean color = true;
+        int counter = 0;
+        for (T value : set.getValues()) {
+            String alias = set.getName(value);
+            counter += alias.length() + 1;
+            hover.append(color ? color1 : color2).append(alias);
+            color = !color;
+            if (counter > 30) {
+                counter = 0;
+                hover.append("\n");
+            } else {
+                hover.append(" ");
+            }
+        }
+        Util.sendMessage(sender, new ComponentBuilder(msg).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
+                        "/" + ItemEditCommand.get().getName() + " "
+                                + ItemEdit.get().getConfig("commands.yml")
+                                .getString("itemedit.listaliases.name") + " " + set.getID()))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover.toString()).create())).create());//TODO fix
     }
 
     protected String getLanguageString(String path, String def, CommandSender sender, String... holders) {
@@ -198,7 +234,7 @@ public abstract class SubCmd {
                         ChatColor.stripColor(params))
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + alias + " " + this.name + " " + ChatColor.stripColor(params)))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,//TODO fix
                         new ComponentBuilder(getDescription(target)).create()))
                 .create());
     }

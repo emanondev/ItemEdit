@@ -14,6 +14,7 @@ import emanondev.itemedit.storage.mongo.MongoStorage;
 import emanondev.itemedit.storage.yaml.YmlPlayerStorage;
 import emanondev.itemedit.storage.yaml.YmlServerStorage;
 import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.VersionUtils;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -204,6 +205,9 @@ public class ItemEdit extends APlugin {
     }
 
     private void initCommands() {
+        if (VersionUtils.isVersionAfter(1, 20,5)) {
+            registerCommand(ItemFoodCommand.get(), Collections.singletonList("if"));
+        }
         registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
         registerCommand(new ItemStorageCommand(), Collections.singletonList("is"));
         registerCommand(new ServerItemCommand(), Collections.singletonList("si"));

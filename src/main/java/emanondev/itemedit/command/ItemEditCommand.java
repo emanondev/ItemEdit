@@ -20,8 +20,8 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new Unbreakable(this));
         this.registerSubCommand(() -> new Equipment(this), VersionUtils.isVersionAfter(1, 21, 2)); // 1.20+
         this.registerSubCommand(() -> new RepairCost(this));
-
-        this.registerSubCommand(() -> new Food(this), VersionUtils.isVersionAfter(1, 20, 5));
+        this.registerSubCommand(() -> new SubCmdLink("food", this, true, true, ItemFoodCommand.get())
+                , VersionUtils.isVersionAfter(1, 20, 5));
         this.registerSubCommand(() -> new MaxStackSize(this), VersionUtils.isVersionAfter(1, 20, 5));
         this.registerSubCommand(() -> new MaxDurability(this), VersionUtils.isVersionAfter(1, 20, 5));
         this.registerSubCommand(() -> new FireResistent(this), VersionUtils.isVersionAfter(1, 20, 5));

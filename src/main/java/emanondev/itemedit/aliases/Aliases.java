@@ -50,7 +50,8 @@ public class Aliases {
 
     };
     public static final AliasSet<DyeColor> COLOR = new EnumAliasSet<>("color", DyeColor.class);
-    public static final AliasSet<String> ANIMATION = VersionUtils.isVersionAfter(1, 20, 5) ?
+    public static final AnimationAliases ANIMATION = VersionUtils.isVersionAfter(1, 21, 4) ? new AnimationAliases() : null;
+    public static final AliasSet<String> ANIMATION_OLD = VersionUtils.isVersionInRange(1, 20, 5, 1, 21, 3) ?
             new AliasSet<String>("animations") {
 
                 private final LinkedHashSet<String> values = new LinkedHashSet<>(craftValues());
@@ -111,8 +112,26 @@ public class Aliases {
     public static final SoundAliases SOUND = getSoundAliases();
     public static final AliasSet<EntityType> ENTITY_TYPE = new EnumAliasSet<>(EntityType.class);
     public static final AliasSet<TagContainer<EntityType>> ENTITY_GROUPS =
-            VersionUtils.isVersionAfter(1,21)?
-                    new TagAliasSet<>("entitygroups", EntityType.class, Tag.REGISTRY_ENTITY_TYPES):null;
+            VersionUtils.isVersionAfter(1, 21) ?
+                    new TagAliasSet<>("entitygroups", EntityType.class, Tag.REGISTRY_ENTITY_TYPES) : null;
+    public static final AliasSet<String> CONSUMABLE_EFFECT = VersionUtils.isVersionAfter(1, 21, 4)?new AliasSet<String>("consumable_effect") {
+        @Override
+        public String getName(String value) {
+            return value;
+        }
+
+        @Override
+        public Collection<String> getValues() {
+            return Arrays.asList(
+                    "apply",
+                    "applymany",
+                    "remove",
+                    "clear",
+                    "sound",
+                    "teleport"
+            );
+        }
+    }:null;
 
     private static final Map<String, IAliasSet<?>> types = new HashMap<>();
     private static boolean loaded = false;
@@ -178,7 +197,7 @@ public class Aliases {
         registerAliasType(TRIM_PATTERN);
         registerAliasType(RARITY);
         registerAliasType(EQUIPMENT_SLOTGROUPS);
-        registerAliasType(ANIMATION);
+        registerAliasType(ANIMATION_OLD);
         registerAliasType(SOUND);
         registerAliasType(ENTITY_TYPE);
         registerAliasType(ENTITY_GROUPS);

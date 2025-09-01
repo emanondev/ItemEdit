@@ -1,6 +1,7 @@
 package emanondev.itemedit.command;
 
 import emanondev.itemedit.APlugin;
+import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.utility.CompleteUtility;
@@ -49,8 +50,8 @@ public abstract class AbstractCommand implements TabExecutor {
     /**
      * Creates an AbstractCommand with an optional paginated help system.
      *
-     * @param name         command name (used as label)
-     * @param plugin       plugin instance
+     * @param name          command name (used as label)
+     * @param plugin        plugin instance
      * @param multiPageHelp whether to enable multi-page help system
      */
     public AbstractCommand(@NotNull String name, @NotNull APlugin plugin, boolean multiPageHelp) {
@@ -96,6 +97,7 @@ public abstract class AbstractCommand implements TabExecutor {
         }
         return list;
     }
+
     /**
      * Registers a sub-command.
      *
@@ -128,7 +130,7 @@ public abstract class AbstractCommand implements TabExecutor {
     /**
      * Registers a sub-command conditionally.
      *
-     * @param sub      the supplier of a sub-command
+     * @param sub       the supplier of a sub-command
      * @param condition if true, the command will be registered
      * @return true if the command was registered
      */
@@ -387,62 +389,76 @@ public abstract class AbstractCommand implements TabExecutor {
                     text21 = text2;
                 }
             }
+            YMLConfig langConf = ItemEdit.get().getLanguageConfig(sender);
             comp.retain(ComponentBuilder.FormatRetention.NONE).append(text11);
+
             if (text12 != null) {
                 if (page < maxPage) {
-                    comp.append(getLanguageString("next_text", ">>>>", sender,
+                    comp.append(loadBaseMessage(langConf, "generic.help.next_text", ">>>>", sender,
                                     "%target%", String.valueOf(page + 1), "%page%", String.valueOf(page)))
                             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page + 1)))
                             .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                                     new ComponentBuilder(
-                                            getLanguageString("next_hover", "Go to page %target%", sender,
+                                            loadBaseMessage(langConf, "generic.help.next_hover", "Go to page %target%",
+                                                    sender,
                                                     "%target%", String.valueOf(page + 1),
                                                     "%page%", String.valueOf(page),
                                                     "%max_page%", String.valueOf(maxPage))
-
                                     ).create()));
                 } else {
-                    comp.append(getLanguageString("next_void", ">>>>", sender,
+                    comp.append(loadBaseMessage(langConf, "generic.help.next_void", ">>>>", sender,
                             "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage)));
                 }
                 comp.append(text12).retain(ComponentBuilder.FormatRetention.FORMATTING);
             }
             if (text21 != null) {
                 if (page > 1) {
-                    comp.append(getLanguageString("prev_text", "<<<<", sender,
-                                    "%target%", String.valueOf(page - 1), "%page%", String.valueOf(page)))
+                    comp.append(loadBaseMessage(langConf, "generic.help.prev_text", "<<<<", sender,
+                                    "%target%", String.valueOf(page - 1),
+                                    "%page%", String.valueOf(page),
+                            "%max_page%", String.valueOf(maxPage)))
                             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page - 1)))
                             .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                                     new ComponentBuilder(
-                                            getLanguageString("prev_hover", "Go to page %target%", sender,
+                                            loadBaseMessage(langConf, "generic.help.prev_hover", "Go to page %target%",
+                                                    sender,
                                                     "%target%", String.valueOf(page - 1),
                                                     "%page%", String.valueOf(page),
                                                     "%max_page%", String.valueOf(maxPage))
                                     ).create()));
                 } else {
-                    comp.append(getLanguageString("prev_void", "<<<<", sender,
-                            "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage)));
+                    comp.append(loadBaseMessage(langConf, "generic.help.prev_void", "<<<<", sender,
+                            "%page%", String.valueOf(page),
+                            "%max_page%", String.valueOf(maxPage)));
                 }
                 comp.append(text21).retain(ComponentBuilder.FormatRetention.FORMATTING);
             }
             if (text22 != null) {
                 if (page < maxPage) {
-                    comp.append(getLanguageString("next_text", ">>>>", sender,
-                                    "%target%", String.valueOf(page + 1), "%page%", String.valueOf(page)))
+                    comp.append(loadBaseMessage(langConf, "generic.help.next_text", ">>>>", sender,
+
+                                    "%target%", String.valueOf(page + 1),
+                                    "%page%", String.valueOf(page),
+                                    "%max_page%", String.valueOf(maxPage)))
                             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page + 1)))
                             .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                                     new ComponentBuilder(
-                                            getLanguageString("next_hover", "Go to page %target%", sender,
+                                            loadBaseMessage(langConf, "generic.help.next_hover", "Go to page %target%", sender,
                                                     "%target%", String.valueOf(page + 1),
                                                     "%page%", String.valueOf(page),
                                                     "%max_page%", String.valueOf(maxPage))
                                     ).create()));
                 } else {
-                    comp.append(getLanguageString("next_void", ">>>>", sender,
-                            "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage)));
+                    comp.append(loadBaseMessage(langConf, "generic.help.next_void", ">>>>", sender,
+                            "%page%", String.valueOf(page),
+                            "%max_page%", String.valueOf(maxPage)));
                 }
                 comp.append(text22).retain(ComponentBuilder.FormatRetention.FORMATTING);
             }
+        }
+
+        private String loadBaseMessage(YMLConfig lang, String fullPath, String def, CommandSender sender, String... holders) {
+            return lang.loadMessage(fullPath, def, sender instanceof Player ? (Player) sender : null, true, holders);
         }
 
 

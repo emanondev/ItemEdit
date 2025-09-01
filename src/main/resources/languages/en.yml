@@ -8,11 +8,8 @@ blocked-by-type-restriction-lore: '&4[&cItemEdit&4] &cYou can''t edit lore on th
 blocked-by-lore-line-limit: '&4[&cItemEdit&4] &cYou can''t add more lore lines on this item'
 blocked-by-lore-length-limit: '&4[&cItemEdit&4] &cYou can''t set lines longer than %limit% chars'
 blocked-by-rename-length-limit: '&4[&cItemEdit&4] &cYou can''t set names longer than %limit% chars'
-itemedit:
+generic:
   help:
-    header: "&9&lItemEdit - Help"
-    header-sub: "&9&lItemEdit %sub% - Help"
-    footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
     next_text: " &d&l>&m> >&r "
     prev_text: " &d&l&m< <&d&l< "
     next_void: " &8&l>&m> >&r "
@@ -25,6 +22,190 @@ itemedit:
       - '&e[page] &bhelp page'
       - '&e[subcommand] &bhelp for subcommand'
     params: '[page/subcommand]'
+  error:
+    wrong-effect: '&4[&cItemEdit&4] &cWrong Effect Value! &4[&6hover here&4]'
+    wrong-animation: '&4[&cItemEdit&4] &cWrong Animation Value! &4[&6hover here&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cWrong Sound Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book or book and quill'
+    wrong-path: '&9[&fItemEdit&9] &cInvalid path, remember to reload the configuration and check the CaPs'
+    wrong-flag: '&4[&cItemEdit&4] &cWrong Flag Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a player skull'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be colorable type like leather armors, firework stars, potions or tipped arrows'
+    wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
+    wrong-generation: '&4[&cItemEdit&4] &cWrong Book type Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a potion or a tipped arrow or a suspicious stew'
+    wrong-effect: '&4[&cItemEdit&4] &cWrong Effect Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a banner'
+    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a spawner egg'
+    wrong-entity: '&4[&cItemEdit&4] &cWrong Egg type Value! &4[&6hover here&4]'
+    wrong-attribute: '&4[&cItemEdit&4] &cWrong Attribute Value! &4[&6hover here&4]'
+    wrong-operation: '&4[&cItemEdit&4] &cWrong Operation Value! &4[&6hover here&4]'
+    wrong-equipment: '&4[&cItemEdit&4] &cWrong Equipment Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a tropical fish bucket'
+    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a axolotl bucket'
+    wrong-axolotl: '&4[&cItemEdit&4] &cWrong Axolotl Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a compass'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a goat horn'
+    wrong-sound: '&4[&cItemEdit&4] &cWrong Sound Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be an armor'
+    wrong-material: '&4[&cItemEdit&4] &cWrong Trim Material Value! &4[&6hover here&4]'
+    wrong-pattern: '&4[&cItemEdit&4] &cWrong Trim Pattern Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must be a book or enchanted book'
+    wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
+    wrong-rarity: '&4[&cItemEdit&4] &cWrong Rarity Value! &4[&6hover here&4]'
+    wrong-type: '&4[&cItemEdit&4] &cItem must have a durability like tools and armors'
+    wrong-boolean: '&4[&cItemEdit&4] &cWrong Boolean Value! &4[&6hover here&4]'
+    wrong-sound: '&4[&cItemEdit&4] &cWrong Sound Value! &4[&6hover here&4]'
+    wrong-slot: '&4[&cItemEdit&4] &cWrong Equipment Value! &4[&6hover here&4]'
+    wrong-entitytype: '&4[&cItemEdit&4] &cWrong EntityType Value! &4[&6hover here&4]'
+    wrong-entitygroup: '&4[&cItemEdit&4] &cWrong EntityGroup Value! &4[&6hover here&4]'
+itemfood:
+  help:
+    header: "&9&lItemFood - Help"
+    header-sub: "&9&lItemFood %sub% - Help"
+    footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
+  clear:
+    description:
+      - '&6&lCompletely remove food property on item'
+      - ''
+      - '&bOr restore defaults if item is a vanilla food'
+    params: ''
+  canalwayseat:
+    description:
+      - '&6&lSets whenever the item can be eaten'
+      - ''
+      - '&e[true/false] &bThe value to set, by default toggle'
+      - ''
+      - '&bUsually food require hunger to be eaten,'
+      - '&bsetting true will mimic golden apple behavior'
+    params: '[true/false]'
+  consumeparticles:
+    description:
+      - '&6&lSets whenever the item show particles when eaten'
+      - '&bOnly for &c1.21.2+'
+      - ''
+      - '&e[true/false] &bThe value to set, by default toggle'
+    params: '[true/false]'
+  animation:
+    description:
+      - '&6&lSets eat animation'
+      - '&bOnly for &c1.21.2+'
+      - ''
+      - '&e<animation> &bThe value to set, by default toggle'
+      - ''
+      - '&bSome animations are shown only on first person view,'
+      - '&bsome animations are shown only on third person view,'
+      - '&bsome animations are shown on both first and third person view'
+    params: '<animation>'
+  sound:
+    description:
+      - '&6&lSets eat sound'
+      - '&bOnly for &c1.21.2+'
+      - ''
+      - '&e<sound> &bThe value to set'
+    params: '<sound>'
+  eatticks:
+    description:
+      - '&6&lSets the time required to eat the item'
+      - ''
+      - '&e<ticks> &bThe amount of time to eat the item'
+      - '  &bmust be &e1 &bor bigger'
+      - ''
+      - '&e20 &bticks = &e1 &bsecond'
+    params: '<ticks>'
+  nutrition:
+    description:
+      - '&6&lSets recovered nutrition'
+      - ''
+      - '&e<amount> &bThe amount hunger to restore'
+      - '  &bmust be &e0 &bor bigger'
+      - ''
+      - '&bA full hunger bar is &e20'
+    params: '<amount>'
+  saturation:
+    description:
+      - '&6&lSets recovered saturation'
+      - ''
+      - '&e<amount> &bThe amount saturation to add'
+      - '  &bnegative values are allowed'
+      - ''
+      - '&bSaturation controls how fast food level'
+      - '&b  (nutrition) decrease'
+    params: '<amount>'
+  addeffect:
+    description:
+      - '&6&lAdd an effect to the item'
+      - ''
+      - '&e<type> &bThe potion effect type'
+      - '&e<duration> &bDuration as seconds of the effect'
+      - '  &btype &einfinite &bfor permanent effect'
+      - '&e[level] &blevel of the effect, &e1&b by default'
+      - '&e[particles] &bthe effect show particles?'
+      - '&e[ambient] &bthe effect is ambient?'
+      - '&e[icon] &bthe effect show icon on top right corner?'
+      - '&e[chance] &bwhat''s the % chance to apply the effect?'
+      - '  &bmust be bigger than &e0&b and lower equals to &e100'
+    params: '<type> <duration> [level] [particles] [ambient] [icon] [chance]'
+  removeeffect:
+    description:
+      - '&6&lRemove an effect from the item'
+      - ''
+      - '&e<type> &bThe potion effect type'
+      - '&e[level] &blevel of the effect to remove'
+      - '  &bif omitted remove all the effects of selected'
+      - '  &btype regardless of level'
+    params: '<type> [level]'
+  cleareffects:
+    description:
+      - '&6&lRemove effects from the item'
+    params: ''
+  info:
+    not_food: "&9[&fItemEdit&9] &bItem has no food property or has default property"
+    message:
+      - '&9[&fItemEdit&9] &2&lItem Food Property'
+      - '&aEat time: &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
+      - '&aRestore Hunger: &e%nutrition% &8| &aSaturation: &e%saturation%&a '
+      - '&aAnimation: &e%animation% &8| &aSound: &e%sound% &8| &aParticles: &e%consumeparticles%'
+      - '&aEatable when full: &e%canalwayseat% &8| &aWhen eaten obtain: &e%convertto%'
+    apply_effect_prefix:
+      - '&2&lContains &e&l%effects%&2&l possible potion effects:'
+    apply_effect:
+      - '&a%index%. Type: &e&b%type% &8| &aLv: &e%level% &8| &aDuration: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
+      - '&a   Particles: &e%hasparticle% &8| &aAmbient: &e%isambient% &8| &aIcon: &e%hasicon% &8| &aChance: &e%chance_perc%&a%'
+    description:
+      - '&6&lDescribe current food info for item'
+    params: ''
+  convertto:
+    description:
+      - '&6&lSets an item give when food is consumed'
+      - '&bOnly for &c1.21+'
+      - ''
+      - '&e[type/serveritem id] &bthe item to return'
+      - '  &byou can set a Material or you can'
+      - '  &bselect an item from ServerItem saved items'
+      - ''
+      - '&bMimic bucket milk behavior where a bucket is'
+      - '&breturned when milk is consumed'
+    params: '[type/serveritem id]'
+itemedit:
+  help:
+    header: "&9&lItemEdit - Help"
+    header-sub: "&9&lItemEdit %sub% - Help"
+    footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
+  food:
+    description:
+      - '&6&lSets food property of the item'
+      - ''
+      - '&bTip: Use /itemfood or /if'
+      - '&bN.B. your drinkable items cannot be eaten'
   rename:
     description:
       - '&6&lSet item''s name'
@@ -63,11 +244,9 @@ itemedit:
     copy:
       feedback: '&9[&fItemEdit&9] &aLore copied'
     copyBook:
-      wrong-type: '&4[&cItemEdit&4] &cItem must be a written book or book and quill'
       feedback: '&9[&fItemEdit&9] &aBook pages copied, and ready to be pasted'
     copyFile:
       no-path: '&4[&cItemEdit&4] &cSelect a path /ie lore copyfile &6<path>'
-      wrong-path: '&9[&fItemEdit&9] &cInvalid path, remember to reload the configuration and check the CaPs'
       feedback: '&9[&fItemEdit&9] &aConfiguration copied, and ready to be pasted'
     paste:
       feedback: '&9[&fItemEdit&9] &aLore pasted'
@@ -86,7 +265,6 @@ itemedit:
         - '&bExample 2: &e/ie lore replace {Heavy} {Very light}'
         - '&b''&eHeavy sword&b'' -> ''&eVery light sword&b'''
   hide:
-    wrong-flag: '&4[&cItemEdit&4] &cWrong Flag Value! &4[&6hover here&4]'
     description:
       - '&6&lHide or show components'
       - ''
@@ -133,7 +311,6 @@ itemedit:
       - '&b from item current amount'
     params: '<amount>'
   skullowner:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a player skull'
     description:
       - '&6&lSet skull owner'
       - ''
@@ -143,7 +320,6 @@ itemedit:
       - '&b&lTip: &bPlace and break the skull to update skins'
     params: '<name>'
   color:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be colorable type like leather armors, firework stars, potions or tipped arrows'
     description:
       - '&6&lSet color'
       - ''
@@ -154,7 +330,6 @@ itemedit:
       - '&bIf you are confused google "&eRGB color picker&b"'
     params: '[red (0-255)] [green (0-255)] [blue (0-255)]'
   enchant:
-    wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
     description:
       - '&6&lSet enchants'
       - ''
@@ -164,15 +339,12 @@ itemedit:
       - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
     params: '<enchant> [level]'
   booktype:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
-    wrong-generation: '&4[&cItemEdit&4] &cWrong Book type Value! &4[&6hover here&4]'
     description:
       - '&6&lSet book type'
       - ''
       - '&bWorks only on Written books'
     params: '<booktype>'
   bookauthor:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a written book'
     description:
       - '&6&lSet author'
       - ''
@@ -180,8 +352,6 @@ itemedit:
       - '&bWorks only on Written books'
     params: '<name>'
   potioneffect:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a potion or a tipped arrow or a suspicious stew'
-    wrong-effect: '&4[&cItemEdit&4] &cWrong Effect Value! &4[&6hover here&4]'
     itemtag-tip: '&9[&fItemEdit&9] &bYou need to add potion effects to common items? try >ItemTag<'
     itemtag-tip-hover:
       - '&6Click me'
@@ -209,9 +379,6 @@ itemedit:
       description:
         - '&6&lRemove selected effect'
   banner:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a banner'
-    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
     description:
       - '&6&lEdit banner'
     set:
@@ -231,20 +398,16 @@ itemedit:
       description:
         - '&6&lChange pattern color on selected line'
   fireworkpower:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
     description:
       - '&6&lSet firework power'
       - ''
       - '&e<power> &bpower of the firework, a value betwheen &e0 &band &e5'
     params: '<power>'
   firework:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a firework'
     description:
       - '&6&lEdit firework'
     params: ''
   spawnereggtype:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a spawner egg'
-    wrong-entity: '&4[&cItemEdit&4] &cWrong Egg type Value! &4[&6hover here&4]'
     description:
       - '&6&lSet type of entity spawned by spawner egg'
       - ''
@@ -252,9 +415,6 @@ itemedit:
       - '&bOnly some entity type are spawnable by eggs'
     params: '<type>'
   attribute:
-    wrong-attribute: '&4[&cItemEdit&4] &cWrong Attribute Value! &4[&6hover here&4]'
-    wrong-operation: '&4[&cItemEdit&4] &cWrong Operation Value! &4[&6hover here&4]'
-    wrong-equipment: '&4[&cItemEdit&4] &cWrong Equipment Value! &4[&6hover here&4]'
     description:
       - '&6&lEdit attribute modifiers'
       - ''
@@ -279,9 +439,6 @@ itemedit:
         - '&e<attribute/slot> &btype to remove, any modifiers with'
         - '&b                 selected value are removed'
   tropicalfish:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a tropical fish bucket'
-    wrong-color: '&4[&cItemEdit&4] &cWrong Color Value! &4[&6hover here&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &cWrong Pattern Value! &4[&6hover here&4]'
     description:
       - '&6&lSet property of tropical fish bucket'
       - ''
@@ -335,8 +492,6 @@ itemedit:
       - '  /assets/&e<namespace>&b/models/item/&e<id>'
     params: '<namespaced key>'
   axolotlvariant:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a axolotl bucket'
-    wrong-axolotl: '&4[&cItemEdit&4] &cWrong Axolotl Value! &4[&6hover here&4]'
     description:
       - '&6&lEdit Axolotl Variant on Axolotl bucket'
       - ''
@@ -356,7 +511,6 @@ itemedit:
     hover_type: '&6Click to examine'
     error-pre-hover: "&6&lAliases:"
   compass:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a compass'
     description:
       - '&6&lSet compass target location'
       - ''
@@ -368,17 +522,12 @@ itemedit:
     clear:
       feedback: '&9[&fItemEdit&9] &aCompass target cleared'
   goathornsound:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a goat horn'
-    wrong-sound: '&4[&cItemEdit&4] &cWrong Sound Value! &4[&6hover here&4]'
     description:
       - '&6&lSet Goat Horn sound'
       - ''
       - '&e<type> &bthe type of sound'
     params: '<type>'
   armortrim:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be an armor'
-    wrong-material: '&4[&cItemEdit&4] &cWrong Trim Material Value! &4[&6hover here&4]'
-    wrong-pattern: '&4[&cItemEdit&4] &cWrong Trim Pattern Value! &4[&6hover here&4]'
     description:
       - '&6&lSet Armor Trim'
       - ''
@@ -386,8 +535,6 @@ itemedit:
       - '&e<pattern> &bthe trim pattern'
     params: '<material> <pattern>'
   bookenchant:
-    wrong-type: '&4[&cItemEdit&4] &cItem must be a book or enchanted book'
-    wrong-enchant: '&4[&cItemEdit&4] &cWrong Enchant Value! &4[&6hover here&4]'
     description:
       - '&6&lSet enchants on the book'
       - '&bThe difference between enchant and bookenchant is that'
@@ -433,7 +580,6 @@ itemedit:
       - '&b values for a few items'
     params: '[1-99/default]'
   rarity:
-    wrong-rarity: '&4[&cItemEdit&4] &cWrong Rarity Value! &4[&6hover here&4]'
     description:
       - '&6&lSets item rarity'
       - ''
@@ -442,146 +588,11 @@ itemedit:
       - '&b&lTip: setting no rarity value will restore default'
     params: '[rarity]'
   maxdurability:
-    wrong-type: '&4[&cItemEdit&4] &cItem must have a durability like tools and armors'
     description:
       - '&6&lSets item max durability'
       - ''
       - '&e<max durability> &bitem new durability value, must be bigger than 1'
     params: '<max durability>'
-  food:
-    help-header: '&9&lItemEdit Food - Help'
-    wrong-effect: '&4[&cItemEdit&4] &cWrong Effect Value! &4[&6hover here&4]'
-    wrong-animation: '&4[&cItemEdit&4] &cWrong Animation Value! &4[&6hover here&4]'
-    wrong-sound: '&4[&cItemEdit&4] &cWrong Sound Value! &4[&6hover here&4]'
-    description:
-      - '&6&lSets food property of the item'
-      - ''
-      - '&bN.B. your drinkable items cannot be eaten'
-      - '&bTip: type &e/ie food&b for more info'
-    params: '[...]'
-    clear:
-      description:
-        - '&6&lCompletely remove food property on item'
-        - ''
-        - '&bOr restore defaults if item is a vanilla food'
-      params: ''
-    canalwayseat:
-      description:
-        - '&6&lSets whenever the item can be eaten'
-        - ''
-        - '&e[true/false] &bThe value to set, by default toggle'
-        - ''
-        - '&bUsually food require hunger to be eaten,'
-        - '&bsetting true will mimic golden apple behavior'
-      params: '[true/false]'
-    consumeparticles:
-      description:
-        - '&6&lSets whenever the item show particles when eaten'
-        - '&bOnly for &c1.21.2+'
-        - ''
-        - '&e[true/false] &bThe value to set, by default toggle'
-      params: '[true/false]'
-    animation:
-      description:
-        - '&6&lSets eat animation'
-        - '&bOnly for &c1.21.2+'
-        - ''
-        - '&e<animation> &bThe value to set, by default toggle'
-        - ''
-        - '&bSome animations are shown only on first person view,'
-        - '&bsome animations are shown only on third person view,'
-        - '&bsome animations are shown on both first and third person view'
-      params: '<animation>'
-    sound:
-      description:
-        - '&6&lSets eat sound'
-        - '&bOnly for &c1.21.2+'
-        - ''
-        - '&e<sound> &bThe value to set'
-      params: '<sound>'
-    eatticks:
-      description:
-        - '&6&lSets the time required to eat the item'
-        - ''
-        - '&e<ticks> &bThe amount of time to eat the item'
-        - '  &bmust be &e1 &bor bigger'
-        - ''
-        - '&e20 &bticks = &e1 &bsecond'
-      params: '<ticks>'
-    nutrition:
-      description:
-        - '&6&lSets recovered nutrition'
-        - ''
-        - '&e<amount> &bThe amount hunger to restore'
-        - '  &bmust be &e0 &bor bigger'
-        - ''
-        - '&bA full hunger bar is &e20'
-      params: '<amount>'
-    saturation:
-      description:
-        - '&6&lSets recovered saturation'
-        - ''
-        - '&e<amount> &bThe amount saturation to add'
-        - '  &bnegative values are allowed'
-        - ''
-        - '&bSaturation controls how fast food level'
-        - '&b  (nutrition) decrease'
-      params: '<amount>'
-    addeffect:
-      description:
-        - '&6&lAdd an effect to the item'
-        - ''
-        - '&e<type> &bThe potion effect type'
-        - '&e<duration> &bDuration as seconds of the effect'
-        - '  &btype &einfinite &bfor permanent effect'
-        - '&e[level] &blevel of the effect, &e1&b by default'
-        - '&e[particles] &bthe effect show particles?'
-        - '&e[ambient] &bthe effect is ambient?'
-        - '&e[icon] &bthe effect show icon on top right corner?'
-        - '&e[chance] &bwhat''s the % chance to apply the effect?'
-        - '  &bmust be bigger than &e0&b and lower equals to &e100'
-      params: '<type> <duration> [level] [particles] [ambient] [icon] [chance]'
-    removeeffect:
-      description:
-        - '&6&lRemove an effect from the item'
-        - ''
-        - '&e<type> &bThe potion effect type'
-        - '&e[level] &blevel of the effect to remove'
-        - '  &bif omitted remove all the effects of selected'
-        - '  &btype regardless of level'
-      params: '<type> [level]'
-    cleareffects:
-      description:
-        - '&6&lRemove effects from the item'
-      params: ''
-    info:
-      not_food: "&9[&fItemEdit&9] &bItem has no food property or has default property"
-      message:
-        - '&9[&fItemEdit&9] &2&lItem Food Property'
-        - '&aEat time: &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
-        - '&aRestore Hunger: &e%nutrition% &8| &aSaturation: &e%saturation%&a '
-        - '&aAnimation: &e%animation% &8| &aSound: &e%sound% &8| &aParticles: &e%consumeparticles%'
-        - '&aEatable when full: &e%canalwayseat% &8| &aWhen eaten obtain: &e%convertto%'
-      apply_effect_prefix:
-        - '&2&lContains &e&l%effects%&2&l possible potion effects:'
-      apply_effect:
-        - '&a%index%. Type: &e&b%type% &8| &aLv: &e%level% &8| &aDuration: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
-        - '&a   Particles: &e%hasparticle% &8| &aAmbient: &e%isambient% &8| &aIcon: &e%hasicon% &8| &aChance: &e%chance_perc%&a%'
-      description:
-        - '&6&lDescribe current food info for item'
-      params: ''
-    convertto:
-      description:
-        - '&6&lSets an item give when food is consumed'
-        - '&bOnly for &c1.21+'
-        - ''
-        - '&e[type/serveritem id] &bthe item to return'
-        - '  &byou can set a Material or you can'
-        - '  &bselect an item from ServerItem saved items'
-        - ''
-        - '&bMimic bucket milk behavior where a bucket is'
-        - '&breturned when milk is consumed'
-      params: '[type/serveritem id]'
   glider:
     description:
       - '&6&lSet Glider state'
@@ -605,11 +616,6 @@ itemedit:
       - '&band <namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
   equipment:
-    wrong-boolean: '&4[&cItemEdit&4] &cWrong Boolean Value! &4[&6hover here&4]'
-    wrong-sound: '&4[&cItemEdit&4] &cWrong Sound Value! &4[&6hover here&4]'
-    wrong-slot: '&4[&cItemEdit&4] &cWrong Equipment Value! &4[&6hover here&4]'
-    wrong-entitytype: '&4[&cItemEdit&4] &cWrong EntityType Value! &4[&6hover here&4]'
-    wrong-entitygroup: '&4[&cItemEdit&4] &cWrong EntityGroup Value! &4[&6hover here&4]'
     description:
       - '&6&lSets equipment property of the item'
       - ''

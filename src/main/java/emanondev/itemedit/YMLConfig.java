@@ -304,6 +304,11 @@ public class YMLConfig extends YamlConfiguration {
     @Contract("_, !null, _, _, _ -> !null")
     public @Nullable String loadMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
                                         boolean color, String... args) {
+        setComments(path, args);
+        return UtilsString.fix(load(path, def, String.class), target, color, args);
+    }
+
+    private void setComments(@NotNull String path, String[] args) {
         if (args.length > 0) {
             if (VersionUtils.isVersionAfter(1, 18, 1)) {
                 if (getComments(path).isEmpty()) {
@@ -314,7 +319,6 @@ public class YMLConfig extends YamlConfiguration {
                 }
             }
         }
-        return UtilsString.fix(load(path, def, String.class), target, color, args);
     }
 
     /**
@@ -331,16 +335,7 @@ public class YMLConfig extends YamlConfiguration {
     @Contract("_, !null, _, _, _ -> !null")
     public @Nullable String getMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
                                        boolean color, String... args) {
-        if (args.length > 0) {
-            if (VersionUtils.isVersionAfter(1, 18, 1)) {
-                if (getComments(path).isEmpty()) {
-                    StringBuilder build = new StringBuilder();
-                    for (int i = 0; i < args.length; i += 2)
-                        build.append(args[i]).append(" ");
-                    this.setComments(path, Collections.singletonList(build.substring(0, build.length() - 1)));
-                }
-            }
-        }
+        setComments(path, args);
         return UtilsString.fix(get(path, def, String.class), target, color, args);
     }
 
