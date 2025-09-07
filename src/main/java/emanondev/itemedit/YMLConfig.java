@@ -341,6 +341,23 @@ public class YMLConfig extends YamlConfiguration {
 
     /**
      * Get String value.<br>
+     *
+     * @param path   yaml path on file
+     * @param def    default value
+     * @param target target user for papi support
+     * @param args   holders and replacer
+     * @return the value found or default if none
+     * @see #get(String, Object, Class)
+     */
+    @Contract("_, !null, _, _, _ -> !null")
+    public @Nullable String getMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
+                                       String... args) {
+        setComments(path, args);
+        return UtilsString.fix(get(path, def, String.class), target, true, args);
+    }
+
+    /**
+     * Get String value.<br>
      * target = null
      *
      * @param path  yaml path on file

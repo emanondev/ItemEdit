@@ -1,5 +1,6 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.utility.TagContainer;
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.DyeColor;
@@ -14,13 +15,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public class Aliases {
 
     public static final EnchAliases ENCHANT = getEnchAliases();
     public static final AliasSet<PatternType> PATTERN_TYPE = getPatternAlias();
     public static final GenAliases BOOK_TYPE = getGenAliases();
-    public static final AliasSet<PotionEffectType> POTION_EFFECT = new AliasSet<PotionEffectType>("potion_effect") {
+    public static final AliasSet<PotionEffectType> POTION_EFFECT = new AliasSet<PotionEffectType>("potion_effect", ItemEdit.get()) {
 
         private final Collection<PotionEffectType> values = grabValues();
 
@@ -49,10 +51,10 @@ public class Aliases {
         }
 
     };
-    public static final AliasSet<DyeColor> COLOR = new EnumAliasSet<>("color", DyeColor.class);
+    public static final AliasSet<DyeColor> COLOR = new EnumAliasSet<>("color", ItemEdit.get(), DyeColor.class);
     public static final AnimationAliases ANIMATION = VersionUtils.isVersionAfter(1, 21, 4) ? new AnimationAliases() : null;
     public static final AliasSet<String> ANIMATION_OLD = VersionUtils.isVersionInRange(1, 20, 5, 1, 21, 3) ?
-            new AliasSet<String>("animations") {
+            new AliasSet<String>("animations", ItemEdit.get()) {
 
                 private final LinkedHashSet<String> values = new LinkedHashSet<>(craftValues());
 
@@ -72,7 +74,7 @@ public class Aliases {
                 }
             } : null;
     public static final EggTypeAliases EGG_TYPE = getEggTypeAliases();
-    public static final AliasSet<ItemFlag> FLAG_TYPE = new EnumAliasSet<ItemFlag>("flag_type", ItemFlag.class) {
+    public static final AliasSet<ItemFlag> FLAG_TYPE = new EnumAliasSet<ItemFlag>("flag_type", ItemEdit.get(), ItemFlag.class) {
         @Override
         public String getName(ItemFlag type) {
             String name = type.name().toLowerCase(Locale.ENGLISH);
@@ -82,7 +84,7 @@ public class Aliases {
             return name;
         }
     };
-    public static final AliasSet<Boolean> BOOLEAN = new AliasSet<Boolean>("boolean") {
+    public static final AliasSet<Boolean> BOOLEAN = new AliasSet<Boolean>("boolean", ItemEdit.get()) {
 
         @Override
         public String getName(Boolean value) {
@@ -96,7 +98,7 @@ public class Aliases {
 
     };
     public static final AliasSet<EquipmentSlot> EQUIPMENT_SLOTS =
-            new EnumAliasSet<>("equip_slot", EquipmentSlot.class);
+            new EnumAliasSet<>("equip_slot", ItemEdit.get(), EquipmentSlot.class);
     public static final AttributeAliases ATTRIBUTE = getAttributeAliases();
     public static final OperationAliases OPERATIONS = getAttributeOperationAliases();
     public static final RarityAliases RARITY = getRarityAliases();
@@ -104,34 +106,35 @@ public class Aliases {
     public static final TrimMaterialAliases TRIM_MATERIAL = getTrimMaterialAliases();
     public static final TrimPatternAliases TRIM_PATTERN = getTrimPatternAliases();
     public static final EnumAliasSet<FireworkEffect.Type> FIREWORK_TYPE =
-            new EnumAliasSet<>("firework_type", FireworkEffect.Type.class);
+            new EnumAliasSet<>("firework_type", ItemEdit.get(), FireworkEffect.Type.class);
     public static final AxolotlVariantAliases AXOLOTL_VARIANT = getAxolotlVariantAliases();
     public static final GoatHornSoundAliases GOAT_HORN_SOUND = getGoatHornSoundAliases();
     public static final EquipmentSlotGroupAliases EQUIPMENT_SLOTGROUPS =
             VersionUtils.isVersionAfter(1, 21) ? new EquipmentSlotGroupAliases() : null;
     public static final SoundAliases SOUND = getSoundAliases();
-    public static final AliasSet<EntityType> ENTITY_TYPE = new EnumAliasSet<>(EntityType.class);
+    public static final AliasSet<EntityType> ENTITY_TYPE = new EnumAliasSet<>(ItemEdit.get(), EntityType.class);
     public static final AliasSet<TagContainer<EntityType>> ENTITY_GROUPS =
             VersionUtils.isVersionAfter(1, 21) ?
-                    new TagAliasSet<>("entitygroups", EntityType.class, Tag.REGISTRY_ENTITY_TYPES) : null;
-    public static final AliasSet<String> CONSUMABLE_EFFECT = VersionUtils.isVersionAfter(1, 21, 4)?new AliasSet<String>("consumable_effect") {
-        @Override
-        public String getName(String value) {
-            return value;
-        }
+                    new TagAliasSet<>("entitygroups", ItemEdit.get(), EntityType.class, Tag.REGISTRY_ENTITY_TYPES) : null;
+    public static final AliasSet<String> CONSUMABLE_EFFECT = VersionUtils.isVersionAfter(1, 21, 4) ?
+            new AliasSet<String>("consumable_effect", ItemEdit.get()) {
+                @Override
+                public String getName(String value) {
+                    return value;
+                }
 
-        @Override
-        public Collection<String> getValues() {
-            return Arrays.asList(
-                    "apply",
-                    "applymany",
-                    "remove",
-                    "clear",
-                    "sound",
-                    "teleport"
-            );
-        }
-    }:null;
+                @Override
+                public Collection<String> getValues() {
+                    return Arrays.asList(
+                            "apply",
+                            "applymany",
+                            "remove",
+                            "clear",
+                            "sound",
+                            "teleport"
+                    );
+                }
+            } : null;
 
     private static final Map<String, IAliasSet<?>> types = new HashMap<>();
     private static boolean loaded = false;
@@ -215,6 +218,25 @@ public class Aliases {
             throw new IllegalArgumentException("Duplicate id");
         }
         types.put(set.getID(), set);
+    }
+
+    public static <T> void registerAliasType(@Nullable Supplier<IAliasSet<T>> supplier) {
+        registerAliasType(supplier, false);
+    }
+
+    public static <T> void registerAliasType(@Nullable Supplier<IAliasSet<T>> supplier, boolean forced) {
+        if (supplier == null) {
+            return;
+        }
+        try {
+            IAliasSet<T> set = supplier.get();
+            if (!forced && types.containsKey(set.getID())) {
+                throw new IllegalArgumentException("Duplicate id");
+            }
+            types.put(set.getID(), set);
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 
     public static IAliasSet<?> getAliasType(@NotNull String id) {

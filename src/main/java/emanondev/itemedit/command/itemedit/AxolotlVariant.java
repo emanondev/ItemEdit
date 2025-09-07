@@ -32,7 +32,7 @@ public class AxolotlVariant extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof AxolotlBucketMeta)) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_axolotl_bucket", null, p));
             return;
         }
 
@@ -43,7 +43,7 @@ public class AxolotlVariant extends SubCmd {
             AxolotlBucketMeta meta = (AxolotlBucketMeta) ItemUtils.getMeta(item);
             Axolotl.Variant type = Aliases.AXOLOTL_VARIANT.convertAlias(args[1]);
             if (type == null) {
-                onWrongAlias("wrong-axolotl", p, Aliases.AXOLOTL_VARIANT);
+                onWrongAlias(p, Aliases.AXOLOTL_VARIANT);
                 onFail(p, alias);
                 return;
             }

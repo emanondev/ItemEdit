@@ -240,7 +240,7 @@ public class Lore extends SubCmd {
         if (item.hasItemMeta()) {
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             if (!(itemMeta instanceof BookMeta)) {
-                Util.sendMessage(p, this.getLanguageString("copyBook.wrong-type", null, p));
+                Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_writable_book", null, p));
                 return;
             }
             BookMeta meta = (BookMeta) itemMeta;

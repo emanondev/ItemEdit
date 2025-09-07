@@ -34,7 +34,7 @@ public class Banner extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof BannerMeta)) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_banner", null, p));
             return;
         }
         if (args.length == 1) {
@@ -68,7 +68,7 @@ public class Banner extends SubCmd {
             PatternType type = meta.getPattern(id).getPattern();
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (color == null) {
-                onWrongAlias("wrong-color", p, Aliases.COLOR);
+                onWrongAlias(p, Aliases.COLOR);
                 sendFailFeedbackForSub(p, alias, "color");
                 return;
             }
@@ -102,10 +102,10 @@ public class Banner extends SubCmd {
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (type == null || color == null) {
                 if (type == null) {
-                    onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
+                    onWrongAlias(p, Aliases.PATTERN_TYPE);
                 }
                 if (color == null) {
-                    onWrongAlias("wrong-color", p, Aliases.COLOR);
+                    onWrongAlias(p, Aliases.COLOR);
                 }
                 sendFailFeedbackForSub(p, alias, "set");
                 return;
@@ -126,10 +126,10 @@ public class Banner extends SubCmd {
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (type == null || color == null) {
                 if (type == null) {
-                    onWrongAlias("wrong-pattern", p, Aliases.PATTERN_TYPE);
+                    onWrongAlias(p, Aliases.PATTERN_TYPE);
                 }
                 if (color == null) {
-                    onWrongAlias("wrong-color", p, Aliases.COLOR);
+                    onWrongAlias(p, Aliases.COLOR);
                 }
                 sendFailFeedbackForSub(p, alias, "add");
                 return;

@@ -102,9 +102,9 @@ public abstract class SubCmd {
     }
 
     protected void sendCustomFeedbackForSub(CommandSender target,
-                                      @NotNull String subSubCommand,
-                                      @NotNull String feedbackPath,
-                                      String... holders) {
+                                            @NotNull String subSubCommand,
+                                            @NotNull String feedbackPath,
+                                            String... holders) {
         Util.sendMessage(target, this.getLanguageString(subSubCommand + "." + feedbackPath, null, target, holders));
     }
 
@@ -118,7 +118,7 @@ public abstract class SubCmd {
 
     protected <T> void onWrongAlias(CommandSender sender, IAliasSet<T> set, String... holders) {
         YMLConfig language = ItemEdit.get().getLanguageConfig(sender);
-        String msg = language.getMessage("generic.wrongalias."+set.getID(),null, holders);
+        String msg = language.getMessage("generic.wrongalias." + set.getID(), null, holders);
         if (msg == null || msg.isEmpty()) {
             return;
         }

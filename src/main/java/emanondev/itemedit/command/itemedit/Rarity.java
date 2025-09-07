@@ -31,7 +31,7 @@ public class Rarity extends SubCmd {
             }
             ItemRarity rarity = args.length == 1 ? null : Aliases.RARITY.convertAlias(args[1]);
             if (rarity == null && args.length != 1) {
-                onWrongAlias("wrong-rarity", p, Aliases.RARITY);
+                onWrongAlias(p, Aliases.RARITY);
                 onFail(p, alias);
                 return;
             }

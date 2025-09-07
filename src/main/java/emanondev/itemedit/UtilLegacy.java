@@ -18,7 +18,7 @@ public final class UtilLegacy {
         double durationSecs = readPotionDurationSeconds(value);
 
         // Seconds to ticks : *20
-        if(durationSecs >= 0) {
+        if (durationSecs >= 0) {
             return (int) (durationSecs * 20);
         }
 
@@ -29,17 +29,18 @@ public final class UtilLegacy {
     /**
      * This method accepts <code>infinite</code>,<code>∞</code>, <code>instant</code> or any number as valid input.<br>
      * It transforms a string into a floating-point value in seconds.
+     *
      * @param value The raw value to be interpreted, values below <code>0</code> are treated as infinite.
      * @return a duration, in seconds.
      * @throws NumberFormatException When value cannot be interpreted to a valid double.
      */
     private static double readPotionDurationSeconds(@NotNull String value) {
         // Infinite duration.
-        if(value.equalsIgnoreCase("infinite") || value.equalsIgnoreCase("∞")) {
+        if (value.equalsIgnoreCase("infinite") || value.equalsIgnoreCase("∞")) {
             return -1;
         }
         // zero-duration.
-        if(value.equalsIgnoreCase("instant")) {
+        if (value.equalsIgnoreCase("instant")) {
             return 0;
         }
         // Normal duration.

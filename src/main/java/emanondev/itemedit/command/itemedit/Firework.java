@@ -24,7 +24,7 @@ public class Firework extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof FireworkMeta)) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_firework", null, p));
             return;
         }
 

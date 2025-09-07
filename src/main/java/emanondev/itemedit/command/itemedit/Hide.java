@@ -40,7 +40,7 @@ public class Hide extends SubCmd {
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             ItemFlag flag = Aliases.FLAG_TYPE.convertAlias(args[1]);
             if (flag == null) {
-                onWrongAlias("wrong-flag", p, Aliases.FLAG_TYPE);
+                onWrongAlias(p, Aliases.FLAG_TYPE);
                 onFail(p, alias);
                 return;
             }

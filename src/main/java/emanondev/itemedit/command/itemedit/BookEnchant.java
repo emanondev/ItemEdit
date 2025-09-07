@@ -31,7 +31,7 @@ public class BookEnchant extends SubCmd {
             item.setType(Material.ENCHANTED_BOOK);
         }
         if (!(item.getItemMeta() instanceof EnchantmentStorageMeta)) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_enchantment_storage", null, p));
             return;
         }
         try {
@@ -42,7 +42,7 @@ public class BookEnchant extends SubCmd {
             int lv = 1;
             Enchantment ench = Aliases.ENCHANT.convertAlias(args[1]);
             if (ench == null) {
-                onWrongAlias("wrong-enchant", p, Aliases.ENCHANT);
+                onWrongAlias(p, Aliases.ENCHANT);
                 onFail(p, alias);
                 return;
             }

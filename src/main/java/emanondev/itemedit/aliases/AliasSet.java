@@ -1,7 +1,9 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.APlugin;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.YMLConfig;
+import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -9,21 +11,34 @@ import java.util.*;
 public abstract class AliasSet<T> implements IAliasSet<T> {
 
     private static final YMLConfig config = ItemEdit.get().getConfig("aliases.yml");
-    private final String path;
+    @Getter
+    private final String id;
     private final HashMap<String, T> map = new HashMap<>();
+    @Getter
+    private final APlugin plugin;
 
-    public AliasSet(String path) {
-        this.path = path.toLowerCase(Locale.ENGLISH);
+    @Deprecated
+    public AliasSet(String id) {
+        this(id, null);
     }
 
+    public AliasSet(String id, APlugin plugin) {
+        this.id = id.toLowerCase(Locale.ENGLISH);
+        this.plugin = plugin == null ? ItemEdit.get() : plugin;
+    }
+
+    /**
+     * @see #getId()
+     */
+    @Deprecated
     public String getID() {
-        return path;
+        return id;
     }
 
     public void reload() {
         map.clear();
         for (T value : getValues()) {
-            String path = this.path + "." + getPathName(value);
+            String path = this.id + "." + getPathName(value);
             String val = config.getString(path, null);
             boolean ok = true;
             if (val == null || val.isEmpty()) {
@@ -88,7 +103,7 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
         }
         alias = alias.replace(" ", "_").toLowerCase(Locale.ENGLISH);
 
-        String path = this.path + "." + getPathName(obj);
+        String path = this.id + "." + getPathName(obj);
         if (alias.equals(config.get(path))) {
             return;
         }

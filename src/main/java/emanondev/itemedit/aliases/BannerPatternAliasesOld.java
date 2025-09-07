@@ -1,5 +1,6 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.block.banner.PatternType;
 
@@ -11,7 +12,7 @@ public class BannerPatternAliasesOld extends AliasSet<PatternType> implements Ba
     private final HashSet<PatternType> values = new HashSet<>();
 
     public BannerPatternAliasesOld() {
-        super("banner_pattern");
+        super("banner_pattern", ItemEdit.get());
         for (PatternType type : ItemUtils.getPatternTypesFiltered()) {
             registerValue(type);
         }

@@ -1,5 +1,6 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.ItemEdit;
 import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 public class GoatHornSoundAliases extends AliasSet<MusicInstrument> {
 
     public GoatHornSoundAliases() {
-        super("goat_horn_sound");
+        super("goat_horn_sound", ItemEdit.get());
         try {//force load the class or throw an exception if absent
             Registry.INSTRUMENT.stream().collect(Collectors.toList());
         } catch (Throwable t) {

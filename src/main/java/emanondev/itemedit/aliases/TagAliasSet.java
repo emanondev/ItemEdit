@@ -1,5 +1,6 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.APlugin;
 import emanondev.itemedit.utility.TagContainer;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -18,8 +19,15 @@ public class TagAliasSet<T extends Keyed> extends AliasSet<TagContainer<T>> {
     private final Class<T> clazz;
     private final String registry;
 
+    @Deprecated
     public TagAliasSet(@NotNull String path, @NotNull Class<T> clazz, @NotNull String registry) {
         super(path);
+        this.clazz = clazz;
+        this.registry = registry;
+    }
+
+    public TagAliasSet(@NotNull String path, @NotNull APlugin plugin, @NotNull Class<T> clazz, @NotNull String registry) {
+        super(path, plugin);
         this.clazz = clazz;
         this.registry = registry;
     }

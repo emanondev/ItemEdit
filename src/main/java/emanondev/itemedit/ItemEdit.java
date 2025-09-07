@@ -205,7 +205,7 @@ public class ItemEdit extends APlugin {
     }
 
     private void initCommands() {
-        if (VersionUtils.isVersionAfter(1, 20,5)) {
+        if (VersionUtils.isVersionAfter(1, 20, 5)) {
             registerCommand(ItemFoodCommand.get(), Collections.singletonList("if"));
         }
         registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));

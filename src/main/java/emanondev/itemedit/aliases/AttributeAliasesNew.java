@@ -1,11 +1,12 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.ItemEdit;
 import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
 
 public class AttributeAliasesNew extends RegistryAliasSet<Attribute> implements AttributeAliases {
     public AttributeAliasesNew() {
-        super("attribute", Registry.ATTRIBUTE);
+        super("attribute", ItemEdit.get(), Registry.ATTRIBUTE);
     }
 
     @Override

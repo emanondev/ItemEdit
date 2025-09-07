@@ -154,7 +154,7 @@ public class Food extends SubCmd {
             }
             ConsumableComponent.Animation value = Aliases.ANIMATION.convertAlias(args[2]);
             if (value == null) {
-                onWrongAlias("wrong-animation", p, Aliases.ANIMATION);
+                onWrongAlias(p, Aliases.ANIMATION);
                 sendFailFeedbackForSub(p, alias, "animation");
                 return;
             }
@@ -180,7 +180,7 @@ public class Food extends SubCmd {
             ConsumableComponent consumable = meta.getConsumable();
             Boolean value = args.length == 2 ? Boolean.valueOf(!consumable.hasConsumeParticles()) : Aliases.BOOLEAN.convertAlias(args[2]);
             if (value == null) {
-                onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                onWrongAlias(p, Aliases.BOOLEAN);
                 sendFailFeedbackForSub(p, alias, "consumeparticles");
                 return;
             }
@@ -235,7 +235,7 @@ public class Food extends SubCmd {
             FoodComponent food = meta.getFood();
             Boolean value = args.length == 2 ? Boolean.valueOf(!food.canAlwaysEat()) : Aliases.BOOLEAN.convertAlias(args[2]);
             if (value == null) {
-                onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                onWrongAlias(p, Aliases.BOOLEAN);
                 sendFailFeedbackForSub(p, alias, "canalwayseat");
                 return;
             }
@@ -334,7 +334,7 @@ public class Food extends SubCmd {
             ConsumableEffect effect;
             String effectType = Aliases.CONSUMABLE_EFFECT.convertAlias(args[2]);
             if (effectType == null) {
-                onWrongAlias("wrong-effecttype", p, Aliases.BOOLEAN);
+                onWrongAlias(p, Aliases.BOOLEAN);
                 sendFailFeedbackForSub(p, alias, "addeffect");
                 return;
             }
@@ -347,7 +347,7 @@ public class Food extends SubCmd {
                         }
                         PotionEffectType potionEffectType = Aliases.POTION_EFFECT.convertAlias(args[2]);
                         if (potionEffectType == null) {
-                            onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
+                            onWrongAlias(p, Aliases.POTION_EFFECT);
                             sendFailFeedbackForSubSub(p, alias, "addeffect", effectType);
                             return;
                         }
@@ -365,7 +365,7 @@ public class Food extends SubCmd {
                         if (args.length >= 6) {
                             particles = Aliases.BOOLEAN.convertAlias(args[5]);
                             if (particles == null) {
-                                onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                                onWrongAlias(p, Aliases.BOOLEAN);
                                 sendFailFeedbackForSubSub(p, alias, "addeffect", effectType);
                                 return;
                             }
@@ -374,7 +374,7 @@ public class Food extends SubCmd {
                         if (args.length >= 7) {
                             ambient = Aliases.BOOLEAN.convertAlias(args[6]);
                             if (ambient == null) {
-                                onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                                onWrongAlias(p, Aliases.BOOLEAN);
                                 sendFailFeedbackForSubSub(p, alias, "addeffect", effectType);
                                 return;
                             }
@@ -383,7 +383,7 @@ public class Food extends SubCmd {
                         if (args.length >= 8) {
                             icon = Aliases.BOOLEAN.convertAlias(args[7]);
                             if (icon == null) {
-                                onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                                onWrongAlias(p, Aliases.BOOLEAN);
                                 sendFailFeedbackForSubSub(p, alias, "addeffect", effectType);
                                 return;
                             }
@@ -429,7 +429,7 @@ public class Food extends SubCmd {
                                     }
                                     PotionEffectType type = Aliases.POTION_EFFECT.convertAlias(args[i]);
                                     if (type == null) {
-                                        onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
+                                        onWrongAlias(p, Aliases.POTION_EFFECT);
                                         sendFailFeedbackForSubSub(p, alias, "addeffect", effectType);
                                         return;
                                     }
@@ -454,7 +454,7 @@ public class Food extends SubCmd {
                                 case 3: {
                                     Boolean ambient = Aliases.BOOLEAN.convertAlias(args[i]);
                                     if (ambient == null) {
-                                        onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                                        onWrongAlias(p, Aliases.BOOLEAN);
                                         sendFailFeedbackForSubSub(p, alias, "addeffect", effectType);
                                         return;
                                     }
@@ -467,7 +467,7 @@ public class Food extends SubCmd {
                                 case 4: {
                                     Boolean particles = Aliases.BOOLEAN.convertAlias(args[i]);
                                     if (particles == null) {
-                                        onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                                        onWrongAlias(p, Aliases.BOOLEAN);
                                         sendFailFeedbackForSubSub(p, alias, "addeffect", effectType);
                                         return;
                                     }
@@ -481,7 +481,7 @@ public class Food extends SubCmd {
                                 case 5: {
                                     Boolean icon = Aliases.BOOLEAN.convertAlias(args[i]);
                                     if (icon == null) {
-                                        onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                                        onWrongAlias(p, Aliases.BOOLEAN);
                                         sendFailFeedbackForSubSub(p, alias, "addeffect", effectType);
                                         return;
                                     }
@@ -514,7 +514,7 @@ public class Food extends SubCmd {
                         for (int i = 3; i < args.length; i++) {
                             PotionEffectType type = Aliases.POTION_EFFECT.convertAlias(args[i]);
                             if (type == null) {
-                                onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
+                                onWrongAlias(p, Aliases.POTION_EFFECT);
                                 sendFailFeedbackForSubSub(p, alias, "addeffect", effectType);
                                 return;
                             }
@@ -550,7 +550,7 @@ public class Food extends SubCmd {
                         }
                         Sound sound = Aliases.SOUND.convertAlias(args[3]);
                         if (sound == null) {
-                            onWrongAlias("wrong-sound", p, Aliases.SOUND);
+                            onWrongAlias(p, Aliases.SOUND);
                             sendFailFeedbackForSubSub(p, alias, "addeffect", effectType);
                             return;
                         }
@@ -607,7 +607,7 @@ public class Food extends SubCmd {
                 return;
             }
             int number;
-            number = Integer.parseInt(args[2])-1;
+            number = Integer.parseInt(args[2]) - 1;
             ItemMeta meta = ItemUtils.getMeta(item);
             ConsumableComponent consumableComponent = meta.getConsumable();
             List<ConsumableEffect> effects = new ArrayList<>(consumableComponent.getEffects());

@@ -126,7 +126,7 @@ public class ColorSubcommand extends SubCmd {
             }
             return;
         }
-        Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+        Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_rgb_colorable", null, p));
 
     }
 

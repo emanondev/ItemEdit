@@ -30,11 +30,11 @@ public class SkullOwner extends SubCmd {
         ItemStack item = this.getItemInHand(p);
         ItemMeta rawMeta = ItemUtils.getMeta(item);
         if (!(rawMeta instanceof SkullMeta)) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_player_head", null, p));
             return;
         }
         if (VersionUtils.isVersionUpTo(1, 12) && item.getDurability() != 3) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_player_head", null, p));
             return;
         }
 

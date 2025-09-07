@@ -27,7 +27,7 @@ public class BookAuthor extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getType() == Material.WRITTEN_BOOK)) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_written_book", null, p));
             return;
         }
 

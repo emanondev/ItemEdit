@@ -1,5 +1,6 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.ItemEdit;
 import org.bukkit.attribute.Attribute;
 
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import java.util.Locale;
 public class AttributeAliasesOld extends AliasSet<Attribute> implements AttributeAliases {
 
     public AttributeAliasesOld() {
-        super("attribute");
+        super("attribute", ItemEdit.get());
     }
 
     @Override

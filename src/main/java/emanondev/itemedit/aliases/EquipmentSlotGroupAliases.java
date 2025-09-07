@@ -1,5 +1,6 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.ItemEdit;
 import org.bukkit.inventory.EquipmentSlotGroup;
 
 import java.util.Arrays;
@@ -8,7 +9,7 @@ import java.util.Collection;
 @SuppressWarnings("UnstableApiUsage")
 public class EquipmentSlotGroupAliases extends AliasSet<EquipmentSlotGroup> {
     public EquipmentSlotGroupAliases() {
-        super("equip_group");
+        super("equip_group", ItemEdit.get());
     }
 
     @Override

@@ -83,7 +83,7 @@ public class UpdateChecker {
         URL checkURL = new URL("https://api.modrinth.com/v2/project/" + plugin.getPluginAdditionalInfo().getModrinthProjectId() + "/version");
         URLConnection con = checkURL.openConnection();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
-            String json  = reader.readLine();
+            String json = reader.readLine();
             try {
                 newVersion = JsonParser.parseString(json)
                         .getAsJsonArray()
@@ -91,7 +91,7 @@ public class UpdateChecker {
                         .getAsJsonObject()
                         .get("version_number")
                         .getAsString();
-            }catch (NoSuchMethodError e){
+            } catch (NoSuchMethodError e) {
                 JsonElement element = new JsonParser().parse(json); // Compatible with old Gson
                 newVersion = element
                         .getAsJsonArray()

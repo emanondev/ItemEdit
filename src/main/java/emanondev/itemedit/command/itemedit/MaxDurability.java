@@ -31,7 +31,7 @@ public class MaxDurability extends SubCmd {
             }
             ItemMeta meta = ItemUtils.getMeta(item);
             if (!(meta instanceof Damageable)) {
-                Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+                Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_damageable", null, p));
                 return;
             }
             int amount = Integer.parseInt(args[1]);

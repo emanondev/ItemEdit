@@ -1,5 +1,6 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.ItemEdit;
 import org.bukkit.entity.EntityType;
 
 import java.util.Collection;
@@ -8,7 +9,7 @@ import java.util.EnumSet;
 public class EggTypeAliases extends EnumAliasSet<EntityType> {
 
     public EggTypeAliases() {
-        super("mob_type", EntityType.class);
+        super("mob_type", ItemEdit.get(), EntityType.class);
     }
 
     public Collection<EntityType> getValues() {

@@ -30,7 +30,7 @@ public class SpawnerEggType extends SubCmd {
         ItemStack item = this.getItemInHand(p);
         ItemMeta rawMeta = ItemUtils.getMeta(item);
         if (!(rawMeta instanceof SpawnEggMeta)) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_spawner_egg", null, p));
             return;
         }
 
@@ -42,7 +42,7 @@ public class SpawnerEggType extends SubCmd {
             }
             EntityType type = Aliases.EGG_TYPE.convertAlias(args[1]);
             if (type == null) {
-                onWrongAlias("wrong-entity", p, Aliases.EGG_TYPE);
+                onWrongAlias(p, Aliases.EGG_TYPE);
                 onFail(p, alias);
                 return;
             }

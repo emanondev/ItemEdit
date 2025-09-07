@@ -31,7 +31,7 @@ public class TropicalFish extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(ItemUtils.getMeta(item) instanceof TropicalFishBucketMeta)) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_tropical_fish_bucket", null, p));
             return;
         }
 
@@ -69,7 +69,7 @@ public class TropicalFish extends SubCmd {
 
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
             if (color == null) {
-                onWrongAlias("wrong-color", p, Aliases.COLOR);
+                onWrongAlias(p, Aliases.COLOR);
                 sendFailFeedbackForSub(p, alias, "bodycolor");
                 return;
             }
@@ -91,7 +91,7 @@ public class TropicalFish extends SubCmd {
 
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
             if (color == null) {
-                onWrongAlias("wrong-color", p, Aliases.COLOR);
+                onWrongAlias(p, Aliases.COLOR);
                 sendFailFeedbackForSub(p, alias, "patterncolor");
                 return;
             }
@@ -113,7 +113,7 @@ public class TropicalFish extends SubCmd {
 
             Pattern pattern = Aliases.TROPICALPATTERN.convertAlias(args[2]);
             if (pattern == null) {
-                onWrongAlias("wrong-pattern", p, Aliases.TROPICALPATTERN);
+                onWrongAlias(p, Aliases.TROPICALPATTERN);
                 sendFailFeedbackForSub(p, alias, "pattern");
                 return;
             }

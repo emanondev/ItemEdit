@@ -78,7 +78,7 @@ public final class VersionUtils {
      * Inclusive comparison.
      *
      * @param major the main version (e.g., 1 in 1.9.4).
-     * @param minor     the minor version (e.g., 9 in 1.9.4).
+     * @param minor the minor version (e.g., 9 in 1.9.4).
      * @return true if the current version is up to the specified version.
      */
     public static boolean isVersionUpTo(int major,
@@ -91,8 +91,8 @@ public final class VersionUtils {
      * Inclusive comparison.
      *
      * @param major the main version.
-     * @param minor     the minor version.
-     * @param patch  the sub version.
+     * @param minor the minor version.
+     * @param patch the sub version.
      * @return true if the current version is up to the specified version.
      */
     public static boolean isVersionUpTo(int major,
@@ -110,7 +110,7 @@ public final class VersionUtils {
      * Inclusive comparison.
      *
      * @param major the main version.
-     * @param minor     the minor version.
+     * @param minor the minor version.
      * @return true if the current version is after the specified version.
      */
     public static boolean isVersionAfter(int major,
@@ -123,8 +123,8 @@ public final class VersionUtils {
      * Inclusive comparison.
      *
      * @param major the main version.
-     * @param minor     the minor version.
-     * @param patch  the sub version.
+     * @param minor the minor version.
+     * @param patch the sub version.
      * @return true if the current version is after the specified version.
      */
     public static boolean isVersionAfter(int major,
@@ -142,9 +142,9 @@ public final class VersionUtils {
      * Inclusive comparison.
      *
      * @param majorMin the minimum main version.
-     * @param minorMin     the minimum minor version.
+     * @param minorMin the minimum minor version.
      * @param majorMax the maximum main version.
-     * @param minorMax     the maximum minor version.
+     * @param minorMax the maximum minor version.
      * @return true if the current version is within the range.
      */
     public static boolean isVersionInRange(int majorMin,
@@ -159,11 +159,11 @@ public final class VersionUtils {
      * Inclusive comparison.
      *
      * @param majorMin the minimum main version.
-     * @param minorMin     the minimum minor version.
-     * @param patchMin  the minimum sub version.
+     * @param minorMin the minimum minor version.
+     * @param patchMin the minimum sub version.
      * @param majorMax the maximum main version.
-     * @param minorMax     the maximum minor version.
-     * @param patchMax  the maximum sub version.
+     * @param minorMax the maximum minor version.
+     * @param patchMax the maximum sub version.
      * @return true if the current version is within the range.
      */
     public static boolean isVersionInRange(int majorMin,

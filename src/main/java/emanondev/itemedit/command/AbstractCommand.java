@@ -13,6 +13,7 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -20,10 +21,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Supplier;
 
 public abstract class AbstractCommand implements TabExecutor {
@@ -144,7 +142,12 @@ public abstract class AbstractCommand implements TabExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         SubCmd subCmd = args.length > 0 ? getSubCmd(args[0], sender) : null;
         if (validateRequires(subCmd, sender, label)) {
-            subCmd.onCommand(sender, label, args);
+            try {
+                subCmd.onCommand(sender, label, args);
+            } catch (Throwable t) {
+                subCmd.onFail(sender, label);
+                t.printStackTrace();
+            }
         }
         return true;
     }
@@ -290,6 +293,10 @@ public abstract class AbstractCommand implements TabExecutor {
         return config.loadBoolean(this.PATH + "." + path, true);
     }
 
+    public PluginCommand getCommand() {
+        return Objects.requireNonNull(plugin.getCommand(getName()));
+    }
+
     private class HelpSubCommand extends SubCmd {
 
         private int commandPerPage;
@@ -416,7 +423,7 @@ public abstract class AbstractCommand implements TabExecutor {
                     comp.append(loadBaseMessage(langConf, "generic.help.prev_text", "<<<<", sender,
                                     "%target%", String.valueOf(page - 1),
                                     "%page%", String.valueOf(page),
-                            "%max_page%", String.valueOf(maxPage)))
+                                    "%max_page%", String.valueOf(maxPage)))
                             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page - 1)))
                             .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                                     new ComponentBuilder(

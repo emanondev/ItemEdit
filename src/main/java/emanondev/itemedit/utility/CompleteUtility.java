@@ -187,7 +187,7 @@ public final class CompleteUtility {
     @NotNull
     public static List<String> complete(@NotNull String prefix,
                                         @Nullable IAliasSet<?> aliases) {
-        return complete(prefix,aliases,null);
+        return complete(prefix, aliases, null);
     }
 
     /**

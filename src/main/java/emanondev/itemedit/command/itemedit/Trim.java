@@ -33,7 +33,7 @@ public class Trim extends SubCmd {
         ItemStack item = this.getItemInHand(p);
         ItemMeta meta = ItemUtils.getMeta(item);
         if (!(meta instanceof ArmorMeta)) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_armor", null, p));
             return;
         }
         try {
@@ -49,13 +49,13 @@ public class Trim extends SubCmd {
             }
             TrimMaterial mat = Aliases.TRIM_MATERIAL.convertAlias(args[1]);
             if (mat == null) {
-                onWrongAlias("wrong-material", p, Aliases.TRIM_MATERIAL);
+                onWrongAlias(p, Aliases.TRIM_MATERIAL);
                 onFail(p, alias);
                 return;
             }
             TrimPattern patt = Aliases.TRIM_PATTERN.convertAlias(args[2]);
             if (patt == null) {
-                onWrongAlias("wrong-pattern", p, Aliases.TRIM_PATTERN);
+                onWrongAlias(p, Aliases.TRIM_PATTERN);
                 onFail(p, alias);
                 return;
             }

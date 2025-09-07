@@ -1,5 +1,6 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.ItemEdit;
 import org.bukkit.enchantments.Enchantment;
 
 import java.util.Collection;
@@ -8,7 +9,7 @@ import java.util.HashSet;
 public class EnchAliases extends AliasSet<Enchantment> {
 
     public EnchAliases() {
-        super("enchant");
+        super("enchant", ItemEdit.get());
     }
 
     @Override

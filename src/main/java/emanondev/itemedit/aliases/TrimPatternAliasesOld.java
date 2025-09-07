@@ -1,5 +1,6 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.ItemEdit;
 import org.bukkit.inventory.meta.trim.TrimPattern;
 
 import java.util.Collection;
@@ -10,7 +11,7 @@ public class TrimPatternAliasesOld extends AliasSet<TrimPattern> implements Trim
     private final HashSet<TrimPattern> values = new HashSet<>();
 
     public TrimPatternAliasesOld() {
-        super("trim_pattern");
+        super("trim_pattern", ItemEdit.get());
         registerValue(TrimPattern.COAST);
         registerValue(TrimPattern.DUNE);
         registerValue(TrimPattern.EYE);

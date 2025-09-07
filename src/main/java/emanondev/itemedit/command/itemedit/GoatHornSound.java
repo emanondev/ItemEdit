@@ -27,7 +27,7 @@ public class GoatHornSound extends SubCmd {
         Player player = (Player) sender;
         ItemStack item = this.getItemInHand(player);
         if (!(item.getItemMeta() instanceof MusicInstrumentMeta)) {
-            Util.sendMessage(player, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(player, getPlugin().getLanguageConfig(player).getMessage("generic.error.wrong-material_music_instrument", null, player));
             return;
         }
 
@@ -38,7 +38,7 @@ public class GoatHornSound extends SubCmd {
             MusicInstrumentMeta meta = (MusicInstrumentMeta) ItemUtils.getMeta(item);
             MusicInstrument type = Aliases.GOAT_HORN_SOUND.convertAlias(args[1]);
             if (type == null) {
-                onWrongAlias("wrong-sound", player, Aliases.GOAT_HORN_SOUND);
+                onWrongAlias(player, Aliases.GOAT_HORN_SOUND);
                 onFail(player, alias);
                 return;
             }

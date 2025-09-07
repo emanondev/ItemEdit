@@ -27,7 +27,7 @@ public class BookType extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getType() == Material.WRITTEN_BOOK)) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_written_book", null, p));
             return;
         }
 
@@ -46,7 +46,7 @@ public class BookType extends SubCmd {
             }
             BookMeta.Generation type = Aliases.BOOK_TYPE.convertAlias(args[1]);
             if (type == null) {
-                onWrongAlias("wrong-generation", p, Aliases.BOOK_TYPE);
+                onWrongAlias(p, Aliases.BOOK_TYPE);
                 onFail(p, alias);
                 return;
             }

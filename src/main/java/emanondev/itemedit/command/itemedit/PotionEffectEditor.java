@@ -39,7 +39,7 @@ public class PotionEffectEditor extends SubCmd {
         ItemStack item = this.getItemInHand(p);
         if (!(ItemUtils.getMeta(item) instanceof PotionMeta)
                 && (VersionUtils.isVersionUpTo(1, 14) || !(ItemUtils.getMeta(item) instanceof SuspiciousStewMeta))) {
-            Util.sendMessage(p, this.getLanguageString("wrong-type", null, sender));
+            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_potion_effect_applicable", null, p));
             if (p.hasPermission("itemedit.admin")) {
                 String msg = this.getLanguageString("itemtag-tip", null, sender);
                 if (msg != null && !msg.isEmpty()) {
@@ -120,7 +120,7 @@ public class PotionEffectEditor extends SubCmd {
 
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2].toUpperCase());
             if (effect == null) {
-                onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
+                onWrongAlias(p, Aliases.POTION_EFFECT);
                 sendFailFeedbackForSub(p, alias, "remove");
                 return;
             }
@@ -150,7 +150,7 @@ public class PotionEffectEditor extends SubCmd {
             int level = 0;
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2]);
             if (effect == null) {
-                onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
+                onWrongAlias(p, Aliases.POTION_EFFECT);
                 sendFailFeedbackForSub(p, alias, "add");
                 return;
             }

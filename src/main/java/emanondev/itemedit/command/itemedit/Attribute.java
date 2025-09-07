@@ -62,7 +62,7 @@ public class Attribute extends SubCmd {
 
             org.bukkit.attribute.Attribute attr = Aliases.ATTRIBUTE.convertAlias(args[2]);
             if (attr == null) {
-                onWrongAlias("wrong-attribute", p, Aliases.ATTRIBUTE);
+                onWrongAlias(p, Aliases.ATTRIBUTE);
                 sendFailFeedbackForSub(p, alias, "add");
                 return;
             }
@@ -75,7 +75,7 @@ public class Attribute extends SubCmd {
             }
 
             if (op == null) {
-                onWrongAlias("wrong-operation", p, Aliases.OPERATIONS);
+                onWrongAlias(p, Aliases.OPERATIONS);
                 sendFailFeedbackForSub(p, alias, "add");
                 return;
             }
@@ -87,14 +87,14 @@ public class Attribute extends SubCmd {
                 if (VersionUtils.isVersionAfter(1, 21)) {
                     equip = Aliases.EQUIPMENT_SLOTGROUPS.convertAlias(args[5]).toString();
                     if (equip == null) {
-                        onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTGROUPS);
+                        onWrongAlias(p, Aliases.EQUIPMENT_SLOTGROUPS);
                         sendFailFeedbackForSub(p, alias, "add");
                         return;
                     }
                 } else {
                     equip = Aliases.EQUIPMENT_SLOTS.convertAlias(args[5]).toString();
                     if (equip == null) {
-                        onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTS);
+                        onWrongAlias(p, Aliases.EQUIPMENT_SLOTS);
                         sendFailFeedbackForSub(p, alias, "add");
                         return;
                     }
@@ -124,8 +124,8 @@ public class Attribute extends SubCmd {
             org.bukkit.attribute.Attribute attr = Aliases.ATTRIBUTE.convertAlias(args[2]);
             EquipmentSlot equip = Aliases.EQUIPMENT_SLOTS.convertAlias(args[2]);
             if (attr == null && equip == null) {
-                onWrongAlias("wrong-attribute", p, Aliases.ATTRIBUTE);
-                onWrongAlias("wrong-equipment", p, Aliases.EQUIPMENT_SLOTS);
+                onWrongAlias(p, Aliases.ATTRIBUTE);
+                onWrongAlias(p, Aliases.EQUIPMENT_SLOTS);
                 sendFailFeedbackForSub(p, alias, "remove");
                 return;
             }

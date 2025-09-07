@@ -116,7 +116,7 @@ public abstract class APlugin extends JavaPlugin {
      */
     public void registerCommand(@NotNull AbstractCommand executor,
                                 @Nullable List<String> aliases) {
-        registerCommand(executor.getName(), executor, aliases);
+        registerCommand(executor.getCommand(), executor, aliases);
     }
 
     /**
@@ -134,6 +134,12 @@ public abstract class APlugin extends JavaPlugin {
             log("&cUnable to register Command &e" + commandName);
             return;
         }
+        registerCommand(command, executor, aliases);
+    }
+
+    private void registerCommand(@NotNull PluginCommand command,
+                                 @NotNull TabExecutor executor,
+                                 @Nullable List<String> aliases) {
         command.setExecutor(executor);
         command.setTabCompleter(executor);
         if (aliases != null) {

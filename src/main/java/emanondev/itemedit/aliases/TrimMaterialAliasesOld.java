@@ -1,5 +1,6 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.ItemEdit;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 
 import java.util.Collection;
@@ -10,7 +11,7 @@ public class TrimMaterialAliasesOld extends AliasSet<TrimMaterial> implements Tr
     private final HashSet<TrimMaterial> values = new HashSet<>();
 
     public TrimMaterialAliasesOld() {
-        super("trim_material");
+        super("trim_material", ItemEdit.get());
         registerValue(TrimMaterial.AMETHYST);
         registerValue(TrimMaterial.COPPER);
         registerValue(TrimMaterial.DIAMOND);

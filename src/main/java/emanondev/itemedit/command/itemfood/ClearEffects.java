@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ClearEffects extends SubCmd {
     public ClearEffects(ItemFoodCommand itemFoodCommand) {
-        super("cleareffects",itemFoodCommand,true,true);
+        super("cleareffects", itemFoodCommand, true, true);
     }
 
     @Override

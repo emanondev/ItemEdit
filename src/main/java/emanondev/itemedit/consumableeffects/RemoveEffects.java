@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bukkit.inventory.meta.components.consumable.effects.ConsumableApplyEffects;
 import org.bukkit.inventory.meta.components.consumable.effects.ConsumableRemoveEffect;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 

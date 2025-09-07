@@ -19,11 +19,11 @@ public class SubCmdLink extends SubCmd {
 
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
-        linkedCommand.onCommand(sender, null, alias, Arrays.copyOfRange(args, 1, args.length));
+        linkedCommand.onCommand(sender, getLinkedCommand().getCommand(), alias, Arrays.copyOfRange(args, 1, args.length));
     }
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return linkedCommand.onTabComplete(sender, null, linkedCommand.getName(), Arrays.copyOfRange(args, 1, args.length));
+        return linkedCommand.onTabComplete(sender, getLinkedCommand().getCommand(), linkedCommand.getName(), Arrays.copyOfRange(args, 1, args.length));
     }
 }

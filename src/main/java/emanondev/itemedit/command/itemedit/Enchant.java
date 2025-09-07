@@ -30,7 +30,7 @@ public class Enchant extends SubCmd {
             int lv = 1;
             Enchantment ench = Aliases.ENCHANT.convertAlias(args[1]);
             if (ench == null) {
-                onWrongAlias("wrong-enchant", p, Aliases.ENCHANT);
+                onWrongAlias(p, Aliases.ENCHANT);
                 onFail(p, alias);
                 return;
             }

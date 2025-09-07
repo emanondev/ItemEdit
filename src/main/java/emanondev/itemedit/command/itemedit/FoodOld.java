@@ -11,7 +11,9 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.hover.content.Text;
-import org.bukkit.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.Registry;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -293,7 +295,7 @@ public class FoodOld extends SubCmd {
             }
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2]);
             if (effect == null) {
-                onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
+                onWrongAlias(p, Aliases.POTION_EFFECT);
                 sendFailFeedbackForSub(p, alias, "addeffect");
                 return;
             }
@@ -348,7 +350,7 @@ public class FoodOld extends SubCmd {
             }
             PotionEffectType type = Aliases.POTION_EFFECT.convertAlias(args[2]);
             if (type == null) {
-                onWrongAlias("wrong-effect", p, Aliases.POTION_EFFECT);
+                onWrongAlias(p, Aliases.POTION_EFFECT);
                 sendFailFeedbackForSub(p, alias, "removeeffect");
                 return;
             }

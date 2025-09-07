@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
@@ -105,7 +104,7 @@ public class Equipment extends SubCmd {
         try {
             if (args.length == 1) {
                 ItemMeta meta = ItemUtils.getMeta(item);
-                if (!meta.hasEquippable()){
+                if (!meta.hasEquippable()) {
                     sendCustomFeedbackForSub(p, "model", "feedback-reset");
                     return;
                 }
@@ -146,7 +145,7 @@ public class Equipment extends SubCmd {
             EquippableComponent comp = meta.getEquippable();
             Sound value = args.length == 2 ? null : Aliases.SOUND.convertAlias(args[2]);
             if (args.length == 3 && value == null) {
-                onWrongAlias("wrong-sound", p, Aliases.SOUND);
+                onWrongAlias(p, Aliases.SOUND);
                 sendFailFeedbackForSub(p, alias, "shearsound");
                 return;
             }
@@ -178,7 +177,7 @@ public class Equipment extends SubCmd {
             EquippableComponent comp = meta.getEquippable();
             Boolean value = args.length == 3 ? Aliases.BOOLEAN.convertAlias(args[2]) : (Boolean) !comp.isCanBeSheared();
             if (args.length == 3 && value == null) {
-                onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                onWrongAlias(p, Aliases.BOOLEAN);
                 sendFailFeedbackForSub(p, alias, "canshear");
                 return;
             }
@@ -237,7 +236,7 @@ public class Equipment extends SubCmd {
             EquippableComponent comp = meta.getEquippable();
             Boolean value = args.length == 3 ? Aliases.BOOLEAN.convertAlias(args[2]) : (Boolean) !comp.isDamageOnHurt();
             if (args.length == 3 && value == null) {
-                onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                onWrongAlias(p, Aliases.BOOLEAN);
                 sendFailFeedbackForSub(p, alias, "damageonhurt");
                 return;
             }
@@ -271,7 +270,7 @@ public class Equipment extends SubCmd {
 
             Boolean value = args.length == 3 ? Aliases.BOOLEAN.convertAlias(args[2]) : (Boolean) !comp.isDamageOnHurt();
             if (args.length == 3 && value == null) {
-                onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                onWrongAlias(p, Aliases.BOOLEAN);
                 sendFailFeedbackForSub(p, alias, "dispensable");
                 return;
             }
@@ -297,7 +296,7 @@ public class Equipment extends SubCmd {
 
             Boolean value = args.length == 3 ? Aliases.BOOLEAN.convertAlias(args[2]) : (Boolean) !comp.isEquipOnInteract();
             if (args.length == 3 && value == null) {
-                onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                onWrongAlias(p, Aliases.BOOLEAN);
                 sendFailFeedbackForSub(p, alias, "equiponinteract");
                 return;
             }
@@ -325,7 +324,7 @@ public class Equipment extends SubCmd {
             EquippableComponent comp = meta.getEquippable();
             Boolean value = args.length == 3 ? Aliases.BOOLEAN.convertAlias(args[2]) : (Boolean) !comp.isSwappable();
             if (args.length == 3 && value == null) {
-                onWrongAlias("wrong-boolean", p, Aliases.BOOLEAN);
+                onWrongAlias(p, Aliases.BOOLEAN);
                 sendFailFeedbackForSub(p, alias, "swappable");
                 return;
             }
@@ -364,8 +363,8 @@ public class Equipment extends SubCmd {
                     types.addAll(tag.getValues().stream().filter(EntityType::isAlive).collect(Collectors.toList()));
                     continue;
                 }
-                onWrongAlias("wrong-entitytype", p, Aliases.ENTITY_TYPE);
-                onWrongAlias("wrong-entitygroup", p, Aliases.ENTITY_GROUPS);
+                onWrongAlias(p, Aliases.ENTITY_TYPE);
+                onWrongAlias(p, Aliases.ENTITY_GROUPS);
                 sendCustomFeedbackForSub(p, "allowedentities", "invalid-type",
                         "%value%", arg);
                 return;
@@ -392,7 +391,7 @@ public class Equipment extends SubCmd {
 
             Sound value = args.length == 2 ? null : Aliases.SOUND.convertAlias(args[2]);
             if (args.length == 3 && value == null) {
-                onWrongAlias("wrong-sound", p, Aliases.SOUND);
+                onWrongAlias(p, Aliases.SOUND);
                 sendFailFeedbackForSub(p, alias, "equipsound");
                 return;
             }
@@ -422,7 +421,7 @@ public class Equipment extends SubCmd {
             EquippableComponent comp = meta.getEquippable();
             EquipmentSlot slot = Aliases.EQUIPMENT_SLOTS.convertAlias(args[2]);
             if (slot == null) {
-                onWrongAlias("wrong-slot", p, Aliases.SOUND);
+                onWrongAlias(p, Aliases.SOUND);
                 sendFailFeedbackForSub(p, alias, "slot");
                 return;
             }
