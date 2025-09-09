@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -34,7 +33,7 @@ public class Banner extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof BannerMeta)) {
-            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_banner", null, p));
+            getPlugin().getTranslator().send(p, "generic.error.wrong-material_banner");
             return;
         }
         if (args.length == 1) {

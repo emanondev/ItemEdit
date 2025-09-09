@@ -10,7 +10,6 @@ import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -39,13 +38,13 @@ public class PotionEffectEditor extends SubCmd {
         ItemStack item = this.getItemInHand(p);
         if (!(ItemUtils.getMeta(item) instanceof PotionMeta)
                 && (VersionUtils.isVersionUpTo(1, 14) || !(ItemUtils.getMeta(item) instanceof SuspiciousStewMeta))) {
-            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_potion_effect_applicable", null, p));
+            getPlugin().getTranslator().send(p, "generic.error.wrong-material_potion_effect_applicable");
             if (p.hasPermission("itemedit.admin")) {
                 String msg = this.getLanguageString("itemtag-tip", null, sender);
                 if (msg != null && !msg.isEmpty()) {
-                    Util.sendMessage(p, new ComponentBuilder(msg).event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                    new ComponentBuilder(String.join("\n",
-                                            this.getLanguageStringList("itemtag-tip-hover", null, p))).create()))
+                    Util.sendMessage(p, new ComponentBuilder(msg).event(
+                                    Util.craftHoverEvent(
+                                            this.getLanguageStringList("itemtag-tip-hover", null, p)))
                             .event(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://modrinth.com/plugin/itemtag")).create()
                     );
                 }

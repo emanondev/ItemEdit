@@ -1,7 +1,11 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.compability.Hooks;
+import emanondev.itemedit.utility.VersionUtils;
 import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -86,8 +90,7 @@ public final class Util {
                     logToFile("user: '" + user.getName() + "' attempt to write '" + text
                             + "' (stripped by colors and lowcased to '" + message + "') was blocked by regex: '" + regex
                             + "'");
-                sendMessage(user,
-                        ItemEdit.get().getLanguageConfig(user).loadMessage("blocked-by-censure", "", null, true));
+                ItemEdit.get().getTranslator().send(user, "blocked-by-censure");
                 return true;
             }
         for (String bannedWord : ItemEdit.get().getConfig().getStringList("blocked.words"))
@@ -101,8 +104,7 @@ public final class Util {
                     logToFile("user: '" + user.getName() + "' attempt to write '" + text
                             + "' (stripped by colors and lowcased to '" + message + "') was blocked by word: '"
                             + bannedWord.toLowerCase(Locale.ENGLISH) + "'");
-                sendMessage(user,
-                        ItemEdit.get().getLanguageConfig(user).loadMessage("blocked-by-censure", "", null, true));
+                ItemEdit.get().getTranslator().send(user, "blocked-by-censure");
                 return true;
             }
         return false;
@@ -149,8 +151,7 @@ public final class Util {
         String id = type.name();
         for (String name : values)
             if (id.equalsIgnoreCase(name)) {
-                sendMessage(sender,
-                        ItemEdit.get().getLanguageConfig(sender).loadMessage("blocked-by-type-restriction", "", null, true));
+                ItemEdit.get().getTranslator().send(sender, "blocked-by-type-restriction");
                 return false;
             }
         return true;
@@ -300,8 +301,7 @@ public final class Util {
         String id = type.name();
         for (String name : values)
             if (id.equalsIgnoreCase(name)) {
-                sendMessage(sender,
-                        ItemEdit.get().getLanguageConfig(sender).loadMessage("blocked-by-type-restriction-lore", "", null, true));
+                ItemEdit.get().getTranslator().send(sender, "blocked-by-type-restriction-lore");
                 return false;
             }
         return true;
@@ -309,5 +309,16 @@ public final class Util {
 
     public static boolean hasMiniMessageAPI() {
         return Hooks.hasMiniMessage();
+    }
+
+    public static HoverEvent craftHoverEvent(String text) {
+        if (VersionUtils.isVersionAfter(1, 18, 0)) {
+            return new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(text));
+        }
+        return new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(text).create());
+    }
+
+    public static HoverEvent craftHoverEvent(List<String> text) {
+        return craftHoverEvent(String.join("\n", text));
     }
 }

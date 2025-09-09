@@ -38,9 +38,8 @@ public class ItemEditInfoCommand implements TabExecutor {
     }
 
     public void sendPermissionLackMessage(@NotNull String permission, CommandSender sender) {
-        Util.sendMessage(sender, plugin.getLanguageConfig(sender).loadMessage("lack-permission", "&cYou lack of permission %permission%",
-                sender instanceof Player ? (Player) sender : null, true
-                , "%permission%", permission));
+        plugin.getTranslator().send(sender, "lack-permission",
+                "%permission%", permission);
     }
 
     @Override

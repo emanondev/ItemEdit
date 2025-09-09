@@ -7,7 +7,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.jetbrains.annotations.NotNull;
@@ -52,10 +51,8 @@ public class ItemEditImportCommand implements TabExecutor {
     }
 
     public void sendPermissionLackMessage(@NotNull String permission, CommandSender sender) {
-        Util.sendMessage(sender, plugin.getLanguageConfig(sender).loadMessage("lack-permission", "&cYou lack of permission %permission%",
-                sender instanceof Player ? (Player) sender : null, true
-                , "%permission%",
-                permission));
+        plugin.getTranslator().send(sender, "lack-permission",
+                "%permission%", permission);
     }
 
     @Override
@@ -67,8 +64,7 @@ public class ItemEditImportCommand implements TabExecutor {
 
 
         if (args.length == 0) {
-            Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
-                    "itemeditimport.help", new ArrayList<>())));
+            plugin.getTranslator().send(sender, "itemeditimport.help");
             return true;
         }
         switch (args[0].toLowerCase(Locale.ENGLISH)) {

@@ -189,8 +189,8 @@ public class Lore extends SubCmd {
             for (String s : lore) {
                 String text = s.replace(from, to);
                 if (!allowedLengthLimit(p, ChatColor.stripColor(text))) {
-                    Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
-                            "", null, true, "%limit%", String.valueOf(lengthLimit)));
+                    getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
+                            "%limit%", String.valueOf(lengthLimit));
                     return;
                 }
             }
@@ -240,7 +240,7 @@ public class Lore extends SubCmd {
         if (item.hasItemMeta()) {
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             if (!(itemMeta instanceof BookMeta)) {
-                Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_writable_book", null, p));
+                getPlugin().getTranslator().send(p, "generic.error.wrong-material_writable_book");
                 return;
             }
             BookMeta meta = (BookMeta) itemMeta;
@@ -362,15 +362,15 @@ public class Lore extends SubCmd {
             lore = new ArrayList<>();
         }
         if (!allowedLineLimit(p, lore.size() + 1)) {
-            Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-line-limit",
-                    "", null, true, "%limit%", String.valueOf(lineLimit)));
+            getPlugin().getTranslator().send(p, "blocked-by-lore-line-limit",
+                    "%limit%", String.valueOf(lineLimit));
             return;
         }
 
         String lineText = Util.formatText(p, text.toString(), getPermission());
         if (!allowedLengthLimit(p, ChatColor.stripColor(lineText))) {
-            Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
-                    "", null, true, "%limit%", String.valueOf(lengthLimit)));
+            getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
+                    "%limit%", String.valueOf(lengthLimit));
             return;
         }
         if (Util.hasBannedWords(p, lineText)) {
@@ -412,14 +412,14 @@ public class Lore extends SubCmd {
                 lore = new ArrayList<>();
             }
             if (!allowedLineLimit(p, Math.max(lore.size() + 1, line + 1))) {
-                Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-line-limit",
-                        "", null, true, "%limit%", String.valueOf(lineLimit)));
+                getPlugin().getTranslator().send(p, "blocked-by-lore-line-limit",
+                        "%limit%", String.valueOf(lineLimit));
                 return;
             }
             String lineText = Util.formatText(p, text.toString(), getPermission());
             if (!allowedLengthLimit(p, ChatColor.stripColor(lineText))) {
-                Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
-                        "", null, true, "%limit%", String.valueOf(lengthLimit)));
+                getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
+                        "%limit%", String.valueOf(lengthLimit));
                 return;
             }
 
@@ -473,13 +473,13 @@ public class Lore extends SubCmd {
             }
 
             if (lore.size() <= line && !allowedLineLimit(p, line + 1)) {
-                Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-line-limit",
-                        "", null, true, "%limit%", String.valueOf(lineLimit)));
+                getPlugin().getTranslator().send(p, "blocked-by-lore-line-limit",
+                        "%limit%", String.valueOf(lineLimit));
                 return;
             }
             if (!allowedLengthLimit(p, ChatColor.stripColor(lineText))) {
-                Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-lore-length-limit",
-                        "", null, true, "%limit%", String.valueOf(lengthLimit)));
+                getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
+                        "%limit%", String.valueOf(lengthLimit));
                 return;
             }
             for (int i = lore.size(); i <= line; i++) {

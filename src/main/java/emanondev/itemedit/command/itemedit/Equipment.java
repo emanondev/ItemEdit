@@ -9,8 +9,6 @@ import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.TagContainer;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
@@ -460,9 +458,8 @@ public class Equipment extends SubCmd {
                             + getLanguageString(sub + ".params", "", target))
                     .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                             "/" + alias + " " + this.getName() + " " + sub + " "))
-                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                            new Text(String.join("\n",
-                                    getLanguageStringList(sub + ".description", null, target)))))
+                    .event(Util.craftHoverEvent(
+                            getLanguageStringList(sub + ".description", null, target)))
                     .create());
         }
     }

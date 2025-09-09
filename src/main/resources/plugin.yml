@@ -48,6 +48,7 @@ permissions:
     description: Gives full access to the plugin
     children:
       itemedit.itemedit.*: true
+      itemedit.itemfood.*: true
       itemedit.itemstorage.*: true
       itemedit.serveritem.*: true
       itemedit.itemeditreload: true
@@ -59,6 +60,7 @@ permissions:
     description: Gives full access to the plugin
     children:
       itemedit.itemedit.*: true
+      itemedit.itemfood.*: true
       itemedit.itemstorage.*: true
   itemedit.bypass.*:
     default: op
@@ -173,6 +175,62 @@ permissions:
   itemedit.itemstorage.get:
     default: op
     description: Allow to get stored items
+  itemedit.itemfood.*:
+    default: op
+    description: Gives full access to command /itemfood
+    children:
+      itemedit.itemfood.addeffect: true
+      itemedit.itemfood.animation: true
+      itemedit.itemfood.canalwayseat: true
+      itemedit.itemfood.clear: true
+      itemedit.itemfood.cleareffects: true
+      itemedit.itemfood.consumeparticles: true
+      itemedit.itemfood.convertto: true
+      itemedit.itemfood.eatticks: true
+      itemedit.itemfood.info: true
+      itemedit.itemfood.nutrition: true
+      itemedit.itemfood.removeeffect: true
+      itemedit.itemfood.saturation: true
+      itemedit.itemfood.sound: true
+  itemedit.itemfood.addeffect:
+    default: op
+    description: Allow adding consume effects on item
+  itemedit.itemfood.animation:
+    default: op
+    description: Allow setting animation when food is eaten
+  itemedit.itemfood.canalwayseat:
+    default: op
+    description: Allow to set whenever a food can be always eaten
+  itemedit.itemfood.clear:
+    default: op
+    description: Allow to reset food property
+  itemedit.itemfood.cleareffects:
+    default: op
+    description: Allow to remove potion effects when eating the food
+  itemedit.itemfood.consumeparticles:
+    default: op
+    description: Allows to set whenever eating particles should be displayed
+  itemedit.itemfood.convertto:
+    default: op
+    description: Allow set what eaten food becomes
+  itemedit.itemfood.eatticks:
+    default: op
+    description: Allow to set how much time is required to eat the food
+  itemedit.itemfood.info:
+    default: op
+    description: Allow to see a recap of food properties
+  itemedit.itemfood.nutrition:
+    default: op
+    description: Allow to set nutrition as result of eating the food
+  itemedit.itemfood.removeeffect:
+    default: op
+    description: Allow to remove specific potion effects when eating the food
+  itemedit.itemfood.saturation:
+    default: op
+    description: Allow to set saturation as result of eating the food
+  itemedit.itemfood.sound:
+    default: op
+    description: Allow to set eating sound
   itemedit.itemedit.*:
     default: op
     description: Gives full access to command /itemedit

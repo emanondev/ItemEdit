@@ -11,7 +11,6 @@ import lombok.Getter;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -89,8 +88,7 @@ public abstract class SubCmd {
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + alias + " " + this.name + " " + params));
         if (desc != null && !desc.isEmpty()) {
-            fail.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                    new ComponentBuilder(String.join("\n", desc)).create()));
+            fail.event(Util.craftHoverEvent(desc));
         }
         return fail.create();
     }
@@ -145,7 +143,7 @@ public abstract class SubCmd {
                         "/" + ItemEditCommand.get().getName() + " "
                                 + ItemEdit.get().getConfig("commands.yml")
                                 .getString("itemedit.listaliases.name") + " " + set.getID()))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover.toString()).create())).create());//TODO fix
+                .event(Util.craftHoverEvent(hover.toString())).create());//TODO fix
     }
 
     @Deprecated
@@ -178,7 +176,7 @@ public abstract class SubCmd {
                         "/" + ItemEditCommand.get().getName() + " "
                                 + ItemEdit.get().getConfig("commands.yml")
                                 .getString("itemedit.listaliases.name") + " " + set.getID()))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover.toString()).create())).create());//TODO fix
+                .event(Util.craftHoverEvent(hover.toString())).create());//TODO fix
     }
 
     protected String getLanguageString(String path, String def, CommandSender sender, String... holders) {
@@ -221,8 +219,7 @@ public abstract class SubCmd {
         base.append(help + getLanguageString("params", "", sender).replace(ChatColor.RESET.toString(),
                         ChatColor.GREEN.toString()))
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ChatColor.stripColor(help)))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                        new ComponentBuilder(getDescription(sender)).create()));
+                .event(Util.craftHoverEvent(getDescription(sender)));
         return base;
     }
 
@@ -234,8 +231,7 @@ public abstract class SubCmd {
                         ChatColor.stripColor(params))
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + alias + " " + this.name + " " + ChatColor.stripColor(params)))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,//TODO fix
-                        new ComponentBuilder(getDescription(target)).create()))
+                .event(Util.craftHoverEvent(getDescription(target)))
                 .create());
     }
 

@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -27,7 +26,7 @@ public class GoatHornSound extends SubCmd {
         Player player = (Player) sender;
         ItemStack item = this.getItemInHand(player);
         if (!(item.getItemMeta() instanceof MusicInstrumentMeta)) {
-            Util.sendMessage(player, getPlugin().getLanguageConfig(player).getMessage("generic.error.wrong-material_music_instrument", null, player));
+            getPlugin().getTranslator().send(player, "generic.error.wrong-material_music_instrument");
             return;
         }
 

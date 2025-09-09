@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
@@ -30,11 +29,11 @@ public class SkullOwner extends SubCmd {
         ItemStack item = this.getItemInHand(p);
         ItemMeta rawMeta = ItemUtils.getMeta(item);
         if (!(rawMeta instanceof SkullMeta)) {
-            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_player_head", null, p));
+            getPlugin().getTranslator().send(p, "generic.error.wrong-material_player_head");
             return;
         }
         if (VersionUtils.isVersionUpTo(1, 12) && item.getDurability() != 3) {
-            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_player_head", null, p));
+            getPlugin().getTranslator().send(p, "generic.error.wrong-material_player_head");
             return;
         }
 

@@ -19,7 +19,8 @@ public class Keys {
         return new NamespacedKey(NamespacedKey.MINECRAFT, postfix);
     }
 
-    public static abstract class EffectType implements Keyed {
+
+    public static class ConsumeEffectType {
 
         public static final NamespacedKey APPLY_EFFECTS = craftKey("apply_effects");
         public static final NamespacedKey REMOVE_EFFECTS = craftKey("remove_effects");
@@ -28,7 +29,7 @@ public class Keys {
         public static final NamespacedKey PLAY_SOUND = craftKey("play_sound");
     }
 
-    public static abstract class Component implements Keyed {
+    public static class Component {
 
         public static final NamespacedKey FOOD = craftKey("food");
         public static final NamespacedKey CONSUMABLE = craftKey("consumable");

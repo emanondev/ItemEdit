@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
@@ -31,7 +30,7 @@ public class MaxDurability extends SubCmd {
             }
             ItemMeta meta = ItemUtils.getMeta(item);
             if (!(meta instanceof Damageable)) {
-                Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_damageable", null, p));
+                getPlugin().getTranslator().send(p, "generic.error.wrong-material_damageable");
                 return;
             }
             int amount = Integer.parseInt(args[1]);

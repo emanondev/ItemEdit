@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -31,7 +30,7 @@ public class BookEnchant extends SubCmd {
             item.setType(Material.ENCHANTED_BOOK);
         }
         if (!(item.getItemMeta() instanceof EnchantmentStorageMeta)) {
-            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_enchantment_storage", null, p));
+            getPlugin().getTranslator().send(p, "generic.error.wrong-material_enchantment_storage");
             return;
         }
         try {

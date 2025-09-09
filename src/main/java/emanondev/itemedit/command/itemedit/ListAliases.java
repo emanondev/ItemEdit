@@ -9,7 +9,6 @@ import emanondev.itemedit.utility.CompleteUtility;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.ComponentBuilder.FormatRetention;
-import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,7 +48,7 @@ public class ListAliases extends SubCmd {
                 Collections.sort(values);
                 for (String id : values) {
                     comp.retain(FormatRetention.NONE).append((counter ? colorOne : colorTwo) + id)
-                            .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover).create()))
+                            .event(Util.craftHoverEvent(hover))
                             .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                                     "/" + alias + " " + this.getName() + " " + id))
                             .append(" ");
@@ -81,9 +80,8 @@ public class ListAliases extends SubCmd {
                 boolean counter = true;
                 for (String aliasS : (List<String>) set.getAliases()) {
                     comp.retain(FormatRetention.NONE).append((counter ? colorOne : colorTwo) + aliasS)
-                            .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                    new ComponentBuilder(
-                                            hover.replace("%default%", set.getName(set.convertAlias(aliasS)))).create()))
+                            .event(Util.craftHoverEvent(
+                                    hover.replace("%default%", set.getName(set.convertAlias(aliasS)))))
                             .append(" ");
                     counter = !counter;
                 }

@@ -9,7 +9,6 @@ import emanondev.itemedit.utility.ItemUtils;
 import lombok.Getter;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -153,29 +152,19 @@ public abstract class AbstractCommand implements TabExecutor {
     }
 
     public void sendPermissionLackMessage(@NotNull String permission, @NotNull CommandSender sender) {
-        Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("lack-permission", "&cYou lack of permission %permission%",
-                sender instanceof Player ? (Player) sender : null, true
-                , "%permission%",
-                permission));
+        getPlugin().getTranslator().send(sender, "lack-permission", "%permission%", permission);
     }
 
     public void sendPermissionLackGenericMessage(@NotNull CommandSender sender) {
-        Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("lack-permission-generic",
-                "&cYou don't have permission to use this command",
-                sender instanceof Player ? (Player) sender : null, true
-        ));
+        getPlugin().getTranslator().send(sender, "lack-permission-generic");
     }
 
     public void sendPlayerOnly(@NotNull CommandSender sender) {
-        Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("player-only", "&cCommand for Players only",
-                sender instanceof Player ? (Player) sender : null, true
-        ));
+        getPlugin().getTranslator().send(sender, "player-only");
     }
 
     public void sendNoItemInHand(@NotNull CommandSender sender) {
-        Util.sendMessage(sender, getPlugin().getLanguageConfig(sender).loadMessage("no-item-on-hand", "&cYou need to hold an item in hand",
-                sender instanceof Player ? (Player) sender : null, true
-        ));
+        getPlugin().getTranslator().send(sender, "no-item-on-hand");
     }
 
     @Contract("null,_,_-> false")
@@ -404,14 +393,13 @@ public abstract class AbstractCommand implements TabExecutor {
                     comp.append(loadBaseMessage(langConf, "generic.help.next_text", ">>>>", sender,
                                     "%target%", String.valueOf(page + 1), "%page%", String.valueOf(page)))
                             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page + 1)))
-                            .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                    new ComponentBuilder(
-                                            loadBaseMessage(langConf, "generic.help.next_hover", "Go to page %target%",
-                                                    sender,
-                                                    "%target%", String.valueOf(page + 1),
-                                                    "%page%", String.valueOf(page),
-                                                    "%max_page%", String.valueOf(maxPage))
-                                    ).create()));
+                            .event(Util.craftHoverEvent(
+                                    loadBaseMessage(langConf, "generic.help.next_hover", "Go to page %target%",
+                                            sender,
+                                            "%target%", String.valueOf(page + 1),
+                                            "%page%", String.valueOf(page),
+                                            "%max_page%", String.valueOf(maxPage))
+                            ));
                 } else {
                     comp.append(loadBaseMessage(langConf, "generic.help.next_void", ">>>>", sender,
                             "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage)));
@@ -425,14 +413,13 @@ public abstract class AbstractCommand implements TabExecutor {
                                     "%page%", String.valueOf(page),
                                     "%max_page%", String.valueOf(maxPage)))
                             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page - 1)))
-                            .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                    new ComponentBuilder(
-                                            loadBaseMessage(langConf, "generic.help.prev_hover", "Go to page %target%",
-                                                    sender,
-                                                    "%target%", String.valueOf(page - 1),
-                                                    "%page%", String.valueOf(page),
-                                                    "%max_page%", String.valueOf(maxPage))
-                                    ).create()));
+                            .event(Util.craftHoverEvent(
+                                    loadBaseMessage(langConf, "generic.help.prev_hover", "Go to page %target%",
+                                            sender,
+                                            "%target%", String.valueOf(page - 1),
+                                            "%page%", String.valueOf(page),
+                                            "%max_page%", String.valueOf(maxPage))
+                            ));
                 } else {
                     comp.append(loadBaseMessage(langConf, "generic.help.prev_void", "<<<<", sender,
                             "%page%", String.valueOf(page),
@@ -448,13 +435,12 @@ public abstract class AbstractCommand implements TabExecutor {
                                     "%page%", String.valueOf(page),
                                     "%max_page%", String.valueOf(maxPage)))
                             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page + 1)))
-                            .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                    new ComponentBuilder(
-                                            loadBaseMessage(langConf, "generic.help.next_hover", "Go to page %target%", sender,
-                                                    "%target%", String.valueOf(page + 1),
-                                                    "%page%", String.valueOf(page),
-                                                    "%max_page%", String.valueOf(maxPage))
-                                    ).create()));
+                            .event(Util.craftHoverEvent(
+                                    loadBaseMessage(langConf, "generic.help.next_hover", "Go to page %target%", sender,
+                                            "%target%", String.valueOf(page + 1),
+                                            "%page%", String.valueOf(page),
+                                            "%max_page%", String.valueOf(maxPage))
+                            ));
                 } else {
                     comp.append(loadBaseMessage(langConf, "generic.help.next_void", ">>>>", sender,
                             "%page%", String.valueOf(page),

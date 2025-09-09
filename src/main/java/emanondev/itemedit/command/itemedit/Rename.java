@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -82,8 +81,8 @@ public class Rename extends SubCmd {
         }
 
         if (!allowedLengthLimit(p, ChatColor.stripColor(name))) {
-            Util.sendMessage(p, ItemEdit.get().getLanguageConfig(p).loadMessage("blocked-by-rename-length-limit",
-                    "", null, true, "%limit%", String.valueOf(lengthLimit)));
+            getPlugin().getTranslator().send(p, "blocked-by-rename-length-limit",
+                    "%limit%", String.valueOf(lengthLimit));
             return;
         }
 

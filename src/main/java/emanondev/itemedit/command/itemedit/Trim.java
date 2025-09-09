@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -33,7 +32,7 @@ public class Trim extends SubCmd {
         ItemStack item = this.getItemInHand(p);
         ItemMeta meta = ItemUtils.getMeta(item);
         if (!(meta instanceof ArmorMeta)) {
-            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_armor", null, p));
+            getPlugin().getTranslator().send(p, "generic.error.wrong-material_armor");
             return;
         }
         try {

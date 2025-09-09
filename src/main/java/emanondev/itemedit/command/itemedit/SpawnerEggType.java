@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -30,7 +29,7 @@ public class SpawnerEggType extends SubCmd {
         ItemStack item = this.getItemInHand(p);
         ItemMeta rawMeta = ItemUtils.getMeta(item);
         if (!(rawMeta instanceof SpawnEggMeta)) {
-            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_spawner_egg", null, p));
+            getPlugin().getTranslator().send(p, "generic.error.wrong-material_spawner_egg");
             return;
         }
 

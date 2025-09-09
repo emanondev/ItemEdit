@@ -4,6 +4,7 @@ import emanondev.itemedit.command.AbstractCommand;
 import emanondev.itemedit.compability.Metrics;
 import emanondev.itemedit.plugin.PluginAdditionalInfo;
 import emanondev.itemedit.utility.ReflectionUtils;
+import emanondev.itemedit.utility.Translator;
 import emanondev.itemedit.utility.VersionUtils;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -29,11 +30,17 @@ public abstract class APlugin extends JavaPlugin {
 
     private final Map<String, YMLConfig> configs =
             VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
+
+    @Deprecated
     private final Map<String, YMLConfig> languageConfigs =
             VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
     @Getter
     private final PluginAdditionalInfo pluginAdditionalInfo;
+    @Getter
+    private final Translator translator;
+    @Deprecated
     private boolean useMultiLanguage;
+    @Deprecated
     private String defaultLanguage;
     private CooldownAPI cooldownApi = null;
     @Getter
@@ -41,6 +48,7 @@ public abstract class APlugin extends JavaPlugin {
 
     protected APlugin() {
         this.pluginAdditionalInfo = new PluginAdditionalInfo(this);
+        this.translator = new Translator(this);
     }
 
     /**
@@ -154,6 +162,7 @@ public abstract class APlugin extends JavaPlugin {
      * @param sender The command sender.
      * @return The language configuration for the sender.
      */
+    @Deprecated
     @NotNull
     public YMLConfig getLanguageConfig(@Nullable CommandSender sender) {
         String locale = getLocale(sender);
@@ -175,6 +184,17 @@ public abstract class APlugin extends JavaPlugin {
         languageConfigs.put(locale, conf);
         return conf;
     }
+
+    @Override
+    public void onLoad() {
+        load();
+    }
+
+    /**
+     * Called by {@link #onLoad()}.<br>
+     * This method should register commands and listeners.
+     */
+    public abstract void load();
 
     /**
      * Called by {@link #onEnable()}.<br>
@@ -249,6 +269,7 @@ public abstract class APlugin extends JavaPlugin {
                 configs.remove(key);
             }
         }
+
         languageConfigs.clear();
         getLanguageConfig(null);
     }
@@ -315,6 +336,7 @@ public abstract class APlugin extends JavaPlugin {
         this.useMultiLanguage = getConfig().getBoolean("language.use_multilanguage", true);
         this.defaultLanguage = getConfig().getString("language.default_language", "en");
         reloadConfigs();
+        this.translator.reload();
         reload();
         log(ChatColor.GREEN, "#", "Reloaded (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
     }
@@ -338,6 +360,7 @@ public abstract class APlugin extends JavaPlugin {
         log(ChatColor.RED + error);
     }
 
+    @Deprecated
     @NotNull
     private String getLocale(@Nullable CommandSender sender) {
         String locale;
@@ -421,6 +444,7 @@ public abstract class APlugin extends JavaPlugin {
         this.getConfig().save();
     }
 
+    @Deprecated
     private void initLanguages() {
         this.useMultiLanguage = getConfig().getBoolean("language.use_multilanguage", true);
         this.defaultLanguage = getConfig().getString("language.default", "en");

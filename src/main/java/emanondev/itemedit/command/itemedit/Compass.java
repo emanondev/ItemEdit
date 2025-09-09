@@ -33,7 +33,7 @@ public class Compass extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(item.getItemMeta() instanceof CompassMeta)) {
-            Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_compass", null, p));
+            getPlugin().getTranslator().send(p, "generic.error.wrong-material_compass");
             return;
         }
         if (args.length == 1) {

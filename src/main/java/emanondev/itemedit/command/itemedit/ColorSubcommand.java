@@ -1,6 +1,5 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.gui.ColorGui;
@@ -126,7 +125,7 @@ public class ColorSubcommand extends SubCmd {
             }
             return;
         }
-        Util.sendMessage(p, getPlugin().getLanguageConfig(p).getMessage("generic.error.wrong-material_rgb_colorable", null, p));
+        getPlugin().getTranslator().send(p, "generic.error.wrong-material_rgb_colorable");
 
     }
 

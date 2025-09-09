@@ -40,7 +40,7 @@ public class ItemEdit extends APlugin {
     }
 
     @Override
-    public void onLoad() {
+    public void load() {
         plugin = this;
     }
 
