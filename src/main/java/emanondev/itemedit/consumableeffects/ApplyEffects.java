@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.meta.components.consumable.effects.ConsumableApplyEffects;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +19,8 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApplyEffects implements ConsumableApplyEffects {
+
+    public static NamespacedKey KEY = NamespacedKey.minecraft("apply_effects");
 
     private List<PotionEffect> effects = new ArrayList<>();
     private float probability = 1;

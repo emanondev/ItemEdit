@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.meta.components.consumable.effects.ConsumableClearEffects;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,6 +17,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class TeleportRandomly implements ConsumableClearEffects {
 
+    public static NamespacedKey KEY = NamespacedKey.minecraft("teleport_randomly");
     private float diameter = 5;
 
     @Override

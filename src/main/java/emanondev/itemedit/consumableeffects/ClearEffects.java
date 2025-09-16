@@ -1,5 +1,6 @@
 package emanondev.itemedit.consumableeffects;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.meta.components.consumable.effects.ConsumableClearEffects;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,6 +9,7 @@ import java.util.Map;
 
 public class ClearEffects implements ConsumableClearEffects {
 
+    public static NamespacedKey KEY = NamespacedKey.minecraft("clear_all_effects");
 
     @Override
     public @NotNull Map<String, Object> serialize() {
