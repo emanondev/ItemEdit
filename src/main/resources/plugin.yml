@@ -24,6 +24,10 @@ commands:
     description: allows to edit item in hand
     usage: /itemedit
     aliases: [ ie ]
+  itemfood:
+    description: allows to edit item in hand
+    usage: /itemfood
+    aliases: [ if ]
   itemeditinfo:
     description: display info of itemedit
     usage: /itemeditinfo

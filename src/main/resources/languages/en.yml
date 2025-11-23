@@ -45,7 +45,6 @@ generic:
     wrong-entitygroups: '&4[&cItemEdit&4] &cWrong EntityGroup Value! &4[&6hover here&4]'
     wrong-consumable_effect: '&4[&cItemEdit&4] &cWrong Consumable Effect Value! &4[&6hover here&4]'
     wrong-goat_horn_sound: '&4[&cItemEdit&4] &cWrong Goat Horn Sound Value! &4[&6hover here&4]'
-
     wrong-material_banner: '&4[&cItemEdit&4] &cItem must be a banner'
     wrong-material_damageable: '&4[&cItemEdit&4] &cItem must have a durability like tools and armors'
     wrong-material_player_head: '&4[&cItemEdit&4] &cItem must be a player head'
@@ -61,7 +60,6 @@ generic:
     wrong-material_music_instrument: '&4[&cItemEdit&4] &cItem must be a goat horn'
     wrong-material_armor: '&4[&cItemEdit&4] &cItem must be an armor'
     wrong-material_enchantment_storage: '&4[&cItemEdit&4] &cItem must be a book or enchanted book'
-
     wrong-path: '&9[&fItemEdit&9] &cInvalid path, remember to reload the configuration and check the CaPs'
 itemfood:
   help:

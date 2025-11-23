@@ -21,10 +21,12 @@ public class Clear extends SubCmd {
         Player player = (Player) sender;
         ItemBuilder builder = new ItemBuilder(getItemInHand(player)).clearFoodComponent();
         if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+            builder.clearFoodComponent();
             setItemInHand(player, builder.build());
         } else {
+            builder.clearFoodComponent();
             builder.clearConsumableComponent();
-            builder.build();
+            setItemInHand(player,builder.build());
         }
         updateView(player);
     }

@@ -336,7 +336,7 @@ public class ItemBuilder {
             stack.setItemMeta(meta);
             ParsedItem parsedItem = new ParsedItem(stack);
             parsedItem.loadEmptyMap(Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
-            parsedItem.set(canAlwaysEat, Keys.Component.FOOD.toString(), "nutrition");
+            parsedItem.set(canAlwaysEat, Keys.Component.FOOD.toString(), "can_always_eat");
             parsedItem.load(0F, Keys.Component.FOOD.toString(), "saturation");
             stack = parsedItem.toItemStack();
             meta = Objects.requireNonNull(stack.getItemMeta());
