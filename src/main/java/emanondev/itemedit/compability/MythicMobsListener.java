@@ -48,11 +48,13 @@ public class MythicMobsListener implements Listener {
                     event.register(new DropServerItemMechanic(event.getConfig()));
                 } catch (IllegalArgumentException ignored) {
                 }
+                break;
             case "giveserveritem":
                 try {
                     event.register(new GiveServerItemMechanic(event.getConfig()));
                 } catch (IllegalArgumentException ignored) {
                 }
+                break;
         }
     }
 }
