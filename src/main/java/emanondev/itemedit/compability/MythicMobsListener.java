@@ -308,7 +308,10 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
             ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + id + "' is not a registered serveritem");
             return;
         }
-        item.setAmount((int) (amount + Math.random() * diff));
-        InventoryUtils.giveAmount(player, item, amount, InventoryUtils.ExcessMode.DROP_EXCESS);
+
+        int finalAmount = amount + (int)(Math.random() * (diff + 1));
+
+        item.setAmount(finalAmount);
+        InventoryUtils.giveAmount(player, item, finalAmount, InventoryUtils.ExcessMode.DROP_EXCESS);
     }
 }
