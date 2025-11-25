@@ -13,6 +13,8 @@ import io.lumine.mythic.api.drops.IItemDrop;
 import io.lumine.mythic.api.drops.ILocationDrop;
 import io.lumine.mythic.api.skills.*;
 import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.bukkit.adapters.BukkitEntity;
+import io.lumine.mythic.bukkit.adapters.BukkitPlayer;
 import io.lumine.mythic.bukkit.adapters.item.ItemComponentBukkitItemStack;
 import io.lumine.mythic.bukkit.events.MythicDropLoadEvent;
 import io.lumine.mythic.bukkit.events.MythicMechanicLoadEvent;
@@ -264,15 +266,35 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
 
     @Override
     public SkillResult castAtEntity(SkillMetadata data, AbstractEntity target) {
-        if (Math.random() > chance || !(target instanceof AbstractPlayer)) {
+        if (Math.random() > chance) {
             return SkillResult.CONDITION_FAILED;
         }
+
+        AbstractPlayer absPlayer;
+
+        if (!(target instanceof AbstractPlayer)) {
+            // Target is not a BukkitPlayer but a BukkitEntity when using @trigger
+            if (target instanceof BukkitEntity) {
+                BukkitEntity entity = (BukkitEntity)target;
+                if (entity.isPlayer()) {
+                    absPlayer = new BukkitPlayer(entity.getEntityAsPlayer());
+                } else {
+                    // This is not a player entity
+                    return SkillResult.CONDITION_FAILED;
+                }
+            } else {
+                return SkillResult.CONDITION_FAILED;
+            }
+        } else {
+            absPlayer = (AbstractPlayer) target;
+        }
+
         if (Bukkit.isPrimaryThread()) {
-            give((AbstractPlayer) target);
+            give(absPlayer);
         } else {
             new BukkitRunnable() {
                 public void run() {
-                    give((AbstractPlayer) target);
+                    give(absPlayer);
                 }
             }.runTask(ItemEdit.get());
         }
