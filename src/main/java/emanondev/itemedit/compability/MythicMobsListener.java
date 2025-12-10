@@ -155,7 +155,12 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, IT
             ItemEdit.get().log("&9[&fMythicMobs&9] &fMissing item id on mechanic, use {&eid&f='<your_id>' ....}");
             throw new IllegalArgumentException();
         }
-        if (ItemEdit.get().getServerStorage().getItem(id) == null) {
+        ItemStack value = null;
+        try {
+            value = ItemEdit.get().getServerStorage().getItem(id);
+        } catch (Exception ignored) {
+        }
+        if (value == null) {
             ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + id + "' is not a registered serveritem");
             throw new IllegalArgumentException();
         }
@@ -239,7 +244,12 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
             ItemEdit.get().log("&9[&fMythicMobs&9] &fMissing item id on mechanic, use {&eid&f='<your_id>' ....}");
             throw new IllegalArgumentException();
         }
-        if (ItemEdit.get().getServerStorage().getItem(id) == null) {
+        ItemStack value = null;
+        try {
+            value = ItemEdit.get().getServerStorage().getItem(id);
+        } catch (Exception ignored) {
+        }
+        if (value == null) {
             ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + id + "' is not a registered serveritem");
             throw new IllegalArgumentException();
         }
@@ -275,7 +285,7 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
         if (!(target instanceof AbstractPlayer)) {
             // Target is not a BukkitPlayer but a BukkitEntity when using @trigger
             if (target instanceof BukkitEntity) {
-                BukkitEntity entity = (BukkitEntity)target;
+                BukkitEntity entity = (BukkitEntity) target;
                 if (entity.isPlayer()) {
                     absPlayer = new BukkitPlayer(entity.getEntityAsPlayer());
                 } else {
@@ -309,7 +319,7 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
             return;
         }
 
-        int finalAmount = amount + (int)(Math.random() * (diff + 1));
+        int finalAmount = amount + (int) (Math.random() * (diff + 1));
 
         item.setAmount(finalAmount);
         InventoryUtils.giveAmount(player, item, finalAmount, InventoryUtils.ExcessMode.DROP_EXCESS);
