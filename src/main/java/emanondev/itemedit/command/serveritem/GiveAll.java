@@ -40,7 +40,30 @@ public class GiveAll extends SubCmd {
             if (silent == null) {
                 silent = Boolean.valueOf(args[3]);
             }
-            int amount = args.length >= 3 ? Integer.parseInt(args[2]) : 1;
+            int amount;
+            if (args.length >= 3) {
+                String amountArg = args[2];
+                if (amountArg.contains("-")) {
+                    String[] range = amountArg.split("-");
+                    if (range.length != 2) {
+                        throw new IllegalArgumentException("Invalid range format");
+                    }
+                    try {
+                        int min = Integer.parseInt(range[0]);
+                        int max = Integer.parseInt(range[1]);
+                        if (min < 1 || max < 1 || min > max) {
+                            throw new IllegalArgumentException("Wrong amount range");
+                        }
+                        amount = min + (int) (Math.random() * (max - min + 1));
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("Invalid number format in range");
+                    }
+                } else {
+                    amount = Integer.parseInt(amountArg);
+                }
+            } else {
+                amount = 1;
+            }
             if (amount < 1) {
                 throw new IllegalArgumentException("Wrong amount number");
             }
@@ -104,7 +127,7 @@ public class GiveAll extends SubCmd {
             case 2:
                 return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
             case 3:
-                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304", "1-10", "1-64"));
             case 4:
                 return CompleteUtility.complete(args[3], Aliases.BOOLEAN);
         }
