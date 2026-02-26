@@ -19,7 +19,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Hide extends SubCmd {
@@ -98,13 +97,11 @@ public class Hide extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2) {
-            return CompleteUtility.complete(args[1], Aliases.FLAG_TYPE);
-        }
-        if (args.length == 3) {
-            return CompleteUtility.complete(args[2], Aliases.BOOLEAN);
-        }
-        return Collections.emptyList();
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], Aliases.FLAG_TYPE);
+            case 3 -> CompleteUtility.complete(args[2], Aliases.BOOLEAN);
+            default -> List.of();
+        };
     }
 
 }

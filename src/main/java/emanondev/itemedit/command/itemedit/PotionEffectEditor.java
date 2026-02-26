@@ -20,7 +20,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -77,38 +76,40 @@ public class PotionEffectEditor extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        switch (args.length) {
-            case 2:
-                return CompleteUtility.complete(args[1], subCommands);
-            case 3:
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], subCommands);
+            case 3 -> {
                 if (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove")) {
-                    return CompleteUtility.complete(args[2], Aliases.POTION_EFFECT);
+                    yield CompleteUtility.complete(args[2], Aliases.POTION_EFFECT);
                 }
-                return Collections.emptyList();
-            case 4:
+                yield List.of();
+            }
+            case 4 -> {
                 if (args[1].equalsIgnoreCase("add")) {
-                    return CompleteUtility.complete(args[3], "infinite", "instant", "∞", "90", "180", "480");
+                    yield CompleteUtility.complete(args[3], "infinite", "instant", "∞", "90", "180", "480");
                 }
-                return Collections.emptyList();
-            case 5:
+                yield List.of();
+            }
+            case 5 -> {
                 if (args[1].equalsIgnoreCase("add")) {
-                    return CompleteUtility.complete(args[4], "1", "2", "3");
+                    yield CompleteUtility.complete(args[4], "1", "2", "3");
                 }
-                return Collections.emptyList();
-            case 6:
-            case 7:
+                yield List.of();
+            }
+            case 6, 7 -> {
                 if (args[1].equalsIgnoreCase("add")) {
-                    return CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
+                    yield CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
                 }
-                return Collections.emptyList();
-            case 8:
+                yield List.of();
+            }
+            case 8 -> {
                 if (VersionUtils.isAfter(1, 13) && args[1].equalsIgnoreCase("add")) {
-                    return CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
+                    yield CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
                 }
-                return Collections.emptyList();
-            default:
-                return Collections.emptyList();
-        }
+                yield List.of();
+            }
+            default -> List.of();
+        };
     }
 
     private void potioneffectRemove(Player p, ItemStack item, String alias, String[] args) {

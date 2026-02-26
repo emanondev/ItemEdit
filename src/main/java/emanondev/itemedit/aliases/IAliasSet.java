@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface IAliasSet<T> {
 
-    String getID();
+    String getId();
 
     void reload();
 

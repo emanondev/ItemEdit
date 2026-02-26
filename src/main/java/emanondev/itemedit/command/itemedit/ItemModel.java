@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -56,7 +55,7 @@ public class ItemModel extends SubCmd {
             return CompleteUtility.complete(args[1], Registry.ITEM.stream().collect(Collectors.toList()),
                     args[1].contains(":") ? (type) -> type.getKey().toString() : (type) -> type.getKey().getKey());
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
 }

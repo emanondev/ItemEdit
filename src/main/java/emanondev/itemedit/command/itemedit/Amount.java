@@ -8,8 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Amount extends SubCmd {
@@ -22,20 +20,24 @@ public class Amount extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
+        if (args.length != 2) {
+            onFail(p, alias);
+        }
         try {
-            if (args.length != 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
             int amount = Integer.parseInt(args[1]);
             if (amount < 0) {//remove this amount
                 item.setAmount(Math.max(0, item.getAmount() + amount));
+                sendFeedback(p, "feedback-decrease",
+                        "%amount%", String.valueOf(Math.abs(amount)));
             } else if ((amount > 127) || (amount < 1)) {
-                throw new IllegalArgumentException("Wrong amount number");
+                onFail(p, alias);
+                return;
             } else {
                 item.setAmount(amount);
+                onSuccess(p, "%amount%", String.valueOf(Math.abs(amount)));
             }
             updateView(p);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             onFail(p, alias);
         }
 
@@ -44,8 +46,8 @@ public class Amount extends SubCmd {
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2) {
-            return CompleteUtility.complete(args[1], Arrays.asList("1", "10", "64", "100", "127"));
+            return CompleteUtility.complete(args[1], List.of("1", "10", "64", "100", "127"));
         }
-        return Collections.emptyList();
+        return List.of();
     }
 }

@@ -8,7 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class SetNick extends SubCmd {
@@ -43,11 +42,11 @@ public class SetNick extends SubCmd {
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {
-            return Collections.emptyList();
+            return List.of();
         }
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
         }
-        return Collections.emptyList();
+        return List.of();
     }
 }

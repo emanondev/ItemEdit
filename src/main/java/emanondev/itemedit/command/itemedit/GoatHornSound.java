@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.MusicInstrumentMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class GoatHornSound extends SubCmd {
@@ -54,6 +53,6 @@ public class GoatHornSound extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.GOAT_HORN_SOUND);
         }
-        return Collections.emptyList();
+        return List.of();
     }
 }

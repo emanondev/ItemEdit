@@ -17,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Drop extends SubCmd {
@@ -75,7 +74,7 @@ public class Drop extends SubCmd {
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {
-            return Collections.emptyList();
+            return List.of();
         }
         switch (args.length) {
             case 2:
@@ -102,7 +101,7 @@ public class Drop extends SubCmd {
                 return CompleteUtility.complete(args[6], Arrays.asList(String.valueOf(loc.getBlockZ()), String.valueOf(loc.getZ())));
             }
             default:
-                return Collections.emptyList();
+                return List.of();
         }
     }
 

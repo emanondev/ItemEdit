@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,7 +44,7 @@ public class Delete extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], ItemEdit.get().getPlayerStorage().getIds((Player) sender));
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
 }

@@ -27,14 +27,6 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
         this.plugin = plugin == null ? ItemEdit.get() : plugin;
     }
 
-    /**
-     * @see #getId()
-     */
-    @Deprecated
-    public String getID() {
-        return id;
-    }
-
     public void reload() {
         map.clear();
         for (T value : getValues()) {

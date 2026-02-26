@@ -47,7 +47,7 @@ public class ItemEditImportCommand implements TabExecutor {
         if (args.length == 1) {
             return CompleteUtility.complete(args[0], Collections.singletonList("itemeditor"));
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
     public void sendPermissionLackMessage(@NotNull String permission, CommandSender sender) {

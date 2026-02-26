@@ -9,9 +9,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Stream;
 
 public class Glow extends SubCmd {
 
@@ -42,13 +42,12 @@ public class Glow extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2) {
-            List<String> list = CompleteUtility.complete(args[1], Aliases.BOOLEAN);
-            if ("default".startsWith(args[1].toLowerCase(Locale.ENGLISH))) {
-                list.add("default");
-            }
-            return list;
+        if (args.length != 2) {
+            return List.of();
         }
-        return Collections.emptyList();
+        return Stream.concat(
+                CompleteUtility.complete(args[1], Aliases.BOOLEAN).stream(),
+                "default".startsWith(args[1].toLowerCase(Locale.ENGLISH)) ? Stream.of("default") : Stream.empty()
+        ).toList();
     }
 }

@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class SkullOwner extends SubCmd {
@@ -65,7 +64,7 @@ public class SkullOwner extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.completePlayers(args[1]);
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
 }

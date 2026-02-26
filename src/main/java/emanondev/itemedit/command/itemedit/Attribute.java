@@ -14,9 +14,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Stream;
 
 public class Attribute extends SubCmd {
     private static final String[] attributeSub = new String[]{"add", "remove"};
@@ -153,25 +153,24 @@ public class Attribute extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], attributeSub);
         }
-        if (args[1].equalsIgnoreCase("add")) {
-            if (args.length == 3) {
-                return CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
-            }
-            if (args.length == 5) {
-                return CompleteUtility.complete(args[4], Aliases.OPERATIONS);
-            }
-            if (args.length == 6) {
-                if (VersionUtils.isAfter(1, 21)) {
-                    return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
-                }
-                return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTS);
-            }
-        } else if (args[1].equalsIgnoreCase("remove") && args.length == 3) {
-            List<String> l = CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
-            l.addAll(CompleteUtility.complete(args[2], Aliases.EQUIPMENT_SLOTS));
-            return l;
+        if (args.length < 2) {
+            return List.of();
         }
-        return Collections.emptyList();
+        return switch (args[1].toLowerCase()) {
+            case "add" -> switch (args.length) {
+                case 3 -> CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
+                case 5 -> CompleteUtility.complete(args[4], Aliases.OPERATIONS);
+                case 6 -> VersionUtils.isAfter(1, 21)
+                        ? CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS)
+                        : CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTS);
+                default -> List.of();
+            };
+            case "remove" -> args.length == 3 ? Stream.concat(
+                    CompleteUtility.complete(args[2], Aliases.ATTRIBUTE).stream(),
+                    CompleteUtility.complete(args[2], Aliases.EQUIPMENT_SLOTS).stream()
+            ).toList() : List.of();
+            default -> List.of();
+        };
     }
 
 }

@@ -16,7 +16,6 @@ import org.bukkit.inventory.meta.BannerMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -143,24 +142,18 @@ public class Banner extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        switch (args.length) {
-            case 2:
-                return CompleteUtility.complete(args[1], subCommands);
-            case 3:
-                if (args[1].equalsIgnoreCase("add")
-                        || args[1].equalsIgnoreCase("set")) {
-                    return CompleteUtility.complete(args[2], Aliases.PATTERN_TYPE);
-                }
-                return Collections.emptyList();
-            case 4:
-                if (args[1].equalsIgnoreCase("color")
-                        || args[1].equalsIgnoreCase("add")
-                        || args[1].equalsIgnoreCase("set")) {
-                    return CompleteUtility.complete(args[3], Aliases.COLOR);
-                }
-            default:
-                return Collections.emptyList();
-        }
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], subCommands);
+            case 3 -> switch (args[1].toLowerCase()) {
+                case "add", "set" -> CompleteUtility.complete(args[2], Aliases.PATTERN_TYPE);
+                default -> List.of();
+            };
+            case 4 -> switch (args[1].toLowerCase()) {
+                case "color", "add", "set" -> CompleteUtility.complete(args[3], Aliases.COLOR);
+                default -> List.of();
+            };
+            default -> List.of();
+        };
     }
 
 }

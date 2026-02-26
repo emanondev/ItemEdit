@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ColorOld extends SubCmd {
@@ -30,12 +29,12 @@ public class ColorOld extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        if ((item.getItemMeta() instanceof LeatherArmorMeta)) {
+        ItemMeta rawMeta = ItemUtils.getMeta(item);
+        if (rawMeta instanceof LeatherArmorMeta leatherMeta) {
             if (!sender.hasPermission(leatherPerm)) {
                 this.getCommand().sendPermissionLackMessage(leatherPerm, sender);
                 return;
             }
-            LeatherArmorMeta leatherMeta = (LeatherArmorMeta) ItemUtils.getMeta(item);
             try {
                 if (args.length != 4) {
                     throw new IllegalArgumentException("Wrong param number");
@@ -51,14 +50,11 @@ public class ColorOld extends SubCmd {
             }
             return;
         }
-        ItemMeta rawMeta = ItemUtils.getMeta(item);
-        if (rawMeta instanceof FireworkEffectMeta) {
+        if (rawMeta instanceof FireworkEffectMeta starMeta) {
             if (!sender.hasPermission(starsPerm)) {
                 this.getCommand().sendPermissionLackMessage(starsPerm, sender);
                 return;
             }
-
-            FireworkEffectMeta starMeta = (FireworkEffectMeta) rawMeta;
             try {
                 if (args.length != 4) {
                     throw new IllegalArgumentException("Wrong param number");
@@ -87,6 +83,6 @@ public class ColorOld extends SubCmd {
     // itemedit bookauthor <name>
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return Collections.emptyList();
+        return List.of();
     }
 }

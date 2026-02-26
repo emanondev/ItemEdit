@@ -17,7 +17,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Give extends SubCmd {
@@ -79,19 +78,15 @@ public class Give extends SubCmd {
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {
-            return Collections.emptyList();
+            return List.of();
         }
-        switch (args.length) {
-            case 2:
-                return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
-            case 3:
-                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
-            case 4:
-                return CompleteUtility.completePlayers(args[3]);
-            case 5:
-                return CompleteUtility.complete(args[4], Aliases.BOOLEAN);
-        }
-        return Collections.emptyList();
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+            case 3 -> CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+            case 4 -> CompleteUtility.completePlayers(args[3]);
+            case 5 -> CompleteUtility.complete(args[4], Aliases.BOOLEAN);
+            default -> List.of();
+        };
     }
 
 }

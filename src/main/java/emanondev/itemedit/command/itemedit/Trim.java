@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -70,16 +70,17 @@ public class Trim extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2) {
-            List<String> list = CompleteUtility.complete(args[1], Aliases.TRIM_MATERIAL);
-            if ("clear".startsWith(args[1].toLowerCase(Locale.ENGLISH))) {
-                list.add("CLEAR");
+        return switch (args.length) {
+            case 2 -> {
+                List<String> list = new ArrayList<>(CompleteUtility.complete(args[1], Aliases.TRIM_MATERIAL));
+                if ("clear".startsWith(args[1].toLowerCase(Locale.ENGLISH))) {
+                    list.add("CLEAR");
+                }
+                yield list;
             }
-            return list;
-        }
-        if (args.length == 3 && !args[1].equalsIgnoreCase("clear")) {
-            return CompleteUtility.complete(args[2], Aliases.TRIM_PATTERN);
-        }
-        return Collections.emptyList();
+            case 3 -> args[1].equalsIgnoreCase("clear")
+                    ? List.of() : CompleteUtility.complete(args[2], Aliases.TRIM_PATTERN);
+            default -> List.of();
+        };
     }
 }

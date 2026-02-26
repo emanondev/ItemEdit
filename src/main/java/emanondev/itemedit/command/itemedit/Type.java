@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Type extends SubCmd {
@@ -45,7 +44,7 @@ public class Type extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], Material.class, ItemUtils::isItem);
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
 }

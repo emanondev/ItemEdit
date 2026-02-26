@@ -13,7 +13,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.TropicalFishBucketMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -126,15 +125,14 @@ public class TropicalFish extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2) {
-            return CompleteUtility.complete(args[1], subCommands);
-        }
-        if (args.length == 3)
-            if (args[1].equalsIgnoreCase("patterncolor") || args[1].equalsIgnoreCase("bodycolor")) {
-                return CompleteUtility.complete(args[2], Aliases.COLOR);
-            } else if (args[1].equalsIgnoreCase("pattern")) {
-                return CompleteUtility.complete(args[2], Aliases.TROPICALPATTERN);
-            }
-        return Collections.emptyList();
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], subCommands);
+            case 3 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "patterncolor", "bodycolor" -> CompleteUtility.complete(args[2], Aliases.COLOR);
+                case "pattern" -> CompleteUtility.complete(args[2], Aliases.TROPICALPATTERN);
+                default -> List.of();
+            };
+            default -> List.of();
+        };
     }
 }

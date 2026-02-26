@@ -12,7 +12,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Rename extends SubCmd {
 
@@ -94,21 +97,20 @@ public class Rename extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (!(sender instanceof Player)) {
-            return Collections.emptyList();
+        if (!(sender instanceof Player player) || args.length != 2) {
+            return List.of();
         }
-        if (args.length != 2) {
-            return Collections.emptyList();
+        ItemStack item = getItemInHand(player);
+        if (item == null || !item.hasItemMeta()) {
+            return List.of();
         }
-        ItemStack item = this.getItemInHand((Player) sender);
-        if (item != null && item.hasItemMeta()) {
-            ItemMeta meta = ItemUtils.getMeta(item);
-            if (meta.hasDisplayName()) {
-                return CompleteUtility.complete(args[1],
-                        meta.getDisplayName().replace('§', '&'), "-clear", "-paste", "-copy");
-            }
+        ItemMeta meta = ItemUtils.getMeta(item);
+        if (!meta.hasDisplayName()) {
+            return List.of();
         }
-        return Collections.emptyList();
+        return CompleteUtility.complete(
+                args[1], meta.getDisplayName().replace('§', '&'),
+                "-clear", "-paste", "-copy");
     }
 
     private boolean allowedLengthLimit(Player who, String text) {

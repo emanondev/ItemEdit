@@ -11,7 +11,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class CustomModelData extends SubCmd {
@@ -46,7 +45,7 @@ public class CustomModelData extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
 }

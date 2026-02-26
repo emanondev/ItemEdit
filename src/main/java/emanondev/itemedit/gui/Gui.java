@@ -19,7 +19,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
 import java.util.List;
 
 public interface Gui extends InventoryHolder {
@@ -103,7 +102,7 @@ public interface Gui extends InventoryHolder {
     default List<String> getLanguageMultiMessage(@NotNull String fullPath,
                                                  String... holders) {
         return getPlugin().getLanguageConfig(getTargetPlayer())
-                .loadMultiMessage(fullPath, Collections.emptyList(), null, true, holders);
+                .loadMultiMessage(fullPath, List.of(), null, true, holders);
     }
 
     @Contract("null,_,_->null;!null,_,_->!null")

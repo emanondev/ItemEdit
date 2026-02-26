@@ -130,7 +130,7 @@ public class ItemBuilder {
             throw new UnsupportedOperationException();
         }
         if (!meta.hasConsumable()) {
-            return Collections.emptyList();
+            return List.of();
         }
         return meta.getConsumable().getEffects();
 

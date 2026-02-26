@@ -5,7 +5,10 @@ import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -203,7 +206,7 @@ public final class CompleteUtility {
                                             @Nullable IAliasSet<T> aliases,
                                             @Nullable Predicate<T> filter) {
         if (aliases == null) {
-            return Collections.emptyList();
+            return List.of();
         }
         ArrayList<String> results = new ArrayList<>();
         prefix = prefix.toLowerCase(Locale.ENGLISH);

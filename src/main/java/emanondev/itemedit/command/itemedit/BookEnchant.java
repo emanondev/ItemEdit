@@ -13,9 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class BookEnchant extends SubCmd {
     public BookEnchant(ItemEditCommand cmd) {
@@ -65,18 +64,15 @@ public class BookEnchant extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2) {
-            return CompleteUtility.complete(args[1], Aliases.ENCHANT);
-        }
-        Enchantment ench = Aliases.ENCHANT.convertAlias(args[2]);
-        if (ench == null) {
-            return Collections.emptyList();
-        }
-        ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i <= ench.getMaxLevel(); i++) {
-            list.add(String.valueOf(i));
-        }
-        return list;
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], Aliases.ENCHANT);
+            case 3 -> {
+                Enchantment ench = Aliases.ENCHANT.convertAlias(args[2]);
+                yield ench == null ? List.of() : IntStream.rangeClosed(0, ench.getMaxLevel())
+                        .mapToObj(String::valueOf).toList();
+            }
+            default -> List.of();
+        };
     }
 
 }

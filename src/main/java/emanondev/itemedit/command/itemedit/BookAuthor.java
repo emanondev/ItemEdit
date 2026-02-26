@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class BookAuthor extends SubCmd {
@@ -39,18 +38,14 @@ public class BookAuthor extends SubCmd {
             return;
         }
 
-        try {
-            StringBuilder name = new StringBuilder(args[1]);
-            for (int i = 2; i < args.length; i++) {
-                name.append(" ").append(args[i]);
-            }
-            meta.setAuthor(UtilsString.fix(name.toString(), null, true));
-            item.setItemMeta(meta);
-            updateView(p);
-        } catch (Exception e) {
-            onFail(p, alias);
+        StringBuilder name = new StringBuilder(args[1]);
+        for (int i = 2; i < args.length; i++) {
+            name.append(" ").append(args[i]);
         }
-
+        meta.setAuthor(UtilsString.fix(name.toString(), null, true));
+        item.setItemMeta(meta);
+        updateView(p);
+        onFail(p, alias);
     }
 
     // itemedit bookauthor <name>
@@ -59,6 +54,6 @@ public class BookAuthor extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.completePlayers(args[1]);
         }
-        return Collections.emptyList();
+        return List.of();
     }
 }

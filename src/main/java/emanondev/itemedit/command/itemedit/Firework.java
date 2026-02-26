@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Firework extends SubCmd {
@@ -38,7 +37,7 @@ public class Firework extends SubCmd {
     // itemedit firework
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return Collections.emptyList();
+        return List.of();
     }
 
 }

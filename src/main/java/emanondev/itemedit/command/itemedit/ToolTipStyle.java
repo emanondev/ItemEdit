@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -60,6 +59,6 @@ public class ToolTipStyle extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], "clear");
         }
-        return Collections.emptyList();
+        return List.of();
     }
 }

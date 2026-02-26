@@ -9,9 +9,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class FireworkPower extends SubCmd {
 
@@ -49,14 +48,8 @@ public class FireworkPower extends SubCmd {
     // itemedit fireworkpower <power>
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2) {
-            ArrayList<String> list = new ArrayList<>();
-            for (int i = 0; i < 6; i++) {
-                list.add(String.valueOf(i));
-            }
-            return list;
-        }
-        return Collections.emptyList();
+        return args.length == 2 ? IntStream.range(0, 6)
+                .mapToObj(String::valueOf).toList() : List.of();
     }
 
 }

@@ -234,10 +234,10 @@ public class Aliases {
         if (set == null) {
             return;
         }
-        if (!forced && types.containsKey(set.getID())) {
+        if (!forced && types.containsKey(set.getId())) {
             throw new IllegalArgumentException("Duplicate id");
         }
-        types.put(set.getID(), set);
+        types.put(set.getId(), set);
     }
 
     public static <T> void registerAliasType(@Nullable Supplier<IAliasSet<T>> supplier) {
@@ -250,10 +250,10 @@ public class Aliases {
         }
         try {
             IAliasSet<T> set = supplier.get();
-            if (!forced && types.containsKey(set.getID())) {
+            if (!forced && types.containsKey(set.getId())) {
                 throw new IllegalArgumentException("Duplicate id");
             }
-            types.put(set.getID(), set);
+            types.put(set.getId(), set);
         } catch (Throwable t) {
             t.printStackTrace();
         }

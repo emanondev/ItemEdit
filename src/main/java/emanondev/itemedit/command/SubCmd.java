@@ -116,7 +116,7 @@ public abstract class SubCmd {
 
     protected <T> void onWrongAlias(CommandSender sender, IAliasSet<T> set, String... holders) {
         YMLConfig language = ItemEdit.get().getLanguageConfig(sender);
-        String msg = language.getMessage("generic.wrongalias." + set.getID(), null, holders);
+        String msg = language.getMessage("generic.wrongalias." + set.getId(), null, holders);
         if (msg == null || msg.isEmpty()) {
             return;
         }
@@ -142,7 +142,7 @@ public abstract class SubCmd {
         Util.sendMessage(sender, new ComponentBuilder(msg).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + ItemEditCommand.get().getName() + " "
                                 + ItemEdit.get().getConfig("commands.yml")
-                                .getString("itemedit.listaliases.name") + " " + set.getID()))
+                                .getString("itemedit.listaliases.name") + " " + set.getId()))
                 .event(Util.craftHoverEvent(hover.toString())).create());//TODO fix
     }
 
@@ -175,7 +175,7 @@ public abstract class SubCmd {
         Util.sendMessage(sender, new ComponentBuilder(msg).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                         "/" + ItemEditCommand.get().getName() + " "
                                 + ItemEdit.get().getConfig("commands.yml")
-                                .getString("itemedit.listaliases.name") + " " + set.getID()))
+                                .getString("itemedit.listaliases.name") + " " + set.getId()))
                 .event(Util.craftHoverEvent(hover.toString())).create());//TODO fix
     }
 

@@ -489,7 +489,7 @@ public abstract class APlugin extends JavaPlugin {
                                           @NotNull Command command,
                                           @NotNull String alias,
                                           @NotNull String[] args) {
-            return Collections.emptyList();
+            return List.of();
         }
 
         @Override

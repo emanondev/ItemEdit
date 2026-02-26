@@ -10,9 +10,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Stream;
 
 public class MaxStackSize extends SubCmd {
 
@@ -41,13 +41,11 @@ public class MaxStackSize extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2) {
-            List<String> list = CompleteUtility.complete(args[1], "1", "32", "64", "99");
-            if ("default".startsWith(args[1].toLowerCase(Locale.ENGLISH))) {
-                list.add("default");
-            }
-            return list;
+        if (args.length != 2) {
+            return List.of();
         }
-        return Collections.emptyList();
+        return Stream.concat(CompleteUtility.complete(args[1], "1", "32", "64", "99").stream(),
+                "default".startsWith(args[1].toLowerCase(Locale.ENGLISH)) ? Stream.of("default") : Stream.empty()
+        ).toList();
     }
 }

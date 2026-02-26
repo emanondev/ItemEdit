@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Unbreakable extends SubCmd {
@@ -44,6 +43,6 @@ public class Unbreakable extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.BOOLEAN);
         }
-        return Collections.emptyList();
+        return List.of();
     }
 }

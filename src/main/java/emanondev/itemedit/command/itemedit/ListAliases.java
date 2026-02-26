@@ -100,7 +100,7 @@ public class ListAliases extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.getTypes().keySet());
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
 }

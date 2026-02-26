@@ -17,6 +17,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lore extends SubCmd {
 
@@ -282,65 +284,54 @@ public class Lore extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        switch (args.length) {
-            case 2:
-                return CompleteUtility.complete(args[1], loreSub);
-            case 3:
-                switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                    case "remove":
-                    case "set":
-                        if (!(sender instanceof Player)) {
-                            return Collections.emptyList();
-                        }
-                        Player player = (Player) sender;
-                        ItemStack item = this.getItemInHand(player);
-                        if (ItemUtils.isAirOrNull(item)) {
-                            return Collections.emptyList();
-                        }
-                        if (!item.hasItemMeta()) {
-                            return CompleteUtility.complete(args[2], Arrays.asList("1", "last"));
-                        }
-                        ItemMeta meta = ItemUtils.getMeta(item);
-                        if (!meta.hasLore()) {
-                            return CompleteUtility.complete(args[2], Arrays.asList("1", "last"));
-                        }
-                        List<String> list = new ArrayList<>();
-                        for (int i = 0; i < meta.getLore().size(); i++) {
-                            list.add(String.valueOf(i + 1));
-                        }
-                        list.add("last");
-                        return CompleteUtility.complete(args[2], list);
-                    case "copyfile":
-                        return CompleteUtility.complete(args[2], loreCopy.getKeys(false));
-                }
-                return Collections.emptyList();
-            case 4:
-                switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                    case "set":
-                        if (sender instanceof Player) {
-                            ItemStack item = this.getItemInHand((Player) sender);
-                            if (item != null && item.hasItemMeta()) {
-                                ItemMeta meta = ItemUtils.getMeta(item);
-                                if (meta.hasLore()) {
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], loreSub);
+            case 3 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "remove", "set" -> {
+                    if (!(sender instanceof Player player)) yield List.of();
 
-                                    List<String> lore = meta.getLore();
+                    ItemStack item = getItemInHand(player);
+                    if (ItemUtils.isAirOrNull(item)) yield List.of();
 
-                                    try {
-                                        int line = args[2].equalsIgnoreCase("last") ?
-                                                lore.size() - 1 : Integer.parseInt(args[2]) - 1;
-                                        if (line < 0 || line >= lore.size()) {
-                                            return Collections.emptyList();
-                                        }
-                                        return CompleteUtility.complete(args[3], lore.get(line).replace('§', '&'));
-                                    } catch (NumberFormatException e) {
-                                        return Collections.emptyList();
-                                    }
-                                }
-                            }
-                        }
+                    ItemMeta meta = ItemUtils.getMeta(item);
+                    if (!item.hasItemMeta() || !meta.hasLore()) {
+                        yield CompleteUtility.complete(args[2], Arrays.asList("1", "last"));
+                    }
+                    List<String> loreIndices = IntStream.range(0, meta.getLore().size())
+                            .mapToObj(i -> String.valueOf(i + 1))
+                            .collect(Collectors.toList());
+                    loreIndices.add("last");
+                    yield CompleteUtility.complete(args[2], loreIndices);
                 }
-        }
-        return Collections.emptyList();
+                case "copyfile" -> CompleteUtility.complete(args[2], loreCopy.getKeys(false));
+                default -> List.of();
+            };
+            case 4 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "set" -> {
+                    if (!(sender instanceof Player player)) yield List.of();
+
+                    ItemStack item = getItemInHand(player);
+                    if (item == null || !item.hasItemMeta()) yield List.of();
+
+                    ItemMeta meta = ItemUtils.getMeta(item);
+                    if (!meta.hasLore()) yield List.of();
+
+                    List<String> lore = meta.getLore();
+                    int line;
+                    try {
+                        line = args[2].equalsIgnoreCase("last") ? lore.size() - 1 : Integer.parseInt(args[2]) - 1;
+                    } catch (NumberFormatException e) {
+                        yield List.of();
+                    }
+
+                    if (line < 0 || line >= lore.size()) yield List.of();
+
+                    yield CompleteUtility.complete(args[3], lore.get(line).replace('§', '&'));
+                }
+                default -> List.of();
+            };
+            default -> List.of();
+        };
     }
 
     // /itemedit lore add

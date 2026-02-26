@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Rarity extends SubCmd {
@@ -50,7 +49,7 @@ public class Rarity extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.RARITY);
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
 }

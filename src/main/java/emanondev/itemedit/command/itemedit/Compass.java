@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -58,7 +57,7 @@ public class Compass extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], compassSub);
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
     // lore set line text

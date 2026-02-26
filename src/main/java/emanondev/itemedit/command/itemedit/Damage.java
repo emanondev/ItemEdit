@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Damage extends SubCmd {
@@ -38,16 +37,21 @@ public class Damage extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2) {
-            if (sender instanceof Player) {
-                ItemStack item = getItemInHand((Player) sender);
-                if (!ItemUtils.isAirOrNull(item) && item.getType().getMaxDurability() > 1) {
-                    int max = item.getType().getMaxDurability();
-                    return CompleteUtility.complete(args[1], "0", String.valueOf(max), String.valueOf(max / 2), String.valueOf(max / 4), String.valueOf(max / 4 * 3));
-                }
-            }
+        if (args.length != 2 || !(sender instanceof Player player)) {
+            return List.of();
         }
-        return Collections.emptyList();
+        ItemStack item = getItemInHand(player);
+        if (ItemUtils.isAirOrNull(item)) {
+            return List.of();
+        }
+        int max = item.getType().getMaxDurability();
+        if (max <= 1) {
+            return List.of();
+        }
+        return CompleteUtility.complete(args[1],
+                "0", String.valueOf(max), String.valueOf(max / 2),
+                String.valueOf(max / 4), String.valueOf((max * 3) / 4)
+        );
     }
 
 }

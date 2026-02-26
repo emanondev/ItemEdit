@@ -12,7 +12,6 @@ import org.bukkit.inventory.meta.Repairable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class RepairCost extends SubCmd {
@@ -49,7 +48,7 @@ public class RepairCost extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], Arrays.asList("0", "1", "3", "7", "30", "40"));
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
 }

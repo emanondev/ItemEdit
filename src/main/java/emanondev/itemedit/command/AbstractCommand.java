@@ -21,7 +21,10 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public abstract class AbstractCommand implements TabExecutor {
@@ -426,7 +429,7 @@ public abstract class AbstractCommand implements TabExecutor {
         @Override
         public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
             if (args.length != 2) {
-                return Collections.emptyList();
+                return List.of();
             }
             ArrayList<String> tabs = new ArrayList<>();
             List<SubCmd> subs = getAllowedSubCommands(sender);

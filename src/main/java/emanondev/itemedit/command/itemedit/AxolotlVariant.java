@@ -4,7 +4,6 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
@@ -12,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.AxolotlBucketMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class AxolotlVariant extends SubCmd {
@@ -30,29 +28,25 @@ public class AxolotlVariant extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        if (!(item.getItemMeta() instanceof AxolotlBucketMeta)) {
+        if (!(item.getItemMeta() instanceof AxolotlBucketMeta meta)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_axolotl_bucket");
             return;
         }
 
-        try {
-            if (args.length != 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-            AxolotlBucketMeta meta = (AxolotlBucketMeta) ItemUtils.getMeta(item);
-            Axolotl.Variant type = Aliases.AXOLOTL_VARIANT.convertAlias(args[1]);
-            if (type == null) {
-                onWrongAlias(p, Aliases.AXOLOTL_VARIANT);
-                onFail(p, alias);
-                return;
-            }
-            meta.setVariant(type);
-            item.setItemMeta(meta);
-            updateView(p);
-        } catch (Exception e) {
+        if (args.length != 2) {
             onFail(p, alias);
+            return;
         }
-
+        Axolotl.Variant type = Aliases.AXOLOTL_VARIANT.convertAlias(args[1]);
+        if (type == null) {
+            onWrongAlias(p, Aliases.AXOLOTL_VARIANT);
+            onFail(p, alias);
+            return;
+        }
+        meta.setVariant(type);
+        item.setItemMeta(meta);
+        onSuccess(p, alias);
+        updateView(p);
     }
 
     @Override
@@ -60,6 +54,6 @@ public class AxolotlVariant extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.AXOLOTL_VARIANT);
         }
-        return Collections.emptyList();
+        return List.of();
     }
 }

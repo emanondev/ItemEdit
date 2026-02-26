@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class SpawnerEggType extends SubCmd {
@@ -59,7 +58,7 @@ public class SpawnerEggType extends SubCmd {
         if (args.length == 2) {
             return CompleteUtility.complete(args[1], Aliases.EGG_TYPE);
         }
-        return Collections.emptyList();
+        return List.of();
     }
 
 }
