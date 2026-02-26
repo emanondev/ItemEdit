@@ -243,7 +243,7 @@ public class Equipment extends SubCmd {
             item.setItemMeta(meta);
             sendFeedbackForSub(p, "damageonhurt", "%value%", String.valueOf(value));
             if (value && (meta.hasMaxStackSize() ? meta.getMaxStackSize() > 1 : item.getType().getMaxStackSize() > 1)) {
-                String msg = getLanguageString("damageonhurt.warning-maxstacksize", null, p);
+                String msg = translate("damageonhurt.warning-maxstacksize", p);
                 if (msg != null && !msg.isEmpty()) {
                     ComponentBuilder compMsg = new ComponentBuilder(msg)
                             .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
@@ -451,15 +451,15 @@ public class Equipment extends SubCmd {
 
 
     public void onFail(@NotNull CommandSender target, @NotNull String alias) {
-        Util.sendMessage(target, new ComponentBuilder(getLanguageString("help-header", "", target)).create());
+        Util.sendMessage(target, new ComponentBuilder(translateOrEmpty("help-header", target)).create());
         for (String sub : subCommands) {
             Util.sendMessage(target, new ComponentBuilder(
                     ChatColor.DARK_GREEN + "/" + alias + " " + this.getName() + ChatColor.GREEN + " " + sub + " "
-                            + getLanguageString(sub + ".params", "", target))
+                            + translateOrEmpty(sub + ".params", target))
                     .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
                             "/" + alias + " " + this.getName() + " " + sub + " "))
                     .event(Util.craftHoverEvent(
-                            getLanguageStringList(sub + ".description", null, target)))
+                            translateList(sub + ".description", target)))
                     .create());
         }
     }

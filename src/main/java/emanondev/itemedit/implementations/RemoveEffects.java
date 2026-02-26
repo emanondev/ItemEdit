@@ -1,10 +1,9 @@
-package emanondev.itemedit.consumableeffects;
+package emanondev.itemedit.implementations;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.meta.components.consumable.effects.ConsumableRemoveEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +19,6 @@ import java.util.Map;
 @AllArgsConstructor
 public class RemoveEffects implements ConsumableRemoveEffect {
 
-    public static NamespacedKey KEY = NamespacedKey.minecraft("remove_effects");
     private List<PotionEffectType> effectTypes = new ArrayList<>();
 
     @Override

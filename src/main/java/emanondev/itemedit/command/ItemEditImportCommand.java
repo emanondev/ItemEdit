@@ -68,7 +68,7 @@ public class ItemEditImportCommand implements TabExecutor {
             return true;
         }
         switch (args[0].toLowerCase(Locale.ENGLISH)) {
-            case "itemeditor": {
+            case "itemeditor" -> {
                 File[] files = new File("plugins" + File.separator + "ItemEditor" + File.separator + "items").listFiles();
                 if (files != null
                         && files.length != 0) {
@@ -122,8 +122,6 @@ public class ItemEditImportCommand implements TabExecutor {
                 }
                 return true;
             }
-            default:
-                break;
         }
         Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage("itemeditimport.help",
                 new ArrayList<>())));

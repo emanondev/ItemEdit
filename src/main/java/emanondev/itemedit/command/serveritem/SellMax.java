@@ -73,7 +73,7 @@ public class SellMax extends SubCmd {
             if (!economy.has(target, price / amount)) {
                 // not enough money, aborting
                 if (!silent) {
-                    sendLanguageString("not-enough-money", null, target, "%id%",
+                    sendLanguageString("not-enough-money", target, "%id%",
                             args[1].toLowerCase(), "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
                             "%amount%", String.valueOf(amount), "%price%", economy.format(price));
                 }
@@ -100,7 +100,7 @@ public class SellMax extends SubCmd {
             if (given == 0) {
                 // not enough space, aborting
                 if (!silent) {
-                    sendLanguageString("not-enough-space", null, target, "%id%",
+                    sendLanguageString("not-enough-space", target, "%id%",
                             args[1].toLowerCase(), "%nick%",
                             ItemEdit.get().getServerStorage().getNick(args[1]));
                 }
@@ -120,7 +120,7 @@ public class SellMax extends SubCmd {
                 if (!economy.depositPlayer(target, pricePerItem * (amount - given)).transactionSuccess()) {
                     // error
                     if (!silent) {
-                        sendLanguageString("transaction-failed", null, target);
+                        sendLanguageString("transaction-failed", target);
                     }
                     Util.logToFile("[transaction failed] player '" + target.getName() + "' (" + target.getUniqueId()
                             + ") lost " + economy.format(pricePerItem * (amount - given))
@@ -133,7 +133,7 @@ public class SellMax extends SubCmd {
 
             // success, giving some feedback
             if (!silent) {
-                sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
+                sendLanguageString("feedback", target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%price%", economy.format(price));
             }

@@ -24,18 +24,60 @@ public class Translator {
     private boolean useMultiLanguage;
     @Getter
     private String defaultLocale;
+    @Getter
+    private boolean logMissingMessages;
 
     public Translator(APlugin plugin) {
         this.plugin = plugin;
         this.useMultiLanguage = plugin.getConfig().getBoolean("language.use_multilanguage", true);
         this.defaultLocale = plugin.getConfig().getString("language.default_language", "en");
+        logMissingMessages = plugin.getConfig().getBoolean("language.log_missing_messages", true);
     }
 
     public void reload() {
         this.useMultiLanguage = plugin.getConfig().getBoolean("language.use_multilanguage", true);
         this.defaultLocale = plugin.getConfig().getString("language.default_language", "en");
+        logMissingMessages = plugin.getConfig().getBoolean("language.log_missing_messages", true);
         fallbackList.clear();
         configurations.clear();
+    }
+
+    public List<String> translateList(CommandSender target, String path, String... holders) {
+        return translateList(target, path, true, holders);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<String> translateList(CommandSender target, String path, boolean placeholderApi, String... holders) {
+        String locale = VersionUtils.isAfter(1, 12)
+                && isUseMultiLanguage()
+                && target instanceof Player ?
+                ((Player) target).getLocale() : null;
+        if (locale == null) {
+            locale = getDefaultLocale();
+        }
+        List<YMLConfig> locales = getLocaleFiles(locale);
+        List<String> message = null;
+        for (YMLConfig file : locales) {
+            Object obj = file.get(path, null);
+            if (obj instanceof String) {
+                message = List.of((String) obj);
+                break;
+            }
+            try {
+                if (obj instanceof List) {
+                    message = (List<String>) obj;
+                    break;
+                }
+            } catch (Exception ignored) {
+            }
+            if (logMissingMessages) {
+                getPlugin().log("Missing language messages at: '" + path + "' for " + file.getFileName());
+            }
+        }
+        if (message == null) {
+            return List.of();
+        }
+        return UtilsString.fix(message, placeholderApi && target instanceof Player ? ((Player) target) : null, true, holders);
     }
 
     public String translate(CommandSender target, String path, String... holders) {
@@ -43,7 +85,7 @@ public class Translator {
     }
 
     public String translate(CommandSender target, String path, boolean placeholderApi, String... holders) {
-        String locale = VersionUtils.isVersionAfter(1, 12)
+        String locale = VersionUtils.isAfter(1, 12)
                 && isUseMultiLanguage()
                 && target instanceof Player ?
                 ((Player) target).getLocale() : null;
@@ -67,11 +109,27 @@ public class Translator {
                 }
             } catch (Exception ignored) {
             }
+            if (logMissingMessages) {
+                getPlugin().log("Missing language messages at: '" + path + "' for " + file.getFileName());
+            }
         }
         if (message == null) {
             return null;
         }
         return UtilsString.fix(message, placeholderApi && target instanceof Player ? ((Player) target) : null, true, holders);
+    }
+
+
+    public String translateOrEmpty(CommandSender target, String path, String... holders) {
+        return translateOrEmpty(target, path, true, holders);
+    }
+
+    public String translateOrEmpty(CommandSender target, String path, boolean placeholderApi, String... holders) {
+        String result = translate(target, path, placeholderApi, holders);
+        if (result == null) {
+            return "";
+        }
+        return result;
     }
 
     public void send(CommandSender target, String path, String... holders) {

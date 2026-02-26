@@ -25,20 +25,12 @@ import java.util.*;
 public class YMLConfig extends YamlConfiguration {
 
     /**
-     * -- GETTER --
-     * Return the plugin associated with this Config.
-     *
-     * @return the plugin associated with this Config
+     * The plugin associated with this Config.
      */
     private final JavaPlugin plugin;
     private final File file;
     /**
-     * -- GETTER --
-     * Returns the file path of this config.
-     *
-     * @return the file path starting by
-     * {@link #getPlugin()}.{@link JavaPlugin#getDataFolder()
-     * getDataFolder()}.
+     * The file path of this config. Starting from owner {@link #getPlugin() plugin} data folder.
      */
     private final String fileName;
     @Setter
@@ -310,7 +302,7 @@ public class YMLConfig extends YamlConfiguration {
 
     private void setComments(@NotNull String path, String[] args) {
         if (args.length > 0) {
-            if (VersionUtils.isVersionAfter(1, 18, 1)) {
+            if (VersionUtils.isAfter(1, 18, 1)) {
                 if (getComments(path).isEmpty()) {
                     StringBuilder build = new StringBuilder();
                     for (int i = 0; i < args.length; i += 2)
@@ -432,7 +424,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable List<String> loadMultiMessage(@NotNull String path, @Nullable List<String> def,
                                                    @Nullable Player target, boolean color, String... holders) {
         if (holders.length > 0) {
-            if (VersionUtils.isVersionAfter(1, 18, 1)) {
+            if (VersionUtils.isAfter(1, 18, 1)) {
                 if (getComments(path).isEmpty()) {
                     if (this.contains(path + "_HOLDERS"))
                         this.set(path + "_HOLDERS", null);
@@ -492,7 +484,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable List<String> getMultiMessage(@NotNull String path, @Nullable List<String> def,
                                                   @Nullable Player target, boolean color, String... holders) {
         if (holders.length > 0) {
-            if (VersionUtils.isVersionAfter(1, 18, 1)) {
+            if (VersionUtils.isAfter(1, 18, 1)) {
                 if (getComments(path).isEmpty()) {
                     if (this.contains(path + "_HOLDERS"))
                         this.set(path + "_HOLDERS", null);

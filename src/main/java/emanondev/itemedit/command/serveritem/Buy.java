@@ -75,7 +75,7 @@ public class Buy extends SubCmd {
             if (removed == 0) {
                 // not enough items, aborting
                 if (!silent) {
-                    this.sendLanguageString("not-enough-items", null, target, "%id%",
+                    this.sendLanguageString("not-enough-items", target, "%id%",
                             args[1].toLowerCase(), "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
                             "%amount%", String.valueOf(amount), "%price%", economy.format(price));
                 }
@@ -94,7 +94,7 @@ public class Buy extends SubCmd {
 
             // success, giving some feedback
             if (!silent) {
-                this.sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
+                this.sendLanguageString("feedback", target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%price%", economy.format(price));
             }

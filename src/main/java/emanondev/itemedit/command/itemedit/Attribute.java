@@ -84,7 +84,7 @@ public class Attribute extends SubCmd {
             String equip = null;
 
             if (args.length > 5) {
-                if (VersionUtils.isVersionAfter(1, 21)) {
+                if (VersionUtils.isAfter(1, 21)) {
                     equip = Aliases.EQUIPMENT_SLOTGROUPS.convertAlias(args[5]).toString();
                     if (equip == null) {
                         onWrongAlias(p, Aliases.EQUIPMENT_SLOTGROUPS);
@@ -161,7 +161,7 @@ public class Attribute extends SubCmd {
                 return CompleteUtility.complete(args[4], Aliases.OPERATIONS);
             }
             if (args.length == 6) {
-                if (VersionUtils.isVersionAfter(1, 21)) {
+                if (VersionUtils.isAfter(1, 21)) {
                     return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
                 }
                 return CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTS);

@@ -4,11 +4,9 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -25,15 +23,18 @@ public class Glow extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+
+        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+
         try {
             if (args.length > 2) {
                 throw new IllegalArgumentException("Wrong param number");
             }
-            ItemMeta meta = ItemUtils.getMeta(item);
-            Boolean value = args.length == 1 ? (meta.hasEnchantmentGlintOverride() ? !meta.getEnchantmentGlintOverride() : Boolean.TRUE) : Aliases.BOOLEAN.convertAlias(args[1]);
-            meta.setEnchantmentGlintOverride(value);
-            item.setItemMeta(meta);
+            Boolean value = args.length == 1
+                    ? ((Boolean) (item.getEnchantmentGlintOverride() != null ?
+                    !item.getEnchantmentGlintOverride() : Boolean.TRUE))
+                    : Aliases.BOOLEAN.convertAlias(args[1]);
+            item.setEnchantmentGlintOverride(value).build();
         } catch (Exception e) {
             onFail(p, alias);
         }

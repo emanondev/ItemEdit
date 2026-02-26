@@ -214,7 +214,7 @@ public class Placeholders extends PlaceholderExpansion {
                         amount += copy.getAmount();
                     }
                 }
-                if (VersionUtils.isVersionAfter(1, 9)) {
+                if (VersionUtils.isAfter(1, 9)) {
                     if (item.isSimilar(player.getInventory().getItemInOffHand())) {
                         amount += player.getInventory().getItemInOffHand().getAmount();
                     }
@@ -227,7 +227,7 @@ public class Placeholders extends PlaceholderExpansion {
                         amount = amount + copy.getAmount();
                     }
                 }
-                if (VersionUtils.isVersionAfter(1, 9)) {
+                if (VersionUtils.isAfter(1, 9)) {
                     if (item.isSimilar(player.getInventory().getItemInOffHand())) {
                         amount += player.getInventory().getItemInOffHand().getAmount();
                     }
@@ -246,7 +246,7 @@ public class Placeholders extends PlaceholderExpansion {
                         amount += copy.getAmount();
                     }
                 }
-                if (VersionUtils.isVersionAfter(1, 9)) {
+                if (VersionUtils.isAfter(1, 9)) {
                     if (item.isSimilar(player.getInventory().getItemInOffHand())) {
                         amount += player.getInventory().getItemInOffHand().getAmount();
                     }

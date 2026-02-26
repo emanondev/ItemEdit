@@ -1,11 +1,9 @@
-package emanondev.itemedit.consumableeffects;
+package emanondev.itemedit.implementations;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Sound;
 import org.bukkit.inventory.meta.components.consumable.effects.ConsumableClearEffects;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,15 +14,14 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlaySound implements ConsumableClearEffects {
+public class TeleportRandomly implements ConsumableClearEffects {
 
-    public static NamespacedKey KEY = NamespacedKey.minecraft("play_sound");
-    private Sound sound;
+    private float diameter = 5;
 
     @Override
     public @NotNull Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>();
-        map.put("sound", sound);
+        map.put("diameter", diameter);
         return map;
     }
 }

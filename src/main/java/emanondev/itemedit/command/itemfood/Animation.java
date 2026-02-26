@@ -29,7 +29,7 @@ public class Animation extends SubCmd {
             onFail(player, alias);
             return;
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
 
             String value = Aliases.ANIMATION_OLD.convertAlias(args[1]);
             if (value == null) {
@@ -48,7 +48,8 @@ public class Animation extends SubCmd {
             onWrongAlias(player, Aliases.ANIMATION);
             onFail(player, alias);
         }
-        new ItemBuilder(getItemInHand(player)).setConsumeAnimation(value).build();
+        setItemInHand(player, new ItemBuilder(getItemInHand(player)).setConsumeAnimation(value).build());
+        onSuccess(player);
         updateView(player);
     }
 
@@ -57,7 +58,7 @@ public class Animation extends SubCmd {
         if (args.length != 2) {
             return Collections.emptyList();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             return CompleteUtility.complete(args[1], Aliases.ANIMATION_OLD);
         }
         return CompleteUtility.complete(args[1], Aliases.ANIMATION);

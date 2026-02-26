@@ -21,7 +21,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
 
@@ -205,12 +205,19 @@ public class ItemEdit extends APlugin {
     }
 
     private void initCommands() {
-        if (VersionUtils.isVersionAfter(1, 20, 5)) {
-            registerCommand(ItemFoodCommand.get(), Collections.singletonList("if"));
+        if (VersionUtils.isAfter(1, 20, 5)) {
+            registerCommand(ItemFoodCommand.get(), List.of("ief"));
         }
-        registerCommand(new ItemEditCommand(), Collections.singletonList("ie"));
-        registerCommand(new ItemStorageCommand(), Collections.singletonList("is"));
-        registerCommand(new ServerItemCommand(), Collections.singletonList("si"));
+        if (VersionUtils.isAfter(1, 21, 2)) {
+            registerCommand(ItemEquipmentCommand.get(), List.of("iee"));
+        }
+        if (VersionUtils.isAfter(1, 21, 11)) {
+            registerCommand(ItemKineticCommand.get(), List.of("iek"));
+            registerCommand(ItemPiercingCommand.get(), List.of("iep"));
+        }
+        registerCommand(new ItemEditCommand(), List.of("ie"));
+        registerCommand(new ItemStorageCommand(), List.of("is"));
+        registerCommand(new ServerItemCommand(), List.of("si"));
         registerCommand("itemeditinfo", new ItemEditInfoCommand(), null);
         new ReloadCommand(this).register();
         registerCommand("itemeditimport", new ItemEditImportCommand(), null);

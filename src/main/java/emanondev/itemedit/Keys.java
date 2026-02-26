@@ -35,7 +35,7 @@ public class Keys {
         public static final NamespacedKey CONSUMABLE = craftKey("consumable");
         public static final NamespacedKey USE_REMAINDER = craftKey("use_remainder");
         public static final NamespacedKey CROSS_VERSION_CONSUMABLE =
-                VersionUtils.isVersionUpTo(1, 21, 1) ? FOOD : CONSUMABLE;
+                VersionUtils.isUpTo(1, 21, 1) ? FOOD : CONSUMABLE;
     }
 
 

@@ -3,9 +3,14 @@ package emanondev.itemedit.utility;
 import emanondev.itemedit.Keys;
 import emanondev.itemedit.ParsedItem;
 import org.bukkit.*;
+import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.bukkit.inventory.meta.components.FoodComponent;
+import org.bukkit.inventory.meta.components.KineticWeaponComponent;
+import org.bukkit.inventory.meta.components.PiercingWeaponComponent;
 import org.bukkit.inventory.meta.components.consumable.ConsumableComponent;
 import org.bukkit.inventory.meta.components.consumable.effects.ConsumableEffect;
 import org.jetbrains.annotations.NotNull;
@@ -34,17 +39,17 @@ public class ItemBuilder {
     //GENERIC
 
     public ItemStack getConvertsTo() {
-        if (!VersionUtils.isVersionAfter(1, 21)) {
+        if (!VersionUtils.isAfter(1, 21)) {
             throw new UnsupportedOperationException();
         }
         return meta.getUseRemainder();
     }
 
     public ItemBuilder setConvertsTo(ItemStack itemStack) {
-        if (!VersionUtils.isVersionAfter(1, 21)) {
+        if (!VersionUtils.isAfter(1, 21)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 2)) {
+        if (!VersionUtils.isAfter(1, 21, 2)) {
             FoodComponent food = meta.getFood();
             try {
                 food.getClass().getMethod("setUsingConvertsTo", ItemStack.class).invoke(food, itemStack);
@@ -60,8 +65,8 @@ public class ItemBuilder {
 
     //CONSUMABLE COMPONENT
 
-    public ItemBuilder addConsumeEffect(ConsumableEffect effect) {
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+    public ItemBuilder addConsumeEffect(@NotNull ConsumableEffect effect) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
         ConsumableComponent consumableComponent = meta.getConsumable();
@@ -73,7 +78,7 @@ public class ItemBuilder {
     }
 
     public ConsumableComponent.Animation getConsumeAnimation() {
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
         if (!meta.hasConsumable()) {
@@ -84,7 +89,7 @@ public class ItemBuilder {
 
     @Deprecated
     public String getConsumeAnimationName() {
-        if (!VersionUtils.isVersionInRange(1, 20, 5, 1, 21, 3)) {
+        if (!VersionUtils.isInRange(1, 20, 5, 1, 21, 3)) {
             throw new UnsupportedOperationException();
         }
         stack.setItemMeta(meta);
@@ -94,7 +99,7 @@ public class ItemBuilder {
 
     @Deprecated
     public ItemBuilder setConsumeAnimationName(String animationName) {
-        if (!VersionUtils.isVersionInRange(1, 20, 5, 1, 21, 3)) {
+        if (!VersionUtils.isInRange(1, 20, 5, 1, 21, 3)) {
             throw new UnsupportedOperationException();
         }
         stack.setItemMeta(meta);
@@ -106,10 +111,10 @@ public class ItemBuilder {
     }
 
     public float getConsumeSeconds() {
-        if (!VersionUtils.isVersionAfter(1, 20, 5)) {
+        if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsedItem = new ParsedItem(stack);
             return parsedItem.readFloat(1.6F, Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "consume_seconds");
@@ -121,7 +126,7 @@ public class ItemBuilder {
     }
 
     public List<ConsumableEffect> getConsumeEffects() {
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
         if (!meta.hasConsumable()) {
@@ -132,10 +137,10 @@ public class ItemBuilder {
     }
 
     public Sound getConsumeSound() {
-        if (!VersionUtils.isVersionAfter(1, 21, 2)) {
+        if (!VersionUtils.isAfter(1, 21, 2)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsedItem = new ParsedItem(stack);
             String val = parsedItem.readString((String) null, Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "sound");
@@ -156,10 +161,10 @@ public class ItemBuilder {
     }
 
     public boolean hasConsumeParticles() {
-        if (!VersionUtils.isVersionAfter(1, 21, 2)) {
+        if (!VersionUtils.isAfter(1, 21, 2)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsedItem = new ParsedItem(stack);
             return parsedItem.readBoolean(true, Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "has_consume_particles");
@@ -171,7 +176,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConsumeAnimation(ConsumableComponent.Animation animation) {
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
         ConsumableComponent consumableComponent = meta.getConsumable();
@@ -181,10 +186,10 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConsumeParticles(boolean consumeParticles) {
-        if (!VersionUtils.isVersionAfter(1, 21, 2)) {
+        if (!VersionUtils.isAfter(1, 21, 2)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsedItem = new ParsedItem(stack);
             parsedItem.set(consumeParticles, Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "has_consume_particles");
@@ -199,10 +204,10 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConsumeSeconds(float consumeSeconds) {
-        if (!VersionUtils.isVersionAfter(1, 20, 5)) {
+        if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsedItem = new ParsedItem(stack);
             parsedItem.loadEmptyMap(Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
@@ -218,7 +223,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConsumeEffects(List<ConsumableEffect> effects) {
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
         ConsumableComponent consumableComponent = meta.getConsumable();
@@ -228,10 +233,10 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConsumeSound(Sound sound) {
-        if (!VersionUtils.isVersionAfter(1, 21, 2)) {
+        if (!VersionUtils.isAfter(1, 21, 2)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsed = new ParsedItem(stack);
             parsed.set(((Keyed) sound).getKey(), Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "sound");
@@ -246,7 +251,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConsumableComponent(ConsumableComponent consumable) {
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
         meta.setConsumable(consumable);
@@ -262,7 +267,7 @@ public class ItemBuilder {
     }
 
     public ConsumableComponent getConsumableComponent() {
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
         return meta.getConsumable();
@@ -271,10 +276,10 @@ public class ItemBuilder {
     //FOOD COMPONENT
 
     public boolean canAlwaysEat() {
-        if (!VersionUtils.isVersionAfter(1, 20, 5)) {
+        if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsed = new ParsedItem(stack);
             return parsed.readBoolean(false, Keys.Component.FOOD.toString(), "can_always_eat");
@@ -287,10 +292,10 @@ public class ItemBuilder {
     }
 
     public int getNutrition() {
-        if (!VersionUtils.isVersionAfter(1, 20, 5)) {
+        if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsedItem = new ParsedItem(stack);
             Map<String, Object> food = ParsedItem.getMap(parsedItem.getMap(), "food");
@@ -308,10 +313,10 @@ public class ItemBuilder {
     }
 
     public float getSaturation() {
-        if (!VersionUtils.isVersionAfter(1, 20, 5)) {
+        if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsedItem = new ParsedItem(stack);
             Map<String, Object> food = ParsedItem.getMap(parsedItem.getMap(), "food");
@@ -329,10 +334,10 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setCanAlwaysEat(boolean canAlwaysEat) {
-        if (!VersionUtils.isVersionAfter(1, 20, 5)) {
+        if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsedItem = new ParsedItem(stack);
             parsedItem.loadEmptyMap(Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
@@ -352,10 +357,10 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setNutrition(int nutrition) {
-        if (!VersionUtils.isVersionAfter(1, 20, 5)) {
+        if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsedItem = new ParsedItem(stack);
             parsedItem.loadEmptyMap(Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
@@ -375,10 +380,10 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setSaturation(float saturation) {
-        if (!VersionUtils.isVersionAfter(1, 20, 5)) {
+        if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isVersionAfter(1, 21, 4)) {
+        if (!VersionUtils.isAfter(1, 21, 4)) {
             stack.setItemMeta(meta);
             ParsedItem parsedItem = new ParsedItem(stack);
             parsedItem.loadEmptyMap(Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
@@ -412,5 +417,235 @@ public class ItemBuilder {
 
     public FoodComponent getFoodComponent() {
         return meta.getFood();
+    }
+
+    public ItemBuilder setKineticContactCooldownTicks(int ticks) {
+        KineticWeaponComponent component = meta.getKineticWeapon();
+        component.setContactCooldownTicks(ticks);
+        meta.setKineticWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setKineticDamageMultiplier(float multiplier) {
+        KineticWeaponComponent component = meta.getKineticWeapon();
+        component.setDamageMultipler(multiplier);
+        meta.setKineticWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setKineticDelayTicks(int ticks) {
+        KineticWeaponComponent component = meta.getKineticWeapon();
+        component.setDelayTicks(ticks);
+        meta.setKineticWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setKineticForwardMovement(float multiplier) {
+        KineticWeaponComponent component = meta.getKineticWeapon();
+        component.setForwardMovement(multiplier);
+        meta.setKineticWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setKineticHitSound(Sound value) {
+        KineticWeaponComponent component = meta.getKineticWeapon();
+        component.setHitSound(value);
+        meta.setKineticWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setKineticSound(Sound value) {
+        KineticWeaponComponent component = meta.getKineticWeapon();
+        component.setSound(value);
+        meta.setKineticWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setKineticDamageConditions(KineticWeaponComponent.Condition condition) {
+        KineticWeaponComponent component = meta.getKineticWeapon();
+        component.setDamageConditions(condition);
+        meta.setKineticWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setKineticDismountingConditions(KineticWeaponComponent.Condition condition) {
+        KineticWeaponComponent component = meta.getKineticWeapon();
+        component.setDismountConditions(condition);
+        meta.setKineticWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setKineticKnockbackConditions(KineticWeaponComponent.Condition condition) {
+        KineticWeaponComponent component = meta.getKineticWeapon();
+        component.setKnockbackConditions(condition);
+        meta.setKineticWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setPiercingDismounts(boolean value) {
+        PiercingWeaponComponent component = meta.getPiercingWeapon();
+        component.setDismounts(value);
+        meta.setPiercingWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setPiercingDealsKnockback(boolean value) {
+        PiercingWeaponComponent component = meta.getPiercingWeapon();
+        component.setDealsKnockback(value);
+        meta.setPiercingWeapon(component);
+        return this;
+    }
+
+    public boolean isPiercingDismounts() {
+        return meta.getPiercingWeapon().isDismounts();
+    }
+
+    public boolean isPiercingDealsKnockback() {
+        return meta.getPiercingWeapon().isDealsKnockback();
+    }
+
+    public ItemBuilder setPiercingHitSound(Sound value) {
+        KineticWeaponComponent component = meta.getKineticWeapon();
+        component.setHitSound(value);
+        meta.setKineticWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setPiercingSound(Sound value) {
+        KineticWeaponComponent component = meta.getKineticWeapon();
+        component.setSound(value);
+        meta.setKineticWeapon(component);
+        return this;
+    }
+
+    public ItemBuilder setEnchantmentGlintOverride(Boolean value) {
+        meta.setEnchantmentGlintOverride(value);
+        return this;
+    }
+
+    public Boolean getEnchantmentGlintOverride() {
+        if (meta.hasEnchantmentGlintOverride()) {
+            return meta.getEnchantmentGlintOverride();
+        }
+        return null;
+    }
+
+    public boolean isEquippableCanBeSheared() {
+        return meta.getEquippable().isCanBeSheared();
+    }
+
+    public ItemBuilder setEquippableCanBeSheared(boolean canBeSheared) {
+        EquippableComponent component = meta.getEquippable();
+        component.setCanBeSheared(canBeSheared);
+        meta.setEquippable(component);
+        return this;
+    }
+
+    public ItemBuilder clearEquippable() {
+        meta.setEquippable(null);
+        return this;
+    }
+
+    public ItemBuilder setEquippableSlot(EquipmentSlot slot) {
+        EquippableComponent component = meta.getEquippable();
+        component.setSlot(slot);
+        meta.setEquippable(component);
+        return this;
+    }
+
+    public ItemBuilder setEquippableEquipSound(Sound value) {
+        EquippableComponent component = meta.getEquippable();
+        component.setEquipSound(value);
+        meta.setEquippable(component);
+        return this;
+    }
+
+    public ItemBuilder setEquippableShearingSound(Sound value) {
+        EquippableComponent component = meta.getEquippable();
+        component.setShearingSound(value);
+        meta.setEquippable(component);
+        return this;
+    }
+
+    public ItemBuilder setEquippableAllowedEntities(EntityType entityType) {
+        EquippableComponent component = meta.getEquippable();
+        component.setAllowedEntities(entityType);
+        meta.setEquippable(component);
+        return this;
+    }
+
+    public ItemBuilder setEquippableAllowedEntities(Collection<EntityType> types) {
+        EquippableComponent component = meta.getEquippable();
+        component.setAllowedEntities(types);
+        meta.setEquippable(component);
+        return this;
+    }
+
+    public boolean isEquipmentSwappable() {
+        return meta.getEquippable().isSwappable();
+    }
+
+    public ItemBuilder setEquipmentSwappable(boolean value) {
+        EquippableComponent component = meta.getEquippable();
+        component.setSwappable(value);
+        meta.setEquippable(component);
+        return this;
+    }
+
+    public boolean isEquipmentDispensable() {
+        return meta.getEquippable().isDispensable();
+    }
+
+    public ItemBuilder setEquipmentDispensable(boolean value) {
+        EquippableComponent component = meta.getEquippable();
+        component.setDispensable(value);
+        meta.setEquippable(component);
+        return this;
+    }
+
+    public boolean isEquipmentEquipOnInteract() {
+        return meta.getEquippable().isEquipOnInteract();
+    }
+
+    public ItemBuilder setEquipmentEquipOnInteract(boolean value) {
+        EquippableComponent component = meta.getEquippable();
+        component.setEquipOnInteract(value);
+        meta.setEquippable(component);
+        return this;
+    }
+
+    public boolean isEquipmentDamageOnHurt() {
+        return meta.getEquippable().isDamageOnHurt();
+    }
+
+    public ItemBuilder setEquipmentDamageOnHurt(boolean value) {
+        EquippableComponent component = meta.getEquippable();
+        component.setDamageOnHurt(value);
+        meta.setEquippable(component);
+        return this;
+    }
+
+    public ItemBuilder setEquipmentCameraOverlay(NamespacedKey key) {
+        if (key == null && !meta.hasEquippable()) {
+            return this;
+        }
+        EquippableComponent component = meta.getEquippable();
+        component.setCameraOverlay(key);
+        meta.setEquippable(component);
+        return this;
+    }
+
+    public boolean hasEquippableComponent() {
+        return meta.hasEquippable();
+    }
+
+    public ItemBuilder setEquipmentModel(NamespacedKey key) {
+        if (key == null && !meta.hasEquippable()) {
+            return this;
+        }
+        EquippableComponent component = meta.getEquippable();
+        component.setModel(key);
+        meta.setEquippable(component);
+        return this;
     }
 }

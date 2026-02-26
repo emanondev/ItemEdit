@@ -6,6 +6,7 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -198,7 +199,7 @@ public abstract class AbstractCommand implements TabExecutor {
             return;
         }
         ComponentBuilder help = new ComponentBuilder(
-                this.getLanguageString("help-header", "&3&l" + getName() + " - Help", sender) + "\n");
+                this.getLanguageString("help-header", sender) + "\n");
         boolean c = false;
         for (SubCmd cmd : subCmds) {
             if (sender.hasPermission(cmd.getPermission())) {
@@ -256,30 +257,8 @@ public abstract class AbstractCommand implements TabExecutor {
         });
     }
 
-    protected String getLanguageString(String path, String def, CommandSender sender, String... holders) {
-        return getPlugin().getLanguageConfig(sender).loadMessage(this.PATH + "." + path, def == null ? "" : def,
-                sender instanceof Player ? (Player) sender : null, true, holders);
-    }
-
-    protected List<String> getLanguageStringList(String path, List<String> def, CommandSender sender, String... holders) {
-        return getPlugin().getLanguageConfig(sender).loadMultiMessage(this.PATH + "." + path,
-                def == null ? new ArrayList<>() : def, sender instanceof Player ? (Player) sender : null, true, holders);
-    }
-
-    protected String getConfString(String path) {
-        return config.loadMessage(this.PATH + "." + path, "", true);
-    }
-
-    protected int getConfInt(String path) {
-        return config.loadInteger(this.PATH + "." + path, 0);
-    }
-
-    protected long getConfLong(String path) {
-        return config.loadLong(this.PATH + "." + path, 0L);
-    }
-
-    protected boolean getConfBoolean(String path) {
-        return config.loadBoolean(this.PATH + "." + path, true);
+    protected String getLanguageString(String path, CommandSender sender, String... holders) {
+        return getPlugin().getTranslator().translateOrEmpty(sender, this.PATH + "." + path, holders);
     }
 
     public PluginCommand getCommand() {
@@ -317,11 +296,11 @@ public abstract class AbstractCommand implements TabExecutor {
         }
 
         public void help(CommandSender sender, String alias, SubCmd sub) {
-            ComponentBuilder help = new ComponentBuilder(this.getLanguageString("header-sub",
-                    "&3&l" + getName() + " %sub% - Help", sender, "%sub%", sub.getName()));
+            ComponentBuilder help = new ComponentBuilder(this.translateOrEmpty("header-sub",
+                    sender, "%sub%", sub.getName()));
             help.append("\n");
             String helpTxt = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + sub.getName() + " ";
-            help.append(helpTxt + sub.getLanguageString("params", "", sender).replace(ChatColor.RESET.toString(),
+            help.append(helpTxt + sub.translateOrEmpty("params", sender).replace(ChatColor.RESET.toString(),
                     ChatColor.GREEN.toString()));
             help.append("\n");
             help.append(sub.getDescription(sender));
@@ -333,18 +312,14 @@ public abstract class AbstractCommand implements TabExecutor {
             if (!cmds.isEmpty()) {
                 page = Math.max(1, Math.min(getMaxPageFor(cmds.size()), page));
                 ComponentBuilder help = new ComponentBuilder("");
-                injectClickablePages(help,
-                        this.getLanguageString("header", "&3&l" + getName() + " - Help", sender),
-                        sender, alias, page);
+                injectClickablePages(help, this.translateOrEmpty("header", sender), sender, alias, page);
                 help.append("\n");
 
                 for (SubCmd cmd : cmds.subList(commandPerPage * (page - 1), Math.min(cmds.size(), commandPerPage * page))) {
                     help = cmd.getHelp(help, sender, alias);
                     help.append("\n");
                 }
-                injectClickablePages(help,
-                        this.getLanguageString("footer", "&3&l" + getName() + " - Help", sender),
-                        sender, alias, page);
+                injectClickablePages(help, this.translateOrEmpty("footer", sender), sender, alias, page);
                 Util.sendMessage(sender, help.create());
             } else
                 sendPermissionLackGenericMessage(sender);
@@ -385,43 +360,41 @@ public abstract class AbstractCommand implements TabExecutor {
                     text21 = text2;
                 }
             }
-            YMLConfig langConf = ItemEdit.get().getLanguageConfig(sender);
+            Translator langConf = ItemEdit.get().getTranslator();
             comp.retain(ComponentBuilder.FormatRetention.NONE).append(text11);
 
             if (text12 != null) {
                 if (page < maxPage) {
-                    comp.append(loadBaseMessage(langConf, "generic.help.next_text", ">>>>", sender,
+                    comp.append(langConf.translateOrEmpty(sender, "generic.help.next_text",
                                     "%target%", String.valueOf(page + 1), "%page%", String.valueOf(page)))
                             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page + 1)))
                             .event(Util.craftHoverEvent(
-                                    loadBaseMessage(langConf, "generic.help.next_hover", "Go to page %target%",
-                                            sender,
+                                    langConf.translateOrEmpty(sender, "generic.help.next_hover",
                                             "%target%", String.valueOf(page + 1),
                                             "%page%", String.valueOf(page),
                                             "%max_page%", String.valueOf(maxPage))
                             ));
                 } else {
-                    comp.append(loadBaseMessage(langConf, "generic.help.next_void", ">>>>", sender,
+                    comp.append(langConf.translateOrEmpty(sender, "generic.help.next_void",
                             "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage)));
                 }
                 comp.append(text12).retain(ComponentBuilder.FormatRetention.FORMATTING);
             }
             if (text21 != null) {
                 if (page > 1) {
-                    comp.append(loadBaseMessage(langConf, "generic.help.prev_text", "<<<<", sender,
+                    comp.append(langConf.translateOrEmpty(sender, "generic.help.prev_text",
                                     "%target%", String.valueOf(page - 1),
                                     "%page%", String.valueOf(page),
                                     "%max_page%", String.valueOf(maxPage)))
                             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page - 1)))
                             .event(Util.craftHoverEvent(
-                                    loadBaseMessage(langConf, "generic.help.prev_hover", "Go to page %target%",
-                                            sender,
+                                    langConf.translateOrEmpty(sender, "generic.help.prev_hover",
                                             "%target%", String.valueOf(page - 1),
                                             "%page%", String.valueOf(page),
                                             "%max_page%", String.valueOf(maxPage))
                             ));
                 } else {
-                    comp.append(loadBaseMessage(langConf, "generic.help.prev_void", "<<<<", sender,
+                    comp.append(langConf.translateOrEmpty(sender, "generic.help.prev_void",
                             "%page%", String.valueOf(page),
                             "%max_page%", String.valueOf(maxPage)));
                 }
@@ -429,31 +402,26 @@ public abstract class AbstractCommand implements TabExecutor {
             }
             if (text22 != null) {
                 if (page < maxPage) {
-                    comp.append(loadBaseMessage(langConf, "generic.help.next_text", ">>>>", sender,
+                    comp.append(langConf.translateOrEmpty(sender, "generic.help.next_text",
 
                                     "%target%", String.valueOf(page + 1),
                                     "%page%", String.valueOf(page),
                                     "%max_page%", String.valueOf(maxPage)))
                             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page + 1)))
                             .event(Util.craftHoverEvent(
-                                    loadBaseMessage(langConf, "generic.help.next_hover", "Go to page %target%", sender,
+                                    langConf.translateOrEmpty(sender, "generic.help.next_hover",
                                             "%target%", String.valueOf(page + 1),
                                             "%page%", String.valueOf(page),
                                             "%max_page%", String.valueOf(maxPage))
                             ));
                 } else {
-                    comp.append(loadBaseMessage(langConf, "generic.help.next_void", ">>>>", sender,
+                    comp.append(langConf.translateOrEmpty(sender, "generic.help.next_void",
                             "%page%", String.valueOf(page),
                             "%max_page%", String.valueOf(maxPage)));
                 }
                 comp.append(text22).retain(ComponentBuilder.FormatRetention.FORMATTING);
             }
         }
-
-        private String loadBaseMessage(YMLConfig lang, String fullPath, String def, CommandSender sender, String... holders) {
-            return lang.loadMessage(fullPath, def, sender instanceof Player ? (Player) sender : null, true, holders);
-        }
-
 
         @Override
         public List<String> onComplete(@NotNull CommandSender sender, String[] args) {

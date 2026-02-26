@@ -51,7 +51,7 @@ public class Take extends SubCmd {
             }
             amount = InventoryUtils.removeAmount(target, item, amount, InventoryUtils.LackMode.REMOVE_MAX_POSSIBLE);
             if (!silent) {
-                sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
+                sendLanguageString("feedback", target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount));
             }

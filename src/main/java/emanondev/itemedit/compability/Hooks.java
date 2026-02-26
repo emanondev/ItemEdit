@@ -63,7 +63,7 @@ public class Hooks {
 
     private static MiniMessageUtil initMiniMessage() {
         try {
-            if (VersionUtils.hasPaperAPI() && VersionUtils.isVersionAfter(1, 16, 5)) {
+            if (VersionUtils.hasPaperAPI() && VersionUtils.isAfter(1, 16, 5)) {
                 MiniMessagePaper inst = MiniMessagePaper.getInstance();
                 if (!inst.fromMiniToText("<red>this is a test</red>").equals("<red>this is a test</red>")) {
                     return inst;

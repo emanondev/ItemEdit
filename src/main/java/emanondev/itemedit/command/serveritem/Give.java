@@ -55,7 +55,7 @@ public class Give extends SubCmd {
                     .loadBoolean("serveritem.give-drops-excess", true) ?
                     InventoryUtils.ExcessMode.DROP_EXCESS : InventoryUtils.ExcessMode.DELETE_EXCESS);
             if (given > 0 && !silent) {
-                sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
+                sendLanguageString("feedback", target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(given));
             }

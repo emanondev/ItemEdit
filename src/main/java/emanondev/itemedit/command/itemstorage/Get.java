@@ -35,9 +35,9 @@ public class Get extends SubCmd {
             ItemStack item = ItemEdit.get().getPlayerStorage().getItem(p, args[1]);
             int given = InventoryUtils.giveAmount(p, item, amount, InventoryUtils.ExcessMode.DELETE_EXCESS);
             if (given == 0) {
-                sendLanguageString("no-inventory-space", null, p);
+                sendLanguageString("no-inventory-space", p);
             } else {
-                sendLanguageString("success", null, p, "%id%",
+                sendLanguageString("success", p, "%id%",
                         args[1].toLowerCase(Locale.ENGLISH), "%amount%", String.valueOf(given));
             }
         } catch (Exception e) {

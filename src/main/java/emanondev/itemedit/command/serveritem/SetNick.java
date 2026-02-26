@@ -33,7 +33,7 @@ public class SetNick extends SubCmd {
                 }
                 ItemEdit.get().getServerStorage().setNick(args[1], builder.toString());
             }
-            sendLanguageString("success", null, p, "%id%", args[1].toLowerCase(),
+            sendLanguageString("success", p, "%id%", args[1].toLowerCase(),
                     "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]));
         } catch (Exception e) {
             onFail(p, alias);

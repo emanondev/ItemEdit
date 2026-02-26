@@ -312,7 +312,7 @@ public final class Util {
     }
 
     public static HoverEvent craftHoverEvent(String text) {
-        if (VersionUtils.isVersionAfter(1, 18, 0)) {
+        if (VersionUtils.isAfter(1, 18, 0)) {
             return new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(text));
         }
         return new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(text).create());

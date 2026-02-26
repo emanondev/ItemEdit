@@ -61,7 +61,7 @@ generic:
     wrong-material_armor: '&4[&cItemEdit&4] &cItem must be an armor'
     wrong-material_enchantment_storage: '&4[&cItemEdit&4] &cItem must be a book or enchanted book'
     wrong-path: '&9[&fItemEdit&9] &cInvalid path, remember to reload the configuration and check the CaPs'
-itemfood:
+itemeditfood:
   help:
     header: "&9&lItemFood - Help"
     header-sub: "&9&lItemFood %sub% - Help"

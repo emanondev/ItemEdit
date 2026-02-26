@@ -208,13 +208,13 @@ public class Lore extends SubCmd {
 
     private void lorePaste(Player p, ItemStack item, String alias, String[] args) {
         if (!copies.containsKey(p.getUniqueId())) {
-            Util.sendMessage(p, this.getLanguageString("paste.no-copy", null, p));
+            Util.sendMessage(p, this.translate("paste.no-copy", p));
             return;
         }
         ItemMeta meta = ItemUtils.getMeta(item);
         meta.setLore(copies.get(p.getUniqueId()));
         item.setItemMeta(meta);
-        Util.sendMessage(p, this.getLanguageString("paste.feedback", null, p));
+        Util.sendMessage(p, this.translate("paste.feedback", p));
         updateView(p);
     }
 
@@ -231,7 +231,7 @@ public class Lore extends SubCmd {
             lore = new ArrayList<>();
 
         copies.put(p.getUniqueId(), lore);
-        Util.sendMessage(p, this.getLanguageString("copy.feedback", null, p));
+        Util.sendMessage(p, this.translate("copy.feedback", p));
     }
 
     private void loreCopyBook(Player p, ItemStack item, String alias, String[] args) {
@@ -260,16 +260,16 @@ public class Lore extends SubCmd {
             lore.set(i, Util.formatText(p, lore.get(i), getPermission()));
         }
         copies.put(p.getUniqueId(), lore);
-        Util.sendMessage(p, this.getLanguageString("copyBook.feedback", null, p));
+        Util.sendMessage(p, this.translate("copyBook.feedback", p));
     }
 
     private void loreCopyFile(Player p, ItemStack item, String alias, String[] args) {
         if (args.length < 2) {
-            Util.sendMessage(p, this.getLanguageString("copyFile.no-path", null, p));
+            Util.sendMessage(p, this.translate("copyFile.no-path", p));
             return;
         }
         if (!loreCopy.contains(args[2])) {
-            Util.sendMessage(p, this.getLanguageString("copyFile.wrong-path", null, p));
+            Util.sendMessage(p, this.translate("copyFile.wrong-path", p));
             return;
         }
         List<String> lore = new ArrayList<>(loreCopy.getStringList(args[2]));
@@ -277,7 +277,7 @@ public class Lore extends SubCmd {
             lore.set(i, Util.formatText(p, lore.get(i), getPermission()));
         }
         copies.put(p.getUniqueId(), lore);
-        Util.sendMessage(p, this.getLanguageString("copyFile.feedback", null, p));
+        Util.sendMessage(p, this.translate("copyFile.feedback", p));
     }
 
     @Override

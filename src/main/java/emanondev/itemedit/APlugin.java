@@ -302,7 +302,7 @@ public abstract class APlugin extends JavaPlugin {
                 log(ChatColor.GREEN, "#", "Enabled (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
                 return;
             }
-            if (!VersionUtils.isVersionAfter(1, 8)) {
+            if (!VersionUtils.isAfter(1, 8)) {
                 enableWithError("1.7.x is not supported!!! use 1.8+");
                 log(ChatColor.GREEN, "#", "Enabled (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
                 return;
@@ -366,7 +366,7 @@ public abstract class APlugin extends JavaPlugin {
         String locale;
         if (!(sender instanceof Player)) {
             locale = this.defaultLanguage;
-        } else if (VersionUtils.isVersionAfter(1, 12) && this.useMultiLanguage) {
+        } else if (VersionUtils.isAfter(1, 12) && this.useMultiLanguage) {
             //apparently zh_tw and zh_cn are quite different, zh_cn and zh_hk will both fall under zh.yml
             locale = ((Player) sender).getLocale().equals("zh_tw") ?
                     ((Player) sender).getLocale() : ((Player) sender).getLocale().split("_")[0];
@@ -388,7 +388,7 @@ public abstract class APlugin extends JavaPlugin {
                 Predicate<Player> isAdmin = languagesMetricsIsAdmin();
                 Predicate<Player> isUser = languagesMetricsIsUser();
 
-                if (!VersionUtils.isVersionAfter(1, 12)) {
+                if (!VersionUtils.isAfter(1, 12)) {
                     return;
                 }
                 bstatsMetrics.addCustomChart(new Metrics.DrilldownPie("admins_languages", () -> {

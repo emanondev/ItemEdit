@@ -32,7 +32,7 @@ public class SkullOwner extends SubCmd {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_player_head");
             return;
         }
-        if (VersionUtils.isVersionUpTo(1, 12) && item.getDurability() != 3) {
+        if (VersionUtils.isUpTo(1, 12) && item.getDurability() != 3) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_player_head");
             return;
         }

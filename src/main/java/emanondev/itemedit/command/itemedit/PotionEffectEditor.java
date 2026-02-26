@@ -37,14 +37,14 @@ public class PotionEffectEditor extends SubCmd {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
         if (!(ItemUtils.getMeta(item) instanceof PotionMeta)
-                && (VersionUtils.isVersionUpTo(1, 14) || !(ItemUtils.getMeta(item) instanceof SuspiciousStewMeta))) {
+                && (VersionUtils.isUpTo(1, 14) || !(ItemUtils.getMeta(item) instanceof SuspiciousStewMeta))) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_potion_effect_applicable");
             if (p.hasPermission("itemedit.admin")) {
-                String msg = this.getLanguageString("itemtag-tip", null, sender);
+                String msg = this.translate("itemtag-tip", sender);
                 if (msg != null && !msg.isEmpty()) {
                     Util.sendMessage(p, new ComponentBuilder(msg).event(
                                     Util.craftHoverEvent(
-                                            this.getLanguageStringList("itemtag-tip-hover", null, p)))
+                                            this.translateList("itemtag-tip-hover", p)))
                             .event(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://modrinth.com/plugin/itemtag")).create()
                     );
                 }
@@ -102,7 +102,7 @@ public class PotionEffectEditor extends SubCmd {
                 }
                 return Collections.emptyList();
             case 8:
-                if (VersionUtils.isVersionAfter(1, 13) && args[1].equalsIgnoreCase("add")) {
+                if (VersionUtils.isAfter(1, 13) && args[1].equalsIgnoreCase("add")) {
                     return CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
                 }
                 return Collections.emptyList();
@@ -169,7 +169,7 @@ public class PotionEffectEditor extends SubCmd {
                 ambient = Aliases.BOOLEAN.convertAlias(args[6]);
             }
             boolean icon = true;
-            if (VersionUtils.isVersionAfter(1, 13) && args.length == 8) {
+            if (VersionUtils.isAfter(1, 13) && args.length == 8) {
                 icon = Aliases.BOOLEAN.convertAlias(args[7]);
             }
             if (!p.hasPermission(this.getPermission() + ".bypass_limits")) {
@@ -180,7 +180,7 @@ public class PotionEffectEditor extends SubCmd {
             ItemMeta rawMeta = ItemUtils.getMeta(item);
             if (rawMeta instanceof PotionMeta) {
                 PotionMeta meta = (PotionMeta) rawMeta;
-                if (VersionUtils.isVersionAfter(1, 13)) {
+                if (VersionUtils.isAfter(1, 13)) {
                     meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles, icon), true);
                 } else {
                     meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles), true);

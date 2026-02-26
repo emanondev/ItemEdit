@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -56,8 +55,8 @@ public class ConvertTo extends SubCmd {
                 target.setAmount(amount);
             }
         }
-        ItemStack item = new ItemBuilder(getItemInHand(player)).setConvertsTo(target).build();
-        setItemInHand(player, item);
+        setItemInHand(player, new ItemBuilder(getItemInHand(player)).setConvertsTo(target).build());
+        onSuccess(player);
         updateView(player);
     }
 
@@ -68,6 +67,6 @@ public class ConvertTo extends SubCmd {
             list2.addAll(CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds()));
             return list2;
         }
-        return Collections.emptyList();
+        return List.of();
     }
 }

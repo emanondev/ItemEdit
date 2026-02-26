@@ -17,13 +17,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public abstract class SubCmd {
 
-    public final String ID;
+    @Getter
+    private final String id;
     @Getter
     private final String permission;
     private final String PATH;
@@ -38,15 +38,15 @@ public abstract class SubCmd {
     public SubCmd(@NotNull String id, @NotNull AbstractCommand command, boolean playerOnly, boolean checkNonNullItem) {
         if (id.isEmpty() || id.contains(" "))
             throw new IllegalArgumentException();
-        this.ID = id.toLowerCase(Locale.ENGLISH);
+        this.id = id.toLowerCase(Locale.ENGLISH);
         this.command = command;
         this.playerOnly = playerOnly;
         this.checkNonNullItem = checkNonNullItem;
-        this.PATH = getCommand().getName() + "." + this.ID + ".";
+        this.PATH = getCommand().getName() + "." + this.id + ".";
         config = this.getPlugin().getConfig("commands.yml");
         load();
         this.permission = this.getPlugin().getName().toLowerCase(Locale.ENGLISH) + "."
-                + command.getName() + "." + this.ID;
+                + command.getName() + "." + this.id;
     }
 
     public @NotNull AbstractCommand getCommand() {
@@ -72,7 +72,7 @@ public abstract class SubCmd {
     private void load() {
         name = this.getConfigString("name").toLowerCase(Locale.ENGLISH);
         if (name.isEmpty() || name.contains(" ")) {
-            name = ID;
+            name = id;
         }
     }
 
@@ -103,14 +103,14 @@ public abstract class SubCmd {
                                             @NotNull String subSubCommand,
                                             @NotNull String feedbackPath,
                                             String... holders) {
-        Util.sendMessage(target, this.getLanguageString(subSubCommand + "." + feedbackPath, null, target, holders));
+        Util.sendMessage(target, this.translate(subSubCommand + "." + feedbackPath, target, holders));
     }
 
     protected void sendFailFeedbackForSub(CommandSender target, String alias, String subSubCommand) {
-        String params = getLanguageString(subSubCommand + ".params", null, target);
+        String params = translate(subSubCommand + ".params", target);
         target.spigot().sendMessage(this.craftFailFeedback(alias, subSubCommand
                         + ((params == null || params.isEmpty()) ? "" : " " + params),
-                getLanguageStringList(subSubCommand + ".description", null, target)));
+                translateList(subSubCommand + ".description", target)));
     }
 
 
@@ -148,7 +148,7 @@ public abstract class SubCmd {
 
     @Deprecated
     protected <T> void onWrongAlias(String pathMessage, CommandSender sender, IAliasSet<T> set, String... holders) {
-        String msg = getLanguageString(pathMessage, null, sender, holders);
+        String msg = translate(pathMessage, sender, holders);
         if (msg == null || msg.isEmpty()) {
             return;
         }
@@ -179,18 +179,30 @@ public abstract class SubCmd {
                 .event(Util.craftHoverEvent(hover.toString())).create());//TODO fix
     }
 
-    protected String getLanguageString(String path, String def, CommandSender sender, String... holders) {
-        return getPlugin().getLanguageConfig(sender).loadMessage(this.PATH + path, def == null ? "" : def,
-                sender instanceof Player ? (Player) sender : null, true, holders);
+    protected String translate(String path, CommandSender sender, String... holders) {
+        return getPlugin().getTranslator().translate(sender, this.PATH + path, holders);
     }
 
-    protected void sendLanguageString(String path, String def, CommandSender sender, String... holders) {
-        Util.sendMessage(sender, getLanguageString(path, def, sender, holders));
+    protected String translateOrEmpty(String path, CommandSender sender, String... holders) {
+        return getPlugin().getTranslator().translateOrEmpty(sender, this.PATH + path, holders);
     }
 
-    protected List<String> getLanguageStringList(String path, List<String> def, CommandSender sender, String... holders) {
-        return getPlugin().getLanguageConfig(sender).loadMultiMessage(this.PATH + path,
-                def == null ? new ArrayList<>() : def, sender instanceof Player ? (Player) sender : null, true, holders);
+    protected void onSuccess(CommandSender sender, String... holders) {
+        Util.sendMessage(sender, translate(this.PATH + "feedback", sender, holders));
+    }
+
+    protected void sendFeedback(CommandSender target,
+                                @NotNull String feedbackPath,
+                                String... holders) {
+        Util.sendMessage(target, this.translate(this.PATH + feedbackPath, target, holders));
+    }
+
+    protected void sendLanguageString(String path, CommandSender sender, String... holders) {
+        Util.sendMessage(sender, translate(path, sender, holders));
+    }
+
+    protected List<String> translateList(String path, CommandSender sender, String... holders) {
+        return getPlugin().getTranslator().translateList(sender, this.PATH + path, holders);
     }
 
     protected String getConfigString(String path, String... holders) {
@@ -201,30 +213,18 @@ public abstract class SubCmd {
         return config.loadInteger(this.PATH + path, 0);
     }
 
-    protected long getConfigLong(String path) {
-        return config.loadLong(this.PATH + path, 0L);
-    }
-
-    protected boolean getConfigBoolean(String path) {
-        return config.loadBoolean(this.PATH + path, true);
-    }
-
-    protected List<String> getConfigStringList(String path, String... holders) {
-        return config.loadMultiMessage(this.PATH + path, new ArrayList<>(), null, true, holders);
-    }
-
     @SuppressWarnings("deprecation")
     public @NotNull ComponentBuilder getHelp(@NotNull ComponentBuilder base, @NotNull CommandSender sender, @NotNull String alias) {
         String help = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + this.name + " ";
-        base.append(help + getLanguageString("params", "", sender).replace(ChatColor.RESET.toString(),
-                        ChatColor.GREEN.toString()))
+        String params = translateOrEmpty("params", sender);
+        base.append(help + (params == null ? "" : (params.replace(ChatColor.RESET.toString(), ChatColor.GREEN.toString()))))
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ChatColor.stripColor(help)))
                 .event(Util.craftHoverEvent(getDescription(sender)));
         return base;
     }
 
     public void onFail(@NotNull CommandSender target, @NotNull String alias) {
-        String params = getLanguageString("params", "", target);
+        String params = translateOrEmpty("params", target);
 
         Util.sendMessage(target, new ComponentBuilder(
                 ChatColor.RED + "/" + alias + " " + this.name + " " +
@@ -236,7 +236,7 @@ public abstract class SubCmd {
     }
 
     protected String getDescription(@NotNull CommandSender target) {
-        return String.join("\n", getLanguageStringList("description", null, target));
+        return String.join("\n", translateList("description", target));
     }
 
     abstract public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args);

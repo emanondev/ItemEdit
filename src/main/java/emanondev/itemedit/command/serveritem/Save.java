@@ -26,10 +26,10 @@ public class Save extends SubCmd {
             if (ItemEdit.get().getServerStorage().getItem(args[1]) == null) {
                 ItemEdit.get().getServerStorage().setItem(args[1], this.getItemInHand(p).clone());
             } else {
-                sendLanguageString("already_used_id", null, p, "%id%", args[1].toLowerCase());
+                sendLanguageString("already_used_id", p, "%id%", args[1].toLowerCase());
                 return;
             }
-            sendLanguageString("success", null, p, "%id%", args[1].toLowerCase());
+            sendLanguageString("success", p, "%id%", args[1].toLowerCase());
         } catch (Exception e) {
             onFail(p, alias);
         }

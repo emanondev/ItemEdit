@@ -298,7 +298,7 @@ public class BannerEditor implements Gui {
             if (data != null) {
                 data.setColor(DyeColor.values()[event.getSlot()]);
             } else {
-                if (VersionUtils.isVersionAfter(1, 13)) {
+                if (VersionUtils.isAfter(1, 13)) {
                     banner.setType(Util.getBannerItemFromColor(DyeColor.values()[event.getSlot()]));
                 } else {
                     banner.setDurability(Util.getDataByColor(DyeColor.values()[event.getSlot()]));

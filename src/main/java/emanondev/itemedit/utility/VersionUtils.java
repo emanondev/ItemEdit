@@ -81,9 +81,9 @@ public final class VersionUtils {
      * @param minor the minor version (e.g., 9 in 1.9.4).
      * @return true if the current version is up to the specified version.
      */
-    public static boolean isVersionUpTo(int major,
-                                        int minor) {
-        return isVersionUpTo(major, minor, 99);
+    public static boolean isUpTo(int major,
+                                 int minor) {
+        return isUpTo(major, minor, 99);
     }
 
     /**
@@ -95,9 +95,9 @@ public final class VersionUtils {
      * @param patch the sub version.
      * @return true if the current version is up to the specified version.
      */
-    public static boolean isVersionUpTo(int major,
-                                        int minor,
-                                        int patch) {
+    public static boolean isUpTo(int major,
+                                 int minor,
+                                 int patch) {
         if (GAME_MAIN_VERSION > major) return false;
         if (GAME_MAIN_VERSION < major) return true;
         if (GAME_VERSION > minor) return false;
@@ -113,9 +113,9 @@ public final class VersionUtils {
      * @param minor the minor version.
      * @return true if the current version is after the specified version.
      */
-    public static boolean isVersionAfter(int major,
-                                         int minor) {
-        return isVersionAfter(major, minor, 0);
+    public static boolean isAfter(int major,
+                                  int minor) {
+        return isAfter(major, minor, 0);
     }
 
     /**
@@ -127,9 +127,9 @@ public final class VersionUtils {
      * @param patch the sub version.
      * @return true if the current version is after the specified version.
      */
-    public static boolean isVersionAfter(int major,
-                                         int minor,
-                                         int patch) {
+    public static boolean isAfter(int major,
+                                  int minor,
+                                  int patch) {
         if (GAME_MAIN_VERSION < major) return false;
         if (GAME_MAIN_VERSION > major) return true;
         if (GAME_VERSION < minor) return false;
@@ -147,11 +147,11 @@ public final class VersionUtils {
      * @param minorMax the maximum minor version.
      * @return true if the current version is within the range.
      */
-    public static boolean isVersionInRange(int majorMin,
-                                           int minorMin,
-                                           int majorMax,
-                                           int minorMax) {
-        return isVersionInRange(majorMin, minorMin, 0, majorMax, minorMax, 99);
+    public static boolean isInRange(int majorMin,
+                                    int minorMin,
+                                    int majorMax,
+                                    int minorMax) {
+        return isInRange(majorMin, minorMin, 0, majorMax, minorMax, 99);
     }
 
     /**
@@ -166,14 +166,14 @@ public final class VersionUtils {
      * @param patchMax the maximum sub version.
      * @return true if the current version is within the range.
      */
-    public static boolean isVersionInRange(int majorMin,
-                                           int minorMin,
-                                           int patchMin,
-                                           int majorMax,
-                                           int minorMax,
-                                           int patchMax) {
-        return isVersionAfter(majorMin, minorMin, patchMin) &&
-                isVersionUpTo(majorMax, minorMax, patchMax);
+    public static boolean isInRange(int majorMin,
+                                    int minorMin,
+                                    int patchMin,
+                                    int majorMax,
+                                    int minorMax,
+                                    int patchMax) {
+        return isAfter(majorMin, minorMin, patchMin) &&
+                isUpTo(majorMax, minorMax, patchMax);
     }
 
     /**
@@ -202,4 +202,5 @@ public final class VersionUtils {
     public static boolean hasFoliaAPI() {
         return HAS_FOLIA;
     }
+
 }

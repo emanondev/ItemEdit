@@ -95,7 +95,7 @@ public final class ItemUtils {
         if (meta == null) {
             return false;
         }
-        if (VersionUtils.isVersionAfter(1, 11)) {
+        if (VersionUtils.isAfter(1, 11)) {
             return meta.isUnbreakable();
         }
 
@@ -131,7 +131,7 @@ public final class ItemUtils {
         if (meta == null) {
             return;
         }
-        if (VersionUtils.isVersionAfter(1, 11)) {
+        if (VersionUtils.isAfter(1, 11)) {
             meta.setUnbreakable(value);
             return;
         }
@@ -153,7 +153,7 @@ public final class ItemUtils {
     public static AttributeModifier createAttributeModifier(double amount,
                                                             @NotNull AttributeModifier.Operation operation,
                                                             @Nullable String slot) {
-        if (VersionUtils.isVersionAfter(1, 20, 6)) {
+        if (VersionUtils.isAfter(1, 20, 6)) {
             EquipmentSlotGroup group;
             if (slot == null) {
                 group = EquipmentSlotGroup.ANY;
@@ -163,7 +163,7 @@ public final class ItemUtils {
                     group = EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)).getGroup();
                 }
             }
-            if (VersionUtils.isVersionAfter(1, 21, 2)) {
+            if (VersionUtils.isAfter(1, 21, 2)) {
                 return new AttributeModifier(Objects.requireNonNull(NamespacedKey.fromString(UUID.randomUUID().toString())),
                         amount, operation, group);
             }
@@ -177,7 +177,7 @@ public final class ItemUtils {
         }
 
         UUID uuid = UUID.randomUUID();
-        if (VersionUtils.isVersionAfter(1, 13, 2)) {
+        if (VersionUtils.isAfter(1, 13, 2)) {
             return ReflectionUtils.invokeConstructor(AttributeModifier.class,
                     UUID.class, uuid,
                     String.class, uuid.toString(),
@@ -200,7 +200,7 @@ public final class ItemUtils {
      */
     public static PatternType[] getPatternTypes() {
         try {
-            if (VersionUtils.isVersionAfter(1, 20, 6)) {
+            if (VersionUtils.isAfter(1, 20, 6)) {
                 List<PatternType> result = new ArrayList<>();
                 Registry.BANNER_PATTERN.forEach(result::add);
                 return result.toArray(new PatternType[0]);
@@ -223,8 +223,8 @@ public final class ItemUtils {
         PatternType[] val = getPatternTypes();
         ArrayList<PatternType> list = new ArrayList<>(Arrays.asList(val));
         list.remove(PatternType.BASE);
-        if (VersionUtils.isVersionAfter(1, 20, 6) &&
-                !VersionUtils.isVersionAfter(1, 21)) { //those are not craftable items on 1.20.6
+        if (VersionUtils.isAfter(1, 20, 6) &&
+                !VersionUtils.isAfter(1, 21)) { //those are not craftable items on 1.20.6
             list.remove(PatternType.FLOW);
             list.remove(PatternType.GUSTER);
         }
@@ -232,7 +232,7 @@ public final class ItemUtils {
     }
 
     public static boolean isItem(@NotNull Material material) {
-        if (VersionUtils.isVersionUpTo(1, 12, 99)) {
+        if (VersionUtils.isUpTo(1, 12, 99)) {
             return true; //limited support
         }
         if (material.name().startsWith("LEGACY_")) {

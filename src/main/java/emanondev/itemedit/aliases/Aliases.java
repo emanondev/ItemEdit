@@ -1,12 +1,10 @@
 package emanondev.itemedit.aliases;
 
 import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.consumableeffects.*;
 import emanondev.itemedit.utility.TagContainer;
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect;
-import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.entity.EntityType;
@@ -22,30 +20,11 @@ import java.util.function.Supplier;
 public class Aliases {
 
     private static final Map<String, IAliasSet<?>> types = new HashMap<>();
-    private static boolean loaded = false;
-
-    private static <K, T extends AliasSet<K>> T createAndRegister(boolean condition, Supplier<T> supplier) {
-        if (!condition) {
-            return null;
-        }
-        try {
-            T value = supplier.get();
-            if (value == null) {
-                return value;
-            }
-            registerAliasType(value);
-            return value;
-        } catch (Throwable t) {
-            t.printStackTrace();
-            return null;
-        }
-    }
-
     public static final EnchAliases ENCHANT = createAndRegister(true, () ->
-            VersionUtils.isVersionUpTo(1, 12) ? new EnchAliasesOld() : new EnchAliases());
+            VersionUtils.isUpTo(1, 12) ? new EnchAliasesOld() : new EnchAliases());
     public static final AliasSet<PatternType> PATTERN_TYPE = createAndRegister(true, () -> {
         try {
-            if (VersionUtils.isVersionAfter(1, 20, 6)) {
+            if (VersionUtils.isAfter(1, 20, 6)) {
                 return new BannerPatternAliasesNew();
             }
         } catch (Throwable ignored) {
@@ -53,7 +32,7 @@ public class Aliases {
         return new BannerPatternAliasesOld();
     });
     public static final GenAliases BOOK_TYPE = createAndRegister(
-            !VersionUtils.isVersionUpTo(1, 9), GenAliases::new);
+            !VersionUtils.isUpTo(1, 9), GenAliases::new);
     public static final AliasSet<PotionEffectType> POTION_EFFECT = createAndRegister(true, () ->
             new AliasSet<PotionEffectType>("potion_effect", ItemEdit.get()) {
 
@@ -88,11 +67,11 @@ public class Aliases {
             createAndRegister(true, () ->
                     new EnumAliasSet<>("color", ItemEdit.get(), DyeColor.class));
     public static final AnimationAliases ANIMATION =
-            createAndRegister(VersionUtils.isVersionAfter(1, 21, 4),
+            createAndRegister(VersionUtils.isAfter(1, 21, 4),
                     AnimationAliases::new);
     public static final AliasSet<String> ANIMATION_OLD =
             createAndRegister(
-                    VersionUtils.isVersionInRange(1, 20, 5, 1, 21, 3), () -> new AliasSet<String>("animations", ItemEdit.get()) {
+                    VersionUtils.isInRange(1, 20, 5, 1, 21, 3), () -> new AliasSet<String>("animations", ItemEdit.get()) {
 
                         private final LinkedHashSet<String> values = new LinkedHashSet<>(craftValues());
 
@@ -112,7 +91,7 @@ public class Aliases {
                         }
                     });
     public static final EggTypeAliases EGG_TYPE = createAndRegister(true, () -> {
-        if (VersionUtils.isVersionInRange(1, 11, 1, 12)) {
+        if (VersionUtils.isInRange(1, 11, 1, 12)) {
             return new EggTypeAliases();
         }
         return null;
@@ -145,29 +124,28 @@ public class Aliases {
             createAndRegister(true, () ->
                     new EnumAliasSet<>("equip_slot", ItemEdit.get(), EquipmentSlot.class));
     public static final AttributeAliases ATTRIBUTE =
-            createAndRegister(!VersionUtils.isVersionUpTo(1, 11), () ->
-                    VersionUtils.isVersionUpTo(1, 21, 2) ?
+            createAndRegister(!VersionUtils.isUpTo(1, 11), () ->
+                    VersionUtils.isUpTo(1, 21, 2) ?
                             new AttributeAliasesOld() :
                             new AttributeAliasesNew()
             );
     public static final OperationAliases OPERATIONS =
-            createAndRegister(!VersionUtils.isVersionUpTo(1, 11), OperationAliases::new
+            createAndRegister(!VersionUtils.isUpTo(1, 11), OperationAliases::new
             );
-
-    public static final RarityAliases RARITY = createAndRegister(!VersionUtils.isVersionUpTo(1, 20, 4), RarityAliases::new);
+    public static final RarityAliases RARITY = createAndRegister(!VersionUtils.isUpTo(1, 20, 4), RarityAliases::new);
     public static final TropicalFishPatternAliases TROPICALPATTERN =
             createAndRegister(true, () -> {
-                if (VersionUtils.isVersionUpTo(1, 12)) {
+                if (VersionUtils.isUpTo(1, 12)) {
                     return null;
                 }
                 return new TropicalFishPatternAliases();
             });
     public static final TrimMaterialAliases TRIM_MATERIAL =
             createAndRegister(true, () -> {
-                if (VersionUtils.isVersionUpTo(1, 19, 4))
+                if (VersionUtils.isUpTo(1, 19, 4))
                     return null;
                 try {
-                    if (VersionUtils.isVersionAfter(1, 20, 2)) {
+                    if (VersionUtils.isAfter(1, 20, 2)) {
                         return new TrimMaterialAliasesNew();
                     } else {
                         return new TrimMaterialAliasesOld();
@@ -179,11 +157,11 @@ public class Aliases {
             });
     public static final TrimPatternAliases TRIM_PATTERN =
             createAndRegister(true, () -> {
-                if (VersionUtils.isVersionUpTo(1, 19, 4)) {
+                if (VersionUtils.isUpTo(1, 19, 4)) {
                     return null;
                 }
                 try {
-                    if (VersionUtils.isVersionAfter(1, 20, 2)) {
+                    if (VersionUtils.isAfter(1, 20, 2)) {
                         return new TrimPatternAliasesNew();
                     } else {
                         return new TrimPatternAliasesOld();
@@ -197,14 +175,14 @@ public class Aliases {
             createAndRegister(true, () -> new EnumAliasSet<>("firework_type", ItemEdit.get(), FireworkEffect.Type.class));
     public static final AxolotlVariantAliases AXOLOTL_VARIANT =
             createAndRegister(true, () -> {
-                if (VersionUtils.isVersionUpTo(1, 17)) {
+                if (VersionUtils.isUpTo(1, 17)) {
                     return null;
                 }
                 return new AxolotlVariantAliases();
             });
     public static final GoatHornSoundAliases GOAT_HORN_SOUND =
             createAndRegister(true, () -> {
-                if (VersionUtils.isVersionUpTo(1, 19, 2)) {
+                if (VersionUtils.isUpTo(1, 19, 2)) {
                     return null;
                 }
                 try {
@@ -215,10 +193,10 @@ public class Aliases {
             });
     public static final EquipmentSlotGroupAliases EQUIPMENT_SLOTGROUPS =
             createAndRegister(true, () ->
-                    VersionUtils.isVersionAfter(1, 21) ? new EquipmentSlotGroupAliases() : null);
+                    VersionUtils.isAfter(1, 21) ? new EquipmentSlotGroupAliases() : null);
     public static final SoundAliases SOUND =
             createAndRegister(true, () -> {
-                if (VersionUtils.isVersionAfter(1, 20, 5)) {
+                if (VersionUtils.isAfter(1, 20, 5)) {
                     return new SoundAliases();
                 }
                 return null;
@@ -227,27 +205,26 @@ public class Aliases {
             createAndRegister(true, () -> new EnumAliasSet<>(ItemEdit.get(), EntityType.class));
     public static final AliasSet<TagContainer<EntityType>> ENTITY_GROUPS =
             createAndRegister(true, () ->
-                    VersionUtils.isVersionAfter(1, 21) ?
+                    VersionUtils.isAfter(1, 21) ?
                             new TagAliasSet<>("entitygroups", ItemEdit.get(), EntityType.class, Tag.REGISTRY_ENTITY_TYPES) : null);
-    public static final AliasSet<NamespacedKey> CONSUMABLE_EFFECT =
-            createAndRegister(true, () -> VersionUtils.isVersionAfter(1, 21, 4) ?
-                    new AliasSet<NamespacedKey>("consumable_effect", ItemEdit.get()) {
-                        @Override
-                        public String getName(NamespacedKey value) {
-                            return value.getKey();
-                        }
+    private static boolean loaded = false;
 
-                        @Override
-                        public Collection<NamespacedKey> getValues() {
-                            return Arrays.asList(
-                                    ApplyEffects.KEY,
-                                    RemoveEffects.KEY,
-                                    ClearEffects.KEY,
-                                    PlaySound.KEY,
-                                    TeleportRandomly.KEY
-                            );
-                        }
-                    } : null);
+    private static <K, T extends AliasSet<K>> T createAndRegister(boolean condition, Supplier<T> supplier) {
+        if (!condition) {
+            return null;
+        }
+        try {
+            T value = supplier.get();
+            if (value == null) {
+                return value;
+            }
+            registerAliasType(value);
+            return value;
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return null;
+        }
+    }
 
     public static <T> void registerAliasType(@Nullable IAliasSet<T> set) {
         registerAliasType(set, false);

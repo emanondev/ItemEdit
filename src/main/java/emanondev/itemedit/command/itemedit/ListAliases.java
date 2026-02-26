@@ -32,11 +32,11 @@ public class ListAliases extends SubCmd {
                 throw new IllegalArgumentException("Wrong param number");
             }
             if (args.length == 1) {
-                String prefix = getLanguageString("prefix_line", null, sender);
-                String postfix = getLanguageString("postfix_line", null, sender);
-                String colorOne = getLanguageString("first_color", null, sender);
-                String colorTwo = getLanguageString("second_color", null, sender);
-                String hover = getLanguageString("hover_type", null, sender);
+                String prefix = translate("prefix_line", sender);
+                String postfix = translate("postfix_line", sender);
+                String colorOne = translate("first_color", sender);
+                String colorTwo = translate("second_color", sender);
+                String hover = translate("hover_type", sender);
                 ComponentBuilder comp;
                 if (prefix != null && !prefix.isEmpty()) {
                     comp = new ComponentBuilder(prefix + "\n");
@@ -66,11 +66,11 @@ public class ListAliases extends SubCmd {
                     return;
                 }
 
-                String prefix = getLanguageString("prefix_line", null, sender);
-                String postfix = getLanguageString("postfix_line", null, sender);
-                String colorOne = getLanguageString("first_color", null, sender);
-                String colorTwo = getLanguageString("second_color", null, sender);
-                String hover = getLanguageString("hover_info", null, sender, "%default%", "%default%");
+                String prefix = translate("prefix_line", sender);
+                String postfix = translate("postfix_line", sender);
+                String colorOne = translate("first_color", sender);
+                String colorTwo = translate("second_color", sender);
+                String hover = translate("hover_info", sender, "%default%", "%default%");
                 ComponentBuilder comp;
                 if (prefix != null && !prefix.isEmpty()) {
                     comp = new ComponentBuilder(prefix + "\n");

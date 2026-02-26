@@ -67,7 +67,7 @@ public class GiveAll extends SubCmd {
                         InventoryUtils.ExcessMode.DROP_EXCESS : InventoryUtils.ExcessMode.DELETE_EXCESS);
                 total += given;
                 if (given > 0 && !silent) {
-                    sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
+                    sendLanguageString("feedback", target, "%id%", args[1].toLowerCase(),
                             "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                             String.valueOf(given));
                 }

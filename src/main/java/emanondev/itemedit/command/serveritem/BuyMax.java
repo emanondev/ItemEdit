@@ -77,7 +77,7 @@ public class BuyMax extends SubCmd {
             if (removed == 0) {
                 // not enough items, aborting
                 if (!silent) {
-                    sendLanguageString("not-enough-items", null, target, "%id%",
+                    sendLanguageString("not-enough-items", target, "%id%",
                             args[1].toLowerCase(), "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
                             "%amount%", String.valueOf(amount), "%price%", economy.format(price));
                 }
@@ -101,7 +101,7 @@ public class BuyMax extends SubCmd {
 
             // success, giving some feedback
             if (!silent) {
-                sendLanguageString("feedback", null, target, "%id%", args[1].toLowerCase(),
+                sendLanguageString("feedback", target, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%price%", economy.format(price));
             }

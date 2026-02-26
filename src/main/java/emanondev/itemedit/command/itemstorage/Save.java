@@ -26,7 +26,7 @@ public class Save extends SubCmd {
             }
             int limit = ItemEdit.get().getConfig().loadInteger("storage.player-item-limit", 45);
             if (limit >= 0 && ItemEdit.get().getPlayerStorage().getIds(p).size() >= limit) {
-                sendLanguageString("limit-reached", null, p, "%limit%",
+                sendLanguageString("limit-reached", p, "%limit%",
                         String.valueOf(limit));
                 return;
             }
@@ -35,7 +35,7 @@ public class Save extends SubCmd {
             } else {
                 throw new IllegalArgumentException();
             }
-            sendLanguageString("success", null, p, "%id%",
+            sendLanguageString("success", p, "%id%",
                     args[1].toLowerCase(Locale.ENGLISH));
         } catch (Exception e) {
             onFail(p, alias);

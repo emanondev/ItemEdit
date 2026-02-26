@@ -67,7 +67,7 @@ public class Compass extends SubCmd {
         meta.setLodestoneTracked(false);
         meta.setLodestone(p.getLocation());
         item.setItemMeta(meta);
-        this.getLanguageString("set.feedback", null, p,
+        this.translate("set.feedback", p,
                 "%world%", p.getLocation().getWorld().getName(),
                 "%x%", String.valueOf(p.getLocation().getBlockX()),
                 "%y%", String.valueOf(p.getLocation().getBlockY()),
@@ -81,7 +81,7 @@ public class Compass extends SubCmd {
         meta.setLodestoneTracked(true);
         meta.setLodestone(p.getLocation());
         item.setItemMeta(meta);
-        Util.sendMessage(p, this.getLanguageString("clear.feedback", null, p));
+        Util.sendMessage(p, this.translate("clear.feedback", p));
         updateView(p);
     }
 }

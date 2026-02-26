@@ -30,7 +30,7 @@ public class Update extends SubCmd {
             } else {
                 throw new IllegalArgumentException();
             }
-            sendLanguageString("success", null, p, "%id%", args[1].toLowerCase(Locale.ENGLISH));
+            sendLanguageString("success", p, "%id%", args[1].toLowerCase(Locale.ENGLISH));
         } catch (Exception e) {
             onFail(p, alias);
         }

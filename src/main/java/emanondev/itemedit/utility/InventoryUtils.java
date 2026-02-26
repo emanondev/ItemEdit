@@ -40,7 +40,7 @@ public final class InventoryUtils {
      * @return The top Inventory object from the event's InventoryView.
      */
     public static Inventory getTopInventory(@NotNull InventoryEvent event) {
-        if (VersionUtils.isVersionAfter(1, 21)) {
+        if (VersionUtils.isAfter(1, 21)) {
             return event.getView().getTopInventory();
         }
         return getTopInventoryP(event.getView());
@@ -57,7 +57,7 @@ public final class InventoryUtils {
      * @return The top Inventory object from the player's InventoryView.
      */
     public static Inventory getTopInventory(@NotNull Player player) {
-        if (VersionUtils.isVersionAfter(1, 21)) {
+        if (VersionUtils.isAfter(1, 21)) {
             return player.getOpenInventory().getTopInventory();
         }
         return getTopInventoryP(player.getOpenInventory());
@@ -83,7 +83,7 @@ public final class InventoryUtils {
      * @return The bottom Inventory object from the event's InventoryView.
      */
     public static Inventory getBottomInventory(@NotNull InventoryEvent event) {
-        if (VersionUtils.isVersionAfter(1, 21)) {
+        if (VersionUtils.isAfter(1, 21)) {
             return event.getView().getBottomInventory();
         }
         return getBottomInventoryP(event.getView());
@@ -215,7 +215,7 @@ public final class InventoryUtils {
                     return amount;
                 } else {
                     int left = map.get(0).getAmount();
-                    if (VersionUtils.isVersionAfter(1, 9)) {
+                    if (VersionUtils.isAfter(1, 9)) {
                         ItemStack[] extras = player.getInventory().getExtraContents();
                         for (int i = 0; i < extras.length; i++) {
                             ItemStack extra = extras[i];

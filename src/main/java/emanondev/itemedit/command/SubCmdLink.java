@@ -12,18 +12,24 @@ public class SubCmdLink extends SubCmd {
     @Getter
     private final @NotNull AbstractCommand linkedCommand;
 
-    public SubCmdLink(@NotNull String id, @NotNull AbstractCommand command, boolean playerOnly, boolean checkNonNullItem, @NotNull AbstractCommand linkedCommand) {
+    public SubCmdLink(@NotNull String id,
+                      @NotNull AbstractCommand command,
+                      boolean playerOnly,
+                      boolean checkNonNullItem,
+                      @NotNull AbstractCommand linkedCommand) {
         super(id, command, playerOnly, checkNonNullItem);
         this.linkedCommand = linkedCommand;
     }
 
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
-        linkedCommand.onCommand(sender, getLinkedCommand().getCommand(), alias, Arrays.copyOfRange(args, 1, args.length));
+        linkedCommand.onCommand(sender, linkedCommand.getCommand(), linkedCommand.getName(),
+                Arrays.copyOfRange(args, 1, args.length));
     }
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return linkedCommand.onTabComplete(sender, getLinkedCommand().getCommand(), linkedCommand.getName(), Arrays.copyOfRange(args, 1, args.length));
+        return linkedCommand.onTabComplete(sender, linkedCommand.getCommand(), linkedCommand.getName(),
+                Arrays.copyOfRange(args, 1, args.length));
     }
 }
