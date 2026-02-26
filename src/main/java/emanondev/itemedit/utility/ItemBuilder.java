@@ -648,4 +648,45 @@ public class ItemBuilder {
         meta.setEquippable(component);
         return this;
     }
+
+    /**
+     * @since 1.21.2
+     */
+    public boolean isGlider() {
+        return meta.isGlider();
+    }
+
+    /**
+     * @since 1.21.2
+     */
+    public ItemBuilder setGlider(boolean value) {
+        meta.setGlider(value);
+        return this;
+    }
+
+    public boolean isUnbreakable() {
+        return ItemUtils.isUnbreakable(meta);
+    }
+
+    public ItemBuilder setUnbreakable(boolean value) {
+        ItemUtils.setUnbreakable(meta, value);
+        return this;
+    }
+
+    /**
+     * @since 1.20.5
+     * @deprecated 1.21.2
+     */
+    public boolean isFireResistent() {
+        return meta.isFireResistant();
+    }
+
+    /**
+     * @since 1.20.5
+     * @deprecated 1.21.2
+     */
+    public ItemBuilder setFireResistent(boolean value) {
+        meta.setFireResistant(value);
+        return this;
+    }
 }

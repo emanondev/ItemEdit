@@ -16,7 +16,7 @@ public class ItemEquipmentCommand extends AbstractCommand {
         this.registerSubCommand(() -> new AllowedEntities(this));
         this.registerSubCommand(() -> new SoundSubCommand(this, "equipsound",
                 ItemBuilder::setEquippableEquipSound));
-        this.registerSubCommand(() -> new BooleanSubCommand(this, "EquipOnInteract",
+        this.registerSubCommand(() -> new BooleanSubCommand(this, "equiponinteract",
                 ItemBuilder::isEquipmentEquipOnInteract,
                 ItemBuilder::setEquipmentEquipOnInteract));
         this.registerSubCommand(() -> new BooleanSubCommand(this, "dispensable",

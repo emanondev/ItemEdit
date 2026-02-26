@@ -2,6 +2,7 @@ package emanondev.itemedit.command;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.command.itemedit.*;
+import emanondev.itemedit.utility.ItemBuilder;
 import emanondev.itemedit.utility.VersionUtils;
 
 public class ItemEditCommand extends AbstractCommand {
@@ -18,7 +19,8 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new HideAll(this));
         this.registerSubCommand(() -> new HideToolTip(this),
                 VersionUtils.isAfter(1, 20, 5));
-        this.registerSubCommand(() -> new Unbreakable(this));
+        this.registerSubCommand(() -> new BooleanSubCommand(this, "unbreakable",
+                ItemBuilder::isUnbreakable, ItemBuilder::setUnbreakable));
         this.registerSubCommand(() -> new SubCmdLink("equipment", this, true, true, ItemEquipmentCommand.get()),
                 VersionUtils.isAfter(1, 21, 2));
         this.registerSubCommand(() -> new RepairCost(this));
@@ -30,9 +32,12 @@ public class ItemEditCommand extends AbstractCommand {
                 VersionUtils.isAfter(1, 21, 11));
         this.registerSubCommand(() -> new MaxStackSize(this), VersionUtils.isAfter(1, 20, 5));
         this.registerSubCommand(() -> new MaxDurability(this), VersionUtils.isAfter(1, 20, 5));
-        this.registerSubCommand(() -> new FireResistent(this), VersionUtils.isAfter(1, 20, 5));
-        this.registerSubCommand(() -> new Glider(this), VersionUtils.isAfter(1, 21, 2));
-
+        this.registerSubCommand(() -> new BooleanSubCommand(this, "fireresistent",
+                        ItemBuilder::isFireResistent, ItemBuilder::setFireResistent),
+                VersionUtils.isAfter(1, 20, 5));
+        this.registerSubCommand(() -> new BooleanSubCommand(this, "glider",
+                        ItemBuilder::isGlider, ItemBuilder::setGlider),
+                VersionUtils.isAfter(1, 21, 2));
 
         this.registerSubCommand(() -> new Glow(this), VersionUtils.isAfter(1, 20, 5));
         this.registerSubCommand(() -> new Rarity(this), VersionUtils.isAfter(1, 20, 5));
