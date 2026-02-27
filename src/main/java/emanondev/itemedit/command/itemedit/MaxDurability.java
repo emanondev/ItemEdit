@@ -23,15 +23,16 @@ public class MaxDurability extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
+        if (args.length != 2) {
+            onFail(p, alias);
+            return;
+        }
+        ItemMeta meta = ItemUtils.getMeta(item);
+        if (!(meta instanceof Damageable)) {
+            getPlugin().getTranslator().send(p, "generic.error.wrong-material_damageable");
+            return;
+        }
         try {
-            if (args.length != 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-            ItemMeta meta = ItemUtils.getMeta(item);
-            if (!(meta instanceof Damageable)) {
-                getPlugin().getTranslator().send(p, "generic.error.wrong-material_damageable");
-                return;
-            }
             int amount = Integer.parseInt(args[1]);
             Damageable damageable = (Damageable) meta;
             damageable.setMaxDamage(amount);
@@ -51,12 +52,8 @@ public class MaxDurability extends SubCmd {
             return List.of();
         }
         int max = item.getType().getMaxDurability();
-        return CompleteUtility.complete(
-                args[1],
-                "1",
-                String.valueOf(max),
-                String.valueOf(max / 2),
-                String.valueOf(max * 2)
+        return CompleteUtility.complete(args[1],
+                "1", String.valueOf(max), String.valueOf(max / 2), String.valueOf(max * 2)
         );
     }
 

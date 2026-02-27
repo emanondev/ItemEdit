@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,30 +25,23 @@ public class SpawnerEggType extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        ItemMeta rawMeta = ItemUtils.getMeta(item);
-        if (!(rawMeta instanceof SpawnEggMeta)) {
+        if (!(ItemUtils.getMeta(item) instanceof SpawnEggMeta meta)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_spawner_egg");
             return;
         }
 
-        SpawnEggMeta meta = (SpawnEggMeta) rawMeta;
-
-        try {
-            if (args.length != 2) {
-                throw new IllegalArgumentException();
-            }
-            EntityType type = Aliases.EGG_TYPE.convertAlias(args[1]);
-            if (type == null) {
-                onWrongAlias(p, Aliases.EGG_TYPE);
-                onFail(p, alias);
-                return;
-            }
-            meta.setSpawnedType(type);
-            item.setItemMeta(meta);
-            updateView(p);
-        } catch (Exception e) {
-            onFail(p, alias);
+        if (args.length != 2) {
+            throw new IllegalArgumentException();
         }
+        EntityType type = Aliases.EGG_TYPE.convertAlias(args[1]);
+        if (type == null) {
+            onWrongAlias(p, Aliases.EGG_TYPE);
+            onFail(p, alias);
+            return;
+        }
+        meta.setSpawnedType(type);
+        item.setItemMeta(meta);
+        updateView(p);
     }
 
     // itemedit bookauthor <name>

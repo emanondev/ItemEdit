@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class CustomModelData extends SubCmd {
@@ -23,19 +22,21 @@ public class CustomModelData extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
+        if (args.length != 2) {
+            onFail(p, alias);
+            return;
+        }
         try {
-            if (args.length != 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
             int amount = Integer.parseInt(args[1]);
             if (amount < 0) {
-                throw new IllegalArgumentException("Wrong model value");
+                onFail(p, alias);
+                return;
             }
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.setCustomModelData(amount);
             item.setItemMeta(meta);
             updateView(p);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             onFail(p, alias);
         }
     }
@@ -43,7 +44,7 @@ public class CustomModelData extends SubCmd {
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2) {
-            return CompleteUtility.complete(args[1], Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+            return CompleteUtility.complete(args[1], List.of("1", "2", "3", "4", "5", "6", "7", "8", "9"));
         }
         return List.of();
     }

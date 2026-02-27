@@ -25,33 +25,30 @@ public class ToolTipStyle extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        try {
-            if (args.length != 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-
-            ItemMeta meta = ItemUtils.getMeta(item);
-
-            String value = args[1].toLowerCase(Locale.ENGLISH);
-            if (value.equals("clear")) {
-                meta.setTooltipStyle(null);
-                item.setItemMeta(meta);
-                return;
-            }
-            String pre;
-            String post;
-            if (!value.contains(":")) {
-                pre = NamespacedKey.MINECRAFT;
-                post = value;
-            } else {
-                pre = value.split(":")[0];
-                post = value.split(":")[1];
-            }
-            meta.setTooltipStyle(new NamespacedKey(pre, post));
-            item.setItemMeta(meta);
-        } catch (Exception e) {
-            onFail(p, alias);
+        if (args.length != 2) {
+            onFail(sender, alias);
+            return;
         }
+
+        ItemMeta meta = ItemUtils.getMeta(item);
+
+        String value = args[1].toLowerCase(Locale.ENGLISH);
+        if (value.equals("clear")) {
+            meta.setTooltipStyle(null);
+            item.setItemMeta(meta);
+            return;
+        }
+        String pre;
+        String post;
+        if (!value.contains(":")) {
+            pre = NamespacedKey.MINECRAFT;
+            post = value;
+        } else {
+            pre = value.split(":")[0];
+            post = value.split(":")[1];
+        }
+        meta.setTooltipStyle(new NamespacedKey(pre, post));
+        item.setItemMeta(meta);
     }
 
     @Override

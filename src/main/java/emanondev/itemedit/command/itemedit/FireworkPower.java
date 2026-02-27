@@ -2,7 +2,6 @@ package emanondev.itemedit.command.itemedit;
 
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
-import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -22,20 +21,20 @@ public class FireworkPower extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        if (!(item.getItemMeta() instanceof FireworkMeta)) {
+        if (!(item.getItemMeta() instanceof FireworkMeta itemMeta)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_firework");
             return;
         }
 
-        FireworkMeta itemMeta = (FireworkMeta) ItemUtils.getMeta(item);
-
+        if (args.length != 2) {
+            onFail(p, alias);
+            return;
+        }
         try {
-            if (args.length != 2) {
-                throw new IllegalArgumentException();
-            }
             int power = Integer.parseInt(args[1]);
             if (power < 0 || power > 5) {
-                throw new IllegalArgumentException();
+                onFail(p, alias);
+                return;
             }
             itemMeta.setPower(power);
             item.setItemMeta(itemMeta);

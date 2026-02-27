@@ -4,7 +4,6 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.MusicInstrument;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -24,28 +23,24 @@ public class GoatHornSound extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player player = (Player) sender;
         ItemStack item = this.getItemInHand(player);
-        if (!(item.getItemMeta() instanceof MusicInstrumentMeta)) {
+        if (!(item.getItemMeta() instanceof MusicInstrumentMeta meta)) {
             getPlugin().getTranslator().send(player, "generic.error.wrong-material_music_instrument");
             return;
         }
 
-        try {
-            if (args.length != 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-            MusicInstrumentMeta meta = (MusicInstrumentMeta) ItemUtils.getMeta(item);
-            MusicInstrument type = Aliases.GOAT_HORN_SOUND.convertAlias(args[1]);
-            if (type == null) {
-                onWrongAlias(player, Aliases.GOAT_HORN_SOUND);
-                onFail(player, alias);
-                return;
-            }
-            meta.setInstrument(type);
-            item.setItemMeta(meta);
-            updateView(player);
-        } catch (Exception e) {
+        if (args.length != 2) {
             onFail(player, alias);
+            return;
         }
+        MusicInstrument type = Aliases.GOAT_HORN_SOUND.convertAlias(args[1]);
+        if (type == null) {
+            onWrongAlias(player, Aliases.GOAT_HORN_SOUND);
+            onFail(player, alias);
+            return;
+        }
+        meta.setInstrument(type);
+        item.setItemMeta(meta);
+        updateView(player);
     }
 
     @Override

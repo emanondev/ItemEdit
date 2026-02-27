@@ -24,15 +24,15 @@ public class RepairCost extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
+        if (args.length > 2) {
+            onFail(sender, alias);
+            return;
+        }
+        if (!sender.hasPermission(this.getPermission() + ".without_durability") && item.getType().getMaxDurability() <= 1) {
+            this.getCommand().sendPermissionLackMessage(this.getPermission() + ".without_durability", sender);
+            return;
+        }
         try {
-            if (args.length > 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-            if (!sender.hasPermission(this.getPermission() + ".without_durability") && item.getType().getMaxDurability() <= 1) {
-                this.getCommand().sendPermissionLackMessage(this.getPermission() + ".without_durability", sender);
-                return;
-            }
-
             Repairable meta = (Repairable) ItemUtils.getMeta(item);
             meta.setRepairCost(Integer.parseInt(args[1]));
             item.setItemMeta((ItemMeta) meta); //cast is required for old game version

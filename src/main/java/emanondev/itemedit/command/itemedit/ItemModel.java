@@ -26,27 +26,24 @@ public class ItemModel extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        try {
-            if (args.length == 1) {
-                ItemMeta meta = ItemUtils.getMeta(item);
-                meta.setItemModel(null);
-                item.setItemMeta(meta);
-                updateView(p);
-                return;
-            }
-            if (args.length != 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-            String[] rawKey = args[1].toLowerCase(Locale.ENGLISH).split(":");
-            NamespacedKey key = rawKey.length == 1 ? new NamespacedKey(NamespacedKey.MINECRAFT, rawKey[0]) :
-                    new NamespacedKey(rawKey[0], rawKey[1]);
+        if (args.length == 1) {
             ItemMeta meta = ItemUtils.getMeta(item);
-            meta.setItemModel(key);
+            meta.setItemModel(null);
             item.setItemMeta(meta);
             updateView(p);
-        } catch (Exception e) {
-            onFail(p, alias);
+            return;
         }
+        if (args.length != 2) {
+            onFail(p, alias);
+            return;
+        }
+        String[] rawKey = args[1].toLowerCase(Locale.ENGLISH).split(":");
+        NamespacedKey key = rawKey.length == 1 ? new NamespacedKey(NamespacedKey.MINECRAFT, rawKey[0]) :
+                new NamespacedKey(rawKey[0], rawKey[1]);
+        ItemMeta meta = ItemUtils.getMeta(item);
+        meta.setItemModel(key);
+        item.setItemMeta(meta);
+        updateView(p);
     }
 
     @Override

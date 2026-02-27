@@ -31,11 +31,11 @@ public class Hide extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
+        if ((args.length != 3) && (args.length != 2)) {
+            onFail(p, alias);
+            return;
+        }
         try {
-            if ((args.length != 3) && (args.length != 2)) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             ItemFlag flag = Aliases.FLAG_TYPE.convertAlias(args[1]);
             if (flag == null) {

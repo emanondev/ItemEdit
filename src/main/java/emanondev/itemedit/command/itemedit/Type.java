@@ -22,14 +22,15 @@ public class Type extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
+        if (args.length != 2) {
+            onFail(p, alias);
+            return;
+        }
         try {
-            if (args.length != 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-
             Material mat = Material.valueOf(args[1].toUpperCase());
             if (mat == Material.AIR) {
-                throw new IllegalArgumentException();
+                onFail(p, alias);
+                return;
             }
             item.setType(mat);
             updateView(p);

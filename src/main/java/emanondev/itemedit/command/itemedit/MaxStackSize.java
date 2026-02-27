@@ -25,13 +25,15 @@ public class MaxStackSize extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
+        if (args.length > 2) {
+            onFail(sender, alias);
+            return;
+        }
         try {
-            if (args.length > 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
             ItemMeta meta = ItemUtils.getMeta(item);
-            Integer value = args.length == 1 ? (meta.hasMaxStackSize() ? Integer.valueOf(item.getType().getMaxStackSize()) : Integer.valueOf(99)) :
-                    (args[1].toLowerCase(Locale.ENGLISH).equalsIgnoreCase("default") ? null : Integer.valueOf(args[1]));
+            Integer value = args.length == 1 ?
+                    (meta.hasMaxStackSize() ? Integer.valueOf(item.getType().getMaxStackSize()) : Integer.valueOf(99)) :
+                    (args[1].toLowerCase(Locale.ENGLISH).equalsIgnoreCase("default") ? null : Integer.parseInt(args[1]));
             meta.setMaxStackSize(value);
             item.setItemMeta(meta);
         } catch (Exception e) {

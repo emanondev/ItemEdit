@@ -24,24 +24,20 @@ public class Rarity extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        try {
-            if (args.length > 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-            ItemRarity rarity = args.length == 1 ? null : Aliases.RARITY.convertAlias(args[1]);
-            if (rarity == null && args.length != 1) {
-                onWrongAlias(p, Aliases.RARITY);
-                onFail(p, alias);
-                return;
-            }
-            ItemMeta meta = ItemUtils.getMeta(item);
-            meta.setRarity(rarity);
-            item.setItemMeta(meta);
-            updateView(p);
-        } catch (Exception e) {
-            onFail(p, alias);
+        if (args.length > 2) {
+            onFail(sender, alias);
+            return;
         }
-
+        ItemRarity rarity = args.length == 1 ? null : Aliases.RARITY.convertAlias(args[1]);
+        if (rarity == null && args.length != 1) {
+            onWrongAlias(p, Aliases.RARITY);
+            onFail(p, alias);
+            return;
+        }
+        ItemMeta meta = ItemUtils.getMeta(item);
+        meta.setRarity(rarity);
+        item.setItemMeta(meta);
+        updateView(p);
     }
 
     @Override

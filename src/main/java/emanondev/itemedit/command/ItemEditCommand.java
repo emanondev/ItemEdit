@@ -17,7 +17,8 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new Enchant(this));
         this.registerSubCommand(() -> new Hide(this));
         this.registerSubCommand(() -> new HideAll(this));
-        this.registerSubCommand(() -> new HideToolTip(this),
+        this.registerSubCommand(() -> new BooleanSubCommand(this, "hidetooltip",
+                        ItemBuilder::isHideToolTip, ItemBuilder::setHideToolTip),
                 VersionUtils.isAfter(1, 20, 5));
         this.registerSubCommand(() -> new BooleanSubCommand(this, "unbreakable",
                 ItemBuilder::isUnbreakable, ItemBuilder::setUnbreakable));

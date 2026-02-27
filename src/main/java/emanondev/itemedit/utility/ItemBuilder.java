@@ -689,4 +689,19 @@ public class ItemBuilder {
         meta.setFireResistant(value);
         return this;
     }
+
+    /**
+     * @since 1.20.5
+     */
+    public Boolean isHideToolTip() {
+        return meta.isHideTooltip();
+    }
+
+    /**
+     * @since 1.20.5
+     */
+    public ItemBuilder setHideToolTip(boolean value) {
+        meta.setHideTooltip(value);
+        return this;
+    }
 }

@@ -22,17 +22,18 @@ public class Enchant extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
+        if (args.length != 2 && args.length != 3) {
+            onFail(p, alias);
+            return;
+        }
+        int lv = 1;
+        Enchantment ench = Aliases.ENCHANT.convertAlias(args[1]);
+        if (ench == null) {
+            onWrongAlias(p, Aliases.ENCHANT);
+            onFail(p, alias);
+            return;
+        }
         try {
-            if (args.length != 2 && args.length != 3) {
-                throw new IllegalArgumentException("Wrong argument Number");
-            }
-            int lv = 1;
-            Enchantment ench = Aliases.ENCHANT.convertAlias(args[1]);
-            if (ench == null) {
-                onWrongAlias(p, Aliases.ENCHANT);
-                onFail(p, alias);
-                return;
-            }
             if (args.length == 3) {
                 lv = Integer.parseInt(args[2]);
             }

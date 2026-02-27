@@ -51,26 +51,15 @@ public class PotionEffectEditor extends SubCmd {
             return;
         }
 
-        try {
-            if (args.length < 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-
-            switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                case "reset":
-                    potioneffectClear(p, item, alias, args);
-                    return;
-                case "add":
-                    potioneffectAdd(p, item, alias, args);
-                    return;
-                case "remove":
-                    potioneffectRemove(p, item, alias, args);
-                    return;
-                default:
-                    throw new IllegalArgumentException();
-            }
-        } catch (Exception e) {
+        if (args.length < 2) {
             onFail(p, alias);
+            return;
+        }
+        switch (args[1].toLowerCase(Locale.ENGLISH)) {
+            case "reset" -> potioneffectClear(p, item, alias, args);
+            case "add" -> potioneffectAdd(p, item, alias, args);
+            case "remove" -> potioneffectRemove(p, item, alias, args);
+            default -> onFail(p, alias);
         }
     }
 

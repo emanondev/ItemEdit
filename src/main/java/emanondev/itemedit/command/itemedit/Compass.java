@@ -30,25 +30,21 @@ public class Compass extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+        ItemStack item = getItemInHand(p);
         if (!(item.getItemMeta() instanceof CompassMeta)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_compass");
             return;
         }
-        if (args.length == 1) {
+
+        if (args.length < 2) {
             onFail(p, alias);
             return;
         }
 
         switch (args[1].toLowerCase(Locale.ENGLISH)) {
-            case "set":
-                compassSet(p, item, args);
-                return;
-            case "clear":
-                compassClear(p, item, args);
-                return;
-            default:
-                onFail(p, alias);
+            case "set" -> compassSet(p, item, args);
+            case "clear" -> compassClear(p, item, args);
+            default -> onFail(p, alias);
         }
     }
 

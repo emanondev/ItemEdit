@@ -25,13 +25,7 @@ public class Firework extends SubCmd {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_firework");
             return;
         }
-
-        try {
-            ((Player) sender).openInventory(new FireworkEditor((Player) sender, item).getInventory());
-        } catch (Exception e) {
-            e.printStackTrace();
-            onFail(p, alias);
-        }
+        p.openInventory(new FireworkEditor(p, item).getInventory());
     }
 
     // itemedit firework

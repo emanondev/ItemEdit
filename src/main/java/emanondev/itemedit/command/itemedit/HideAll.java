@@ -25,18 +25,15 @@ public class HideAll extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        try {
-            if (args.length != 1) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-            ItemMeta itemMeta = ItemUtils.getMeta(item);
-            handleFlagChange(item, itemMeta);
-            itemMeta.addItemFlags(ItemFlag.values());
-            item.setItemMeta(itemMeta);
-            updateView(p);
-        } catch (Exception e) {
+        if (args.length != 1) {
             onFail(p, alias);
+            return;
         }
+        ItemMeta itemMeta = ItemUtils.getMeta(item);
+        handleFlagChange(item, itemMeta);
+        itemMeta.addItemFlags(ItemFlag.values());
+        item.setItemMeta(itemMeta);
+        updateView(p);
     }
 
     private void handleFlagChange(ItemStack item, ItemMeta meta) {

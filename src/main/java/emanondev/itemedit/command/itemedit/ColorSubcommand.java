@@ -4,6 +4,7 @@ import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.gui.ColorGui;
 import emanondev.itemedit.utility.ItemUtils;
+import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -47,18 +48,18 @@ public class ColorSubcommand extends SubCmd {
                 this.getCommand().sendPermissionLackMessage(potionPerm, sender);
                 return;
             }
+            if (args.length == 1) {
+                p.openInventory(new ColorGui(p).getInventory());
+                return;
+            }
+
+            if (args.length != 4) {
+                onFail(p, alias);
+                return;
+            }
             try {
-                if (args.length == 1) {
-                    p.openInventory(new ColorGui(p).getInventory());
-                    return;
-                }
 
-                if (args.length != 4)
-                    throw new IllegalArgumentException("Wrong param number");
-
-                org.bukkit.Color color = org.bukkit.Color.fromRGB(Integer.parseInt(args[1]),
-                        Integer.parseInt(args[2]),
-                        Integer.parseInt(args[3]));
+                Color color = Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
                 potionMeta.setColor(color);
                 item.setItemMeta(potionMeta);
                 updateView(p);
@@ -72,19 +73,18 @@ public class ColorSubcommand extends SubCmd {
                 this.getCommand().sendPermissionLackMessage(leatherPerm, sender);
                 return;
             }
+            if (args.length == 1) {
+                p.openInventory(new ColorGui(p).getInventory());
+                return;
+            }
+            if (args.length != 4) {
+                onFail(p, alias);
+                return;
+            }
 
             try {
-                if (args.length == 1) {
-                    p.openInventory(new ColorGui(p).getInventory());
-                    return;
-                }
-                if (args.length != 4) {
-                    throw new IllegalArgumentException("Wrong param number");
-                }
 
-                org.bukkit.Color color = org.bukkit.Color.fromRGB(Integer.parseInt(args[1]),
-                        Integer.parseInt(args[2]),
-                        Integer.parseInt(args[3]));
+                Color color = Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
                 leatherMeta.setColor(color);
                 item.setItemMeta(leatherMeta);
                 updateView(p);
@@ -99,12 +99,13 @@ public class ColorSubcommand extends SubCmd {
                 return;
             }
 
-            try {
-                if (args.length != 4) {
-                    throw new IllegalArgumentException("Wrong param number");
-                }
+            if (args.length != 4) {
+                onFail(p, alias);
+                return;
+            }
 
-                org.bukkit.Color color = org.bukkit.Color.fromRGB(Integer.parseInt(args[1]),
+            try {
+                Color color = Color.fromRGB(Integer.parseInt(args[1]),
                         Integer.parseInt(args[2]),
                         Integer.parseInt(args[3]));
                 FireworkEffect oldEffect = starMeta.getEffect(); // may be null?

@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ArmorMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
@@ -30,42 +29,35 @@ public class Trim extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
-        ItemMeta meta = ItemUtils.getMeta(item);
-        if (!(meta instanceof ArmorMeta)) {
+        if (!(ItemUtils.getMeta(item) instanceof ArmorMeta armorMeta)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_armor");
             return;
         }
-        try {
-            if (args.length == 2 && args[1].equalsIgnoreCase("clear")) {
-                ArmorMeta armorMeta = (ArmorMeta) meta;
-                armorMeta.setTrim(null);
-                item.setItemMeta(armorMeta);
-                updateView(p);
-                return;
-            }
-            if (args.length != 3) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-            TrimMaterial mat = Aliases.TRIM_MATERIAL.convertAlias(args[1]);
-            if (mat == null) {
-                onWrongAlias(p, Aliases.TRIM_MATERIAL);
-                onFail(p, alias);
-                return;
-            }
-            TrimPattern patt = Aliases.TRIM_PATTERN.convertAlias(args[2]);
-            if (patt == null) {
-                onWrongAlias(p, Aliases.TRIM_PATTERN);
-                onFail(p, alias);
-                return;
-            }
-            ArmorMeta armorMeta = (ArmorMeta) meta;
-            armorMeta.setTrim(new ArmorTrim(mat, patt));
+        if (args.length == 2 && args[1].equalsIgnoreCase("clear")) {
+            armorMeta.setTrim(null);
             item.setItemMeta(armorMeta);
             updateView(p);
-        } catch (Exception e) {
-            onFail(p, alias);
+            return;
         }
-
+        if (args.length != 3) {
+            onFail(sender, alias);
+            return;
+        }
+        TrimMaterial mat = Aliases.TRIM_MATERIAL.convertAlias(args[1]);
+        if (mat == null) {
+            onWrongAlias(p, Aliases.TRIM_MATERIAL);
+            onFail(p, alias);
+            return;
+        }
+        TrimPattern patt = Aliases.TRIM_PATTERN.convertAlias(args[2]);
+        if (patt == null) {
+            onWrongAlias(p, Aliases.TRIM_PATTERN);
+            onFail(p, alias);
+            return;
+        }
+        armorMeta.setTrim(new ArmorTrim(mat, patt));
+        item.setItemMeta(armorMeta);
+        updateView(p);
     }
 
     @Override

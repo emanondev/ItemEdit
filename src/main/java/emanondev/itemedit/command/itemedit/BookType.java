@@ -22,39 +22,43 @@ public class BookType extends SubCmd {
 
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
-        Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
-        if (!(item.getType() == Material.WRITTEN_BOOK)) {
+
+        if (!(sender instanceof Player p)) return;
+
+        ItemStack item = getItemInHand(p);
+        if (item.getType() != Material.WRITTEN_BOOK) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_written_book");
             return;
         }
 
-        try {
-            BookMeta itemMeta = (BookMeta) ItemUtils.getMeta(item);
+        BookMeta itemMeta = (BookMeta) ItemUtils.getMeta(item);
 
-            if (args.length == 1) {
-                itemMeta.setGeneration(null);
-                item.setItemMeta(itemMeta);
-                updateView(p);
-                return;
-            }
-
-            if (args.length != 2) {
-                throw new IllegalArgumentException();
-            }
-            BookMeta.Generation type = Aliases.BOOK_TYPE.convertAlias(args[1]);
-            if (type == null) {
-                onWrongAlias(p, Aliases.BOOK_TYPE);
-                onFail(p, alias);
-                return;
-            }
-            itemMeta.setGeneration(type);
+        // Reset generation if only the command is provided
+        if (args.length == 1) {
+            itemMeta.setGeneration(null);
             item.setItemMeta(itemMeta);
             updateView(p);
-        } catch (Exception e) {
-            onFail(p, alias);
+            return;
         }
 
+        // Only accept exactly 2 arguments beyond the command
+        if (args.length != 2) {
+            onFail(p, alias);
+            return;
+        }
+
+        // Convert alias to BookMeta.Generation
+        BookMeta.Generation type = Aliases.BOOK_TYPE.convertAlias(args[1]);
+        if (type == null) {
+            onWrongAlias(p, Aliases.BOOK_TYPE);
+            onFail(p, alias);
+            return;
+        }
+
+        // Apply the generation type and update the view
+        itemMeta.setGeneration(type);
+        item.setItemMeta(itemMeta);
+        updateView(p);
     }
 
     @Override

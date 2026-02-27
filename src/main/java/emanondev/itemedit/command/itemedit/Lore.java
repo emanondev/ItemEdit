@@ -58,82 +58,51 @@ public class Lore extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
-        if (args.length == 1) {
+        ItemStack item = getItemInHand(p);
+
+        if (args.length < 2) {
             onFail(p, alias);
             return;
         }
 
-        switch (args[1].toLowerCase(Locale.ENGLISH)) {
-            case "set":
-                if (!Util.isAllowedChangeLore(sender, item.getType())) {
-                    return;
+        String subCommand = args[1].toLowerCase(Locale.ENGLISH);
+
+        // Commands that require lore modification permission
+        switch (subCommand) {
+            case "set", "add", "insert", "reset", "remove", "replace" -> {
+                if (!Util.isAllowedChangeLore(sender, item.getType())) return;
+                switch (subCommand) {
+                    case "set" -> loreSet(p, item, alias, args);
+                    case "add" -> loreAdd(p, item, alias, args);
+                    case "insert" -> loreInsert(p, item, alias, args);
+                    case "reset" -> loreReset(p, item, alias, args);
+                    case "remove" -> loreRemove(p, item, alias, args);
+                    case "replace" -> loreReplace(p, item, alias, args);
                 }
-                loreSet(p, item, alias, args);
-                return;
-            case "add":
-                if (!Util.isAllowedChangeLore(sender, item.getType())) {
-                    return;
-                }
-                loreAdd(p, item, alias, args);
-                return;
-            case "insert":
-                if (!Util.isAllowedChangeLore(sender, item.getType())) {
-                    return;
-                }
-                loreInsert(p, item, alias, args);
-                return;
-            case "reset":
-                if (!Util.isAllowedChangeLore(sender, item.getType())) {
-                    return;
-                }
-                loreReset(p, item, alias, args);
-                return;
-            case "remove":
-                if (!Util.isAllowedChangeLore(sender, item.getType())) {
-                    return;
-                }
-                loreRemove(p, item, alias, args);
-                return;
-            case "copy":
+            }
+            // Commands that require copy permission
+            case "copy", "copybook", "copyfile" -> {
                 if (!sender.hasPermission(getPermission() + ".copy")) {
                     getCommand().sendPermissionLackMessage(getPermission() + ".copy", sender);
                     return;
                 }
-                loreCopy(p, item, alias, args);
-                return;
-            case "copybook":
+                switch (subCommand) {
+                    case "copy" -> loreCopy(p, item, alias, args);
+                    case "copybook" -> loreCopyBook(p, item, alias, args);
+                    case "copyfile" -> loreCopyFile(p, item, alias, args);
+                }
+            }
+            // Paste requires both copy permission AND lore modification
+            case "paste" -> {
                 if (!sender.hasPermission(getPermission() + ".copy")) {
                     getCommand().sendPermissionLackMessage(getPermission() + ".copy", sender);
                     return;
                 }
-                loreCopyBook(p, item, alias, args);
-                return;
-            case "copyfile":
-                if (!sender.hasPermission(getPermission() + ".copy")) {
-                    getCommand().sendPermissionLackMessage(getPermission() + ".copy", sender);
-                    return;
-                }
-                loreCopyFile(p, item, alias, args);
-                return;
-            case "paste":
-                if (!sender.hasPermission(getPermission() + ".copy")) {
-                    getCommand().sendPermissionLackMessage(getPermission() + ".copy", sender);
-                    return;
-                }
-                if (!Util.isAllowedChangeLore(sender, item.getType())) {
-                    return;
-                }
+                if (!Util.isAllowedChangeLore(sender, item.getType())) return;
+
                 lorePaste(p, item, alias, args);
-                return;
-            case "replace":
-                if (!Util.isAllowedChangeLore(sender, item.getType())) {
-                    return;
-                }
-                loreReplace(p, item, alias, args);
-                return;
-            default:
-                onFail(p, alias);
+            }
+            default -> onFail(p, alias);
         }
     }
 
@@ -241,11 +210,10 @@ public class Lore extends SubCmd {
         List<String> lore;
         if (item.hasItemMeta()) {
             ItemMeta itemMeta = ItemUtils.getMeta(item);
-            if (!(itemMeta instanceof BookMeta)) {
+            if (!(itemMeta instanceof BookMeta meta)) {
                 getPlugin().getTranslator().send(p, "generic.error.wrong-material_writable_book");
                 return;
             }
-            BookMeta meta = (BookMeta) itemMeta;
             List<String> pages = meta.getPages();
             lore = new ArrayList<>();
             if (pages != null)
@@ -258,9 +226,7 @@ public class Lore extends SubCmd {
         } else {
             lore = new ArrayList<>();
         }
-        for (int i = 0; i < lore.size(); i++) {
-            lore.set(i, Util.formatText(p, lore.get(i), getPermission()));
-        }
+        lore.replaceAll(text -> Util.formatText(p, text, getPermission()));
         copies.put(p.getUniqueId(), lore);
         Util.sendMessage(p, this.translate("copyBook.feedback", p));
     }

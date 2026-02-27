@@ -22,10 +22,11 @@ public class Damage extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemStack item = this.getItemInHand(p);
+        if (args.length != 2) {
+            onFail(p, alias);
+            return;
+        }
         try {
-            if (args.length != 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
             short amount = Short.parseShort(args[1]);
             amount = (short) Math.max(0, Math.min(amount, item.getType().getMaxDurability()));
             item.setDurability(amount);

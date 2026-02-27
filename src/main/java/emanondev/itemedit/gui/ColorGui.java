@@ -63,121 +63,70 @@ public class ColorGui implements Gui {
         Color original = ItemUtils.getColor(colorableMeta);
         int[] colors = fromColor(original);
         switch (event.getSlot()) {
-            case 0:
-                colors[0] += 1;
-                break;
-            case 1:
-                colors[0] += 10;
-                break;
-            case 2:
-                colors[0] += 50;
-                break;
-            case 9:
-                colors[0] -= 1;
-                break;
-            case 10:
-                colors[0] -= 10;
-                break;
-            case 11:
-                colors[0] -= 50;
-                break;
-            case 6:
-                colors[2] += 1;
-                break;
-            case 7:
-                colors[2] += 10;
-                break;
-            case 8:
-                colors[2] += 50;
-                break;
-            case 15:
-                colors[2] -= 1;
-                break;
-            case 16:
-                colors[2] -= 10;
-                break;
-            case 17:
-                colors[2] -= 50;
-                break;
-            case 3:
-                colors[1] += 1;
-                break;
-            case 4:
-                colors[1] += 10;
-                break;
-            case 5:
-                colors[1] += 50;
-                break;
-            case 12:
-                colors[1] -= 1;
-                break;
-            case 13:
-                colors[1] -= 10;
-                break;
-            case 14:
-                colors[1] -= 50;
-                break;
-            case 34:
+            // Red channel
+            case 0 -> colors[0] += 1;
+            case 1 -> colors[0] += 10;
+            case 2 -> colors[0] += 50;
+            case 9 -> colors[0] -= 1;
+            case 10 -> colors[0] -= 10;
+            case 11 -> colors[0] -= 50;
+
+            // Green channel
+            case 3 -> colors[1] += 1;
+            case 4 -> colors[1] += 10;
+            case 5 -> colors[1] += 50;
+            case 12 -> colors[1] -= 1;
+            case 13 -> colors[1] -= 10;
+            case 14 -> colors[1] -= 50;
+
+            // Blue channel
+            case 6 -> colors[2] += 1;
+            case 7 -> colors[2] += 10;
+            case 8 -> colors[2] += 50;
+            case 15 -> colors[2] -= 1;
+            case 16 -> colors[2] -= 10;
+            case 17 -> colors[2] -= 50;
+
+            // Modify all channels
+            case 34 -> {
                 colors[0] += 5;
                 colors[1] += 5;
                 colors[2] += 5;
-                break;
-            case 35:
+            }
+            case 35 -> {
                 colors[0] += 25;
                 colors[1] += 25;
                 colors[2] += 25;
-                break;
-            case 43:
+            }
+            case 43 -> {
                 colors[0] -= 5;
                 colors[1] -= 5;
                 colors[2] -= 5;
-                break;
-            case 44:
+            }
+            case 44 -> {
                 colors[0] -= 25;
                 colors[1] -= 25;
                 colors[2] -= 25;
-                break;
-            case 27:
-                colors = new int[]{255, 255, 255};  // White (#FFFFFF)
-                break;
-            case 36:
-                colors = new int[]{170, 170, 170};  // Light Gray (#AAAAAA)
-                break;
-            case 37:
-                colors = new int[]{85, 85, 85};     // Dark Gray (#555555)
-                break;
-            case 28:
-                colors = new int[]{0, 0, 0};        // Black (#000000)
-                break;
-            case 45:
-                colors = new int[]{65, 105, 225};  // Royal Blue (#4169E1)
-                break;
-            case 46:
-                colors = new int[]{125, 249, 255}; // Electric Blue (#7DF9FF)
-                break;
-            case 47:
-                colors = new int[]{15, 255, 192};  // Lime Cyan (#0FFFC0)
-                break;
-            case 48:
-                colors = new int[]{57, 255, 20};   // Neon Green (#39FF14)
-                break;
-            case 49:
-                colors = new int[]{255, 255, 51};  // Bright Yellow (#FFFF33)
-                break;
-            case 50:
-                colors = new int[]{255, 179, 0};   // Neon Orange (#FFB300)
-                break;
-            case 51:
-                colors = new int[]{255, 95, 31};   // Vivid Orange (#FF5F1F)
-                break;
-            case 52:
-                colors = new int[]{255, 105, 180}; // Hot Pink (#FF69B4)
-                break;
-            case 53:
-                colors = new int[]{191, 0, 255};   // Bright Purple (#BF00FF)
-                break;
-            default:
+            }
+
+            // Preset colors
+            case 27 -> colors = new int[]{255, 255, 255};  // White
+            case 36 -> colors = new int[]{170, 170, 170};  // Light Gray
+            case 37 -> colors = new int[]{85, 85, 85};     // Dark Gray
+            case 28 -> colors = new int[]{0, 0, 0};        // Black
+            case 45 -> colors = new int[]{65, 105, 225};   // Royal Blue
+            case 46 -> colors = new int[]{125, 249, 255};  // Electric Blue
+            case 47 -> colors = new int[]{15, 255, 192};   // Lime Cyan
+            case 48 -> colors = new int[]{57, 255, 20};    // Neon Green
+            case 49 -> colors = new int[]{255, 255, 51};   // Bright Yellow
+            case 50 -> colors = new int[]{255, 179, 0};    // Neon Orange
+            case 51 -> colors = new int[]{255, 95, 31};    // Vivid Orange
+            case 52 -> colors = new int[]{255, 105, 180};  // Hot Pink
+            case 53 -> colors = new int[]{191, 0, 255};    // Bright Purple
+
+            default -> {
                 return;
+            }
         }
         Color newColor = toColor(colors);
         if (original.equals(newColor)) {

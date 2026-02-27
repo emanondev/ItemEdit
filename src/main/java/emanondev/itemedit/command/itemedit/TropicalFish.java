@@ -33,36 +33,26 @@ public class TropicalFish extends SubCmd {
             return;
         }
 
-        try {
-            if (args.length < 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-
-            switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                case "pattern":
-                    pattern(p, item, alias, args);
-                    return;
-                case "patterncolor":
-                    patternColor(p, item, alias, args);
-                    return;
-                case "bodycolor":
-                    bodyColor(p, item, alias, args);
-                    return;
-                default:
-                    throw new IllegalArgumentException();
-            }
-        } catch (Exception e) {
-            onFail(p, alias);
+        if (args.length < 2) {
+            onFail(sender, alias);
+            return;
         }
 
+        switch (args[1].toLowerCase(Locale.ENGLISH)) {
+            case "pattern" -> pattern(p, item, alias, args);
+            case "patterncolor" -> patternColor(p, item, alias, args);
+            case "bodycolor" -> bodyColor(p, item, alias, args);
+            default -> onFail(p, alias);
+        }
     }
 
     private void bodyColor(Player p, ItemStack item, String alias, String[] args) {
-        try {
-            if (args.length != 3) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
+        if (args.length != 3) {
+            sendFailFeedbackForSub(p, alias, "bodycolor");
+            return;
+        }
 
+        try {
             TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
 
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
@@ -80,11 +70,12 @@ public class TropicalFish extends SubCmd {
     }
 
     private void patternColor(Player p, ItemStack item, String alias, String[] args) {
-        try {
-            if (args.length != 3) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
+        if (args.length != 3) {
+            sendFailFeedbackForSub(p, alias, "patterncolor");
+            return;
+        }
 
+        try {
             TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
 
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
@@ -97,16 +88,18 @@ public class TropicalFish extends SubCmd {
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
+            e.printStackTrace();
             sendFailFeedbackForSub(p, alias, "patterncolor");
         }
     }
 
     private void pattern(Player p, ItemStack item, String alias, String[] args) {
-        try {
-            if (args.length != 3) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
+        if (args.length != 3) {
+            sendFailFeedbackForSub(p, alias, "pattern");
+            return;
+        }
 
+        try {
             TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
 
             Pattern pattern = Aliases.TROPICALPATTERN.convertAlias(args[2]);
@@ -119,6 +112,7 @@ public class TropicalFish extends SubCmd {
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
+            e.printStackTrace();
             sendFailFeedbackForSub(p, alias, "pattern");
         }
     }

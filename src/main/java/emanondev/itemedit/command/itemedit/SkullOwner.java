@@ -44,18 +44,14 @@ public class SkullOwner extends SubCmd {
             updateView(p);
             return;
         }
-        try {
-            StringBuilder name = new StringBuilder(args[1]);
-            for (int i = 2; i < args.length; i++) {
-                name.append(" ").append(args[i]);
-            }
-            name = new StringBuilder(ChatColor.translateAlternateColorCodes('&', name.toString()));
-            meta.setOwner(name.toString());
-            item.setItemMeta(meta);
-            updateView(p);
-        } catch (Exception e) {
-            onFail(p, alias);
+        StringBuilder name = new StringBuilder(args[1]);
+        for (int i = 2; i < args.length; i++) {
+            name.append(" ").append(args[i]);
         }
+        name = new StringBuilder(ChatColor.translateAlternateColorCodes('&', name.toString()));
+        meta.setOwner(name.toString());
+        item.setItemMeta(meta);
+        updateView(p);
     }
 
     // itemedit bookauthor <name>

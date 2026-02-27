@@ -35,13 +35,13 @@ public class ColorOld extends SubCmd {
                 this.getCommand().sendPermissionLackMessage(leatherPerm, sender);
                 return;
             }
-            try {
-                if (args.length != 4) {
-                    throw new IllegalArgumentException("Wrong param number");
-                }
+            if (args.length != 4) {
+                onFail(p, alias);
+                return;
+            }
 
-                Color color = Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]),
-                        Integer.parseInt(args[3]));
+            try {
+                Color color = Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
                 leatherMeta.setColor(color);
                 item.setItemMeta(leatherMeta);
                 updateView(p);
@@ -55,13 +55,13 @@ public class ColorOld extends SubCmd {
                 this.getCommand().sendPermissionLackMessage(starsPerm, sender);
                 return;
             }
-            try {
-                if (args.length != 4) {
-                    throw new IllegalArgumentException("Wrong param number");
-                }
+            if (args.length != 4) {
+                onFail(p, alias);
+                return;
+            }
 
-                org.bukkit.Color color = org.bukkit.Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]),
-                        Integer.parseInt(args[3]));
+            try {
+                Color color = Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
                 FireworkEffect oldEffect = starMeta.getEffect();
                 FireworkEffect.Builder newEffect = FireworkEffect.builder().flicker(oldEffect != null && oldEffect.hasFlicker())
                         .trail(oldEffect != null && oldEffect.hasTrail()).withColor(color);
