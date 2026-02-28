@@ -110,7 +110,7 @@ public class PotionEffectEditor extends SubCmd {
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2].toUpperCase());
             if (effect == null) {
                 onWrongAlias(p, Aliases.POTION_EFFECT);
-                sendFailFeedbackForSub(p, alias, "remove");
+                onSubFail(p, alias, "remove");
                 return;
             }
 
@@ -126,7 +126,7 @@ public class PotionEffectEditor extends SubCmd {
             }
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p, alias, "remove");
+            onSubFail(p, alias, "remove");
         }
     }
 
@@ -140,7 +140,7 @@ public class PotionEffectEditor extends SubCmd {
             PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2]);
             if (effect == null) {
                 onWrongAlias(p, Aliases.POTION_EFFECT);
-                sendFailFeedbackForSub(p, alias, "add");
+                onSubFail(p, alias, "add");
                 return;
             }
             int duration = UtilLegacy.readPotionEffectDurationSecondsToTicks(args[3]);
@@ -183,7 +183,7 @@ public class PotionEffectEditor extends SubCmd {
             }
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p, alias, "add");
+            onSubFail(p, alias, "add");
         }
     }
 

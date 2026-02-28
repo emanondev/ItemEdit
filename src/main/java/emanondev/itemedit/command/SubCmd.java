@@ -106,13 +106,12 @@ public abstract class SubCmd {
         Util.sendMessage(target, this.translate(subSubCommand + "." + feedbackPath, target, holders));
     }
 
-    protected void sendFailFeedbackForSub(CommandSender target, String alias, String subSubCommand) {
+    protected void onSubFail(CommandSender target, String alias, String subSubCommand) {
         String params = translate(subSubCommand + ".params", target);
         target.spigot().sendMessage(this.craftFailFeedback(alias, subSubCommand
                         + ((params == null || params.isEmpty()) ? "" : " " + params),
                 translateList(subSubCommand + ".description", target)));
     }
-
 
     protected <T> void onWrongAlias(CommandSender sender, IAliasSet<T> set, String... holders) {
         YMLConfig language = ItemEdit.get().getLanguageConfig(sender);
@@ -189,6 +188,10 @@ public abstract class SubCmd {
 
     protected void onSuccess(CommandSender sender, String... holders) {
         Util.sendMessage(sender, translate(this.PATH + "feedback", sender, holders));
+    }
+
+    protected void onSubSuccess(CommandSender sender, String subSubCommand, String... holders) {
+        Util.sendMessage(sender, translate(this.PATH + subSubCommand + ".feedback", sender, holders));
     }
 
     protected void sendFeedback(CommandSender target,

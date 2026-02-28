@@ -4,20 +4,20 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.AxolotlBucketMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Locale;
 
 public class AxolotlVariant extends SubCmd {
 
     public AxolotlVariant(ItemEditCommand cmd) {
-        super("axolotlvariant",
-                cmd, true, true);
+        super("axolotlvariant", cmd, true, true);
     }
 
     public void reload() {
@@ -27,8 +27,8 @@ public class AxolotlVariant extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
-        if (!(item.getItemMeta() instanceof AxolotlBucketMeta meta)) {
+        ItemBuilder item = new ItemBuilder(this.getItemInHand(p));
+        if (!(item.isMetaClass(AxolotlBucketMeta.class))) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_axolotl_bucket");
             return;
         }
@@ -43,9 +43,8 @@ public class AxolotlVariant extends SubCmd {
             onFail(p, alias);
             return;
         }
-        meta.setVariant(type);
-        item.setItemMeta(meta);
-        onSuccess(p, alias);
+        item.setAxolotlVariant(type).build();
+        onSuccess(p, "%variant%", args[1].toLowerCase(Locale.ENGLISH));
         updateView(p);
     }
 

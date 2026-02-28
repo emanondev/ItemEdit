@@ -38,7 +38,7 @@ public class SoundSubCommand extends SubCmd {
         ItemBuilder builder = new ItemBuilder(getItemInHand(player));
         apply.accept(builder, value);
         setItemInHand(player, builder.build());
-        onSuccess(player, alias);
+        onSuccess(player);
         updateView(player);
     }
 

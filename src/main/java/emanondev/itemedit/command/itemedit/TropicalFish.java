@@ -48,7 +48,7 @@ public class TropicalFish extends SubCmd {
 
     private void bodyColor(Player p, ItemStack item, String alias, String[] args) {
         if (args.length != 3) {
-            sendFailFeedbackForSub(p, alias, "bodycolor");
+            onSubFail(p, alias, "bodycolor");
             return;
         }
 
@@ -58,20 +58,20 @@ public class TropicalFish extends SubCmd {
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
             if (color == null) {
                 onWrongAlias(p, Aliases.COLOR);
-                sendFailFeedbackForSub(p, alias, "bodycolor");
+                onSubFail(p, alias, "bodycolor");
                 return;
             }
             meta.setBodyColor(color);
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p, alias, "bodycolor");
+            onSubFail(p, alias, "bodycolor");
         }
     }
 
     private void patternColor(Player p, ItemStack item, String alias, String[] args) {
         if (args.length != 3) {
-            sendFailFeedbackForSub(p, alias, "patterncolor");
+            onSubFail(p, alias, "patterncolor");
             return;
         }
 
@@ -81,7 +81,7 @@ public class TropicalFish extends SubCmd {
             DyeColor color = Aliases.COLOR.convertAlias(args[2]);
             if (color == null) {
                 onWrongAlias(p, Aliases.COLOR);
-                sendFailFeedbackForSub(p, alias, "patterncolor");
+                onSubFail(p, alias, "patterncolor");
                 return;
             }
             meta.setPatternColor(color);
@@ -89,13 +89,13 @@ public class TropicalFish extends SubCmd {
             updateView(p);
         } catch (Exception e) {
             e.printStackTrace();
-            sendFailFeedbackForSub(p, alias, "patterncolor");
+            onSubFail(p, alias, "patterncolor");
         }
     }
 
     private void pattern(Player p, ItemStack item, String alias, String[] args) {
         if (args.length != 3) {
-            sendFailFeedbackForSub(p, alias, "pattern");
+            onSubFail(p, alias, "pattern");
             return;
         }
 
@@ -105,7 +105,7 @@ public class TropicalFish extends SubCmd {
             Pattern pattern = Aliases.TROPICALPATTERN.convertAlias(args[2]);
             if (pattern == null) {
                 onWrongAlias(p, Aliases.TROPICALPATTERN);
-                sendFailFeedbackForSub(p, alias, "pattern");
+                onSubFail(p, alias, "pattern");
                 return;
             }
             meta.setPattern(pattern);
@@ -113,7 +113,7 @@ public class TropicalFish extends SubCmd {
             updateView(p);
         } catch (Exception e) {
             e.printStackTrace();
-            sendFailFeedbackForSub(p, alias, "pattern");
+            onSubFail(p, alias, "pattern");
         }
     }
 

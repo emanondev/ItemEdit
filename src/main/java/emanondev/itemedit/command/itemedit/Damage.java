@@ -3,6 +3,7 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemBuilder;
 import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,17 +22,21 @@ public class Damage extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+        ItemBuilder item = new ItemBuilder(this.getItemInHand(p));
         if (args.length != 2) {
             onFail(p, alias);
             return;
         }
         try {
-            short amount = Short.parseShort(args[1]);
-            amount = (short) Math.max(0, Math.min(amount, item.getType().getMaxDurability()));
+            int amount = Integer.parseInt(args[1]); //TODO test bounds <0 >maxDurability
             item.setDurability(amount);
             updateView(p);
-        } catch (Exception e) {
+            if (amount == 0) {
+                sendFeedback(p, "feedback-reset");
+            } else {
+                onSuccess(p);
+            }
+        } catch (NumberFormatException e) {
             onFail(p, alias);
         }
     }

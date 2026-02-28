@@ -1,13 +1,11 @@
 package emanondev.itemedit.command.itemedit;
 
-import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,8 +28,8 @@ public class Compass extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = getItemInHand(p);
-        if (!(item.getItemMeta() instanceof CompassMeta)) {
+        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+        if (!item.isMetaClass(CompassMeta.class)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_compass");
             return;
         }
@@ -57,12 +55,9 @@ public class Compass extends SubCmd {
     }
 
     // lore set line text
-    private void compassSet(Player p, ItemStack item, String[] args) {
-        CompassMeta meta = (CompassMeta) ItemUtils.getMeta(item);
-        meta.setLodestoneTracked(false);
-        meta.setLodestone(p.getLocation());
-        item.setItemMeta(meta);
-        this.translate("set.feedback", p,
+    private void compassSet(Player p, ItemBuilder item, String[] args) {
+        item.setCompassLodestone(false, p.getLocation()).build();
+        onSubSuccess(p, "set",
                 "%world%", p.getLocation().getWorld().getName(),
                 "%x%", String.valueOf(p.getLocation().getBlockX()),
                 "%y%", String.valueOf(p.getLocation().getBlockY()),
@@ -71,12 +66,9 @@ public class Compass extends SubCmd {
         updateView(p);
     }
 
-    private void compassClear(Player p, ItemStack item, String[] args) {
-        CompassMeta meta = (CompassMeta) ItemUtils.getMeta(item);
-        meta.setLodestoneTracked(true);
-        meta.setLodestone(p.getLocation());
-        item.setItemMeta(meta);
-        Util.sendMessage(p, this.translate("clear.feedback", p));
+    private void compassClear(Player p, ItemBuilder item, String[] args) {
+        item.setCompassLodestone(false, p.getLocation()).build();
+        onSubSuccess(p, "clear");
         updateView(p);
     }
 }

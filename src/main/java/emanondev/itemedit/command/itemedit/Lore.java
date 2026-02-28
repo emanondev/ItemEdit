@@ -109,7 +109,7 @@ public class Lore extends SubCmd {
     private void loreReplace(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 4) {
-                sendFailFeedbackForSub(p, alias, "replace");
+                onSubFail(p, alias, "replace");
                 return;
             }
             if (!item.hasItemMeta()) {
@@ -133,22 +133,22 @@ public class Lore extends SubCmd {
                 String rawText = raw.substring(1);
                 int i1 = rawText.indexOf("{");
                 if (i1 != 0) {
-                    sendFailFeedbackForSub(p, alias, "replace");
+                    onSubFail(p, alias, "replace");
                     return;
                 }
                 int i2 = rawText.indexOf("}", i1);
                 if (i2 == -1) {
-                    sendFailFeedbackForSub(p, alias, "replace");
+                    onSubFail(p, alias, "replace");
                     return;
                 }
                 int i3 = rawText.indexOf("{", i2);
                 if (i3 == -1 || i2 + 2 != i3) {
-                    sendFailFeedbackForSub(p, alias, "replace");
+                    onSubFail(p, alias, "replace");
                     return;
                 }
                 int i4 = rawText.indexOf("}", i3);
                 if (i4 != rawText.length() - 1) {
-                    sendFailFeedbackForSub(p, alias, "replace");
+                    onSubFail(p, alias, "replace");
                     return;
                 }
                 from = rawText.substring(1, i2);
@@ -173,7 +173,7 @@ public class Lore extends SubCmd {
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p, alias, "replace");
+            onSubFail(p, alias, "replace");
         }
     }
 
@@ -394,7 +394,7 @@ public class Lore extends SubCmd {
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p, alias, "insert");
+            onSubFail(p, alias, "insert");
         }
     }
 
@@ -452,7 +452,7 @@ public class Lore extends SubCmd {
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p, alias, "set");
+            onSubFail(p, alias, "set");
         }
     }
 
@@ -488,7 +488,7 @@ public class Lore extends SubCmd {
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p, alias, "remove");
+            onSubFail(p, alias, "remove");
         }
     }
 

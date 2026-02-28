@@ -27,14 +27,13 @@ public class Amount extends SubCmd {
             int amount = Integer.parseInt(args[1]);
             if (amount < 0) {//remove this amount
                 item.setAmount(Math.max(0, item.getAmount() + amount));
-                sendFeedback(p, "feedback-decrease",
-                        "%amount%", String.valueOf(Math.abs(amount)));
+                sendFeedback(p, "feedback-decrease", "%amount%", String.valueOf(Math.abs(amount)));
             } else if ((amount > 127) || (amount < 1)) {
                 onFail(p, alias);
                 return;
             } else {
                 item.setAmount(amount);
-                onSuccess(p, "%amount%", String.valueOf(Math.abs(amount)));
+                onSuccess(p, "%amount%", String.valueOf(amount));
             }
             updateView(p);
         } catch (NumberFormatException e) {

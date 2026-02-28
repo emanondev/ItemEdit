@@ -3,9 +3,9 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.gui.FireworkEditor;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,12 +20,12 @@ public class Firework extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
-        if (!(item.getItemMeta() instanceof FireworkMeta)) {
+        ItemBuilder item = new ItemBuilder(this.getItemInHand(p));
+        if (!item.isMetaClass(FireworkMeta.class)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_firework");
             return;
         }
-        p.openInventory(new FireworkEditor(p, item).getInventory());
+        p.openInventory(new FireworkEditor(p, item.build()).getInventory());
     }
 
     // itemedit firework

@@ -3,11 +3,9 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -21,20 +19,23 @@ public class CustomModelData extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
-        if (args.length != 2) {
+        ItemBuilder item = new ItemBuilder(this.getItemInHand(p));
+        if (args.length != 1 && args.length != 2) {
             onFail(p, alias);
             return;
         }
         try {
-            int amount = Integer.parseInt(args[1]);
-            if (amount < 0) {
+            Integer amount = args.length == 1 ? null : Integer.parseInt(args[1]);
+            if (amount != null && amount < 0) {
                 onFail(p, alias);
                 return;
             }
-            ItemMeta meta = ItemUtils.getMeta(item);
-            meta.setCustomModelData(amount);
-            item.setItemMeta(meta);
+            item.setCustomModelData(amount).build();
+            if (amount != null) {
+                onSuccess(p);
+            } else {
+                sendFeedback(p, "feedback-reset");
+            }
             updateView(p);
         } catch (NumberFormatException e) {
             onFail(p, alias);

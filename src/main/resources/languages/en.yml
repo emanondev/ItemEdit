@@ -45,6 +45,7 @@ generic:
     wrong-entitygroups: '&4[&cItemEdit&4] &cWrong EntityGroup Value! &4[&6hover here&4]'
     wrong-consumable_effect: '&4[&cItemEdit&4] &cWrong Consumable Effect Value! &4[&6hover here&4]'
     wrong-goat_horn_sound: '&4[&cItemEdit&4] &cWrong Goat Horn Sound Value! &4[&6hover here&4]'
+    wrong-material_axolotl_bucket: '&4[&cItemEdit&4] &cItem must be a axolotl bucket'
     wrong-material_banner: '&4[&cItemEdit&4] &cItem must be a banner'
     wrong-material_damageable: '&4[&cItemEdit&4] &cItem must have a durability like tools and armors'
     wrong-material_player_head: '&4[&cItemEdit&4] &cItem must be a player head'
@@ -55,7 +56,6 @@ generic:
     wrong-material_spawner_egg: '&4[&cItemEdit&4] &cItem must be a spawner egg'
     wrong-material_tropical_fish_bucket: '&4[&cItemEdit&4] &cItem must be a tropical fish bucket'
     wrong-material_writable_book: '&4[&cItemEdit&4] &cItem must be a written book or book and quill'
-    wrong-material_axolotl_bucket: '&4[&cItemEdit&4] &cItem must be a axolotl bucket'
     wrong-material_compass: '&4[&cItemEdit&4] &cItem must be a compass'
     wrong-material_music_instrument: '&4[&cItemEdit&4] &cItem must be a goat horn'
     wrong-material_armor: '&4[&cItemEdit&4] &cItem must be an armor'
@@ -190,6 +190,137 @@ itemeditfood:
       - '&breturned when milk is consumed'
     params: '[type/serveritem id]'
 itemedit:
+  amount:
+    description:
+      - '&6&lSet amount'
+      - ''
+      - '&e<amount> &bamount to set (up to 127)'
+      - '&b&lTip: &bNegative amounts are subtracted'
+      - '&b from item current amount'
+    params: '<amount>'
+    feedback: '&9[&fItemEdit&9] &aItem amount set to &e%amount%'
+    feedback-decrease: '&9[&fItemEdit&9] &aItem amount decreased by &e%amount%'
+  attribute:
+    description:
+      - '&6&lEdit attribute modifiers'
+      - ''
+      - '&eAdd <attribute> <amount> [operation] [slot] &b- add new modifiers'
+      - '&eRemove <attribute/slot> &b- removes some modifiers'
+    params: '<add/remove> [...]'
+    add:
+      params: '<attribute> <amount> [operation] [slot]'
+      description:
+        - '&6&lAdd attribute modifier'
+        - ''
+        - '&e<attribute> &battribute type'
+        - '&e<amount> &bamount to set'
+        - '&e[operation] &bhow the modifier is added, by default sums'
+        - '&e[slot] &bapply this modifier only when item is on selected'
+        - '&e       equipment slot or any equipment slot if not selected'
+      feedback: '&9[&fItemEdit&9] &aAdded modifier'
+    remove:
+      params: '<attribute/slot>'
+      description:
+        - '&6&lRemove modifiers'
+        - ''
+        - '&e<attribute/slot> &btype to remove, any modifiers with'
+        - '&b                 selected value are removed'
+      feedback-attribute: '&9[&fItemEdit&9] &aRemoved modifiers of attribute'
+      feedback-equipment: '&9[&fItemEdit&9] &aRemoved modifiers of equipment slot'
+  axolotlvariant:
+    description:
+      - '&6&lEdit Axolotl Variant on Axolotl bucket'
+      - ''
+      - '&e<type> &bthe type of axolotl'
+    params: '<type>'
+    feedback: '&9[&fItemEdit&9] &aChanged Axolotl variant to &e%variant%'
+  banner:
+    description:
+      - '&6&lEdit banner'
+    set:
+      params: '<type> <color> <line>'
+      description:
+        - '&6&lReplace the pattern on selected line'
+      feedback: '&9[&fItemEdit&9] &aPattern set'
+    add:
+      params: '<type> <color>'
+      description:
+        - '&6&lAdd a pattern'
+      feedback: '&9[&fItemEdit&9] &aPattern added'
+    remove:
+      params: '<line>'
+      description:
+        - '&6&lRemove pattern on selected line'
+      feedback: '&9[&fItemEdit&9] &aPattern removed'
+    color:
+      params: '<line> <color>'
+      description:
+        - '&6&lChange pattern color on selected line'
+      feedback: '&9[&fItemEdit&9] &aPattern recolored'
+  color:
+    description:
+      - '&6&lSet color'
+      - ''
+      - '&bWorks on leather armor and firework stars, on servers'
+      - '&b 1.11+ works on any Potion and Tipped arrows too!'
+      - '&e[red (0-255)] [green (0-255)] [blue (0-255)] &bare the amount of each color to combine'
+      - '&bEach color is an int value between 0 and 255'
+      - '&bIf you are confused google "&eRGB color picker&b"'
+    params: '[red (0-255)] [green (0-255)] [blue (0-255)]'
+    feedback: '&9[&fItemEdit&9] &aColor updated'
+  compass:
+    description:
+      - '&6&lSet compass target location'
+      - ''
+      - '&eSet &b- set your location as compass target'
+      - '&eClear &b- clear compass target'
+    params: '<set/clear>'
+    set:
+      feedback: '&9[&fItemEdit&9] &aCompass now points to &e%world% %x% %y% %z%'
+    clear:
+      feedback: '&9[&fItemEdit&9] &aCompass target cleared'
+  custommodeldata:
+    description:
+      - '&6&lEdit custom model data'
+      - ''
+      - '&bUsed for texture packs'
+      - '&e[value] &bpositive int of target data model'
+      - '&bNote: modern servers use itemmodel instead of custommodeldata'
+      - '&b for textures, this command is for legacy clients'
+    params: '<value>'
+    feedback: '&9[&fItemEdit&9] &aCustom model data updated'
+    feedback-reset: '&9[&fItemEdit&9] &aCustom model data reset'
+  damage:
+    description:
+      - '&6&lEdit durability'
+      - ''
+      - '&e<durability> &bdamage to apply'
+      - '&b&lN.B. &e0 &bmeans no damage, full durability'
+    params: '<durability>'
+    feedback-reset: '&9[&fItemEdit&9] &aDurability restored'
+    feedback: '&9[&fItemEdit&9] &aDurability updated'
+  enchant:
+    description:
+      - '&6&lSet enchants'
+      - ''
+      - '&e<enchant> &benchant type'
+      - '&e[level] &blevel of the enchant, by default &e1'
+      - ''
+      - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
+    params: '<enchant> [level]'
+    feedback-removed: '&9[&fItemEdit&9] &aRemoved enchant'
+    feedback: '&9[&fItemEdit&9] &aEnchantment applied'
+  fireworkpower:
+    description:
+      - '&6&lSet firework power'
+      - ''
+      - '&e<power> &bpower of the firework, a value betwheen &e0 &band &e5'
+    params: '<power>'
+    feedback: '&9[&fItemEdit&9] &aUpdated firework power'
+  firework:
+    description:
+      - '&6&lEdit firework with a GUI'
+    params: ''
   help:
     header: "&9&lItemEdit - Help"
     header-sub: "&9&lItemEdit %sub% - Help"
@@ -276,13 +407,6 @@ itemedit:
       - ''
       - '&b&lTip: &bhide single components with &e/itemedit hide <flag> true'
     params: ''
-  damage:
-    description:
-      - '&6&lEdit durability'
-      - ''
-      - '&e<durability> &bdamage to apply'
-      - '&b&lN.B. &e0 &bmeans no damage, full durability'
-    params: '<durability>'
   type:
     description:
       - '&6&lSet item''s type'
@@ -296,14 +420,6 @@ itemedit:
       - '&bUnbreakable tools and armors won''t lost durability'
       - '&e[true/false] &bset unbreakable value, by default toggle'
     params: '[true/false]'
-  amount:
-    description:
-      - '&6&lSet amount'
-      - ''
-      - '&e<amount> &bamount to set (up to 127)'
-      - '&b&lTip: &bNegative amounts are subtracted'
-      - '&b from item current amount'
-    params: '<amount>'
   skullowner:
     description:
       - '&6&lSet skull owner'
@@ -313,25 +429,6 @@ itemedit:
       - ''
       - '&b&lTip: &bPlace and break the skull to update skins'
     params: '<name>'
-  color:
-    description:
-      - '&6&lSet color'
-      - ''
-      - '&bWorks on leather armor and firework stars, on servers'
-      - '&b 1.11+ works on any Potion and Tipped arrows too!'
-      - '&e[red (0-255)] [green (0-255)] [blue (0-255)] &bare the amount of each color to combine'
-      - '&bEach color is an int value between 0 and 255'
-      - '&bIf you are confused google "&eRGB color picker&b"'
-    params: '[red (0-255)] [green (0-255)] [blue (0-255)]'
-  enchant:
-    description:
-      - '&6&lSet enchants'
-      - ''
-      - '&e<enchant> &benchant type'
-      - '&e[level] &blevel of the enchant, by default &e1'
-      - ''
-      - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
-    params: '<enchant> [level]'
   booktype:
     description:
       - '&6&lSet book type'
@@ -372,35 +469,6 @@ itemedit:
       params: '<effect>'
       description:
         - '&6&lRemove selected effect'
-  banner:
-    description:
-      - '&6&lEdit banner'
-    set:
-      params: '<type> <color> <line>'
-      description:
-        - '&6&lReplace the pattern on selected line'
-    add:
-      params: '<type> <color>'
-      description:
-        - '&6&lAdd a pattern'
-    remove:
-      params: '<line>'
-      description:
-        - '&6&lRemove pattern on selected line'
-    color:
-      params: '<line> <color>'
-      description:
-        - '&6&lChange pattern color on selected line'
-  fireworkpower:
-    description:
-      - '&6&lSet firework power'
-      - ''
-      - '&e<power> &bpower of the firework, a value betwheen &e0 &band &e5'
-    params: '<power>'
-  firework:
-    description:
-      - '&6&lEdit firework'
-    params: ''
   spawnereggtype:
     description:
       - '&6&lSet type of entity spawned by spawner egg'
@@ -408,30 +476,6 @@ itemedit:
       - '&e<type> &btype of the entity'
       - '&bOnly some entity type are spawnable by eggs'
     params: '<type>'
-  attribute:
-    description:
-      - '&6&lEdit attribute modifiers'
-      - ''
-      - '&eAdd <attribute> <amount> [operation] [slot] &b- add new modifiers'
-      - '&eRemove <attribute/slot> &b- removes some modifiers'
-    params: '<add/remove> [...]'
-    add:
-      params: '<attribute> <amount> [operation] [slot]'
-      description:
-        - '&6&lAdd attribute modifier'
-        - ''
-        - '&e<attribute> &battribute type'
-        - '&e<amount> &bamount to set'
-        - '&e[operation] &bhow the modifier is added, by default sums'
-        - '&e[slot] &bapply this modifier only when item is on selected'
-        - '&e       equipment slot or any equipment slot if not selected'
-    remove:
-      params: '<attribute/slot>'
-      description:
-        - '&6&lRemove modifiers'
-        - ''
-        - '&e<attribute/slot> &btype to remove, any modifiers with'
-        - '&b                 selected value are removed'
   tropicalfish:
     description:
       - '&6&lSet property of tropical fish bucket'
@@ -467,13 +511,6 @@ itemedit:
       - '&b&lN.B. &bthis command set base repair cost of the item, final levels cost on anvil is based what you do'
       - '&bMore info at &eminecraft.gamepedia.com/Anvil/Mechanics'
     params: '<cost>'
-  custommodeldata:
-    description:
-      - '&6&lEdit custom model data'
-      - ''
-      - '&bUsed for texture packs'
-      - '&e<value> &bpositive int of target data model'
-    params: '<value>'
   itemmodel:
     description:
       - '&6&lEdit item model'
@@ -485,12 +522,6 @@ itemedit:
       - '&e<namespace>&b:&e<id> &bwill reference model:'
       - '  /assets/&e<namespace>&b/models/item/&e<id>'
     params: '<namespaced key>'
-  axolotlvariant:
-    description:
-      - '&6&lEdit Axolotl Variant on Axolotl bucket'
-      - ''
-      - '&e<type> &bthe type of axolotl'
-    params: '<type>'
   listaliases:
     description:
       - '&6&lShows allowed aliases parameters'
@@ -504,17 +535,6 @@ itemedit:
     hover_info: '&9Original value: &e%default%'
     hover_type: '&6Click to examine'
     error-pre-hover: "&6&lAliases:"
-  compass:
-    description:
-      - '&6&lSet compass target location'
-      - ''
-      - '&eSet &b- set your location as compass target'
-      - '&eClear &b- clear compass target'
-    params: '<set/clear>'
-    set:
-      feedback: '&9[&fItemEdit&9] &aCompass now points to &e%world% %x% %y% %z%'
-    clear:
-      feedback: '&9[&fItemEdit&9] &aCompass target cleared'
   goathornsound:
     description:
       - '&6&lSet Goat Horn sound'

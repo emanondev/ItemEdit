@@ -4,15 +4,15 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Locale;
 
 public class BookType extends SubCmd {
 
@@ -23,20 +23,18 @@ public class BookType extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
 
-        if (!(sender instanceof Player p)) return;
+        Player p = (Player) sender;
 
-        ItemStack item = getItemInHand(p);
+        ItemBuilder item = new ItemBuilder(getItemInHand(p));
         if (item.getType() != Material.WRITTEN_BOOK) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_written_book");
             return;
         }
 
-        BookMeta itemMeta = (BookMeta) ItemUtils.getMeta(item);
-
         // Reset generation if only the command is provided
         if (args.length == 1) {
-            itemMeta.setGeneration(null);
-            item.setItemMeta(itemMeta);
+            item.setBookGeneration(null).build();
+            sendFeedback(p, "feedback-reset");
             updateView(p);
             return;
         }
@@ -56,8 +54,8 @@ public class BookType extends SubCmd {
         }
 
         // Apply the generation type and update the view
-        itemMeta.setGeneration(type);
-        item.setItemMeta(itemMeta);
+        item.setBookGeneration(type).build();
+        onSuccess(p, "%generation%", args[1].toLowerCase(Locale.ENGLISH));
         updateView(p);
     }
 

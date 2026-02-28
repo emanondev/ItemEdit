@@ -5,13 +5,12 @@ import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.gui.BannerEditor;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,72 +29,64 @@ public class Banner extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
-        if (!(item.getItemMeta() instanceof BannerMeta)) {
+        ItemBuilder item = new ItemBuilder(this.getItemInHand(p));
+        if (!(item.isMetaClass(BannerMeta.class))) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_banner");
             return;
         }
         if (args.length == 1) {
-            p.openInventory(new BannerEditor(p, item).getInventory());
+            p.openInventory(new BannerEditor(p, item.build()).getInventory());
             return;
         }
 
         switch (args[1].toLowerCase(Locale.ENGLISH)) {
-            case "add":
-                addPattern(p, item, alias, args);
-                return;
-            case "set":
-                setPattern(p, item, alias, args);
-                return;
-            case "remove":
-                removePattern(p, item, alias, args);
-                return;
-            case "color":
-                colorPattern(p, item, alias, args);
-                return;
-            default:
-                onFail(p, alias);
+            case "add" -> addPattern(p, item, alias, args);
+            case "set" -> setPattern(p, item, alias, args);
+            case "remove" -> removePattern(p, item, alias, args);
+            case "color" -> colorPattern(p, item, alias, args);
+            default -> onFail(p, alias);
         }
     }
 
     // itemedit banner color id color
-    private void colorPattern(@NotNull Player p, @NotNull ItemStack item, @NotNull String alias, String[] args) {
+    private void colorPattern(@NotNull Player p, @NotNull ItemBuilder item, @NotNull String alias, String[] args) {
         try {
-            BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
-            int id = Integer.parseInt(args[2]) - 1;
-            PatternType type = meta.getPattern(id).getPattern();
+            //TODO check indexes
+            int index = Integer.parseInt(args[2]) - 1;
+            PatternType type = item.getBannerPatterns().get(index).getPattern();
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (color == null) {
                 onWrongAlias(p, Aliases.COLOR);
-                sendFailFeedbackForSub(p, alias, "color");
+                onSubFail(p, alias, "color");
                 return;
             }
-            meta.setPattern(id, new Pattern(color, type));
-            item.setItemMeta(meta);
+            item.setBannerPattern(index, new Pattern(color, type)).build();
+            onSubSuccess(p, "color");
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p, alias, "color");
+            e.printStackTrace();
+            onSubFail(p, alias, "color");
         }
 
     }
 
-    private void removePattern(@NotNull Player p, @NotNull ItemStack item, @NotNull String alias, String[] args) {
+    private void removePattern(@NotNull Player p, @NotNull ItemBuilder item, @NotNull String alias, String[] args) {
         try {
-            BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
-            int id = Integer.parseInt(args[2]) - 1;
-            List<Pattern> list = new ArrayList<>(meta.getPatterns());
-            list.remove(id);
-            meta.setPatterns(list);
-            item.setItemMeta(meta);
+            //TODO check indexes
+            int index = Integer.parseInt(args[2]) - 1;
+            List<Pattern> list = new ArrayList<>(item.getBannerPatterns());
+            list.remove(index);
+            item.setBannerPatterns(list).build();
+            onSubSuccess(p, "remove");
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p, alias, "remove");
+            e.printStackTrace();
+            onSubFail(p, alias, "remove");
         }
     }
 
-    private void setPattern(@NotNull Player p, @NotNull ItemStack item, @NotNull String alias, String[] args) {
+    private void setPattern(@NotNull Player p, @NotNull ItemBuilder item, @NotNull String alias, String[] args) {
         try {
-            BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (type == null || color == null) {
@@ -105,21 +96,28 @@ public class Banner extends SubCmd {
                 if (color == null) {
                     onWrongAlias(p, Aliases.COLOR);
                 }
-                sendFailFeedbackForSub(p, alias, "set");
+                onSubFail(p, alias, "set");
                 return;
             }
-            int id = Integer.parseInt(args[4]) - 1;
-            meta.setPattern(id, new Pattern(color, type));
-            item.setItemMeta(meta);
+            //TODO check indexes
+            int index = Integer.parseInt(args[4]) - 1;
+            item.setBannerPattern(index, new Pattern(color, type)).build();
+            onSubSuccess(p, "set");
             updateView(p);
+        } catch (NumberFormatException n) {
+            onSubFail(p, alias, "set");
         } catch (Exception e) {
-            sendFailFeedbackForSub(p, alias, "set");
+            e.printStackTrace();
+            onSubFail(p, alias, "set");
         }
     }
 
-    private void addPattern(@NotNull Player p, @NotNull ItemStack item, @NotNull String alias, String[] args) {
+    private void addPattern(@NotNull Player p, @NotNull ItemBuilder item, @NotNull String alias, String[] args) {
         try {
-            BannerMeta meta = (BannerMeta) ItemUtils.getMeta(item);
+            if (args.length != 3 && args.length != 4) {
+                onSubFail(p, alias, "add");
+                return;
+            }
             PatternType type = Aliases.PATTERN_TYPE.convertAlias(args[2]);
             DyeColor color = Aliases.COLOR.convertAlias(args[3]);
             if (type == null || color == null) {
@@ -129,14 +127,15 @@ public class Banner extends SubCmd {
                 if (color == null) {
                     onWrongAlias(p, Aliases.COLOR);
                 }
-                sendFailFeedbackForSub(p, alias, "add");
+                onSubFail(p, alias, "add");
                 return;
             }
-            meta.addPattern(new Pattern(color, type));
-            item.setItemMeta(meta);
+            item.addBannerPattern(new Pattern(color, type)).build();
+            onSubSuccess(p, "add");
             updateView(p);
         } catch (Exception e) {
-            sendFailFeedbackForSub(p, alias, "add");
+            e.printStackTrace();
+            onSubFail(p, alias, "add");
         }
     }
 

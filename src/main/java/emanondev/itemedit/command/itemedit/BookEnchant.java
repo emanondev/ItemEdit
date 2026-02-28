@@ -32,34 +32,39 @@ public class BookEnchant extends SubCmd {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_enchantment_storage");
             return;
         }
+        EnchantmentStorageMeta meta = (EnchantmentStorageMeta) ItemUtils.getMeta(item);
+        if (args.length != 2 && args.length != 3) {
+            onFail(p, alias);
+            return;
+        }
+        int lv = 1;
+        Enchantment ench = Aliases.ENCHANT.convertAlias(args[1]);
+        if (ench == null) {
+            onWrongAlias(p, Aliases.ENCHANT);
+            onFail(p, alias);
+            return;
+        }
         try {
-            EnchantmentStorageMeta meta = (EnchantmentStorageMeta) ItemUtils.getMeta(item);
-            if (args.length != 2 && args.length != 3) {
-                throw new IllegalArgumentException("Wrong argument Number");
-            }
-            int lv = 1;
-            Enchantment ench = Aliases.ENCHANT.convertAlias(args[1]);
-            if (ench == null) {
-                onWrongAlias(p, Aliases.ENCHANT);
-                onFail(p, alias);
-                return;
-            }
             if (args.length == 3) {
                 lv = Integer.parseInt(args[2]);
             }
-            if (lv == 0) {
-                meta.removeStoredEnchant(ench);
-            } else {
-                if (!p.hasPermission(this.getPermission() + ".bypass_max_level")) {
-                    lv = Math.min(ench.getMaxLevel(), lv);
-                }
-                meta.addStoredEnchant(ench, lv, true);
-            }
-            item.setItemMeta(meta);
-            updateView(p);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             onFail(p, alias);
+            return;
         }
+        if (lv == 0) {
+            meta.removeStoredEnchant(ench);
+            sendFeedback(p, "feedback-removed", "%enchant%", args[1]);
+        } else {
+            if (!p.hasPermission(this.getPermission() + ".bypass_max_level")) {
+                lv = Math.min(ench.getMaxLevel(), lv);
+                //TODO feedback?
+            }
+            meta.addStoredEnchant(ench, lv, true);
+            onSuccess(p, "%enchant%", args[1], "%lv%", String.valueOf(lv));
+        }
+        item.setItemMeta(meta);
+        updateView(p);
     }
 
     @Override

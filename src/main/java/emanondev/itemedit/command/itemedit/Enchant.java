@@ -4,10 +4,10 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class Enchant extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+        ItemBuilder item = new ItemBuilder(this.getItemInHand(p));
         if (args.length != 2 && args.length != 3) {
             onFail(p, alias);
             return;
@@ -38,12 +38,14 @@ public class Enchant extends SubCmd {
                 lv = Integer.parseInt(args[2]);
             }
             if (lv == 0) {
-                item.removeEnchantment(ench);
+                item.removeEnchantment(ench).build();
+                sendFeedback(p, "feedback-removed");
             } else {
                 if (!p.hasPermission(this.getPermission() + ".bypass_max_level")) {
                     lv = Math.min(ench.getMaxLevel(), lv);
                 }
-                item.addUnsafeEnchantment(ench, lv);
+                item.setEnchantment(ench, lv).build();
+                onSuccess(p);
             }
             updateView(p);
         } catch (Exception e) {

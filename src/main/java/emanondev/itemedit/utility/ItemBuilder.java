@@ -3,10 +3,13 @@ package emanondev.itemedit.utility;
 import emanondev.itemedit.Keys;
 import emanondev.itemedit.ParsedItem;
 import org.bukkit.*;
+import org.bukkit.block.banner.Pattern;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.*;
 import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.inventory.meta.components.KineticWeaponComponent;
@@ -702,6 +705,125 @@ public class ItemBuilder {
      */
     public ItemBuilder setHideToolTip(boolean value) {
         meta.setHideTooltip(value);
+        return this;
+    }
+
+    public boolean isMetaClass(Class<? extends ItemMeta> metaClass) {
+        return metaClass.isInstance(meta);
+    }
+
+    public ItemBuilder setAxolotlVariant(Axolotl.Variant type) {
+        if (meta instanceof AxolotlBucketMeta axolotlBucketMeta) {
+            axolotlBucketMeta.setVariant(type);
+        }
+        return this;
+    }
+
+    public Material getType() {
+        return stack.getType();
+    }
+
+    public ItemBuilder setBookAuthor(String author) {
+        if (meta instanceof BookMeta bookMeta) {
+            bookMeta.setAuthor(author);
+        }
+        return this;
+    }
+
+    public ItemBuilder setBookGeneration(BookMeta.Generation type) {
+        if (meta instanceof BookMeta bookMeta) {
+            bookMeta.setGeneration(type);
+        }
+        return this;
+    }
+
+    public ItemBuilder addBannerPattern(Pattern pattern) {
+        if (meta instanceof BannerMeta bannerMeta) {
+            bannerMeta.addPattern(pattern);
+        }
+        return this;
+    }
+
+    public ItemBuilder setBannerPattern(int index, Pattern pattern) {
+        if (meta instanceof BannerMeta bannerMeta) {
+            bannerMeta.setPattern(index, pattern);
+        }
+        return this;
+    }
+
+    public List<Pattern> getBannerPatterns() {
+        if (meta instanceof BannerMeta bannerMeta) {
+            bannerMeta.getPatterns();
+        }
+        return List.of();
+    }
+
+    public ItemBuilder setBannerPatterns(List<Pattern> list) {
+        if (meta instanceof BannerMeta bannerMeta) {
+            bannerMeta.setPatterns(list);
+        }
+        return this;
+    }
+
+    public ItemBuilder setColor(Color color) {
+        if (meta instanceof LeatherArmorMeta leatherArmorMeta) {
+            leatherArmorMeta.setColor(color);
+        } else if (meta instanceof PotionMeta potionMeta) {
+            potionMeta.setColor(color);
+        }
+        return this;
+    }
+
+    public FireworkEffect getFireworkEffect() {
+        if (meta instanceof FireworkEffectMeta fireworkMeta) {
+            return fireworkMeta.getEffect();
+        }
+        return null;
+    }
+
+    public ItemBuilder setFireworkEffect(FireworkEffect build) {
+        if (meta instanceof FireworkEffectMeta fireworkMeta) {
+            fireworkMeta.setEffect(build);
+        }
+        return this;
+    }
+
+    public ItemBuilder setCompassLodestone(boolean tracked, Location location) {
+        if (meta instanceof CompassMeta compassMeta) {
+            compassMeta.setLodestoneTracked(tracked);
+            compassMeta.setLodestone(location);
+        }
+        return this;
+    }
+
+    public ItemBuilder setCustomModelData(Integer amount) {
+        meta.setCustomModelData(amount);
+        return this;
+    }
+
+    public ItemBuilder setDurability(int amount) {
+        if (!VersionUtils.isAfter(1, 13)) {
+            stack.setDurability((short) Math.max(0, Math.min(amount, stack.getType().getMaxDurability())));
+        } else if (meta instanceof Damageable damageable) {
+            damageable.setDamage(amount);
+        }
+        return this;
+    }
+
+    public ItemBuilder removeEnchantment(Enchantment ench) {
+        meta.removeEnchant(ench);
+        return this;
+    }
+
+    public ItemBuilder setEnchantment(Enchantment ench, int lv) {
+        meta.addEnchant(ench, lv, true);
+        return this;
+    }
+
+    public ItemBuilder setFireworkPower(int power) {
+        if (meta instanceof FireworkMeta fireworkMeta) {
+            fireworkMeta.setPower(power);
+        }
         return this;
     }
 }
