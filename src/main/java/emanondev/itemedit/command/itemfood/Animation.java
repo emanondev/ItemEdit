@@ -47,7 +47,7 @@ public class Animation extends SubCmd {
             onWrongAlias(player, Aliases.ANIMATION);
             onFail(player, alias);
         }
-        setItemInHand(player, new ItemBuilder(getItemInHand(player)).setConsumeAnimation(value).build());
+        new ItemBuilder(getItemInHand(player)).setConsumeAnimation(value).build();
         onSuccess(player);
         updateView(player);
     }

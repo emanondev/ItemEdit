@@ -3,12 +3,9 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.Repairable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -23,7 +20,7 @@ public class RepairCost extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+        ItemBuilder item = new ItemBuilder(getItemInHand(p));
         if (args.length > 2) {
             onFail(sender, alias);
             return;
@@ -32,15 +29,10 @@ public class RepairCost extends SubCmd {
             this.getCommand().sendPermissionLackMessage(this.getPermission() + ".without_durability", sender);
             return;
         }
-        try {
-            Repairable meta = (Repairable) ItemUtils.getMeta(item);
-            meta.setRepairCost(Integer.parseInt(args[1]));
-            item.setItemMeta((ItemMeta) meta); //cast is required for old game version
-            updateView(p);
-        } catch (Exception e) {
-            onFail(p, alias);
-        }
-
+        int amount = Integer.parseInt(args[1]);
+        item.setRepairCost(amount).build();
+        onSuccess(sender);
+        updateView(p);
     }
 
     @Override

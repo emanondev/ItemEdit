@@ -3,16 +3,12 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Stream;
 
 public class MaxStackSize extends SubCmd {
 
@@ -24,19 +20,20 @@ public class MaxStackSize extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+        ItemBuilder item = new ItemBuilder(getItemInHand(p));
         if (args.length > 2) {
             onFail(sender, alias);
             return;
         }
         try {
-            ItemMeta meta = ItemUtils.getMeta(item);
-            Integer value = args.length == 1 ?
-                    (meta.hasMaxStackSize() ? Integer.valueOf(item.getType().getMaxStackSize()) : Integer.valueOf(99)) :
-                    (args[1].toLowerCase(Locale.ENGLISH).equalsIgnoreCase("default") ? null : Integer.parseInt(args[1]));
-            meta.setMaxStackSize(value);
-            item.setItemMeta(meta);
-        } catch (Exception e) {
+            Integer value = args.length == 1 ? null : Integer.parseInt(args[1]);
+            item.setMaxStackSize(value).build();
+            if (value != null) {
+                onSuccess(p, "%value%", String.valueOf(value));
+            } else {
+                sendFeedback(p, "feedback-reset");
+            }
+        } catch (NumberFormatException e) { //TODO test limit values
             onFail(p, alias);
         }
     }
@@ -46,8 +43,6 @@ public class MaxStackSize extends SubCmd {
         if (args.length != 2) {
             return List.of();
         }
-        return Stream.concat(CompleteUtility.complete(args[1], "1", "32", "64", "99").stream(),
-                "default".startsWith(args[1].toLowerCase(Locale.ENGLISH)) ? Stream.of("default") : Stream.empty()
-        ).toList();
+        return CompleteUtility.complete(args[1], "1", "32", "64", "99");
     }
 }

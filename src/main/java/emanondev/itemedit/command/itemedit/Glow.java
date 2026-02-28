@@ -11,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Stream;
 
 public class Glow extends SubCmd {
 
@@ -23,20 +22,23 @@ public class Glow extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-
         ItemBuilder item = new ItemBuilder(getItemInHand(p));
 
-        try {
-            if (args.length > 2) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-            Boolean value = args.length == 1
-                    ? ((Boolean) (item.getEnchantmentGlintOverride() != null ?
-                    !item.getEnchantmentGlintOverride() : Boolean.TRUE))
-                    : Aliases.BOOLEAN.convertAlias(args[1]);
-            item.setEnchantmentGlintOverride(value).build();
-        } catch (Exception e) {
+        if (args.length > 2) {
             onFail(p, alias);
+            return;
+        }
+        Boolean value = args.length == 1 ? null : Aliases.BOOLEAN.convertAlias(args[1]);
+        if (value == null && args.length == 2) {
+            onFail(p, alias);
+            return;
+        }
+
+        item.setEnchantmentGlintOverride(value).build();
+        if (value == null) {
+            sendFeedback(p, "feedback-reset");
+        } else {
+            onSuccess(p, "%value%", args[1].toLowerCase(Locale.ENGLISH));
         }
     }
 
@@ -45,9 +47,6 @@ public class Glow extends SubCmd {
         if (args.length != 2) {
             return List.of();
         }
-        return Stream.concat(
-                CompleteUtility.complete(args[1], Aliases.BOOLEAN).stream(),
-                "default".startsWith(args[1].toLowerCase(Locale.ENGLISH)) ? Stream.of("default") : Stream.empty()
-        ).toList();
+        return CompleteUtility.complete(args[1], Aliases.BOOLEAN);
     }
 }

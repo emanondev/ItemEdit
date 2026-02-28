@@ -32,40 +32,41 @@ public class AddEffect extends SubCmd {
     //addeffect playsound <sound>
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
-        switch (args[1].toLowerCase(Locale.ENGLISH)) {
-            case "cleareffects" -> cleareffects(sender, alias, args);
-            case "teleport" -> teleport(sender, alias, args);
-            case "applyeffects" -> addaffect(sender, alias, args);
-            case "removeeffect" -> removeeffect(sender, alias, args);
-            case "playsound" -> playsound(sender, alias, args);
+        Player player = (Player) sender;
+        ItemBuilder builder = new ItemBuilder(getItemInHand(player));
+        try {
+            switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "cleareffects" -> cleareffects(player, builder, alias, args);
+                case "teleport" -> teleport(player, builder, alias, args);
+                case "applyeffects" -> addaffect(player, builder, alias, args);
+                case "removeeffect" -> removeeffect(player, builder, alias, args);
+                case "playsound" -> playsound(player, builder, alias, args);
+                default -> onFail(player, alias);
+            }
+        } catch (Exception e) {
+            onSubFail(player, alias, args[1].toLowerCase(Locale.ENGLISH));
         }
-        updateView((Player) sender);
+        updateView(player);
     }
 
-    private void playsound(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
+    private void playsound(@NotNull Player player, ItemBuilder item, @NotNull String alias, String[] args) {
         Sound sound = Aliases.SOUND.convertAlias(args[2]);
-        Player player = (Player) sender;
-        ItemBuilder builder = new ItemBuilder(getItemInHand(player));
         PlaySound consumableEffect = new PlaySound(sound);
-        builder.addConsumeEffect(consumableEffect);
-        setItemInHand(player, builder.build());
+        item.addConsumeEffect(consumableEffect).build();
+        onSubSuccess(player, "playsound");
     }
 
-    private void removeeffect(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
-        Player player = (Player) sender;
-        ItemBuilder builder = new ItemBuilder(getItemInHand(player));
+    private void removeeffect(@NotNull Player player, ItemBuilder item, @NotNull String alias, String[] args) {
         List<PotionEffectType> effects = new ArrayList<>();
         for (String effect : Arrays.copyOfRange(args, 2, args.length)) {
             effects.add(Aliases.POTION_EFFECT.convertAlias(effect));
         }
         RemoveEffects removeEffects = new RemoveEffects(effects);
-        builder.addConsumeEffect(removeEffects);
-        setItemInHand(player, builder.build());
+        item.addConsumeEffect(removeEffects).build();
+        onSubSuccess(player, "removeeffect");
     }
 
-    private void addaffect(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
-        Player player = (Player) sender;
-        ItemBuilder builder = new ItemBuilder(getItemInHand(player));
+    private void addaffect(@NotNull Player player, ItemBuilder item, @NotNull String alias, String[] args) {
         List<PotionEffect> effects = new ArrayList<>();
         double chance = 1;
         int chanceIndexMod = 1;
@@ -107,22 +108,19 @@ public class AddEffect extends SubCmd {
             effects.add(effect);
         }
         ApplyEffects applyEffects = new ApplyEffects(effects, (float) chance);
-        builder.addConsumeEffect(applyEffects);
-        setItemInHand(player, builder.build());
+        item.addConsumeEffect(applyEffects).build();
+        onSubSuccess(player, "addaffect");
     }
 
-    private void teleport(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
-        Player player = (Player) sender;
+    private void teleport(@NotNull Player player, ItemBuilder item, @NotNull String alias, String[] args) {
         float val = Float.parseFloat(args[1]);
-        setItemInHand(player, new ItemBuilder(getItemInHand(player))
-                .addConsumeEffect(new TeleportRandomly(val)).build());
+        item.addConsumeEffect(new TeleportRandomly(val)).build();
+        onSubSuccess(player, "teleport");
     }
 
-    private void cleareffects(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
-        Player player = (Player) sender;
-        ItemBuilder builder = new ItemBuilder(getItemInHand(player));
-        builder.addConsumeEffect(new ClearEffects());
-        setItemInHand(player, builder.build());
+    private void cleareffects(@NotNull Player player, ItemBuilder item, @NotNull String alias, String[] args) {
+        item.addConsumeEffect(new ClearEffects()).build();
+        onSubSuccess(player, "cleareffects");
     }
 
     //addeffect cleareffects

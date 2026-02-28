@@ -4,10 +4,10 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.MusicInstrument;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.MusicInstrumentMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,8 +22,8 @@ public class GoatHornSound extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player player = (Player) sender;
-        ItemStack item = this.getItemInHand(player);
-        if (!(item.getItemMeta() instanceof MusicInstrumentMeta meta)) {
+        ItemBuilder item = new ItemBuilder(getItemInHand(player));
+        if (!item.isMetaClass(MusicInstrumentMeta.class)) {
             getPlugin().getTranslator().send(player, "generic.error.wrong-material_music_instrument");
             return;
         }
@@ -38,8 +38,8 @@ public class GoatHornSound extends SubCmd {
             onFail(player, alias);
             return;
         }
-        meta.setInstrument(type);
-        item.setItemMeta(meta);
+        item.setMusicInstrument(type).build();
+        onSuccess(player);
         updateView(player);
     }
 

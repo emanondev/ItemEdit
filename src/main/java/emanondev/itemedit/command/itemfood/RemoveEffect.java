@@ -29,7 +29,7 @@ public class RemoveEffect extends SubCmd {
         ItemBuilder item = new ItemBuilder(getItemInHand(p));
         List<ConsumableEffect> effects = new ArrayList<>(item.getConsumeEffects());
         effects.remove(line);
-        item.setConsumeEffects(effects);
+        item.setConsumeEffects(effects).build();
         onSuccess(p);
     }
 

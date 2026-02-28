@@ -4,12 +4,10 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemRarity;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -23,7 +21,7 @@ public class Rarity extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+        ItemBuilder item = new ItemBuilder(getItemInHand(p));
         if (args.length > 2) {
             onFail(sender, alias);
             return;
@@ -34,9 +32,12 @@ public class Rarity extends SubCmd {
             onFail(p, alias);
             return;
         }
-        ItemMeta meta = ItemUtils.getMeta(item);
-        meta.setRarity(rarity);
-        item.setItemMeta(meta);
+        item.setRarity(rarity).build();
+        if (rarity == null) {
+            sendFeedback(p, "feedback-reset");
+        } else {
+            onSuccess(p);
+        }
         updateView(p);
     }
 

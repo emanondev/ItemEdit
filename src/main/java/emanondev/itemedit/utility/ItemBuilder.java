@@ -1,13 +1,18 @@
 package emanondev.itemedit.utility;
 
+import com.google.common.collect.Multimap;
 import emanondev.itemedit.Keys;
 import emanondev.itemedit.ParsedItem;
 import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
 import org.bukkit.inventory.meta.components.EquippableComponent;
@@ -16,6 +21,8 @@ import org.bukkit.inventory.meta.components.KineticWeaponComponent;
 import org.bukkit.inventory.meta.components.PiercingWeaponComponent;
 import org.bukkit.inventory.meta.components.consumable.ConsumableComponent;
 import org.bukkit.inventory.meta.components.consumable.effects.ConsumableEffect;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -801,7 +808,7 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder setDurability(int amount) {
+    public ItemBuilder setDamage(int amount) {
         if (!VersionUtils.isAfter(1, 13)) {
             stack.setDurability((short) Math.max(0, Math.min(amount, stack.getType().getMaxDurability())));
         } else if (meta instanceof Damageable damageable) {
@@ -824,6 +831,131 @@ public class ItemBuilder {
         if (meta instanceof FireworkMeta fireworkMeta) {
             fireworkMeta.setPower(power);
         }
+        return this;
+    }
+
+    public ItemBuilder setMusicInstrument(MusicInstrument type) {
+        if (meta instanceof MusicInstrumentMeta musicInstrumentMeta) {
+            musicInstrumentMeta.setInstrument(type);
+        }
+        return this;
+    }
+
+    public boolean hasItemFlag(ItemFlag flag) {
+        return meta.hasItemFlag(flag);
+    }
+
+    public ItemBuilder setItemFlag(ItemFlag flag, boolean add) {
+        if (add) {
+            meta.addItemFlags(flag);
+        } else {
+            meta.removeItemFlags(flag);
+        }
+        return this;
+    }
+
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers() {
+        return meta.getAttributeModifiers();
+    }
+
+    public ItemBuilder addAttributeModifier(Attribute attribute, AttributeModifier attributeModifier) {
+        meta.addAttributeModifier(attribute, attributeModifier);
+        return this;
+    }
+
+    public ItemBuilder removeAttributeModifier(EquipmentSlot slot) {
+        meta.removeAttributeModifier(slot);
+        return this;
+    }
+
+    public ItemBuilder setItemFlags(ItemFlag[] values, boolean value) {
+        for (ItemFlag itemFlag : values) {
+            setItemFlag(itemFlag,value);
+        }
+        return this;
+    }
+
+    public ItemBuilder setItemModel(NamespacedKey key) {
+        meta.setItemModel(key);
+        return this;
+    }
+
+    public ItemBuilder setMaxDamage(int amount) {
+        if (meta instanceof Damageable damageable) {
+            damageable.setMaxDamage(amount);
+        }
+        return this;
+    }
+
+    public ItemBuilder setMaxStackSize(Integer value) {
+        meta.setMaxStackSize(value);
+        return this;
+    }
+
+    public ItemBuilder removeCustomEffect(PotionEffectType effect) {
+        if (meta instanceof PotionMeta potionMeta) {
+            potionMeta.removeCustomEffect(effect);
+        } else if (meta instanceof SuspiciousStewMeta suspiciousStewMeta) {
+            suspiciousStewMeta.removeCustomEffect(effect);
+        }
+        return this;
+    }
+
+    public ItemBuilder addCustomEffect(PotionEffect effect) {
+        if (meta instanceof PotionMeta potionMeta) {
+            potionMeta.addCustomEffect(effect,true);
+        } else if (meta instanceof SuspiciousStewMeta suspiciousStewMeta) {
+            suspiciousStewMeta.addCustomEffect(effect,true);
+        }
+        return this;
+    }
+
+    public ItemBuilder clearCustomEffects() {
+        if (meta instanceof PotionMeta potionMeta) {
+            potionMeta.clearCustomEffects();
+        } else if (meta instanceof SuspiciousStewMeta suspiciousStewMeta) {
+            suspiciousStewMeta.clearCustomEffects();
+        }
+        return this;
+    }
+
+    public ItemBuilder setRarity(ItemRarity rarity) {
+        meta.setRarity(rarity);
+        return this;
+    }
+
+    public ItemBuilder setRepairCost(int amount) {
+        if (meta instanceof Repairable repairable) {
+            repairable.setRepairCost(amount);
+        }
+        return this;
+    }
+
+    public int getDamage() {
+        if (!VersionUtils.isAfter(1, 13)) {
+            return stack.getDurability();
+        } else if (meta instanceof Damageable damageable) {
+            return damageable.getDamage();
+        }
+        return 0;
+    }
+
+    public ItemBuilder setSkullOwner(String name) {
+        if (meta instanceof SkullMeta skullMeta) {
+            skullMeta.setOwner(name);
+        }
+        return this;
+    }
+
+    public ItemBuilder setSpawnedType(EntityType type) {
+        if (meta instanceof SpawnEggMeta spawnEggMeta) {
+            spawnEggMeta.setSpawnedType(type);
+        }
+        return this;
+    }
+
+    public ItemBuilder setTooltipStyle(NamespacedKey namespacedKey) {
+        meta.setTooltipStyle(namespacedKey);
         return this;
     }
 }

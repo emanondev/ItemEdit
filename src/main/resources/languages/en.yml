@@ -321,6 +321,162 @@ itemedit:
     description:
       - '&6&lEdit firework with a GUI'
     params: ''
+  glow:
+    description:
+      - '&6&lOverride enchantment glow effect'
+      - ''
+      - '&e[true/false] &bset the value, by default reset'
+      - ''
+      - '&b&lTip: &eno value specified &brestore vanilla behavior'
+    params: '[true/false/default]'
+    feedback: '&9[&fItemEdit&9] &aGlow set to &e%value%'
+    feedback-reset: '&9[&fItemEdit&9] &aReset glow value to default'
+  goathornsound:
+    description:
+      - '&6&lSet Goat Horn sound'
+      - ''
+      - '&e<type> &bthe type of sound'
+    params: '<type>'
+    feedback: '&9[&fItemEdit&9] &aUpdated Sound'
+  hide:
+    description:
+      - '&6&lHide or show components'
+      - ''
+      - '&e<flag> &bitem flag to edit'
+      - '&e[true/false] &bset the flag value, by default toggle'
+      - ''
+      - '&b&lTip: &bhide banner pannerns with potion_effects flag'
+      - '&b&lTip: &bhide all flags at once with &e/itemedit hideall'
+    params: '<flag> [true/false]'
+    feedback: '&9[&fItemEdit&9] &aFlag is now &e%value%'
+  hideall:
+    description:
+      - '&6&lHide all components'
+      - ''
+      - '&bHides: enchants, potion effects, banner layers, attributes ...'
+      - ''
+      - '&b&lTip: &bhide single components with &e/itemedit hide <flag> true'
+    params: ''
+    feedback: '&9[&fItemEdit&9] &aHidden all the flags'
+  itemmodel:
+    description:
+      - '&6&lEdit item model'
+      - ''
+      - '&e<namespaced key> &bkey to set for texture reference'
+      - '&bExample: /ie itemmodel &eiron_sword'
+      - '&bExample: /ie itemmodel &eminecraft:iron_sword'
+      - ''
+      - '&e<namespace>&b:&e<id> &bwill reference model:'
+      - '  /assets/&e<namespace>&b/models/item/&e<id>'
+    params: '<namespaced key>'
+    feedback: '&9[&fItemEdit&9] &aUpdated Item Model'
+    feedback-reset: '&9[&fItemEdit&9] &aReset Item Model'
+  maxdurability:
+    description:
+      - '&6&lSets item max durability'
+      - ''
+      - '&e<max durability> &bitem new durability value, must be bigger than 1'
+    params: '<max durability>'
+    feedback: '&9[&fItemEdit&9] &aUpdated Max durability to &e%value%'
+  maxstacksize:
+    description:
+      - '&6&lSets item max stack size'
+      - ''
+      - '&e[1-99] &bset the flag value'
+      - ''
+      - '&eno value &bwill restore common stack size which is &e64'
+      - '&b for most items, &e1&b for armors and tools, and other'
+      - '&b values for a few items'
+    params: '[1-99]'
+    feedback: '&9[&fItemEdit&9] &aUpdated Max stack size to &e%value%'
+    feedback-reset: '&9[&fItemEdit&9] &aReset Max stack size'
+  potioneffect:
+    itemtag-tip: '&9[&fItemEdit&9] &bYou need to add potion effects to common items? try >ItemTag<'
+    itemtag-tip-hover:
+      - '&6Click me'
+    description:
+      - '&6&lEdit potion''s effects'
+      - ''
+      - '&bWorks on any Potion, Tipped arrows and Suspicious stew!'
+      - '&eAdd <effect> <duration> [level] &b- add effect'
+      - '&eRemove <effect> &b- removes selected effect'
+      - '&eReset &b- remove all effects'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
+      description:
+        - '&6&lAdds/Override selected effect'
+        - ''
+        - '&e<effect> &beffect type'
+        - '&e<duration> &bduration in seconds'
+        - '&e[level] &bUp to 127, by default &e1'
+        - '&e[particles] &bShould show particles? &etrue&b/&efalse'
+        - '&e[ambient] &bParticles should have ambient flag? &etrue&b/&efalse'
+        - '&e[icon] &bShow icon on top-right corner? &etrue&b/&efalse &b(for 1.13+ only)'
+      feedback: '&9[&fItemEdit&9] &aAdded potion effect'
+    remove:
+      params: '<effect>'
+      description:
+        - '&6&lRemove selected effect'
+      feedback: '&9[&fItemEdit&9] &aRemoved potion effect'
+    reset:
+      feedback: '&9[&fItemEdit&9] &aReset potion effects'
+  rarity:
+    description:
+      - '&6&lSets item rarity'
+      - ''
+      - '&e[rarity] &bset item rarity'
+      - ''
+      - '&b&lTip: setting no rarity value will restore default'
+    params: '[rarity]'
+    feedback: '&9[&fItemEdit&9] &aUpdated rarity'
+    feedback-reset: '&9[&fItemEdit&9] &aReset Rarity'
+  repaircost:
+    description:
+      - '&6&lEdit Anvil Repair Cost'
+      - ''
+      - '&e<cost> &blevels amount'
+      - '&b&lN.B. &banvil repair/rename price is always at least &e1'
+      - '&b&lN.B. &bthis command set base repair cost of the item, final levels cost on anvil is based what you do'
+      - '&bMore info at &eminecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<cost>'
+    feedback: '&9[&fItemEdit&9] &aRepair cost updated'
+  skullowner:
+    description:
+      - '&6&lSet skull owner'
+      - ''
+      - '&bWorks only on Player''s skulls'
+      - '&e[name] &bname of the owner'
+      - ''
+      - '&b&lTip: &bPlace and break the skull to update skins'
+    params: '[name]'
+    feedback: '&9[&fItemEdit&9] &aUpdated Head owner'
+    feedback-reset: '&9[&fItemEdit&9] &aReset Head owner'
+  spawnereggtype:
+    description:
+      - '&6&lSet type of entity spawned by spawner egg'
+      - ''
+      - '&e<type> &btype of the entity'
+      - '&bOnly some entity type are spawnable by eggs'
+    params: '<type>'
+    feedback: '&9[&fItemEdit&9] &aUpdated Egg type'
+  tooltipstyle:
+    description:
+      - '&6&lEdit item tooltip style'
+      - ''
+      - '&e<style> &bkey to set for texture reference'
+      - '&b  style is composed by <namespace>:<id>'
+      - '&bExample: /ie tooltipstyle &emy_style'
+      - '&bExample: /ie tooltipstyle &eminecraft:my_style'
+      - '&bwhere minecraft is the <namespace> and'
+      - '&bmy_style is the <id>'
+      - '&bwhen set, this item can use custom sprites for'
+      - '&bits tooltip background and frame.'
+      - '&b<namespace>:tooltip/<id>_background'
+      - '&band <namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
+    feedback: '&9[&fItemEdit&9] &aUpdated tooltip style'
+    feedback-reset: '&9[&fItemEdit&9] &aReset tooltip style'
   help:
     header: "&9&lItemEdit - Help"
     header-sub: "&9&lItemEdit %sub% - Help"
@@ -389,24 +545,6 @@ itemedit:
         - ''
         - '&bExample 2: &e/ie lore replace {Heavy} {Very light}'
         - '&b''&eHeavy sword&b'' -> ''&eVery light sword&b'''
-  hide:
-    description:
-      - '&6&lHide or show components'
-      - ''
-      - '&e<flag> &bitem flag to edit'
-      - '&e[true/false] &bset the flag value, by default toggle'
-      - ''
-      - '&b&lTip: &bhide banner pannerns with potion_effects flag'
-      - '&b&lTip: &bhide all flags at once with &e/itemedit hideall'
-    params: '<flag> [true/false]'
-  hideall:
-    description:
-      - '&6&lHide all components'
-      - ''
-      - '&bHides: enchants, potion effects, banner layers, attributes ...'
-      - ''
-      - '&b&lTip: &bhide single components with &e/itemedit hide <flag> true'
-    params: ''
   type:
     description:
       - '&6&lSet item''s type'
@@ -420,15 +558,6 @@ itemedit:
       - '&bUnbreakable tools and armors won''t lost durability'
       - '&e[true/false] &bset unbreakable value, by default toggle'
     params: '[true/false]'
-  skullowner:
-    description:
-      - '&6&lSet skull owner'
-      - ''
-      - '&bWorks only on Player''s skulls'
-      - '&e<name> &bname of the owner'
-      - ''
-      - '&b&lTip: &bPlace and break the skull to update skins'
-    params: '<name>'
   booktype:
     description:
       - '&6&lSet book type'
@@ -442,40 +571,6 @@ itemedit:
       - '&bAuthor name may contains spaces and be colored too'
       - '&bWorks only on Written books'
     params: '<name>'
-  potioneffect:
-    itemtag-tip: '&9[&fItemEdit&9] &bYou need to add potion effects to common items? try >ItemTag<'
-    itemtag-tip-hover:
-      - '&6Click me'
-    description:
-      - '&6&lEdit potion''s effects'
-      - ''
-      - '&bWorks on any Potion, Tipped arrows and Suspicious stew!'
-      - '&eAdd <effect> <duration> [level] &b- add effect'
-      - '&eRemove <effect> &b- removes selected effect'
-      - '&eReset &b- remove all effects'
-    params: '<add/remove/reset> [...]'
-    add:
-      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
-      description:
-        - '&6&lAdds/Override selected effect'
-        - ''
-        - '&e<effect> &beffect type'
-        - '&e<duration> &bduration in seconds'
-        - '&e[level] &bUp to 127, by default &e1'
-        - '&e[particles] &bShould show particles? &etrue&b/&efalse'
-        - '&e[ambient] &bParticles should have ambient flag? &etrue&b/&efalse'
-        - '&e[icon] &bShow icon on top-right corner? &etrue&b/&efalse &b(for 1.13+ only)'
-    remove:
-      params: '<effect>'
-      description:
-        - '&6&lRemove selected effect'
-  spawnereggtype:
-    description:
-      - '&6&lSet type of entity spawned by spawner egg'
-      - ''
-      - '&e<type> &btype of the entity'
-      - '&bOnly some entity type are spawnable by eggs'
-    params: '<type>'
   tropicalfish:
     description:
       - '&6&lSet property of tropical fish bucket'
@@ -502,26 +597,6 @@ itemedit:
         - '&6&lSet tropical fish body color'
         - ''
         - '&e<color> &bbody color of the fish'
-  repaircost:
-    description:
-      - '&6&lEdit Anvil Repair Cost'
-      - ''
-      - '&e<cost> &blevels amount'
-      - '&b&lN.B. &banvil repair/rename price is always at least &e1'
-      - '&b&lN.B. &bthis command set base repair cost of the item, final levels cost on anvil is based what you do'
-      - '&bMore info at &eminecraft.gamepedia.com/Anvil/Mechanics'
-    params: '<cost>'
-  itemmodel:
-    description:
-      - '&6&lEdit item model'
-      - ''
-      - '&e<namespaced key> &bkey to set for texture reference'
-      - '&bExample: /ie itemmodel &eiron_sword'
-      - '&bExample: /ie itemmodel &eminecraft:iron_sword'
-      - ''
-      - '&e<namespace>&b:&e<id> &bwill reference model:'
-      - '  /assets/&e<namespace>&b/models/item/&e<id>'
-    params: '<namespaced key>'
   listaliases:
     description:
       - '&6&lShows allowed aliases parameters'
@@ -535,12 +610,6 @@ itemedit:
     hover_info: '&9Original value: &e%default%'
     hover_type: '&6Click to examine'
     error-pre-hover: "&6&lAliases:"
-  goathornsound:
-    description:
-      - '&6&lSet Goat Horn sound'
-      - ''
-      - '&e<type> &bthe type of sound'
-    params: '<type>'
   armortrim:
     description:
       - '&6&lSet Armor Trim'
@@ -575,38 +644,6 @@ itemedit:
       - '&bAn item with fire resistance won''t be destroyed'
       - '&b when falling into fire and will float over lava'
     params: '[true/false]'
-  glow:
-    description:
-      - '&6&lOverride enchantment glow effect'
-      - ''
-      - '&e[true/false/default] &bset the value, by default toggle'
-      - ''
-      - '&b&lTip: &edefault &brestore vanilla behavior'
-    params: '[true/false/default]'
-  maxstacksize:
-    description:
-      - '&6&lSets item max stack size'
-      - ''
-      - '&e[1-99/default] &bset the flag value'
-      - ''
-      - '&edefault &bwill restore common stack size which is &e64'
-      - '&b for most items, &e1&b for armors and tools, and other'
-      - '&b values for a few items'
-    params: '[1-99/default]'
-  rarity:
-    description:
-      - '&6&lSets item rarity'
-      - ''
-      - '&e[rarity] &bset item rarity'
-      - ''
-      - '&b&lTip: setting no rarity value will restore default'
-    params: '[rarity]'
-  maxdurability:
-    description:
-      - '&6&lSets item max durability'
-      - ''
-      - '&e<max durability> &bitem new durability value, must be bigger than 1'
-    params: '<max durability>'
   glider:
     description:
       - '&6&lSet Glider state'
@@ -614,21 +651,6 @@ itemedit:
       - '&bGlider item should allow gliding like on elytras'
       - '&e[true/false] &bset glider value, by default toggle'
     params: '[true/false]'
-  tooltipstyle:
-    description:
-      - '&6&lEdit item tooltip style'
-      - ''
-      - '&e<style> &bkey to set for texture reference'
-      - '&b  style is composed by <namespace>:<id>'
-      - '&bExample: /ie tooltipstyle &emy_style'
-      - '&bExample: /ie tooltipstyle &eminecraft:my_style'
-      - '&bwhere minecraft is the <namespace> and'
-      - '&bmy_style is the <id>'
-      - '&bwhen set, this item can use custom sprites for'
-      - '&bits tooltip background and frame.'
-      - '&b<namespace>:tooltip/<id>_background'
-      - '&band <namespace>:tooltip/<id>_frame'
-    params: '<style/clear>'
   equipment:
     description:
       - '&6&lSets equipment property of the item'

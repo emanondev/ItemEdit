@@ -3,12 +3,10 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -24,18 +22,17 @@ public class ToolTipStyle extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+        ItemBuilder item = new ItemBuilder(getItemInHand(p));
         if (args.length != 2) {
             onFail(sender, alias);
             return;
         }
 
-        ItemMeta meta = ItemUtils.getMeta(item);
-
         String value = args[1].toLowerCase(Locale.ENGLISH);
         if (value.equals("clear")) {
-            meta.setTooltipStyle(null);
-            item.setItemMeta(meta);
+
+            item.setTooltipStyle(null).build();
+            sendFeedback(p, "feedback-reset");
             return;
         }
         String pre;
@@ -47,8 +44,8 @@ public class ToolTipStyle extends SubCmd {
             pre = value.split(":")[0];
             post = value.split(":")[1];
         }
-        meta.setTooltipStyle(new NamespacedKey(pre, post));
-        item.setItemMeta(meta);
+        item.setTooltipStyle(new NamespacedKey(pre, post)).build();
+        onSuccess(p);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class ItemPiercingCommand extends AbstractCommand {
         this.registerSubCommand(() -> new SoundSubCommand(this, "hitsound",
                 ItemBuilder::setPiercingHitSound));
         this.registerSubCommand(() -> new SoundSubCommand(this, "sound",
-                ItemBuilder::setPiercingHitSound));
+                ItemBuilder::setPiercingSound));
     }
 
     public static ItemPiercingCommand get() {

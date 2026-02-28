@@ -24,7 +24,7 @@ public class BookEnchant extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+        ItemStack item = this.getItemInHand(p); //TODO use itemBuilder
         if (item.getType() == Material.BOOK) {
             item.setType(Material.ENCHANTED_BOOK);
         }

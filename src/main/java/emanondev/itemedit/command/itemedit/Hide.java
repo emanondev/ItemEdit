@@ -7,7 +7,7 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -15,8 +15,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -30,36 +28,35 @@ public class Hide extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+        ItemBuilder item = new ItemBuilder(getItemInHand(p));
         if ((args.length != 3) && (args.length != 2)) {
             onFail(p, alias);
             return;
         }
         try {
-            ItemMeta itemMeta = ItemUtils.getMeta(item);
             ItemFlag flag = Aliases.FLAG_TYPE.convertAlias(args[1]);
             if (flag == null) {
                 onWrongAlias(p, Aliases.FLAG_TYPE);
                 onFail(p, alias);
                 return;
             }
-            boolean add = args.length == 3 ? Aliases.BOOLEAN.convertAlias(args[2]) : !itemMeta.hasItemFlag(flag);
-            handleFlagChange(add, flag, item, itemMeta);
-
-            if (add) {
-                itemMeta.addItemFlags(flag);
-            } else {
-                itemMeta.removeItemFlags(flag);
+            Boolean add = args.length == 3 ? Aliases.BOOLEAN.convertAlias(args[2]) : (Boolean) !item.hasItemFlag(flag);
+            if (add == null) {
+                onWrongAlias(p, Aliases.BOOLEAN);
+                onFail(p, alias);
+                return;
             }
+            handleFlagChange(add, flag, item);
 
-            item.setItemMeta(itemMeta);
+            item.setItemFlag(flag, add).build();
+            onSuccess(p, "%value%", Aliases.BOOLEAN.convertValue(add));
             updateView(p);
         } catch (Exception e) {
             onFail(p, alias);
         }
     }
 
-    private void handleFlagChange(boolean put, ItemFlag flag, ItemStack item, ItemMeta meta) {
+    private void handleFlagChange(boolean put, ItemFlag flag, ItemBuilder item) {
         if (!VersionUtils.hasPaperAPI() ||
                 !VersionUtils.isAfter(1, 20, 5) ||
                 !ItemEdit.get().getConfig().loadBoolean("itemedit.paper_hide_fix", true)) {
@@ -69,16 +66,16 @@ public class Hide extends SubCmd {
             return;
         }
         if (put) {
-            if (meta.getAttributeModifiers() != null) {
+            if (item.getAttributeModifiers() != null) {
                 return;
             }
             for (EquipmentSlot slot : EquipmentSlot.values()) {
-                item.getType().getDefaultAttributeModifiers(slot).forEach(meta::addAttributeModifier);
+                item.getType().getDefaultAttributeModifiers(slot).forEach(item::addAttributeModifier);
             }
             return;
         }
 
-        Multimap<Attribute, AttributeModifier> mods = meta.getAttributeModifiers();
+        Multimap<Attribute, AttributeModifier> mods = item.getAttributeModifiers();
         if (mods == null) {
             return;
         }
@@ -90,7 +87,7 @@ public class Hide extends SubCmd {
 
         if (mods.equals(mods2)) {
             for (EquipmentSlot slot : EquipmentSlot.values()) {
-                meta.removeAttributeModifier(slot);
+                item.removeAttributeModifier(slot).build();
             }
         }
     }

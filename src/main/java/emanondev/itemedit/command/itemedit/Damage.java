@@ -29,7 +29,7 @@ public class Damage extends SubCmd {
         }
         try {
             int amount = Integer.parseInt(args[1]); //TODO test bounds <0 >maxDurability
-            item.setDurability(amount);
+            item.setDamage(amount).build();
             updateView(p);
             if (amount == 0) {
                 sendFeedback(p, "feedback-reset");

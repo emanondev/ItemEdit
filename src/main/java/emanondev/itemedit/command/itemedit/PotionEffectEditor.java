@@ -6,14 +6,12 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import emanondev.itemedit.utility.VersionUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
@@ -34,9 +32,9 @@ public class PotionEffectEditor extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
-        if (!(ItemUtils.getMeta(item) instanceof PotionMeta)
-                && (VersionUtils.isUpTo(1, 14) || !(ItemUtils.getMeta(item) instanceof SuspiciousStewMeta))) {
+        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+        if (!item.isMetaClass(PotionMeta.class)
+                && (VersionUtils.isUpTo(1, 14) || !item.isMetaClass(SuspiciousStewMeta.class))) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_potion_effect_applicable");
             if (p.hasPermission("itemedit.admin")) {
                 String msg = this.translate("itemtag-tip", sender);
@@ -55,11 +53,16 @@ public class PotionEffectEditor extends SubCmd {
             onFail(p, alias);
             return;
         }
-        switch (args[1].toLowerCase(Locale.ENGLISH)) {
-            case "reset" -> potioneffectClear(p, item, alias, args);
-            case "add" -> potioneffectAdd(p, item, alias, args);
-            case "remove" -> potioneffectRemove(p, item, alias, args);
-            default -> onFail(p, alias);
+        try {
+            switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "reset" -> potioneffectReset(p, item, alias, args);
+                case "add" -> potioneffectAdd(p, item, alias, args);
+                case "remove" -> potioneffectRemove(p, item, alias, args);
+                default -> onFail(p, alias);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            onSubFail(p, alias, args[1].toLowerCase(Locale.ENGLISH));
         }
     }
 
@@ -101,106 +104,69 @@ public class PotionEffectEditor extends SubCmd {
         };
     }
 
-    private void potioneffectRemove(Player p, ItemStack item, String alias, String[] args) {
-        try {
-            if (args.length != 3) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-
-            PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2].toUpperCase());
-            if (effect == null) {
-                onWrongAlias(p, Aliases.POTION_EFFECT);
-                onSubFail(p, alias, "remove");
-                return;
-            }
-
-            ItemMeta rawMeta = ItemUtils.getMeta(item);
-            if (rawMeta instanceof PotionMeta) {
-                PotionMeta meta = (PotionMeta) rawMeta;
-                meta.removeCustomEffect(effect);
-                item.setItemMeta(meta);
-            } else {
-                SuspiciousStewMeta meta = (SuspiciousStewMeta) rawMeta;
-                meta.removeCustomEffect(effect);
-                item.setItemMeta(meta);
-            }
-            updateView(p);
-        } catch (Exception e) {
+    private void potioneffectRemove(Player p, ItemBuilder item, String alias, String[] args) {
+        if (args.length != 3) {
             onSubFail(p, alias, "remove");
         }
+
+        PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2].toUpperCase());
+        if (effect == null) {
+            onWrongAlias(p, Aliases.POTION_EFFECT);
+            onSubFail(p, alias, "remove");
+            return;
+        }
+
+        item.removeCustomEffect(effect).build();
+        onSubSuccess(p, "remove");
+        updateView(p);
     }
 
-    private void potioneffectAdd(Player p, ItemStack item, String alias, String[] args) {
-        try {
-            if (args.length != 4 && args.length != 5 && args.length != 6 && args.length != 7 && args.length != 8) {
-                throw new IllegalArgumentException("Wrong param number");
-            }
-
-            int level = 0;
-            PotionEffectType effect = Aliases.POTION_EFFECT.convertAlias(args[2]);
-            if (effect == null) {
-                onWrongAlias(p, Aliases.POTION_EFFECT);
-                onSubFail(p, alias, "add");
-                return;
-            }
-            int duration = UtilLegacy.readPotionEffectDurationSecondsToTicks(args[3]);
-            if (args.length >= 5) {
-                level = Integer.parseInt(args[4]) - 1;
-                if ((level < 0) || (level > 127)) {
-                    throw new IllegalArgumentException();
-                }
-            }
-            boolean particles = true;
-            if (args.length >= 6) {
-                particles = Aliases.BOOLEAN.convertAlias(args[5]);
-            }
-            boolean ambient = false;
-            if (args.length >= 7) {
-                ambient = Aliases.BOOLEAN.convertAlias(args[6]);
-            }
-            boolean icon = true;
-            if (VersionUtils.isAfter(1, 13) && args.length == 8) {
-                icon = Aliases.BOOLEAN.convertAlias(args[7]);
-            }
-            if (!p.hasPermission(this.getPermission() + ".bypass_limits")) {
-                level = Math.min(level, 1);
-            }
-
-
-            ItemMeta rawMeta = ItemUtils.getMeta(item);
-            if (rawMeta instanceof PotionMeta) {
-                PotionMeta meta = (PotionMeta) rawMeta;
-                if (VersionUtils.isAfter(1, 13)) {
-                    meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles, icon), true);
-                } else {
-                    meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles), true);
-                }
-                item.setItemMeta(meta);
-            } else {
-                SuspiciousStewMeta meta = (SuspiciousStewMeta) rawMeta;
-                meta.addCustomEffect(new PotionEffect(effect, duration, level, ambient, particles, icon), true);
-                item.setItemMeta(meta);
-            }
-            updateView(p);
-        } catch (Exception e) {
+    private void potioneffectAdd(Player p, ItemBuilder item, String alias, String[] args) {
+        if (args.length != 4 && args.length != 5 && args.length != 6 && args.length != 7 && args.length != 8) {
             onSubFail(p, alias, "add");
         }
+
+        int level = 0;
+        PotionEffectType type = Aliases.POTION_EFFECT.convertAlias(args[2]);
+        if (type == null) {
+            onWrongAlias(p, Aliases.POTION_EFFECT);
+            onSubFail(p, alias, "add");
+            return;
+        }
+        int duration = UtilLegacy.readPotionEffectDurationSecondsToTicks(args[3]);
+        if (args.length >= 5) {
+            level = Integer.parseInt(args[4]) - 1;
+            if ((level < 0) || (level > 127)) {
+                throw new IllegalArgumentException();
+            }
+        }
+        boolean particles = true;
+        if (args.length >= 6) {
+            particles = Aliases.BOOLEAN.convertAlias(args[5]);
+        }
+        boolean ambient = false;
+        if (args.length >= 7) {
+            ambient = Aliases.BOOLEAN.convertAlias(args[6]);
+        }
+        boolean icon = true;
+        if (VersionUtils.isAfter(1, 13) && args.length == 8) {
+            icon = Aliases.BOOLEAN.convertAlias(args[7]);
+        }
+        if (!p.hasPermission(this.getPermission() + ".bypass_limits")) {
+            level = Math.min(level, 1);
+        }
+        PotionEffect effect = VersionUtils.isAfter(1, 13) ?
+                new PotionEffect(type, duration, level, ambient, particles, icon) :
+                new PotionEffect(type, duration, level, ambient, particles);
+
+        item.addCustomEffect(effect).build();
+        onSubSuccess(p, "add");
+        updateView(p);
     }
 
-    private void potioneffectClear(Player p, ItemStack item, String alias, String[] args) {
-        try {
-            ItemMeta rawMeta = ItemUtils.getMeta(item);
-            if (rawMeta instanceof PotionMeta) {
-                PotionMeta meta = (PotionMeta) rawMeta;
-                meta.clearCustomEffects();
-                item.setItemMeta(meta);
-            } else {
-                SuspiciousStewMeta meta = (SuspiciousStewMeta) rawMeta;
-                meta.clearCustomEffects();
-                item.setItemMeta(meta);
-            }
-            updateView(p);
-        } catch (Exception ignored) {
-        }
+    private void potioneffectReset(Player p, ItemBuilder item, String alias, String[] args) {
+        item.clearCustomEffects().build();
+        onSubSuccess(p, "clear");
+        updateView(p);
     }
 }

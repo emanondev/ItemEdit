@@ -19,11 +19,10 @@ public class Reset extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player player = (Player) sender;
         ItemBuilder builder = new ItemBuilder(getItemInHand(player)).clearFoodComponent();
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            setItemInHand(player, builder.clearFoodComponent().build());
-        } else {
-            setItemInHand(player, builder.clearFoodComponent().clearConsumableComponent().build());
+        if (VersionUtils.isAfter(1, 21, 4)) {
+            builder.clearConsumableComponent();
         }
+        builder.build();
         onSuccess(player);
         updateView(player);
     }
