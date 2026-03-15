@@ -1,5 +1,6 @@
 package emanondev.itemedit.command.itemedit;
 
+import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -64,7 +65,7 @@ public class Banner extends SubCmd {
             onSubSuccess(p, "color");
             updateView(p);
         } catch (Exception e) {
-            e.printStackTrace();
+            Util.logCommandError(getCommand(),args, p);
             onSubFail(p, alias, "color");
         }
 
@@ -80,7 +81,7 @@ public class Banner extends SubCmd {
             onSubSuccess(p, "remove");
             updateView(p);
         } catch (Exception e) {
-            e.printStackTrace();
+            Util.logCommandError(getCommand(),args, p);
             onSubFail(p, alias, "remove");
         }
     }
@@ -107,7 +108,7 @@ public class Banner extends SubCmd {
         } catch (NumberFormatException n) {
             onSubFail(p, alias, "set");
         } catch (Exception e) {
-            e.printStackTrace();
+            Util.logCommandError(getCommand(),args, p);
             onSubFail(p, alias, "set");
         }
     }
@@ -134,7 +135,7 @@ public class Banner extends SubCmd {
             onSubSuccess(p, "add");
             updateView(p);
         } catch (Exception e) {
-            e.printStackTrace();
+            Util.logCommandError(getCommand(),args, p);
             onSubFail(p, alias, "add");
         }
     }

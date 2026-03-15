@@ -31,7 +31,8 @@ public abstract class SubCmd {
     @Getter
     private final boolean playerOnly;
     private final boolean checkNonNullItem;
-    private final AbstractCommand command;
+    @Getter
+    private @NotNull final AbstractCommand command;
     @Getter
     private @NotNull String name;
 
@@ -49,12 +50,8 @@ public abstract class SubCmd {
                 + command.getName() + "." + this.id;
     }
 
-    public @NotNull AbstractCommand getCommand() {
-        return command;
-    }
-
     public @NotNull APlugin getPlugin() {
-        return command.getPlugin();
+        return getCommand().getPlugin();
     }
 
     public boolean checkNonNullItem() {

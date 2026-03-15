@@ -46,7 +46,7 @@ public class ItemEditCommand extends AbstractCommand {
 
         this.registerSubCommand(() -> new Damage(this));
         this.registerSubCommand(() -> new Banner(this));
-        this.registerSubCommand(() -> new ColorSubcommand(this));
+        this.registerSubCommand(() -> new Color(this));
         this.registerSubCommand(() -> new SkullOwner(this));
         this.registerSubCommand(() -> new FireworkPower(this));
         this.registerSubCommand(() -> new Firework(this));
@@ -63,7 +63,7 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new AxolotlVariant(this), VersionUtils.isAfter(1, 17)); // 1.17+
 
         this.registerSubCommand(() -> new GoatHornSound(this), VersionUtils.isAfter(1, 19, 3)); // 1.19.3+
-        this.registerSubCommand(() -> new Trim(this), VersionUtils.isAfter(1, 20)); // 1.20+
+        this.registerSubCommand(() -> new ArmorTrim(this), VersionUtils.isAfter(1, 20)); // 1.20+
         this.registerSubCommand(() -> new BookEnchant(this));
 
         //as last

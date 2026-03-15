@@ -61,7 +61,7 @@ public class PotionEffectEditor extends SubCmd {
                 default -> onFail(p, alias);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Util.logCommandError(getCommand(),args, p);
             onSubFail(p, alias, args[1].toLowerCase(Locale.ENGLISH));
         }
     }

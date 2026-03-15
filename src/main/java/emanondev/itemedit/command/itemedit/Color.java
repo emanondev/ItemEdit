@@ -1,11 +1,11 @@
 package emanondev.itemedit.command.itemedit;
 
+import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.gui.ColorGui;
 import emanondev.itemedit.utility.ItemBuilder;
 import emanondev.itemedit.utility.VersionUtils;
-import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -18,13 +18,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
-public class ColorSubcommand extends SubCmd {
+public class Color extends SubCmd {
     private final String tippedArrowPerm;
     private final String potionPerm;
     private final String leatherPerm;
     private final String starsPerm;
 
-    public ColorSubcommand(@NotNull ItemEditCommand cmd) {
+    public Color(@NotNull ItemEditCommand cmd) {
         super("color", cmd, true, true);
         tippedArrowPerm = getPermission() + ".tipped_arrow";
         potionPerm = getPermission() + ".potion";
@@ -36,7 +36,7 @@ public class ColorSubcommand extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemBuilder item = new ItemBuilder(this.getItemInHand(p));
-        String perm = calculatePermission(item);
+        String perm = calculatePermission(item, args,p);
         if (perm == null) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_rgb_colorable");
             return;
@@ -56,9 +56,9 @@ public class ColorSubcommand extends SubCmd {
             return;
         }
 
-        Color color;
+        org.bukkit.Color color;
         try {
-            color = Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
+            color = org.bukkit.Color.fromRGB(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
         } catch (NumberFormatException e) {
             onFail(p, alias);
             return;
@@ -87,7 +87,7 @@ public class ColorSubcommand extends SubCmd {
         updateView(p);
     }
 
-    private String calculatePermission(ItemBuilder item) {
+    private String calculatePermission(ItemBuilder item,String[] args, Player p) {
         if (item.isMetaClass(LeatherArmorMeta.class)) {
             return leatherPerm;
         } else if (item.isMetaClass(FireworkEffectMeta.class)) {
@@ -98,8 +98,7 @@ public class ColorSubcommand extends SubCmd {
             } else if (item.getType().name().contains("POTION")) {
                 return potionPerm;
             } else {
-                //TODO log issue
-                new IllegalStateException("unhandled kind " + item.getType().name()).printStackTrace();
+                Util.logCommandError(getCommand(),args, p);
                 return potionPerm;
             }
         }

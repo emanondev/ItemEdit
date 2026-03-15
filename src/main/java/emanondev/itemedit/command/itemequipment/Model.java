@@ -28,7 +28,8 @@ public class Model extends SubCmd {
             return;
         }
         if (args.length != 2) {
-            throw new IllegalArgumentException("Wrong param number");
+            onFail(p,alias);
+            return;
         }
         String[] rawKey = args[1].toLowerCase(Locale.ENGLISH).split(":");
         NamespacedKey key = rawKey.length == 1 ? new NamespacedKey(NamespacedKey.MINECRAFT, rawKey[0]) :

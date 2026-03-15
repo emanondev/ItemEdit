@@ -26,18 +26,14 @@ public class Type extends SubCmd {
             onFail(p, alias);
             return;
         }
-        try {
-            Material mat = Material.valueOf(args[1].toUpperCase());
-            if (mat == Material.AIR) {
-                onFail(p, alias);
-                return;
-            }
-            item.setType(mat);
-            updateView(p);
-        } catch (Exception e) {
+        Material mat = Material.valueOf(args[1].toUpperCase());
+        if (mat == Material.AIR) {
             onFail(p, alias);
+            return;
         }
-
+        item.setType(mat);
+        updateView(p);
+        onSuccess(p);
     }
 
     @Override

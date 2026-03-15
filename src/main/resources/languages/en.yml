@@ -477,16 +477,78 @@ itemedit:
     params: '<style/clear>'
     feedback: '&9[&fItemEdit&9] &aUpdated tooltip style'
     feedback-reset: '&9[&fItemEdit&9] &aReset tooltip style'
-  help:
-    header: "&9&lItemEdit - Help"
-    header-sub: "&9&lItemEdit %sub% - Help"
-    footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
+  armortrim:
+    description:
+      - '&6&lSet Armor Trim'
+      - ''
+      - '&e<material> &bthe trim material'
+      - '&e<pattern> &bthe trim pattern'
+    params: '<material> <pattern>'
+    feedback: '&9[&fItemEdit&9] &aUpdated Trim'
+    feedback-reset: '&9[&fItemEdit&9] &aTrim removed'
+  tropicalfish:
+    description:
+      - '&6&lSet property of tropical fish bucket'
+      - ''
+      - '&epattern <pattern type> &b- type of fish'
+      - '&epatterncolor <color> &b- pattern color of fish'
+      - '&ebodycolor <color> &b- body color of fish'
+    params: '[...]'
+    pattern:
+      params: '<type>'
+      description:
+        - '&6&lSet tropical fish pattern type'
+        - ''
+        - '&e<type> &bpattern type of the fish'
+      feedback: '&9[&fItemEdit&9] &aUpdated Pattern'
+    patterncolor:
+      params: '<color>'
+      description:
+        - '&6&lSet tropical fish pattern color'
+        - ''
+        - '&e<color> &bpattern color of the fish'
+      feedback: '&9[&fItemEdit&9] &aUpdated Color'
+    bodycolor:
+      params: '<color>'
+      description:
+        - '&6&lSet tropical fish body color'
+        - ''
+        - '&e<color> &bbody color of the fish'
+      feedback: '&9[&fItemEdit&9] &aUpdated Color'
+  type:
+    description:
+      - '&6&lSet item''s type'
+      - ''
+      - '&b&lN.B. &ba few types as Air won''t work'
+    params: '<type>'
+  #link commands
   food:
     description:
       - '&6&lSets food property of the item'
       - ''
       - '&bTip: Use /itemfood or /if'
       - '&bN.B. your drinkable items cannot be eaten'
+  equipment:
+    description:
+      - '&6&lSets food property of the item'
+      - ''
+      - '&bTip: Use /itemequip or /iee'
+      - '&bN.B. your drinkable items cannot be eaten'
+  kinetic:
+    description:
+      - '&6&lSets kinetic property of the item'
+      - ''
+      - '&bTip: Use /itemkinetic or /iek'
+  piercing:
+    description:
+      - '&6&lSets piercing property of the item'
+      - ''
+      - '&bTip: Use /itempiercing or /iep'
+  #help
+  help:
+    header: "&9&lItemEdit - Help"
+    header-sub: "&9&lItemEdit %sub% - Help"
+    footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
   rename:
     description:
       - '&6&lSet item''s name'
@@ -545,12 +607,6 @@ itemedit:
         - ''
         - '&bExample 2: &e/ie lore replace {Heavy} {Very light}'
         - '&b''&eHeavy sword&b'' -> ''&eVery light sword&b'''
-  type:
-    description:
-      - '&6&lSet item''s type'
-      - ''
-      - '&b&lN.B. &ba few types as Air won''t work'
-    params: '<type>'
   unbreakable:
     description:
       - '&6&lSet unbreakable state'
@@ -571,32 +627,6 @@ itemedit:
       - '&bAuthor name may contains spaces and be colored too'
       - '&bWorks only on Written books'
     params: '<name>'
-  tropicalfish:
-    description:
-      - '&6&lSet property of tropical fish bucket'
-      - ''
-      - '&epattern <pattern type> &b- type of fish'
-      - '&epatterncolor <color> &b- pattern color of fish'
-      - '&ebodycolor <color> &b- body color of fish'
-    params: '[...]'
-    pattern:
-      params: '<type>'
-      description:
-        - '&6&lSet tropical fish pattern type'
-        - ''
-        - '&e<type> &bpattern type of the fish'
-    patterncolor:
-      params: '<color>'
-      description:
-        - '&6&lSet tropical fish pattern color'
-        - ''
-        - '&e<color> &bpattern color of the fish'
-    bodycolor:
-      params: '<color>'
-      description:
-        - '&6&lSet tropical fish body color'
-        - ''
-        - '&e<color> &bbody color of the fish'
   listaliases:
     description:
       - '&6&lShows allowed aliases parameters'
@@ -610,13 +640,6 @@ itemedit:
     hover_info: '&9Original value: &e%default%'
     hover_type: '&6Click to examine'
     error-pre-hover: "&6&lAliases:"
-  armortrim:
-    description:
-      - '&6&lSet Armor Trim'
-      - ''
-      - '&e<material> &bthe trim material'
-      - '&e<pattern> &bthe trim pattern'
-    params: '<material> <pattern>'
   bookenchant:
     description:
       - '&6&lSet enchants on the book'
@@ -651,120 +674,120 @@ itemedit:
       - '&bGlider item should allow gliding like on elytras'
       - '&e[true/false] &bset glider value, by default toggle'
     params: '[true/false]'
-  equipment:
+equipment:
+  description:
+    - '&6&lSets equipment property of the item'
+    - ''
+    - '&bTip: type &e/ie equipment&b for more info'
+  params: '<slot/...>'
+  help-header: '&9&lItemEdit Equipment - Help'
+  model:
     description:
-      - '&6&lSets equipment property of the item'
+      - '&6&lSets texture model'
       - ''
-      - '&bTip: type &e/ie equipment&b for more info'
-    params: '<slot/...>'
-    help-header: '&9&lItemEdit Equipment - Help'
-    model:
-      description:
-        - '&6&lSets texture model'
-        - ''
-        - '&e[key] &bNamespaced ID of the equipment model to use when equipped'
-      params: "[key]"
-      feedback: "&aEquipment model is now &e%key%"
-      feedback-reset: "&aEquipment model has been reset"
-    slot:
-      description:
-        - '&6&lSets equippable slot'
-        - ''
-        - '&e<slot> &bwhere the item can be equipped'
-      params: "<slot>"
-      feedback: "&aEquipment Slot is now &e%value%"
-    swappable:
-      description:
-        - '&6&lSets the item swappable'
-        - ''
-        - '&e[true/false] &btrue for the item to be swappable'
-      params: "[true/false]"
-      feedback: "&aSwappable property is now &e%value%"
-    allowedentities:
-      invalid-type: '&4[&cItemEdit&4] &cThe value &6%value% &cis neither a valid entity nor a valid group of entities'
-      description:
-        - '&6&lSets entity types allowed to wear this equipment'
-        - ''
-        - '&e[entity] &bwhich entity type'
-        - '&e[group] &bwhich entity group'
-        - ''
-        - '&bAll selected types are added'
-      params: "[entity/group] [entity/group] ..."
-      feedback: "&aAllowed entity types are now: &e%value%"
-      feedback-reset: "&aAllowed entity types have been reset"
-    equipsound:
-      description:
-        - '&6&lSets equipping sound'
-        - ''
-        - '&e[sound] &bwhich sound should be made'
-      params: "[sound]"
-      feedback: "&aEquip sound property is now &e%value%"
-      feedback-reset: "&aEquip sound property has been reset to default"
-    equiponinteract:
-      description:
-        - '&6&lSets equip on interaction'
-        - ''
-        - '&e[true/false] &btrue to equip with interaction'
-      params: "[true/false]"
-      feedback: "&aEquip on interact property is now &e%value%"
-    shearsound:
-      description:
-        - '&6&lSets sound when item is removed by shear'
-        - ''
-        - '&e[sound] &bwhich sound should be made'
-        - '&bwhen it''s removed by shear, like pumpkin'
-        - '&bfor snowman'
-      params: "[sound]"
-      feedback: "&aShear sound is now &e%value%"
-      feedback-reset: "&aShear sound property has been reset to default"
-    canshear:
-      unsupported-version: '&4[&cItemEdit&4] &cYou server version (&6%value%&c) doesn''t support this feature'
-      description:
-        - '&6&lSets equip on interaction'
-        - ''
-        - '&e[true/false] &btrue be able to shear the'
-        - '&bequipment from and entity, like pumpkin'
-        - '&bfor snowman'
-      params: "[true/false]"
-      feedback: "&aCan shear property is now &e%value%"
-    dispensable:
-      description:
-        - '&6&lSets dispensable'
-        - ''
-        - '&e[true/false] &btrue to equip with dispenser'
-      params: "[true/false]"
-      feedback: "&aDispensable property is now &e%value%"
-    damageonhurt:
-      description:
-        - '&6&lSets damageable'
-        - ''
-        - '&e[true/false] &btrue to reduce durability with damage'
-        - ''
-        - '&bN.B. only item with max stack size of 1 can be damaged'
-        - '&b  use &e/ie maxstacksize 1'
-        - '&bTip: remember to set item max durability with'
-        - '  &e/ie maxdurability <amount>'
-      params: "[true/false]"
-      feedback: "&aDamage on hurt property is now &e%value%"
-      warning-maxstacksize: '&4[&cItemEdit&4] &cItem max stack size must be &61 &cto be damageable &4[&6click to fix&4]'
-    cameraoverlay:
-      description:
+      - '&e[key] &bNamespaced ID of the equipment model to use when equipped'
+    params: "[key]"
+    feedback: "&aEquipment model is now &e%key%"
+    feedback-reset: "&aEquipment model has been reset"
+  slot:
+    description:
+      - '&6&lSets equippable slot'
+      - ''
+      - '&e<slot> &bwhere the item can be equipped'
+    params: "<slot>"
+    feedback: "&aEquipment Slot is now &e%value%"
+  swappable:
+    description:
+      - '&6&lSets the item swappable'
+      - ''
+      - '&e[true/false] &btrue for the item to be swappable'
+    params: "[true/false]"
+    feedback: "&aSwappable property is now &e%value%"
+  allowedentities:
+    invalid-type: '&4[&cItemEdit&4] &cThe value &6%value% &cis neither a valid entity nor a valid group of entities'
+    description:
+      - '&6&lSets entity types allowed to wear this equipment'
+      - ''
+      - '&e[entity] &bwhich entity type'
+      - '&e[group] &bwhich entity group'
+      - ''
+      - '&bAll selected types are added'
+    params: "[entity/group] [entity/group] ..."
+    feedback: "&aAllowed entity types are now: &e%value%"
+    feedback-reset: "&aAllowed entity types have been reset"
+  equipsound:
+    description:
+      - '&6&lSets equipping sound'
+      - ''
+      - '&e[sound] &bwhich sound should be made'
+    params: "[sound]"
+    feedback: "&aEquip sound property is now &e%value%"
+    feedback-reset: "&aEquip sound property has been reset to default"
+  equiponinteract:
+    description:
+      - '&6&lSets equip on interaction'
+      - ''
+      - '&e[true/false] &btrue to equip with interaction'
+    params: "[true/false]"
+    feedback: "&aEquip on interact property is now &e%value%"
+  shearsound:
+    description:
+      - '&6&lSets sound when item is removed by shear'
+      - ''
+      - '&e[sound] &bwhich sound should be made'
+      - '&bwhen it''s removed by shear, like pumpkin'
+      - '&bfor snowman'
+    params: "[sound]"
+    feedback: "&aShear sound is now &e%value%"
+    feedback-reset: "&aShear sound property has been reset to default"
+  canshear:
+    unsupported-version: '&4[&cItemEdit&4] &cYou server version (&6%value%&c) doesn''t support this feature'
+    description:
+      - '&6&lSets equip on interaction'
+      - ''
+      - '&e[true/false] &btrue be able to shear the'
+      - '&bequipment from and entity, like pumpkin'
+      - '&bfor snowman'
+    params: "[true/false]"
+    feedback: "&aCan shear property is now &e%value%"
+  dispensable:
+    description:
+      - '&6&lSets dispensable'
+      - ''
+      - '&e[true/false] &btrue to equip with dispenser'
+    params: "[true/false]"
+    feedback: "&aDispensable property is now &e%value%"
+  damageonhurt:
+    description:
+      - '&6&lSets damageable'
+      - ''
+      - '&e[true/false] &btrue to reduce durability with damage'
+      - ''
+      - '&bN.B. only item with max stack size of 1 can be damaged'
+      - '&b  use &e/ie maxstacksize 1'
+      - '&bTip: remember to set item max durability with'
+      - '  &e/ie maxdurability <amount>'
+    params: "[true/false]"
+    feedback: "&aDamage on hurt property is now &e%value%"
+    warning-maxstacksize: '&4[&cItemEdit&4] &cItem max stack size must be &61 &cto be damageable &4[&6click to fix&4]'
+  cameraoverlay:
+    description:
       - '&6&lSets camera overlay'
       - ''
       - '&e[namespacedkey] &bwhich overlay you want'
       - '&bOverlays are set on texturepacks, the only vanilla'
       - '&boverlay is the minecraft:misc/pumpkinblur'
-      params: "[namespacedkey]"
-      feedback: "&aCamera overlay has been updated"
-      feedback-reset: "&aCamera overlay has been removed"
-      invalid-namespacedkey: "&cNamespacedkey &6%value% &c is invalid"
-    clear:
-      description:
-        - '&6&lCompletely remove equipment property on item'
-        - ''
-        - '&bOr restore defaults if item is a vanilla equipment'
-      params: ""
-      feedback: "&aEquipment properties have been reset to default"
+    params: "[namespacedkey]"
+    feedback: "&aCamera overlay has been updated"
+    feedback-reset: "&aCamera overlay has been removed"
+    invalid-namespacedkey: "&cNamespacedkey &6%value% &c is invalid"
+  clear:
+    description:
+      - '&6&lCompletely remove equipment property on item'
+      - ''
+      - '&bOr restore defaults if item is a vanilla equipment'
+    params: ""
+    feedback: "&aEquipment properties have been reset to default"
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:

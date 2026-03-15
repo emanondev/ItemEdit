@@ -10,6 +10,7 @@ import org.bukkit.block.banner.Pattern;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
@@ -21,6 +22,7 @@ import org.bukkit.inventory.meta.components.KineticWeaponComponent;
 import org.bukkit.inventory.meta.components.PiercingWeaponComponent;
 import org.bukkit.inventory.meta.components.consumable.ConsumableComponent;
 import org.bukkit.inventory.meta.components.consumable.effects.ConsumableEffect;
+import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
@@ -956,6 +958,34 @@ public class ItemBuilder {
 
     public ItemBuilder setTooltipStyle(NamespacedKey namespacedKey) {
         meta.setTooltipStyle(namespacedKey);
+        return this;
+    }
+
+    public ItemBuilder setTrim(ArmorTrim armorTrim) {
+        if (meta instanceof ArmorMeta armorMeta) {
+            armorMeta.setTrim(armorTrim);
+        }
+        return this;
+    }
+
+    public ItemBuilder setTropicalFishBodyColor(DyeColor color) {
+        if (meta instanceof TropicalFishBucketMeta tropicalFishBucketMeta) {
+            tropicalFishBucketMeta.setBodyColor(color);
+        }
+        return this;
+    }
+
+    public ItemBuilder setTropicalFishPatternColor(DyeColor color) {
+        if (meta instanceof TropicalFishBucketMeta tropicalFishBucketMeta) {
+            tropicalFishBucketMeta.setPatternColor(color);
+        }
+        return this;
+    }
+
+    public ItemBuilder setTropicalFishPattern(TropicalFish.Pattern pattern) {
+        if (meta instanceof TropicalFishBucketMeta tropicalFishBucketMeta) {
+            tropicalFishBucketMeta.setPattern(pattern);
+        }
         return this;
     }
 }

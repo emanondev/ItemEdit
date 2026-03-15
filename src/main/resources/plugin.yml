@@ -27,19 +27,19 @@ commands:
   itemeditfood:
     description: allows to edit item in hand
     usage: /itemeditfood
-    aliases: [ ief ]
+    aliases: [ if, ief, itemfood ]
   itemeditkinetic:
     description: allows to edit item in hand
     usage: /itemeditkinetic
-    aliases: [ iek ]
+    aliases: [ ik, iek, itemkinetic ]
   itemeditequipment:
     description: allows to edit item in hand
     usage: /itemeditequipment
-    aliases: [ iee ]
+    aliases: [ iee, iequip, itemequip ]
   itemeditpiercing:
     description: allows to edit item in hand
     usage: /itemeditpiercing
-    aliases: [ iep ]
+    aliases: [ iep, itempiercing ]
   itemeditinfo:
     description: display info of itemedit
     usage: /itemeditinfo

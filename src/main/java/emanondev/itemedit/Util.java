@@ -1,6 +1,8 @@
 package emanondev.itemedit;
 
+import emanondev.itemedit.command.AbstractCommand;
 import emanondev.itemedit.compability.Hooks;
+import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -12,6 +14,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,6 +47,13 @@ public final class Util {
         } else {
             sender.sendMessage(BaseComponent.toPlainText(message));
         }
+    }
+
+    public static void logCommandError(AbstractCommand command,String[] args, CommandSender sender) {
+        ItemStack item = sender instanceof Player p ? InventoryUtils.getItem(p, EquipmentSlot.HAND) : null;
+        command.getPlugin().log(ChatColor.RED + "ERROR when executing /" + command.getName()
+                + " " + String.join(" ", args) + " by " + sender.getName()
+                + " (with " + (item == null ? "nothing" : item) + " in hand)");
     }
 
     public static void logToFile(String message) {
@@ -212,82 +222,47 @@ public final class Util {
     }
 
     public static DyeColor getColorByData(byte color) {
-        switch (color) { //Silver
-            case 0:
-                return DyeColor.BLACK;
-            case 4:
-                return DyeColor.BLUE;
-            case 3:
-                return DyeColor.BROWN;
-            case 6:
-                return DyeColor.CYAN;
-            case 8:
-                return DyeColor.GRAY;
-            case 2:
-                return DyeColor.GREEN;
-            case 12:
-                return DyeColor.LIGHT_BLUE;
-            case 10:
-                return DyeColor.LIME;
-            case 13:
-                return DyeColor.MAGENTA;
-            case 14:
-                return DyeColor.ORANGE;
-            case 9:
-                return DyeColor.PINK;
-            case 5:
-                return DyeColor.PURPLE;
-            case 1:
-                return DyeColor.RED;
-            case 7:
-                return DyeColor.LIGHT_GRAY;
-            case 15:
-                return DyeColor.WHITE;
-            case 11:
-                return DyeColor.YELLOW;
-            default:
-                throw new IllegalStateException();
-        }
+        return switch (color) { //Silver
+            case 0 -> DyeColor.BLACK;
+            case 4 -> DyeColor.BLUE;
+            case 3 -> DyeColor.BROWN;
+            case 6 -> DyeColor.CYAN;
+            case 8 -> DyeColor.GRAY;
+            case 2 -> DyeColor.GREEN;
+            case 12 -> DyeColor.LIGHT_BLUE;
+            case 10 -> DyeColor.LIME;
+            case 13 -> DyeColor.MAGENTA;
+            case 14 -> DyeColor.ORANGE;
+            case 9 -> DyeColor.PINK;
+            case 5 -> DyeColor.PURPLE;
+            case 1 -> DyeColor.RED;
+            case 7 -> DyeColor.LIGHT_GRAY;
+            case 15 -> DyeColor.WHITE;
+            case 11 -> DyeColor.YELLOW;
+            default -> throw new IllegalStateException();
+        };
     }
 
     public static Byte getDataByColor(DyeColor color) {
-        switch (color.name()) { //Silver
-            case "BLACK":
-                return 0;
-            case "BLUE":
-                return 4;
-            case "BROWN":
-                return 3;
-            case "CYAN":
-                return 6;
-            case "GRAY":
-                return 8;
-            case "GREEN":
-                return 2;
-            case "LIGHT_BLUE":
-                return 12;
-            case "LIME":
-                return 10;
-            case "MAGENTA":
-                return 13;
-            case "ORANGE":
-                return 14;
-            case "PINK":
-                return 9;
-            case "PURPLE":
-                return 5;
-            case "RED":
-                return 1;
-            case "SILVER":
-            case "LIGHT_GRAY":
-                return 7;
-            case "WHITE":
-                return 15;
-            case "YELLOW":
-                return 11;
-            default:
-                throw new IllegalStateException();
-        }
+        return switch (color.name()) { //Silver
+            case "BLACK" -> 0;
+            case "BLUE" -> 4;
+            case "BROWN" -> 3;
+            case "CYAN" -> 6;
+            case "GRAY" -> 8;
+            case "GREEN" -> 2;
+            case "LIGHT_BLUE" -> 12;
+            case "LIME" -> 10;
+            case "MAGENTA" -> 13;
+            case "ORANGE" -> 14;
+            case "PINK" -> 9;
+            case "PURPLE" -> 5;
+            case "RED" -> 1;
+            case "SILVER", "LIGHT_GRAY" -> 7;
+            case "WHITE" -> 15;
+            case "YELLOW" -> 11;
+            default -> throw new IllegalStateException();
+        };
     }
 
     public static boolean isAllowedChangeLore(CommandSender sender, Material type) {

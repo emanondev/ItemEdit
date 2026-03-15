@@ -4,12 +4,10 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ArmorMeta;
-import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.jetbrains.annotations.NotNull;
@@ -18,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Trim extends SubCmd {
+public class ArmorTrim extends SubCmd {
 
-    public Trim(ItemEditCommand cmd) {
+    public ArmorTrim(ItemEditCommand cmd) {
         super("armortrim", cmd, true, true);
 
     }
@@ -28,14 +26,14 @@ public class Trim extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
-        if (!(ItemUtils.getMeta(item) instanceof ArmorMeta armorMeta)) {
+        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+        if (!item.isMetaClass(ArmorMeta.class)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_armor");
             return;
         }
         if (args.length == 2 && args[1].equalsIgnoreCase("clear")) {
-            armorMeta.setTrim(null);
-            item.setItemMeta(armorMeta);
+            item.setTrim(null).build();
+            sendFeedback(p,"feedback-reset");
             updateView(p);
             return;
         }
@@ -55,8 +53,8 @@ public class Trim extends SubCmd {
             onFail(p, alias);
             return;
         }
-        armorMeta.setTrim(new ArmorTrim(mat, patt));
-        item.setItemMeta(armorMeta);
+        item.setTrim(new org.bukkit.inventory.meta.trim.ArmorTrim(mat, patt)).build();
+        onSuccess(p);
         updateView(p);
     }
 

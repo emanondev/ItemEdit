@@ -1,15 +1,15 @@
 package emanondev.itemedit.command.itemedit;
 
+import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.DyeColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TropicalFish.Pattern;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.TropicalFishBucketMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,8 +27,8 @@ public class TropicalFish extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
-        if (!(ItemUtils.getMeta(item) instanceof TropicalFishBucketMeta)) {
+        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+        if (!item.isMetaClass(TropicalFishBucketMeta.class)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_tropical_fish_bucket");
             return;
         }
@@ -38,83 +38,70 @@ public class TropicalFish extends SubCmd {
             return;
         }
 
-        switch (args[1].toLowerCase(Locale.ENGLISH)) {
-            case "pattern" -> pattern(p, item, alias, args);
-            case "patterncolor" -> patternColor(p, item, alias, args);
-            case "bodycolor" -> bodyColor(p, item, alias, args);
-            default -> onFail(p, alias);
+        try {
+            switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "pattern" -> pattern(p, item, alias, args);
+                case "patterncolor" -> patternColor(p, item, alias, args);
+                case "bodycolor" -> bodyColor(p, item, alias, args);
+                default -> onFail(p, alias);
+            }
+        } catch (Exception e) {
+            Util.logCommandError(getCommand(),args, p);
+            onSubFail(p, alias, args[1].toLowerCase(Locale.ENGLISH));
         }
+
     }
 
-    private void bodyColor(Player p, ItemStack item, String alias, String[] args) {
+
+    private void bodyColor(Player p, ItemBuilder item, String alias, String[] args) {
         if (args.length != 3) {
             onSubFail(p, alias, "bodycolor");
             return;
         }
 
-        try {
-            TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
-
-            DyeColor color = Aliases.COLOR.convertAlias(args[2]);
-            if (color == null) {
-                onWrongAlias(p, Aliases.COLOR);
-                onSubFail(p, alias, "bodycolor");
-                return;
-            }
-            meta.setBodyColor(color);
-            item.setItemMeta(meta);
-            updateView(p);
-        } catch (Exception e) {
+        DyeColor color = Aliases.COLOR.convertAlias(args[2]);
+        if (color == null) {
+            onWrongAlias(p, Aliases.COLOR);
             onSubFail(p, alias, "bodycolor");
+            return;
         }
+        item.setTropicalFishBodyColor(color).build();
+        onSubSuccess(p,  "bodycolor");
+        updateView(p);
     }
 
-    private void patternColor(Player p, ItemStack item, String alias, String[] args) {
+    private void patternColor(Player p, ItemBuilder item, String alias, String[] args) {
         if (args.length != 3) {
             onSubFail(p, alias, "patterncolor");
             return;
         }
 
-        try {
-            TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
-
-            DyeColor color = Aliases.COLOR.convertAlias(args[2]);
-            if (color == null) {
-                onWrongAlias(p, Aliases.COLOR);
-                onSubFail(p, alias, "patterncolor");
-                return;
-            }
-            meta.setPatternColor(color);
-            item.setItemMeta(meta);
-            updateView(p);
-        } catch (Exception e) {
-            e.printStackTrace();
+        DyeColor color = Aliases.COLOR.convertAlias(args[2]);
+        if (color == null) {
+            onWrongAlias(p, Aliases.COLOR);
             onSubFail(p, alias, "patterncolor");
+            return;
         }
+        item.setTropicalFishPatternColor(color).build();
+        onSubSuccess(p,  "patterncolor");
+        updateView(p);
     }
 
-    private void pattern(Player p, ItemStack item, String alias, String[] args) {
+    private void pattern(Player p, ItemBuilder item, String alias, String[] args) {
         if (args.length != 3) {
             onSubFail(p, alias, "pattern");
             return;
         }
 
-        try {
-            TropicalFishBucketMeta meta = (TropicalFishBucketMeta) ItemUtils.getMeta(item);
-
-            Pattern pattern = Aliases.TROPICALPATTERN.convertAlias(args[2]);
-            if (pattern == null) {
-                onWrongAlias(p, Aliases.TROPICALPATTERN);
-                onSubFail(p, alias, "pattern");
-                return;
-            }
-            meta.setPattern(pattern);
-            item.setItemMeta(meta);
-            updateView(p);
-        } catch (Exception e) {
-            e.printStackTrace();
+        Pattern pattern = Aliases.TROPICALPATTERN.convertAlias(args[2]);
+        if (pattern == null) {
+            onWrongAlias(p, Aliases.TROPICALPATTERN);
             onSubFail(p, alias, "pattern");
+            return;
         }
+        item.setTropicalFishPattern(pattern).build();
+        onSubSuccess(p,  "pattern");
+        updateView(p);
     }
 
     @Override
