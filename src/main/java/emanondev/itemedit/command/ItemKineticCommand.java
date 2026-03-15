@@ -4,6 +4,9 @@ import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.command.itemkinetic.DamageConditions;
 import emanondev.itemedit.command.itemkinetic.DismountConditions;
 import emanondev.itemedit.command.itemkinetic.KnockbackConditions;
+import emanondev.itemedit.command.subcommands.DoubleSubCommand;
+import emanondev.itemedit.command.subcommands.IntSubCommand;
+import emanondev.itemedit.command.subcommands.SoundSubCommand;
 import emanondev.itemedit.utility.ItemBuilder;
 
 import java.util.List;

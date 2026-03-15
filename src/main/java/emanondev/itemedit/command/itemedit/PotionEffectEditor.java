@@ -61,7 +61,7 @@ public class PotionEffectEditor extends SubCmd {
                 default -> onFail(p, alias);
             }
         } catch (Exception e) {
-            Util.logCommandError(getCommand(),args, p);
+            Util.logCommandError(getCommand(), args, p);
             onSubFail(p, alias, args[1].toLowerCase(Locale.ENGLISH));
         }
     }
@@ -140,17 +140,32 @@ public class PotionEffectEditor extends SubCmd {
                 throw new IllegalArgumentException();
             }
         }
-        boolean particles = true;
+        Boolean particles = true;
         if (args.length >= 6) {
             particles = Aliases.BOOLEAN.convertAlias(args[5]);
+            if (particles == null) {
+                onWrongAlias(p, Aliases.BOOLEAN);
+                onSubFail(p, alias, "add");
+                return;
+            }
         }
-        boolean ambient = false;
+        Boolean ambient = false;
         if (args.length >= 7) {
             ambient = Aliases.BOOLEAN.convertAlias(args[6]);
+            if (ambient == null) {
+                onWrongAlias(p, Aliases.BOOLEAN);
+                onSubFail(p, alias, "add");
+                return;
+            }
         }
-        boolean icon = true;
+        Boolean icon = true;
         if (VersionUtils.isAfter(1, 13) && args.length == 8) {
             icon = Aliases.BOOLEAN.convertAlias(args[7]);
+            if (icon == null) {
+                onWrongAlias(p, Aliases.BOOLEAN);
+                onSubFail(p, alias, "add");
+                return;
+            }
         }
         if (!p.hasPermission(this.getPermission() + ".bypass_limits")) {
             level = Math.min(level, 1);

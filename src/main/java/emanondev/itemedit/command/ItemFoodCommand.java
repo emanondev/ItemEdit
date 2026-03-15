@@ -2,6 +2,10 @@ package emanondev.itemedit.command;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.command.itemfood.*;
+import emanondev.itemedit.command.subcommands.BooleanSubCommand;
+import emanondev.itemedit.command.subcommands.DoubleSubCommand;
+import emanondev.itemedit.command.subcommands.IntSubCommand;
+import emanondev.itemedit.command.subcommands.SoundSubCommand;
 import emanondev.itemedit.utility.ItemBuilder;
 import emanondev.itemedit.utility.VersionUtils;
 

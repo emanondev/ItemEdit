@@ -1,5 +1,7 @@
-package emanondev.itemedit.command;
+package emanondev.itemedit.command.subcommands;
 
+import emanondev.itemedit.command.AbstractCommand;
+import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
@@ -8,30 +10,18 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 
-public class IntSubCommand extends SubCmd {
+public class DoubleSubCommand extends SubCmd {
 
 
-    private final BiConsumer<ItemBuilder, Integer> apply;
-    private final BiFunction<String, Player, List<String>> suggestions;
+    private final BiConsumer<ItemBuilder, Double> apply;
+    private final List<String> suggestions;
 
-    public IntSubCommand(AbstractCommand command, String id, BiConsumer<ItemBuilder, Integer> apply) {
+    public DoubleSubCommand(AbstractCommand command, String id, BiConsumer<ItemBuilder, Double> apply) {
         this(command, id, apply, List.of());
     }
 
-    public IntSubCommand(AbstractCommand command,
-                         String id,
-                         BiConsumer<ItemBuilder, Integer> apply,
-                         List<String> suggestions) {
-
-        this(command, id, apply, (arg, supplier) -> CompleteUtility.complete(arg, suggestions));
-    }
-
-    public IntSubCommand(AbstractCommand command,
-                         String id,
-                         BiConsumer<ItemBuilder, Integer> apply,
-                         BiFunction<String, Player, List<String>> suggestions) {
+    public DoubleSubCommand(AbstractCommand command, String id, BiConsumer<ItemBuilder, Double> apply, List<String> suggestions) {
         super(id, command, true, true);
         this.apply = apply;
         this.suggestions = suggestions;
@@ -46,7 +36,7 @@ public class IntSubCommand extends SubCmd {
                 onFail(player, alias);
                 return;
             }
-            int value = Integer.parseInt(args[1]);
+            double value = Double.parseDouble(args[1]);
             ItemBuilder builder = new ItemBuilder(getItemInHand(player));
             apply.accept(builder, value);
             setItemInHand(player, builder.build());
@@ -59,6 +49,6 @@ public class IntSubCommand extends SubCmd {
     //command sound <sound>
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return args.length == 2 ? suggestions.apply(args[1], (Player) sender) : null;
+        return args.length == 2 ? CompleteUtility.complete(args[1], suggestions) : null;
     }
 }

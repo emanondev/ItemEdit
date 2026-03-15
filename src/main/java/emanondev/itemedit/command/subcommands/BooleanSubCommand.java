@@ -1,6 +1,8 @@
-package emanondev.itemedit.command;
+package emanondev.itemedit.command.subcommands;
 
 import emanondev.itemedit.aliases.Aliases;
+import emanondev.itemedit.command.AbstractCommand;
+import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;

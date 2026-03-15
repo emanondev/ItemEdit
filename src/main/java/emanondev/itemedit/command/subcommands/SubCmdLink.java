@@ -1,5 +1,7 @@
-package emanondev.itemedit.command;
+package emanondev.itemedit.command.subcommands;
 
+import emanondev.itemedit.command.AbstractCommand;
+import emanondev.itemedit.command.SubCmd;
 import lombok.Getter;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;

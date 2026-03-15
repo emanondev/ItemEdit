@@ -2,6 +2,8 @@ package emanondev.itemedit.command;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.command.itemequipment.*;
+import emanondev.itemedit.command.subcommands.BooleanSubCommand;
+import emanondev.itemedit.command.subcommands.SoundSubCommand;
 import emanondev.itemedit.utility.ItemBuilder;
 
 public class ItemEquipmentCommand extends AbstractCommand {
