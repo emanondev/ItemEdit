@@ -65,7 +65,7 @@ public class Banner extends SubCmd {
             onSubSuccess(p, "color");
             updateView(p);
         } catch (Exception e) {
-            Util.logCommandError(getCommand(),args, p);
+            Util.logCommandError(getCommand(), args, p);
             onSubFail(p, alias, "color");
         }
 
@@ -81,7 +81,7 @@ public class Banner extends SubCmd {
             onSubSuccess(p, "remove");
             updateView(p);
         } catch (Exception e) {
-            Util.logCommandError(getCommand(),args, p);
+            Util.logCommandError(getCommand(), args, p);
             onSubFail(p, alias, "remove");
         }
     }
@@ -108,7 +108,7 @@ public class Banner extends SubCmd {
         } catch (NumberFormatException n) {
             onSubFail(p, alias, "set");
         } catch (Exception e) {
-            Util.logCommandError(getCommand(),args, p);
+            Util.logCommandError(getCommand(), args, p);
             onSubFail(p, alias, "set");
         }
     }
@@ -135,7 +135,7 @@ public class Banner extends SubCmd {
             onSubSuccess(p, "add");
             updateView(p);
         } catch (Exception e) {
-            Util.logCommandError(getCommand(),args, p);
+            Util.logCommandError(getCommand(), args, p);
             onSubFail(p, alias, "add");
         }
     }

@@ -46,7 +46,7 @@ public class TropicalFish extends SubCmd {
                 default -> onFail(p, alias);
             }
         } catch (Exception e) {
-            Util.logCommandError(getCommand(),args, p);
+            Util.logCommandError(getCommand(), args, p);
             onSubFail(p, alias, args[1].toLowerCase(Locale.ENGLISH));
         }
 
@@ -66,7 +66,7 @@ public class TropicalFish extends SubCmd {
             return;
         }
         item.setTropicalFishBodyColor(color).build();
-        onSubSuccess(p,  "bodycolor");
+        onSubSuccess(p, "bodycolor");
         updateView(p);
     }
 
@@ -83,7 +83,7 @@ public class TropicalFish extends SubCmd {
             return;
         }
         item.setTropicalFishPatternColor(color).build();
-        onSubSuccess(p,  "patterncolor");
+        onSubSuccess(p, "patterncolor");
         updateView(p);
     }
 
@@ -100,7 +100,7 @@ public class TropicalFish extends SubCmd {
             return;
         }
         item.setTropicalFishPattern(pattern).build();
-        onSubSuccess(p,  "pattern");
+        onSubSuccess(p, "pattern");
         updateView(p);
     }
 

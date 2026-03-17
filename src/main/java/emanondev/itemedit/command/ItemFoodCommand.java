@@ -19,11 +19,23 @@ public class ItemFoodCommand extends AbstractCommand {
         super("itemeditfood", ItemEdit.get(), true);
         //version is >= 1.20.5
         this.registerSubCommand(() -> new DoubleSubCommand(this, "saturation",
-                (b, v) -> b.setSaturation(v.floatValue()), List.of("20", "40", "60")));
+                (b, v) -> {
+                    if (v != null && v >= 0) {
+                        b.setSaturation(v.floatValue());
+                        return true;
+                    }
+                    return false;
+                }, List.of("20", "40", "60")));
         this.registerSubCommand(() -> new BooleanSubCommand(this, "canalwayseat",
                 ItemBuilder::canAlwaysEat, ItemBuilder::setCanAlwaysEat));
         this.registerSubCommand(() -> new IntSubCommand(this, "eatticks",
-                (b, v) -> b.setConsumeSeconds(v / 20f), List.of("20", "40", "60")));
+                (b, v) -> {
+                    if (v == null || v >= 0) {
+                        return false;
+                    }
+                    b.setConsumeSeconds(v / 20f);
+                    return true;
+                }, List.of("20", "40", "60")));
         this.registerSubCommand(() -> new AddEffect(this),
                 VersionUtils.isAfter(1, 21, 4));//TODO
         this.registerSubCommand(() -> new RemoveEffect(this),

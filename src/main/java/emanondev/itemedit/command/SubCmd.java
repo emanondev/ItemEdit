@@ -32,7 +32,8 @@ public abstract class SubCmd {
     private final boolean playerOnly;
     private final boolean checkNonNullItem;
     @Getter
-    private @NotNull final AbstractCommand command;
+    private @NotNull
+    final AbstractCommand command;
     @Getter
     private @NotNull String name;
 
@@ -88,19 +89,6 @@ public abstract class SubCmd {
             fail.event(Util.craftHoverEvent(desc));
         }
         return fail.create();
-    }
-
-    protected void sendFeedbackForSub(CommandSender target,
-                                      @NotNull String subSubCommand,
-                                      String... holders) {
-        sendCustomFeedbackForSub(target, subSubCommand, "feedback", holders);
-    }
-
-    protected void sendCustomFeedbackForSub(CommandSender target,
-                                            @NotNull String subSubCommand,
-                                            @NotNull String feedbackPath,
-                                            String... holders) {
-        Util.sendMessage(target, this.translate(subSubCommand + "." + feedbackPath, target, holders));
     }
 
     protected void onSubFail(CommandSender target, String alias, String subSubCommand) {
@@ -197,6 +185,13 @@ public abstract class SubCmd {
         Util.sendMessage(target, this.translate(this.PATH + feedbackPath, target, holders));
     }
 
+    protected void sendSubFeedback(CommandSender target,
+                                   @NotNull String subSubCommand,
+                                   @NotNull String feedbackPath,
+                                   String... holders) {
+        Util.sendMessage(target, this.translate(this.PATH + subSubCommand + "." + feedbackPath, target, holders));
+    }
+
     protected void sendLanguageString(String path, CommandSender sender, String... holders) {
         Util.sendMessage(sender, translate(path, sender, holders));
     }
@@ -213,7 +208,6 @@ public abstract class SubCmd {
         return config.loadInteger(this.PATH + path, 0);
     }
 
-    @SuppressWarnings("deprecation")
     public @NotNull ComponentBuilder getHelp(@NotNull ComponentBuilder base, @NotNull CommandSender sender, @NotNull String alias) {
         String help = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + this.name + " ";
         String params = translateOrEmpty("params", sender);

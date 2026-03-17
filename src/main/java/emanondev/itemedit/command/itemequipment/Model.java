@@ -28,7 +28,7 @@ public class Model extends SubCmd {
             return;
         }
         if (args.length != 2) {
-            onFail(p,alias);
+            onFail(p, alias);
             return;
         }
         String[] rawKey = args[1].toLowerCase(Locale.ENGLISH).split(":");

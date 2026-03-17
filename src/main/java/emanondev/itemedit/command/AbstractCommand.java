@@ -149,7 +149,7 @@ public abstract class AbstractCommand implements TabExecutor {
                 subCmd.onCommand(sender, label, args);
             } catch (Throwable t) {
                 subCmd.onFail(sender, label);
-                Util.logCommandError(this,args, sender);
+                Util.logCommandError(this, args, sender);
             }
         }
         return true;

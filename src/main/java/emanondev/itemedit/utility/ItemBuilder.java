@@ -872,7 +872,7 @@ public class ItemBuilder {
 
     public ItemBuilder setItemFlags(ItemFlag[] values, boolean value) {
         for (ItemFlag itemFlag : values) {
-            setItemFlag(itemFlag,value);
+            setItemFlag(itemFlag, value);
         }
         return this;
     }
@@ -905,9 +905,9 @@ public class ItemBuilder {
 
     public ItemBuilder addCustomEffect(PotionEffect effect) {
         if (meta instanceof PotionMeta potionMeta) {
-            potionMeta.addCustomEffect(effect,true);
+            potionMeta.addCustomEffect(effect, true);
         } else if (meta instanceof SuspiciousStewMeta suspiciousStewMeta) {
-            suspiciousStewMeta.addCustomEffect(effect,true);
+            suspiciousStewMeta.addCustomEffect(effect, true);
         }
         return this;
     }

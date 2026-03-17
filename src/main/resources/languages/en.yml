@@ -61,134 +61,6 @@ generic:
     wrong-material_armor: '&4[&cItemEdit&4] &cItem must be an armor'
     wrong-material_enchantment_storage: '&4[&cItemEdit&4] &cItem must be a book or enchanted book'
     wrong-path: '&9[&fItemEdit&9] &cInvalid path, remember to reload the configuration and check the CaPs'
-itemeditfood:
-  help:
-    header: "&9&lItemFood - Help"
-    header-sub: "&9&lItemFood %sub% - Help"
-    footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
-  clear:
-    description:
-      - '&6&lCompletely remove food property on item'
-      - ''
-      - '&bOr restore defaults if item is a vanilla food'
-    params: ''
-  canalwayseat:
-    description:
-      - '&6&lSets whenever the item can be eaten'
-      - ''
-      - '&e[true/false] &bThe value to set, by default toggle'
-      - ''
-      - '&bUsually food require hunger to be eaten,'
-      - '&bsetting true will mimic golden apple behavior'
-    params: '[true/false]'
-  consumeparticles:
-    description:
-      - '&6&lSets whenever the item show particles when eaten'
-      - '&bOnly for &c1.21.2+'
-      - ''
-      - '&e[true/false] &bThe value to set, by default toggle'
-    params: '[true/false]'
-  animation:
-    description:
-      - '&6&lSets eat animation'
-      - '&bOnly for &c1.21.2+'
-      - ''
-      - '&e<animation> &bThe value to set, by default toggle'
-      - ''
-      - '&bSome animations are shown only on first person view,'
-      - '&bsome animations are shown only on third person view,'
-      - '&bsome animations are shown on both first and third person view'
-    params: '<animation>'
-  sound:
-    description:
-      - '&6&lSets eat sound'
-      - '&bOnly for &c1.21.2+'
-      - ''
-      - '&e<sound> &bThe value to set'
-    params: '<sound>'
-  eatticks:
-    description:
-      - '&6&lSets the time required to eat the item'
-      - ''
-      - '&e<ticks> &bThe amount of time to eat the item'
-      - '  &bmust be &e1 &bor bigger'
-      - ''
-      - '&e20 &bticks = &e1 &bsecond'
-    params: '<ticks>'
-  nutrition:
-    description:
-      - '&6&lSets recovered nutrition'
-      - ''
-      - '&e<amount> &bThe amount hunger to restore'
-      - '  &bmust be &e0 &bor bigger'
-      - ''
-      - '&bA full hunger bar is &e20'
-    params: '<amount>'
-  saturation:
-    description:
-      - '&6&lSets recovered saturation'
-      - ''
-      - '&e<amount> &bThe amount saturation to add'
-      - '  &bnegative values are allowed'
-      - ''
-      - '&bSaturation controls how fast food level'
-      - '&b  (nutrition) decrease'
-    params: '<amount>'
-  addeffect:
-    description:
-      - '&6&lAdd an effect to the item'
-      - ''
-      - '&e<type> &bThe potion effect type'
-      - '&e<duration> &bDuration as seconds of the effect'
-      - '  &btype &einfinite &bfor permanent effect'
-      - '&e[level] &blevel of the effect, &e1&b by default'
-      - '&e[particles] &bthe effect show particles?'
-      - '&e[ambient] &bthe effect is ambient?'
-      - '&e[icon] &bthe effect show icon on top right corner?'
-      - '&e[chance] &bwhat''s the % chance to apply the effect?'
-      - '  &bmust be bigger than &e0&b and lower equals to &e100'
-    params: '<type> <duration> [level] [particles] [ambient] [icon] [chance]'
-  removeeffect:
-    description:
-      - '&6&lRemove an effect from the item'
-      - ''
-      - '&e<type> &bThe potion effect type'
-      - '&e[level] &blevel of the effect to remove'
-      - '  &bif omitted remove all the effects of selected'
-      - '  &btype regardless of level'
-    params: '<type> [level]'
-  cleareffects:
-    description:
-      - '&6&lRemove effects from the item'
-    params: ''
-  info:
-    not_food: "&9[&fItemEdit&9] &bItem has no food property or has default property"
-    message:
-      - '&9[&fItemEdit&9] &2&lItem Food Property'
-      - '&aEat time: &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
-      - '&aRestore Hunger: &e%nutrition% &8| &aSaturation: &e%saturation%&a '
-      - '&aAnimation: &e%animation% &8| &aSound: &e%sound% &8| &aParticles: &e%consumeparticles%'
-      - '&aEatable when full: &e%canalwayseat% &8| &aWhen eaten obtain: &e%convertto%'
-    apply_effect_prefix:
-      - '&2&lContains &e&l%effects%&2&l possible potion effects:'
-    apply_effect:
-      - '&a%index%. Type: &e&b%type% &8| &aLv: &e%level% &8| &aDuration: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
-      - '&a   Particles: &e%hasparticle% &8| &aAmbient: &e%isambient% &8| &aIcon: &e%hasicon% &8| &aChance: &e%chance_perc%&a%'
-    description:
-      - '&6&lDescribe current food info for item'
-    params: ''
-  convertto:
-    description:
-      - '&6&lSets an item give when food is consumed'
-      - '&bOnly for &c1.21+'
-      - ''
-      - '&e[type/serveritem id] &bthe item to return'
-      - '  &byou can set a Material or you can'
-      - '  &bselect an item from ServerItem saved items'
-      - ''
-      - '&bMimic bucket milk behavior where a bucket is'
-      - '&breturned when milk is consumed'
-    params: '[type/serveritem id]'
 itemedit:
   amount:
     description:
@@ -257,6 +129,37 @@ itemedit:
       description:
         - '&6&lChange pattern color on selected line'
       feedback: '&9[&fItemEdit&9] &aPattern recolored'
+  bookauthor:
+    description:
+      - '&6&lSet author'
+      - ''
+      - '&bAuthor name may contains spaces and be colored too'
+      - '&bWorks only on Written books'
+    params: '<name>'
+    feedback: '&9[&fItemEdit&9] &aUpdated book author'
+    feedback-reset: '&9[&fItemEdit&9] &aReset book author'
+  bookenchant:
+    description:
+      - '&6&lSet enchants on the book'
+      - '&bThe difference between enchant and bookenchant is that'
+      - '&ba book with enchant fire aspect sets hit targets on fire'
+      - '&bwhile a book with bookenchant doesn''t'
+      - ''
+      - '&e<enchant> &benchant type'
+      - '&e[level] &blevel of the enchant, by default &e1'
+      - ''
+      - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
+    params: '<enchant> [level]'
+    feedback-removed: '&9[&fItemEdit&9] &aRemoved book enchantment &e%enchant%'
+    feedback: '&9[&fItemEdit&9] &aApplied book enchantment &e%enchant% &alv &e%lv%'
+  booktype:
+    description:
+      - '&6&lSet book type'
+      - ''
+      - '&bWorks only on Written books'
+    params: '<booktype>'
+    feedback: '&9[&fItemEdit&9] &aUpdated book generation to &e%generation%'
+    feedback-reset: '&9[&fItemEdit&9] &aReset book generation'
   color:
     description:
       - '&6&lSet color'
@@ -299,6 +202,12 @@ itemedit:
     params: '<durability>'
     feedback-reset: '&9[&fItemEdit&9] &aDurability restored'
     feedback: '&9[&fItemEdit&9] &aDurability updated'
+  equipment:
+    description:
+      - '&6&lSets food property of the item'
+      - ''
+      - '&bTip: Use /itemequip or /iee'
+      - '&bN.B. your drinkable items cannot be eaten'
   enchant:
     description:
       - '&6&lSet enchants'
@@ -308,8 +217,18 @@ itemedit:
       - ''
       - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
     params: '<enchant> [level]'
-    feedback-removed: '&9[&fItemEdit&9] &aRemoved enchant'
-    feedback: '&9[&fItemEdit&9] &aEnchantment applied'
+    feedback-removed: '&9[&fItemEdit&9] &aRemoved enchantment &e%enchant%'
+    feedback: '&9[&fItemEdit&9] &aApplied enchantment &e%enchant% &alv &e%lv%'
+  fireresistent:
+    description:
+      - '&6&lSet item resistence to fire/lava'
+      - ''
+      - '&e[true/false] &bset the value, by default toggle'
+      - ''
+      - '&bAn item with fire resistance won''t be destroyed'
+      - '&b when falling into fire and will float over lava'
+    params: '[true/false]'
+    feedback: '&9[&fItemEdit&9] &aFire resistance set to &e%value%'
   fireworkpower:
     description:
       - '&6&lSet firework power'
@@ -321,6 +240,20 @@ itemedit:
     description:
       - '&6&lEdit firework with a GUI'
     params: ''
+  food:
+    description:
+      - '&6&lSets food property of the item'
+      - ''
+      - '&bTip: Use /itemfood or /if'
+      - '&bN.B. your drinkable items cannot be eaten'
+  glider:
+    description:
+      - '&6&lSet Glider state'
+      - ''
+      - '&bGlider item should allow gliding like on elytras'
+      - '&e[true/false] &bset glider value, by default toggle'
+    params: '[true/false]'
+    feedback: '&9[&fItemEdit&9] &aUpdated Gliding set to &e%value%'
   glow:
     description:
       - '&6&lOverride enchantment glow effect'
@@ -349,6 +282,13 @@ itemedit:
       - '&b&lTip: &bhide all flags at once with &e/itemedit hideall'
     params: '<flag> [true/false]'
     feedback: '&9[&fItemEdit&9] &aFlag is now &e%value%'
+  hidetooltip:
+    description:
+      - '&6&lHide or show tooltips'
+      - ''
+      - '&e[true/false] &bset the flag value, by default toggle'
+    params: '[true/false]'
+    feedback: '&9[&fItemEdit&9] &aTooltip hidden status is now &e%value%'
   hideall:
     description:
       - '&6&lHide all components'
@@ -371,6 +311,11 @@ itemedit:
     params: '<namespaced key>'
     feedback: '&9[&fItemEdit&9] &aUpdated Item Model'
     feedback-reset: '&9[&fItemEdit&9] &aReset Item Model'
+  kinetic:
+    description:
+      - '&6&lSets kinetic property of the item'
+      - ''
+      - '&bTip: Use /itemkinetic or /iek'
   maxdurability:
     description:
       - '&6&lSets item max durability'
@@ -390,6 +335,11 @@ itemedit:
     params: '[1-99]'
     feedback: '&9[&fItemEdit&9] &aUpdated Max stack size to &e%value%'
     feedback-reset: '&9[&fItemEdit&9] &aReset Max stack size'
+  piercing:
+    description:
+      - '&6&lSets piercing property of the item'
+      - ''
+      - '&bTip: Use /itempiercing or /iep'
   potioneffect:
     itemtag-tip: '&9[&fItemEdit&9] &bYou need to add potion effects to common items? try >ItemTag<'
     itemtag-tip-hover:
@@ -521,30 +471,15 @@ itemedit:
       - ''
       - '&b&lN.B. &ba few types as Air won''t work'
     params: '<type>'
-  #link commands
-  food:
+    feedback: '&9[&fItemEdit&9] &aUpdated Item Material'
+  unbreakable:
     description:
-      - '&6&lSets food property of the item'
+      - '&6&lSet unbreakable state'
       - ''
-      - '&bTip: Use /itemfood or /if'
-      - '&bN.B. your drinkable items cannot be eaten'
-  equipment:
-    description:
-      - '&6&lSets food property of the item'
-      - ''
-      - '&bTip: Use /itemequip or /iee'
-      - '&bN.B. your drinkable items cannot be eaten'
-  kinetic:
-    description:
-      - '&6&lSets kinetic property of the item'
-      - ''
-      - '&bTip: Use /itemkinetic or /iek'
-  piercing:
-    description:
-      - '&6&lSets piercing property of the item'
-      - ''
-      - '&bTip: Use /itempiercing or /iep'
-  #help
+      - '&bUnbreakable tools and armors won''t lost durability'
+      - '&e[true/false] &bset unbreakable value, by default toggle'
+    params: '[true/false]'
+    feedback: '&9[&fItemEdit&9] &aUpdated Item Unbreakable to &e%value%'
   help:
     header: "&9&lItemEdit - Help"
     header-sub: "&9&lItemEdit %sub% - Help"
@@ -607,26 +542,6 @@ itemedit:
         - ''
         - '&bExample 2: &e/ie lore replace {Heavy} {Very light}'
         - '&b''&eHeavy sword&b'' -> ''&eVery light sword&b'''
-  unbreakable:
-    description:
-      - '&6&lSet unbreakable state'
-      - ''
-      - '&bUnbreakable tools and armors won''t lost durability'
-      - '&e[true/false] &bset unbreakable value, by default toggle'
-    params: '[true/false]'
-  booktype:
-    description:
-      - '&6&lSet book type'
-      - ''
-      - '&bWorks only on Written books'
-    params: '<booktype>'
-  bookauthor:
-    description:
-      - '&6&lSet author'
-      - ''
-      - '&bAuthor name may contains spaces and be colored too'
-      - '&bWorks only on Written books'
-    params: '<name>'
   listaliases:
     description:
       - '&6&lShows allowed aliases parameters'
@@ -640,69 +555,7 @@ itemedit:
     hover_info: '&9Original value: &e%default%'
     hover_type: '&6Click to examine'
     error-pre-hover: "&6&lAliases:"
-  bookenchant:
-    description:
-      - '&6&lSet enchants on the book'
-      - '&bThe difference between enchant and bookenchant is that'
-      - '&ba book with enchant fire aspect sets hit targets on fire'
-      - '&bwhile a book with bookenchant doesn''t'
-      - ''
-      - '&e<enchant> &benchant type'
-      - '&e[level] &blevel of the enchant, by default &e1'
-      - ''
-      - '&b&lTip: &bSet &e[level] &bto &e0 &bto remove an enchant'
-    params: '<enchant> [level]'
-  hidetooltip:
-    description:
-      - '&6&lHide or show tooltips'
-      - ''
-      - '&e[true/false] &bset the flag value, by default toggle'
-    params: '[true/false]'
-  fireresistent:
-    description:
-      - '&6&lSet item resistence to fire/lava'
-      - ''
-      - '&e[true/false] &bset the value, by default toggle'
-      - ''
-      - '&bAn item with fire resistance won''t be destroyed'
-      - '&b when falling into fire and will float over lava'
-    params: '[true/false]'
-  glider:
-    description:
-      - '&6&lSet Glider state'
-      - ''
-      - '&bGlider item should allow gliding like on elytras'
-      - '&e[true/false] &bset glider value, by default toggle'
-    params: '[true/false]'
-equipment:
-  description:
-    - '&6&lSets equipment property of the item'
-    - ''
-    - '&bTip: type &e/ie equipment&b for more info'
-  params: '<slot/...>'
-  help-header: '&9&lItemEdit Equipment - Help'
-  model:
-    description:
-      - '&6&lSets texture model'
-      - ''
-      - '&e[key] &bNamespaced ID of the equipment model to use when equipped'
-    params: "[key]"
-    feedback: "&aEquipment model is now &e%key%"
-    feedback-reset: "&aEquipment model has been reset"
-  slot:
-    description:
-      - '&6&lSets equippable slot'
-      - ''
-      - '&e<slot> &bwhere the item can be equipped'
-    params: "<slot>"
-    feedback: "&aEquipment Slot is now &e%value%"
-  swappable:
-    description:
-      - '&6&lSets the item swappable'
-      - ''
-      - '&e[true/false] &btrue for the item to be swappable'
-    params: "[true/false]"
-    feedback: "&aSwappable property is now &e%value%"
+itemeditequipment:
   allowedentities:
     invalid-type: '&4[&cItemEdit&4] &cThe value &6%value% &cis neither a valid entity nor a valid group of entities'
     description:
@@ -713,33 +566,8 @@ equipment:
       - ''
       - '&bAll selected types are added'
     params: "[entity/group] [entity/group] ..."
-    feedback: "&aAllowed entity types are now: &e%value%"
-    feedback-reset: "&aAllowed entity types have been reset"
-  equipsound:
-    description:
-      - '&6&lSets equipping sound'
-      - ''
-      - '&e[sound] &bwhich sound should be made'
-    params: "[sound]"
-    feedback: "&aEquip sound property is now &e%value%"
-    feedback-reset: "&aEquip sound property has been reset to default"
-  equiponinteract:
-    description:
-      - '&6&lSets equip on interaction'
-      - ''
-      - '&e[true/false] &btrue to equip with interaction'
-    params: "[true/false]"
-    feedback: "&aEquip on interact property is now &e%value%"
-  shearsound:
-    description:
-      - '&6&lSets sound when item is removed by shear'
-      - ''
-      - '&e[sound] &bwhich sound should be made'
-      - '&bwhen it''s removed by shear, like pumpkin'
-      - '&bfor snowman'
-    params: "[sound]"
-    feedback: "&aShear sound is now &e%value%"
-    feedback-reset: "&aShear sound property has been reset to default"
+    feedback: "&9[&fItemEdit&9] &aAllowed entity types are now: &e%value%"
+    feedback-reset: "&9[&fItemEdit&9] &aAllowed entity types have been reset"
   canshear:
     unsupported-version: '&4[&cItemEdit&4] &cYou server version (&6%value%&c) doesn''t support this feature'
     description:
@@ -749,14 +577,25 @@ equipment:
       - '&bequipment from and entity, like pumpkin'
       - '&bfor snowman'
     params: "[true/false]"
-    feedback: "&aCan shear property is now &e%value%"
-  dispensable:
+    feedback: "&9[&fItemEdit&9] &aCan shear property is now &e%value%"
+  cameraoverlay:
     description:
-      - '&6&lSets dispensable'
+      - '&6&lSets camera overlay'
       - ''
-      - '&e[true/false] &btrue to equip with dispenser'
-    params: "[true/false]"
-    feedback: "&aDispensable property is now &e%value%"
+      - '&e[namespacedkey] &bwhich overlay you want'
+      - '&bOverlays are set on texturepacks, the only vanilla'
+      - '&boverlay is the minecraft:misc/pumpkinblur'
+    params: "[namespacedkey]"
+    feedback: "&9[&fItemEdit&9] &aCamera overlay has been updated"
+    feedback-reset: "&9[&fItemEdit&9] &aCamera overlay has been removed"
+    invalid-namespacedkey: "&cNamespacedkey &6%value% &c is invalid"
+  clear:
+    description:
+      - '&6&lCompletely remove equipment property on item'
+      - ''
+      - '&bOr restore defaults if item is a vanilla equipment'
+    params: ""
+    feedback: "&9[&fItemEdit&9] &aEquipment properties have been reset to default"
   damageonhurt:
     description:
       - '&6&lSets damageable'
@@ -768,26 +607,302 @@ equipment:
       - '&bTip: remember to set item max durability with'
       - '  &e/ie maxdurability <amount>'
     params: "[true/false]"
-    feedback: "&aDamage on hurt property is now &e%value%"
+    feedback: "&9[&fItemEdit&9] &aDamage on hurt property is now &e%value%"
     warning-maxstacksize: '&4[&cItemEdit&4] &cItem max stack size must be &61 &cto be damageable &4[&6click to fix&4]'
-  cameraoverlay:
+  dispensable:
     description:
-      - '&6&lSets camera overlay'
+      - '&6&lSets dispensable'
       - ''
-      - '&e[namespacedkey] &bwhich overlay you want'
-      - '&bOverlays are set on texturepacks, the only vanilla'
-      - '&boverlay is the minecraft:misc/pumpkinblur'
-    params: "[namespacedkey]"
-    feedback: "&aCamera overlay has been updated"
-    feedback-reset: "&aCamera overlay has been removed"
-    invalid-namespacedkey: "&cNamespacedkey &6%value% &c is invalid"
-  clear:
+      - '&e[true/false] &btrue to equip with dispenser'
+    params: "[true/false]"
+    feedback: "&9[&fItemEdit&9] &aDispensable property is now &e%value%"
+  equiponinteract:
     description:
-      - '&6&lCompletely remove equipment property on item'
+      - '&6&lSets equip on interaction'
       - ''
-      - '&bOr restore defaults if item is a vanilla equipment'
-    params: ""
-    feedback: "&aEquipment properties have been reset to default"
+      - '&e[true/false] &btrue to equip with interaction'
+    params: "[true/false]"
+    feedback: "&9[&fItemEdit&9] &aEquip on interact property is now &e%value%"
+  equipsound:
+    description:
+      - '&6&lSets equipping sound'
+      - ''
+      - '&e[sound] &bwhich sound should be made'
+    params: "[sound]"
+    feedback: "&9[&fItemEdit&9] &aEquip sound property is now &e%value%"
+    feedback-reset: "&9[&fItemEdit&9] &aEquip sound property has been reset to default"
+  help:
+    header: "&9&lItemEditEquipment - Help"
+    header-sub: "&9&lItemEditEquipment %sub% - Help"
+    footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
+  model:
+    description:
+      - '&6&lSets texture model'
+      - ''
+      - '&e[key] &bNamespaced ID of the equipment model to use when equipped'
+    params: "[key]"
+    feedback: "&9[&fItemEdit&9] &aEquipment model is now &e%key%"
+    feedback-reset: "&9[&fItemEdit&9] &aEquipment model has been reset"
+  shearsound:
+    description:
+      - '&6&lSets sound when item is removed by shear'
+      - ''
+      - '&e[sound] &bwhich sound should be made'
+      - '&bwhen it''s removed by shear, like pumpkin'
+      - '&bfor snowman'
+    params: "[sound]"
+    feedback: "&9[&fItemEdit&9] &aShear sound is now &e%value%"
+    feedback-reset: "&9[&fItemEdit&9] &aShear sound property has been reset to default"
+  slot:
+    description:
+      - '&6&lSets equippable slot'
+      - ''
+      - '&e<slot> &bwhere the item can be equipped'
+    params: "<slot>"
+    feedback: "&9[&fItemEdit&9] &aEquipment Slot is now &e%value%"
+  swappable:
+    description:
+      - '&6&lSets the item swappable'
+      - ''
+      - '&e[true/false] &btrue for the item to be swappable'
+    params: "[true/false]"
+    feedback: "&9[&fItemEdit&9] &aSwappable property is now &e%value%"
+itemeditfood:
+  addeffect:
+    description:
+      - '&6&lAdd an effect to the item'
+      - '&e/ief addeffect &bcleareffects'
+      - '&e/ief addeffect &bteleport <range>'
+      - '&e/ief addeffect &bapplyeffects [chance] <potion> <lv> <duration> [ambient] [particle] [icon]'
+      - '&e/ief addeffect &bremoveeffects <potion>'
+      - '&e/ief addeffect &bplaysound <sound>'
+      - ''
+    params: '[...]'
+    cleareffects:
+      description:
+        - '&6&lAdd an effect to the item'
+        - ''
+        - '&bRemove any potion effect on the player, like milk bucket'
+      params: '<potion>'
+      feedback: "&9[&fItemEdit&9] &aAdded teleport effect when food is eaten"
+    teleport:
+      description:
+        - '&6&lAdd an effect to the item'
+        - '&e<range> &bhow far teleport the player'
+        - ''
+        - '&bRandomly teleport player when food is eaten'
+      params: '<potion>'
+      feedback: "&9[&fItemEdit&9] &aAdded teleport effect when food is eaten"
+    applyeffects:
+      description:
+        - '&6&lAdd an effect to the item'
+        - '&e[chance] &bwhat''s the % chance to apply the effect?'
+        - '  &bmust be bigger than &e0&b and lower equals to &e100'
+        - '&e<potion> &bThe potion effect type'
+        - '&e<lv> &blevel of the effect, &e1&b by default'
+        - '&e<duration> &bDuration as seconds of the effect or &e-1 &bfor permanent effect'
+        - '&e[ambient] [particle] [icon] &btrue/false potioneffect customizations'
+        - ''
+        - '&bApply selected effect to the player when food is eaten'
+      params: '<potion>'
+      feedback: "&9[&fItemEdit&9] &aAdded apply effect when food is eaten"
+    removeeffects:
+      description:
+        - '&6&lAdd an effect to the item'
+        - '&e<potion> &bclear selected effect'
+        - ''
+        - '&bRemove selected effect from the player when food is eaten'
+      params: '<potion>'
+      feedback: "&9[&fItemEdit&9] &aAdded remove effect when food is eaten"
+    playsound:
+      description:
+        - '&6&lAdd an effect to the item'
+        - '&e<sound> &bsound to play'
+        - ''
+        - '&bPlay selected sound when food is eaten'
+      params: '<sound>'
+      feedback: "&9[&fItemEdit&9] &aAdded sound when food is eaten"
+  animation:
+    description:
+      - '&6&lSets eat animation'
+      - '&bOnly for &c1.21.2+'
+      - ''
+      - '&e<animation> &bThe value to set, by default toggle'
+      - ''
+      - '&bSome animations are shown only on first person view,'
+      - '&bsome animations are shown only on third person view,'
+      - '&bsome animations are shown on both first and third person view'
+    params: '<animation>'
+    feedback: "&9[&fItemEdit&9] &aApplied animation"
+  canalwayseat:
+    description:
+      - '&6&lSets whenever the item can be eaten'
+      - ''
+      - '&e[true/false] &bThe value to set, by default toggle'
+      - ''
+      - '&bUsually food require hunger to be eaten,'
+      - '&bsetting true will mimic golden apple behavior'
+    params: '[true/false]'
+    feedback: "&9[&fItemEdit&9] &aItem has Can always eat to &e%value%"
+  consumeparticles:
+    description:
+      - '&6&lSets whenever the item show particles when eaten'
+      - '&bOnly for &c1.21.2+'
+      - ''
+      - '&e[true/false] &bThe value to set, by default toggle'
+    params: '[true/false]'
+    feedback: "&9[&fItemEdit&9] &aConsume particles is now &e%value%"
+  convertto:
+    description:
+      - '&6&lSets an item give when food is consumed'
+      - '&bOnly for &c1.21+'
+      - ''
+      - '&e[type/serveritem id] &bthe item to return'
+      - '  &byou can set a Material or you can'
+      - '  &bselect an item from ServerItem saved items'
+      - ''
+      - '&bMimic bucket milk behavior where a bucket is'
+      - '&breturned when milk is consumed'
+    params: '[type/serveritem id]'
+    feedback: "&9[&fItemEdit&9] &aConvert to updated"
+  eatticks:
+    description:
+      - '&6&lSets the time required to eat the item'
+      - ''
+      - '&e<ticks> &bThe amount of time to eat the item'
+      - '  &bmust be &e1 &bor bigger'
+      - ''
+      - '&e20 &bticks = &e1 &bsecond'
+    params: '<ticks>'
+    feedback: "&9[&fItemEdit&9] &aEat ticks updated to &e%value%"
+  help:
+    header: "&9&lItemFood - Help"
+    header-sub: "&9&lItemFood %sub% - Help"
+    footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
+  info:
+    not_food: "&9[&fItemEdit&9] &bItem has no food property or has default property"
+    message:
+      - '&9[&fItemEdit&9] &2&lItem Food Property'
+      - '&aEat time: &e%eatseconds%&a s &8(&7%eatticks%&8 ticks)'
+      - '&aRestore Hunger: &e%nutrition% &8| &aSaturation: &e%saturation%&a '
+      - '&aAnimation: &e%animation% &8| &aSound: &e%sound% &8| &aParticles: &e%consumeparticles%'
+      - '&aEatable when full: &e%canalwayseat% &8| &aWhen eaten obtain: &e%convertto%'
+    apply_effect_prefix:
+      - '&2&lContains &e&l%effects%&2&l possible potion effects:'
+    apply_effect:
+      - '&a%index%. Type: &e&b%type% &8| &aLv: &e%level% &8| &aDuration: &e%duration_s%&a s &8(&7%duration_ticks%&8 ticks)'
+      - '&a   Particles: &e%hasparticle% &8| &aAmbient: &e%isambient% &8| &aIcon: &e%hasicon% &8| &aChance: &e%chance_perc%&a%'
+    description:
+      - '&6&lDescribe current food info for item'
+    params: ''
+    feedback: "&4currently unimplemented"
+  nutrition:
+    description:
+      - '&6&lSets recovered nutrition'
+      - ''
+      - '&e<amount> &bThe amount hunger to restore'
+      - '  &bmust be &e0 &bor bigger'
+      - ''
+      - '&bA full hunger bar is &e20'
+    params: '<amount>'
+    feedback: "&9[&fItemEdit&9] &aNutrition value is now &e%value%"
+  removeeffect:
+    description:
+      - '&6&lRemove an effect from the item'
+      - ''
+      - '&e<index> &bRemove selected effect'
+    params: '<index>'
+    feedback: "&9[&fItemEdit&9] &aRemoved selected food effect"
+  reset:
+    description:
+      - '&6&lCompletely remove food property on item'
+      - ''
+      - '&bOr restore defaults if item is a vanilla food'
+    params: ''
+    feedback: "&9[&fItemEdit&9] &aFood properties removed"
+  reseteffects:
+    description:
+      - '&6&lRemove effects from the item'
+    params: ''
+    feedback: "&9[&fItemEdit&9] &aFood effects removed"
+  saturation:
+    description:
+      - '&6&lSets recovered saturation'
+      - ''
+      - '&e<amount> &bThe amount saturation to add'
+      - '  &bnegative values are allowed'
+      - ''
+      - '&bSaturation controls how fast food level'
+      - '&b  (nutrition) decrease'
+    params: '<amount>'
+    feedback: "&9[&fItemEdit&9] &aSaturation is now &e%value%"
+  sound:
+    description:
+      - '&6&lSets eat sound'
+      - '&bOnly for &c1.21.2+'
+      - ''
+      - '&e<sound> &bThe value to set'
+    params: '<sound>'
+    feedback: "&9[&fItemEdit&9] &aEating sound is now &e%value%"
+itemeditkinetic:
+  contactcooldownticks:
+  damageconditions:
+  damagemultiplier:
+  delayticks:
+  dismountconditions:
+  forwardmovement:
+  help:
+    header: "&9&lItemKinetic - Help"
+    header-sub: "&9&lItemKinetic %sub% - Help"
+    footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
+  hitsound:
+    description:
+      - '&6&lSets hit sound'
+      - ''
+      - '&e<sound> &bThe value to set'
+    params: '<sound>'
+    feedback: "&9[&fItemEdit&9] &aHit sound is now &e%value%"
+  knockbackconditions:
+  sound:
+    description:
+      - '&6&lSets sound'
+      - ''
+      - '&e<sound> &bThe value to set'
+    params: '<sound>'
+    feedback: "&9[&fItemEdit&9] &aSound is now &e%value%"
+itemeditpiercing:
+  dealsknockback:
+    description:
+      - '&6&lSets whenever the hit cause knockback'
+      - ''
+      - '&e[true/false] &btrue to apply knockback'
+    params: "[true/false]"
+    feedback: "&9[&fItemEdit&9] &aKnockback is now &e%value%"
+  dismounts:
+    description:
+      - '&6&lSets whenever the hit cause dismount'
+      - ''
+      - '&e[true/false] &btrue to dismount'
+    params: "[true/false]"
+    feedback: "&9[&fItemEdit&9] &aDismount is now &e%value%"
+  help:
+    header: "&9&lItemPiercing - Help"
+    header-sub: "&9&lItemPiercing %sub% - Help"
+    footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
+  hitsound:
+    description:
+      - '&6&lSets hit sound'
+      - ''
+      - '&e<sound> &bThe value to set'
+    params: '<sound>'
+    feedback: "&9[&fItemEdit&9] &aHit sound is now &e%value%"
+  sound:
+    description:
+      - '&6&lSets sound'
+      - ''
+      - '&e<sound> &bThe value to set'
+    params: '<sound>'
+    feedback: "&9[&fItemEdit&9] &aSound is now &e%value%"
 serveritem:
   help-header: '&9&lServerItem - Help'
   give:

@@ -36,7 +36,7 @@ public class Color extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
         ItemBuilder item = new ItemBuilder(this.getItemInHand(p));
-        String perm = calculatePermission(item, args,p);
+        String perm = calculatePermission(item, args, p);
         if (perm == null) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_rgb_colorable");
             return;
@@ -87,7 +87,7 @@ public class Color extends SubCmd {
         updateView(p);
     }
 
-    private String calculatePermission(ItemBuilder item,String[] args, Player p) {
+    private String calculatePermission(ItemBuilder item, String[] args, Player p) {
         if (item.isMetaClass(LeatherArmorMeta.class)) {
             return leatherPerm;
         } else if (item.isMetaClass(FireworkEffectMeta.class)) {
@@ -98,7 +98,7 @@ public class Color extends SubCmd {
             } else if (item.getType().name().contains("POTION")) {
                 return potionPerm;
             } else {
-                Util.logCommandError(getCommand(),args, p);
+                Util.logCommandError(getCommand(), args, p);
                 return potionPerm;
             }
         }

@@ -49,7 +49,7 @@ public final class Util {
         }
     }
 
-    public static void logCommandError(AbstractCommand command,String[] args, CommandSender sender) {
+    public static void logCommandError(AbstractCommand command, String[] args, CommandSender sender) {
         ItemStack item = sender instanceof Player p ? InventoryUtils.getItem(p, EquipmentSlot.HAND) : null;
         command.getPlugin().log(ChatColor.RED + "ERROR when executing /" + command.getName()
                 + " " + String.join(" ", args) + " by " + sender.getName()
@@ -87,7 +87,7 @@ public final class Util {
         }
     }
 
-    public static boolean hasBannedWords(@NotNull Player user, String text) {
+    public static boolean checkBannedWords(@NotNull Player user, String text) {
         if (user.hasPermission("itemedit.bypass.censure"))
             return false;
         String message = ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', text.toLowerCase(Locale.ENGLISH)));

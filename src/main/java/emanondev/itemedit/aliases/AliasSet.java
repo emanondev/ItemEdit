@@ -122,8 +122,8 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
 
     public @Nullable String convertValue(T value) {
         for (Map.Entry<String, T> entry : map.entrySet()) {
-            if (Objects.equals(entry.getValue(),value)) {
-                return  entry.getKey();
+            if (Objects.equals(entry.getValue(), value)) {
+                return entry.getKey();
             }
         }
         return null;

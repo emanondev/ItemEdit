@@ -1,5 +1,6 @@
 package emanondev.itemedit.command.itemfood;
 
+import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemFoodCommand;
 import emanondev.itemedit.command.SubCmd;
@@ -45,12 +46,18 @@ public class AddEffect extends SubCmd {
             }
         } catch (Exception e) {
             onSubFail(player, alias, args[1].toLowerCase(Locale.ENGLISH));
+            Util.logCommandError(this.getCommand(), args, sender);
         }
         updateView(player);
     }
 
     private void playsound(@NotNull Player player, ItemBuilder item, @NotNull String alias, String[] args) {
         Sound sound = Aliases.SOUND.convertAlias(args[2]);
+        if (sound == null) {
+            onWrongAlias(player,Aliases.SOUND);
+            onSubFail(player, alias, "playsound");
+            return;
+        }
         PlaySound consumableEffect = new PlaySound(sound);
         item.addConsumeEffect(consumableEffect).build();
         onSubSuccess(player, "playsound");

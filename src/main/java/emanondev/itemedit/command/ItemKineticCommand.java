@@ -19,13 +19,37 @@ public class ItemKineticCommand extends AbstractCommand {
         super("itemeditkinetic", ItemEdit.get(), true);
         //version is >= 1.20.5
         this.registerSubCommand(() -> new IntSubCommand(this, "contactcooldownticks",
-                ItemBuilder::setKineticContactCooldownTicks, List.of("20", "40", "60")));
+                (b, v) -> {
+                    if (v == null || v >= 0) {
+                        return false;
+                    }
+                    b.setKineticContactCooldownTicks(v);
+                    return true;
+                }, List.of("20", "40", "60")));
         this.registerSubCommand(() -> new DoubleSubCommand(this, "damagemultiplier",
-                (b, d) -> b.setKineticDamageMultiplier(d.floatValue()), List.of("1", "1.5", "0.5")));
+                (b, v) -> {
+                    if (v != null && v >= 0) {
+                        b.setKineticDamageMultiplier(v.floatValue());
+                        return true;
+                    }
+                    return false;
+                }, List.of("1", "1.5", "0.5")));
         this.registerSubCommand(() -> new IntSubCommand(this, "delayticks",
-                ItemBuilder::setKineticDelayTicks, List.of("20", "40", "60")));
+                (b, v) -> {
+                    if (v == null || v >= 0) {
+                        return false;
+                    }
+                    b.setKineticDelayTicks(v);
+                    return true;
+                }, List.of("20", "40", "60")));
         this.registerSubCommand(() -> new DoubleSubCommand(this, "forwardmovement",
-                (b, d) -> b.setKineticForwardMovement(d.floatValue()), List.of("1", "1.5", "0.5")));
+                (b, v) -> {
+                    if (v != null && v >= 0) {
+                        b.setKineticForwardMovement(v.floatValue());
+                        return true;
+                    }
+                    return false;
+                }, List.of("1", "1.5", "0.5")));
         this.registerSubCommand(() -> new SoundSubCommand(this, "hitsound", ItemBuilder::setKineticHitSound));
         this.registerSubCommand(() -> new SoundSubCommand(this, "sound", ItemBuilder::setKineticSound));
         this.registerSubCommand(() -> new DamageConditions(this));

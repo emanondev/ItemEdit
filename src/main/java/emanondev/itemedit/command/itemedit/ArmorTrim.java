@@ -33,7 +33,7 @@ public class ArmorTrim extends SubCmd {
         }
         if (args.length == 2 && args[1].equalsIgnoreCase("clear")) {
             item.setTrim(null).build();
-            sendFeedback(p,"feedback-reset");
+            sendFeedback(p, "feedback-reset");
             updateView(p);
             return;
         }

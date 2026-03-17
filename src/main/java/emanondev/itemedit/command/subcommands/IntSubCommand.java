@@ -9,22 +9,21 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 public class IntSubCommand extends SubCmd {
 
 
-    private final BiConsumer<ItemBuilder, Integer> apply;
+    private final BiFunction<ItemBuilder, Integer, Boolean> apply;
     private final BiFunction<String, Player, List<String>> suggestions;
 
-    public IntSubCommand(AbstractCommand command, String id, BiConsumer<ItemBuilder, Integer> apply) {
+    public IntSubCommand(AbstractCommand command, String id, BiFunction<ItemBuilder, Integer, Boolean> apply) {
         this(command, id, apply, List.of());
     }
 
     public IntSubCommand(AbstractCommand command,
                          String id,
-                         BiConsumer<ItemBuilder, Integer> apply,
+                         BiFunction<ItemBuilder, Integer, Boolean> apply,
                          List<String> suggestions) {
 
         this(command, id, apply, (arg, supplier) -> CompleteUtility.complete(arg, suggestions));
@@ -32,7 +31,7 @@ public class IntSubCommand extends SubCmd {
 
     public IntSubCommand(AbstractCommand command,
                          String id,
-                         BiConsumer<ItemBuilder, Integer> apply,
+                         BiFunction<ItemBuilder, Integer, Boolean> apply,
                          BiFunction<String, Player, List<String>> suggestions) {
         super(id, command, true, true);
         this.apply = apply;
@@ -48,11 +47,15 @@ public class IntSubCommand extends SubCmd {
                 onFail(player, alias);
                 return;
             }
-            int value = Integer.parseInt(args[1]);
+            Integer value = Integer.parseInt(args[1]);
             ItemBuilder builder = new ItemBuilder(getItemInHand(player));
-            apply.accept(builder, value);
-            setItemInHand(player, builder.build());
-            updateView(player);
+            if (apply.apply(builder, value)) {
+                onSuccess(player, "%value%", String.valueOf(value));
+                //setItemInHand(player, builder.build());
+                updateView(player);
+                return;
+            }
+            onFail(player, alias);
         } catch (NumberFormatException e) {
             onFail(player, alias);
         }

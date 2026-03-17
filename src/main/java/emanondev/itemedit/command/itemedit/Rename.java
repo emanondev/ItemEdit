@@ -52,34 +52,37 @@ public class Rename extends SubCmd {
         if (args.length == 2 && args[1].equalsIgnoreCase("-clear")) {
             itemMeta.setDisplayName(null);
             item.setItemMeta(itemMeta);
-            //TODO feedback
+            sendFeedback(p, "rename-clear");
             updateView(p);
             return;
         }
 
         if (args.length == 2 && args[1].equalsIgnoreCase("-copy")) {
             copies.put(p.getUniqueId(), itemMeta.getDisplayName());
-            //TODO feedback
+            sendFeedback(p, "rename-copy");
             updateView(p);
             return;
         }
 
+        boolean paste = false;
+        String name;
         if (args.length == 2 && args[1].equalsIgnoreCase("-paste")) {
-            itemMeta.setDisplayName(copies.get(p.getUniqueId()));
-            item.setItemMeta(itemMeta);
-            //TODO feedback
-            updateView(p);
-            return;
+            paste = true;
+            if (!copies.containsKey(p.getUniqueId())) {
+                sendFeedback(p, "rename-paste-empty");
+                return;
+            }
+            name = Util.formatText(p, copies.get(p.getUniqueId()), getPermission());
+        } else {
+            StringBuilder bname = new StringBuilder(args[1]);
+            for (int i = 2; i < args.length; i++) {
+                bname.append(" ").append(args[i]);
+            }
+            name = Util.formatText(p, bname.toString(), getPermission());
         }
 
-        StringBuilder bname = new StringBuilder(args[1]);
-        for (int i = 2; i < args.length; i++) {
-            bname.append(" ").append(args[i]);
-        }
-
-        String name = Util.formatText(p, bname.toString(), getPermission());
-        if (Util.hasBannedWords(p, name)) {
-            //TODO feedback
+        if (Util.checkBannedWords(p, name)) {
+            sendFeedback(p, "banned_words");
             return;
         }
 
@@ -91,7 +94,11 @@ public class Rename extends SubCmd {
 
         itemMeta.setDisplayName(name);
         item.setItemMeta(itemMeta);
-        //TODO feedback
+        if (paste) {
+            sendFeedback(p, "feedback-paste");
+        } else {
+            onSuccess(p);
+        }
         updateView(p);
     }
 

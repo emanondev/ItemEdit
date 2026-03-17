@@ -330,7 +330,7 @@ public class Lore extends SubCmd {
                     "%limit%", String.valueOf(lengthLimit));
             return;
         }
-        if (Util.hasBannedWords(p, lineText)) {
+        if (Util.checkBannedWords(p, lineText)) {
             return;
         }
 
@@ -385,7 +385,7 @@ public class Lore extends SubCmd {
                 lore.add("");
             }
 
-            if (Util.hasBannedWords(p, lineText)) {
+            if (Util.checkBannedWords(p, lineText)) {
                 return;
             }
 
@@ -443,7 +443,7 @@ public class Lore extends SubCmd {
                 lore.add("");
             }
 
-            if (Util.hasBannedWords(p, lineText)) {
+            if (Util.checkBannedWords(p, lineText)) {
                 return;
             }
 

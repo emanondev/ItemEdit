@@ -10,18 +10,22 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 public class DoubleSubCommand extends SubCmd {
 
 
-    private final BiConsumer<ItemBuilder, Double> apply;
+    private final BiFunction<ItemBuilder, Double, Boolean> apply;
     private final List<String> suggestions;
 
-    public DoubleSubCommand(AbstractCommand command, String id, BiConsumer<ItemBuilder, Double> apply) {
+    public DoubleSubCommand(AbstractCommand command, String id,
+                            BiFunction<ItemBuilder, Double, Boolean> apply) {
         this(command, id, apply, List.of());
     }
 
-    public DoubleSubCommand(AbstractCommand command, String id, BiConsumer<ItemBuilder, Double> apply, List<String> suggestions) {
+    public DoubleSubCommand(AbstractCommand command, String id,
+                            BiFunction<ItemBuilder, Double, Boolean> apply,
+                            List<String> suggestions) {
         super(id, command, true, true);
         this.apply = apply;
         this.suggestions = suggestions;
@@ -38,9 +42,13 @@ public class DoubleSubCommand extends SubCmd {
             }
             double value = Double.parseDouble(args[1]);
             ItemBuilder builder = new ItemBuilder(getItemInHand(player));
-            apply.accept(builder, value);
-            setItemInHand(player, builder.build());
-            updateView(player);
+            if (apply.apply(builder, value)){
+                onSuccess(player, "%value%", String.valueOf(value));
+                setItemInHand(player, builder.build());
+                updateView(player);
+                return;
+            }
+            onFail(player,alias);
         } catch (NumberFormatException e) {
             onFail(player, alias);
         }

@@ -39,13 +39,13 @@ public class Enchant extends SubCmd {
             }
             if (lv == 0) {
                 item.removeEnchantment(ench).build();
-                sendFeedback(p, "feedback-removed");
+                sendFeedback(p, "feedback-removed", "%enchant%", args[1]);
             } else {
                 if (!p.hasPermission(this.getPermission() + ".bypass_max_level")) {
                     lv = Math.min(ench.getMaxLevel(), lv);
                 }
                 item.setEnchantment(ench, lv).build();
-                onSuccess(p);
+                onSuccess(p, "%enchant%", args[1], "%lv%", String.valueOf(lv));
             }
             updateView(p);
         } catch (Exception e) {
