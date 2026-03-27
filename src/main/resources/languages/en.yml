@@ -846,26 +846,74 @@ itemeditfood:
     feedback: "&9[&fItemEdit&9] &aEating sound is now &e%value%"
 itemeditkinetic:
   contactcooldownticks:
+    description:
+      - '&6&lSets Kinetic Contact cooldown'
+      - ''
+      - '&e<cooldown> &bcontact cooldown ticks'
+    params: '<delay>'
+    feedback: "&9[&fItemEdit&9] &aContact cooldown set"
   damageconditions:
+    description:
+      - '&6&lSets kinetic Damage conditions'
+      - ''
+      - '&e<max duration> &bMax damage duration ticks'
+      - '&e<min speed> &bMinimal speed'
+      - '&e<min relative speed> &bminimal relative speed'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: "&9[&fItemEdit&9] &aDamage condition set"
   damagemultiplier:
+    description:
+      - '&6&lSets Kinetic Damage multiplier'
+      - ''
+      - '&e<multiplier> &bdamage multiplier'
+    params: '<delay>'
+    feedback: "&9[&fItemEdit&9] &aKinetic damage multiplier set"
   delayticks:
+    description:
+      - '&6&lSets Kinetic Delay ticks'
+      - ''
+      - '&e<delay> &bkinetic delay ticks'
+    params: '<delay>'
+    feedback: "&9[&fItemEdit&9] &aDelay ticks set"
   dismountconditions:
+    description:
+      - '&6&lSets Kinetic Dismount conditions'
+      - ''
+      - '&e<max duration> &bMax dismount duration ticks'
+      - '&e<min speed> &bMinimal speed to dismount'
+      - '&e<min relative speed> &bminimal relative speed to dismount'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: "&9[&fItemEdit&9] &aDismount condition set"
   forwardmovement:
+    description:
+      - '&6&lSets Kinetic Forward movement'
+      - ''
+      - '&e<movement> &bForward movement amount'
+    params: '<movement>'
+    feedback: "&9[&fItemEdit&9] &aForward movement set"
   help:
     header: "&9&lItemKinetic - Help"
     header-sub: "&9&lItemKinetic %sub% - Help"
     footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
   hitsound:
     description:
-      - '&6&lSets hit sound'
+      - '&6&lSets Kinetic hit sound'
       - ''
       - '&e<sound> &bThe value to set'
     params: '<sound>'
     feedback: "&9[&fItemEdit&9] &aHit sound is now &e%value%"
   knockbackconditions:
+    description:
+      - '&6&lSets Kinetic Knockback conditions'
+      - ''
+      - '&e<max duration> &bMax knockback duration ticks'
+      - '&e<min speed> &bMinimal speed to knockback'
+      - '&e<min relative speed> &bminimal relative speed to knockback'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: "&9[&fItemEdit&9] &aKnockback condition set"
   sound:
     description:
-      - '&6&lSets sound'
+      - '&6&lSets Kinetic sound'
       - ''
       - '&e<sound> &bThe value to set'
     params: '<sound>'
@@ -891,14 +939,14 @@ itemeditpiercing:
     footer: "%prev_clickable% &9&lHelp [%page%/%max_page%] %next_clickable%"
   hitsound:
     description:
-      - '&6&lSets hit sound'
+      - '&6&lSets Piercing hit sound'
       - ''
       - '&e<sound> &bThe value to set'
     params: '<sound>'
     feedback: "&9[&fItemEdit&9] &aHit sound is now &e%value%"
   sound:
     description:
-      - '&6&lSets sound'
+      - '&6&lSets Piercing sound'
       - ''
       - '&e<sound> &bThe value to set'
     params: '<sound>'
