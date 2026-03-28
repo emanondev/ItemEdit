@@ -4,9 +4,12 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemFoodCommand;
 import emanondev.itemedit.command.SubCmd;
-import emanondev.itemedit.implementations.*;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemBuilder;
+import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
+import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.registry.TypedKey;
+import io.papermc.paper.registry.set.RegistrySet;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -51,15 +54,46 @@ public class AddEffect extends SubCmd {
         updateView(player);
     }
 
+    //addeffect cleareffects
+    //addeffect teleport <range>
+    //addeffect applyeffects <chance> <potion> <lv> <duration> [ambient] [particle] [icon]
+    //addeffect removeeffects <potion>
+    //addeffect playsound <sound>
+    @Override
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        return switch (args.length) {
+            case 1 -> List.of();
+            case 2 -> CompleteUtility.complete(args[1],
+                    "cleareffects", "teleport", "applyeffects", "removeeffects", "playsound");
+            case 3 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "teleport" -> CompleteUtility.complete(args[2], "1", "10", "20");
+                case "applyeffects" -> CompleteUtility.complete(args[2], "1", "0.5", "0.1");
+                case "playsound" -> CompleteUtility.complete(args[2], Aliases.SOUND);
+                case "removeeffects" -> CompleteUtility.complete(args[2], Aliases.POTION_EFFECT);
+                default -> List.of();
+            };
+            default -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "applyeffects" -> switch ((args.length - 3) % 6) {
+                    case 0 -> CompleteUtility.complete(args[args.length - 1], Aliases.POTION_EFFECT);
+                    case 1 -> CompleteUtility.complete(args[args.length - 1], "1", "2", "3");
+                    case 2 -> CompleteUtility.complete(args[args.length - 1],
+                            "infinite", "instant", "∞", "90", "180", "480");
+                    default -> CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
+                };
+                case "removeeffects" -> CompleteUtility.complete(args[1], Aliases.POTION_EFFECT);
+                default -> List.of();
+            };
+        };
+    }
+
     private void playsound(@NotNull Player player, ItemBuilder item, @NotNull String alias, String[] args) {
         Sound sound = Aliases.SOUND.convertAlias(args[2]);
         if (sound == null) {
-            onWrongAlias(player,Aliases.SOUND);
+            onWrongAlias(player, Aliases.SOUND);
             onSubFail(player, alias, "playsound");
             return;
         }
-        PlaySound consumableEffect = new PlaySound(sound);
-        item.addConsumeEffect(consumableEffect).build();
+        item.addConsumeEffect(ConsumeEffect.playSoundConsumeEffect(sound.key())).build();
         onSubSuccess(player, "playsound");
     }
 
@@ -68,8 +102,9 @@ public class AddEffect extends SubCmd {
         for (String effect : Arrays.copyOfRange(args, 2, args.length)) {
             effects.add(Aliases.POTION_EFFECT.convertAlias(effect));
         }
-        RemoveEffects removeEffects = new RemoveEffects(effects);
-        item.addConsumeEffect(removeEffects).build();
+        item.addConsumeEffect(ConsumeEffect.removeEffects(RegistrySet.keySet(RegistryKey.MOB_EFFECT, effects.stream()
+                .map(effect -> TypedKey.create(RegistryKey.MOB_EFFECT, effect.getKey()))
+                .toList()))).build();
         onSubSuccess(player, "removeeffect");
     }
 
@@ -114,51 +149,19 @@ public class AddEffect extends SubCmd {
             PotionEffect effect = new PotionEffect(type, duration, amplifier, ambient, particles, icon);
             effects.add(effect);
         }
-        ApplyEffects applyEffects = new ApplyEffects(effects, (float) chance);
-        item.addConsumeEffect(applyEffects).build();
+
+        item.addConsumeEffect(ConsumeEffect.applyStatusEffects(effects, (float) chance)).build();
         onSubSuccess(player, "addaffect");
     }
 
     private void teleport(@NotNull Player player, ItemBuilder item, @NotNull String alias, String[] args) {
         float val = Float.parseFloat(args[1]);
-        item.addConsumeEffect(new TeleportRandomly(val)).build();
+        item.addConsumeEffect(ConsumeEffect.teleportRandomlyEffect(val)).build();
         onSubSuccess(player, "teleport");
     }
 
     private void cleareffects(@NotNull Player player, ItemBuilder item, @NotNull String alias, String[] args) {
-        item.addConsumeEffect(new ClearEffects()).build();
+        item.addConsumeEffect(ConsumeEffect.clearAllStatusEffects()).build();
         onSubSuccess(player, "cleareffects");
-    }
-
-    //addeffect cleareffects
-    //addeffect teleport <range>
-    //addeffect applyeffects <chance> <potion> <lv> <duration> [ambient] [particle] [icon]
-    //addeffect removeeffects <potion>
-    //addeffect playsound <sound>
-    @Override
-    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return switch (args.length) {
-            case 1 -> List.of();
-            case 2 -> CompleteUtility.complete(args[1],
-                    "cleareffects", "teleport", "applyeffects", "removeeffects", "playsound");
-            case 3 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                case "teleport" -> CompleteUtility.complete(args[2], "1", "10", "20");
-                case "applyeffects" -> CompleteUtility.complete(args[2], "1", "0.5", "0.1");
-                case "playsound" -> CompleteUtility.complete(args[2], Aliases.SOUND);
-                case "removeeffects" -> CompleteUtility.complete(args[2], Aliases.POTION_EFFECT);
-                default -> List.of();
-            };
-            default -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                case "applyeffects" -> switch ((args.length - 3) % 6) {
-                    case 0 -> CompleteUtility.complete(args[args.length - 1], Aliases.POTION_EFFECT);
-                    case 1 -> CompleteUtility.complete(args[args.length - 1], "1", "2", "3");
-                    case 2 -> CompleteUtility.complete(args[args.length - 1],
-                            "infinite", "instant", "∞", "90", "180", "480");
-                    default -> CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
-                };
-                case "removeeffects" -> CompleteUtility.complete(args[1], Aliases.POTION_EFFECT);
-                default -> List.of();
-            };
-        };
     }
 }

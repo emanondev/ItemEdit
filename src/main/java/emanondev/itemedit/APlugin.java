@@ -7,6 +7,7 @@ import emanondev.itemedit.utility.ReflectionUtils;
 import emanondev.itemedit.utility.Translator;
 import emanondev.itemedit.utility.VersionUtils;
 import lombok.Getter;
+import net.kyori.adventure.Adventure;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -364,12 +365,15 @@ public abstract class APlugin extends JavaPlugin {
     @NotNull
     private String getLocale(@Nullable CommandSender sender) {
         String locale;
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             locale = this.defaultLanguage;
         } else if (VersionUtils.isAfter(1, 12) && this.useMultiLanguage) {
             //apparently zh_tw and zh_cn are quite different, zh_cn and zh_hk will both fall under zh.yml
-            locale = ((Player) sender).getLocale().equals("zh_tw") ?
-                    ((Player) sender).getLocale() : ((Player) sender).getLocale().split("_")[0];
+
+            String rawLocale = player.locale().toString();
+            rawLocale = rawLocale.toLowerCase(Locale.ENGLISH);
+            locale = rawLocale.equals("zh_tw") ?
+                    rawLocale : rawLocale.split("_")[0];
         } else {
             locale = this.defaultLanguage;
         }

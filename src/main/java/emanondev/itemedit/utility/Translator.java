@@ -87,8 +87,8 @@ public class Translator {
     public String translate(CommandSender target, String path, boolean placeholderApi, String... holders) {
         String locale = VersionUtils.isAfter(1, 12)
                 && isUseMultiLanguage()
-                && target instanceof Player ?
-                ((Player) target).getLocale() : null;
+                && target instanceof Player player ?
+                (player.locale().toString()).toLowerCase(Locale.ENGLISH) : null;
         if (locale == null) {
             locale = getDefaultLocale();
         }

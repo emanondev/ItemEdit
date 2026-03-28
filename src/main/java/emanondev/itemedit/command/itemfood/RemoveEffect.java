@@ -3,9 +3,9 @@ package emanondev.itemedit.command.itemfood;
 import emanondev.itemedit.command.ItemFoodCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.ItemBuilder;
+import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.meta.components.consumable.effects.ConsumableEffect;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class RemoveEffect extends SubCmd {
         int line = Integer.parseInt(args[1]) - 1;
 
         ItemBuilder item = new ItemBuilder(getItemInHand(p));
-        List<ConsumableEffect> effects = new ArrayList<>(item.getConsumeEffects());
+        List<ConsumeEffect> effects = new ArrayList<>(item.getConsumeEffects());
         effects.remove(line);
         item.setConsumeEffects(effects).build();
         onSuccess(p);

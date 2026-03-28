@@ -69,33 +69,6 @@ public class Aliases {
     public static final AnimationAliases ANIMATION =
             createAndRegister(VersionUtils.isAfter(1, 21, 4),
                     AnimationAliases::new);
-    public static final AliasSet<String> ANIMATION_OLD =
-            createAndRegister(
-                    VersionUtils.isInRange(1, 20, 5, 1, 21, 3), () -> new AliasSet<String>("animations", ItemEdit.get()) {
-
-                        private final LinkedHashSet<String> values = new LinkedHashSet<>(craftValues());
-
-                        @Override
-                        public String getName(String type) {
-                            return type.toLowerCase(Locale.ENGLISH);
-                        }
-
-                        private List<String> craftValues() {
-                            return Arrays.asList("drink", "eat", "crossbow",
-                                    "none", "block", "bow", "spear", "spyglass", "toot_horn", "brush");
-                        }
-
-                        @Override
-                        public Collection<String> getValues() {
-                            return values;
-                        }
-                    });
-    public static final EggTypeAliases EGG_TYPE = createAndRegister(true, () -> {
-        if (VersionUtils.isInRange(1, 11, 1, 12)) {
-            return new EggTypeAliases();
-        }
-        return null;
-    });
     public static final AliasSet<ItemFlag> FLAG_TYPE = createAndRegister(true, () -> new EnumAliasSet<ItemFlag>("flag_type", ItemEdit.get(), ItemFlag.class) {
         @Override
         public String getName(ItemFlag type) {

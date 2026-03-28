@@ -2,12 +2,11 @@ package emanondev.itemedit.command.itemkinetic;
 
 import emanondev.itemedit.command.ItemKineticCommand;
 import emanondev.itemedit.command.SubCmd;
-import emanondev.itemedit.implementations.KineticWeaponComponentCondition;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemBuilder;
+import io.papermc.paper.datacomponent.item.KineticWeapon;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.meta.components.KineticWeaponComponent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class KnockbackConditions extends SubCmd {
         int maxDurationTicks = Integer.parseInt(args[1]);
         double minSpeed = Double.parseDouble(args[2]);
         double minRelativeSpeed = Double.parseDouble(args[3]);
-        KineticWeaponComponent.Condition condition = new KineticWeaponComponentCondition(
+        KineticWeapon.Condition condition = KineticWeapon.condition(
                 maxDurationTicks, (float) minSpeed, (float) minRelativeSpeed);
         new ItemBuilder(getItemInHand(player)).setKineticKnockbackConditions(condition).build();
         onSuccess(player);

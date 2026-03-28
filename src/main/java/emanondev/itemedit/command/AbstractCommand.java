@@ -21,10 +21,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Supplier;
 
 public abstract class AbstractCommand implements TabExecutor {
@@ -150,6 +147,19 @@ public abstract class AbstractCommand implements TabExecutor {
             } catch (Throwable t) {
                 subCmd.onFail(sender, label);
                 Util.logCommandError(this, args, sender);
+                System.out.println("A");
+                t.printStackTrace();
+                System.out.println("B");
+                System.out.println(""+t.getMessage());
+                System.out.println(""+t.getStackTrace());
+                System.out.println("C");
+                getPlugin().getLogger().info(
+                        String.join("\n",
+                                Arrays.stream(t.getStackTrace()).map(s->s.toString()).toList()));
+                t.printStackTrace();
+                System.out.println(
+                        String.join("\n",
+                                Arrays.stream(t.getStackTrace()).map(s->s.toString()).toList()));
             }
         }
         return true;

@@ -1,8 +1,15 @@
 package emanondev.itemedit.utility;
 
 import com.google.common.collect.Multimap;
-import emanondev.itemedit.Keys;
-import emanondev.itemedit.ParsedItem;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.*;
+import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
+import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
+import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.registry.TypedKey;
+import io.papermc.paper.registry.set.RegistryKeySet;
+import io.papermc.paper.registry.set.RegistrySet;
+import net.kyori.adventure.key.Key;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -16,19 +23,20 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
-import org.bukkit.inventory.meta.components.EquippableComponent;
+import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.inventory.meta.components.FoodComponent;
-import org.bukkit.inventory.meta.components.KineticWeaponComponent;
-import org.bukkit.inventory.meta.components.PiercingWeaponComponent;
-import org.bukkit.inventory.meta.components.consumable.ConsumableComponent;
-import org.bukkit.inventory.meta.components.consumable.effects.ConsumableEffect;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
+@SuppressWarnings("UnstableApiUsage")
 public class ItemBuilder {
 
     private @NotNull ItemStack stack;
@@ -47,8 +55,6 @@ public class ItemBuilder {
         stack.setItemMeta(meta);
         return stack;
     }
-
-    //GENERIC
 
     public ItemStack getConvertsTo() {
         if (!VersionUtils.isAfter(1, 21)) {
@@ -75,125 +81,64 @@ public class ItemBuilder {
         return this;
     }
 
-    //CONSUMABLE COMPONENT
-
-    public ItemBuilder addConsumeEffect(@NotNull ConsumableEffect effect) {
+    public ItemBuilder addConsumeEffect(@NotNull ConsumeEffect effect) {
         if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
-        ConsumableComponent consumableComponent = meta.getConsumable();
-        List<ConsumableEffect> effects = new ArrayList<>(consumableComponent.getEffects());
-        effects.add(effect);
-        consumableComponent.setEffects(effects);
-        meta.setConsumable(consumableComponent);
+        Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
+                Consumable.consumable().build()).toBuilder().addEffect(effect).build();
+        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
-    public ConsumableComponent.Animation getConsumeAnimation() {
+    public ItemUseAnimation getConsumeAnimation() {
         if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
-        if (!meta.hasConsumable()) {
-            return null;
-        }
-        return meta.getConsumable().getAnimation();
-    }
-
-    @Deprecated
-    public String getConsumeAnimationName() {
-        if (!VersionUtils.isInRange(1, 20, 5, 1, 21, 3)) {
-            throw new UnsupportedOperationException();
-        }
-        stack.setItemMeta(meta);
-        ParsedItem parsedItem = new ParsedItem(stack);
-        return parsedItem.readString("eat", Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "animation");
-    }
-
-    @Deprecated
-    public ItemBuilder setConsumeAnimationName(String animationName) {
-        if (!VersionUtils.isInRange(1, 20, 5, 1, 21, 3)) {
-            throw new UnsupportedOperationException();
-        }
-        stack.setItemMeta(meta);
-        ParsedItem parsedItem = new ParsedItem(stack);
-        parsedItem.set(animationName, Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "animation");
-        stack = parsedItem.toItemStack();
-        meta = Objects.requireNonNull(stack.getItemMeta());
-        return this;
+        return stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
+                Consumable.consumable().build()).animation();
     }
 
     public float getConsumeSeconds() {
         if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsedItem = new ParsedItem(stack);
-            return parsedItem.readFloat(1.6F, Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "consume_seconds");
-        }
-        if (!meta.hasConsumable()) {
-            return 1.6F;
-        }
-        return meta.getConsumable().getConsumeSeconds();
+        return stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
+                Consumable.consumable().build()).consumeSeconds();
     }
 
-    public List<ConsumableEffect> getConsumeEffects() {
+    public List<ConsumeEffect> getConsumeEffects() {
         if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
-        if (!meta.hasConsumable()) {
-            return List.of();
-        }
-        return meta.getConsumable().getEffects();
+        return stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
+                Consumable.consumable().build()).consumeEffects();
 
     }
 
-    public Sound getConsumeSound() {
+    public Key getConsumeSound() {
         if (!VersionUtils.isAfter(1, 21, 2)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsedItem = new ParsedItem(stack);
-            String val = parsedItem.readString((String) null, Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "sound");
-            if (val == null) {
-                return Sound.ENTITY_GENERIC_EAT;
-            }
-            try {
-                Sound value = Registry.SOUNDS.get(new NamespacedKey(val.split(":")[0], val.split(":")[1]));
-                return value == null ? Sound.ENTITY_GENERIC_EAT : value;
-            } catch (Exception e) {
-                return Sound.ENTITY_GENERIC_EAT;
-            }
-        }
-        if (!meta.hasConsumable()) {
-            return null;
-        }
-        return meta.getConsumable().getSound();
+        return stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
+                Consumable.consumable().build()).sound();
     }
 
     public boolean hasConsumeParticles() {
         if (!VersionUtils.isAfter(1, 21, 2)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsedItem = new ParsedItem(stack);
-            return parsedItem.readBoolean(true, Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "has_consume_particles");
-        }
-        if (!meta.hasConsumable()) {
-            return true;
-        }
-        return meta.getConsumable().hasConsumeParticles();
+        return stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
+                Consumable.consumable().build()).hasConsumeParticles();
     }
 
-    public ItemBuilder setConsumeAnimation(ConsumableComponent.Animation animation) {
+    public ItemBuilder setConsumeAnimation(ItemUseAnimation animation) {
         if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
-        ConsumableComponent consumableComponent = meta.getConsumable();
-        consumableComponent.setAnimation(animation);
-        meta.setConsumable(consumableComponent);
+        Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
+                Consumable.consumable().build()).toBuilder().animation(animation).build();
+        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
@@ -201,17 +146,9 @@ public class ItemBuilder {
         if (!VersionUtils.isAfter(1, 21, 2)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsedItem = new ParsedItem(stack);
-            parsedItem.set(consumeParticles, Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "has_consume_particles");
-            stack = parsedItem.toItemStack();
-            meta = Objects.requireNonNull(stack.getItemMeta());
-            return this;
-        }
-        ConsumableComponent consumableComponent = meta.getConsumable();
-        consumableComponent.setConsumeParticles(consumeParticles);
-        meta.setConsumable(consumableComponent);
+        Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
+                Consumable.consumable().build()).toBuilder().hasConsumeParticles(consumeParticles).build();
+        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
@@ -219,70 +156,57 @@ public class ItemBuilder {
         if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsedItem = new ParsedItem(stack);
-            parsedItem.loadEmptyMap(Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
-            parsedItem.set(consumeSeconds, Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "consume_seconds");
-            stack = parsedItem.toItemStack();
-            meta = Objects.requireNonNull(stack.getItemMeta());
-            return this;
-        }
-        ConsumableComponent consumableComponent = meta.getConsumable();
-        consumableComponent.setConsumeSeconds(consumeSeconds);
-        meta.setConsumable(consumableComponent);
+        Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
+                Consumable.consumable().build()).toBuilder().consumeSeconds(consumeSeconds).build();
+        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
-    public ItemBuilder setConsumeEffects(List<ConsumableEffect> effects) {
+    public ItemBuilder setConsumeEffects(List<ConsumeEffect> effects) {
         if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
-        ConsumableComponent consumableComponent = meta.getConsumable();
-        consumableComponent.setEffects(effects);
-        meta.setConsumable(consumableComponent);
+        Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
+                Consumable.consumable().build()).toBuilder().effects(effects).build();
+        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
-    public ItemBuilder setConsumeSound(Sound sound) {
+    public ItemBuilder setConsumeSound(Sound sound){
+        return setConsumeSound(RegistryKey.SOUND_EVENT.typedKey(Registry.SOUNDS.getKeyOrThrow(sound)));
+    }
+
+    public ItemBuilder setConsumeSound(Key sound) {
         if (!VersionUtils.isAfter(1, 21, 2)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsed = new ParsedItem(stack);
-            parsed.set(((Keyed) sound).getKey(), Keys.Component.CROSS_VERSION_CONSUMABLE.toString(), "sound");
-            stack = parsed.toItemStack();
-            meta = Objects.requireNonNull(stack.getItemMeta());
-            return this;
-        }
-        ConsumableComponent consumableComponent = meta.getConsumable();
-        consumableComponent.setSound(sound);
-        meta.setConsumable(consumableComponent);
+        Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
+                Consumable.consumable().build()).toBuilder().sound(sound).build();
+        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
-    public ItemBuilder setConsumableComponent(ConsumableComponent consumable) {
+    public ItemBuilder setConsumableComponent(@Nullable Consumable consumable) {
         if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
-        meta.setConsumable(consumable);
+        if (consumable == null) {
+            stack.unsetData(DataComponentTypes.CONSUMABLE);
+        } else {
+            stack.setData(DataComponentTypes.CONSUMABLE, consumable);
+        }
         return this;
-    }
-
-    public ItemBuilder writeConsumableComponent() {
-        return setConsumableComponent(meta.getConsumable());
     }
 
     public ItemBuilder clearConsumableComponent() {
         return setConsumableComponent(null);
     }
 
-    public ConsumableComponent getConsumableComponent() {
+    public Consumable getConsumableComponent() {
         if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
-        return meta.getConsumable();
+        return stack.getData(DataComponentTypes.CONSUMABLE);
     }
 
     //FOOD COMPONENT
@@ -291,80 +215,33 @@ public class ItemBuilder {
         if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsed = new ParsedItem(stack);
-            return parsed.readBoolean(false, Keys.Component.FOOD.toString(), "can_always_eat");
-        }
-        if (!meta.hasFood()) {
-            return false;
-        }
-        FoodComponent food = meta.getFood();
-        return food.canAlwaysEat();
+        return stack.getDataOrDefault(DataComponentTypes.FOOD,
+                FoodProperties.food().build()).canAlwaysEat();
     }
 
     public int getNutrition() {
         if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsedItem = new ParsedItem(stack);
-            Map<String, Object> food = ParsedItem.getMap(parsedItem.getMap(), "food");
-            if (food == null || !food.containsKey("nutrition")) {
-                return 0;
-            }
-            return ParsedItem.readInt(food, "nutrition", 0);
-        }
-
-        if (!meta.hasFood()) {
-            return 0;
-        }
-        FoodComponent food = meta.getFood();
-        return food.getNutrition();
+        return stack.getDataOrDefault(DataComponentTypes.FOOD,
+                FoodProperties.food().build()).nutrition();
     }
 
     public float getSaturation() {
         if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsedItem = new ParsedItem(stack);
-            Map<String, Object> food = ParsedItem.getMap(parsedItem.getMap(), "food");
-            if (food == null || !food.containsKey("saturation")) {
-                return 0F;
-            }
-            return ParsedItem.readFloat(food, "saturation", 0f);
-        }
-
-        if (!meta.hasFood()) {
-            return 0F;
-        }
-        FoodComponent food = meta.getFood();
-        return food.getSaturation();
+        return stack.getDataOrDefault(DataComponentTypes.FOOD,
+                FoodProperties.food().build()).saturation();
     }
 
     public ItemBuilder setCanAlwaysEat(boolean canAlwaysEat) {
         if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsedItem = new ParsedItem(stack);
-            parsedItem.loadEmptyMap(Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
-            parsedItem.set(canAlwaysEat, Keys.Component.FOOD.toString(), "can_always_eat");
-            parsedItem.load(0F, Keys.Component.FOOD.toString(), "saturation");
-            stack = parsedItem.toItemStack();
-            meta = Objects.requireNonNull(stack.getItemMeta());
-            return this;
-        }
-        FoodComponent food = meta.getFood();
-        food.setCanAlwaysEat(canAlwaysEat);
-        meta.setFood(food);
-        if (!meta.hasConsumable()) {
-            meta.setConsumable(meta.getConsumable());
-        }
+        FoodProperties food = stack.getDataOrDefault(DataComponentTypes.FOOD,
+                FoodProperties.food().build()).toBuilder().canAlwaysEat(canAlwaysEat).build();
+        stack.setData(DataComponentTypes.FOOD, food);
         return this;
     }
 
@@ -372,22 +249,9 @@ public class ItemBuilder {
         if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsedItem = new ParsedItem(stack);
-            parsedItem.loadEmptyMap(Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
-            parsedItem.set(nutrition, Keys.Component.FOOD.toString(), "nutrition");
-            parsedItem.load(0F, Keys.Component.FOOD.toString(), "saturation");
-            stack = parsedItem.toItemStack();
-            meta = Objects.requireNonNull(stack.getItemMeta());
-            return this;
-        }
-        FoodComponent food = meta.getFood();
-        food.setNutrition(nutrition);
-        meta.setFood(food);
-        if (!meta.hasConsumable()) {
-            meta.setConsumable(meta.getConsumable());
-        }
+        FoodProperties food = stack.getDataOrDefault(DataComponentTypes.FOOD,
+                FoodProperties.food().build()).toBuilder().nutrition(nutrition).build();
+        stack.setData(DataComponentTypes.FOOD, food);
         return this;
     }
 
@@ -395,139 +259,234 @@ public class ItemBuilder {
         if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
         }
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            stack.setItemMeta(meta);
-            ParsedItem parsedItem = new ParsedItem(stack);
-            parsedItem.loadEmptyMap(Keys.Component.CROSS_VERSION_CONSUMABLE.toString());
-            parsedItem.set(0, Keys.Component.FOOD.toString(), "nutrition");
-            parsedItem.load(saturation, Keys.Component.FOOD.toString(), "saturation");
-            stack = parsedItem.toItemStack();
-            meta = Objects.requireNonNull(stack.getItemMeta());
-            return this;
-        }
-        FoodComponent food = meta.getFood();
-        food.setSaturation(saturation);
-        meta.setFood(food);
-        if (!meta.hasConsumable()) {
-            meta.setConsumable(meta.getConsumable());
-        }
+        FoodProperties food = stack.getDataOrDefault(DataComponentTypes.FOOD,
+                FoodProperties.food().build()).toBuilder().saturation(saturation).build();
+        stack.setData(DataComponentTypes.FOOD, food);
         return this;
     }
 
-    public ItemBuilder setFoodComponent(FoodComponent food) {
-        meta.setFood(food);
+    public ItemBuilder setFoodComponent(FoodProperties food) {
+        if (food != null) {
+            stack.setData(DataComponentTypes.FOOD, food);
+        } else {
+            stack.unsetData(DataComponentTypes.FOOD);
+        }
         return this;
-    }
-
-    public ItemBuilder writeFoodComponent() {
-        return setFoodComponent(meta.getFood());
     }
 
     public ItemBuilder clearFoodComponent() {
         return setFoodComponent(null);
     }
 
-    public FoodComponent getFoodComponent() {
-        return meta.getFood();
+    public FoodProperties getFoodComponent() {
+        return stack.getData(DataComponentTypes.FOOD);
     }
 
     public ItemBuilder setKineticContactCooldownTicks(int ticks) {
-        KineticWeaponComponent component = meta.getKineticWeapon();
-        component.setContactCooldownTicks(ticks);
-        meta.setKineticWeapon(component);
+        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
+        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+        builder.delayTicks(ticks);
+        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
     public ItemBuilder setKineticDamageMultiplier(float multiplier) {
-        KineticWeaponComponent component = meta.getKineticWeapon();
-        component.setDamageMultipler(multiplier);
-        meta.setKineticWeapon(component);
+        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
+        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.damageMultiplier(multiplier);
+
+        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
     public ItemBuilder setKineticDelayTicks(int ticks) {
-        KineticWeaponComponent component = meta.getKineticWeapon();
-        component.setDelayTicks(ticks);
-        meta.setKineticWeapon(component);
+        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
+        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.delayTicks(ticks);
+
+        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
     public ItemBuilder setKineticForwardMovement(float multiplier) {
-        KineticWeaponComponent component = meta.getKineticWeapon();
-        component.setForwardMovement(multiplier);
-        meta.setKineticWeapon(component);
+        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
+        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.forwardMovement(multiplier);
+
+        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
     public ItemBuilder setKineticHitSound(Sound value) {
-        KineticWeaponComponent component = meta.getKineticWeapon();
-        component.setHitSound(value);
-        meta.setKineticWeapon(component);
+        return setKineticHitSound(RegistryKey.SOUND_EVENT.typedKey(Registry.SOUNDS.getKeyOrThrow(value)));
+    }
+
+
+    public ItemBuilder setKineticHitSound(Key value) {
+        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
+        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.hitSound(value);
+
+        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
     public ItemBuilder setKineticSound(Sound value) {
-        KineticWeaponComponent component = meta.getKineticWeapon();
-        component.setSound(value);
-        meta.setKineticWeapon(component);
+        return setKineticSound(RegistryKey.SOUND_EVENT.typedKey(Registry.SOUNDS.getKeyOrThrow(value)));
+    }
+
+    public ItemBuilder setKineticSound(Key value) {
+        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
+        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.sound(value);
+
+        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
-    public ItemBuilder setKineticDamageConditions(KineticWeaponComponent.Condition condition) {
-        KineticWeaponComponent component = meta.getKineticWeapon();
-        component.setDamageConditions(condition);
-        meta.setKineticWeapon(component);
+    public ItemBuilder setKineticDamageConditions(KineticWeapon.Condition condition) {
+        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
+        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.damageConditions(condition);
+
+        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
-    public ItemBuilder setKineticDismountingConditions(KineticWeaponComponent.Condition condition) {
-        KineticWeaponComponent component = meta.getKineticWeapon();
-        component.setDismountConditions(condition);
-        meta.setKineticWeapon(component);
+    public ItemBuilder setKineticDismountConditions(KineticWeapon.Condition condition) {
+        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
+        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.dismountConditions(condition);
+
+        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
-    public ItemBuilder setKineticKnockbackConditions(KineticWeaponComponent.Condition condition) {
-        KineticWeaponComponent component = meta.getKineticWeapon();
-        component.setKnockbackConditions(condition);
-        meta.setKineticWeapon(component);
+    public ItemBuilder setKineticKnockbackConditions(KineticWeapon.Condition condition) {
+        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
+        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.knockbackConditions(condition);
+
+        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
     public ItemBuilder setPiercingDismounts(boolean value) {
-        PiercingWeaponComponent component = meta.getPiercingWeapon();
-        component.setDismounts(value);
-        meta.setPiercingWeapon(component);
+        PiercingWeapon weapon = stack.getData(DataComponentTypes.PIERCING_WEAPON);
+        PiercingWeapon.Builder builder = PiercingWeapon.piercingWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.dismounts(value);
+
+        stack.setData(DataComponentTypes.PIERCING_WEAPON, builder.build());
         return this;
     }
 
     public ItemBuilder setPiercingDealsKnockback(boolean value) {
-        PiercingWeaponComponent component = meta.getPiercingWeapon();
-        component.setDealsKnockback(value);
-        meta.setPiercingWeapon(component);
+        PiercingWeapon weapon = stack.getData(DataComponentTypes.PIERCING_WEAPON);
+        PiercingWeapon.Builder builder = PiercingWeapon.piercingWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.dealsKnockback(value);
+
+        stack.setData(DataComponentTypes.PIERCING_WEAPON, builder.build());
         return this;
     }
 
-    public boolean isPiercingDismounts() {
-        return meta.getPiercingWeapon().isDismounts();
-    }
-
-    public boolean isPiercingDealsKnockback() {
-        return meta.getPiercingWeapon().isDealsKnockback();
-    }
 
     public ItemBuilder setPiercingHitSound(Sound value) {
-        KineticWeaponComponent component = meta.getKineticWeapon();
-        component.setHitSound(value);
-        meta.setKineticWeapon(component);
+        return setPiercingHitSound(RegistryKey.SOUND_EVENT.typedKey(Registry.SOUNDS.getKeyOrThrow(value)));
+    }
+
+    public ItemBuilder setPiercingHitSound(Key value) {
+        PiercingWeapon weapon = stack.getData(DataComponentTypes.PIERCING_WEAPON);
+        PiercingWeapon.Builder builder = PiercingWeapon.piercingWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.hitSound(value);
+
+        stack.setData(DataComponentTypes.PIERCING_WEAPON, builder.build());
         return this;
     }
 
     public ItemBuilder setPiercingSound(Sound value) {
-        KineticWeaponComponent component = meta.getKineticWeapon();
-        component.setSound(value);
-        meta.setKineticWeapon(component);
+        return setPiercingSound(RegistryKey.SOUND_EVENT.typedKey(Registry.SOUNDS.getKeyOrThrow(value)));
+    }
+
+    public ItemBuilder setPiercingSound(Key value) {
+        PiercingWeapon weapon = stack.getData(DataComponentTypes.PIERCING_WEAPON);
+        PiercingWeapon.Builder builder = PiercingWeapon.piercingWeapon();
+
+        if (weapon != null) {
+            inheritProperties(builder, weapon);
+        }
+
+        builder.sound(value);
+
+        stack.setData(DataComponentTypes.PIERCING_WEAPON, builder.build());
         return this;
+    }
+
+    public boolean isPiercingDismounts() {
+        return stack.getDataOrDefault(DataComponentTypes.PIERCING_WEAPON,
+                PiercingWeapon.piercingWeapon().build()).dismounts();
+    }
+
+    public boolean isPiercingDealsKnockback() {
+        return stack.getDataOrDefault(DataComponentTypes.PIERCING_WEAPON,
+                PiercingWeapon.piercingWeapon().build()).dealsKnockback();
     }
 
     public ItemBuilder setEnchantmentGlintOverride(Boolean value) {
@@ -543,121 +502,185 @@ public class ItemBuilder {
     }
 
     public boolean isEquippableCanBeSheared() {
-        return meta.getEquippable().isCanBeSheared();
+        return stack.getDataOrDefault(DataComponentTypes.EQUIPPABLE,
+                Equippable.equippable(EquipmentSlot.HEAD).build()).canBeSheared();
     }
 
     public ItemBuilder setEquippableCanBeSheared(boolean canBeSheared) {
-        EquippableComponent component = meta.getEquippable();
-        component.setCanBeSheared(canBeSheared);
-        meta.setEquippable(component);
+        Equippable.Builder builder = stack.getDataOrDefault(DataComponentTypes.EQUIPPABLE,
+                Equippable.equippable(EquipmentSlot.HAND).build()).toBuilder();
+        builder.canBeSheared(canBeSheared);
+        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
     public ItemBuilder clearEquippable() {
-        meta.setEquippable(null);
+        stack.unsetData(DataComponentTypes.EQUIPPABLE);
         return this;
     }
 
     public ItemBuilder setEquippableSlot(EquipmentSlot slot) {
-        EquippableComponent component = meta.getEquippable();
-        component.setSlot(slot);
-        meta.setEquippable(component);
+        Equippable equippable = stack.getData(DataComponentTypes.EQUIPPABLE);
+        if (equippable != null && equippable.slot().equals(slot)) {
+            return this;
+        }
+        Equippable.Builder builder = Equippable.equippable(slot);
+        if (equippable != null) {
+            inheritProperties(builder, equippable);
+        }
+        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
     public ItemBuilder setEquippableEquipSound(Sound value) {
-        EquippableComponent component = meta.getEquippable();
-        component.setEquipSound(value);
-        meta.setEquippable(component);
+        return setEquippableEquipSound(RegistryKey.SOUND_EVENT.typedKey(Registry.SOUNDS.getKeyOrThrow(value)));
+    }
+
+        public ItemBuilder setEquippableEquipSound(Key value) {
+        Equippable.Builder builder = stack.getDataOrDefault(DataComponentTypes.EQUIPPABLE,
+                Equippable.equippable(EquipmentSlot.HAND).build()).toBuilder();
+        builder.equipSound(value);
+        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
     public ItemBuilder setEquippableShearingSound(Sound value) {
-        EquippableComponent component = meta.getEquippable();
-        component.setShearingSound(value);
-        meta.setEquippable(component);
+        return setEquippableShearingSound(RegistryKey.SOUND_EVENT.typedKey(Registry.SOUNDS.getKeyOrThrow(value)));
+    }
+
+    public ItemBuilder setEquippableShearingSound(Key value) {
+        Equippable.Builder builder = stack.getDataOrDefault(
+                DataComponentTypes.EQUIPPABLE,
+                Equippable.equippable(EquipmentSlot.HAND).build()
+        ).toBuilder();
+
+        builder.shearSound(value);
+
+        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
     public ItemBuilder setEquippableAllowedEntities(EntityType entityType) {
-        EquippableComponent component = meta.getEquippable();
-        component.setAllowedEntities(entityType);
-        meta.setEquippable(component);
+        return setEquippableAllowedEntities(RegistrySet.keySet(RegistryKey.ENTITY_TYPE, Stream.of(entityType)
+                .map(e -> TypedKey.create(RegistryKey.ENTITY_TYPE, e.getKey())).toList()));
+    }
+
+    public ItemBuilder setEquippableAllowedEntities(RegistryKeySet<@NotNull EntityType> entityType) {
+        Equippable.Builder builder = stack.getDataOrDefault(
+                DataComponentTypes.EQUIPPABLE,
+                Equippable.equippable(EquipmentSlot.HAND).build()
+        ).toBuilder();
+        builder.allowedEntities(entityType);
+        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
-    public ItemBuilder setEquippableAllowedEntities(Collection<EntityType> types) {
-        EquippableComponent component = meta.getEquippable();
-        component.setAllowedEntities(types);
-        meta.setEquippable(component);
-        return this;
+    public ItemBuilder setEquippableAllowedEntities(Collection<EntityType> entityType) {
+        return setEquippableAllowedEntities(RegistrySet.keySet(RegistryKey.ENTITY_TYPE, entityType.stream()
+                .map(e -> TypedKey.create(RegistryKey.ENTITY_TYPE, e.getKey())).toList()));
     }
 
     public boolean isEquipmentSwappable() {
-        return meta.getEquippable().isSwappable();
+        Equippable eq = stack.getData(DataComponentTypes.EQUIPPABLE);
+        return eq != null && eq.swappable();
     }
 
     public ItemBuilder setEquipmentSwappable(boolean value) {
-        EquippableComponent component = meta.getEquippable();
-        component.setSwappable(value);
-        meta.setEquippable(component);
+        Equippable.Builder builder = stack.getDataOrDefault(
+                DataComponentTypes.EQUIPPABLE,
+                Equippable.equippable(EquipmentSlot.HAND).build()
+        ).toBuilder();
+
+        builder.swappable(value);
+
+        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
     public boolean isEquipmentDispensable() {
-        return meta.getEquippable().isDispensable();
+        Equippable eq = stack.getData(DataComponentTypes.EQUIPPABLE);
+        return eq != null && eq.dispensable();
     }
 
     public ItemBuilder setEquipmentDispensable(boolean value) {
-        EquippableComponent component = meta.getEquippable();
-        component.setDispensable(value);
-        meta.setEquippable(component);
+        Equippable.Builder builder = stack.getDataOrDefault(
+                DataComponentTypes.EQUIPPABLE,
+                Equippable.equippable(EquipmentSlot.HAND).build()
+        ).toBuilder();
+
+        builder.dispensable(value);
+
+        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
     public boolean isEquipmentEquipOnInteract() {
-        return meta.getEquippable().isEquipOnInteract();
+        Equippable eq = stack.getData(DataComponentTypes.EQUIPPABLE);
+        return eq != null && eq.equipOnInteract();
     }
 
     public ItemBuilder setEquipmentEquipOnInteract(boolean value) {
-        EquippableComponent component = meta.getEquippable();
-        component.setEquipOnInteract(value);
-        meta.setEquippable(component);
+        Equippable.Builder builder = stack.getDataOrDefault(
+                DataComponentTypes.EQUIPPABLE,
+                Equippable.equippable(EquipmentSlot.HAND).build()
+        ).toBuilder();
+
+        builder.equipOnInteract(value);
+
+        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
     public boolean isEquipmentDamageOnHurt() {
-        return meta.getEquippable().isDamageOnHurt();
+        Equippable eq = stack.getData(DataComponentTypes.EQUIPPABLE);
+        return eq != null && eq.damageOnHurt();
     }
 
     public ItemBuilder setEquipmentDamageOnHurt(boolean value) {
-        EquippableComponent component = meta.getEquippable();
-        component.setDamageOnHurt(value);
-        meta.setEquippable(component);
+        Equippable.Builder builder = stack.getDataOrDefault(
+                DataComponentTypes.EQUIPPABLE,
+                Equippable.equippable(EquipmentSlot.HAND).build()
+        ).toBuilder();
+
+        builder.damageOnHurt(value);
+
+        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
-    public ItemBuilder setEquipmentCameraOverlay(NamespacedKey key) {
-        if (key == null && !meta.hasEquippable()) {
+    public ItemBuilder setEquipmentCameraOverlay(Key key) {
+        if (key == null && !stack.hasData(DataComponentTypes.EQUIPPABLE)) {
             return this;
         }
-        EquippableComponent component = meta.getEquippable();
-        component.setCameraOverlay(key);
-        meta.setEquippable(component);
+
+        Equippable.Builder builder = stack.getDataOrDefault(
+                DataComponentTypes.EQUIPPABLE,
+                Equippable.equippable(EquipmentSlot.HAND).build()
+        ).toBuilder();
+
+        builder.cameraOverlay(key);
+
+        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
     public boolean hasEquippableComponent() {
-        return meta.hasEquippable();
+        return stack.hasData(DataComponentTypes.EQUIPPABLE);
     }
 
-    public ItemBuilder setEquipmentModel(NamespacedKey key) {
-        if (key == null && !meta.hasEquippable()) {
+    public ItemBuilder setEquipmentModel(Key key) {
+        if (key == null && !stack.hasData(DataComponentTypes.EQUIPPABLE)) {
             return this;
         }
-        EquippableComponent component = meta.getEquippable();
-        component.setModel(key);
-        meta.setEquippable(component);
+
+        Equippable.Builder builder = stack.getDataOrDefault(
+                DataComponentTypes.EQUIPPABLE,
+                Equippable.equippable(EquipmentSlot.HAND).build()
+        ).toBuilder();
+
+        builder.assetId(key);
+
+        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
@@ -677,11 +700,11 @@ public class ItemBuilder {
     }
 
     public boolean isUnbreakable() {
-        return ItemUtils.isUnbreakable(meta);
+        return meta.isUnbreakable();
     }
 
     public ItemBuilder setUnbreakable(boolean value) {
-        ItemUtils.setUnbreakable(meta, value);
+        meta.setUnbreakable(value);
         return this;
     }
 
@@ -695,18 +718,18 @@ public class ItemBuilder {
 
     /**
      * @since 1.20.5
+     */
+    public Boolean isHideToolTip() {
+        return meta.isHideTooltip();
+    }
+
+    /**
+     * @since 1.20.5
      * @deprecated 1.21.2
      */
     public ItemBuilder setFireResistent(boolean value) {
         meta.setFireResistant(value);
         return this;
-    }
-
-    /**
-     * @since 1.20.5
-     */
-    public Boolean isHideToolTip() {
-        return meta.isHideTooltip();
     }
 
     /**
@@ -949,13 +972,6 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder setSpawnedType(EntityType type) {
-        if (meta instanceof SpawnEggMeta spawnEggMeta) {
-            spawnEggMeta.setSpawnedType(type);
-        }
-        return this;
-    }
-
     public ItemBuilder setTooltipStyle(NamespacedKey namespacedKey) {
         meta.setTooltipStyle(namespacedKey);
         return this;
@@ -987,5 +1003,37 @@ public class ItemBuilder {
             tropicalFishBucketMeta.setPattern(pattern);
         }
         return this;
+    }
+
+    private void inheritProperties(Equippable.Builder builder, Equippable equippable) {
+        builder.canBeSheared(equippable.canBeSheared());
+        builder.allowedEntities(equippable.allowedEntities());
+        builder.assetId(equippable.assetId());
+        builder.cameraOverlay(equippable.cameraOverlay());
+        builder.damageOnHurt(equippable.damageOnHurt());
+        builder.dispensable(equippable.dispensable());
+        builder.equipOnInteract(equippable.equipOnInteract());
+        builder.shearSound(equippable.shearSound());
+        builder.equipSound(equippable.equipSound());
+        builder.swappable(equippable.swappable());
+    }
+
+    private void inheritProperties(KineticWeapon.Builder builder, KineticWeapon weapon) {
+        builder.delayTicks(weapon.delayTicks());
+        builder.contactCooldownTicks(weapon.contactCooldownTicks());
+        builder.sound(weapon.sound());
+        builder.damageConditions(weapon.damageConditions());
+        builder.damageMultiplier(weapon.damageMultiplier());
+        builder.dismountConditions(weapon.dismountConditions());
+        builder.forwardMovement(weapon.forwardMovement());
+        builder.hitSound(weapon.hitSound());
+        builder.knockbackConditions(weapon.knockbackConditions());
+    }
+
+    private void inheritProperties(PiercingWeapon.Builder builder, PiercingWeapon weapon) {
+        builder.sound(weapon.sound());
+        builder.hitSound(weapon.hitSound());
+        builder.dismounts(weapon.dismounts());
+        builder.dealsKnockback(weapon.dealsKnockback());
     }
 }

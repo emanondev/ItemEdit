@@ -55,7 +55,6 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new PotionEffectEditor(this)); // 1.15+ adds suspicious stew
         this.registerSubCommand(() -> new BookAuthor(this));
         this.registerSubCommand(() -> new BookType(this), VersionUtils.isAfter(1, 10));
-        this.registerSubCommand(() -> new SpawnerEggType(this), VersionUtils.isInRange(1, 11, 1, 12)); // 1.11 & 1.12 only
         this.registerSubCommand(() -> new Attribute(this), VersionUtils.isAfter(1, 13)); // 1.13+
         this.registerSubCommand(() -> new TropicalFish(this), VersionUtils.isAfter(1, 13)); // 1.13+
         this.registerSubCommand(() -> new CustomModelData(this), VersionUtils.isAfter(1, 14)); // 1.14+

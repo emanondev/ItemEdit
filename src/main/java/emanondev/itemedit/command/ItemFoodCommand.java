@@ -30,7 +30,7 @@ public class ItemFoodCommand extends AbstractCommand {
                 ItemBuilder::canAlwaysEat, ItemBuilder::setCanAlwaysEat));
         this.registerSubCommand(() -> new IntSubCommand(this, "eatticks",
                 (b, v) -> {
-                    if (v == null || v >= 0) {
+                    if (v == null || v <= 0) {
                         return false;
                     }
                     b.setConsumeSeconds(v / 20f);
@@ -52,7 +52,6 @@ public class ItemFoodCommand extends AbstractCommand {
         this.registerSubCommand(() -> new Nutrition(this));
         this.registerSubCommand(() -> new SoundSubCommand(this, "sound", ItemBuilder::setConsumeSound),
                 VersionUtils.isAfter(1, 21, 2));
-        ;
         this.registerSubCommand(() -> new Info(this));
         this.registerSubCommand(() -> new Reset(this));
     }
