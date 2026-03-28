@@ -52,6 +52,18 @@ public class TropicalFish extends SubCmd {
 
     }
 
+    @Override
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], subCommands);
+            case 3 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "patterncolor", "bodycolor" -> CompleteUtility.complete(args[2], Aliases.COLOR);
+                case "pattern" -> CompleteUtility.complete(args[2], Aliases.TROPICALPATTERN);
+                default -> List.of();
+            };
+            default -> List.of();
+        };
+    }
 
     private void bodyColor(Player p, ItemBuilder item, String alias, String[] args) {
         if (args.length != 3) {
@@ -102,18 +114,5 @@ public class TropicalFish extends SubCmd {
         item.setTropicalFishPattern(pattern).build();
         onSubSuccess(p, "pattern");
         updateView(p);
-    }
-
-    @Override
-    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return switch (args.length) {
-            case 2 -> CompleteUtility.complete(args[1], subCommands);
-            case 3 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                case "patterncolor", "bodycolor" -> CompleteUtility.complete(args[2], Aliases.COLOR);
-                case "pattern" -> CompleteUtility.complete(args[2], Aliases.TROPICALPATTERN);
-                default -> List.of();
-            };
-            default -> List.of();
-        };
     }
 }

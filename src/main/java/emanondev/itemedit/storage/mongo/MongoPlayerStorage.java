@@ -27,10 +27,6 @@ public class MongoPlayerStorage implements PlayerStorage {
         this.logger = logger;
     }
 
-    private String getStore(OfflinePlayer player) {
-        return storeByUUID() ? player.getUniqueId().toString() : player.getName();
-    }
-
     @Override
     public @Nullable ItemStack getItem(@NotNull OfflinePlayer player, @NotNull String id) {
         validateID(id);
@@ -120,5 +116,9 @@ public class MongoPlayerStorage implements PlayerStorage {
             players.add(uuid ? Bukkit.getOfflinePlayer(uniqueId) : Bukkit.getOfflinePlayer(store));
         }
         return players;
+    }
+
+    private String getStore(OfflinePlayer player) {
+        return storeByUUID() ? player.getUniqueId().toString() : player.getName();
     }
 }

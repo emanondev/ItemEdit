@@ -49,6 +49,22 @@ public class Banner extends SubCmd {
         }
     }
 
+    @Override
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], subCommands);
+            case 3 -> switch (args[1].toLowerCase()) {
+                case "add", "set" -> CompleteUtility.complete(args[2], Aliases.PATTERN_TYPE);
+                default -> List.of();
+            };
+            case 4 -> switch (args[1].toLowerCase()) {
+                case "color", "add", "set" -> CompleteUtility.complete(args[3], Aliases.COLOR);
+                default -> List.of();
+            };
+            default -> List.of();
+        };
+    }
+
     // itemedit banner color id color
     private void colorPattern(@NotNull Player p, @NotNull ItemBuilder item, @NotNull String alias, String[] args) {
         try {
@@ -138,22 +154,6 @@ public class Banner extends SubCmd {
             Util.logCommandError(getCommand(), args, p);
             onSubFail(p, alias, "add");
         }
-    }
-
-    @Override
-    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return switch (args.length) {
-            case 2 -> CompleteUtility.complete(args[1], subCommands);
-            case 3 -> switch (args[1].toLowerCase()) {
-                case "add", "set" -> CompleteUtility.complete(args[2], Aliases.PATTERN_TYPE);
-                default -> List.of();
-            };
-            case 4 -> switch (args[1].toLowerCase()) {
-                case "color", "add", "set" -> CompleteUtility.complete(args[3], Aliases.COLOR);
-                default -> List.of();
-            };
-            default -> List.of();
-        };
     }
 
 }

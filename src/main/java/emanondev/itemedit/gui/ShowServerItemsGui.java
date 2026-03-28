@@ -97,11 +97,6 @@ public class ShowServerItemsGui implements PagedGui {
         }
     }
 
-    private ItemStack getPageInfoItem() {
-        return this.loadLanguageDescription(this.getGuiItem("gui.serveritems.page-info", Material.NAME_TAG),
-                "gui.serveritems.page-info.description", "%player_name%", target.getName(), "%page%", String.valueOf(page));
-    }
-
     /**
      * @return 1+
      */
@@ -187,6 +182,11 @@ public class ShowServerItemsGui implements PagedGui {
     @Override
     public @NotNull ItemEdit getPlugin() {
         return ItemEdit.get();
+    }
+
+    private ItemStack getPageInfoItem() {
+        return this.loadLanguageDescription(this.getGuiItem("gui.serveritems.page-info", Material.NAME_TAG),
+                "gui.serveritems.page-info.description", "%player_name%", target.getName(), "%page%", String.valueOf(page));
     }
 
 }

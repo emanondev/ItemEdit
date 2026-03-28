@@ -41,20 +41,6 @@ public class Lore extends SubCmd {
         lengthLimit = getPlugin().getConfig().getInt("blocked.lore-length-limit", 120);
     }
 
-    private boolean allowedLineLimit(Player who, int lines) {
-        if (lineLimit < 0 || who.hasPermission("itemedit.bypass.lore_line_limit")) {
-            return true;
-        }
-        return lines <= lineLimit;
-    }
-
-    private boolean allowedLengthLimit(Player who, String text) {
-        if (lengthLimit < 0 || who.hasPermission("itemedit.bypass.lore_length_limit")) {
-            return true;
-        }
-        return text.length() <= lengthLimit;
-    }
-
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
@@ -104,6 +90,72 @@ public class Lore extends SubCmd {
             }
             default -> onFail(p, alias);
         }
+    }
+
+    @Override
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], loreSub);
+            case 3 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "remove", "set" -> {
+                    if (!(sender instanceof Player player)) yield List.of();
+
+                    ItemStack item = getItemInHand(player);
+                    if (ItemUtils.isAirOrNull(item)) yield List.of();
+
+                    ItemMeta meta = ItemUtils.getMeta(item);
+                    if (!item.hasItemMeta() || !meta.hasLore()) {
+                        yield CompleteUtility.complete(args[2], Arrays.asList("1", "last"));
+                    }
+                    List<String> loreIndices = IntStream.range(0, meta.getLore().size())
+                            .mapToObj(i -> String.valueOf(i + 1))
+                            .collect(Collectors.toList());
+                    loreIndices.add("last");
+                    yield CompleteUtility.complete(args[2], loreIndices);
+                }
+                case "copyfile" -> CompleteUtility.complete(args[2], loreCopy.getKeys(false));
+                default -> List.of();
+            };
+            case 4 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
+                case "set" -> {
+                    if (!(sender instanceof Player player)) yield List.of();
+
+                    ItemStack item = getItemInHand(player);
+                    if (item == null || !item.hasItemMeta()) yield List.of();
+
+                    ItemMeta meta = ItemUtils.getMeta(item);
+                    if (!meta.hasLore()) yield List.of();
+
+                    List<String> lore = meta.getLore();
+                    int line;
+                    try {
+                        line = args[2].equalsIgnoreCase("last") ? lore.size() - 1 : Integer.parseInt(args[2]) - 1;
+                    } catch (NumberFormatException e) {
+                        yield List.of();
+                    }
+
+                    if (line < 0 || line >= lore.size()) yield List.of();
+
+                    yield CompleteUtility.complete(args[3], lore.get(line).replace('§', '&'));
+                }
+                default -> List.of();
+            };
+            default -> List.of();
+        };
+    }
+
+    private boolean allowedLineLimit(Player who, int lines) {
+        if (lineLimit < 0 || who.hasPermission("itemedit.bypass.lore_line_limit")) {
+            return true;
+        }
+        return lines <= lineLimit;
+    }
+
+    private boolean allowedLengthLimit(Player who, String text) {
+        if (lengthLimit < 0 || who.hasPermission("itemedit.bypass.lore_length_limit")) {
+            return true;
+        }
+        return text.length() <= lengthLimit;
     }
 
     private void loreReplace(Player p, ItemStack item, String alias, String[] args) {
@@ -246,58 +298,6 @@ public class Lore extends SubCmd {
         }
         copies.put(p.getUniqueId(), lore);
         Util.sendMessage(p, this.translate("copyFile.feedback", p));
-    }
-
-    @Override
-    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return switch (args.length) {
-            case 2 -> CompleteUtility.complete(args[1], loreSub);
-            case 3 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                case "remove", "set" -> {
-                    if (!(sender instanceof Player player)) yield List.of();
-
-                    ItemStack item = getItemInHand(player);
-                    if (ItemUtils.isAirOrNull(item)) yield List.of();
-
-                    ItemMeta meta = ItemUtils.getMeta(item);
-                    if (!item.hasItemMeta() || !meta.hasLore()) {
-                        yield CompleteUtility.complete(args[2], Arrays.asList("1", "last"));
-                    }
-                    List<String> loreIndices = IntStream.range(0, meta.getLore().size())
-                            .mapToObj(i -> String.valueOf(i + 1))
-                            .collect(Collectors.toList());
-                    loreIndices.add("last");
-                    yield CompleteUtility.complete(args[2], loreIndices);
-                }
-                case "copyfile" -> CompleteUtility.complete(args[2], loreCopy.getKeys(false));
-                default -> List.of();
-            };
-            case 4 -> switch (args[1].toLowerCase(Locale.ENGLISH)) {
-                case "set" -> {
-                    if (!(sender instanceof Player player)) yield List.of();
-
-                    ItemStack item = getItemInHand(player);
-                    if (item == null || !item.hasItemMeta()) yield List.of();
-
-                    ItemMeta meta = ItemUtils.getMeta(item);
-                    if (!meta.hasLore()) yield List.of();
-
-                    List<String> lore = meta.getLore();
-                    int line;
-                    try {
-                        line = args[2].equalsIgnoreCase("last") ? lore.size() - 1 : Integer.parseInt(args[2]) - 1;
-                    } catch (NumberFormatException e) {
-                        yield List.of();
-                    }
-
-                    if (line < 0 || line >= lore.size()) yield List.of();
-
-                    yield CompleteUtility.complete(args[3], lore.get(line).replace('§', '&'));
-                }
-                default -> List.of();
-            };
-            default -> List.of();
-        };
     }
 
     // /itemedit lore add

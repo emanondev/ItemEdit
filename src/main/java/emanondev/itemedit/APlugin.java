@@ -7,7 +7,6 @@ import emanondev.itemedit.utility.ReflectionUtils;
 import emanondev.itemedit.utility.Translator;
 import emanondev.itemedit.utility.VersionUtils;
 import lombok.Getter;
-import net.kyori.adventure.Adventure;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -146,16 +145,6 @@ public abstract class APlugin extends JavaPlugin {
         registerCommand(command, executor, aliases);
     }
 
-    private void registerCommand(@NotNull PluginCommand command,
-                                 @NotNull TabExecutor executor,
-                                 @Nullable List<String> aliases) {
-        command.setExecutor(executor);
-        command.setTabCompleter(executor);
-        if (aliases != null) {
-            command.setAliases(aliases);
-        }
-    }
-
     /**
      * Retrieves the language configuration for the specified sender.
      * Fallbacks to the default language configuration if necessary.
@@ -214,66 +203,6 @@ public abstract class APlugin extends JavaPlugin {
      * This method should save persistent data.
      */
     public abstract void disable();
-
-    /**
-     * You can update configuration by overriding this method.
-     * configuration version is saved as int on {@code config.yml} at path {@code config-version},
-     * if not specified it's {@code 1}.
-     *
-     * @param oldConfigVersion old configuration version you update from
-     */
-    protected void updateConfigurations(int oldConfigVersion) {
-    }
-
-    /**
-     * @see #languagesMetricsIsAdmin()
-     * @see #languagesMetricsIsUser()
-     */
-    protected boolean addLanguagesMetrics() {
-        return false;
-    }
-
-    protected @NotNull Predicate<Player> languagesMetricsIsAdmin() {
-        return ServerOperator::isOp;
-    }
-
-    protected @NotNull Predicate<Player> languagesMetricsIsUser() {
-        return player -> true;
-    }
-
-    /**
-     * Reloads all configuration files and updates their references.
-     */
-    protected void reloadConfigs() {
-        boolean check = false;
-        for (YMLConfig conf : configs.values())
-            try {
-                if (conf.getFile().exists()) {
-                    conf.reload();
-                } else {
-                    check = true;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        if (check) {
-            ArrayList<String> toRemove = new ArrayList<>();
-            configs.forEach((k, v) -> {
-                try {
-                    if (!v.getFile().exists()) {
-                        toRemove.add(k);
-                    }
-                } catch (Exception ignored) {
-                }
-            });
-            for (String key : toRemove) {
-                configs.remove(key);
-            }
-        }
-
-        languageConfigs.clear();
-        getLanguageConfig(null);
-    }
 
     /**
      * Retrieves the {@link CooldownAPI} instance for the plugin.
@@ -348,6 +277,66 @@ public abstract class APlugin extends JavaPlugin {
     }
 
     /**
+     * You can update configuration by overriding this method.
+     * configuration version is saved as int on {@code config.yml} at path {@code config-version},
+     * if not specified it's {@code 1}.
+     *
+     * @param oldConfigVersion old configuration version you update from
+     */
+    protected void updateConfigurations(int oldConfigVersion) {
+    }
+
+    /**
+     * @see #languagesMetricsIsAdmin()
+     * @see #languagesMetricsIsUser()
+     */
+    protected boolean addLanguagesMetrics() {
+        return false;
+    }
+
+    protected @NotNull Predicate<Player> languagesMetricsIsAdmin() {
+        return ServerOperator::isOp;
+    }
+
+    protected @NotNull Predicate<Player> languagesMetricsIsUser() {
+        return player -> true;
+    }
+
+    /**
+     * Reloads all configuration files and updates their references.
+     */
+    protected void reloadConfigs() {
+        boolean check = false;
+        for (YMLConfig conf : configs.values())
+            try {
+                if (conf.getFile().exists()) {
+                    conf.reload();
+                } else {
+                    check = true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        if (check) {
+            ArrayList<String> toRemove = new ArrayList<>();
+            configs.forEach((k, v) -> {
+                try {
+                    if (!v.getFile().exists()) {
+                        toRemove.add(k);
+                    }
+                } catch (Exception ignored) {
+                }
+            });
+            for (String key : toRemove) {
+                configs.remove(key);
+            }
+        }
+
+        languageConfigs.clear();
+        getLanguageConfig(null);
+    }
+
+    /**
      * Enables the plugin but displays an error message.
      * Registers all plugin commands with a handler that explains why the plugin failed to load properly.
      *
@@ -359,6 +348,16 @@ public abstract class APlugin extends JavaPlugin {
             registerCommand(command, exec, null);
         }
         log(ChatColor.RED + error);
+    }
+
+    private void registerCommand(@NotNull PluginCommand command,
+                                 @NotNull TabExecutor executor,
+                                 @Nullable List<String> aliases) {
+        command.setExecutor(executor);
+        command.setTabCompleter(executor);
+        if (aliases != null) {
+            command.setAliases(aliases);
+        }
     }
 
     @Deprecated

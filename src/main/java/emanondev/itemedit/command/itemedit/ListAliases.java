@@ -33,6 +33,14 @@ public class ListAliases extends SubCmd {
         }
     }
 
+    @Override
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        if (args.length == 2) {
+            return CompleteUtility.complete(args[1], Aliases.getTypes().keySet());
+        }
+        return List.of();
+    }
+
     private void oneArg(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         String prefix = translate("prefix_line", sender);
         String postfix = translate("postfix_line", sender);
@@ -93,14 +101,6 @@ public class ListAliases extends SubCmd {
             comp.retain(FormatRetention.NONE).append("\n" + postfix);
         }
         Util.sendMessage(sender, comp.create());
-    }
-
-    @Override
-    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (args.length == 2) {
-            return CompleteUtility.complete(args[1], Aliases.getTypes().keySet());
-        }
-        return List.of();
     }
 
 }

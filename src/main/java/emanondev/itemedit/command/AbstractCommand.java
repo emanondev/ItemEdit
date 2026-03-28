@@ -150,16 +150,16 @@ public abstract class AbstractCommand implements TabExecutor {
                 System.out.println("A");
                 t.printStackTrace();
                 System.out.println("B");
-                System.out.println(""+t.getMessage());
-                System.out.println(""+t.getStackTrace());
+                System.out.println("" + t.getMessage());
+                System.out.println("" + t.getStackTrace());
                 System.out.println("C");
                 getPlugin().getLogger().info(
                         String.join("\n",
-                                Arrays.stream(t.getStackTrace()).map(s->s.toString()).toList()));
+                                Arrays.stream(t.getStackTrace()).map(s -> s.toString()).toList()));
                 t.printStackTrace();
                 System.out.println(
                         String.join("\n",
-                                Arrays.stream(t.getStackTrace()).map(s->s.toString()).toList()));
+                                Arrays.stream(t.getStackTrace()).map(s -> s.toString()).toList()));
             }
         }
         return true;
@@ -179,6 +179,53 @@ public abstract class AbstractCommand implements TabExecutor {
 
     public void sendNoItemInHand(@NotNull CommandSender sender) {
         getPlugin().getTranslator().send(sender, "no-item-on-hand");
+    }
+
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        List<String> l = new ArrayList<>();
+
+        if (args.length == 1) {
+            completeCmd(l, args[0], sender);
+            return l;
+        }
+        if (args.length > 1) {
+            SubCmd subCmd = getSubCmd(args[0], sender);
+            if (subCmd != null && sender.hasPermission(subCmd.getPermission())) {
+                l = subCmd.onComplete(sender, args);
+            }
+        }
+        return l;
+    }
+
+    public SubCmd getSubCmd(@NotNull String cmd, @NotNull CommandSender sender) {
+        for (SubCmd subCmd : subCmds) {
+            if (subCmd.getName().equalsIgnoreCase(cmd)) {
+                return subCmd;
+            }
+        }
+        if (helpSubCommand != null && helpSubCommand.getName().equalsIgnoreCase(cmd) && !getAllowedSubCommands(sender).isEmpty()) {
+            return helpSubCommand;
+        }
+        return null;
+    }
+
+    public void completeCmd(@NotNull List<String> l,
+                            @NotNull String prefix,
+                            @NotNull CommandSender sender) {
+        String text = prefix.toLowerCase(Locale.ENGLISH);
+        getAllowedSubCommands(sender).forEach((cmd) -> {
+            if (cmd.getName().startsWith(text)) {
+                l.add(cmd.getName());
+            }
+        });
+    }
+
+    public PluginCommand getCommand() {
+        return Objects.requireNonNull(plugin.getCommand(getName()));
+    }
+
+    protected String getLanguageString(String path, CommandSender sender, String... holders) {
+        return getPlugin().getTranslator().translateOrEmpty(sender, this.PATH + "." + path, holders);
     }
 
     @Contract("null,_,_-> false")
@@ -231,53 +278,6 @@ public abstract class AbstractCommand implements TabExecutor {
         }
     }
 
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        List<String> l = new ArrayList<>();
-
-        if (args.length == 1) {
-            completeCmd(l, args[0], sender);
-            return l;
-        }
-        if (args.length > 1) {
-            SubCmd subCmd = getSubCmd(args[0], sender);
-            if (subCmd != null && sender.hasPermission(subCmd.getPermission())) {
-                l = subCmd.onComplete(sender, args);
-            }
-        }
-        return l;
-    }
-
-    public SubCmd getSubCmd(@NotNull String cmd, @NotNull CommandSender sender) {
-        for (SubCmd subCmd : subCmds) {
-            if (subCmd.getName().equalsIgnoreCase(cmd)) {
-                return subCmd;
-            }
-        }
-        if (helpSubCommand != null && helpSubCommand.getName().equalsIgnoreCase(cmd) && !getAllowedSubCommands(sender).isEmpty()) {
-            return helpSubCommand;
-        }
-        return null;
-    }
-
-    public void completeCmd(@NotNull List<String> l,
-                            @NotNull String prefix,
-                            @NotNull CommandSender sender) {
-        String text = prefix.toLowerCase(Locale.ENGLISH);
-        getAllowedSubCommands(sender).forEach((cmd) -> {
-            if (cmd.getName().startsWith(text)) {
-                l.add(cmd.getName());
-            }
-        });
-    }
-
-    protected String getLanguageString(String path, CommandSender sender, String... holders) {
-        return getPlugin().getTranslator().translateOrEmpty(sender, this.PATH + "." + path, holders);
-    }
-
-    public PluginCommand getCommand() {
-        return Objects.requireNonNull(plugin.getCommand(getName()));
-    }
-
     private class HelpSubCommand extends SubCmd {
 
         private int commandPerPage;
@@ -285,10 +285,6 @@ public abstract class AbstractCommand implements TabExecutor {
         public HelpSubCommand(@NotNull AbstractCommand cmd) {
             super("help", cmd, false, false);
             this.commandPerPage = Math.max(4, this.getConfigInt("commands_per_page"));
-        }
-
-        private int getMaxPageFor(int elements) {
-            return elements / commandPerPage + (elements % commandPerPage == 0 ? 0 : 1);
         }
 
         @Override
@@ -336,6 +332,31 @@ public abstract class AbstractCommand implements TabExecutor {
                 Util.sendMessage(sender, help.create());
             } else
                 sendPermissionLackGenericMessage(sender);
+        }
+
+        @Override
+        public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+            if (args.length != 2) {
+                return List.of();
+            }
+            ArrayList<String> tabs = new ArrayList<>();
+            List<SubCmd> subs = getAllowedSubCommands(sender);
+            for (int i = 0; i < getMaxPageFor(subs.size()); i++) {
+                tabs.add(String.valueOf(i + 1));
+            }
+            for (SubCmd sub : subs) {
+                tabs.add(sub.getName());
+            }
+            return CompleteUtility.complete(args[1], tabs);
+        }
+
+        public void reload() {
+            super.reload();
+            this.commandPerPage = Math.max(4, this.getConfigInt("commands_per_page"));
+        }
+
+        private int getMaxPageFor(int elements) {
+            return elements / commandPerPage + (elements % commandPerPage == 0 ? 0 : 1);
         }
 
         @SuppressWarnings("deprecation")
@@ -434,27 +455,6 @@ public abstract class AbstractCommand implements TabExecutor {
                 }
                 comp.append(text22).retain(ComponentBuilder.FormatRetention.FORMATTING);
             }
-        }
-
-        @Override
-        public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-            if (args.length != 2) {
-                return List.of();
-            }
-            ArrayList<String> tabs = new ArrayList<>();
-            List<SubCmd> subs = getAllowedSubCommands(sender);
-            for (int i = 0; i < getMaxPageFor(subs.size()); i++) {
-                tabs.add(String.valueOf(i + 1));
-            }
-            for (SubCmd sub : subs) {
-                tabs.add(sub.getName());
-            }
-            return CompleteUtility.complete(args[1], tabs);
-        }
-
-        public void reload() {
-            super.reload();
-            this.commandPerPage = Math.max(4, this.getConfigInt("commands_per_page"));
         }
     }
 

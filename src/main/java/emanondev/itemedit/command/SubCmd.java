@@ -59,23 +59,41 @@ public abstract class SubCmd {
         return this.checkNonNullItem;
     }
 
+    public void reload() {
+        load();
+    }
+
+    public @NotNull ComponentBuilder getHelp(@NotNull ComponentBuilder base, @NotNull CommandSender sender, @NotNull String alias) {
+        String help = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + this.name + " ";
+        String params = translateOrEmpty("params", sender);
+        base.append(help + (params == null ? "" : (params.replace(ChatColor.RESET.toString(), ChatColor.GREEN.toString()))))
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ChatColor.stripColor(help)))
+                .event(Util.craftHoverEvent(getDescription(sender)));
+        return base;
+    }
+
+    public void onFail(@NotNull CommandSender target, @NotNull String alias) {
+        String params = translateOrEmpty("params", target);
+
+        Util.sendMessage(target, new ComponentBuilder(
+                ChatColor.RED + "/" + alias + " " + this.name + " " +
+                        ChatColor.stripColor(params))
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
+                        "/" + alias + " " + this.name + " " + ChatColor.stripColor(params)))
+                .event(Util.craftHoverEvent(getDescription(target)))
+                .create());
+    }
+
+    abstract public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args);
+
+    abstract public List<String> onComplete(@NotNull CommandSender sender, String[] args);
+
     protected @NotNull ItemStack getItemInHand(@NotNull Player p) {
         return ItemUtils.getHandItem(p);
     }
 
     protected void setItemInHand(@NotNull Player p, ItemStack item) {
         ItemUtils.setHandItem(p, item);
-    }
-
-    private void load() {
-        name = this.getConfigString("name").toLowerCase(Locale.ENGLISH);
-        if (name.isEmpty() || name.contains(" ")) {
-            name = id;
-        }
-    }
-
-    public void reload() {
-        load();
     }
 
     protected BaseComponent[] craftFailFeedback(String alias, String params, List<String> desc) {
@@ -208,37 +226,19 @@ public abstract class SubCmd {
         return config.loadInteger(this.PATH + path, 0);
     }
 
-    public @NotNull ComponentBuilder getHelp(@NotNull ComponentBuilder base, @NotNull CommandSender sender, @NotNull String alias) {
-        String help = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + this.name + " ";
-        String params = translateOrEmpty("params", sender);
-        base.append(help + (params == null ? "" : (params.replace(ChatColor.RESET.toString(), ChatColor.GREEN.toString()))))
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ChatColor.stripColor(help)))
-                .event(Util.craftHoverEvent(getDescription(sender)));
-        return base;
-    }
-
-    public void onFail(@NotNull CommandSender target, @NotNull String alias) {
-        String params = translateOrEmpty("params", target);
-
-        Util.sendMessage(target, new ComponentBuilder(
-                ChatColor.RED + "/" + alias + " " + this.name + " " +
-                        ChatColor.stripColor(params))
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
-                        "/" + alias + " " + this.name + " " + ChatColor.stripColor(params)))
-                .event(Util.craftHoverEvent(getDescription(target)))
-                .create());
-    }
-
     protected String getDescription(@NotNull CommandSender target) {
         return String.join("\n", translateList("description", target));
     }
 
-    abstract public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args);
-
-    abstract public List<String> onComplete(@NotNull CommandSender sender, String[] args);
-
     protected void updateView(@NotNull Player player) {
         InventoryUtils.updateView(player);
+    }
+
+    private void load() {
+        name = this.getConfigString("name").toLowerCase(Locale.ENGLISH);
+        if (name.isEmpty() || name.contains(" ")) {
+            name = id;
+        }
     }
 
 }

@@ -172,7 +172,7 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder setConsumeSound(Sound sound){
+    public ItemBuilder setConsumeSound(Sound sound) {
         return setConsumeSound(RegistryKey.SOUND_EVENT.typedKey(Registry.SOUNDS.getKeyOrThrow(sound)));
     }
 
@@ -536,7 +536,7 @@ public class ItemBuilder {
         return setEquippableEquipSound(RegistryKey.SOUND_EVENT.typedKey(Registry.SOUNDS.getKeyOrThrow(value)));
     }
 
-        public ItemBuilder setEquippableEquipSound(Key value) {
+    public ItemBuilder setEquippableEquipSound(Key value) {
         Equippable.Builder builder = stack.getDataOrDefault(DataComponentTypes.EQUIPPABLE,
                 Equippable.equippable(EquipmentSlot.HAND).build()).toBuilder();
         builder.equipSound(value);

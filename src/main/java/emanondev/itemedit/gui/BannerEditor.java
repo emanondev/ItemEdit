@@ -131,6 +131,16 @@ public class BannerEditor implements Gui {
         updateInventory();
     }
 
+    @Override
+    public @NotNull Inventory getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public Player getTargetPlayer() {
+        return target;
+    }
+
     @SuppressWarnings("deprecation")
     private void updateInventory() {
         meta.setPatterns(new ArrayList<>());
@@ -168,16 +178,6 @@ public class BannerEditor implements Gui {
         item.setItemMeta(meta);
         this.getInventory().setItem(49, item);
         ItemUtils.getHandItem(getTargetPlayer()).setItemMeta(meta);
-    }
-
-    @Override
-    public @NotNull Inventory getInventory() {
-        return inventory;
-    }
-
-    @Override
-    public Player getTargetPlayer() {
-        return target;
     }
 
     private class BannerData {

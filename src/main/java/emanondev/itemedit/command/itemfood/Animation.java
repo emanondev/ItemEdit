@@ -5,7 +5,6 @@ import emanondev.itemedit.command.ItemFoodCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemBuilder;
-import emanondev.itemedit.utility.VersionUtils;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

@@ -30,18 +30,6 @@ public class ItemEditImportCommand implements TabExecutor {
         this.permission = "itemedit.itemeditimport";
     }
 
-    private static ItemStack fromBase64(String data) throws IOException {
-        try {
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
-            BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
-            ItemStack item = (ItemStack) dataInput.readObject();
-            dataInput.close();
-            return item;
-        } catch (ClassNotFoundException e) {
-            throw new IOException("Unable to decode class type.", e);
-        }
-    }
-
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length == 1) {
@@ -126,6 +114,18 @@ public class ItemEditImportCommand implements TabExecutor {
         Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage("itemeditimport.help",
                 new ArrayList<>())));
         return true;
+    }
+
+    private static ItemStack fromBase64(String data) throws IOException {
+        try {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
+            BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+            ItemStack item = (ItemStack) dataInput.readObject();
+            dataInput.close();
+            return item;
+        } catch (ClassNotFoundException e) {
+            throw new IOException("Unable to decode class type.", e);
+        }
     }
 
 }

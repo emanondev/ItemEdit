@@ -56,14 +56,14 @@ public class ShopGuiPlusItemProvider extends ItemProvider {
         return id1.equals(getCustomId(item2));
     }
 
+    public void register() {
+        ShopGuiPlusApi.registerItemProvider(this);
+    }
+
     private String getCustomId(ItemStack item) {
         if (ItemUtils.isAirOrNull(item)) {
             return null;
         }
         return ItemEdit.get().getServerStorage().getId(item);
-    }
-
-    public void register() {
-        ShopGuiPlusApi.registerItemProvider(this);
     }
 }

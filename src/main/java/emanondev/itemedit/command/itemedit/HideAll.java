@@ -33,6 +33,11 @@ public class HideAll extends SubCmd {
         updateView(p);
     }
 
+    @Override
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        return List.of();
+    }
+
     private void handleFlagChange(ItemBuilder item) {
         if (!VersionUtils.hasPaperAPI() ||
                 !VersionUtils.isAfter(1, 20, 5) ||
@@ -45,11 +50,6 @@ public class HideAll extends SubCmd {
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             item.getType().getDefaultAttributeModifiers(slot).forEach(item::addAttributeModifier);
         }
-    }
-
-    @Override
-    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return List.of();
     }
 
 }

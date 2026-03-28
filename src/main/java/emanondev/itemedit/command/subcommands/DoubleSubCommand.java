@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 public class DoubleSubCommand extends SubCmd {
@@ -42,13 +41,13 @@ public class DoubleSubCommand extends SubCmd {
             }
             double value = Double.parseDouble(args[1]);
             ItemBuilder builder = new ItemBuilder(getItemInHand(player));
-            if (apply.apply(builder, value)){
+            if (apply.apply(builder, value)) {
                 onSuccess(player, "%value%", String.valueOf(value));
                 setItemInHand(player, builder.build());
                 updateView(player);
                 return;
             }
-            onFail(player,alias);
+            onFail(player, alias);
         } catch (NumberFormatException e) {
             onFail(player, alias);
         }

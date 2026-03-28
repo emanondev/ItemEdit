@@ -87,6 +87,12 @@ public class Color extends SubCmd {
         updateView(p);
     }
 
+    // itemedit bookauthor <name>
+    @Override
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        return List.of();
+    }
+
     private String calculatePermission(ItemBuilder item, String[] args, Player p) {
         if (item.isMetaClass(LeatherArmorMeta.class)) {
             return leatherPerm;
@@ -103,11 +109,5 @@ public class Color extends SubCmd {
             }
         }
         return null;
-    }
-
-    // itemedit bookauthor <name>
-    @Override
-    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return List.of();
     }
 }

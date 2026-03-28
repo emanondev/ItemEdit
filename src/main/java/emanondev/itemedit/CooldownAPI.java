@@ -38,20 +38,6 @@ public class CooldownAPI {
         }
     }
 
-    void save() {
-        long now = System.currentTimeMillis();
-        conf.getKeys(false).forEach(path -> conf.set(path, null));
-        for (UUID uuid : cooldowns.keySet()) {
-            Map<String, Long> values = cooldowns.get(uuid);
-            for (String id : values.keySet()) {
-                if (values.get(id) > now) {
-                    conf.getLong(uuid.toString() + "." + id, values.get(id));
-                }
-            }
-        }
-        conf.save();
-    }
-
     /**
      * Sets a cooldown for a block with a specified duration.
      *
@@ -346,5 +332,19 @@ public class CooldownAPI {
                 Math.max(0L, cooldowns.get(uuid).getOrDefault(cooldownId, 0L) - System.currentTimeMillis()) :
                 0L;
         return timeUnit.convert(cooldownMS, TimeUnit.MILLISECONDS);
+    }
+
+    void save() {
+        long now = System.currentTimeMillis();
+        conf.getKeys(false).forEach(path -> conf.set(path, null));
+        for (UUID uuid : cooldowns.keySet()) {
+            Map<String, Long> values = cooldowns.get(uuid);
+            for (String id : values.keySet()) {
+                if (values.get(id) > now) {
+                    conf.getLong(uuid.toString() + "." + id, values.get(id));
+                }
+            }
+        }
+        conf.save();
     }
 }

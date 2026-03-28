@@ -300,19 +300,6 @@ public class YMLConfig extends YamlConfiguration {
         return UtilsString.fix(load(path, def, String.class), target, color, args);
     }
 
-    private void setComments(@NotNull String path, String[] args) {
-        if (args.length > 0) {
-            if (VersionUtils.isAfter(1, 18, 1)) {
-                if (getComments(path).isEmpty()) {
-                    StringBuilder build = new StringBuilder();
-                    for (int i = 0; i < args.length; i += 2)
-                        build.append(args[i]).append(" ");
-                    this.setComments(path, Collections.singletonList(build.substring(0, build.length() - 1)));
-                }
-            }
-        }
-    }
-
     /**
      * Get String value.<br>
      *
@@ -529,25 +516,6 @@ public class YMLConfig extends YamlConfiguration {
         return stringToEnum(getString(path, def == null ? null : def.name()), def, clazz, path);
     }
 
-    @Contract("_, !null, _, _ -> !null")
-    private @Nullable <T extends Enum<T>> T stringToEnum(@Nullable String value, @Nullable T def,
-                                                         @NotNull Class<T> clazz, @NotNull String errorPath) {
-        try {
-            if (value == null || value.isEmpty())
-                return def;
-            return Enum.valueOf(clazz, value);
-        } catch (IllegalArgumentException e) {
-            try {
-                return Enum.valueOf(clazz, value.toUpperCase());
-            } catch (IllegalArgumentException e2) {
-                e2.printStackTrace();
-                new IllegalArgumentException(getError(errorPath) + "; can't find value for '" + value + "' from enum '"
-                        + clazz.getName() + "' using default").printStackTrace();
-            }
-        }
-        return def;
-    }
-
     /**
      * assumes that enum constants are all uppercase null enum values contained in
      * def might be lost
@@ -568,28 +536,6 @@ public class YMLConfig extends YamlConfiguration {
                                                                @NotNull Class<T> clazz) {
         return stringListToEnumCollection(EnumSet.noneOf(clazz),
                 loadMultiMessage(path, enumCollectionToStringList(def), false), clazz, path);
-    }
-
-    @Contract("!null -> !null; null -> null")
-    private <T extends Enum<T>> ArrayList<String> enumCollectionToStringList(@Nullable Collection<T> enums) {
-        if (enums == null)
-            return null;
-        ArrayList<String> list = new ArrayList<>();
-        for (T enumValue : enums)
-            list.add(enumValue.name());
-        return list;
-    }
-
-    private <T extends Enum<T>, K extends Collection<T>> K stringListToEnumCollection(K destination,
-                                                                                      Collection<String> from, Class<T> clazz, String errPath) {
-        if (from == null || from.isEmpty())
-            return destination;
-        for (String value : from) {
-            T val = stringToEnum(value, null, clazz, errPath);
-            if (val != null)
-                destination.add(val);
-        }
-        return destination;
     }
 
     @SuppressWarnings("unchecked")
@@ -623,17 +569,6 @@ public class YMLConfig extends YamlConfiguration {
         }
     }
 
-    /*
-    @Contract("_, !null -> !null")
-    public @Nullable Sound loadSound(@NotNull String path, @Nullable Sound def) {
-        return loadEnum(path, def, Sound.class);
-    }
-
-    @Contract("_, !null -> !null")
-    public @Nullable Sound getSound(@NotNull String path, @Nullable Sound def) {
-        return getEnum(path, def, Sound.class);
-    }*/
-
     @Contract("_, !null -> !null")
     public @Nullable Material loadMaterial(@NotNull String path, @Nullable Material def) {
         return loadEnum(path, def, Material.class);
@@ -651,9 +586,16 @@ public class YMLConfig extends YamlConfiguration {
         return loadEnumSet(path, def == null ? null : Arrays.asList(def), ItemFlag.class).toArray(new ItemFlag[0]);
     }
 
-    private @NotNull String getError(String path) {
-        return "Value has wrong type or wrong value at '" + path + ":' on file " + file.getName();
+    /*
+    @Contract("_, !null -> !null")
+    public @Nullable Sound loadSound(@NotNull String path, @Nullable Sound def) {
+        return loadEnum(path, def, Sound.class);
     }
+
+    @Contract("_, !null -> !null")
+    public @Nullable Sound getSound(@NotNull String path, @Nullable Sound def) {
+        return getEnum(path, def, Sound.class);
+    }*/
 
     @Contract("_, !null -> !null")
     @Nullable
@@ -684,27 +626,6 @@ public class YMLConfig extends YamlConfiguration {
             }
         }
         return super.createSection(path);
-    }
-
-
-    protected void mapChildrenKeys(@NotNull Set<String> output, @NotNull ConfigurationSection section, boolean deep) {
-        if (multiThreadSupport) {
-            synchronized (this) {
-                super.mapChildrenKeys(output, section, deep);
-                return;
-            }
-        }
-        super.mapChildrenKeys(output, section, deep);
-    }
-
-    protected void mapChildrenValues(@NotNull Map<String, Object> output, @NotNull ConfigurationSection section, boolean deep) {
-        if (multiThreadSupport) {
-            synchronized (this) {
-                super.mapChildrenValues(output, section, deep);
-                return;
-            }
-        }
-        super.mapChildrenValues(output, section, deep);
     }
 
     @NotNull
@@ -745,5 +666,83 @@ public class YMLConfig extends YamlConfiguration {
             }
         }
         super.setInlineComments(path, comments);
+    }
+
+    protected void mapChildrenKeys(@NotNull Set<String> output, @NotNull ConfigurationSection section, boolean deep) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.mapChildrenKeys(output, section, deep);
+                return;
+            }
+        }
+        super.mapChildrenKeys(output, section, deep);
+    }
+
+    protected void mapChildrenValues(@NotNull Map<String, Object> output, @NotNull ConfigurationSection section, boolean deep) {
+        if (multiThreadSupport) {
+            synchronized (this) {
+                super.mapChildrenValues(output, section, deep);
+                return;
+            }
+        }
+        super.mapChildrenValues(output, section, deep);
+    }
+
+    private void setComments(@NotNull String path, String[] args) {
+        if (args.length > 0) {
+            if (VersionUtils.isAfter(1, 18, 1)) {
+                if (getComments(path).isEmpty()) {
+                    StringBuilder build = new StringBuilder();
+                    for (int i = 0; i < args.length; i += 2)
+                        build.append(args[i]).append(" ");
+                    this.setComments(path, Collections.singletonList(build.substring(0, build.length() - 1)));
+                }
+            }
+        }
+    }
+
+    @Contract("_, !null, _, _ -> !null")
+    private @Nullable <T extends Enum<T>> T stringToEnum(@Nullable String value, @Nullable T def,
+                                                         @NotNull Class<T> clazz, @NotNull String errorPath) {
+        try {
+            if (value == null || value.isEmpty())
+                return def;
+            return Enum.valueOf(clazz, value);
+        } catch (IllegalArgumentException e) {
+            try {
+                return Enum.valueOf(clazz, value.toUpperCase());
+            } catch (IllegalArgumentException e2) {
+                e2.printStackTrace();
+                new IllegalArgumentException(getError(errorPath) + "; can't find value for '" + value + "' from enum '"
+                        + clazz.getName() + "' using default").printStackTrace();
+            }
+        }
+        return def;
+    }
+
+    @Contract("!null -> !null; null -> null")
+    private <T extends Enum<T>> ArrayList<String> enumCollectionToStringList(@Nullable Collection<T> enums) {
+        if (enums == null)
+            return null;
+        ArrayList<String> list = new ArrayList<>();
+        for (T enumValue : enums)
+            list.add(enumValue.name());
+        return list;
+    }
+
+    private <T extends Enum<T>, K extends Collection<T>> K stringListToEnumCollection(K destination,
+                                                                                      Collection<String> from, Class<T> clazz, String errPath) {
+        if (from == null || from.isEmpty())
+            return destination;
+        for (String value : from) {
+            T val = stringToEnum(value, null, clazz, errPath);
+            if (val != null)
+                destination.add(val);
+        }
+        return destination;
+    }
+
+    private @NotNull String getError(String path) {
+        return "Value has wrong type or wrong value at '" + path + ":' on file " + file.getName();
     }
 }

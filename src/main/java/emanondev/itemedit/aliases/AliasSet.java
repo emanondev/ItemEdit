@@ -86,6 +86,23 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
 
     public abstract Collection<T> getValues();
 
+    public List<String> getAliases() {
+        return new ArrayList<>(map.keySet());
+    }
+
+    public @Nullable T convertAlias(String alias) {
+        return map.get(alias.toLowerCase(Locale.ENGLISH));
+    }
+
+    public @Nullable String convertValue(T value) {
+        for (Map.Entry<String, T> entry : map.entrySet()) {
+            if (Objects.equals(entry.getValue(), value)) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
     protected void set(String alias, T obj) {
         if (obj == null || alias == null) {
             throw new NullPointerException();
@@ -110,23 +127,6 @@ public abstract class AliasSet<T> implements IAliasSet<T> {
 
         config.set(path, alias);
         config.save();
-    }
-
-    public List<String> getAliases() {
-        return new ArrayList<>(map.keySet());
-    }
-
-    public @Nullable T convertAlias(String alias) {
-        return map.get(alias.toLowerCase(Locale.ENGLISH));
-    }
-
-    public @Nullable String convertValue(T value) {
-        for (Map.Entry<String, T> entry : map.entrySet()) {
-            if (Objects.equals(entry.getValue(), value)) {
-                return entry.getKey();
-            }
-        }
-        return null;
     }
 
 }

@@ -39,13 +39,6 @@ public class MongoServerStorage implements ServerStorage {
         return this.mapToItem(serializedItem);
     }
 
-    private @Nullable ItemStack mapToItem(@Nullable Map<String, Object> serializedItem) {
-        if (serializedItem == null) return null;
-
-        ItemStack item = ItemStack.deserialize(serializedItem);
-        return item.clone();
-    }
-
     @Override
     public @Nullable String getNick(@NotNull String id) {
         validateID(id);
@@ -136,5 +129,12 @@ public class MongoServerStorage implements ServerStorage {
     public void reload() {
         // In MongoDB we don't cache the items so that there are no problems when using the same database on multiple servers.
         // In the future it is recommended to support message brokers like RabbitMQ, if something like that is supported, then you can also start caching the items for remote databases.
+    }
+
+    private @Nullable ItemStack mapToItem(@Nullable Map<String, Object> serializedItem) {
+        if (serializedItem == null) return null;
+
+        ItemStack item = ItemStack.deserialize(serializedItem);
+        return item.clone();
     }
 }

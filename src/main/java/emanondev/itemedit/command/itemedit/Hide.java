@@ -56,6 +56,15 @@ public class Hide extends SubCmd {
         }
     }
 
+    @Override
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], Aliases.FLAG_TYPE);
+            case 3 -> CompleteUtility.complete(args[2], Aliases.BOOLEAN);
+            default -> List.of();
+        };
+    }
+
     private void handleFlagChange(boolean put, ItemFlag flag, ItemBuilder item) {
         if (!VersionUtils.hasPaperAPI() ||
                 !VersionUtils.isAfter(1, 20, 5) ||
@@ -90,15 +99,6 @@ public class Hide extends SubCmd {
                 item.removeAttributeModifier(slot).build();
             }
         }
-    }
-
-    @Override
-    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return switch (args.length) {
-            case 2 -> CompleteUtility.complete(args[1], Aliases.FLAG_TYPE);
-            case 3 -> CompleteUtility.complete(args[2], Aliases.BOOLEAN);
-            default -> List.of();
-        };
     }
 
 }

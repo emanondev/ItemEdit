@@ -63,15 +63,6 @@ public final class InventoryUtils {
         return getTopInventoryP(player.getOpenInventory());
     }
 
-    private static Inventory getTopInventoryP(@NotNull Object view) {
-        Method method = getTopInventory.get(view.getClass());
-        if (method == null) {
-            method = ReflectionUtils.getMethod(view.getClass(), "getTopInventory");
-            getTopInventory.put(view.getClass(), method);
-        }
-        return (Inventory) ReflectionUtils.invokeMethod(view, method);
-    }
-
     /**
      * Returns the bottom Inventory object from the event's InventoryView.<br><br>
      * This method may use reflections to get the top Inventory object from the
@@ -87,15 +78,6 @@ public final class InventoryUtils {
             return event.getView().getBottomInventory();
         }
         return getBottomInventoryP(event.getView());
-    }
-
-    private static Inventory getBottomInventoryP(@NotNull Object view) {
-        Method method = getBottomInventory.get(view.getClass());
-        if (method == null) {
-            method = ReflectionUtils.getMethod(view.getClass(), "getBottomInventory");
-            getBottomInventory.put(view.getClass(), method);
-        }
-        return (Inventory) ReflectionUtils.invokeMethod(view, method);
     }
 
     /**
@@ -253,21 +235,6 @@ public final class InventoryUtils {
         }
     }
 
-    private static Set<EquipmentSlot> loadPlayerEquipmentSlot() {
-        EnumSet<EquipmentSlot> slots = EnumSet.noneOf(EquipmentSlot.class);
-        slots.add(EquipmentSlot.HEAD);
-        slots.add(EquipmentSlot.CHEST);
-        slots.add(EquipmentSlot.LEGS);
-        slots.add(EquipmentSlot.FEET);
-        slots.add(EquipmentSlot.HAND);
-        try {
-            slots.add(EquipmentSlot.valueOf("OFF_HAND"));
-        } catch (Throwable ignored) {
-            //1.8
-        }
-        return Collections.unmodifiableSet(slots);
-    }
-
     public static @NotNull Set<EquipmentSlot> getPlayerEquipmentSlots() {
         return playerEquipmentSlots;
     }
@@ -297,6 +264,39 @@ public final class InventoryUtils {
             }
         }
         return null;
+    }
+
+    private static Inventory getTopInventoryP(@NotNull Object view) {
+        Method method = getTopInventory.get(view.getClass());
+        if (method == null) {
+            method = ReflectionUtils.getMethod(view.getClass(), "getTopInventory");
+            getTopInventory.put(view.getClass(), method);
+        }
+        return (Inventory) ReflectionUtils.invokeMethod(view, method);
+    }
+
+    private static Inventory getBottomInventoryP(@NotNull Object view) {
+        Method method = getBottomInventory.get(view.getClass());
+        if (method == null) {
+            method = ReflectionUtils.getMethod(view.getClass(), "getBottomInventory");
+            getBottomInventory.put(view.getClass(), method);
+        }
+        return (Inventory) ReflectionUtils.invokeMethod(view, method);
+    }
+
+    private static Set<EquipmentSlot> loadPlayerEquipmentSlot() {
+        EnumSet<EquipmentSlot> slots = EnumSet.noneOf(EquipmentSlot.class);
+        slots.add(EquipmentSlot.HEAD);
+        slots.add(EquipmentSlot.CHEST);
+        slots.add(EquipmentSlot.LEGS);
+        slots.add(EquipmentSlot.FEET);
+        slots.add(EquipmentSlot.HAND);
+        try {
+            slots.add(EquipmentSlot.valueOf("OFF_HAND"));
+        } catch (Throwable ignored) {
+            //1.8
+        }
+        return Collections.unmodifiableSet(slots);
     }
 
     public enum ExcessMode {

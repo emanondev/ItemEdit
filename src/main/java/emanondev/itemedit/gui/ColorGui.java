@@ -138,6 +138,30 @@ public class ColorGui implements Gui {
         updateInventory();
     }
 
+    @Override
+    public void onDrag(InventoryDragEvent event) {
+    }
+
+    @Override
+    public void onOpen(InventoryOpenEvent event) {
+        updateInventory();
+    }
+
+    @Override
+    public @NotNull Inventory getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public Player getTargetPlayer() {
+        return target;
+    }
+
+    @Override
+    public @NotNull ItemEdit getPlugin() {
+        return ItemEdit.get();
+    }
+
     private void updateInventory() {
         colorable.setItemMeta(colorableMeta);
         inventory.setItem(31, colorable);
@@ -195,7 +219,6 @@ public class ColorGui implements Gui {
         inventory.setItem(52, createItem(current, toColor(255, 105, 180))); // Hot Pink
         inventory.setItem(53, createItem(current, toColor(191, 0, 255)));   // Bright Purple
     }
-
 
     private ItemStack createItem(Color currentColor, Color color) {
         ItemStack stack = colorable.clone();
@@ -255,30 +278,6 @@ public class ColorGui implements Gui {
                 "%hex%", currentHex,
                 "%amount%", (amount > 0 ? "+" : "") + amount
         );
-    }
-
-    @Override
-    public void onDrag(InventoryDragEvent event) {
-    }
-
-    @Override
-    public void onOpen(InventoryOpenEvent event) {
-        updateInventory();
-    }
-
-    @Override
-    public @NotNull Inventory getInventory() {
-        return inventory;
-    }
-
-    @Override
-    public Player getTargetPlayer() {
-        return target;
-    }
-
-    @Override
-    public @NotNull ItemEdit getPlugin() {
-        return ItemEdit.get();
     }
 
     private Color toColor(int red, int green, int blue) {

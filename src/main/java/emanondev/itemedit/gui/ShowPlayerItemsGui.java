@@ -94,11 +94,6 @@ public class ShowPlayerItemsGui implements PagedGui {
         }
     }
 
-    private ItemStack getPageInfoItem() {
-        return this.loadLanguageDescription(this.getGuiItem("gui.playeritems.page-info", Material.NAME_TAG),
-                "gui.playeritems.page-info.description", "%page%", String.valueOf(page));
-    }
-
     /**
      * @return 1+
      */
@@ -181,6 +176,11 @@ public class ShowPlayerItemsGui implements PagedGui {
     @Override
     public @NotNull ItemEdit getPlugin() {
         return ItemEdit.get();
+    }
+
+    private ItemStack getPageInfoItem() {
+        return this.loadLanguageDescription(this.getGuiItem("gui.playeritems.page-info", Material.NAME_TAG),
+                "gui.playeritems.page-info.description", "%page%", String.valueOf(page));
     }
 
 }

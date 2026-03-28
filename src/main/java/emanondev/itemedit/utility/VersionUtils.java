@@ -65,14 +65,6 @@ public final class VersionUtils {
         return getVersionType() + " " + getVersionNumber();
     }
 
-    private static String[] safeSplitVersion() {
-        try {
-            return Bukkit.getBukkitVersion().split("-")[0].split("\\.");
-        } catch (Exception e) {
-            throw new IllegalStateException("Invalid Bukkit version format: " + Bukkit.getBukkitVersion(), e);
-        }
-    }
-
     /**
      * Checks if the current version is up to (or equal to) the specified version.
      * Inclusive comparison.
@@ -201,6 +193,14 @@ public final class VersionUtils {
      */
     public static boolean hasFoliaAPI() {
         return HAS_FOLIA;
+    }
+
+    private static String[] safeSplitVersion() {
+        try {
+            return Bukkit.getBukkitVersion().split("-")[0].split("\\.");
+        } catch (Exception e) {
+            throw new IllegalStateException("Invalid Bukkit version format: " + Bukkit.getBukkitVersion(), e);
+        }
     }
 
 }

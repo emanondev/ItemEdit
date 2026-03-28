@@ -118,6 +118,16 @@ public class Placeholders extends PlaceholderExpansion {
         return null;
     }
 
+    @Override
+    public boolean persist() {
+        return true;
+    }
+
+    @Override
+    public boolean canRegister() {
+        return true;
+    }
+
     //{itemid}
     //{itemid}_{slot}
     //{itemid}_{slot}_{player}
@@ -259,15 +269,5 @@ public class Placeholders extends PlaceholderExpansion {
             }
         }
         return String.valueOf(amount);
-    }
-
-    @Override
-    public boolean persist() {
-        return true;
-    }
-
-    @Override
-    public boolean canRegister() {
-        return true;
     }
 }

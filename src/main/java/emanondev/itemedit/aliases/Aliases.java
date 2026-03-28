@@ -47,6 +47,11 @@ public class Aliases {
                     return name;
                 }
 
+                @Override
+                public Collection<PotionEffectType> getValues() {
+                    return values;
+                }
+
                 private Collection<PotionEffectType> grabValues() {
                     HashSet<PotionEffectType> set = new HashSet<>();
                     for (PotionEffectType val : PotionEffectType.values()) {
@@ -55,11 +60,6 @@ public class Aliases {
                         }
                     }
                     return set;
-                }
-
-                @Override
-                public Collection<PotionEffectType> getValues() {
-                    return values;
                 }
 
             });
@@ -182,23 +182,6 @@ public class Aliases {
                             new TagAliasSet<>("entitygroups", ItemEdit.get(), EntityType.class, Tag.REGISTRY_ENTITY_TYPES) : null);
     private static boolean loaded = false;
 
-    private static <K, T extends AliasSet<K>> T createAndRegister(boolean condition, Supplier<T> supplier) {
-        if (!condition) {
-            return null;
-        }
-        try {
-            T value = supplier.get();
-            if (value == null) {
-                return value;
-            }
-            registerAliasType(value);
-            return value;
-        } catch (Throwable t) {
-            t.printStackTrace();
-            return null;
-        }
-    }
-
     public static <T> void registerAliasType(@Nullable IAliasSet<T> set) {
         registerAliasType(set, false);
     }
@@ -247,6 +230,23 @@ public class Aliases {
 
     public static Map<String, IAliasSet<?>> getTypes() {
         return Collections.unmodifiableMap(types);
+    }
+
+    private static <K, T extends AliasSet<K>> T createAndRegister(boolean condition, Supplier<T> supplier) {
+        if (!condition) {
+            return null;
+        }
+        try {
+            T value = supplier.get();
+            if (value == null) {
+                return value;
+            }
+            registerAliasType(value);
+            return value;
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return null;
+        }
     }
 
 }

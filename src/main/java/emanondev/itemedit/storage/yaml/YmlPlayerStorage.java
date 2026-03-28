@@ -20,10 +20,6 @@ public class YmlPlayerStorage implements PlayerStorage {
     private final YMLConfig database = ItemEdit.get()
             .getConfig("database" + File.separatorChar + "player-database.yml");
 
-    private String getBasePath(OfflinePlayer p) {
-        return storeByUUID() ? p.getUniqueId().toString() : p.getName();
-    }
-
     @Override
     public ItemStack getItem(@NotNull OfflinePlayer player, @NotNull String id) {
         validateID(id);
@@ -77,6 +73,10 @@ public class YmlPlayerStorage implements PlayerStorage {
             }
         }
         return players;
+    }
+
+    private String getBasePath(OfflinePlayer p) {
+        return storeByUUID() ? p.getUniqueId().toString() : p.getName();
     }
 
 }

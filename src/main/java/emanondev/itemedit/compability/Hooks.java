@@ -61,6 +61,14 @@ public class Hooks {
         return isEnabled("DungeonMMO");
     }
 
+    public static boolean hasMiniMessage() {
+        return miniMessage != null;
+    }
+
+    public static MiniMessageUtil getMiniMessageUtil() {
+        return miniMessage;
+    }
+
     private static MiniMessageUtil initMiniMessage() {
         try {
             if (VersionUtils.hasPaperAPI() && VersionUtils.isAfter(1, 16, 5)) {
@@ -72,13 +80,5 @@ public class Hooks {
         } catch (Throwable ignored) {
         }
         return null;
-    }
-
-    public static boolean hasMiniMessage() {
-        return miniMessage != null;
-    }
-
-    public static MiniMessageUtil getMiniMessageUtil() {
-        return miniMessage;
     }
 }

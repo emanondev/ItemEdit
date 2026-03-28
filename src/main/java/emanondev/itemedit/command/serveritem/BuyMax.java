@@ -30,17 +30,6 @@ public class BuyMax extends SubCmd {
         setupEconomy();
     }
 
-    private void setupEconomy() {
-        RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager()
-                .getRegistration(Economy.class);
-        if (economyProvider != null) {
-            economy = economyProvider.getProvider();
-        }
-        if (economy == null) {
-            throw new IllegalStateException();
-        }
-    }
-
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         try {
@@ -134,5 +123,16 @@ public class BuyMax extends SubCmd {
             case 6 -> CompleteUtility.complete(args[4], Aliases.BOOLEAN);
             default -> List.of();
         };
+    }
+
+    private void setupEconomy() {
+        RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager()
+                .getRegistration(Economy.class);
+        if (economyProvider != null) {
+            economy = economyProvider.getProvider();
+        }
+        if (economy == null) {
+            throw new IllegalStateException();
+        }
     }
 }

@@ -49,34 +49,6 @@ public class FireworkEditor implements Gui {
         }
     }
 
-    private static List<DyeColor> translateToDyeColor(List<Color> colors) {
-        if (colors == null) {
-            return null;
-        }
-        List<DyeColor> list = new ArrayList<>();
-        for (Color color : colors) {
-            DyeColor col = DyeColor.getByFireworkColor(color);
-            if (col != null) {
-                list.add(col);
-            }
-        }
-        return list;
-    }
-
-    private static List<Color> translateToColor(List<DyeColor> colors) {
-        if (colors == null) {
-            return null;
-        }
-        List<Color> list = new ArrayList<>();
-        for (DyeColor color : colors) {
-            Color col = color.getFireworkColor();
-            if (col != null) {
-                list.add(col);
-            }
-        }
-        return list;
-    }
-
     @Override
     public @NotNull ItemEdit getPlugin() {
         return ItemEdit.get();
@@ -156,6 +128,44 @@ public class FireworkEditor implements Gui {
         updateInventory();
     }
 
+    @Override
+    public @NotNull Inventory getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public Player getTargetPlayer() {
+        return target;
+    }
+
+    private static List<DyeColor> translateToDyeColor(List<Color> colors) {
+        if (colors == null) {
+            return null;
+        }
+        List<DyeColor> list = new ArrayList<>();
+        for (Color color : colors) {
+            DyeColor col = DyeColor.getByFireworkColor(color);
+            if (col != null) {
+                list.add(col);
+            }
+        }
+        return list;
+    }
+
+    private static List<Color> translateToColor(List<DyeColor> colors) {
+        if (colors == null) {
+            return null;
+        }
+        List<Color> list = new ArrayList<>();
+        for (DyeColor color : colors) {
+            Color col = color.getFireworkColor();
+            if (col != null) {
+                list.add(col);
+            }
+        }
+        return list;
+    }
+
     private void updateInventory() {
         meta.clearEffects();
         for (int i = 0; i < 9; i++) {
@@ -185,16 +195,6 @@ public class FireworkEditor implements Gui {
                 String.valueOf(meta.getPower() + 1));
         item.setItemMeta(powerMeta);
         this.getInventory().setItem(47, item);
-    }
-
-    @Override
-    public @NotNull Inventory getInventory() {
-        return inventory;
-    }
-
-    @Override
-    public Player getTargetPlayer() {
-        return target;
     }
 
     private class FireworkEffectData {
