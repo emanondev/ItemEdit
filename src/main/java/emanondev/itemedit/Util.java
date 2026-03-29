@@ -3,13 +3,8 @@ package emanondev.itemedit;
 import emanondev.itemedit.command.AbstractCommand;
 import emanondev.itemedit.compability.Hooks;
 import emanondev.itemedit.utility.InventoryUtils;
-import emanondev.itemedit.utility.VersionUtils;
 import net.kyori.adventure.text.*;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -90,14 +85,6 @@ public final class Util {
             }
         }
         return false;
-    }
-
-    public static void sendMessage(@NotNull CommandSender sender, BaseComponent... message) {
-        if (sender instanceof Player) {
-            ((Player) sender).spigot().sendMessage(message);
-        } else {
-            sender.sendMessage(BaseComponent.toPlainText(message));
-        }
     }
 
     public static void logCommandError(AbstractCommand command, String[] args, CommandSender sender) {
@@ -260,17 +247,6 @@ public final class Util {
         return true;
     }
 
-    public static HoverEvent craftHoverEvent(String text) {
-        if (VersionUtils.isAfter(1, 18, 0)) {
-            return new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(text));
-        }
-        return new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(text).create());
-    }
-
-    public static HoverEvent craftHoverEvent(List<String> text) {
-        return craftHoverEvent(String.join("\n", text));
-    }
-
     public static String asSuggestCommand(String text, @Nullable String command) {
         if (command == null || command.isEmpty()) {
             return text;
@@ -283,6 +259,13 @@ public final class Util {
             return text;
         }
         return "<click:run_command:'" + command.replace("'", "''") + "'>" + text + "</click>";
+    }
+
+    public static String asCopyToClipboard(String text, @Nullable String copied) {
+        if (copied == null || copied.isEmpty()) {
+            return text;
+        }
+        return "<click:copy_to_clipboard:'" + copied.replace("'", "''") + "'>" + text + "</click>";
     }
 
     public static String asOpenUrl(String text, @Nullable String url) {
