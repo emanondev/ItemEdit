@@ -146,10 +146,10 @@ public abstract class SubCmd {
             return;
         }
         Translator translator = getPlugin().getTranslator();
-        StringBuilder hover = new StringBuilder(translator.translateOrEmpty(sender,"wrongalias.error-pre-hover")).append("\n");
+        StringBuilder hover = new StringBuilder(translator.translateOrEmpty(sender, "wrongalias.error-pre-hover")).append("\n");
 
-        String color1 = translator.translateOrEmpty(sender,"wrongalias.first_color");
-        String color2 = translator.translateOrEmpty(sender,"wrongalias.second_color");
+        String color1 = translator.translateOrEmpty(sender, "wrongalias.first_color");
+        String color2 = translator.translateOrEmpty(sender, "wrongalias.second_color");
         boolean color = true;
         int counter = 0;
         for (T value : set.getValues()) {

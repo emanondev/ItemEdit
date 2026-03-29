@@ -97,7 +97,7 @@ public abstract class APlugin extends JavaPlugin {
     public void log(@NotNull ChatColor color,
                     @NotNull String prefix,
                     @NotNull String log) {
-        log("<" + color.name().toLowerCase() + ">" + prefix + " <white>"  + log);
+        log("<" + color.name().toLowerCase() + ">" + prefix + " <white>" + log);
     }
 
     /**
@@ -293,7 +293,7 @@ public abstract class APlugin extends JavaPlugin {
             }
         }
 
-        translator.translate(Bukkit.getConsoleSender(),"player-only");
+        translator.translate(Bukkit.getConsoleSender(), "player-only");
     }
 
     /**
@@ -408,7 +408,7 @@ public abstract class APlugin extends JavaPlugin {
                 }
             }
         }
-        translator.translate(null,"player-only");
+        translator.translate(null, "player-only");
     }
 
     /**
