@@ -35,12 +35,12 @@ public class ColorGui implements Gui {
         String title = getLanguageMessage(subPath + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
         this.target = target;
-        this.colorable = ItemUtils.getHandItem(getTargetPlayer());
+        this.colorable = ItemUtils.getHandMainItem(getTargetPlayer());
         this.colorableMeta = ItemUtils.getMeta(this.colorable);
         cleanColorableMeta = colorableMeta.clone();
         cleanColorableMeta.addItemFlags(ItemFlag.values());
-        cleanColorableMeta.setDisplayName(null);
-        cleanColorableMeta.setLore(null);
+        cleanColorableMeta.displayName(null);
+        cleanColorableMeta.lore(null);
         try {
             cleanColorableMeta.setMaxStackSize(100);
         } catch (Throwable ignored) {
@@ -51,11 +51,7 @@ public class ColorGui implements Gui {
 
     @Override
     public void onClose(InventoryCloseEvent event) {
-        try {
-            target.getInventory().setItemInMainHand(colorable);
-        } catch (Throwable t) {
-            target.getInventory().setItemInHand(colorable);
-        }
+        target.getInventory().setItemInMainHand(colorable);
     }
 
     @Override

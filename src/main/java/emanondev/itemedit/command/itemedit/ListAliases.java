@@ -6,9 +6,6 @@ import emanondev.itemedit.aliases.IAliasSet;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.ComponentBuilder.FormatRetention;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
@@ -47,27 +44,23 @@ public class ListAliases extends SubCmd {
         String colorOne = translate("first_color", sender);
         String colorTwo = translate("second_color", sender);
         String hover = translate("hover_type", sender);
-        ComponentBuilder comp;
-        if (prefix != null && !prefix.isEmpty()) {
-            comp = new ComponentBuilder(prefix + "\n");
-        } else {
-            comp = new ComponentBuilder("");
-        }
+        StringBuilder feedback = new StringBuilder((prefix != null && !prefix.isEmpty()) ? prefix + "\n" : "");
         boolean counter = true;
         List<String> values = new ArrayList<>(Aliases.getTypes().keySet());
         Collections.sort(values);
         for (String id : values) {
-            comp.retain(FormatRetention.NONE).append((counter ? colorOne : colorTwo) + id)
-                    .event(Util.craftHoverEvent(hover))
-                    .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
-                            "/" + alias + " " + this.getName() + " " + id))
-                    .append(" ");
+            feedback.append(
+                    Util.asHover(Util.asSuggestCommand(
+                                    (counter ? colorOne : colorTwo) + id,
+                                    "/" + alias + " " + this.getName() + " " + id),
+                            hover)
+            ).append(" ");
             counter = !counter;
         }
         if (postfix != null && !postfix.isEmpty()) {
-            comp.retain(FormatRetention.NONE).append("\n" + postfix);
+            feedback.append("\n").append(postfix);
         }
-        Util.sendMessage(sender, comp.create());
+        Util.sendMessage(sender, feedback.toString());
     }
 
     @SuppressWarnings({"deprecation", "unchecked", "rawtypes"})
@@ -83,24 +76,19 @@ public class ListAliases extends SubCmd {
         String colorOne = translate("first_color", sender);
         String colorTwo = translate("second_color", sender);
         String hover = translate("hover_info", sender, "%default%", "%default%");
-        ComponentBuilder comp;
-        if (prefix != null && !prefix.isEmpty()) {
-            comp = new ComponentBuilder(prefix + "\n");
-        } else {
-            comp = new ComponentBuilder("");
-        }
+
+        StringBuilder feedback = new StringBuilder((prefix != null && !prefix.isEmpty()) ? prefix + "\n" : "");
         boolean counter = true;
         for (String aliasS : (List<String>) set.getAliases()) {
-            comp.retain(FormatRetention.NONE).append((counter ? colorOne : colorTwo) + aliasS)
-                    .event(Util.craftHoverEvent(
+            feedback.append(Util.asHover((counter ? colorOne : colorTwo) + aliasS,
                             hover.replace("%default%", set.getName(set.convertAlias(aliasS)))))
                     .append(" ");
             counter = !counter;
         }
         if (postfix != null && !postfix.isEmpty()) {
-            comp.retain(FormatRetention.NONE).append("\n" + postfix);
+            feedback.append("\n").append(postfix);
         }
-        Util.sendMessage(sender, comp.create());
+        Util.sendMessage(sender, feedback.toString());
     }
 
 }

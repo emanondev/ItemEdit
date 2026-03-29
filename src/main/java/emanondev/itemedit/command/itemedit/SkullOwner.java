@@ -4,7 +4,6 @@ import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemBuilder;
-import emanondev.itemedit.utility.VersionUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -25,10 +24,6 @@ public class SkullOwner extends SubCmd {
         Player p = (Player) sender;
         ItemBuilder item = new ItemBuilder(getItemInHand(p));
         if (!item.isMetaClass(SkullMeta.class)) {
-            getPlugin().getTranslator().send(p, "generic.error.wrong-material_player_head");
-            return;
-        }
-        if (VersionUtils.isUpTo(1, 12) && item.getDamage() != 3) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_player_head");
             return;
         }

@@ -67,7 +67,6 @@ public class Attribute extends SubCmd {
     }
 
     // add <attribute> amount [operation] [equip]
-    @SuppressWarnings("UnstableApiUsage")
     private void attributeAdd(Player p, ItemStack item, String alias, String[] args) {
         if (args.length < 4 || args.length > 6) {
             onSubFail(p, alias, "add");

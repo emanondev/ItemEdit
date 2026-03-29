@@ -8,8 +8,6 @@ import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemBuilder;
 import emanondev.itemedit.utility.VersionUtils;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -39,11 +37,10 @@ public class PotionEffectEditor extends SubCmd {
             if (p.hasPermission("itemedit.admin")) {
                 String msg = this.translate("itemtag-tip", sender);
                 if (msg != null && !msg.isEmpty()) {
-                    Util.sendMessage(p, new ComponentBuilder(msg).event(
-                                    Util.craftHoverEvent(
-                                            this.translateList("itemtag-tip-hover", p)))
-                            .event(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://modrinth.com/plugin/itemtag")).create()
-                    );
+                    Util.sendMessage(p, Util.asHover(Util.asOpenUrl(
+                            msg,
+                            "https://modrinth.com/plugin/itemtag"
+                    ), this.translate("itemtag-tip-hover", p)));
                 }
             }
             return;

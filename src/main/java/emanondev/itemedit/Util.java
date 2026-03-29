@@ -4,6 +4,8 @@ import emanondev.itemedit.command.AbstractCommand;
 import emanondev.itemedit.compability.Hooks;
 import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.VersionUtils;
+import net.kyori.adventure.text.*;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -17,6 +19,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -34,11 +37,52 @@ public final class Util {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * takes an already formatted message
+     *
+     * @param sender
+     * @param message
+     */
     public static void sendMessage(@NotNull CommandSender sender, String message) {
         if (message == null || message.isEmpty()) {
             return;
         }
+        sendMessage(sender, MiniMessage.miniMessage().deserialize(message));
+    }
+
+    /**
+     * takes an already formatted message
+     *
+     * @param sender
+     * @param message
+     */
+    public static void sendMessage(@NotNull CommandSender sender, Component message) {
+        if (!hasRenderableContent(message)) {
+            return;
+        }
         sender.sendMessage(message);
+    }
+
+    public static boolean hasRenderableContent(Component component) {
+        if (component == null) return false;
+
+        if (component instanceof TextComponent text) {
+            if (!text.content().isBlank()) {
+                return true;
+            }
+        }
+
+        if (component instanceof TranslatableComponent) return true;
+        if (component instanceof KeybindComponent) return true;
+        if (component instanceof ScoreComponent) return true;
+        if (component instanceof SelectorComponent) return true;
+
+        for (Component child : component.children()) {
+            if (hasRenderableContent(child)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void sendMessage(@NotNull CommandSender sender, BaseComponent... message) {
@@ -51,7 +95,7 @@ public final class Util {
 
     public static void logCommandError(AbstractCommand command, String[] args, CommandSender sender) {
         ItemStack item = sender instanceof Player p ? InventoryUtils.getItem(p, EquipmentSlot.HAND) : null;
-        command.getPlugin().log(ChatColor.RED + "ERROR when executing /" + command.getName()
+        sendMessage(sender,"<red>ERROR when executing /" + command.getName()
                 + " " + String.join(" ", args) + " by " + sender.getName()
                 + " (with " + (item == null ? "nothing" : item) + " in hand)");
     }
@@ -122,7 +166,7 @@ public final class Util {
     }
 
     public static String formatText(CommandSender sender, String text, String basePermission) {
-        if (Util.hasMiniMessageAPI() && sender.hasPermission(basePermission + ".minimessage")) {
+        if (sender.hasPermission(basePermission + ".minimessage")) {
             text = Hooks.getMiniMessageUtil().fromMiniToText(text);
         }
         text = ChatColor.translateAlternateColorCodes('&', text);
@@ -168,38 +212,14 @@ public final class Util {
     }
 
     /**
-     * for pre 1.13 compatibility
-     *
      * @param color color
      * @return An ItemStack of selected Dye
      */
-    @SuppressWarnings("deprecation")
     public static ItemStack getDyeItemFromColor(DyeColor color) {
-        try {
-            return new ItemStack(Material.valueOf(color.name() + "_DYE"));
-        } catch (Exception e) {
-            return new ItemStack(Material.valueOf("INK_SACK"), 1, (short) 0, getDataByColor(color));
-        }
+         return new ItemStack(Material.valueOf(color.name() + "_DYE"));
     }
 
     /**
-     * for pre 1.13 compatibility
-     *
-     * @param color color
-     * @return An ItemStack of selected Dyed wool
-     */
-    @SuppressWarnings("deprecation")
-    public static ItemStack getWoolItemFromColor(DyeColor color) {
-        try {
-            return new ItemStack(Material.valueOf(color.name() + "_WOOL"));
-        } catch (Exception e) {
-            return new ItemStack(Material.valueOf("WOOL"), 1, (short) 0, getDataByColor(color));
-        }
-    }
-
-    /**
-     * for pre 1.13 compatibility
-     *
      * @param color color
      * @return An ItemStack of selected Dyed wool
      */
@@ -211,58 +231,9 @@ public final class Util {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public static DyeColor getColorFromBanner(ItemStack banner) {
-        try {
             String name = banner.getType().name();
             return DyeColor.valueOf(name.substring(0, name.length() - 7));
-        } catch (Exception e) {
-            return getColorByData((byte) banner.getDurability());
-        }
-    }
-
-    public static DyeColor getColorByData(byte color) {
-        return switch (color) { //Silver
-            case 0 -> DyeColor.BLACK;
-            case 4 -> DyeColor.BLUE;
-            case 3 -> DyeColor.BROWN;
-            case 6 -> DyeColor.CYAN;
-            case 8 -> DyeColor.GRAY;
-            case 2 -> DyeColor.GREEN;
-            case 12 -> DyeColor.LIGHT_BLUE;
-            case 10 -> DyeColor.LIME;
-            case 13 -> DyeColor.MAGENTA;
-            case 14 -> DyeColor.ORANGE;
-            case 9 -> DyeColor.PINK;
-            case 5 -> DyeColor.PURPLE;
-            case 1 -> DyeColor.RED;
-            case 7 -> DyeColor.LIGHT_GRAY;
-            case 15 -> DyeColor.WHITE;
-            case 11 -> DyeColor.YELLOW;
-            default -> throw new IllegalStateException();
-        };
-    }
-
-    public static Byte getDataByColor(DyeColor color) {
-        return switch (color.name()) { //Silver
-            case "BLACK" -> 0;
-            case "BLUE" -> 4;
-            case "BROWN" -> 3;
-            case "CYAN" -> 6;
-            case "GRAY" -> 8;
-            case "GREEN" -> 2;
-            case "LIGHT_BLUE" -> 12;
-            case "LIME" -> 10;
-            case "MAGENTA" -> 13;
-            case "ORANGE" -> 14;
-            case "PINK" -> 9;
-            case "PURPLE" -> 5;
-            case "RED" -> 1;
-            case "SILVER", "LIGHT_GRAY" -> 7;
-            case "WHITE" -> 15;
-            case "YELLOW" -> 11;
-            default -> throw new IllegalStateException();
-        };
     }
 
     public static boolean isAllowedChangeLore(CommandSender sender, Material type) {
@@ -282,10 +253,6 @@ public final class Util {
         return true;
     }
 
-    public static boolean hasMiniMessageAPI() {
-        return Hooks.hasMiniMessage();
-    }
-
     public static HoverEvent craftHoverEvent(String text) {
         if (VersionUtils.isAfter(1, 18, 0)) {
             return new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(text));
@@ -295,5 +262,33 @@ public final class Util {
 
     public static HoverEvent craftHoverEvent(List<String> text) {
         return craftHoverEvent(String.join("\n", text));
+    }
+
+    public static String asSuggestCommand(String text, @Nullable String command){
+        if (command==null || command.isEmpty()){
+            return text;
+        }
+        return "<click:suggest_command:'"+command.replace("'","''")+"'>"+text+"</click>";
+    }
+
+    public static String asOpenUrl(String text, @Nullable String url){
+        if (url==null || url.isEmpty()){
+            return text;
+        }
+        return "<click:open_url:'"+url.replace("'","''")+"'>"+text+"</click>";
+    }
+
+    public static String asHover(String text, @Nullable String hover){
+        if (hover==null || hover.isEmpty()) {
+            return text;
+        }
+        return "<hover:show_text:'"+hover.replace("'","''")+"'>"+text+"</hover>";
+    }
+
+    public static String asHover(String text, @Nullable List<String> hover){
+        if (hover==null || hover.isEmpty()) {
+            return text;
+        }
+        return asHover(text, String.join("\n", hover));
     }
 }

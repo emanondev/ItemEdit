@@ -7,8 +7,8 @@ import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.aliases.IAliasSet;
 import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.ChatColor;
@@ -64,9 +64,9 @@ public abstract class SubCmd {
     }
 
     public @NotNull ComponentBuilder getHelp(@NotNull ComponentBuilder base, @NotNull CommandSender sender, @NotNull String alias) {
-        String help = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + this.name + " ";
+        String help = "<dark_green>/" + alias + " <green>"+ this.name + " ";
         String params = translateOrEmpty("params", sender);
-        base.append(help + (params == null ? "" : (params.replace(ChatColor.RESET.toString(), ChatColor.GREEN.toString()))))
+        base.append(help + (params == null ? "" : params))
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ChatColor.stripColor(help)))
                 .event(Util.craftHoverEvent(getDescription(sender)));
         return base;
@@ -74,14 +74,11 @@ public abstract class SubCmd {
 
     public void onFail(@NotNull CommandSender target, @NotNull String alias) {
         String params = translateOrEmpty("params", target);
-
-        Util.sendMessage(target, new ComponentBuilder(
-                ChatColor.RED + "/" + alias + " " + this.name + " " +
-                        ChatColor.stripColor(params))
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
-                        "/" + alias + " " + this.name + " " + ChatColor.stripColor(params)))
-                .event(Util.craftHoverEvent(getDescription(target)))
-                .create());
+        String feedback = Util.asHover(Util.asSuggestCommand(
+                        "<red>/" + alias + " " + this.name + " " + params,
+                        "/" + alias + " " + this.name + " " + params),
+                getDescription(target));
+        Util.sendMessage(target, feedback);
     }
 
     abstract public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args);
@@ -89,44 +86,41 @@ public abstract class SubCmd {
     abstract public List<String> onComplete(@NotNull CommandSender sender, String[] args);
 
     protected @NotNull ItemStack getItemInHand(@NotNull Player p) {
-        return ItemUtils.getHandItem(p);
+        return ItemUtils.getHandMainItem(p);
     }
 
     protected void setItemInHand(@NotNull Player p, ItemStack item) {
         ItemUtils.setHandItem(p, item);
     }
 
-    protected BaseComponent[] craftFailFeedback(String alias, String params, List<String> desc) {
+    protected String craftFailFeedback(String alias, String params, List<String> desc) {
         if (params == null) {
             params = "";
         }
-        ComponentBuilder fail = new ComponentBuilder(ChatColor.RED + "/" + alias + " " + this.name + " " + params)
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
-                        "/" + alias + " " + this.name + " " + params));
-        if (desc != null && !desc.isEmpty()) {
-            fail.event(Util.craftHoverEvent(desc));
-        }
-        return fail.create();
+        return Util.asHover(Util.asSuggestCommand(
+                "<red>/" + alias + " " + this.name + " " + params,
+                "/" + alias + " " + this.name + " " + params),
+                desc);
     }
 
     protected void onSubFail(CommandSender target, String alias, String subSubCommand) {
         String params = translate(subSubCommand + ".params", target);
-        target.spigot().sendMessage(this.craftFailFeedback(alias, subSubCommand
+        Util.sendMessage(target, craftFailFeedback(alias, subSubCommand
                         + ((params == null || params.isEmpty()) ? "" : " " + params),
                 translateList(subSubCommand + ".description", target)));
     }
 
     protected <T> void onWrongAlias(CommandSender sender, IAliasSet<T> set, String... holders) {
-        YMLConfig language = ItemEdit.get().getLanguageConfig(sender);
-        String msg = language.getMessage("generic.wrongalias." + set.getId(), null, holders);
+        Translator pluginTranslator = getPlugin().getTranslator();
+        Translator itemeditTranslator = ItemEdit.get().getTranslator();
+        String msg = pluginTranslator.translate(sender,"generic.wrongalias." + set.getId(),holders);
         if (msg == null || msg.isEmpty()) {
             return;
         }
-        StringBuilder hover = new StringBuilder(language
-                .getMessage("generic.wrongalias.error-pre-hover", "")).append("\n");
+        StringBuilder hover = new StringBuilder(itemeditTranslator.translate(sender,"generic.wrongalias.error-pre-hover")+ "\n");
 
-        String color1 = language.getMessage("generic.wrongalias.first_color", "");
-        String color2 = language.getMessage("generic.wrongalias.second_color", "");
+        String color1 = itemeditTranslator.translate(sender,"generic.wrongalias.first_color");
+        String color2 = itemeditTranslator.translate(sender,"generic.wrongalias.second_color");
         boolean color = true;
         int counter = 0;
         for (T value : set.getValues()) {

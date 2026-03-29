@@ -244,7 +244,7 @@ public abstract class AbstractCommand implements TabExecutor {
             return false;
         }
         if (sub.isPlayerOnly() && sub.checkNonNullItem()) {
-            ItemStack item = ItemUtils.getHandItem((Player) sender);
+            ItemStack item = ItemUtils.getHandMainItem((Player) sender);
             if (ItemUtils.isAirOrNull(item)) {
                 sendNoItemInHand(sender);
                 return false;

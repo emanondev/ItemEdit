@@ -18,7 +18,6 @@ public class Damage extends SubCmd {
         super("damage", cmd, true, true);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;

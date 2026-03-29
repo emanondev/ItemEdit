@@ -79,7 +79,7 @@ public class Color extends SubCmd {
         FireworkEffect oldEffect = item.getFireworkEffect();
         FireworkEffect.Builder newEffect = FireworkEffect.builder().flicker(oldEffect != null && oldEffect.hasFlicker())
                 .trail(oldEffect != null && oldEffect.hasTrail()).withColor(color);
-        if (oldEffect != null && oldEffect.getFadeColors() != null) {
+        if (oldEffect != null) {
             newEffect.withFade(oldEffect.getFadeColors());
         }
         item.setFireworkEffect(newEffect.build()).build();

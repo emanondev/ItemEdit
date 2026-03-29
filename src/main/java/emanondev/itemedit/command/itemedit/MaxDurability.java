@@ -46,7 +46,7 @@ public class MaxDurability extends SubCmd {
             return List.of();
         }
         ItemStack item = getItemInHand(player);
-        if (item == null || item.getType().getMaxDurability() <= 1) {
+        if (item.getType().getMaxDurability() <= 1) {
             return List.of();
         }
         int max = item.getType().getMaxDurability();

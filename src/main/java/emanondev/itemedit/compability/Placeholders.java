@@ -171,12 +171,11 @@ public class Placeholders extends PlaceholderExpansion {
                 throw new IllegalStateException();
             }
         }
-
         switch (slot.toLowerCase(Locale.ENGLISH)) {
             case "main_hand":
             case "mainhand":
             case "hand": {
-                ItemStack copy = ItemUtils.getHandItem(player);
+                ItemStack copy = ItemUtils.getHandMainItem(player);
                 if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
                 }

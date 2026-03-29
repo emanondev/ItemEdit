@@ -46,9 +46,8 @@ public final class ItemUtils {
      * @param player the {@link Player} whose main hand item is to be retrieved.
      * @return the {@link ItemStack} in the player's main hand.
      */
-    @SuppressWarnings("deprecation")
-    public static ItemStack getHandItem(@NotNull Player player) {
-        return player.getInventory().getItemInHand();
+    public static ItemStack getHandMainItem(@NotNull Player player) {
+        return player.getInventory().getItemInMainHand();
     }
 
     /**
