@@ -63,8 +63,17 @@ public abstract class SubCmd {
         load();
     }
 
+    public @NotNull String getHelp(@NotNull CommandSender sender, @NotNull String alias) {
+        String help = "<dark_green>/" + alias + " <green>" + this.name + " ";
+        String params = translateOrEmpty("params", sender);
+        return Util.asHover(Util.asSuggestCommand(
+                help + (params == null ? "" : params),
+                "/" + alias + " " + this.name + " "
+        ), getDescription(sender));
+    }
+
     public @NotNull ComponentBuilder getHelp(@NotNull ComponentBuilder base, @NotNull CommandSender sender, @NotNull String alias) {
-        String help = "<dark_green>/" + alias + " <green>"+ this.name + " ";
+        String help = "<dark_green>/" + alias + " <green>" + this.name + " ";
         String params = translateOrEmpty("params", sender);
         base.append(help + (params == null ? "" : params))
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ChatColor.stripColor(help)))
@@ -98,8 +107,8 @@ public abstract class SubCmd {
             params = "";
         }
         return Util.asHover(Util.asSuggestCommand(
-                "<red>/" + alias + " " + this.name + " " + params,
-                "/" + alias + " " + this.name + " " + params),
+                        "<red>/" + alias + " " + this.name + " " + params,
+                        "/" + alias + " " + this.name + " " + params),
                 desc);
     }
 
@@ -113,14 +122,14 @@ public abstract class SubCmd {
     protected <T> void onWrongAlias(CommandSender sender, IAliasSet<T> set, String... holders) {
         Translator pluginTranslator = getPlugin().getTranslator();
         Translator itemeditTranslator = ItemEdit.get().getTranslator();
-        String msg = pluginTranslator.translate(sender,"generic.wrongalias." + set.getId(),holders);
+        String msg = pluginTranslator.translate(sender, "generic.wrongalias." + set.getId(), holders);
         if (msg == null || msg.isEmpty()) {
             return;
         }
-        StringBuilder hover = new StringBuilder(itemeditTranslator.translate(sender,"generic.wrongalias.error-pre-hover")+ "\n");
+        StringBuilder hover = new StringBuilder(itemeditTranslator.translate(sender, "generic.wrongalias.error-pre-hover") + "\n");
 
-        String color1 = itemeditTranslator.translate(sender,"generic.wrongalias.first_color");
-        String color2 = itemeditTranslator.translate(sender,"generic.wrongalias.second_color");
+        String color1 = itemeditTranslator.translate(sender, "generic.wrongalias.first_color");
+        String color2 = itemeditTranslator.translate(sender, "generic.wrongalias.second_color");
         boolean color = true;
         int counter = 0;
         for (T value : set.getValues()) {

@@ -95,7 +95,7 @@ public final class Util {
 
     public static void logCommandError(AbstractCommand command, String[] args, CommandSender sender) {
         ItemStack item = sender instanceof Player p ? InventoryUtils.getItem(p, EquipmentSlot.HAND) : null;
-        sendMessage(sender,"<red>ERROR when executing /" + command.getName()
+        sendMessage(sender, "<red>ERROR when executing /" + command.getName()
                 + " " + String.join(" ", args) + " by " + sender.getName()
                 + " (with " + (item == null ? "nothing" : item) + " in hand)");
     }
@@ -216,7 +216,7 @@ public final class Util {
      * @return An ItemStack of selected Dye
      */
     public static ItemStack getDyeItemFromColor(DyeColor color) {
-         return new ItemStack(Material.valueOf(color.name() + "_DYE"));
+        return new ItemStack(Material.valueOf(color.name() + "_DYE"));
     }
 
     /**
@@ -232,8 +232,8 @@ public final class Util {
     }
 
     public static DyeColor getColorFromBanner(ItemStack banner) {
-            String name = banner.getType().name();
-            return DyeColor.valueOf(name.substring(0, name.length() - 7));
+        String name = banner.getType().name();
+        return DyeColor.valueOf(name.substring(0, name.length() - 7));
     }
 
     public static boolean isAllowedChangeLore(CommandSender sender, Material type) {
@@ -264,29 +264,36 @@ public final class Util {
         return craftHoverEvent(String.join("\n", text));
     }
 
-    public static String asSuggestCommand(String text, @Nullable String command){
-        if (command==null || command.isEmpty()){
+    public static String asSuggestCommand(String text, @Nullable String command) {
+        if (command == null || command.isEmpty()) {
             return text;
         }
-        return "<click:suggest_command:'"+command.replace("'","''")+"'>"+text+"</click>";
+        return "<click:suggest_command:'" + command.replace("'", "''") + "'>" + text + "</click>";
     }
 
-    public static String asOpenUrl(String text, @Nullable String url){
-        if (url==null || url.isEmpty()){
+    public static String asExecuteCommand(String text, @Nullable String command) {
+        if (command == null || command.isEmpty()) {
             return text;
         }
-        return "<click:open_url:'"+url.replace("'","''")+"'>"+text+"</click>";
+        return "<click:run_command:'" + command.replace("'", "''") + "'>" + text + "</click>";
     }
 
-    public static String asHover(String text, @Nullable String hover){
-        if (hover==null || hover.isEmpty()) {
+    public static String asOpenUrl(String text, @Nullable String url) {
+        if (url == null || url.isEmpty()) {
             return text;
         }
-        return "<hover:show_text:'"+hover.replace("'","''")+"'>"+text+"</hover>";
+        return "<click:open_url:'" + url.replace("'", "''") + "'>" + text + "</click>";
     }
 
-    public static String asHover(String text, @Nullable List<String> hover){
-        if (hover==null || hover.isEmpty()) {
+    public static String asHover(String text, @Nullable String hover) {
+        if (hover == null || hover.isEmpty()) {
+            return text;
+        }
+        return "<hover:show_text:'" + hover.replace("'", "''") + "'>" + text + "</hover>";
+    }
+
+    public static String asHover(String text, @Nullable List<String> hover) {
+        if (hover == null || hover.isEmpty()) {
             return text;
         }
         return asHover(text, String.join("\n", hover));

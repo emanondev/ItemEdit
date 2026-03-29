@@ -1,16 +1,12 @@
 package emanondev.itemedit.command;
 
 import emanondev.itemedit.APlugin;
-import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
@@ -258,21 +254,16 @@ public abstract class AbstractCommand implements TabExecutor {
             helpSubCommand.help(sender, alias, 1);
             return;
         }
-        ComponentBuilder help = new ComponentBuilder(
-                this.getLanguageString("help-header", sender) + "\n");
-        boolean c = false;
+        StringBuilder msg = new StringBuilder(this.getLanguageString("help-header", sender));
+        boolean any = false;
         for (SubCmd cmd : subCmds) {
             if (sender.hasPermission(cmd.getPermission())) {
-                if (c) {
-                    help.append("\n");
-                } else {
-                    c = true;
-                }
-                help = cmd.getHelp(help, sender, alias);
+                any = true;
+                msg.append("\n").append(cmd.getHelp(sender, alias));
             }
         }
-        if (c) {
-            Util.sendMessage(sender, help.create());
+        if (any) {
+            Util.sendMessage(sender, msg.toString());
         } else {
             sendPermissionLackGenericMessage(sender);
         }
@@ -305,33 +296,35 @@ public abstract class AbstractCommand implements TabExecutor {
         }
 
         public void help(CommandSender sender, String alias, SubCmd sub) {
-            ComponentBuilder help = new ComponentBuilder(this.translateOrEmpty("header-sub",
-                    sender, "%sub%", sub.getName()));
-            help.append("\n");
-            String helpTxt = ChatColor.DARK_GREEN + "/" + alias + " " + ChatColor.GREEN + sub.getName() + " ";
-            help.append(helpTxt + sub.translateOrEmpty("params", sender).replace(ChatColor.RESET.toString(),
-                    ChatColor.GREEN.toString()));
-            help.append("\n");
-            help.append(sub.getDescription(sender));
-            Util.sendMessage(sender, help.create());
+            Util.sendMessage(sender,
+                    this.translateOrEmpty("header-sub",
+                            sender, "%sub%", sub.getName()) +
+                            "\n" +
+                            "<dark_green>/" + alias + " <green>" + sub.getName() + " " +
+                            sub.translateOrEmpty("params", sender) +
+                            "\n" +
+                            sub.getDescription(sender)
+            );
         }
 
         public void help(CommandSender sender, String alias, int page) {
             List<SubCmd> cmds = getAllowedSubCommands(sender);
-            if (!cmds.isEmpty()) {
-                page = Math.max(1, Math.min(getMaxPageFor(cmds.size()), page));
-                ComponentBuilder help = new ComponentBuilder("");
-                injectClickablePages(help, this.translateOrEmpty("header", sender), sender, alias, page);
-                help.append("\n");
-
-                for (SubCmd cmd : cmds.subList(commandPerPage * (page - 1), Math.min(cmds.size(), commandPerPage * page))) {
-                    help = cmd.getHelp(help, sender, alias);
-                    help.append("\n");
-                }
-                injectClickablePages(help, this.translateOrEmpty("footer", sender), sender, alias, page);
-                Util.sendMessage(sender, help.create());
-            } else
+            if (cmds.isEmpty()) {
                 sendPermissionLackGenericMessage(sender);
+                return;
+            }
+            int maxPage = getMaxPageFor(cmds.size());
+            page = Math.max(1, Math.min(maxPage, page));
+
+            StringBuilder body = new StringBuilder(this.translateOrEmpty("header", sender)).append("\n");
+
+            for (SubCmd cmd : cmds.subList(commandPerPage * (page - 1), Math.min(cmds.size(), commandPerPage * page))) {
+                body.append(cmd.getHelp(sender, alias)).append("\n");
+            }
+            body.append(this.translateOrEmpty("footer", sender));
+
+
+            Util.sendMessage(sender, injectClickablePages(body.toString(), sender, alias, page, maxPage));
         }
 
         @Override
@@ -359,103 +352,49 @@ public abstract class AbstractCommand implements TabExecutor {
             return elements / commandPerPage + (elements % commandPerPage == 0 ? 0 : 1);
         }
 
-        @SuppressWarnings("deprecation")
-        private void injectClickablePages(ComponentBuilder comp, String text, CommandSender sender, String alias, int page) {
-            int maxPage = getMaxPageFor(getAllowedSubCommands(sender).size());
-            text = text.replace("%page%", String.valueOf(page)).replace("%max_page%", String.valueOf(maxPage));
-            int index = text.indexOf("%prev_clickable%");
-            String text1;
-            String text2;
-            if (index != -1) {
-                text1 = text.substring(0, index);
-                text2 = text.substring(index + "%prev_clickable%".length());
-            } else {
-                text1 = text;
-                text2 = null;
-            }
-            String text11;
-            String text12;
-            String text21 = null;
-            String text22 = null;
-            index = text1.indexOf("%next_clickable%");
-            if (index != -1) {
-                text11 = text1.substring(0, index);
-                text12 = text1.substring(index + "%next_clickable%".length());
-            } else {
-                text11 = text1;
-                text12 = null;
-            }
-            if (text2 != null) {
-                index = text2.indexOf("%next_clickable%");
-                if (index != -1) {
-                    text21 = text2.substring(0, index);
-                    text22 = text2.substring(index + "%next_clickable%".length());
-                } else {
-                    text21 = text2;
-                }
-            }
-            Translator langConf = ItemEdit.get().getTranslator();
-            comp.retain(ComponentBuilder.FormatRetention.NONE).append(text11);
-
-            if (text12 != null) {
-                if (page < maxPage) {
-                    comp.append(langConf.translateOrEmpty(sender, "generic.help.next_text",
-                                    "%target%", String.valueOf(page + 1), "%page%", String.valueOf(page)))
-                            .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page + 1)))
-                            .event(Util.craftHoverEvent(
-                                    langConf.translateOrEmpty(sender, "generic.help.next_hover",
-                                            "%target%", String.valueOf(page + 1),
-                                            "%page%", String.valueOf(page),
-                                            "%max_page%", String.valueOf(maxPage))
-                            ));
-                } else {
-                    comp.append(langConf.translateOrEmpty(sender, "generic.help.next_void",
-                            "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage)));
-                }
-                comp.append(text12).retain(ComponentBuilder.FormatRetention.FORMATTING);
-            }
-            if (text21 != null) {
+        private String injectClickablePages(String text, CommandSender sender,
+                                            String alias, int page, int maxPage) {
+            text = text.replace("%page%", String.valueOf(page))
+                    .replace("%max_page%", String.valueOf(maxPage));
+            Translator translator = getPlugin().getTranslator();
+            if (text.contains("%prev_clickable%")) {
+                String clickable;
                 if (page > 1) {
-                    comp.append(langConf.translateOrEmpty(sender, "generic.help.prev_text",
+                    clickable = Util.asHover(Util.asExecuteCommand(
+                                    translator.translateOrEmpty(sender, "generic.help.prev_text",
+                                            "%target%", String.valueOf(page - 1),
+                                            "%page%", String.valueOf(page)),
+                                    "/" + alias + " " + getName() + " " + (page - 1)),
+                            translator.translateOrEmpty(sender, "generic.help.prev_hover",
                                     "%target%", String.valueOf(page - 1),
                                     "%page%", String.valueOf(page),
-                                    "%max_page%", String.valueOf(maxPage)))
-                            .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page - 1)))
-                            .event(Util.craftHoverEvent(
-                                    langConf.translateOrEmpty(sender, "generic.help.prev_hover",
-                                            "%target%", String.valueOf(page - 1),
-                                            "%page%", String.valueOf(page),
-                                            "%max_page%", String.valueOf(maxPage))
-                            ));
+                                    "%max_page%", String.valueOf(maxPage)));
                 } else {
-                    comp.append(langConf.translateOrEmpty(sender, "generic.help.prev_void",
-                            "%page%", String.valueOf(page),
-                            "%max_page%", String.valueOf(maxPage)));
+                    clickable = translator.translateOrEmpty(sender, "generic.help.prev_void",
+                            "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage));
                 }
-                comp.append(text21).retain(ComponentBuilder.FormatRetention.FORMATTING);
+                text = text.replace("%next_clickable%", clickable);
             }
-            if (text22 != null) {
+            if (text.contains("%next_clickable%")) {
+                String clickable;
                 if (page < maxPage) {
-                    comp.append(langConf.translateOrEmpty(sender, "generic.help.next_text",
-
+                    clickable = Util.asHover(Util.asExecuteCommand(
+                                    translator.translateOrEmpty(sender, "generic.help.next_text",
+                                            "%target%", String.valueOf(page + 1),
+                                            "%page%", String.valueOf(page)),
+                                    "/" + alias + " " + getName() + " " + (page + 1)),
+                            translator.translateOrEmpty(sender, "generic.help.next_hover",
                                     "%target%", String.valueOf(page + 1),
                                     "%page%", String.valueOf(page),
-                                    "%max_page%", String.valueOf(maxPage)))
-                            .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/" + alias + " " + getName() + " " + (page + 1)))
-                            .event(Util.craftHoverEvent(
-                                    langConf.translateOrEmpty(sender, "generic.help.next_hover",
-                                            "%target%", String.valueOf(page + 1),
-                                            "%page%", String.valueOf(page),
-                                            "%max_page%", String.valueOf(maxPage))
-                            ));
+                                    "%max_page%", String.valueOf(maxPage)));
                 } else {
-                    comp.append(langConf.translateOrEmpty(sender, "generic.help.next_void",
-                            "%page%", String.valueOf(page),
-                            "%max_page%", String.valueOf(maxPage)));
+                    clickable = translator.translateOrEmpty(sender, "generic.help.next_void",
+                            "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage));
                 }
-                comp.append(text22).retain(ComponentBuilder.FormatRetention.FORMATTING);
+                text = text.replace("%next_clickable%", clickable);
             }
+            return text;
         }
-    }
 
+    }
 }
