@@ -20,10 +20,6 @@ public class AxolotlVariant extends SubCmd {
         super("axolotlvariant", cmd, true, true);
     }
 
-    public void reload() {
-        super.reload();
-    }
-
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;

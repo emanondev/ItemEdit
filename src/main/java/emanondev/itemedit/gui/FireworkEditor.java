@@ -4,6 +4,7 @@ import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.utility.ItemUtils;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -39,7 +40,8 @@ public class FireworkEditor implements Gui {
         this.meta = (FireworkMeta) ItemUtils.getMeta(firework);
         this.target = target;
         String title = getLanguageMessage(subPath + "title");
-        this.inventory = Bukkit.createInventory(this, (6) * 9, title);
+        this.inventory = Bukkit.createInventory(this, (6) * 9,
+                MiniMessage.miniMessage().deserialize(title));
         for (int i = 0; i < 9; i++) {
             if (i < meta.getEffects().size()) {
                 effects.add(new FireworkEffectData(meta.getEffects().get(i)));
@@ -158,10 +160,7 @@ public class FireworkEditor implements Gui {
         }
         List<Color> list = new ArrayList<>();
         for (DyeColor color : colors) {
-            Color col = color.getFireworkColor();
-            if (col != null) {
-                list.add(col);
-            }
+            list.add(color.getFireworkColor());
         }
         return list;
     }
@@ -235,7 +234,6 @@ public class FireworkEditor implements Gui {
             this.trail = trail;
         }
 
-        @SuppressWarnings("deprecation")
         public ItemStack getTypeItem() {
             if (!active) {
                 return null;
@@ -261,11 +259,7 @@ public class FireworkEditor implements Gui {
                     item = new ItemStack(Material.FEATHER);
                     break;
                 case CREEPER:
-                    try {
-                        item = new ItemStack(Material.CREEPER_HEAD);
-                    } catch (Throwable t) {
-                        item = new ItemStack(Material.valueOf("SKULL"), 1, (short) 0, (byte) 4);
-                    }
+                    item = new ItemStack(Material.CREEPER_HEAD);
                     break;
                 case STAR:
                     item = new ItemStack(Material.GOLD_NUGGET);

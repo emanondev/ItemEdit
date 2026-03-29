@@ -89,7 +89,6 @@ public final class InventoryUtils {
      *
      * @param player The player which inventory view should be updated
      */
-    @SuppressWarnings("UnstableApiUsage")
     public static void updateView(@NotNull Player player) {
         SchedulerUtils.run(ItemEdit.get(), player, player::updateInventory);
     }
@@ -103,7 +102,6 @@ public final class InventoryUtils {
      *
      * @param player The player which inventory view should be updated
      */
-    @SuppressWarnings("UnstableApiUsage")
     public static void updateViewDelayed(@NotNull Player player) {
         SchedulerUtils.runLater(ItemEdit.get(), player, 1L, player::updateInventory);
     }

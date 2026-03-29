@@ -59,7 +59,6 @@ public class YmlPlayerStorage implements PlayerStorage {
         return database.getKeys(getBasePath(player));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull Set<OfflinePlayer> getPlayers() {
         Set<String> playersData = database.getKeys(false);

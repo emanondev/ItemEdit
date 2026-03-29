@@ -20,11 +20,6 @@ public class Compass extends SubCmd {
         super("compass", cmd, true, true);
     }
 
-
-    public void reload() {
-        super.reload();
-    }
-
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;

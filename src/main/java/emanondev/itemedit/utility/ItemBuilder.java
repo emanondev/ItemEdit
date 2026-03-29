@@ -39,8 +39,8 @@ import java.util.stream.Stream;
 @SuppressWarnings("UnstableApiUsage")
 public class ItemBuilder {
 
-    private @NotNull ItemStack stack;
-    private @NotNull ItemMeta meta;
+    private final @NotNull ItemStack stack;
+    private final @NotNull ItemMeta meta;
 
     public ItemBuilder(@NotNull Material material) {
         this(new ItemStack(material));
