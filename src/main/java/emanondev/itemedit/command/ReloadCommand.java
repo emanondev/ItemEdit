@@ -6,7 +6,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -39,16 +38,16 @@ public class ReloadCommand implements TabExecutor {
     }
 
     public void sendPermissionLackMessage(@NotNull String permission, CommandSender sender) {
-        Util.sendMessage(sender, plugin.getLanguageConfig(sender).loadMessage("lack-permission", "&cYou lack of permission %permission%",
-                sender instanceof Player ? (Player) sender : null, true
-                , "%permission%", permission));
+        Util.sendMessage(sender, plugin.getTranslator().translate(sender, "lack-permission",
+                "%permission%", permission));
     }
 
     @Override
     public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender.hasPermission(permission)) {
             plugin.onReload();
-            Util.sendMessage(sender, plugin.getLanguageConfig(sender).loadMessage(plugin.getName().toLowerCase(Locale.ENGLISH) + "reload.success", "", true));
+            Util.sendMessage(sender, plugin.getTranslator().translate(sender,
+                    plugin.getName().toLowerCase(Locale.ENGLISH) + "reload.success"));
         } else
             sendPermissionLackMessage(permission, sender);
         return true;

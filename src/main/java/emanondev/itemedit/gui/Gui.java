@@ -95,14 +95,7 @@ public interface Gui extends InventoryHolder {
 
     default String getLanguageMessage(@NotNull String fullPath,
                                       String... holders) {
-        return getPlugin().getLanguageConfig(getTargetPlayer())
-                .loadMessage(fullPath, "", null, true, holders);
-    }
-
-    default List<String> getLanguageMultiMessage(@NotNull String fullPath,
-                                                 String... holders) {
-        return getPlugin().getLanguageConfig(getTargetPlayer())
-                .loadMultiMessage(fullPath, List.of(), null, true, holders);
+        return getPlugin().getTranslator().translateOrEmpty(getTargetPlayer(),fullPath,  holders);
     }
 
     @Contract("null,_,_->null;!null,_,_->!null")
@@ -125,8 +118,7 @@ public interface Gui extends InventoryHolder {
         if (meta == null) {
             return null;
         }
-        List<String> list = getPlugin().getLanguageConfig(getTargetPlayer()).loadMultiMessage(fullPath,
-                null, getTargetPlayer(), true, holders);
+        List<String> list = getPlugin().getTranslator().translateList(getTargetPlayer(),fullPath, holders);
         meta.setDisplayName(list == null || list.isEmpty() ? " " : list.get(0));
         if (list != null && !list.isEmpty()) {
             meta.setLore(list.subList(1, list.size()));

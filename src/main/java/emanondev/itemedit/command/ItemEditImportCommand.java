@@ -58,61 +58,59 @@ public class ItemEditImportCommand implements TabExecutor {
         switch (args[0].toLowerCase(Locale.ENGLISH)) {
             case "itemeditor" -> {
                 File[] files = new File("plugins" + File.separator + "ItemEditor" + File.separator + "items").listFiles();
-                if (files != null
-                        && files.length != 0) {
-                    List<String> importedIds = new ArrayList<>();
-                    int max = files.length;
-                    for (File file : files) {
-                        String name = file.getName().replace(".yml", "");
-                        try {
-                            ItemEdit.get().getServerStorage().validateID(name);
-                        } catch (Exception e) {
-                            Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
-                                    "itemeditimport.itemeditor.invalid-id", new ArrayList<>(), null, true, "%id%", name)));
-                            continue;
-                        }
-                        if (ItemEdit.get().getServerStorage().getItem(name) != null) {
-                            Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
-                                    "itemeditimport.itemeditor.already-used-id", new ArrayList<>(), null, true,
-                                    "%id%", name)));
-                            continue;
-                        }
-
-                        try {
-                            ItemStack item = fromBase64(YamlConfiguration.loadConfiguration(file).getString("Item"));
-                            ItemEdit.get().getServerStorage().setItem(name, item);
-                            importedIds.add(name);
-                        } catch (Exception e) {
-                            Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
-                                    "itemeditimport.itemeditor.unable-to-get-item", new ArrayList<>(), null, true,
-                                    "%id%", name)));
-                            e.printStackTrace();
-                            continue;
-                        }
-
+                if (files == null || files.length == 0) {
+                    Util.sendMessage(sender, plugin.getTranslator()
+                            .translate(sender, "itemeditimport.itemeditor.import-empty"));
+                    return true;
+                }
+                List<String> importedIds = new ArrayList<>();
+                int max = files.length;
+                for (File file : files) {
+                    String name = file.getName().replace(".yml", "");
+                    try {
+                        ItemEdit.get().getServerStorage().validateID(name);
+                    } catch (Exception e) {
+                        Util.sendMessage(sender, plugin.getTranslator()
+                                .translate(sender, "itemeditimport.itemeditor.invalid-id",
+                                        "%id%", name));
+                        continue;
                     }
-                    if (importedIds.isEmpty()) {
-                        Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
-                                "itemeditimport.itemeditor.import-unsuccess", new ArrayList<>(), null, true,
-                                "%ids%", String.join(", ", importedIds),
-                                "%max%", String.valueOf(max), "%done%", String.valueOf(importedIds.size()))));
-                    } else {
-                        Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
-                                "itemeditimport.itemeditor.import-success", new ArrayList<>(), null, true,
-                                "%ids%", String.join(", ", importedIds)
-                                , "%max%", String.valueOf(max),
-                                "%done%", String.valueOf(importedIds.size()))));
+                    if (ItemEdit.get().getServerStorage().getItem(name) != null) {
+                        Util.sendMessage(sender, plugin.getTranslator()
+                                .translate(sender, "itemeditimport.itemeditor.already-used-id",
+                                        "%id%", name));
+                        continue;
                     }
 
+                    try {
+                        ItemStack item = fromBase64(YamlConfiguration.loadConfiguration(file).getString("Item"));
+                        ItemEdit.get().getServerStorage().setItem(name, item);
+                        importedIds.add(name);
+                    } catch (Exception e) {
+                        Util.sendMessage(sender, plugin.getTranslator()
+                                .translate(sender, "itemeditimport.itemeditor.unable-to-get-item",
+                                        "%id%", name));
+                        e.printStackTrace();
+                        continue;
+                    }
+                }
+                if (importedIds.isEmpty()) {
+                    Util.sendMessage(sender, plugin.getTranslator()
+                            .translate(sender, "itemeditimport.itemeditor.import-unsuccess",
+                                    "%ids%", String.join(", ", importedIds),
+                                    "%max%", String.valueOf(max),
+                                    "%done%", String.valueOf(importedIds.size())));
                 } else {
-                    Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage(
-                            "itemeditimport.itemeditor.import-empty", new ArrayList<>())));
+                    Util.sendMessage(sender, plugin.getTranslator()
+                            .translate(sender, "itemeditimport.itemeditor.import-success",
+                                    "%ids%", String.join(", ", importedIds)
+                                    , "%max%", String.valueOf(max),
+                                    "%done%", String.valueOf(importedIds.size())));
                 }
                 return true;
             }
         }
-        Util.sendMessage(sender, String.join("\n", plugin.getLanguageConfig(sender).loadMultiMessage("itemeditimport.help",
-                new ArrayList<>())));
+        Util.sendMessage(sender, plugin.getTranslator().translate(sender, "itemeditimport.help"));
         return true;
     }
 

@@ -7,6 +7,7 @@ import emanondev.itemedit.utility.ReflectionUtils;
 import emanondev.itemedit.utility.Translator;
 import emanondev.itemedit.utility.VersionUtils;
 import lombok.Getter;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -31,17 +32,10 @@ public abstract class APlugin extends JavaPlugin {
     private final Map<String, YMLConfig> configs =
             VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
 
-    @Deprecated
-    private final Map<String, YMLConfig> languageConfigs =
-            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
     @Getter
     private final PluginAdditionalInfo pluginAdditionalInfo;
     @Getter
     private final Translator translator;
-    @Deprecated
-    private boolean useMultiLanguage;
-    @Deprecated
-    private String defaultLanguage;
     private CooldownAPI cooldownApi = null;
     @Getter
     private Metrics bstatsMetrics;
@@ -89,9 +83,8 @@ public abstract class APlugin extends JavaPlugin {
      * @param log The message to log.
      */
     public void log(@NotNull String log) {
-        Bukkit.getConsoleSender().sendMessage(UtilsString.fix(ChatColor.DARK_BLUE + "["
-                        + ChatColor.WHITE + this.getName() + ChatColor.DARK_BLUE + "] " + ChatColor.WHITE + log,
-                null, true));
+        Bukkit.getConsoleSender().sendMessage(MiniMessage.miniMessage().deserialize(
+                "<dark_blue>[<white>" + this.getName() + "<dark_blue>] <white>" + log));
     }
 
     /**
@@ -104,7 +97,7 @@ public abstract class APlugin extends JavaPlugin {
     public void log(@NotNull ChatColor color,
                     @NotNull String prefix,
                     @NotNull String log) {
-        log(color + prefix + " " + ChatColor.WHITE + log);
+        log("<" + color.name().toLowerCase() + ">" + prefix + " <white>"  + log);
     }
 
     /**
@@ -143,36 +136,6 @@ public abstract class APlugin extends JavaPlugin {
             return;
         }
         registerCommand(command, executor, aliases);
-    }
-
-    /**
-     * Retrieves the language configuration for the specified sender.
-     * Fallbacks to the default language configuration if necessary.
-     *
-     * @param sender The command sender.
-     * @return The language configuration for the sender.
-     */
-    @Deprecated
-    @NotNull
-    public YMLConfig getLanguageConfig(@Nullable CommandSender sender) {
-        String locale = getLocale(sender);
-
-        if (this.languageConfigs.containsKey(locale)) {
-            return languageConfigs.get(locale);
-        }
-
-        String fileName = "languages" + File.separator + locale + ".yml";
-
-        if (locale.equals(this.defaultLanguage) || new File(getDataFolder(), fileName).exists()
-                || this.getResource("languages/" + locale + ".yml") != null) {
-            YMLConfig conf = new YMLConfig(this, fileName);
-            languageConfigs.put(locale, conf);
-            return conf;
-        }
-
-        YMLConfig conf = getLanguageConfig(null);
-        languageConfigs.put(locale, conf);
-        return conf;
     }
 
     @Override
@@ -263,8 +226,6 @@ public abstract class APlugin extends JavaPlugin {
      */
     public final void onReload() {
         long now = System.currentTimeMillis();
-        this.useMultiLanguage = getConfig().getBoolean("language.use_multilanguage", true);
-        this.defaultLanguage = getConfig().getString("language.default_language", "en");
         reloadConfigs();
         this.translator.reload();
         reload();
@@ -332,8 +293,7 @@ public abstract class APlugin extends JavaPlugin {
             }
         }
 
-        languageConfigs.clear();
-        getLanguageConfig(null);
+        translator.translate(Bukkit.getConsoleSender(),"player-only");
     }
 
     /**
@@ -360,25 +320,6 @@ public abstract class APlugin extends JavaPlugin {
         }
     }
 
-    @Deprecated
-    @NotNull
-    private String getLocale(@Nullable CommandSender sender) {
-        String locale;
-        if (!(sender instanceof Player player)) {
-            locale = this.defaultLanguage;
-        } else if (VersionUtils.isAfter(1, 12) && this.useMultiLanguage) {
-            //apparently zh_tw and zh_cn are quite different, zh_cn and zh_hk will both fall under zh.yml
-
-            String rawLocale = player.locale().toString();
-            rawLocale = rawLocale.toLowerCase(Locale.ENGLISH);
-            locale = rawLocale.equals("zh_tw") ?
-                    rawLocale : rawLocale.split("_")[0];
-        } else {
-            locale = this.defaultLanguage;
-        }
-        return locale;
-    }
-
     private void initMetrics() {
         Integer pluginId = getPluginAdditionalInfo().getBstatsPluginId();
         if (pluginId == null) {
@@ -400,7 +341,7 @@ public abstract class APlugin extends JavaPlugin {
                         if (!isAdmin.test(player)) {
                             continue;
                         }
-                        String locale = player.getLocale().toLowerCase(Locale.ENGLISH);
+                        String locale = player.locale().toString().toLowerCase(Locale.ENGLISH);
                         String pre = locale.split("_")[0];
                         if (!mainMap.containsKey(pre)) {
                             mainMap.put(pre, new HashMap<>());
@@ -416,7 +357,7 @@ public abstract class APlugin extends JavaPlugin {
                         if (!isUser.test(player)) {
                             continue;
                         }
-                        String locale = player.getLocale().toLowerCase(Locale.ENGLISH);
+                        String locale = player.locale().toString().toLowerCase(Locale.ENGLISH);
                         String pre = locale.split("_")[0];
                         if (!mainMap.containsKey(pre)) {
                             mainMap.put(pre, new HashMap<>());
@@ -449,8 +390,6 @@ public abstract class APlugin extends JavaPlugin {
 
     @Deprecated
     private void initLanguages() {
-        this.useMultiLanguage = getConfig().getBoolean("language.use_multilanguage", true);
-        this.defaultLanguage = getConfig().getString("language.default", "en");
         if (getConfig().getBoolean("language.regen_files", true)) {
             YMLConfig version = getConfig("version.yml");
             if (!getDescription().getVersion().equals(version.loadMessage("previous_version", "1"))) {
@@ -469,7 +408,7 @@ public abstract class APlugin extends JavaPlugin {
                 }
             }
         }
-        getLanguageConfig(null);
+        translator.translate(null,"player-only");
     }
 
     /**

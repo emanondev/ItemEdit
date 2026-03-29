@@ -50,6 +50,13 @@ public final class Util {
         sendMessage(sender, MiniMessage.miniMessage().deserialize(message));
     }
 
+    public static void sendMessage(@NotNull CommandSender sender, List<String> message) {
+        if (message == null || message.isEmpty()) {
+            return;
+        }
+        sendMessage(sender, String.join("\n", message));
+    }
+
     /**
      * takes an already formatted message
      *

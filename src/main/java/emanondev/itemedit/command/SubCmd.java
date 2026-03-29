@@ -9,9 +9,6 @@ import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -70,15 +67,6 @@ public abstract class SubCmd {
                 help + (params == null ? "" : params),
                 "/" + alias + " " + this.name + " "
         ), getDescription(sender));
-    }
-
-    public @NotNull ComponentBuilder getHelp(@NotNull ComponentBuilder base, @NotNull CommandSender sender, @NotNull String alias) {
-        String help = "<dark_green>/" + alias + " <green>" + this.name + " ";
-        String params = translateOrEmpty("params", sender);
-        base.append(help + (params == null ? "" : params))
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, ChatColor.stripColor(help)))
-                .event(Util.craftHoverEvent(getDescription(sender)));
-        return base;
     }
 
     public void onFail(@NotNull CommandSender target, @NotNull String alias) {
@@ -144,11 +132,11 @@ public abstract class SubCmd {
                 hover.append(" ");
             }
         }
-        Util.sendMessage(sender, new ComponentBuilder(msg).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
-                        "/" + ItemEditCommand.get().getName() + " "
-                                + ItemEdit.get().getConfig("commands.yml")
-                                .getString("itemedit.listaliases.name") + " " + set.getId()))
-                .event(Util.craftHoverEvent(hover.toString())).create());//TODO fix
+        String command = "/" + ItemEditCommand.get().getName() + " "
+                + ItemEdit.get().getConfig("commands.yml")
+                .getString("itemedit.listaliases.name") + " " + set.getId();
+        sender.sendMessage(Util.asHover(Util.asSuggestCommand(
+                msg, command), hover.toString()));
     }
 
     @Deprecated
@@ -157,12 +145,11 @@ public abstract class SubCmd {
         if (msg == null || msg.isEmpty()) {
             return;
         }
-        YMLConfig language = ItemEdit.get().getLanguageConfig(sender);
-        StringBuilder hover = new StringBuilder(language
-                .getMessage("wrongalias.error-pre-hover", "")).append("\n");
+        Translator translator = getPlugin().getTranslator();
+        StringBuilder hover = new StringBuilder(translator.translateOrEmpty(sender,"wrongalias.error-pre-hover")).append("\n");
 
-        String color1 = language.getMessage("wrongalias.first_color", "");
-        String color2 = language.getMessage("wrongalias.second_color", "");
+        String color1 = translator.translateOrEmpty(sender,"wrongalias.first_color");
+        String color2 = translator.translateOrEmpty(sender,"wrongalias.second_color");
         boolean color = true;
         int counter = 0;
         for (T value : set.getValues()) {
@@ -177,11 +164,12 @@ public abstract class SubCmd {
                 hover.append(" ");
             }
         }
-        Util.sendMessage(sender, new ComponentBuilder(msg).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
-                        "/" + ItemEditCommand.get().getName() + " "
-                                + ItemEdit.get().getConfig("commands.yml")
-                                .getString("itemedit.listaliases.name") + " " + set.getId()))
-                .event(Util.craftHoverEvent(hover.toString())).create());//TODO fix
+        String command = "/" + ItemEditCommand.get().getName() + " "
+                + ItemEdit.get().getConfig("commands.yml")
+                .getString("itemedit.listaliases.name") + " " + set.getId();
+
+        sender.sendMessage(Util.asHover(Util.asSuggestCommand(
+                msg, command), hover.toString()));
     }
 
     protected String translate(String path, CommandSender sender, String... holders) {
