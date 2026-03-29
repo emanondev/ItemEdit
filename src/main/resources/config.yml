@@ -49,7 +49,7 @@ storage:
     uri: "mongodb://127.0.0.1:27017"
     database: "itemedit"
     collection_prefix: "itemedit-"
-  # Player should be identified by uuid?
+  # Uuid should identify Player?
   # If set to false players will be identified by name
   # Disclaimer: players may change their name, use uuid unless you know what you do
   store-by-uuid: true

@@ -49,7 +49,7 @@ public class Placeholders extends PlaceholderExpansion {
      * The placeholder identifier should go here. <br>
      * This is what tells PlaceholderAPI to call our onRequest method to obtain a
      * value if a placeholder starts with our identifier. <br>
-     * This must be unique and can not contain % or _
+     * This must be unique and cannot contain % or _
      *
      * @return The identifier in {@code %<identifier>_<value>%} as String.
      */

@@ -155,11 +155,11 @@ public abstract class AbstractCommand implements TabExecutor {
                 System.out.println("C");
                 getPlugin().getLogger().info(
                         String.join("\n",
-                                Arrays.stream(t.getStackTrace()).map(s -> s.toString()).toList()));
+                                Arrays.stream(t.getStackTrace()).map(StackTraceElement::toString).toList()));
                 t.printStackTrace();
                 System.out.println(
                         String.join("\n",
-                                Arrays.stream(t.getStackTrace()).map(s -> s.toString()).toList()));
+                                Arrays.stream(t.getStackTrace()).map(StackTraceElement::toString).toList()));
             }
         }
         return true;

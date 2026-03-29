@@ -284,8 +284,7 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
 
         if (!(target instanceof AbstractPlayer)) {
             // Target is not a BukkitPlayer but a BukkitEntity when using @trigger
-            if (target instanceof BukkitEntity) {
-                BukkitEntity entity = (BukkitEntity) target;
+            if (target instanceof BukkitEntity entity) {
                 if (entity.isPlayer()) {
                     absPlayer = new BukkitPlayer(entity.getEntityAsPlayer());
                 } else {

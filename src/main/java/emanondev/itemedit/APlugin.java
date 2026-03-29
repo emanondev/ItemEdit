@@ -278,7 +278,7 @@ public abstract class APlugin extends JavaPlugin {
 
     /**
      * You can update configuration by overriding this method.
-     * configuration version is saved as int on {@code config.yml} at path {@code config-version},
+     * Configuration version is saved as int on {@code config.yml} at path {@code config-version},
      * if not specified it's {@code 1}.
      *
      * @param oldConfigVersion old configuration version you update from

@@ -180,8 +180,7 @@ public final class ItemUtils {
             return meta;
         }
         try {
-            if ((meta instanceof LeatherArmorMeta)) {
-                LeatherArmorMeta leatherArmorMeta = ((LeatherArmorMeta) meta);
+            if ((meta instanceof LeatherArmorMeta leatherArmorMeta)) {
                 leatherArmorMeta.setColor(color);
                 return meta;
             }
@@ -191,13 +190,11 @@ public final class ItemUtils {
     }
 
     public static Color getColor(@NotNull ItemMeta meta) {
-        if ((meta instanceof PotionMeta)) {
-            PotionMeta potionMeta = ((PotionMeta) meta);
+        if ((meta instanceof PotionMeta potionMeta)) {
             return potionMeta.getColor() == null ? toColor(65, 85, 255) : potionMeta.getColor();
         }
         try {
-            if ((meta instanceof LeatherArmorMeta)) {
-                LeatherArmorMeta leatherArmorMeta = ((LeatherArmorMeta) meta);
+            if ((meta instanceof LeatherArmorMeta leatherArmorMeta)) {
                 leatherArmorMeta.getColor();
                 return leatherArmorMeta.getColor();
             }
