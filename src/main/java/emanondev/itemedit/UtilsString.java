@@ -147,22 +147,14 @@ public final class UtilsString {
             text = PlaceholderAPI.setPlaceholders(player, text);
         }
 
-        //minimessage
-        if (Hooks.hasMiniMessage()) {
-            text = Hooks.getMiniMessageUtil().fromMiniToText(text);
-        }
-
-        // color
-        if (color) {
-            text = ChatColor.translateAlternateColorCodes('&', text);
-        }
+        //TODO legacy colors to MM colors
 
         return text;
     }
 
     /**
      * @param text text to revert
-     * @return a string with original colors and formats but with &amp; instead of §
+     * @return a string with original colors and formats but with <green>mp; instead of §
      */
     @Contract("!null -> !null")
     public static @Nullable String revertColors(@Nullable String text) {

@@ -165,9 +165,9 @@ public class ColorGui implements Gui {
         Color current = ItemUtils.getColor(colorableMeta);
 
         // RGB channel adjustments
-        setupChannel(current, 0, 9, 255, 0, 0, "&c█ %amount%", 'R');
-        setupChannel(current, 6, 15, 0, 0, 255, "&9█ %amount%", 'B');
-        setupChannel(current, 3, 12, 0, 255, 0, "&a█ %amount%", 'G');
+        setupChannel(current, 0, 9, 255, 0, 0, "<red>█ %amount%", 'R');
+        setupChannel(current, 6, 15, 0, 0, 255, "<blue>█ %amount%", 'B');
+        setupChannel(current, 3, 12, 0, 255, 0, "<green>█ %amount%", 'G');
 
         // All channels
         setupAllChannels(current);
@@ -193,10 +193,10 @@ public class ColorGui implements Gui {
     }
 
     private void setupAllChannels(Color current) {
-        inventory.setItem(34, createItem(5, current, toColor(255, 255, 255), 5, 5, 5, "&f█ %amount%"));
-        inventory.setItem(35, createItem(25, current, toColor(255, 255, 255), 25, 25, 25, "&f█ %amount%"));
-        inventory.setItem(43, createItem(-5, current, toColor(0, 0, 0), -5, -5, -5, "&f█ %amount%"));
-        inventory.setItem(44, createItem(-25, current, toColor(0, 0, 0), -25, -25, -25, "&f█ %amount%"));
+        inventory.setItem(34, createItem(5, current, toColor(255, 255, 255), 5, 5, 5, "<white>█ %amount%"));
+        inventory.setItem(35, createItem(25, current, toColor(255, 255, 255), 25, 25, 25, "<white>█ %amount%"));
+        inventory.setItem(43, createItem(-5, current, toColor(0, 0, 0), -5, -5, -5, "<white>█ %amount%"));
+        inventory.setItem(44, createItem(-25, current, toColor(0, 0, 0), -25, -25, -25, "<white>█ %amount%"));
     }
 
     private void setupPresetColors(Color current) {
@@ -226,11 +226,11 @@ public class ColorGui implements Gui {
         String hex = String.format("%02X%02X%02X", red, green, blue);
         String currentHex = String.format("%02X%02X%02X", currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue());
         List<String> description = Arrays.asList(
-                "&x&" + String.join("&", currentHex.split("")) + "█ &f-> &x&" + String.join("&", hex.split("")) + "█",
+                "<#" +  currentHex + ">█ <white>-> <#" +  hex + ">█",
                 "",
                 "",
-                "&f -> (&c█ %red%&f, &a█ %green%&f, &9█ %blue%&f)",
-                "&f -> HEX: #%hex%"
+                "<white> -> (<red>█ %red%<white>, <green>█ %green%<white>, <blue>█ %blue%<white>)",
+                "<white> -> HEX: #%hex%"
         );
 
         return UtilsString.setDescription(stack, description, target, true,
@@ -260,11 +260,11 @@ public class ColorGui implements Gui {
         String nextHex = String.format("%02X%02X%02X", nextRed, nextGreen, nextBlue);
         String currentHex = String.format("%02X%02X%02X", currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue());
         List<String> description = Arrays.asList(
-                "&x&" + String.join("&", currentHex.split("")) + "█ &f-> &x&" + String.join("&", nextHex.split("")) + "█",
+                "<#" +  currentHex + ">█ <white>-> <#" + nextHex+ ">█",
                 title,
                 "",
-                "&f(&c█ %red%&f, &a█ %green%&f, &9█ %blue%&f)",
-                "&fHEX: #%hex%"
+                "<white>(<red>█ %red%<white>, <green>█ %green%<white>, <blue>█ %blue%<white>)",
+                "<white>HEX: #%hex%"
         );
 
         return UtilsString.setDescription(stack, description, target, true,

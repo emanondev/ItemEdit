@@ -68,17 +68,17 @@ class ServerItemDrop implements IItemDrop, ILocationDrop {
     public ServerItemDrop(MythicLineConfig config) {
         String value = config.getString(new String[]{"name", "id", "serveritem", "type"}, null);
         if (value == null) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fMissing item id on mechanic, use {&eid&f='<your_id>' ....}");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Missing item id on mechanic, use {<yellow>id<white>='<your_id>' ....}");
             throw new IllegalArgumentException();
         }
         if (ItemEdit.get().getServerStorage().getItem(value) == null) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + value + "' is not a registered serveritem");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid id, '" + value + "' is not a registered serveritem");
             throw new IllegalArgumentException();
         }
 
         int amount = config.getInteger(new String[]{"a", "amount"}, 1);
         if (amount < 1) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid amount, should be from [1 to +inf[");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid amount, should be from [1 to +inf[");
             throw new IllegalArgumentException();
         }
         this.id = value;
@@ -132,7 +132,7 @@ class ServerItemDrop implements IItemDrop, ILocationDrop {
     public ItemStack getItem(@Nullable Player p, double amountMultiplier) {
         ItemStack item = ItemEdit.get().getServerStorage().getItem(id, p);
         if (item == null) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + id + "' is not a registered serveritem");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid id, '" + id + "' is not a registered serveritem");
             return null;
         }
         int a = (int) (this.amount * amountMultiplier);
@@ -152,7 +152,7 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, IT
     public DropServerItemMechanic(MythicLineConfig mlc) {
         id = mlc.getString(new String[]{"id", "name", "type", "serveritem",}, null);
         if (id == null) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fMissing item id on mechanic, use {&eid&f='<your_id>' ....}");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Missing item id on mechanic, use {<yellow>id<white>='<your_id>' ....}");
             throw new IllegalArgumentException();
         }
         ItemStack value = null;
@@ -161,22 +161,22 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, IT
         } catch (Exception ignored) {
         }
         if (value == null) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + id + "' is not a registered serveritem");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid id, '" + id + "' is not a registered serveritem");
             throw new IllegalArgumentException();
         }
         this.amount = mlc.getInteger(new String[]{"amount", "a"}, 1);
         this.diff = mlc.getInteger(new String[]{"amountmax", "amount-max", "amax"}, this.amount) - this.amount;
         this.chance = mlc.getDouble(new String[]{"chance", "c"}, 1D);//probabilità 0 = nulla 1 = 100%
         if (chance <= 0) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid chance, should be from ]0 to 1]");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid chance, should be from ]0 to 1]");
             throw new IllegalArgumentException();
         }
         if (amount <= 0) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid amount, should be from [1 to +inf[");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid amount, should be from [1 to +inf[");
             throw new IllegalArgumentException();
         }
         if (diff < 0) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid max amount, should be from [amount to +inf[");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid max amount, should be from [amount to +inf[");
             throw new IllegalArgumentException();
         }
     }
@@ -206,7 +206,7 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, IT
         Location loc = BukkitAdapter.adapt(location);
         ItemStack item = ItemEdit.get().getServerStorage().getItem(id);
         if (item == null) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + id + "' is not a registered serveritem");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid id, '" + id + "' is not a registered serveritem");
             return;
         }
         item.setAmount((int) (amount + Math.random() * diff));
@@ -241,7 +241,7 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
     public GiveServerItemMechanic(MythicLineConfig mlc) {
         id = mlc.getString(new String[]{"id", "name", "type", "serveritem",}, null);
         if (id == null) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fMissing item id on mechanic, use {&eid&f='<your_id>' ....}");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Missing item id on mechanic, use {<yellow>id<white>='<your_id>' ....}");
             throw new IllegalArgumentException();
         }
         ItemStack value = null;
@@ -250,22 +250,22 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
         } catch (Exception ignored) {
         }
         if (value == null) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + id + "' is not a registered serveritem");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid id, '" + id + "' is not a registered serveritem");
             throw new IllegalArgumentException();
         }
         this.amount = mlc.getInteger(new String[]{"amount", "a"}, 1);
         this.diff = mlc.getInteger(new String[]{"amountmax", "amount-max", "amax"}, this.amount) - this.amount;
         this.chance = mlc.getDouble(new String[]{"chance", "c"}, 1D);//probabilità 0 = nulla 1 = 100%
         if (chance <= 0) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid chance, should be from ]0 to 1]");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid chance, should be from ]0 to 1]");
             throw new IllegalArgumentException();
         }
         if (amount <= 0) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid amount, should be from [1 to +inf[");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid amount, should be from [1 to +inf[");
             throw new IllegalArgumentException();
         }
         if (diff < 0) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid max amount, should be from [amount to +inf[");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid max amount, should be from [amount to +inf[");
             throw new IllegalArgumentException();
         }
     }
@@ -314,7 +314,7 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
         Player player = BukkitAdapter.adapt(target);
         ItemStack item = ItemEdit.get().getServerStorage().getItem(id);
         if (item == null) {
-            ItemEdit.get().log("&9[&fMythicMobs&9] &fInvalid id, '" + id + "' is not a registered serveritem");
+            ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid id, '" + id + "' is not a registered serveritem");
             return;
         }
 

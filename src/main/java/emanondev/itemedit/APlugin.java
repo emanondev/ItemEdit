@@ -132,7 +132,7 @@ public abstract class APlugin extends JavaPlugin {
                                 @Nullable List<String> aliases) {
         PluginCommand command = getCommand(commandName);
         if (command == null) {
-            log("&cUnable to register Command &e" + commandName);
+            log("<red>Unable to register Command <yellow>" + commandName);
             return;
         }
         registerCommand(command, executor, aliases);
@@ -192,12 +192,12 @@ public abstract class APlugin extends JavaPlugin {
 
             if (!ReflectionUtils.isClassPresent("org.spigotmc.SpigotConfig")) {
                 enableWithError("CraftBukkit is not supported!!! use Spigot or Paper");
-                log(ChatColor.GREEN, "#", "Enabled (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
+                log(ChatColor.GREEN, "#", "Enabled (took <yellow>" + (System.currentTimeMillis() - now) + "<white> ms)");
                 return;
             }
             if (!VersionUtils.isAfter(1, 8)) {
                 enableWithError("1.7.x is not supported!!! use 1.8+");
-                log(ChatColor.GREEN, "#", "Enabled (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
+                log(ChatColor.GREEN, "#", "Enabled (took <yellow>" + (System.currentTimeMillis() - now) + "<white> ms)");
                 return;
             }
             initLanguages();
@@ -210,10 +210,10 @@ public abstract class APlugin extends JavaPlugin {
 
             enable();
 
-            log(ChatColor.GREEN, "#", "Enabled (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
+            log(ChatColor.GREEN, "#", "Enabled (took <yellow>" + (System.currentTimeMillis() - now) + "<white> ms)");
 
         } catch (Throwable e) {
-            this.log(ChatColor.RED + "Error while loading " + this.getName() + ", disabling it");
+            Bukkit.getConsoleSender().sendMessage("Error while loading " + this.getName() + ", disabling it");
             e.printStackTrace();
             Bukkit.getServer().getPluginManager().disablePlugin(this);
         }
@@ -229,7 +229,7 @@ public abstract class APlugin extends JavaPlugin {
         reloadConfigs();
         this.translator.reload();
         reload();
-        log(ChatColor.GREEN, "#", "Reloaded (took &e" + (System.currentTimeMillis() - now) + "&f ms)");
+        log(ChatColor.GREEN, "#", "Reloaded (took <yellow>" + (System.currentTimeMillis() - now) + "<white> ms)");
     }
 
     @Override
@@ -292,7 +292,6 @@ public abstract class APlugin extends JavaPlugin {
                 configs.remove(key);
             }
         }
-
         translator.translate(Bukkit.getConsoleSender(), "player-only");
     }
 

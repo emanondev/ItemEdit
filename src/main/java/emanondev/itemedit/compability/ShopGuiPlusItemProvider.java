@@ -37,11 +37,11 @@ public class ShopGuiPlusItemProvider extends ItemProvider {
                 result.setAmount(section.getInt("quantity", 1));
                 return result;
             }
-            ItemEdit.get().log("Invalid ServerItem id on ShopGuiPlus config for &e" + id + " &fon path &e"
+            ItemEdit.get().log("Invalid ServerItem id on ShopGuiPlus config for <yellow>" + id + " <white>on path <yellow>"
                     + section.getCurrentPath() + ".serveritem");
             return null;
         } catch (Exception e) {
-            ItemEdit.get().log("Invalid ServerItem id on ShopGuiPlus config for &e" + id + " &fon path &e"
+            ItemEdit.get().log("Invalid ServerItem id on ShopGuiPlus config for <yellow>" + id + " <white>on path <yellow>"
                     + section.getCurrentPath() + ".serveritem");
         }
         return null;

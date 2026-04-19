@@ -132,8 +132,8 @@ public final class Util {
         for (String regex : ItemEdit.get().getConfig().getStringList("blocked.regex"))
             if (Pattern.compile(regex).matcher(message).find()) {
                 if (ItemEdit.get().getConfig().getBoolean("blocked.log.console", true))
-                    sendMessage(Bukkit.getConsoleSender(), "user: §e" + user.getName() + "§r attempt to write '" + text
-                            + "'§r (stripped by colors and lowcased) was blocked by regex: §e" + regex);
+                    sendMessage(Bukkit.getConsoleSender(), "user: <yellow>" + user.getName() + "<white> attempt to write '" + text
+                            + "'<reset> (stripped by colors and lowcased) was blocked by regex: <yellow>" + regex);
                 if (ItemEdit.get().getConfig().getBoolean("blocked.log.file", true))
                     logToFile("user: '" + user.getName() + "' attempt to write '" + text
                             + "' (stripped by colors and lowcased to '" + message + "') was blocked by regex: '" + regex
@@ -145,8 +145,8 @@ public final class Util {
             if (message.contains(bannedWord.toLowerCase(Locale.ENGLISH))) {
                 if (ItemEdit.get().getConfig().getBoolean("blocked.log.console", true))
                     sendMessage(Bukkit.getConsoleSender(),
-                            "user: §e" + user.getName() + "§r attempt to write '" + text
-                                    + "'§r (stripped by colors and lowcased) was blocked by word: §e"
+                            "user: <yellow>" + user.getName() + "<reset> attempt to write '" + text
+                                    + "'<reset> (stripped by colors and lowcased) was blocked by word: <yellow>"
                                     + bannedWord.toLowerCase(Locale.ENGLISH));
                 if (ItemEdit.get().getConfig().getBoolean("blocked.log.file", true))
                     logToFile("user: '" + user.getName() + "' attempt to write '" + text
@@ -160,10 +160,7 @@ public final class Util {
     }
 
     public static String formatText(CommandSender sender, String text, String basePermission) {
-        if (sender.hasPermission(basePermission + ".minimessage")) {
-            text = Hooks.getMiniMessageUtil().fromMiniToText(text);
-        }
-        text = ChatColor.translateAlternateColorCodes('&', text);
+        //TODO formats
         if (basePermission != null) {
             for (ChatColor style : ChatColor.values())
                 if (style.isFormat()) {

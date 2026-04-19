@@ -1,13 +1,11 @@
 package emanondev.itemedit.compability;
 
-import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Hooks {
-    private static final MiniMessageUtil miniMessage = initMiniMessage();
 
     public static boolean isVault() {
         return isEnabled("Vault");
@@ -59,26 +57,5 @@ public class Hooks {
 
     public static boolean isDungeonMMOEnabled() {
         return isEnabled("DungeonMMO");
-    }
-
-    public static boolean hasMiniMessage() {
-        return miniMessage != null;
-    }
-
-    public static MiniMessageUtil getMiniMessageUtil() {
-        return miniMessage;
-    }
-
-    private static MiniMessageUtil initMiniMessage() {
-        try {
-            if (VersionUtils.hasPaperAPI() && VersionUtils.isAfter(1, 16, 5)) {
-                MiniMessagePaper inst = MiniMessagePaper.getInstance();
-                if (!inst.fromMiniToText("<red>this is a test</red>").equals("<red>this is a test</red>")) {
-                    return inst;
-                }
-            }
-        } catch (Throwable ignored) {
-        }
-        return null;
     }
 }

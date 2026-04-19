@@ -87,7 +87,7 @@ public class ShowPlayerItemsGui implements PagedGui {
                 ItemStack display = item.clone();
                 ItemMeta meta = ItemUtils.getMeta(display);
                 meta.addItemFlags(ItemFlag.values());
-                meta.setDisplayName(UtilsString.fix("&9ID: &e" + list.get(slot), null, true));
+                meta.setDisplayName(UtilsString.fix("<blue>ID: <yellow>" + list.get(slot), null, true));
                 display.setItemMeta(meta);
                 this.inventory.setItem(i, display);
             }

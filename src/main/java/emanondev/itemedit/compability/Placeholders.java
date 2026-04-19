@@ -4,7 +4,6 @@ import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -26,13 +25,13 @@ public class Placeholders extends PlaceholderExpansion {
 
         //ItemEdit.get().log("Hooked into PlaceHolderAPI:");
         ItemEdit.get().log("placeholders:");
-        ItemEdit.get().log("  &e%itemedit_amount_&6<{itemid}>&e_&6[{slot}]&e_&6[{player}]&e%");
-        ItemEdit.get().log("    shows how many &6itemid player &fhas on &6slot");
+        ItemEdit.get().log("  <yellow>%itemedit_amount_<gold><{itemid}><yellow>_<gold>[{slot}]<yellow>_<gold>[{player}]<yellow>%");
+        ItemEdit.get().log("    shows how many <gold>itemid player <white>has on <gold>slot");
         ItemEdit.get().log("    <{itemid}> for item id on serveritem");
-        ItemEdit.get().log("    [{slot}] for the slot where the item should be counted, by default &ainventory");
-        ItemEdit.get().log("      Values: &einventory&f (include offhand), &eequip&f (include offhand), &einventoryandequip&f (include offhand), &ehand&f, &eoffhand&f, &ehead&f, &echest&f, &elegs&f, &efeet");
-        ItemEdit.get().log("    [{player}] for the player, by default &aself");
-        ItemEdit.get().log("    example: %itemedit_amount_{&6my_item_id&f}_{&6hand&f}%");
+        ItemEdit.get().log("    [{slot}] for the slot where the item should be counted, by default <green>inventory");
+        ItemEdit.get().log("      Values: <yellow>inventory<white> (include offhand), <yellow>equip<white> (include offhand), <yellow>inventoryandequip<white> (include offhand), <yellow>hand<white>, <yellow>offhand<white>, <yellow>head<white>, <yellow>chest<white>, <yellow>legs<white>, <yellow>feet");
+        ItemEdit.get().log("    [{player}] for the player, by default <green>self");
+        ItemEdit.get().log("    example: %itemedit_amount_{<gold>my_item_id<white>}_{<gold>hand<white>}%");
     }
 
     /**
@@ -111,8 +110,8 @@ public class Placeholders extends PlaceholderExpansion {
             }
 
         } catch (Exception e) {
-            ItemEdit.get().log("&c! &fWrong PlaceHolderValue %" + getIdentifier() + "_" + ChatColor.YELLOW + value
-                    + ChatColor.WHITE + "% " + e.getMessage());
+            ItemEdit.get().log("<red>! <white>Wrong PlaceHolderValue %" + getIdentifier() + "_<yellow>" + value
+                    + "<white>% " + e.getMessage());
             //e.printStackTrace();
         }
         return null;

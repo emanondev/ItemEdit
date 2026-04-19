@@ -38,7 +38,7 @@ public class UpdateChecker {
                 isUpdated = newVersion.equals(plugin.getDescription().getVersion());
             }
             if (isUpdated != null && !isUpdated) {
-                plugin.log("&bNEW UPDATE&f (&6" + plugin.getDescription().getVersion() + "&f -> &a" + newVersion + "&f) available at &b" + getResourceDownloadUrl());
+                plugin.log("<aqua>NEW UPDATE<white> (<gold>" + plugin.getDescription().getVersion() + "<white> -> <green>" + newVersion + "<white>) available at <aqua>" + getResourceDownloadUrl());
             }
         });
     }
@@ -52,15 +52,15 @@ public class UpdateChecker {
         try {
             return checkMethod.call();
         } catch (MalformedURLException e) {
-            plugin.log("&cInvalid URL while checking for updates on " + sourceName + ".");
+            plugin.log("<red>Invalid URL while checking for updates on " + sourceName + ".");
         } catch (FileNotFoundException e) {
-            plugin.log("&cUpdate file not found on " + sourceName + ".");
+            plugin.log("<red>Update file not found on " + sourceName + ".");
         } catch (UnknownHostException e) {
-            plugin.log("&cCannot reach " + sourceName + " server. Check your network.");
+            plugin.log("<red>Cannot reach " + sourceName + " server. Check your network.");
         } catch (IOException e) {
-            plugin.log("&cI/O error while checking " + sourceName + ": " + e.getMessage());
+            plugin.log("<red>I/O error while checking " + sourceName + ": " + e.getMessage());
         } catch (Exception e) {
-            plugin.log("&cUnexpected error on " + sourceName + ".");
+            plugin.log("<red>Unexpected error on " + sourceName + ".");
             e.printStackTrace();
         }
         return false;

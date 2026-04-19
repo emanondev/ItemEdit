@@ -287,7 +287,7 @@ public class FireworkEditor implements Gui {
                 colorNames.add(Aliases.COLOR.getName(color));
             }
             loadLanguageDescription(meta, subPath + "buttons.colors",
-                    "%colors%", String.join("&b, &e", colorNames));
+                    "%colors%", String.join("<aqua>, <yellow>", colorNames));
             item.setItemMeta(meta);
             item.setAmount(Math.max(Math.min(101, colors.size()), 1));
             return item;
@@ -306,7 +306,7 @@ public class FireworkEditor implements Gui {
             }
 
             loadLanguageDescription(meta, subPath + "buttons.fadecolors",
-                    "%colors%", String.join("&b, &e", colorNames));
+                    "%colors%", String.join("<aqua>, <yellow>", colorNames));
 
             item.setItemMeta(meta);
             item.setAmount(Math.max(Math.min(101, fadeColors.size()), 1));

@@ -254,12 +254,12 @@ public abstract class AbstractCommand implements TabExecutor {
             helpSubCommand.help(sender, alias, 1);
             return;
         }
-        StringBuilder msg = new StringBuilder(this.getLanguageString("help-header", sender));
+        StringBuilder msg = new StringBuilder(this.getLanguageString("help-header", sender)).append("<reset>");
         boolean any = false;
         for (SubCmd cmd : subCmds) {
             if (sender.hasPermission(cmd.getPermission())) {
                 any = true;
-                msg.append("\n").append(cmd.getHelp(sender, alias));
+                msg.append("\n").append(cmd.getHelp(sender, alias)).append("<reset>");
             }
         }
         if (any) {

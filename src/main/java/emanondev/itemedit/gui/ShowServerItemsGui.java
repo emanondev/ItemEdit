@@ -89,8 +89,8 @@ public class ShowServerItemsGui implements PagedGui {
                 ItemStack display = item.clone();
                 ItemMeta meta = ItemUtils.getMeta(display);
                 meta.addItemFlags(ItemFlag.values());
-                meta.setLore(Collections.singletonList(UtilsString.fix("&9Nick: &e" + storage.getNick(list.get(slot)), null, true)));
-                meta.setDisplayName(UtilsString.fix("&9ID: &e" + list.get(slot), null, true));
+                meta.setLore(Collections.singletonList(UtilsString.fix("<blue>Nick: <yellow>" + storage.getNick(list.get(slot)), null, true)));
+                meta.setDisplayName(UtilsString.fix("<blue>ID: <yellow>" + list.get(slot), null, true));
                 display.setItemMeta(meta);
                 this.inventory.setItem(i, display);
             }

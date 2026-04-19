@@ -78,7 +78,7 @@ public class SellMax extends SubCmd {
                 // error
                 if (!silent) {
                     Util.sendMessage(target,
-                            "&cAn error occurred, try again, if this message shows again try to contact the server administrators");
+                            "<red>An error occurred, try again, if this message shows again try to contact the server administrators");
                 }
                 Util.logToFile("[transaction failed] no errors, is your Economy provider stable?");
                 return;
@@ -96,7 +96,7 @@ public class SellMax extends SubCmd {
                     // error
                     if (!silent) {
                         Util.sendMessage(target,
-                                "&cAn error occurred, try again, if this message shows again try to contact the server administrators");
+                                "<red>An error occurred, try again, if this message shows again try to contact the server administrators");
                     }
                     Util.logToFile("[transaction failed] player '" + target.getName() + "' (" + target.getUniqueId()
                             + ") lost " + economy.format(price) + " money, is your Economy provider stable?");

@@ -49,7 +49,7 @@ public class ColorListSelectorGui implements Gui {
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             loadLanguageDescription(meta, subPath + "buttons.color", "%colors%",
-                    String.join("&b, &e", list), "%color%", Aliases.COLOR.getName(color));
+                    String.join("<aqua>, <yellow>", list), "%color%", Aliases.COLOR.getName(color));
             item.setItemMeta(meta);
             item.setAmount(Math.max(Math.min(101, colors.size()), 1));
             inventory.setItem(i, item);

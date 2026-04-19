@@ -74,7 +74,7 @@ public class Buy extends SubCmd {
                 InventoryUtils.giveAmount(target, item, amount, InventoryUtils.ExcessMode.DROP_EXCESS);
                 if (!silent) {
                     Util.sendMessage(target,
-                            "&cAn error occurred, try again, if this message shows again try to contact the server administrators");
+                            "<red>An error occurred, try again, if this message shows again try to contact the server administrators");
                     Util.logToFile("[transaction failed] no errors, is your Economy provider stable?");
                 }
                 return;
