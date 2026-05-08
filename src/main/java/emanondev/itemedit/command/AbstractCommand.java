@@ -316,10 +316,10 @@ public abstract class AbstractCommand implements TabExecutor {
             int maxPage = getMaxPageFor(cmds.size());
             page = Math.max(1, Math.min(maxPage, page));
 
-            StringBuilder body = new StringBuilder(this.translateOrEmpty("header", sender)).append("\n");
+            StringBuilder body = new StringBuilder(this.translateOrEmpty("header", sender)).append("<reset>\n");
 
             for (SubCmd cmd : cmds.subList(commandPerPage * (page - 1), Math.min(cmds.size(), commandPerPage * page))) {
-                body.append(cmd.getHelp(sender, alias)).append("\n");
+                body.append(cmd.getHelp(sender, alias)).append("<reset>\n");
             }
             body.append(this.translateOrEmpty("footer", sender));
 
@@ -373,7 +373,7 @@ public abstract class AbstractCommand implements TabExecutor {
                     clickable = translator.translateOrEmpty(sender, "generic.help.prev_void",
                             "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage));
                 }
-                text = text.replace("%next_clickable%", clickable);
+                text = text.replace("%prev_clickable%", "<reset>"+clickable+"<reset>");
             }
             if (text.contains("%next_clickable%")) {
                 String clickable;
@@ -391,7 +391,7 @@ public abstract class AbstractCommand implements TabExecutor {
                     clickable = translator.translateOrEmpty(sender, "generic.help.next_void",
                             "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage));
                 }
-                text = text.replace("%next_clickable%", clickable);
+                text = text.replace("%next_clickable%", "<reset>"+clickable+"<reset>");
             }
             return text;
         }

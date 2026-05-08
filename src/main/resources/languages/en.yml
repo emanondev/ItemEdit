@@ -10,14 +10,14 @@ blocked-by-lore-length-limit: '<dark_red>[<red>ItemEdit<dark_red>] <red>You can'
 blocked-by-rename-length-limit: '<dark_red>[<red>ItemEdit<dark_red>] <red>You can''t set names longer than %limit% chars'
 generic:
   help:
-    next_text: " <light_purple><bold>><strikethrough>> ></strikethrough></bold></light_purple> "
-    prev_text: " <light_purple><bold><strikethrough>< <<light_purple><bold>< "
-    next_void: " <dark_gray><bold>><strikethrough>> ></strikethrough></bold></dark_gray> "
-    prev_void: " <dark_gray><bold><strikethrough>< <<dark_gray><bold>< "
-    next_hover: "<gold><bold>Go to page %target%"
-    prev_hover: "<gold><bold>Go to page %target%"
+    next_text: " <light_purple><b>><st>> ></st> "
+    prev_text: " <light_purple><b><st>< <</st>< "
+    next_void: " <dark_gray><b>><st>> ></st> "
+    prev_void: " <dark_gray><b><st>< <</st>< "
+    next_hover: "<gold><b>Go to page %target%"
+    prev_hover: "<gold><b>Go to page %target%"
     description:
-      - '<gold><bold>Shows help'
+      - '<gold><b>Shows help</b>'
       - ''
       - '<yellow>[page] <aqua>help page'
       - '<yellow>[subcommand] <aqua>help for subcommand'
@@ -64,17 +64,17 @@ generic:
 itemedit:
   amount:
     description:
-      - '<gold><bold>Set amount'
+      - '<gold><b>Set amount</b>'
       - ''
       - '<yellow><amount> <aqua>amount to set (up to 127)'
-      - '<aqua><bold>Tip: <aqua>Negative amounts are subtracted'
+      - '<aqua><b>Tip</b>: <aqua>Negative amounts are subtracted'
       - '<aqua> from item current amount'
     params: '<amount>'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Item amount set to <yellow>%amount%'
     feedback-decrease: '<blue>[<white>ItemEdit<blue>] <green>Item amount decreased by <yellow>%amount%'
   attribute:
     description:
-      - '<gold><bold>Edit attribute modifiers'
+      - '<gold><b>Edit attribute modifiers</b>'
       - ''
       - '<yellow>Add <attribute> <amount> [operation] [slot] <aqua>- add new modifiers'
       - '<yellow>Remove <attribute/slot> <aqua>- removes some modifiers'
@@ -82,7 +82,7 @@ itemedit:
     add:
       params: '<attribute> <amount> [operation] [slot]'
       description:
-        - '<gold><bold>Add attribute modifier'
+        - '<gold><b>Add attribute modifier</b>'
         - ''
         - '<yellow><attribute> <aqua>attribute type'
         - '<yellow><amount> <aqua>amount to set'
@@ -93,7 +93,7 @@ itemedit:
     remove:
       params: '<attribute/slot>'
       description:
-        - '<gold><bold>Remove modifiers'
+        - '<gold><b>Remove modifiers</b>'
         - ''
         - '<yellow><attribute/slot> <aqua>type to remove, any modifiers with'
         - '<aqua>                 selected value are removed'
@@ -101,37 +101,37 @@ itemedit:
       feedback-equipment: '<blue>[<white>ItemEdit<blue>] <green>Removed modifiers of equipment slot'
   axolotlvariant:
     description:
-      - '<gold><bold>Edit Axolotl Variant on Axolotl bucket'
+      - '<gold><b>Edit Axolotl Variant on Axolotl bucket</b>'
       - ''
       - '<yellow><type> <aqua>the type of axolotl'
     params: '<type>'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Changed Axolotl variant to <yellow>%variant%'
   banner:
     description:
-      - '<gold><bold>Edit banner'
+      - '<gold><b>Edit banner</b>'
     set:
       params: '<type> <color> <line>'
       description:
-        - '<gold><bold>Replace the pattern on selected line'
+        - '<gold><b>Replace the pattern on selected line</b>'
       feedback: '<blue>[<white>ItemEdit<blue>] <green>Pattern set'
     add:
       params: '<type> <color>'
       description:
-        - '<gold><bold>Add a pattern'
+        - '<gold><b>Add a pattern</b>'
       feedback: '<blue>[<white>ItemEdit<blue>] <green>Pattern added'
     remove:
       params: '<line>'
       description:
-        - '<gold><bold>Remove pattern on selected line'
+        - '<gold><b>Remove pattern on selected line</b>'
       feedback: '<blue>[<white>ItemEdit<blue>] <green>Pattern removed'
     color:
       params: '<line> <color>'
       description:
-        - '<gold><bold>Change pattern color on selected line'
+        - '<gold><b>Change pattern color on selected line</b>'
       feedback: '<blue>[<white>ItemEdit<blue>] <green>Pattern recolored'
   bookauthor:
     description:
-      - '<gold><bold>Set author'
+      - '<gold><b>Set author</b>'
       - ''
       - '<aqua>Author name may contains spaces and be colored too'
       - '<aqua>Works only on Written books'
@@ -140,7 +140,7 @@ itemedit:
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset book author'
   bookenchant:
     description:
-      - '<gold><bold>Set enchants on the book'
+      - '<gold><b>Set enchants on the book</b>'
       - '<aqua>The difference between enchant and bookenchant is that'
       - '<aqua>a book with enchant fire aspect sets hit targets on fire'
       - '<aqua>while a book with bookenchant doesn''t'
@@ -148,13 +148,13 @@ itemedit:
       - '<yellow><enchant> <aqua>enchant type'
       - '<yellow>[level] <aqua>level of the enchant, by default <yellow>1'
       - ''
-      - '<aqua><bold>Tip: <aqua>Set <yellow>[level] <aqua>to <yellow>0 <aqua>to remove an enchant'
+      - '<aqua><b>Tip</b>: <aqua>Set <yellow>[level] <aqua>to <yellow>0 <aqua>to remove an enchant'
     params: '<enchant> [level]'
     feedback-removed: '<blue>[<white>ItemEdit<blue>] <green>Removed book enchantment <yellow>%enchant%'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Applied book enchantment <yellow>%enchant% <green>lv <yellow>%lv%'
   booktype:
     description:
-      - '<gold><bold>Set book type'
+      - '<gold><b>Set book type</b>'
       - ''
       - '<aqua>Works only on Written books'
     params: '<booktype>'
@@ -162,7 +162,7 @@ itemedit:
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset book generation'
   color:
     description:
-      - '<gold><bold>Set color'
+      - '<gold><b>Set color</b>'
       - ''
       - '<aqua>Works on leather armor and firework stars, on servers'
       - '<aqua> 1.11+ works on any Potion and Tipped arrows too!'
@@ -173,7 +173,7 @@ itemedit:
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Color updated'
   compass:
     description:
-      - '<gold><bold>Set compass target location'
+      - '<gold><b>Set compass target location</b>'
       - ''
       - '<yellow>Set <aqua>- set your location as compass target'
       - '<yellow>Clear <aqua>- clear compass target'
@@ -184,7 +184,7 @@ itemedit:
       feedback: '<blue>[<white>ItemEdit<blue>] <green>Compass target cleared'
   custommodeldata:
     description:
-      - '<gold><bold>Edit custom model data'
+      - '<gold><b>Edit custom model data</b>'
       - ''
       - '<aqua>Used for texture packs'
       - '<yellow>[value] <aqua>positive int of target data model'
@@ -195,33 +195,33 @@ itemedit:
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Custom model data reset'
   damage:
     description:
-      - '<gold><bold>Edit durability'
+      - '<gold><b>Edit durability</b>'
       - ''
       - '<yellow><durability> <aqua>damage to apply'
-      - '<aqua><bold>N.B. <yellow>0 <aqua>means no damage, full durability'
+      - '<aqua><b>N.B.</b> <yellow>0 <aqua>means no damage, full durability'
     params: '<durability>'
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Durability restored'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Durability updated'
   equipment:
     description:
-      - '<gold><bold>Sets food property of the item'
+      - '<gold><b>Sets food property of the item</b>'
       - ''
       - '<aqua>Tip: Use /itemequip or /iee'
       - '<aqua>N.B. your drinkable items cannot be eaten'
   enchant:
     description:
-      - '<gold><bold>Set enchants'
+      - '<gold><b>Set enchants</b>'
       - ''
       - '<yellow><enchant> <aqua>enchant type'
       - '<yellow>[level] <aqua>level of the enchant, by default <yellow>1'
       - ''
-      - '<aqua><bold>Tip: <aqua>Set <yellow>[level] <aqua>to <yellow>0 <aqua>to remove an enchant'
+      - '<aqua><b>Tip</b>: <aqua>Set <yellow>[level] <aqua>to <yellow>0 <aqua>to remove an enchant'
     params: '<enchant> [level]'
     feedback-removed: '<blue>[<white>ItemEdit<blue>] <green>Removed enchantment <yellow>%enchant%'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Applied enchantment <yellow>%enchant% <green>lv <yellow>%lv%'
   fireresistent:
     description:
-      - '<gold><bold>Set item resistence to fire/lava'
+      - '<gold><b>Set item resistence to fire/lava</b>'
       - ''
       - '<yellow>[true/false] <aqua>set the value, by default toggle'
       - ''
@@ -231,24 +231,24 @@ itemedit:
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Fire resistance set to <yellow>%value%'
   fireworkpower:
     description:
-      - '<gold><bold>Set firework power'
+      - '<gold><b>Set firework power</b>'
       - ''
       - '<yellow><power> <aqua>power of the firework, a value betwheen <yellow>0 <aqua>and <yellow>5'
     params: '<power>'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated firework power'
   firework:
     description:
-      - '<gold><bold>Edit firework with a GUI'
+      - '<gold><b>Edit firework with a GUI</b>'
     params: ''
   food:
     description:
-      - '<gold><bold>Sets food property of the item'
+      - '<gold><b>Sets food property of the item</b>'
       - ''
       - '<aqua>Tip: Use /itemfood or /if'
       - '<aqua>N.B. your drinkable items cannot be eaten'
   glider:
     description:
-      - '<gold><bold>Set Glider state'
+      - '<gold><b>Set Glider state</b>'
       - ''
       - '<aqua>Glider item should allow gliding like on elytras'
       - '<yellow>[true/false] <aqua>set glider value, by default toggle'
@@ -256,51 +256,51 @@ itemedit:
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Gliding set to <yellow>%value%'
   glow:
     description:
-      - '<gold><bold>Override enchantment glow effect'
+      - '<gold><b>Override enchantment glow effect</b>'
       - ''
       - '<yellow>[true/false] <aqua>set the value, by default reset'
       - ''
-      - '<aqua><bold>Tip: <yellow>no value specified <aqua>restore vanilla behavior'
+      - '<aqua><b>Tip</b>: <yellow>no value specified <aqua>restore vanilla behavior'
     params: '[true/false/default]'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Glow set to <yellow>%value%'
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset glow value to default'
   goathornsound:
     description:
-      - '<gold><bold>Set Goat Horn sound'
+      - '<gold><b>Set Goat Horn sound</b>'
       - ''
       - '<yellow><type> <aqua>the type of sound'
     params: '<type>'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Sound'
   hide:
     description:
-      - '<gold><bold>Hide or show components'
+      - '<gold><b>Hide or show components</b>'
       - ''
       - '<yellow><flag> <aqua>item flag to edit'
       - '<yellow>[true/false] <aqua>set the flag value, by default toggle'
       - ''
-      - '<aqua><bold>Tip: <aqua>hide banner pannerns with potion_effects flag'
-      - '<aqua><bold>Tip: <aqua>hide all flags at once with <yellow>/itemedit hideall'
+      - '<aqua><b>Tip</b>: <aqua>hide banner pannerns with potion_effects flag'
+      - '<aqua><b>Tip</b>: <aqua>hide all flags at once with <yellow>/itemedit hideall'
     params: '<flag> [true/false]'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Flag is now <yellow>%value%'
   hidetooltip:
     description:
-      - '<gold><bold>Hide or show tooltips'
+      - '<gold><b>Hide or show tooltips</b>'
       - ''
       - '<yellow>[true/false] <aqua>set the flag value, by default toggle'
     params: '[true/false]'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Tooltip hidden status is now <yellow>%value%'
   hideall:
     description:
-      - '<gold><bold>Hide all components'
+      - '<gold><b>Hide all components</b>'
       - ''
       - '<aqua>Hides: enchants, potion effects, banner layers, attributes ...'
       - ''
-      - '<aqua><bold>Tip: <aqua>hide single components with <yellow>/itemedit hide <flag> true'
+      - '<aqua><b>Tip</b>: <aqua>hide single components with <yellow>/itemedit hide <flag> true'
     params: ''
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Hidden all the flags'
   itemmodel:
     description:
-      - '<gold><bold>Edit item model'
+      - '<gold><b>Edit item model</b>'
       - ''
       - '<yellow><namespaced key> <aqua>key to set for texture reference'
       - '<aqua>Example: /ie itemmodel <yellow>iron_sword'
@@ -313,19 +313,19 @@ itemedit:
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset Item Model'
   kinetic:
     description:
-      - '<gold><bold>Sets kinetic property of the item'
+      - '<gold><b>Sets kinetic property of the item</b>'
       - ''
       - '<aqua>Tip: Use /itemkinetic or /iek'
   maxdurability:
     description:
-      - '<gold><bold>Sets item max durability'
+      - '<gold><b>Sets item max durability</b>'
       - ''
       - '<yellow><max durability> <aqua>item new durability value, must be bigger than 1'
     params: '<max durability>'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Max durability to <yellow>%value%'
   maxstacksize:
     description:
-      - '<gold><bold>Sets item max stack size'
+      - '<gold><b>Sets item max stack size</b>'
       - ''
       - '<yellow>[1-99] <aqua>set the flag value'
       - ''
@@ -337,15 +337,15 @@ itemedit:
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset Max stack size'
   piercing:
     description:
-      - '<gold><bold>Sets piercing property of the item'
+      - '<gold><b>Sets piercing property of the item</b>'
       - ''
-      - '<aqua>Tip: Use /itempiercing or /iep'
+      - '<aqua><b>Tip</b>: Use /itempiercing or /iep'
   potioneffect:
     itemtag-tip: '<blue>[<white>ItemEdit<blue>] <aqua>You need to add potion effects to common items? try >ItemTag<'
     itemtag-tip-hover:
       - '<gold>Click me'
     description:
-      - '<gold><bold>Edit potion''s effects'
+      - '<gold><b>Edit potion''s effects</b>'
       - ''
       - '<aqua>Works on any Potion, Tipped arrows and Suspicious stew!'
       - '<yellow>Add <effect> <duration> [level] <aqua>- add effect'
@@ -355,7 +355,7 @@ itemedit:
     add:
       params: '<effect> <duration> [level] [particles] [ambient] [icon]'
       description:
-        - '<gold><bold>Adds/Override selected effect'
+        - '<gold><b>Adds/Override selected effect</b>'
         - ''
         - '<yellow><effect> <aqua>effect type'
         - '<yellow><duration> <aqua>duration in seconds'
@@ -367,44 +367,44 @@ itemedit:
     remove:
       params: '<effect>'
       description:
-        - '<gold><bold>Remove selected effect'
+        - '<gold><b>Remove selected effect</b>'
       feedback: '<blue>[<white>ItemEdit<blue>] <green>Removed potion effect'
     reset:
       feedback: '<blue>[<white>ItemEdit<blue>] <green>Reset potion effects'
   rarity:
     description:
-      - '<gold><bold>Sets item rarity'
+      - '<gold><b>Sets item rarity</b>'
       - ''
       - '<yellow>[rarity] <aqua>set item rarity'
       - ''
-      - '<aqua><bold>Tip: setting no rarity value will restore default'
+      - '<aqua><b>Tip</b>: setting no rarity value will restore default'
     params: '[rarity]'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated rarity'
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset Rarity'
   repaircost:
     description:
-      - '<gold><bold>Edit Anvil Repair Cost'
+      - '<gold><b>Edit Anvil Repair Cost</b>'
       - ''
       - '<yellow><cost> <aqua>levels amount'
-      - '<aqua><bold>N.B. <aqua>anvil repair/rename price is always at least <yellow>1'
-      - '<aqua><bold>N.B. <aqua>this command set base repair cost of the item, final levels cost on anvil is based what you do'
+      - '<aqua><b>N.B.</b> <aqua>anvil repair/rename price is always at least <yellow>1'
+      - '<aqua><b>N.B.</b> <aqua>this command set base repair cost of the item, final levels cost on anvil is based what you do'
       - '<aqua>More info at <yellow>minecraft.gamepedia.com/Anvil/Mechanics'
     params: '<cost>'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Repair cost updated'
   skullowner:
     description:
-      - '<gold><bold>Set skull owner'
+      - '<gold><b>Set skull owner</b>'
       - ''
       - '<aqua>Works only on Player''s skulls'
       - '<yellow>[name] <aqua>name of the owner'
       - ''
-      - '<aqua><bold>Tip: <aqua>Place and break the skull to update skins'
+      - '<aqua><b>Tip</b>: <aqua>Place and break the skull to update skins'
     params: '[name]'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Head owner'
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset Head owner'
   spawnereggtype:
     description:
-      - '<gold><bold>Set type of entity spawned by spawner egg'
+      - '<gold><b>Set type of entity spawned by spawner egg</b>'
       - ''
       - '<yellow><type> <aqua>type of the entity'
       - '<aqua>Only some entity type are spawnable by eggs'
@@ -412,7 +412,7 @@ itemedit:
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Egg type'
   tooltipstyle:
     description:
-      - '<gold><bold>Edit item tooltip style'
+      - '<gold><b>Edit item tooltip style</b>'
       - ''
       - '<yellow><style> <aqua>key to set for texture reference'
       - '<aqua>  style is composed by <namespace>:<id>'
@@ -429,7 +429,7 @@ itemedit:
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset tooltip style'
   armortrim:
     description:
-      - '<gold><bold>Set Armor Trim'
+      - '<gold><b>Set Armor Trim</b>'
       - ''
       - '<yellow><material> <aqua>the trim material'
       - '<yellow><pattern> <aqua>the trim pattern'
@@ -438,7 +438,7 @@ itemedit:
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Trim removed'
   tropicalfish:
     description:
-      - '<gold><bold>Set property of tropical fish bucket'
+      - '<gold><b>Set property of tropical fish bucket</b>'
       - ''
       - '<yellow>pattern <pattern type> <aqua>- type of fish'
       - '<yellow>patterncolor <color> <aqua>- pattern color of fish'
@@ -447,54 +447,54 @@ itemedit:
     pattern:
       params: '<type>'
       description:
-        - '<gold><bold>Set tropical fish pattern type'
+        - '<gold><b>Set tropical fish pattern type</b>'
         - ''
         - '<yellow><type> <aqua>pattern type of the fish'
       feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Pattern'
     patterncolor:
       params: '<color>'
       description:
-        - '<gold><bold>Set tropical fish pattern color'
+        - '<gold><b>Set tropical fish pattern color</b>'
         - ''
         - '<yellow><color> <aqua>pattern color of the fish'
       feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Color'
     bodycolor:
       params: '<color>'
       description:
-        - '<gold><bold>Set tropical fish body color'
+        - '<gold><b>Set tropical fish body color</b>'
         - ''
         - '<yellow><color> <aqua>body color of the fish'
       feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Color'
   type:
     description:
-      - '<gold><bold>Set item''s type'
+      - '<gold><b>Set item''s type</b>'
       - ''
-      - '<aqua><bold>N.B. <aqua>a few types as Air won''t work'
+      - '<aqua><b>N.B. <aqua>a few types as Air won''t work</b>'
     params: '<type>'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Item Material'
   unbreakable:
     description:
-      - '<gold><bold>Set unbreakable state'
+      - '<gold><b>Set unbreakable state</b>'
       - ''
       - '<aqua>Unbreakable tools and armors won''t lost durability'
       - '<yellow>[true/false] <aqua>set unbreakable value, by default toggle'
     params: '[true/false]'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Item Unbreakable to <yellow>%value%'
   help:
-    header: "<blue><bold>ItemEdit - Help"
-    header-sub: "<blue><bold>ItemEdit %sub% - Help"
-    footer: "%prev_clickable% <blue><bold>Help [%page%/%max_page%] %next_clickable%"
+    header: "<blue><b>ItemEdit - Help</b>"
+    header-sub: "<blue><b>ItemEdit %sub% - Help</b>"
+    footer: "%prev_clickable% <blue><b>Help</b> [%page%/%max_page%] %next_clickable%"
   rename:
     description:
-      - '<gold><bold>Set item''s name'
+      - '<gold><b>Set item''s name</b>'
       - ''
-      - '<aqua><bold>Tip: <aqua>type <yellow>-clear <aqua>to revert name to default'
-      - '<aqua><bold>Tip: <aqua>type <yellow>-copy <aqua>to copy the name'
-      - '<aqua><bold>Tip: <aqua>type <yellow>-paste <aqua>to paste previously copied value'
+      - '<aqua><b>Tip</b>: <aqua>type <yellow>-clear <aqua>to revert name to default'
+      - '<aqua><b>Tip</b>: <aqua>type <yellow>-copy <aqua>to copy the name'
+      - '<aqua><b>Tip</b>: <aqua>type <yellow>-paste <aqua>to paste previously copied value'
     params: '<name>'
   lore:
     description:
-      - '<gold><bold>Edit lore'
+      - '<gold><b>Edit lore</b>'
       - ''
       - '<yellow>Add <text> <aqua>- add text on a new line'
       - '<yellow>Insert <line> <text> <aqua>- add text on selected line'
@@ -510,15 +510,15 @@ itemedit:
     set:
       params: '<line> <text>'
       description:
-        - '<gold><bold>Set or replace text on selected line'
+        - '<gold><b>Set or replace text on selected line</b>'
     remove:
       params: '<line>'
       description:
-        - '<gold><bold>Remove selected line'
+        - '<gold><b>Remove selected line</b>'
     insert:
       params: '<line> <text>'
       description:
-        - '<gold><bold>Add text on selected line'
+        - '<gold><b>Add text on selected line</b>'
     copy:
       feedback: '<blue>[<white>ItemEdit<blue>] <green>Lore copied'
     copyBook:
@@ -532,7 +532,7 @@ itemedit:
     replace:
       params: '<replaced> <replacer>'
       description:
-        - '<gold><bold>Replace all occurrences on the lore'
+        - '<gold><b>Replace all occurrences on the lore</b>'
         - ''
         - '<aqua>If you need to replace more than a word you have'
         - '<aqua> to close them inside <yellow>{ }'
@@ -544,7 +544,7 @@ itemedit:
         - '<aqua>''<yellow>Heavy sword<aqua>'' -> ''<yellow>Very light sword<aqua>'''
   listaliases:
     description:
-      - '<gold><bold>Shows allowed aliases parameters'
+      - '<gold><b>Shows allowed aliases parameters</b>'
       - ''
       - '<yellow><type> <aqua>the type of parameter to show'
     params: '<type>'
@@ -554,12 +554,12 @@ itemedit:
     second_color: '<yellow>'
     hover_info: '<blue>Original value: <yellow>%default%'
     hover_type: '<gold>Click to examine'
-    error-pre-hover: "<gold><bold>Aliases:"
+    error-pre-hover: "<gold><b>Aliases:</b>"
 itemeditequipment:
   allowedentities:
     invalid-type: '<dark_red>[<red>ItemEdit<dark_red>] <red>The value <gold>%value% <red>is neither a valid entity nor a valid group of entities'
     description:
-      - '<gold><bold>Sets entity types allowed to wear this equipment'
+      - '<gold><b>Sets entity types allowed to wear this equipment</b>'
       - ''
       - '<yellow>[entity] <aqua>which entity type'
       - '<yellow>[group] <aqua>which entity group'
@@ -571,7 +571,7 @@ itemeditequipment:
   canshear:
     unsupported-version: '<dark_red>[<red>ItemEdit<dark_red>] <red>You server version (<gold>%value%<red>) doesn''t support this feature'
     description:
-      - '<gold><bold>Sets equip on interaction'
+      - '<gold><b>Sets equip on interaction</b>'
       - ''
       - '<yellow>[true/false] <aqua>true be able to shear the'
       - '<aqua>equipment from and entity, like pumpkin'
@@ -580,7 +580,7 @@ itemeditequipment:
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Can shear property is now <yellow>%value%"
   cameraoverlay:
     description:
-      - '<gold><bold>Sets camera overlay'
+      - '<gold><b>Sets camera overlay</b>'
       - ''
       - '<yellow>[namespacedkey] <aqua>which overlay you want'
       - '<aqua>Overlays are set on texturepacks, the only vanilla'
@@ -591,14 +591,14 @@ itemeditequipment:
     invalid-namespacedkey: "<red>Namespacedkey <gold>%value% <red> is invalid"
   clear:
     description:
-      - '<gold><bold>Completely remove equipment property on item'
+      - '<gold><b>Completely remove equipment property on item</b>'
       - ''
       - '<aqua>Or restore defaults if item is a vanilla equipment'
     params: ""
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Equipment properties have been reset to default"
   damageonhurt:
     description:
-      - '<gold><bold>Sets damageable'
+      - '<gold><b>Sets damageable'
       - ''
       - '<yellow>[true/false] <aqua>true to reduce durability with damage'
       - ''
@@ -611,33 +611,33 @@ itemeditequipment:
     warning-maxstacksize: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item max stack size must be <gold>1 <red>to be damageable <dark_red>[<gold>click to fix<dark_red>]'
   dispensable:
     description:
-      - '<gold><bold>Sets dispensable'
+      - '<gold><b>Sets dispensable</b>'
       - ''
       - '<yellow>[true/false] <aqua>true to equip with dispenser'
     params: "[true/false]"
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Dispensable property is now <yellow>%value%"
   equiponinteract:
     description:
-      - '<gold><bold>Sets equip on interaction'
+      - '<gold><b>Sets equip on interaction</b>'
       - ''
       - '<yellow>[true/false] <aqua>true to equip with interaction'
     params: "[true/false]"
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Equip on interact property is now <yellow>%value%"
   equipsound:
     description:
-      - '<gold><bold>Sets equipping sound'
+      - '<gold><b>Sets equipping sound</b>'
       - ''
       - '<yellow>[sound] <aqua>which sound should be made'
     params: "[sound]"
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Equip sound property is now <yellow>%value%"
     feedback-reset: "<blue>[<white>ItemEdit<blue>] <green>Equip sound property has been reset to default"
   help:
-    header: "<blue><bold>ItemEditEquipment - Help"
-    header-sub: "<blue><bold>ItemEditEquipment %sub% - Help"
-    footer: "%prev_clickable% <blue><bold>Help [%page%/%max_page%] %next_clickable%"
+    header: "<blue><b>ItemEditEquipment - Help</b>"
+    header-sub: "<blue><b>ItemEditEquipment %sub% - Help</b>"
+    footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
   model:
     description:
-      - '<gold><bold>Sets texture model'
+      - '<gold><b>Sets texture model</b>'
       - ''
       - '<yellow>[key] <aqua>Namespaced ID of the equipment model to use when equipped'
     params: "[key]"
@@ -645,7 +645,7 @@ itemeditequipment:
     feedback-reset: "<blue>[<white>ItemEdit<blue>] <green>Equipment model has been reset"
   shearsound:
     description:
-      - '<gold><bold>Sets sound when item is removed by shear'
+      - '<gold><b>Sets sound when item is removed by shear</b>'
       - ''
       - '<yellow>[sound] <aqua>which sound should be made'
       - '<aqua>when it''s removed by shear, like pumpkin'
@@ -655,14 +655,14 @@ itemeditequipment:
     feedback-reset: "<blue>[<white>ItemEdit<blue>] <green>Shear sound property has been reset to default"
   slot:
     description:
-      - '<gold><bold>Sets equippable slot'
+      - '<gold><b>Sets equippable slot</b>'
       - ''
       - '<yellow><slot> <aqua>where the item can be equipped'
     params: "<slot>"
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Equipment Slot is now <yellow>%value%"
   swappable:
     description:
-      - '<gold><bold>Sets the item swappable'
+      - '<gold><b>Sets the item swappable</b>'
       - ''
       - '<yellow>[true/false] <aqua>true for the item to be swappable'
     params: "[true/false]"
@@ -670,7 +670,7 @@ itemeditequipment:
 itemeditfood:
   addeffect:
     description:
-      - '<gold><bold>Add an effect to the item'
+      - '<gold><b>Add an effect to the item</b>'
       - '<yellow>/ief addeffect <aqua>cleareffects'
       - '<yellow>/ief addeffect <aqua>teleport <range>'
       - '<yellow>/ief addeffect <aqua>applyeffects [chance] <potion> <lv> <duration> [ambient] [particle] [icon]'
@@ -680,14 +680,14 @@ itemeditfood:
     params: '[...]'
     cleareffects:
       description:
-        - '<gold><bold>Add an effect to the item'
+        - '<gold><b>Add an effect to the item</b>'
         - ''
         - '<aqua>Remove any potion effect on the player, like milk bucket'
       params: '<potion>'
       feedback: "<blue>[<white>ItemEdit<blue>] <green>Added teleport effect when food is eaten"
     teleport:
       description:
-        - '<gold><bold>Add an effect to the item'
+        - '<gold><b>Add an effect to the item</b>'
         - '<yellow><range> <aqua>how far teleport the player'
         - ''
         - '<aqua>Randomly teleport player when food is eaten'
@@ -695,7 +695,7 @@ itemeditfood:
       feedback: "<blue>[<white>ItemEdit<blue>] <green>Added teleport effect when food is eaten"
     applyeffects:
       description:
-        - '<gold><bold>Add an effect to the item'
+        - '<gold><b>Add an effect to the item</b>'
         - '<yellow>[chance] <aqua>what''s the % chance to apply the effect?'
         - '  <aqua>must be bigger than <yellow>0<aqua> and lower equals to <yellow>100'
         - '<yellow><potion> <aqua>The potion effect type'
@@ -708,7 +708,7 @@ itemeditfood:
       feedback: "<blue>[<white>ItemEdit<blue>] <green>Added apply effect when food is eaten"
     removeeffects:
       description:
-        - '<gold><bold>Add an effect to the item'
+        - '<gold><b>Add an effect to the item</b>'
         - '<yellow><potion> <aqua>clear selected effect'
         - ''
         - '<aqua>Remove selected effect from the player when food is eaten'
@@ -716,7 +716,7 @@ itemeditfood:
       feedback: "<blue>[<white>ItemEdit<blue>] <green>Added remove effect when food is eaten"
     playsound:
       description:
-        - '<gold><bold>Add an effect to the item'
+        - '<gold><b>Add an effect to the item</b>'
         - '<yellow><sound> <aqua>sound to play'
         - ''
         - '<aqua>Play selected sound when food is eaten'
@@ -724,7 +724,7 @@ itemeditfood:
       feedback: "<blue>[<white>ItemEdit<blue>] <green>Added sound when food is eaten"
   animation:
     description:
-      - '<gold><bold>Sets eat animation'
+      - '<gold><b>Sets eat animation</b>'
       - '<aqua>Only for <red>1.21.2+'
       - ''
       - '<yellow><animation> <aqua>The value to set, by default toggle'
@@ -736,7 +736,7 @@ itemeditfood:
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Applied animation"
   canalwayseat:
     description:
-      - '<gold><bold>Sets whenever the item can be eaten'
+      - '<gold><b>Sets whenever the item can be eaten</b>'
       - ''
       - '<yellow>[true/false] <aqua>The value to set, by default toggle'
       - ''
@@ -746,7 +746,7 @@ itemeditfood:
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Item has Can always eat to <yellow>%value%"
   consumeparticles:
     description:
-      - '<gold><bold>Sets whenever the item show particles when eaten'
+      - '<gold><b>Sets whenever the item show particles when eaten</b>'
       - '<aqua>Only for <red>1.21.2+'
       - ''
       - '<yellow>[true/false] <aqua>The value to set, by default toggle'
@@ -754,7 +754,7 @@ itemeditfood:
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Consume particles is now <yellow>%value%"
   convertto:
     description:
-      - '<gold><bold>Sets an item give when food is consumed'
+      - '<gold><b>Sets an item give when food is consumed</b>'
       - '<aqua>Only for <red>1.21+'
       - ''
       - '<yellow>[type/serveritem id] <aqua>the item to return'
@@ -767,7 +767,7 @@ itemeditfood:
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Convert to updated"
   eatticks:
     description:
-      - '<gold><bold>Sets the time required to eat the item'
+      - '<gold><b>Sets the time required to eat the item</b>'
       - ''
       - '<yellow><ticks> <aqua>The amount of time to eat the item'
       - '  <aqua>must be <yellow>1 <aqua>or bigger'
@@ -776,29 +776,29 @@ itemeditfood:
     params: '<ticks>'
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Eat ticks updated to <yellow>%value%"
   help:
-    header: "<blue><bold>ItemFood - Help"
-    header-sub: "<blue><bold>ItemFood %sub% - Help"
-    footer: "%prev_clickable% <blue><bold>Help [%page%/%max_page%] %next_clickable%"
+    header: "<blue><b>ItemFood - Help</b>"
+    header-sub: "<blue><b>ItemFood %sub% - Help</b>"
+    footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
   info:
     not_food: "<blue>[<white>ItemEdit<blue>] <aqua>Item has no food property or has default property"
     message:
-      - '<blue>[<white>ItemEdit<blue>] <dark_green><bold>Item Food Property'
+      - '<blue>[<white>ItemEdit<blue>] <dark_green><b>Item Food Property</b>'
       - '<green>Eat time: <yellow>%eatseconds%<green> s <dark_gray>(<gray>%eatticks%<dark_gray> ticks)'
       - '<green>Restore Hunger: <yellow>%nutrition% <dark_gray>| <green>Saturation: <yellow>%saturation%<green> '
       - '<green>Animation: <yellow>%animation% <dark_gray>| <green>Sound: <yellow>%sound% <dark_gray>| <green>Particles: <yellow>%consumeparticles%'
       - '<green>Eatable when full: <yellow>%canalwayseat% <dark_gray>| <green>When eaten obtain: <yellow>%convertto%'
     apply_effect_prefix:
-      - '<dark_green><bold>Contains <yellow><bold>%effects%<dark_green><bold> possible potion effects:'
+      - '<dark_green><b>Contains <yellow>%effects%<dark_green> possible potion effects:</b>'
     apply_effect:
       - '<green>%index%. Type: <yellow><aqua>%type% <dark_gray>| <green>Lv: <yellow>%level% <dark_gray>| <green>Duration: <yellow>%duration_s%<green> s <dark_gray>(<gray>%duration_ticks%<dark_gray> ticks)'
       - '<green>   Particles: <yellow>%hasparticle% <dark_gray>| <green>Ambient: <yellow>%isambient% <dark_gray>| <green>Icon: <yellow>%hasicon% <dark_gray>| <green>Chance: <yellow>%chance_perc%<green>%'
     description:
-      - '<gold><bold>Describe current food info for item'
+      - '<gold><b>Describe current food info for item</b>'
     params: ''
     feedback: "<dark_red>currently unimplemented"
   nutrition:
     description:
-      - '<gold><bold>Sets recovered nutrition'
+      - '<gold><b>Sets recovered nutrition</b>'
       - ''
       - '<yellow><amount> <aqua>The amount hunger to restore'
       - '  <aqua>must be <yellow>0 <aqua>or bigger'
@@ -808,26 +808,26 @@ itemeditfood:
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Nutrition value is now <yellow>%value%"
   removeeffect:
     description:
-      - '<gold><bold>Remove an effect from the item'
+      - '<gold><b>Remove an effect from the item</b>'
       - ''
       - '<yellow><index> <aqua>Remove selected effect'
     params: '<index>'
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Removed selected food effect"
   reset:
     description:
-      - '<gold><bold>Completely remove food property on item'
+      - '<gold><b>Completely remove food property on item</b>'
       - ''
       - '<aqua>Or restore defaults if item is a vanilla food'
     params: ''
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Food properties removed"
   reseteffects:
     description:
-      - '<gold><bold>Remove effects from the item'
+      - '<gold><b>Remove effects from the item</b>'
     params: ''
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Food effects removed"
   saturation:
     description:
-      - '<gold><bold>Sets recovered saturation'
+      - '<gold><b>Sets recovered saturation</b>'
       - ''
       - '<yellow><amount> <aqua>The amount saturation to add'
       - '  <aqua>negative values are allowed'
@@ -838,7 +838,7 @@ itemeditfood:
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Saturation is now <yellow>%value%"
   sound:
     description:
-      - '<gold><bold>Sets eat sound'
+      - '<gold><b>Sets eat sound</b>'
       - '<aqua>Only for <red>1.21.2+'
       - ''
       - '<yellow><sound> <aqua>The value to set'
@@ -847,14 +847,14 @@ itemeditfood:
 itemeditkinetic:
   contactcooldownticks:
     description:
-      - '<gold><bold>Sets Kinetic Contact cooldown'
+      - '<gold><b>Sets Kinetic Contact cooldown</b>'
       - ''
       - '<yellow><cooldown> <aqua>contact cooldown ticks'
     params: '<delay>'
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Contact cooldown set"
   damageconditions:
     description:
-      - '<gold><bold>Sets kinetic Damage conditions'
+      - '<gold><b>Sets kinetic Damage conditions</b>'
       - ''
       - '<yellow><max duration> <aqua>Max damage duration ticks'
       - '<yellow><min speed> <aqua>Minimal speed'
@@ -863,21 +863,21 @@ itemeditkinetic:
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Damage condition set"
   damagemultiplier:
     description:
-      - '<gold><bold>Sets Kinetic Damage multiplier'
+      - '<gold><b>Sets Kinetic Damage multiplier</b>'
       - ''
       - '<yellow><multiplier> <aqua>damage multiplier'
     params: '<delay>'
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Kinetic damage multiplier set"
   delayticks:
     description:
-      - '<gold><bold>Sets Kinetic Delay ticks'
+      - '<gold><b>Sets Kinetic Delay ticks</b>'
       - ''
       - '<yellow><delay> <aqua>kinetic delay ticks'
     params: '<delay>'
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Delay ticks set"
   dismountconditions:
     description:
-      - '<gold><bold>Sets Kinetic Dismount conditions'
+      - '<gold><b>Sets Kinetic Dismount conditions</b>'
       - ''
       - '<yellow><max duration> <aqua>Max dismount duration ticks'
       - '<yellow><min speed> <aqua>Minimal speed to dismount'
@@ -886,25 +886,25 @@ itemeditkinetic:
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Dismount condition set"
   forwardmovement:
     description:
-      - '<gold><bold>Sets Kinetic Forward movement'
+      - '<gold><b>Sets Kinetic Forward movement</b>'
       - ''
       - '<yellow><movement> <aqua>Forward movement amount'
     params: '<movement>'
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Forward movement set"
   help:
-    header: "<blue><bold>ItemKinetic - Help"
-    header-sub: "<blue><bold>ItemKinetic %sub% - Help"
-    footer: "%prev_clickable% <blue><bold>Help [%page%/%max_page%] %next_clickable%"
+    header: "<blue><b>ItemKinetic - Help</b>"
+    header-sub: "<blue><b>ItemKinetic %sub% - Help</b>"
+    footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
   hitsound:
     description:
-      - '<gold><bold>Sets Kinetic hit sound'
+      - '<gold><b>Sets Kinetic hit sound</b>'
       - ''
       - '<yellow><sound> <aqua>The value to set'
     params: '<sound>'
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Hit sound is now <yellow>%value%"
   knockbackconditions:
     description:
-      - '<gold><bold>Sets Kinetic Knockback conditions'
+      - '<gold><b>Sets Kinetic Knockback conditions</b>'
       - ''
       - '<yellow><max duration> <aqua>Max knockback duration ticks'
       - '<yellow><min speed> <aqua>Minimal speed to knockback'
@@ -913,7 +913,7 @@ itemeditkinetic:
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Knockback condition set"
   sound:
     description:
-      - '<gold><bold>Sets Kinetic sound'
+      - '<gold><b>Sets Kinetic sound</b>'
       - ''
       - '<yellow><sound> <aqua>The value to set'
     params: '<sound>'
@@ -921,45 +921,45 @@ itemeditkinetic:
 itemeditpiercing:
   dealsknockback:
     description:
-      - '<gold><bold>Sets whenever the hit cause knockback'
+      - '<gold><b>Sets whenever the hit cause knockback</b>'
       - ''
       - '<yellow>[true/false] <aqua>true to apply knockback'
     params: "[true/false]"
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Knockback is now <yellow>%value%"
   dismounts:
     description:
-      - '<gold><bold>Sets whenever the hit cause dismount'
+      - '<gold><b>Sets whenever the hit cause dismount</b>'
       - ''
       - '<yellow>[true/false] <aqua>true to dismount'
     params: "[true/false]"
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Dismount is now <yellow>%value%"
   help:
-    header: "<blue><bold>ItemPiercing - Help"
-    header-sub: "<blue><bold>ItemPiercing %sub% - Help"
-    footer: "%prev_clickable% <blue><bold>Help [%page%/%max_page%] %next_clickable%"
+    header: "<blue><b>ItemPiercing - Help</b>"
+    header-sub: "<blue><b>ItemPiercing %sub% - Help</b>"
+    footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
   hitsound:
     description:
-      - '<gold><bold>Sets Piercing hit sound'
+      - '<gold><b>Sets Piercing hit sound</b>'
       - ''
       - '<yellow><sound> <aqua>The value to set'
     params: '<sound>'
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Hit sound is now <yellow>%value%"
   sound:
     description:
-      - '<gold><bold>Sets Piercing sound'
+      - '<gold><b>Sets Piercing sound</b>'
       - ''
       - '<yellow><sound> <aqua>The value to set'
     params: '<sound>'
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Sound is now <yellow>%value%"
 serveritem:
-  help-header: '<blue><bold>ServerItem - Help'
+  help-header: '<blue><b>ServerItem - Help</b>'
   give:
     #Holders: %id% %nick% %amount%
     feedback: '<green>Obtained <yellow>%amount% <green>of <yellow>%nick%'
     #Holders: %id% %nick% %amount% %player_name%
     log: '[serveritem][give] %player_name% obtained %amount% of %id% (%nick%)'
     description:
-      - '<gold><bold>Give selected item to player'
+      - '<gold><b>Give selected item to player</b>'
       - ''
       - '<yellow><id> <aqua>Id of the item'
       - '<yellow>[amount] <aqua>amount of items to give, by default 1'
@@ -972,7 +972,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %targets%
     log: '[serveritem][giveall] %targets% obtained %amount% of %id% (%nick%)'
     description:
-      - '<gold><bold>Give selected item to all online players'
+      - '<gold><b>Give selected item to all online players</b>'
       - ''
       - '<yellow><id> <aqua>Id of the item'
       - '<yellow>[amount] <aqua>amount of items to give, by default 1'
@@ -982,7 +982,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %world% %x% %y% %z%
     log: '[serveritem][drop] dropped %amount% of %id% (%nick%) at %world% %x% %y% %z%'
     description:
-      - '<gold><bold>Drop selected item at chosen location'
+      - '<gold><b>Drop selected item at chosen location</b>'
       - ''
       - '<yellow><id> <aqua>Id of the item'
       - '<yellow><amount> <aqua>amount of items to drop, 1 to 2304'
@@ -995,7 +995,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name%
     log: '[serveritem][take] %player_name% gave %amount% of %id% (%nick%)'
     description:
-      - '<gold><bold>Take selected item from player'
+      - '<gold><b>Take selected item from player</b>'
       - ''
       - '<yellow><id> <aqua>Id of the item'
       - '<yellow>[amount] <aqua>amount of items to give, by default 1'
@@ -1013,14 +1013,14 @@ serveritem:
       - '<aqua>     contain spaces or dots also you can''t select'
       - '<aqua>     any already used id'
       - ''
-      - '<aqua><bold>Tip: <aqua>use <yellow>/serveritem update <id><aqua>, to change an existing item'
-      - '<aqua><bold>Tip: <aqua>retrieve saved items with <yellow>/serveritem give <id>'
+      - '<aqua><b>Tip</b>: <aqua>use <yellow>/serveritem update <id><aqua>, to change an existing item'
+      - '<aqua><b>Tip</b>: <aqua>retrieve saved items with <yellow>/serveritem give <id>'
     params: '<id>'
   delete:
     #Holders: %id%
     success: '<blue>[<white>ItemEdit<blue>] <green>Item <yellow>%id% <green>unregistered'
     description:
-      - '<gold><bold>Delete selected item'
+      - '<gold><b>Delete selected item</b>'
       - ''
       - '<yellow><id> <aqua>Id of the item'
     params: '<id>'
@@ -1028,17 +1028,17 @@ serveritem:
     #Holders: %id%
     success: '<blue>[<white>ItemEdit<blue>] <green>Item <yellow>%id% <green>has been updated'
     description:
-      - '<gold><bold>Update selected item'
+      - '<gold><b>Update selected item</b>'
       - ''
       - '<aqua>Change the item associated with id with your hand item'
       - '<yellow><id> <aqua>Id of the item'
       - ''
-      - '<aqua><bold>Tip: <aqua>use <yellow>/serveritem save <id><aqua>, to create a new item'
-      - '<aqua><bold>Tip: <aqua>use <yellow>/serveritem delete <id><aqua>, to delete an item'
+      - '<aqua><b>Tip</b>: <aqua>use <yellow>/serveritem save <id><aqua>, to create a new item'
+      - '<aqua><b>Tip</b>: <aqua>use <yellow>/serveritem delete <id><aqua>, to delete an item'
     params: '<id>'
   show:
     description:
-      - '<gold><bold>Open a gui with server saved items'
+      - '<gold><b>Open a gui with server saved items</b>'
       - ''
       - '<yellow>[page] <aqua>page of the gui, by default 1'
     params: '[page]'
@@ -1054,7 +1054,7 @@ serveritem:
       - '<yellow><id> <aqua>Id of the item'
       - '<yellow>[nick] <aqua>name to set'
       - ''
-      - '<aqua><bold>Tip: <aqua>to reset to default just use <yellow>/serveritem setnick <id>'
+      - '<aqua><b>Tip</b>: <aqua>to reset to default just use <yellow>/serveritem setnick <id>'
     params: '<id> [nick]'
   sell:
     #Holders: %id% %nick% %amount% %price%
@@ -1066,7 +1066,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)'
     description:
-      - '<gold><bold>Sell items to player'
+      - '<gold><b>Sell items to player</b>'
       - ''
       - '<aqua>Sell differs from SellMax because you sell the whole amount'
       - '<aqua>  to player or you sell none'
@@ -1088,7 +1088,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%'
     description:
-      - '<gold><bold>Buy items from player'
+      - '<gold><b>Buy items from player</b>'
       - ''
       - '<aqua>Buy differs from BuyMax because you buy the whole amount'
       - '<aqua>  from player or you buy none'
@@ -1112,7 +1112,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)'
     description:
-      - '<gold><bold>Sell items to player'
+      - '<gold><b>Sell items to player</b>'
       - ''
       - '<aqua>SellMax differs from Sell because you may sell the less of amount'
       - '<aqua>  to player if there are not enough money or space for the whole'
@@ -1135,7 +1135,7 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%'
     description:
-      - '<gold><bold>Buy items from player'
+      - '<gold><b>Buy items from player</b>'
       - ''
       - '<aqua>BuyMax differs from Buy because you may buy less of amount'
       - '<aqua>  from player if he has less than amount items in inventory'
@@ -1151,13 +1151,13 @@ serveritem:
       - '<aqua>N.B. balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
 itemstorage:
-  help-header: '<blue><bold>ItemStorage - Help'
+  help-header: '<blue><b>ItemStorage - Help</b>'
   get:
     #Holders: %id% %amount%
     success: '<blue>[<white>ItemEdit<blue>] <green>Obtained <yellow>%amount% <green>of <yellow>%id%'
     no-inventory-space: '<dark_red>[<red>ItemEdit<dark_red>] <red>You don''t have space in your inventory'
     description:
-      - '<gold><bold>Get selected item'
+      - '<gold><b>Get selected item</b>'
       - ''
       - '<yellow><id> <aqua>Id of the item'
       - '<yellow>[amount] <aqua>amount to get, by default 1'
@@ -1168,20 +1168,20 @@ itemstorage:
     #Holders: %limit%
     limit-reached: '<dark_red>[<red>ItemEdit<dark_red>] <red>You reached the maximus number of savable items (%limit%)'
     description:
-      - '<gold><bold>Register the item in your hand'
+      - '<gold><b>Register the item in your hand</b>'
       - ''
       - '<yellow><id> <aqua>identify your item, case insensitive and can''t'
       - '<aqua>     contain spaces or dots also you can''t select'
       - '<aqua>     any already used id'
       - ''
-      - '<aqua><bold>Tip: <aqua>use <yellow>/itemstorage update <id><aqua>, to change an existing item'
-      - '<aqua><bold>Tip: <aqua>retrieve your saved items with <yellow>/itemstorage get <id>'
+      - '<aqua><b>Tip</b>: <aqua>use <yellow>/itemstorage update <id><aqua>, to change an existing item'
+      - '<aqua><b>Tip</b>: <aqua>retrieve your saved items with <yellow>/itemstorage get <id>'
     params: '<id>'
   delete:
     #Holders: %id%
     success: '<blue>[<white>ItemEdit<blue>] <green>Item <yellow>%id% <green>unregistered'
     description:
-      - '<gold><bold>Delete selected item'
+      - '<gold><b>Delete selected item</b>'
       - ''
       - '<yellow><id> <aqua>Id of the item'
     params: '<id>'
@@ -1189,7 +1189,7 @@ itemstorage:
     #Holders: %id%
     success: '<blue>[<white>ItemEdit<blue>] <green>Item <yellow>%id% <green>has been updated'
     description:
-      - '<gold><bold>Update selected item'
+      - '<gold><b>Update selected item</b>'
       - ''
       - '<aqua>Change the item associated with id with your hand item'
       - '<yellow><id> <aqua>Id of the item'
@@ -1199,7 +1199,7 @@ itemstorage:
     params: '<id>'
   show:
     description:
-      - '<gold><bold>Open a gui with your saved items'
+      - '<gold><b>Open a gui with your saved items</b>'
       - ''
       - '<yellow>[page] <aqua>page of the gui, by default 1'
     params: '[page]'
@@ -1241,9 +1241,9 @@ gui:
     pattern_selector_title: '<blue>Pattern selector'
     buttons:
       pattern_selector_info:
-        - '<aqua>Select <gold><bold>%type%'
+        - '<aqua>Select <gold><b>%type%</b>'
       color_selector_info:
-        - '<aqua>Select <gold><bold>%color%'
+        - '<aqua>Select <gold><b>%color%</b>'
       position:
         - '<gold>Pattern Controller'
         - ''
@@ -1300,19 +1300,19 @@ gui:
   previous-page:
     #Holders: %player_name% %page% %target_page%
     description:
-      - '<gold><bold>Previous Page'
+      - '<gold><b>Previous Page</b>'
       - ''
       - '<gray>[<white>Click<gray>]<aqua> Go to page <yellow>%target_page%'
   next-page:
     #Holders: %player_name% %page% %target_page%
     description:
-      - '<gold><bold>Next Page'
+      - '<gold><b>Next Page</b>'
       - ''
       - '<gray>[<white>Click<gray>]<aqua> Go to page <yellow>%target_page%'
   back:
     #Holders: %player_name%
     description:
-      - '<gold><bold>Go Back'
+      - '<gold><b>Go Back</b>'
       - ''
       - '<gray>[<white>Click<gray>]<aqua> Go to previous gui'
   playeritems:
@@ -1321,7 +1321,7 @@ gui:
     page-info:
       #Holders: %player_name% %page%
       description:
-        - '<gold><bold>Page <yellow><bold>%page%'
+        - '<gold><b>Page <yellow>%page%</b>'
         - '<gray>[<white>Click<gray>]<aqua> Toggle view of <yellow>item<aqua>/<yellow>ID'
         - ''
         - '<aqua>Click on items:'
@@ -1334,7 +1334,7 @@ gui:
     page-info:
       #Holders: %player_name% %page%
       description:
-        - '<gold><bold>Page <yellow><bold>%page%'
+        - '<gold><b>Page <yellow>%page%</b>'
         - '<gray>[<white>Click<gray>]<aqua> Toggle view of <yellow>item<aqua>/<yellow>ID'
         - ''
         - '<aqua>Click on items:'
