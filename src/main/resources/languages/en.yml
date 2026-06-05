@@ -208,6 +208,7 @@ itemedit:
       - ''
       - '<aqua>Tip: Use /itemequip or /iee'
       - '<aqua>N.B. your drinkable items cannot be eaten'
+    params: ''
   enchant:
     description:
       - '<gold><b>Set enchants</b>'
@@ -246,6 +247,7 @@ itemedit:
       - ''
       - '<aqua>Tip: Use /itemfood or /if'
       - '<aqua>N.B. your drinkable items cannot be eaten'
+    params: ''
   glider:
     description:
       - '<gold><b>Set Glider state</b>'
@@ -316,6 +318,7 @@ itemedit:
       - '<gold><b>Sets kinetic property of the item</b>'
       - ''
       - '<aqua>Tip: Use /itemkinetic or /iek'
+    params: ''
   maxdurability:
     description:
       - '<gold><b>Sets item max durability</b>'
@@ -335,11 +338,12 @@ itemedit:
     params: '[1-99]'
     feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Max stack size to <yellow>%value%'
     feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset Max stack size'
-  piercing:
+  pierce:
     description:
       - '<gold><b>Sets piercing property of the item</b>'
       - ''
       - '<aqua><b>Tip</b>: Use /itempiercing or /iep'
+    params: ''
   potioneffect:
     itemtag-tip: '<blue>[<white>ItemEdit<blue>] <aqua>You need to add potion effects to common items? try >ItemTag<'
     itemtag-tip-hover:
