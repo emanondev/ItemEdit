@@ -10,7 +10,7 @@ import org.bukkit.Bukkit;
 @Slf4j
 public class MiniMessagePaper implements MiniMessageUtil {
 
-    private static final LegacyComponentSerializer UNGLY_LEGACY = LegacyComponentSerializer.legacySection().toBuilder().hexColors().useUnusualXRepeatedCharacterHexFormat().build();
+    private static final LegacyComponentSerializer UNGLY_LEGACY = LegacyComponentSerializer.builder().character(LegacyComponentSerializer.SECTION_CHAR).hexColors().useUnusualXRepeatedCharacterHexFormat().build();
 
     @Getter
     private static final MiniMessagePaper instance = new MiniMessagePaper();

@@ -1,10 +1,13 @@
 package emanondev.itemedit.compability;
 
+import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.logging.Level;
 
 public class Hooks {
     private static final MiniMessageUtil miniMessage = initMiniMessage();
@@ -69,7 +72,8 @@ public class Hooks {
                     return inst;
                 }
             }
-        } catch (Throwable ignored) {
+        } catch (Throwable ex) {
+            ItemEdit.get().getLogger().log(Level.WARNING, "MiniMessage is not available, skipping MiniMessage support.", ex);
         }
         return null;
     }
