@@ -7,6 +7,11 @@ import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
@@ -20,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
+@Slf4j
 public abstract class AbstractCommand implements TabExecutor {
 
     private final String PATH;
@@ -116,7 +122,7 @@ public abstract class AbstractCommand implements TabExecutor {
                 return true;
             }
         } catch (Throwable t) {
-            t.printStackTrace();
+            log.warn(t.getMessage(), t);
         }
         return false;
     }
@@ -397,4 +403,5 @@ public abstract class AbstractCommand implements TabExecutor {
         }
 
     }
+
 }

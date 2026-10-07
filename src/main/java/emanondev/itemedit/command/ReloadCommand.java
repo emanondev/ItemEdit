@@ -2,6 +2,7 @@ package emanondev.itemedit.command;
 
 import emanondev.itemedit.APlugin;
 import emanondev.itemedit.Util;
+import lombok.extern.slf4j.Slf4j;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -22,6 +23,7 @@ import java.util.Locale;
  * <br>
  * those info should be added to your plugin.yml
  */
+@Slf4j
 public class ReloadCommand implements TabExecutor {
 
     private final APlugin plugin;
@@ -58,7 +60,7 @@ public class ReloadCommand implements TabExecutor {
             plugin.registerCommand(plugin.getName().toLowerCase(Locale.ENGLISH) + "reload", this, null);
         } catch (Exception e) {
             plugin.log("Unable to register command " + ChatColor.YELLOW + plugin.getName().toLowerCase(Locale.ENGLISH) + "reload");
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
         }
     }
 }

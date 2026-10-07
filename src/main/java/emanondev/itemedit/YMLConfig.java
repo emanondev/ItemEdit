@@ -3,6 +3,7 @@ package emanondev.itemedit;
 import emanondev.itemedit.utility.VersionUtils;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,6 +23,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Getter
+@Slf4j
 public class YMLConfig extends YamlConfiguration {
 
     /**
@@ -85,24 +87,25 @@ public class YMLConfig extends YamlConfiguration {
         boolean existed = file.exists();
         if (!file.exists()) {
             if (!file.getParentFile().exists())  // Create parent folders if they don't exist
-                if (!file.getParentFile().mkdirs())
-                    new Exception("unable to create parent folder").printStackTrace();
+                if (!file.getParentFile().mkdirs()) {
+                    log.warn("unable to create parent folder", new Exception());
+                }
 
             if (plugin.getResource(fileName.replace('\\', '/')) != null) {
                 plugin.saveResource(fileName, true); // Save the one from the JAR if possible
             } else
                 try {
                     if (!file.createNewFile())
-                        new Exception("unable to create file").printStackTrace();
+                        log.warn("unable to create file", new Exception());
                 } // Create a blank file if there's not one to copy from the JAR
                 catch (IOException e) {
-                    e.printStackTrace();
+                    log.warn(e.getMessage(), e);
                 }
         }
         try {
             this.load(file);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
         }
         InputStream resource = plugin.getResource(fileName.replace('\\', '/'));
         if (resource != null)
@@ -121,7 +124,7 @@ public class YMLConfig extends YamlConfiguration {
         try {
             this.save(file);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
         }
     }
 
@@ -426,7 +429,7 @@ public class YMLConfig extends YamlConfiguration {
         try {
             return UtilsString.fix(load(path, def, List.class), target, color, holders);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
             return UtilsString.fix(def, target, color, holders);
         }
     }
@@ -486,7 +489,7 @@ public class YMLConfig extends YamlConfiguration {
         try {
             return UtilsString.fix(get(path, def, List.class), target, color, holders);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
             return UtilsString.fix(def, target, color, holders);
         }
     }
@@ -551,7 +554,7 @@ public class YMLConfig extends YamlConfiguration {
             Map<String, Object> subMap = ((ConfigurationSection) this.get(path)).getValues(true);
             try {
                 return (Map<String, T>) subMap;
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
 
             Map<String, T> result = new LinkedHashMap<>();
@@ -559,12 +562,12 @@ public class YMLConfig extends YamlConfiguration {
                 try {
                     result.put(key, (T) subMap.get(key));
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    log.warn(e.getMessage(), e);
                 }
             }
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
             return def;
         }
     }
@@ -586,16 +589,6 @@ public class YMLConfig extends YamlConfiguration {
         return loadEnumSet(path, def == null ? null : Arrays.asList(def), ItemFlag.class).toArray(new ItemFlag[0]);
     }
 
-    /*
-    @Contract("_, !null -> !null")
-    public @Nullable Sound loadSound(@NotNull String path, @Nullable Sound def) {
-        return loadEnum(path, def, Sound.class);
-    }
-
-    @Contract("_, !null -> !null")
-    public @Nullable Sound getSound(@NotNull String path, @Nullable Sound def) {
-        return getEnum(path, def, Sound.class);
-    }*/
 
     @Contract("_, !null -> !null")
     @Nullable

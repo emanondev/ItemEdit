@@ -2,6 +2,7 @@ package emanondev.itemedit.plugin;
 
 import emanondev.itemedit.APlugin;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.yaml.snakeyaml.Yaml;
@@ -10,6 +11,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 @Getter
+@Slf4j
 public class PluginAdditionalInfo {
 
     private final String modrinthProjectId;
@@ -41,7 +43,7 @@ public class PluginAdditionalInfo {
             foliaSupported = (Boolean) data.getOrDefault("folia-supported", false);
             bstatsPluginId = (Integer) data.get("bstats-plugin-id");
         } catch (Throwable e) {
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
         }
         this.spigotResourceId = spigotResourceId;
         this.modrinthProjectId = modrinthResourceId;
@@ -63,7 +65,7 @@ public class PluginAdditionalInfo {
             Map<String, Object> data = yaml.load(inputStream);
             return (T) data.getOrDefault(path, def);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
         }
         return def;
     }

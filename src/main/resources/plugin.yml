@@ -58,6 +58,9 @@ permissions:
     children:
       itemedit.itemedit.*: true
       itemedit.itemfood.*: true
+      itemedit.itemeditkinetic.*: true
+      itemedit.itemeditequipment.*: true
+      itemedit.itemeditpiercing.*: true
       itemedit.itemstorage.*: true
       itemedit.serveritem.*: true
       itemedit.itemeditreload: true
@@ -70,6 +73,9 @@ permissions:
     children:
       itemedit.itemedit.*: true
       itemedit.itemfood.*: true
+      itemedit.itemeditkinetic.*: true
+      itemedit.itemeditequipment.*: true
+      itemedit.itemeditpiercing.*: true
       itemedit.itemstorage.*: true
   itemedit.bypass.*:
     default: op

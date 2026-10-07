@@ -1,8 +1,8 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.command.AbstractCommand;
-import emanondev.itemedit.compability.Hooks;
 import emanondev.itemedit.utility.InventoryUtils;
+import lombok.extern.slf4j.Slf4j;
 import net.kyori.adventure.text.*;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+@Slf4j
 public final class Util {
 
     private Util() {

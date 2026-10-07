@@ -18,6 +18,7 @@ import io.lumine.mythic.bukkit.adapters.BukkitPlayer;
 import io.lumine.mythic.bukkit.adapters.item.ItemComponentBukkitItemStack;
 import io.lumine.mythic.bukkit.events.MythicDropLoadEvent;
 import io.lumine.mythic.bukkit.events.MythicMechanicLoadEvent;
+import lombok.extern.slf4j.Slf4j;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -30,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 
+@Slf4j
 public class MythicMobsListener implements Listener {
 
     @EventHandler
@@ -61,6 +63,7 @@ public class MythicMobsListener implements Listener {
     }
 }
 
+@Slf4j
 class ServerItemDrop implements IItemDrop, ILocationDrop {
     private final String id;
     private final int amount;
@@ -104,7 +107,7 @@ class ServerItemDrop implements IItemDrop, ILocationDrop {
                 return null;
             return new ItemComponentBukkitItemStack(item);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
             return null;
         }
     }

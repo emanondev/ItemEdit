@@ -3,6 +3,7 @@ package emanondev.itemedit.command;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.utility.CompleteUtility;
+import lombok.extern.slf4j.Slf4j;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -20,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+@Slf4j
 public class ItemEditImportCommand implements TabExecutor {
 
     private final ItemEdit plugin;

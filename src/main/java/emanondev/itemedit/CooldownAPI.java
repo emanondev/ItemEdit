@@ -1,6 +1,7 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.utility.VersionUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.jetbrains.annotations.NotNull;
@@ -12,6 +13,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class CooldownAPI {
 
     private final YMLConfig conf;
@@ -32,7 +34,7 @@ public class CooldownAPI {
                     }
                 } catch (Exception e) {
                     plugin.log("Corrupted path value for cooldown data on ");
-                    e.printStackTrace();
+                    log.warn(e.getMessage(), e);
                 }
             }
         }

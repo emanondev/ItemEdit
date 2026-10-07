@@ -3,6 +3,7 @@ package emanondev.itemedit;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import emanondev.itemedit.utility.SchedulerUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -15,6 +16,7 @@ import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.concurrent.Callable;
 
+@Slf4j
 public class UpdateChecker {
     private final APlugin plugin;
     private String newVersion;
@@ -61,7 +63,7 @@ public class UpdateChecker {
             plugin.log("<red>I/O error while checking " + sourceName + ": " + e.getMessage());
         } catch (Exception e) {
             plugin.log("<red>Unexpected error on " + sourceName + ".");
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
         }
         return false;
     }

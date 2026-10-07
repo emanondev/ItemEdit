@@ -16,6 +16,7 @@ import emanondev.itemedit.storage.yaml.YmlServerStorage;
 import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
 
+@Slf4j
 public class ItemEdit extends APlugin {
 
     private static ItemEdit plugin = null;
@@ -165,7 +167,7 @@ public class ItemEdit extends APlugin {
                 this.log("Hooking into PlaceHolderAPI");
                 new Placeholders().register();
             } catch (Throwable t) {
-                t.printStackTrace();
+                log.warn(t.getMessage(), t);
             }
         }
         if (Hooks.isShopGuiPlusEnabled()) {
@@ -173,7 +175,7 @@ public class ItemEdit extends APlugin {
                 this.log("Hooking into ShopGuiPlus");
                 new ShopGuiPlusItemProvider().register();
             } catch (Throwable t) {
-                t.printStackTrace();
+                log.warn(t.getMessage(), t);
             }
         }
         if (Hooks.isMythicMobsEnabled()) {
@@ -181,7 +183,7 @@ public class ItemEdit extends APlugin {
                 this.log("Hooking into MythicMobs");
                 registerListener(new MythicMobsListener());
             } catch (Throwable t) {
-                t.printStackTrace();
+                log.warn(t.getMessage(), t);
             }
         }
         if (Hooks.isItemBridgeEnabled()) {
@@ -189,7 +191,7 @@ public class ItemEdit extends APlugin {
                 this.log("Hooking into ItemBridge");
                 ItemBridgeItemProvider.setup(this);
             } catch (Throwable t) {
-                t.printStackTrace();
+                log.warn(t.getMessage(), t);
             }
         }
         if (Hooks.isDungeonMMOEnabled()) {
@@ -197,7 +199,7 @@ public class ItemEdit extends APlugin {
                 this.log("Hooking into DungeonMMO");
                 DungeonMMOItemProvider.register();
             } catch (Throwable t) {
-                t.printStackTrace();
+                log.warn(t.getMessage(), t);
             }
         }
     }

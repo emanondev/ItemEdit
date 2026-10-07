@@ -4,6 +4,7 @@ import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.gui.FireworkEditor;
 import emanondev.itemedit.utility.ItemBuilder;
+import lombok.extern.slf4j.Slf4j;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -11,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+@Slf4j
 public class Firework extends SubCmd {
 
     public Firework(ItemEditCommand cmd) {

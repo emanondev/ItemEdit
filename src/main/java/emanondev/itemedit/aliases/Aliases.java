@@ -3,6 +3,7 @@ package emanondev.itemedit.aliases;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.utility.TagContainer;
 import emanondev.itemedit.utility.VersionUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Registry;
@@ -18,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
+@Slf4j
 public class Aliases {
 
     private static final Map<String, IAliasSet<?>> types = new HashMap<>();
@@ -175,7 +177,7 @@ public class Aliases {
             registerAliasType(value);
             return value;
         } catch (Throwable t) {
-            t.printStackTrace();
+            log.warn(t.getMessage(), t);
             return null;
         }
     }

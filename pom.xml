@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>emanondev.itemedit</groupId>
     <artifactId>ItemEdit</artifactId>
-    <version>4.0.0-test3</version>
+    <version>4.0.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,20 +24,20 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <release>17</release>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.48</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
     <repositories>
-        <!-- Spigot -->
-<!--        <repository>-->
-<!--            <id>spigot-repo</id>-->
-<!--            <url>https://hub.spigotmc.org/nexus/content/repositories/public/</url>-->
-<!--        </repository>-->
-        <!-- Paper -->
         <repository>
             <id>papermc-repo</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
@@ -58,17 +58,6 @@
         </repository>
     </repositories>
     <dependencies>
-        <!-- MiniMessage -->
-<!--        <dependency>-->
-<!--            <groupId>net.kyori</groupId>-->
-<!--            <artifactId>adventure-text-minimessage</artifactId>-->
-<!--            <version>4.20.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>net.kyori</groupId>-->
-<!--            <artifactId>adventure-text-serializer-legacy</artifactId>-->
-<!--            <version>4.20.0</version>-->
-<!--        </dependency>-->
         <!-- ItemBridge -->
         <dependency>
             <groupId>com.github.jojodmo</groupId>
@@ -85,8 +74,14 @@
         <dependency>
             <groupId>com.github.LeonMangler</groupId>
             <artifactId>SuperVanish</artifactId>
-            <version>6.2.6-2</version>
+            <version>6.2.18-3</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>* </groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- Paper -->
         <dependency>
@@ -95,25 +90,18 @@
             <version>1.21.11-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Spigot -->
-<!--        <dependency>-->
-<!--            <groupId>org.spigotmc</groupId>-->
-<!--            <artifactId>spigot-api</artifactId>-->
-<!--            <version>1.21.11-R0.1-SNAPSHOT</version>-->
-<!--            <type>jar</type>-->
-<!--        </dependency>-->
         <!-- JetBrains Annotations -->
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>26.0.2</version>
+            <version>26.1.0</version>
             <scope>provided</scope>
         </dependency>
         <!-- Vault -->
         <dependency>
             <groupId>com.github.MilkBowl</groupId>
             <artifactId>VaultAPI</artifactId>
-            <version>1.7</version>
+            <version>1.7.1</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
@@ -126,7 +114,7 @@
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.11.6</version>
+            <version>2.11.7</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
@@ -139,7 +127,7 @@
         <dependency>
             <groupId>com.github.brcdev-minecraft</groupId>
             <artifactId>shopgui-api</artifactId>
-            <version>2.2.0</version>
+            <version>3.2.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>*</groupId>
@@ -151,7 +139,7 @@
         <dependency>
             <groupId>io.lumine</groupId>
             <artifactId>Mythic-Dist</artifactId>
-            <version>LATEST</version>
+            <version>5.12.2-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <!-- MongoDB -->
@@ -176,7 +164,14 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>1.18.48</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.20</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
