@@ -40,7 +40,7 @@ public class ReloadCommand implements TabExecutor {
     }
 
     public void sendPermissionLackMessage(@NotNull String permission, CommandSender sender) {
-        Util.sendMessage(sender, plugin.getTranslator().translate(sender, "lack-permission",
+        Util.sendMessage2(sender, plugin.getTranslator().translate(sender, "lack-permission",
                 "%permission%", permission));
     }
 
@@ -48,7 +48,7 @@ public class ReloadCommand implements TabExecutor {
     public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender.hasPermission(permission)) {
             plugin.onReload();
-            Util.sendMessage(sender, plugin.getTranslator().translate(sender,
+            Util.sendMessage2(sender, plugin.getTranslator().translate(sender,
                     plugin.getName().toLowerCase(Locale.ENGLISH) + "reload.success"));
         } else
             sendPermissionLackMessage(permission, sender);

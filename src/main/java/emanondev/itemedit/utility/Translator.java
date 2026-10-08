@@ -5,6 +5,8 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.YMLConfig;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -42,12 +44,12 @@ public class Translator {
         configurations.clear();
     }
 
-    public List<String> translateList(CommandSender target, String path, String... holders) {
+    public List<Component> translateList(CommandSender target, String path, String... holders) {
         return translateList(target, path, true, holders);
     }
 
     @SuppressWarnings("unchecked")
-    public List<String> translateList(CommandSender target, String path, boolean placeholderApi, String... holders) {
+    public List<Component> translateList(CommandSender target, String path, boolean placeholderApi, String... holders) {
         String locale = VersionUtils.isAfter(1, 12)
                 && isUseMultiLanguage()
                 && target instanceof Player ?
@@ -77,14 +79,14 @@ public class Translator {
         if (message == null) {
             return List.of();
         }
-        return UtilsString.fix(message, placeholderApi && target instanceof Player ? ((Player) target) : null, true, holders);
+        return UtilsString.fix2(message, placeholderApi && target instanceof Player ? ((Player) target) : null, true, holders);
     }
 
-    public String translate(CommandSender target, String path, String... holders) {
+    public Component translate(CommandSender target, String path, String... holders) {
         return translate(target, path, true, holders);
     }
 
-    public String translate(CommandSender target, String path, boolean placeholderApi, String... holders) {
+    public Component translate(CommandSender target, String path, boolean placeholderApi, String... holders) {
         String locale = VersionUtils.isAfter(1, 12)
                 && isUseMultiLanguage()
                 && target instanceof Player player ?
@@ -116,24 +118,24 @@ public class Translator {
         if (message == null) {
             return null;
         }
-        return UtilsString.fix(message, placeholderApi && target instanceof Player ? ((Player) target) : null, true, holders);
+        return UtilsString.fix2(message, placeholderApi && target instanceof Player ? ((Player) target) : null, true, holders);
     }
 
 
-    public String translateOrEmpty(CommandSender target, String path, String... holders) {
+    public Component translateOrEmpty(CommandSender target, String path, String... holders) {
         return translateOrEmpty(target, path, true, holders);
     }
 
-    public String translateOrEmpty(CommandSender target, String path, boolean placeholderApi, String... holders) {
-        String result = translate(target, path, placeholderApi, holders);
+    public Component translateOrEmpty(CommandSender target, String path, boolean placeholderApi, String... holders) {
+        Component result = translate(target, path, placeholderApi, holders);
         if (result == null) {
-            return "";
+            return Component.empty();
         }
         return result;
     }
 
     public void send(CommandSender target, String path, String... holders) {
-        Util.sendMessage(target, translate(target, path, holders));
+        Util.sendMessage2(target, translate(target, path, holders));
     }
 
     private List<YMLConfig> getLocaleFiles(String fullLocale) {

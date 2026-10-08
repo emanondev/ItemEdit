@@ -61,7 +61,7 @@ public class ItemEditImportCommand implements TabExecutor {
             case "itemeditor" -> {
                 File[] files = new File("plugins" + File.separator + "ItemEditor" + File.separator + "items").listFiles();
                 if (files == null || files.length == 0) {
-                    Util.sendMessage(sender, plugin.getTranslator()
+                    Util.sendMessage2(sender, plugin.getTranslator()
                             .translate(sender, "itemeditimport.itemeditor.import-empty"));
                     return true;
                 }
@@ -72,13 +72,13 @@ public class ItemEditImportCommand implements TabExecutor {
                     try {
                         ItemEdit.get().getServerStorage().validateID(name);
                     } catch (Exception e) {
-                        Util.sendMessage(sender, plugin.getTranslator()
+                        Util.sendMessage2(sender, plugin.getTranslator()
                                 .translate(sender, "itemeditimport.itemeditor.invalid-id",
                                         "%id%", name));
                         continue;
                     }
                     if (ItemEdit.get().getServerStorage().getItem(name) != null) {
-                        Util.sendMessage(sender, plugin.getTranslator()
+                        Util.sendMessage2(sender, plugin.getTranslator()
                                 .translate(sender, "itemeditimport.itemeditor.already-used-id",
                                         "%id%", name));
                         continue;
@@ -89,7 +89,7 @@ public class ItemEditImportCommand implements TabExecutor {
                         ItemEdit.get().getServerStorage().setItem(name, item);
                         importedIds.add(name);
                     } catch (Exception e) {
-                        Util.sendMessage(sender, plugin.getTranslator()
+                        Util.sendMessage2(sender, plugin.getTranslator()
                                 .translate(sender, "itemeditimport.itemeditor.unable-to-get-item",
                                         "%id%", name));
                         e.printStackTrace();
@@ -97,13 +97,13 @@ public class ItemEditImportCommand implements TabExecutor {
                     }
                 }
                 if (importedIds.isEmpty()) {
-                    Util.sendMessage(sender, plugin.getTranslator()
+                    Util.sendMessage2(sender, plugin.getTranslator()
                             .translate(sender, "itemeditimport.itemeditor.import-unsuccess",
                                     "%ids%", String.join(", ", importedIds),
                                     "%max%", String.valueOf(max),
                                     "%done%", String.valueOf(importedIds.size())));
                 } else {
-                    Util.sendMessage(sender, plugin.getTranslator()
+                    Util.sendMessage2(sender, plugin.getTranslator()
                             .translate(sender, "itemeditimport.itemeditor.import-success",
                                     "%ids%", String.join(", ", importedIds)
                                     , "%max%", String.valueOf(max),
@@ -112,7 +112,7 @@ public class ItemEditImportCommand implements TabExecutor {
                 return true;
             }
         }
-        Util.sendMessage(sender, plugin.getTranslator().translate(sender, "itemeditimport.help"));
+        Util.sendMessage2(sender, plugin.getTranslator().translate(sender, "itemeditimport.help"));
         return true;
     }
 

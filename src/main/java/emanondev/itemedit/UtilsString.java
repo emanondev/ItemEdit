@@ -3,6 +3,9 @@ package emanondev.itemedit;
 import emanondev.itemedit.compability.Hooks;
 import emanondev.itemedit.utility.ItemUtils;
 import me.clip.placeholderapi.PlaceholderAPI;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.JoinConfiguration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,8 +17,14 @@ import org.jetbrains.annotations.Nullable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class UtilsString {
+
+    private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
+    private static final Pattern LEGACY_CODE = Pattern.compile("(?i)([§&])([0-9a-fk-or])");
 
     private UtilsString() {
         throw new UnsupportedOperationException();
@@ -74,14 +83,18 @@ public final class UtilsString {
             }
         }
 
-        // apply holders and colors for title and lore
-        title = fix(title, p, color, holders);
-        lore = fix(lore, p, color, holders);
-
         // apply title and lore to item
         ItemMeta meta = ItemUtils.getMeta(item);
-        meta.setDisplayName(title);
-        meta.setLore(lore);
+        meta.displayName(fix2(title, p, color, holders));
+        if (lore == null) {
+            meta.lore(null);
+        } else {
+            List<Component> componentLore = new ArrayList<>(lore.size());
+            for (String line : lore) {
+                componentLore.add(fix2(line, p, color, holders));
+            }
+            meta.lore(componentLore);
+        }
         item.setItemMeta(meta);
 
     }
@@ -102,6 +115,26 @@ public final class UtilsString {
         ArrayList<String> newList = new ArrayList<>();
         for (String line : list) {
             newList.add(fix(line, player, color, holders));
+        }
+        return newList;
+    }
+
+    /**
+     * @param list    raw text
+     * @param player  player or null for placeHolderApi use
+     * @param color   translate colors
+     * @param holders additional placeholders, must be even number with the format
+     *                "to replace#1","replacer#1","to replace#2","replacer#2"....
+     * @return a new list with fixed text, or null if list was null
+     */
+    @Contract("!null, _, _, _ -> !null")
+    public static @Nullable ArrayList<Component> fix2(@Nullable List<String> list, @Nullable Player player, boolean color, String... holders) {
+        if (list == null) {
+            return null;
+        }
+        ArrayList<Component> newList = new ArrayList<>();
+        for (String line : list) {
+            newList.add(fix2(line, player, color, holders));
         }
         return newList;
     }
@@ -130,6 +163,7 @@ public final class UtilsString {
     }
 
     @Contract("!null, _, _, _ -> !null")
+    @Deprecated
     public static String fix(@Nullable String text, @Nullable Player player, boolean color, String... holders) {
         if (text == null)
             return null;
@@ -147,9 +181,72 @@ public final class UtilsString {
             text = PlaceholderAPI.setPlaceholders(player, text);
         }
 
-        //TODO legacy colors to MM colors
-
         return text;
+    }
+
+    @Contract("!null, _, _, _ -> !null")
+    public static @Nullable Component fix2(@Nullable String text, @Nullable Player player, boolean color, String... holders) {
+        String fixed = fix(text, player, color, holders);
+        if (fixed == null) {
+            return null;
+        }
+        return MINI_MESSAGE.deserialize(legacyToMiniMessage(fixed, color));
+    }
+
+    public static Component toSingleComponent(@Nullable List<Component> components) {
+        if (components == null || components.isEmpty()) {
+            return null;
+        }
+
+        List<Component> lines = components.stream()
+                .filter(Objects::nonNull)
+                .toList();
+        if (lines.isEmpty()) {
+            return null;
+        }
+
+        return Component.join(JoinConfiguration.separator(Component.newline()), lines);
+    }
+
+    private static String legacyToMiniMessage(String text, boolean color) {
+        Matcher matcher = LEGACY_CODE.matcher(text);
+        StringBuilder result = new StringBuilder();
+        while (matcher.find()) {
+            char prefix = matcher.group(1).charAt(0);
+            if (prefix == '&' && !color) {
+                matcher.appendReplacement(result, Matcher.quoteReplacement(matcher.group()));
+                continue;
+            }
+
+            String tag = switch (matcher.group(2).toLowerCase()) {
+                case "0" -> "black";
+                case "1" -> "dark_blue";
+                case "2" -> "dark_green";
+                case "3" -> "dark_aqua";
+                case "4" -> "dark_red";
+                case "5" -> "dark_purple";
+                case "6" -> "gold";
+                case "7" -> "gray";
+                case "8" -> "dark_gray";
+                case "9" -> "blue";
+                case "a" -> "green";
+                case "b" -> "aqua";
+                case "c" -> "red";
+                case "d" -> "light_purple";
+                case "e" -> "yellow";
+                case "f" -> "white";
+                case "k" -> "obfuscated";
+                case "l" -> "bold";
+                case "m" -> "strikethrough";
+                case "n" -> "underlined";
+                case "o" -> "italic";
+                case "r" -> "reset";
+                default -> throw new IllegalStateException("Unexpected legacy formatting code");
+            };
+            matcher.appendReplacement(result, Matcher.quoteReplacement("<" + tag + ">"));
+        }
+        matcher.appendTail(result);
+        return result.toString();
     }
 
     /**

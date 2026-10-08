@@ -8,10 +8,8 @@ import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
@@ -149,19 +147,10 @@ public abstract class AbstractCommand implements TabExecutor {
             } catch (Throwable t) {
                 subCmd.onFail(sender, label);
                 Util.logCommandError(this, args, sender);
-                System.out.println("A");
-                t.printStackTrace();
-                System.out.println("B");
-                System.out.println("" + t.getMessage());
-                System.out.println("" + t.getStackTrace());
-                System.out.println("C");
                 getPlugin().getLogger().info(
                         String.join("\n",
                                 Arrays.stream(t.getStackTrace()).map(StackTraceElement::toString).toList()));
                 t.printStackTrace();
-                System.out.println(
-                        String.join("\n",
-                                Arrays.stream(t.getStackTrace()).map(StackTraceElement::toString).toList()));
             }
         }
         return true;
@@ -227,7 +216,8 @@ public abstract class AbstractCommand implements TabExecutor {
     }
 
     protected String getLanguageString(String path, CommandSender sender, String... holders) {
-        return getPlugin().getTranslator().translateOrEmpty(sender, this.PATH + "." + path, holders);
+        return MiniMessage.miniMessage().serialize(
+                getPlugin().getTranslator().translateOrEmpty(sender, this.PATH + "." + path, holders));
     }
 
     @Contract("null,_,_-> false")
@@ -302,15 +292,12 @@ public abstract class AbstractCommand implements TabExecutor {
         }
 
         public void help(CommandSender sender, String alias, SubCmd sub) {
-            Util.sendMessage(sender,
-                    this.translateOrEmpty("header-sub",
-                            sender, "%sub%", sub.getName()) +
-                            "\n" +
-                            "<dark_green>/" + alias + " <green>" + sub.getName() + " " +
-                            sub.translateOrEmpty("params", sender) +
-                            "\n" +
-                            sub.getDescription(sender)
-            );
+            MiniMessage miniMessage = MiniMessage.miniMessage();
+            String message = miniMessage.serialize(this.translateOrEmpty("header-sub", sender, "%sub%", sub.getName()))
+                    + "\n<dark_green>/" + alias + " <green>" + sub.getName() + " "
+                    + miniMessage.serialize(sub.translateOrEmpty("params", sender))
+                    + "\n" + miniMessage.serialize(sub.getDescription(sender));
+            Util.sendMessage(sender, message);
         }
 
         public void help(CommandSender sender, String alias, int page) {
@@ -322,12 +309,14 @@ public abstract class AbstractCommand implements TabExecutor {
             int maxPage = getMaxPageFor(cmds.size());
             page = Math.max(1, Math.min(maxPage, page));
 
-            StringBuilder body = new StringBuilder(this.translateOrEmpty("header", sender)).append("<reset>\n");
+            MiniMessage miniMessage = MiniMessage.miniMessage();
+            StringBuilder body = new StringBuilder(miniMessage.serialize(this.translateOrEmpty("header", sender)))
+                    .append("<reset>\n");
 
             for (SubCmd cmd : cmds.subList(commandPerPage * (page - 1), Math.min(cmds.size(), commandPerPage * page))) {
                 body.append(cmd.getHelp(sender, alias)).append("<reset>\n");
             }
-            body.append(this.translateOrEmpty("footer", sender));
+            body.append(miniMessage.serialize(this.translateOrEmpty("footer", sender)));
 
 
             Util.sendMessage(sender, injectClickablePages(body.toString(), sender, alias, page, maxPage));
@@ -363,10 +352,11 @@ public abstract class AbstractCommand implements TabExecutor {
             text = text.replace("%page%", String.valueOf(page))
                     .replace("%max_page%", String.valueOf(maxPage));
             Translator translator = getPlugin().getTranslator();
+            MiniMessage miniMessage = MiniMessage.miniMessage();
             if (text.contains("%prev_clickable%")) {
                 String clickable;
                 if (page > 1) {
-                    clickable = Util.asHover(Util.asExecuteCommand(
+                    Component component = Util.asHover(Util.asExecuteCommand(
                                     translator.translateOrEmpty(sender, "generic.help.prev_text",
                                             "%target%", String.valueOf(page - 1),
                                             "%page%", String.valueOf(page)),
@@ -375,16 +365,17 @@ public abstract class AbstractCommand implements TabExecutor {
                                     "%target%", String.valueOf(page - 1),
                                     "%page%", String.valueOf(page),
                                     "%max_page%", String.valueOf(maxPage)));
+                    clickable = miniMessage.serialize(component);
                 } else {
-                    clickable = translator.translateOrEmpty(sender, "generic.help.prev_void",
-                            "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage));
+                    clickable = miniMessage.serialize(translator.translateOrEmpty(sender, "generic.help.prev_void",
+                            "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage)));
                 }
-                text = text.replace("%prev_clickable%", "<reset>"+clickable+"<reset>");
+                text = text.replace("%prev_clickable%", "<reset>" + clickable + "<reset>");
             }
             if (text.contains("%next_clickable%")) {
                 String clickable;
                 if (page < maxPage) {
-                    clickable = Util.asHover(Util.asExecuteCommand(
+                    Component component = Util.asHover(Util.asExecuteCommand(
                                     translator.translateOrEmpty(sender, "generic.help.next_text",
                                             "%target%", String.valueOf(page + 1),
                                             "%page%", String.valueOf(page)),
@@ -393,11 +384,12 @@ public abstract class AbstractCommand implements TabExecutor {
                                     "%target%", String.valueOf(page + 1),
                                     "%page%", String.valueOf(page),
                                     "%max_page%", String.valueOf(maxPage)));
+                    clickable = miniMessage.serialize(component);
                 } else {
-                    clickable = translator.translateOrEmpty(sender, "generic.help.next_void",
-                            "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage));
+                    clickable = miniMessage.serialize(translator.translateOrEmpty(sender, "generic.help.next_void",
+                            "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage)));
                 }
-                text = text.replace("%next_clickable%", "<reset>"+clickable+"<reset>");
+                text = text.replace("%next_clickable%", "<reset>" + clickable + "<reset>");
             }
             return text;
         }

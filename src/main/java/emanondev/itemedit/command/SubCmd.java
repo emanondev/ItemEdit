@@ -1,14 +1,13 @@
 package emanondev.itemedit.command;
 
-import emanondev.itemedit.APlugin;
-import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
-import emanondev.itemedit.YMLConfig;
+import emanondev.itemedit.*;
 import emanondev.itemedit.aliases.IAliasSet;
 import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -62,18 +61,19 @@ public abstract class SubCmd {
 
     public @NotNull String getHelp(@NotNull CommandSender sender, @NotNull String alias) {
         String help = "<dark_green>/" + alias + " <green>" + this.name + " ";
-        String params = translateOrEmpty("params", sender);
+        Component params = translateOrEmpty("params", sender);
         return Util.asHover(Util.asSuggestCommand(
-                help + (params == null ? "" : params),
+                help + (params == null ? "" : MiniMessage.miniMessage().serialize(params)),
                 "/" + alias + " " + this.name + " "
         ), getDescription(sender));
     }
 
     public void onFail(@NotNull CommandSender target, @NotNull String alias) {
-        String params = translateOrEmpty("params", target);
+        Component params = translateOrEmpty("params", target);
+        String paramsText = params == null ? "" : MiniMessage.miniMessage().serialize(params);
         String feedback = Util.asHover(Util.asSuggestCommand(
-                        "<red>/" + alias + " " + this.name + " " + params,
-                        "/" + alias + " " + this.name + " " + params),
+                        "<red>/" + alias + " " + this.name + " " + paramsText,
+                        "/" + alias + " " + this.name + " " + paramsText),
                 getDescription(target));
         Util.sendMessage(target, feedback);
     }
@@ -90,122 +90,129 @@ public abstract class SubCmd {
         ItemUtils.setHandItem(p, item);
     }
 
-    protected String craftFailFeedback(String alias, String params, List<String> desc) {
+    protected Component craftFailFeedback(String alias, String params, List<Component> desc) {
         if (params == null) {
             params = "";
         }
-        return Util.asHover(Util.asSuggestCommand(
-                        "<red>/" + alias + " " + this.name + " " + params,
-                        "/" + alias + " " + this.name + " " + params),
-                desc);
+        Component hover = null;
+        if (desc != null) {
+            List<Component> lines = desc.stream().filter(java.util.Objects::nonNull).toList();
+            if (!lines.isEmpty()) {
+                hover = Component.join(net.kyori.adventure.text.JoinConfiguration.newlines(), lines);
+            }
+        }
+        Component text = MiniMessage.miniMessage().deserialize(
+                "<red>/" + alias + " " + this.name + " " + params);
+        return Util.asHover(Util.asSuggestCommand(text, "/" + alias + " " + this.name + " " + params), hover);
     }
 
     protected void onSubFail(CommandSender target, String alias, String subSubCommand) {
-        String params = translate(subSubCommand + ".params", target);
-        Util.sendMessage(target, craftFailFeedback(alias, subSubCommand
-                        + ((params == null || params.isEmpty()) ? "" : " " + params),
+        Component params = translate(subSubCommand + ".params", target);
+        String paramsText = params == null ? "" : MiniMessage.miniMessage().serialize(params);
+        Util.sendMessage2(target, craftFailFeedback(alias, subSubCommand
+                        + ((!Util.hasRenderableContent(params)) ? "" : " " + paramsText),
                 translateList(subSubCommand + ".description", target)));
     }
 
     protected <T> void onWrongAlias(CommandSender sender, IAliasSet<T> set, String... holders) {
         Translator pluginTranslator = getPlugin().getTranslator();
         Translator itemeditTranslator = ItemEdit.get().getTranslator();
-        String msg = pluginTranslator.translate(sender, "generic.wrongalias." + set.getId(), holders);
-        if (msg == null || msg.isEmpty()) {
+        Component msg = pluginTranslator.translate(sender, "generic.wrongalias." + set.getId(), holders);
+        if (!Util.hasRenderableContent(msg)) {
             return;
         }
-        StringBuilder hover = new StringBuilder(itemeditTranslator.translate(sender, "generic.wrongalias.error-pre-hover") + "\n");
+        Component hover = itemeditTranslator.translate(sender, "generic.wrongalias.error-pre-hover")
+                .append(Component.newline());
 
-        String color1 = itemeditTranslator.translate(sender, "generic.wrongalias.first_color");
-        String color2 = itemeditTranslator.translate(sender, "generic.wrongalias.second_color");
+        Component color1 = itemeditTranslator.translate(sender, "generic.wrongalias.first_color");
+        Component color2 = itemeditTranslator.translate(sender, "generic.wrongalias.second_color");
         boolean color = true;
         int counter = 0;
         for (T value : set.getValues()) {
             String alias = set.getName(value);
             counter += alias.length() + 1;
-            hover.append(color ? color1 : color2).append(alias);
+            hover = hover.append(color ? color1 : color2).append(Component.text(alias));
             color = !color;
             if (counter > 30) {
                 counter = 0;
-                hover.append("\n");
+                hover = hover.append(Component.newline());
             } else {
-                hover.append(" ");
+                hover = hover.append(Component.space());
             }
         }
         String command = "/" + ItemEditCommand.get().getName() + " "
                 + ItemEdit.get().getConfig("commands.yml")
                 .getString("itemedit.listaliases.name") + " " + set.getId();
-        sender.sendMessage(Util.asHover(Util.asSuggestCommand(
-                msg, command), hover.toString()));
+        sender.sendMessage(Util.asHover(Util.asSuggestCommand(msg, command), hover));
     }
 
     @Deprecated
     protected <T> void onWrongAlias(String pathMessage, CommandSender sender, IAliasSet<T> set, String... holders) {
-        String msg = translate(pathMessage, sender, holders);
-        if (msg == null || msg.isEmpty()) {
+        Component msg = translate(pathMessage, sender, holders);
+        if (!Util.hasRenderableContent(msg)) {
             return;
         }
         Translator translator = getPlugin().getTranslator();
-        StringBuilder hover = new StringBuilder(translator.translateOrEmpty(sender, "wrongalias.error-pre-hover")).append("\n");
+        Component hover = translator.translateOrEmpty(sender, "wrongalias.error-pre-hover")
+                .append(Component.newline());
 
-        String color1 = translator.translateOrEmpty(sender, "wrongalias.first_color");
-        String color2 = translator.translateOrEmpty(sender, "wrongalias.second_color");
+        Component color1 = translator.translateOrEmpty(sender, "wrongalias.first_color");
+        Component color2 = translator.translateOrEmpty(sender, "wrongalias.second_color");
         boolean color = true;
         int counter = 0;
         for (T value : set.getValues()) {
             String alias = set.getName(value);
             counter += alias.length() + 1;
-            hover.append(color ? color1 : color2).append(alias);
+            hover = hover.append(color ? color1 : color2).append(Component.text(alias));
             color = !color;
             if (counter > 30) {
                 counter = 0;
-                hover.append("\n");
+                hover = hover.append(Component.newline());
             } else {
-                hover.append(" ");
+                hover = hover.append(Component.space());
             }
         }
         String command = "/" + ItemEditCommand.get().getName() + " "
                 + ItemEdit.get().getConfig("commands.yml")
                 .getString("itemedit.listaliases.name") + " " + set.getId();
 
-        sender.sendMessage(Util.asHover(Util.asSuggestCommand(
-                msg, command), hover.toString()));
+        sender.sendMessage(Util.asHover(Util.asSuggestCommand(msg, command), hover));
     }
 
-    protected String translate(String path, CommandSender sender, String... holders) {
+    protected Component translate(String path, CommandSender sender, String... holders) {
         return getPlugin().getTranslator().translate(sender, this.PATH + path, holders);
     }
 
-    protected String translateOrEmpty(String path, CommandSender sender, String... holders) {
+    protected Component translateOrEmpty(String path, CommandSender sender, String... holders) {
         return getPlugin().getTranslator().translateOrEmpty(sender, this.PATH + path, holders);
     }
 
     protected void onSuccess(CommandSender sender, String... holders) {
-        Util.sendMessage(sender, translate(this.PATH + "feedback", sender, holders));
+        Util.sendMessage2(sender, translate(this.PATH + "feedback", sender, holders));
     }
 
     protected void onSubSuccess(CommandSender sender, String subSubCommand, String... holders) {
-        Util.sendMessage(sender, translate(this.PATH + subSubCommand + ".feedback", sender, holders));
+        Util.sendMessage2(sender, translate(this.PATH + subSubCommand + ".feedback", sender, holders));
     }
 
     protected void sendFeedback(CommandSender target,
                                 @NotNull String feedbackPath,
                                 String... holders) {
-        Util.sendMessage(target, this.translate(this.PATH + feedbackPath, target, holders));
+        Util.sendMessage2(target, this.translate(this.PATH + feedbackPath, target, holders));
     }
 
     protected void sendSubFeedback(CommandSender target,
                                    @NotNull String subSubCommand,
                                    @NotNull String feedbackPath,
                                    String... holders) {
-        Util.sendMessage(target, this.translate(this.PATH + subSubCommand + "." + feedbackPath, target, holders));
+        Util.sendMessage2(target, this.translate(this.PATH + subSubCommand + "." + feedbackPath, target, holders));
     }
 
     protected void sendLanguageString(String path, CommandSender sender, String... holders) {
-        Util.sendMessage(sender, translate(path, sender, holders));
+        Util.sendMessage2(sender, translate(path, sender, holders));
     }
 
-    protected List<String> translateList(String path, CommandSender sender, String... holders) {
+    protected List<Component> translateList(String path, CommandSender sender, String... holders) {
         return getPlugin().getTranslator().translateList(sender, this.PATH + path, holders);
     }
 
@@ -217,8 +224,9 @@ public abstract class SubCmd {
         return config.loadInteger(this.PATH + path, 0);
     }
 
-    protected String getDescription(@NotNull CommandSender target) {
-        return String.join("\n", translateList("description", target));
+    protected Component getDescription(@NotNull CommandSender target) {
+        Component description = UtilsString.toSingleComponent(translateList("description", target));
+        return description == null ? Component.empty() : description;
     }
 
     protected void updateView(@NotNull Player player) {

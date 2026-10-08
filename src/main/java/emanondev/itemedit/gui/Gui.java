@@ -3,6 +3,8 @@ package emanondev.itemedit.gui;
 import emanondev.itemedit.APlugin;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.utility.ItemUtils;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -95,6 +97,11 @@ public interface Gui extends InventoryHolder {
 
     default String getLanguageMessage(@NotNull String fullPath,
                                       String... holders) {
+        return LegacyComponentSerializer.legacySection().serialize(getLanguageComponent(fullPath, holders));
+    }
+
+    default Component getLanguageComponent(@NotNull String fullPath,
+                                           String... holders) {
         return getPlugin().getTranslator().translateOrEmpty(getTargetPlayer(), fullPath, holders);
     }
 
@@ -118,10 +125,10 @@ public interface Gui extends InventoryHolder {
         if (meta == null) {
             return null;
         }
-        List<String> list = getPlugin().getTranslator().translateList(getTargetPlayer(), fullPath, holders);
-        meta.setDisplayName(list == null || list.isEmpty() ? " " : list.get(0));
-        if (list != null && !list.isEmpty()) {
-            meta.setLore(list.subList(1, list.size()));
+        List<Component> list = getPlugin().getTranslator().translateList(getTargetPlayer(), fullPath, holders);
+        meta.displayName(list == null || list.isEmpty() ? Component.text(" ") : list.get(0));
+        if (list != null && list.size() > 1) {
+            meta.lore(list.subList(1, list.size()));
         }
         return meta;
     }

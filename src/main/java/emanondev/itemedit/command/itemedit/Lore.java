@@ -231,13 +231,13 @@ public class Lore extends SubCmd {
 
     private void lorePaste(Player p, ItemStack item, String alias, String[] args) {
         if (!copies.containsKey(p.getUniqueId())) {
-            Util.sendMessage(p, this.translate("paste.no-copy", p));
+            Util.sendMessage2(p, this.translate("paste.no-copy", p));
             return;
         }
         ItemMeta meta = ItemUtils.getMeta(item);
         meta.setLore(copies.get(p.getUniqueId()));
         item.setItemMeta(meta);
-        Util.sendMessage(p, this.translate("paste.feedback", p));
+        Util.sendMessage2(p, this.translate("paste.feedback", p));
         updateView(p);
     }
 
@@ -254,7 +254,7 @@ public class Lore extends SubCmd {
             lore = new ArrayList<>();
 
         copies.put(p.getUniqueId(), lore);
-        Util.sendMessage(p, this.translate("copy.feedback", p));
+        Util.sendMessage2(p, this.translate("copy.feedback", p));
     }
 
     private void loreCopyBook(Player p, ItemStack item, String alias, String[] args) {
@@ -280,22 +280,22 @@ public class Lore extends SubCmd {
         }
         lore.replaceAll(text -> Util.formatText(p, text, getPermission()));
         copies.put(p.getUniqueId(), lore);
-        Util.sendMessage(p, this.translate("copyBook.feedback", p));
+        Util.sendMessage2(p, this.translate("copyBook.feedback", p));
     }
 
     private void loreCopyFile(Player p, ItemStack item, String alias, String[] args) {
         if (args.length < 2) {
-            Util.sendMessage(p, this.translate("copyFile.no-path", p));
+            Util.sendMessage2(p, this.translate("copyFile.no-path", p));
             return;
         }
         if (!loreCopy.contains(args[2])) {
-            Util.sendMessage(p, this.translate("copyFile.wrong-path", p));
+            Util.sendMessage2(p, this.translate("copyFile.wrong-path", p));
             return;
         }
         List<String> lore = new ArrayList<>(loreCopy.getStringList(args[2]));
         lore.replaceAll(text -> Util.formatText(p, text, getPermission()));
         copies.put(p.getUniqueId(), lore);
-        Util.sendMessage(p, this.translate("copyFile.feedback", p));
+        Util.sendMessage2(p, this.translate("copyFile.feedback", p));
     }
 
     // /itemedit lore add

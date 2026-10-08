@@ -8,6 +8,7 @@ import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemBuilder;
 import emanondev.itemedit.utility.VersionUtils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -35,9 +36,9 @@ public class PotionEffectEditor extends SubCmd {
                 && (VersionUtils.isUpTo(1, 14) || !item.isMetaClass(SuspiciousStewMeta.class))) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_potion_effect_applicable");
             if (p.hasPermission("itemedit.admin")) {
-                String msg = this.translate("itemtag-tip", sender);
-                if (msg != null && !msg.isEmpty()) {
-                    Util.sendMessage(p, Util.asHover(Util.asOpenUrl(
+                Component msg = this.translate("itemtag-tip", sender);
+                if (Util.hasRenderableContent(msg)) {
+                    Util.sendMessage2(p, Util.asHover(Util.asOpenUrl(
                             msg,
                             "https://modrinth.com/plugin/itemtag"
                     ), this.translate("itemtag-tip-hover", p)));

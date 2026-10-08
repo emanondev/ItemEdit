@@ -4,6 +4,8 @@ import emanondev.itemedit.command.AbstractCommand;
 import emanondev.itemedit.utility.InventoryUtils;
 import lombok.extern.slf4j.Slf4j;
 import net.kyori.adventure.text.*;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 @Slf4j
@@ -39,18 +42,36 @@ public final class Util {
      * @param sender
      * @param message
      */
+    @Deprecated
     public static void sendMessage(@NotNull CommandSender sender, String message) {
         if (message == null || message.isEmpty()) {
             return;
         }
-        sendMessage(sender, MiniMessage.miniMessage().deserialize(message));
+        sendMessage2(sender, MiniMessage.miniMessage().deserialize(message));
     }
 
+    @Deprecated
     public static void sendMessage(@NotNull CommandSender sender, List<String> message) {
         if (message == null || message.isEmpty()) {
             return;
         }
         sendMessage(sender, String.join("\n", message));
+    }
+
+    public static void sendMessage2(@NotNull CommandSender sender, List<Component> message) {
+        if (message == null || message.isEmpty()) {
+            return;
+        }
+
+        List<Component> lines = message.stream()
+                .filter(Objects::nonNull)
+                .toList();
+        if (lines.isEmpty()) {
+            return;
+        }
+
+        Component combined = Component.join(JoinConfiguration.separator(Component.newline()), lines);
+        sendMessage2(sender, combined);
     }
 
     /**
@@ -59,7 +80,7 @@ public final class Util {
      * @param sender
      * @param message
      */
-    public static void sendMessage(@NotNull CommandSender sender, Component message) {
+    public static void sendMessage2(@NotNull CommandSender sender, Component message) {
         if (!hasRenderableContent(message)) {
             return;
         }
@@ -252,11 +273,19 @@ public final class Util {
         return "<click:suggest_command:'" + command.replace("'", "''") + "'>" + text + "</click>";
     }
 
+    public static Component asSuggestCommand(Component text, @Nullable String command) {
+        return command == null || command.isEmpty() ? text : text.clickEvent(ClickEvent.suggestCommand(command));
+    }
+
     public static String asExecuteCommand(String text, @Nullable String command) {
         if (command == null || command.isEmpty()) {
             return text;
         }
         return "<click:run_command:'" + command.replace("'", "''") + "'>" + text + "</click>";
+    }
+
+    public static Component asExecuteCommand(Component text, @Nullable String command) {
+        return command == null || command.isEmpty() ? text : text.clickEvent(ClickEvent.runCommand(command));
     }
 
     public static String asCopyToClipboard(String text, @Nullable String copied) {
@@ -266,6 +295,10 @@ public final class Util {
         return "<click:copy_to_clipboard:'" + copied.replace("'", "''") + "'>" + text + "</click>";
     }
 
+    public static Component asCopyToClipboard(Component text, @Nullable String copied) {
+        return copied == null || copied.isEmpty() ? text : text.clickEvent(ClickEvent.copyToClipboard(copied));
+    }
+
     public static String asOpenUrl(String text, @Nullable String url) {
         if (url == null || url.isEmpty()) {
             return text;
@@ -273,11 +306,38 @@ public final class Util {
         return "<click:open_url:'" + url.replace("'", "''") + "'>" + text + "</click>";
     }
 
+    public static Component asOpenUrl(Component text, @Nullable String url) {
+        return url == null || url.isEmpty() ? text : text.clickEvent(ClickEvent.openUrl(url));
+    }
+
     public static String asHover(String text, @Nullable String hover) {
         if (hover == null || hover.isEmpty()) {
             return text;
         }
         return "<hover:show_text:'" + hover.replace("'", "''") + "'>" + text + "</hover>";
+    }
+
+    public static String asHover(String text, @Nullable Component hover) {
+        if (hover == null) {
+            return text;
+        }
+        return asHover(text, MiniMessage.miniMessage().serialize(hover));
+    }
+
+    public static Component asHover(Component text, @Nullable Component hover) {
+        return hover == null ? text : text.hoverEvent(HoverEvent.showText(hover));
+    }
+
+    public static Component asHover(Component text, @Nullable String hover) {
+        return hover == null || hover.isEmpty()
+                ? text
+                : asHover(text, MiniMessage.miniMessage().deserialize(hover));
+    }
+
+    public static Component asHover(Component text, @Nullable List<Component> hover) {
+        return hover == null || hover.isEmpty()
+                ? text
+                : asHover(text, Component.join(JoinConfiguration.newlines(), hover));
     }
 
     public static String asHover(String text, @Nullable List<String> hover) {

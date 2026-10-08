@@ -6,6 +6,7 @@ import emanondev.itemedit.aliases.IAliasSet;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,28 +40,32 @@ public class ListAliases extends SubCmd {
     }
 
     private void oneArg(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
-        String prefix = translate("prefix_line", sender);
-        String postfix = translate("postfix_line", sender);
-        String colorOne = translate("first_color", sender);
-        String colorTwo = translate("second_color", sender);
-        String hover = translate("hover_type", sender);
-        StringBuilder feedback = new StringBuilder((prefix != null && !prefix.isEmpty()) ? prefix + "\n" : "");
+        Component prefix = translate("prefix_line", sender);
+        Component postfix = translate("postfix_line", sender);
+        Component colorOne = translate("first_color", sender);
+        Component colorTwo = translate("second_color", sender);
+        Component hover = translate("hover_type", sender);
+        Component feedback = Component.empty();
+        if (Util.hasRenderableContent(prefix)) {
+            feedback = feedback.append(prefix).appendNewline();
+        }
         boolean counter = true;
         List<String> values = new ArrayList<>(Aliases.getTypes().keySet());
         Collections.sort(values);
         for (String id : values) {
-            feedback.append(
-                    Util.asHover(Util.asSuggestCommand(
-                                    (counter ? colorOne : colorTwo) + id,
-                                    "/" + alias + " " + this.getName() + " " + id),
-                            hover)
-            ).append(" ");
+            Component label = counter ? colorOne : colorTwo;
+            if (label == null) {
+                label = Component.empty();
+            }
+            Component clickable = Util.asSuggestCommand(label.append(Component.text(id)),
+                    "/" + alias + " " + this.getName() + " " + id);
+            feedback = feedback.append(Util.asHover(clickable, hover)).appendSpace();
             counter = !counter;
         }
-        if (postfix != null && !postfix.isEmpty()) {
-            feedback.append("\n").append(postfix);
+        if (Util.hasRenderableContent(postfix)) {
+            feedback = feedback.appendNewline().append(postfix);
         }
-        Util.sendMessage(sender, feedback.toString());
+        Util.sendMessage2(sender, feedback);
     }
 
     @SuppressWarnings({"deprecation", "unchecked", "rawtypes"})
@@ -71,24 +76,30 @@ public class ListAliases extends SubCmd {
             return;
         }
 
-        String prefix = translate("prefix_line", sender);
-        String postfix = translate("postfix_line", sender);
-        String colorOne = translate("first_color", sender);
-        String colorTwo = translate("second_color", sender);
-        String hover = translate("hover_info", sender, "%default%", "%default%");
-
-        StringBuilder feedback = new StringBuilder((prefix != null && !prefix.isEmpty()) ? prefix + "\n" : "");
+        Component prefix = translate("prefix_line", sender);
+        Component postfix = translate("postfix_line", sender);
+        Component colorOne = translate("first_color", sender);
+        Component colorTwo = translate("second_color", sender);
+        Component feedback = Component.empty();
+        if (Util.hasRenderableContent(prefix)) {
+            feedback = feedback.append(prefix).appendNewline();
+        }
         boolean counter = true;
         for (String aliasS : (List<String>) set.getAliases()) {
-            feedback.append(Util.asHover((counter ? colorOne : colorTwo) + aliasS,
-                            hover.replace("%default%", set.getName(set.convertAlias(aliasS)))))
-                    .append(" ");
+            Component label = counter ? colorOne : colorTwo;
+            if (label == null) {
+                label = Component.empty();
+            }
+            String defaultName = set.getName(set.convertAlias(aliasS));
+            Component hover = translate("hover_info", sender, "%default%", defaultName);
+            Component clickable = label.append(Component.text(aliasS));
+            feedback = feedback.append(Util.asHover(clickable, hover)).appendSpace();
             counter = !counter;
         }
-        if (postfix != null && !postfix.isEmpty()) {
-            feedback.append("\n").append(postfix);
+        if (Util.hasRenderableContent(postfix)) {
+            feedback = feedback.appendNewline().append(postfix);
         }
-        Util.sendMessage(sender, feedback.toString());
+        Util.sendMessage2(sender, feedback);
     }
 
 }
