@@ -169,64 +169,6 @@ public abstract class APlugin extends JavaPlugin {
      */
     public abstract void disable();
 
-    /**
-     * You can update configuration by overriding this method.
-     * configuration version is saved as int on {@code config.yml} at path {@code config-version},
-     * if not specified it's {@code 1}.
-     *
-     * @param oldConfigVersion old configuration version you update from
-     */
-    protected void updateConfigurations(int oldConfigVersion) {
-    }
-
-    /**
-     * @see #languagesMetricsIsAdmin()
-     * @see #languagesMetricsIsUser()
-     */
-    protected boolean addLanguagesMetrics() {
-        return false;
-    }
-
-    protected @NotNull Predicate<Player> languagesMetricsIsAdmin() {
-        return ServerOperator::isOp;
-    }
-
-    protected @NotNull Predicate<Player> languagesMetricsIsUser() {
-        return player -> true;
-    }
-
-    /**
-     * Reloads all configuration files and updates their references.
-     */
-    protected void reloadConfigs() {
-        boolean check = false;
-        for (YMLConfig conf : configs.values())
-            try {
-                if (conf.getFile().exists()) {
-                    conf.reload();
-                } else {
-                    check = true;
-                }
-            } catch (Exception e) {
-                log.warn(e.getMessage(), e);
-            }
-        if (check) {
-            ArrayList<String> toRemove = new ArrayList<>();
-            configs.forEach((k, v) -> {
-                try {
-                    if (!v.getFile().exists()) {
-                        toRemove.add(k);
-                    }
-                } catch (Exception ignored) {
-                }
-            });
-            for (String key : toRemove) {
-                configs.remove(key);
-            }
-        }
-        languageConfigs.clear();
-        getLanguageConfig(null);
-    }
 
     /**
      * Retrieves the {@link CooldownAPI} instance for the plugin.

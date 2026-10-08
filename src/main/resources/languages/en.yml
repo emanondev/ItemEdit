@@ -492,9 +492,9 @@ itemedit:
     description:
       - '<gold><b>Set item''s name</b>'
       - ''
-      - '<aqua><b>Tip</b>: <aqua>type <yellow>-clear <aqua>to revert name to default'
-      - '<aqua><b>Tip</b>: <aqua>type <yellow>-copy <aqua>to copy the name'
-      - '<aqua><b>Tip</b>: <aqua>type <yellow>-paste <aqua>to paste previously copied value'
+      - '<aqua><b>Tip</b>: <aqua>type <yellow>/ie rename -clear <aqua>to revert name to default'
+      - '<aqua><b>Tip</b>: <aqua>type <yellow>/ie rename -copy <aqua>to copy the name'
+      - '<aqua><b>Tip</b>: <aqua>type <yellow>/ie rename -paste <aqua>to paste previously copied value'
     params: '<name>'
   lore:
     description:
