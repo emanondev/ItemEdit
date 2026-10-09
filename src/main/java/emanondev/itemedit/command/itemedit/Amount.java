@@ -19,7 +19,7 @@ public class Amount extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+        ItemStack item = this.getItemInMainHand(p);
         if (args.length != 2) {
             onFail(p, alias);
         }

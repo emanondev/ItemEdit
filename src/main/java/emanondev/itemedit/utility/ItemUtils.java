@@ -56,9 +56,8 @@ public final class ItemUtils {
      * @param player the {@link Player} whose main hand item is to be set.
      * @param item   the {@link ItemStack} to set in the player's main hand.
      */
-    @SuppressWarnings("deprecation")
-    public static void setHandItem(@NotNull Player player, @Nullable ItemStack item) {
-        player.getInventory().setItemInHand(item);
+    public static void setHandMainItem(@NotNull Player player, @Nullable ItemStack item) {
+        player.getInventory().setItemInMainHand(item);
     }
 
     /**
@@ -69,7 +68,7 @@ public final class ItemUtils {
      */
     @Contract("null -> true")
     public static boolean isAirOrNull(@Nullable ItemStack item) {
-        return item == null || item.getType() == Material.AIR;
+        return item == null || item.getType().isAir();
     }
 
     /**
@@ -109,19 +108,13 @@ public final class ItemUtils {
         }
 
         UUID uuid = UUID.randomUUID();
-        if (VersionUtils.isAfter(1, 13, 2)) {
-            return ReflectionUtils.invokeConstructor(AttributeModifier.class,
-                    UUID.class, uuid,
-                    String.class, uuid.toString(),
-                    double.class, amount,
-                    AttributeModifier.Operation.class, operation,
-                    EquipmentSlot.class, slot == null ? null : EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)));
-        }
         return ReflectionUtils.invokeConstructor(AttributeModifier.class,
                 UUID.class, uuid,
                 String.class, uuid.toString(),
                 double.class, amount,
-                AttributeModifier.Operation.class, operation);
+                AttributeModifier.Operation.class, operation,
+                EquipmentSlot.class, slot == null ? null : EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)));
+
     }
 
     /**
@@ -164,9 +157,6 @@ public final class ItemUtils {
     }
 
     public static boolean isItem(@NotNull Material material) {
-        if (VersionUtils.isUpTo(1, 12, 99)) {
-            return true; //limited support
-        }
         if (material.name().startsWith("LEGACY_")) {
             return false;
         }

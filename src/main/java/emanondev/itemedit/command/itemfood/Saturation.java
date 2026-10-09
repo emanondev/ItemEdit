@@ -24,7 +24,7 @@ public class Saturation extends SubCmd {
             return;
         }
         float val = Float.parseFloat(args[1]);//TODO handle parsing fail? should be positive?
-        new ItemBuilder(getItemInHand(player)).setSaturation(val).build();
+        new ItemBuilder(getItemInMainHand(player)).setSaturation(val).build();
         onSuccess(player);
         updateView(player);
     }

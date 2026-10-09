@@ -19,14 +19,14 @@ public class ResetEffects extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player player = (Player) sender;
-        new ItemBuilder(getItemInHand(player)).setConsumeEffects(null).build();
+        new ItemBuilder(getItemInMainHand(player)).setConsumeEffects(null).build();
         onSuccess(player);
         updateView(player);
     }
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        int size = new ItemBuilder(getItemInHand((Player) sender)).getConsumeEffects().size();
+        int size = new ItemBuilder(getItemInMainHand((Player) sender)).getConsumeEffects().size();
         return CompleteUtility.complete(args[args.length - 1], IntStream.rangeClosed(1, size)
                 .mapToObj(String::valueOf).toList());
     }

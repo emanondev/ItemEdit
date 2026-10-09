@@ -22,7 +22,7 @@ public class Clear extends SubCmd {
             onFail(player, alias);
             return;
         }
-        new ItemBuilder(getItemInHand(player)).clearEquippable().build();
+        new ItemBuilder(getItemInMainHand(player)).clearEquippable().build();
         onSuccess(player);
     }
 

@@ -25,7 +25,7 @@ public class BookType extends SubCmd {
 
         Player p = (Player) sender;
 
-        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+        ItemBuilder item = new ItemBuilder(getItemInMainHand(p));
         if (item.getType() != Material.WRITTEN_BOOK) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_written_book");
             return;

@@ -6,10 +6,10 @@ import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.IntParser;
 import emanondev.itemedit.utility.SchedulerUtils;
 import lombok.extern.slf4j.Slf4j;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -34,11 +34,13 @@ public class Drop extends SubCmd {
         try {
             // <id> <amount> <world> <x> <y> <z>
             if (args.length != 7) {
-                throw new IllegalArgumentException("Wrong param number");
+                onFail(sender, alias);
+                return;
             }
-            int amount = Integer.parseInt(args[2]);
-            if (amount < 1 || amount > 2304) {
-                throw new IllegalArgumentException("Wrong amount number");
+            IntParser amount = new IntParser(args[2]);
+            if (!amount.isNumberInRange(1, 2304)) {
+                onFail(sender, alias);
+                return;
             }
 
             ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1]);
@@ -49,7 +51,7 @@ public class Drop extends SubCmd {
                     Double.parseDouble(args[6]));
 
             SchedulerUtils.run(getPlugin(), loc, () -> {
-                int toGive = amount;
+                int toGive = amount.getValue();
                 while (toGive > 0) {
                     item.setAmount(Math.min(toGive, stackSize));
                     world.dropItem(loc, item.clone());
@@ -58,10 +60,14 @@ public class Drop extends SubCmd {
             });
 
             if (ItemEdit.get().getConfig().loadBoolean("log.action.drop", true)) {
-                Component msg = UtilsString.fix2(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
-                        "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
-                        String.valueOf(amount), "%world%", world.getName(), "%x%", args[4], "%y%", args[5], "%z%",
-                        args[6]);
+                Component msg = UtilsString.fix2(this.getConfigString("log"), null, true,
+                        "%id%", args[1].toLowerCase(),
+                        "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
+                        "%amount%", String.valueOf(amount),
+                        "%world%", world.getName(),
+                        "%x%", args[4],
+                        "%y%", args[5],
+                        "%z%", args[6]);
                 if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
                     Util.sendMessage2(Bukkit.getConsoleSender(), msg);
                 }
@@ -77,36 +83,33 @@ public class Drop extends SubCmd {
 
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             return List.of();
         }
-        switch (args.length) {
-            case 2:
-                return CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
-            case 3:
-                return CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
-            case 4: {
+        return switch (args.length) {
+            case 2 -> CompleteUtility.complete(args[1], ItemEdit.get().getServerStorage().getIds());
+            case 3 -> CompleteUtility.complete(args[2], Arrays.asList("1", "10", "64", "576", "2304"));
+            case 4 -> {
                 List<String> l = new ArrayList<>();
                 for (World w : Bukkit.getWorlds()) {
                     l.add(w.getName());
                 }
-                return CompleteUtility.complete(args[3], l);
+                yield CompleteUtility.complete(args[3], l);
             }
-            case 5: {
-                Location loc = ((Player) sender).getLocation();
-                return CompleteUtility.complete(args[4], Arrays.asList(String.valueOf(loc.getBlockX()), String.valueOf(loc.getX())));
+            case 5 -> {
+                Location loc = player.getLocation();
+                yield CompleteUtility.complete(args[4], Arrays.asList(String.valueOf(loc.getBlockX()), String.valueOf(loc.getX())));
             }
-            case 6: {
-                Location loc = ((Player) sender).getLocation();
-                return CompleteUtility.complete(args[5], Arrays.asList(String.valueOf(loc.getBlockY()), String.valueOf(loc.getY())));
+            case 6 -> {
+                Location loc = player.getLocation();
+                yield CompleteUtility.complete(args[5], Arrays.asList(String.valueOf(loc.getBlockY()), String.valueOf(loc.getY())));
             }
-            case 7: {
-                Location loc = ((Player) sender).getLocation();
-                return CompleteUtility.complete(args[6], Arrays.asList(String.valueOf(loc.getBlockZ()), String.valueOf(loc.getZ())));
+            case 7 -> {
+                Location loc = player.getLocation();
+                yield CompleteUtility.complete(args[6], Arrays.asList(String.valueOf(loc.getBlockZ()), String.valueOf(loc.getZ())));
             }
-            default:
-                return List.of();
-        }
+            default -> List.of();
+        };
     }
 
 }

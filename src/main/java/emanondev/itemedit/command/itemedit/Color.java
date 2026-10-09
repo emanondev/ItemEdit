@@ -35,7 +35,7 @@ public class Color extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemBuilder item = new ItemBuilder(this.getItemInHand(p));
+        ItemBuilder item = new ItemBuilder(this.getItemInMainHand(p));
         String perm = calculatePermission(item, args, p);
         if (perm == null) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_rgb_colorable");

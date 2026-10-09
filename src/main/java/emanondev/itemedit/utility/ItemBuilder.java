@@ -785,7 +785,7 @@ public class ItemBuilder {
 
     public List<Pattern> getBannerPatterns() {
         if (meta instanceof BannerMeta bannerMeta) {
-            bannerMeta.getPatterns();
+            return bannerMeta.getPatterns();
         }
         return List.of();
     }

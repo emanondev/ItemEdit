@@ -24,7 +24,7 @@ public class Nutrition extends SubCmd {
             return;
         }
         int val = Integer.parseInt(args[1]);//TODO handle parsing fail? should be positive?
-        setItemInHand(player, new ItemBuilder(getItemInHand(player)).setNutrition(val).build());
+        setItemInHand(player, new ItemBuilder(getItemInMainHand(player)).setNutrition(val).build());
         onSuccess(player);
         updateView(player);
     }

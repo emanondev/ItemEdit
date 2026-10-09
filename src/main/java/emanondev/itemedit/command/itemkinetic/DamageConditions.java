@@ -29,7 +29,7 @@ public class DamageConditions extends SubCmd {
         double minRelativeSpeed = Double.parseDouble(args[3]);
         KineticWeapon.Condition condition = KineticWeapon.condition(
                 maxDurationTicks, (float) minSpeed, (float) minRelativeSpeed);
-        new ItemBuilder(getItemInHand(player)).setKineticDamageConditions(condition).build();
+        new ItemBuilder(getItemInMainHand(player)).setKineticDamageConditions(condition).build();
         onSuccess(player);
         updateView(player);
     }

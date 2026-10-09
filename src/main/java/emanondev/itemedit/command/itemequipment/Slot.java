@@ -31,7 +31,7 @@ public class Slot extends SubCmd {
             onFail(p, alias);
             return;
         }
-        new ItemBuilder(getItemInHand(p)).setEquippableSlot(slot).build();
+        new ItemBuilder(getItemInMainHand(p)).setEquippableSlot(slot).build();
         onSuccess(p, "%value%", args[1]);
     }
 

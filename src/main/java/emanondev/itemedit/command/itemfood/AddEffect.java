@@ -37,7 +37,7 @@ public class AddEffect extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player player = (Player) sender;
-        ItemBuilder builder = new ItemBuilder(getItemInHand(player));
+        ItemBuilder builder = new ItemBuilder(getItemInMainHand(player));
         if (args.length == 0) {
             //TODO help message?
             return;

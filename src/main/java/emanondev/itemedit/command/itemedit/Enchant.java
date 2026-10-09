@@ -4,6 +4,7 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.IntParser;
 import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
@@ -21,7 +22,7 @@ public class Enchant extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemBuilder item = new ItemBuilder(this.getItemInHand(p));
+        ItemBuilder item = new ItemBuilder(this.getItemInMainHand(p));
         if (args.length != 2 && args.length != 3) {
             onFail(p, alias);
             return;
@@ -35,7 +36,12 @@ public class Enchant extends SubCmd {
         }
         try {
             if (args.length == 3) {
-                lv = Integer.parseInt(args[2]);
+                IntParser parsedLv = new IntParser(args[2]);
+                if (!parsedLv.isNumberMin(0)) {
+                    onFail(p, alias);
+                    return;
+                }
+                lv = parsedLv.getValue();
             }
             if (lv == 0) {
                 item.removeEnchantment(ench).build();

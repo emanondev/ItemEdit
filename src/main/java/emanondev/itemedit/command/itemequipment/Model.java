@@ -20,7 +20,7 @@ public class Model extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+        ItemBuilder item = new ItemBuilder(getItemInMainHand(p));
         if (args.length == 1) {
             item.setEquipmentModel(null).build();
             updateView(p);

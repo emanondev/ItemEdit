@@ -26,7 +26,7 @@ public class RemoveEffect extends SubCmd {
         }
         int line = Integer.parseInt(args[1]) - 1;
 
-        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+        ItemBuilder item = new ItemBuilder(getItemInMainHand(p));
         List<ConsumeEffect> effects = new ArrayList<>(item.getConsumeEffects());
         effects.remove(line);
         item.setConsumeEffects(effects).build();

@@ -23,7 +23,7 @@ public class Compass extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+        ItemBuilder item = new ItemBuilder(getItemInMainHand(p));
         if (!item.isMetaClass(CompassMeta.class)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_compass");
             return;

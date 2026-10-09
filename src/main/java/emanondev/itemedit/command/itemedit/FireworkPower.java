@@ -20,7 +20,7 @@ public class FireworkPower extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemBuilder item = new ItemBuilder(this.getItemInHand(p));
+        ItemBuilder item = new ItemBuilder(this.getItemInMainHand(p));
         if (!item.isMetaClass(FireworkMeta.class)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_firework");
             return;

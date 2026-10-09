@@ -82,12 +82,12 @@ public abstract class SubCmd {
 
     abstract public List<String> onComplete(@NotNull CommandSender sender, String[] args);
 
-    protected @NotNull ItemStack getItemInHand(@NotNull Player p) {
+    protected @NotNull ItemStack getItemInMainHand(@NotNull Player p) {
         return ItemUtils.getHandMainItem(p);
     }
 
     protected void setItemInHand(@NotNull Player p, ItemStack item) {
-        ItemUtils.setHandItem(p, item);
+        ItemUtils.setHandMainItem(p, item);
     }
 
     protected Component craftFailFeedback(String alias, String params, List<Component> desc) {

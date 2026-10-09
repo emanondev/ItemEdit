@@ -36,7 +36,7 @@ public class Rename extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = this.getItemInHand(p);
+        ItemStack item = this.getItemInMainHand(p);
         if (!Util.isAllowedRenameItem(sender, item.getType())) {
             return;
         }
@@ -110,7 +110,7 @@ public class Rename extends SubCmd {
         if (!(sender instanceof Player player) || args.length != 2) {
             return List.of();
         }
-        ItemStack item = getItemInHand(player);
+        ItemStack item = getItemInMainHand(player);
         if (item == null || !item.hasItemMeta()) {
             return List.of();
         }

@@ -55,7 +55,7 @@ public class ConvertTo extends SubCmd {
                 target.setAmount(amount);
             }
         }
-        setItemInHand(player, new ItemBuilder(getItemInHand(player)).setConvertsTo(target).build());
+        setItemInHand(player, new ItemBuilder(getItemInMainHand(player)).setConvertsTo(target).build());
         onSuccess(player);
         updateView(player);
     }

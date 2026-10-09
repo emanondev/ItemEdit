@@ -29,7 +29,7 @@ public class DismountConditions extends SubCmd {
         double minRelativeSpeed = Double.parseDouble(args[3]);
         KineticWeapon.Condition condition = KineticWeapon.condition(
                 maxDurationTicks, (float) minSpeed, (float) minRelativeSpeed);
-        new ItemBuilder(getItemInHand(player)).setKineticDismountConditions(condition).build();
+        new ItemBuilder(getItemInMainHand(player)).setKineticDismountConditions(condition).build();
         onSuccess(player);
         updateView(player);
     }

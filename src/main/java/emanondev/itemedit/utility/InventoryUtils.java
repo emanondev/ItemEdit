@@ -141,11 +141,9 @@ public final class InventoryUtils {
             return amount;
         }
 
-        switch (mode) {
-            case DELETE_EXCESS: {
-                return amount - remains;
-            }
-            case DROP_EXCESS: {
+        return switch (mode) {
+            case DELETE_EXCESS -> amount - remains;
+            case DROP_EXCESS -> {
                 while (remains > 0) {
                     int drop = Math.min(remains, 64);
                     itemClone.setAmount(drop);
@@ -155,16 +153,13 @@ public final class InventoryUtils {
                             () -> player.getWorld().dropItem(loc, itemCopy));
                     remains -= drop;
                 }
-                return amount;
+                yield amount;
             }
-            case CANCEL: {
+            case CANCEL -> {
                 removeAmount(player, itemClone, amount - remains, LackMode.REMOVE_MAX_POSSIBLE);
-                return 0;
+                yield 0;
             }
-            default: {
-                throw new UnsupportedOperationException();
-            }
-        }
+        };
     }
 
     /**
@@ -186,51 +181,49 @@ public final class InventoryUtils {
             updateViewDelayed((Player) player);
         }
 
-        switch (mode) {
-            case REMOVE_MAX_POSSIBLE: {
+        return switch (mode) {
+            case REMOVE_MAX_POSSIBLE -> {
                 itemClone.setAmount(amount);
                 HashMap<Integer, ItemStack> map = player.getInventory().removeItem(itemClone);
 
                 if (map.isEmpty()) {
-                    return amount;
-                } else {
-                    int left = map.get(0).getAmount();
-                    if (VersionUtils.isAfter(1, 9)) {
-                        ItemStack[] extras = player.getInventory().getExtraContents();
-                        for (int i = 0; i < extras.length; i++) {
-                            ItemStack extra = extras[i];
-                            if (extra != null && itemClone.isSimilar(extra)) {
-                                int toRemove = Math.min(left, extra.getAmount());
-                                left -= toRemove;
-                                if (toRemove == extra.getAmount()) {
-                                    extras[i] = null;
-                                } else {
-                                    extra.setAmount(extra.getAmount() - toRemove);
-                                    extras[i] = extra;
-                                }
+                    yield amount;
+                }
+
+                int left = map.get(0).getAmount();
+                if (VersionUtils.isAfter(1, 9)) {
+                    ItemStack[] extras = player.getInventory().getExtraContents();
+                    for (int i = 0; i < extras.length; i++) {
+                        ItemStack extra = extras[i];
+                        if (extra != null && itemClone.isSimilar(extra)) {
+                            int toRemove = Math.min(left, extra.getAmount());
+                            left -= toRemove;
+                            if (toRemove == extra.getAmount()) {
+                                extras[i] = null;
+                            } else {
+                                extra.setAmount(extra.getAmount() - toRemove);
+                                extras[i] = extra;
                             }
                         }
-                        player.getInventory().setExtraContents(extras);
                     }
-                    return amount - left;
+                    player.getInventory().setExtraContents(extras);
                 }
+                yield amount - left;
+
             }
-            case CANCEL: {
+            case CANCEL -> {
                 if (player.getInventory().containsAtLeast(itemClone, amount)) {
                     itemClone.setAmount(amount);
                     HashMap<Integer, ItemStack> map = player.getInventory().removeItem(itemClone);
 
                     if (map.isEmpty()) {
-                        return amount;
+                        yield amount;
                     }
-                    return amount - map.get(0).getAmount();
+                    yield amount - map.get(0).getAmount();
                 }
-                return 0;
+                yield 0;
             }
-            default: {
-                throw new UnsupportedOperationException();
-            }
-        }
+        };
     }
 
     public static @NotNull Set<EquipmentSlot> getPlayerEquipmentSlots() {
@@ -243,25 +236,15 @@ public final class InventoryUtils {
         } catch (Throwable ignored) {
         }
         EntityEquipment equip = player.getEquipment();
-        if (equip != null) {
-            switch (slot.name()) {
-                case "HAND":
-                    return equip.getItemInHand();
-                case "LEGS":
-                    return equip.getLeggings();
-                case "CHEST":
-                    return equip.getChestplate();
-                case "HEAD":
-                    return equip.getHelmet();
-                case "FEET":
-                    return equip.getBoots();
-                case "OFF_HAND":
-                    return equip.getItemInOffHand();
-                default:
-                    throw new UnsupportedOperationException();
-            }
-        }
-        return null;
+        return switch (slot.name()) {
+            case "HAND" -> equip.getItemInMainHand();
+            case "LEGS" -> equip.getLeggings();
+            case "CHEST" -> equip.getChestplate();
+            case "HEAD" -> equip.getHelmet();
+            case "FEET" -> equip.getBoots();
+            case "OFF_HAND" -> equip.getItemInOffHand();
+            default -> throw new UnsupportedOperationException();
+        };
     }
 
     private static Inventory getTopInventoryP(@NotNull Object view) {

@@ -21,7 +21,7 @@ public class MaxDurability extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+        ItemBuilder item = new ItemBuilder(getItemInMainHand(p));
         if (args.length != 2) {
             onFail(p, alias);
             return;
@@ -45,7 +45,7 @@ public class MaxDurability extends SubCmd {
         if (args.length != 2 || !(sender instanceof Player player)) {
             return List.of();
         }
-        ItemStack item = getItemInHand(player);
+        ItemStack item = getItemInMainHand(player);
         if (item.getType().getMaxDurability() <= 1) {
             return List.of();
         }

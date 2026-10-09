@@ -22,7 +22,7 @@ public class GoatHornSound extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player player = (Player) sender;
-        ItemBuilder item = new ItemBuilder(getItemInHand(player));
+        ItemBuilder item = new ItemBuilder(getItemInMainHand(player));
         if (!item.isMetaClass(MusicInstrumentMeta.class)) {
             getPlugin().getTranslator().send(player, "generic.error.wrong-material_music_instrument");
             return;

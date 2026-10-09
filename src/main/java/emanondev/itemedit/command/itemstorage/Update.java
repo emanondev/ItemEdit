@@ -25,7 +25,7 @@ public class Update extends SubCmd {
                 throw new IllegalArgumentException("Wrong param number");
             }
             if (ItemEdit.get().getPlayerStorage().getItem(p, args[1]) != null) {
-                ItemEdit.get().getPlayerStorage().setItem(p, args[1], this.getItemInHand(p).clone());
+                ItemEdit.get().getPlayerStorage().setItem(p, args[1], this.getItemInMainHand(p).clone());
             } else {
                 throw new IllegalArgumentException();
             }

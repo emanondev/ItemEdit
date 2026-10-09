@@ -1,7 +1,5 @@
 package emanondev.itemedit.utility;
 
-import net.md_5.bungee.api.ChatColor;
-
 import java.awt.*;
 
 /**
@@ -57,22 +55,6 @@ public class ColorBuilder implements Cloneable {
      */
     public static ColorBuilder from(org.bukkit.Color color) {
         return new ColorBuilder(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
-    }
-
-    /**
-     * Create from a Bungee ChatColor (must be RGB-based).
-     */
-    public static ColorBuilder from(ChatColor color) {
-        int rgb = color.getColor().getRGB();
-        return fromRGB(rgb).setAlpha(color.getColor().getAlpha());
-    }
-
-    /**
-     * Create from a Bukkit ChatColor (must be RGB-based).
-     */
-    public static ColorBuilder from(org.bukkit.ChatColor color) {
-        int rgb = color.asBungee().getColor().getRGB();
-        return fromRGB(rgb);
     }
 
     /**
@@ -205,13 +187,6 @@ public class ColorBuilder implements Cloneable {
      */
     public org.bukkit.Color toBukkit() {
         return org.bukkit.Color.fromRGB(red, green, blue);
-    }
-
-    /**
-     * Converts to net.md_5.bungee.api.ChatColor (RGB).
-     */
-    public ChatColor toBungee() {
-        return ChatColor.of(new Color(red, green, blue));
     }
 
     // ======= Utility Methods =======

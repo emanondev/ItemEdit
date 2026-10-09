@@ -40,7 +40,7 @@ public class DoubleSubCommand extends SubCmd {
                 return;
             }
             double value = Double.parseDouble(args[1]);
-            ItemBuilder builder = new ItemBuilder(getItemInHand(player));
+            ItemBuilder builder = new ItemBuilder(getItemInMainHand(player));
             if (apply.apply(builder, value)) {
                 onSuccess(player, "%value%", String.valueOf(value));
                 setItemInHand(player, builder.build());

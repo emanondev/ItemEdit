@@ -29,7 +29,7 @@ public class KnockbackConditions extends SubCmd {
         double minRelativeSpeed = Double.parseDouble(args[3]);
         KineticWeapon.Condition condition = KineticWeapon.condition(
                 maxDurationTicks, (float) minSpeed, (float) minRelativeSpeed);
-        new ItemBuilder(getItemInHand(player)).setKineticKnockbackConditions(condition).build();
+        new ItemBuilder(getItemInMainHand(player)).setKineticKnockbackConditions(condition).build();
         onSuccess(player);
         updateView(player);
     }

@@ -31,7 +31,7 @@ public class PotionEffectEditor extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+        ItemBuilder item = new ItemBuilder(getItemInMainHand(p));
         if (!item.isMetaClass(PotionMeta.class)
                 && (VersionUtils.isUpTo(1, 14) || !item.isMetaClass(SuspiciousStewMeta.class))) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_potion_effect_applicable");

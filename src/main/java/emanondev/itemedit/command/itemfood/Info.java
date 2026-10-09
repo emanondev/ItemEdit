@@ -17,7 +17,7 @@ public class Info extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player player = (Player) sender;
-        ItemBuilder item = new ItemBuilder(getItemInHand(player));
+        ItemBuilder item = new ItemBuilder(getItemInMainHand(player));
         onSuccess(player);
         //TODO
     }

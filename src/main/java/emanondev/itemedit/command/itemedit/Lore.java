@@ -6,6 +6,7 @@ import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.IntParser;
 import emanondev.itemedit.utility.ItemUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
@@ -45,7 +46,7 @@ public class Lore extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemStack item = getItemInHand(p);
+        ItemStack item = getItemInMainHand(p);
 
         if (args.length < 2) {
             onFail(p, alias);
@@ -101,7 +102,7 @@ public class Lore extends SubCmd {
                 case "remove", "set" -> {
                     if (!(sender instanceof Player player)) yield List.of();
 
-                    ItemStack item = getItemInHand(player);
+                    ItemStack item = getItemInMainHand(player);
                     if (ItemUtils.isAirOrNull(item)) yield List.of();
 
                     ItemMeta meta = ItemUtils.getMeta(item);
@@ -121,7 +122,7 @@ public class Lore extends SubCmd {
                 case "set" -> {
                     if (!(sender instanceof Player player)) yield List.of();
 
-                    ItemStack item = getItemInHand(player);
+                    ItemStack item = getItemInMainHand(player);
                     if (item == null || !item.hasItemMeta()) yield List.of();
 
                     ItemMeta meta = ItemUtils.getMeta(item);
@@ -359,7 +360,8 @@ public class Lore extends SubCmd {
     private void loreInsert(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 3) {
-                throw new IllegalArgumentException("Wrong param number");
+                onSubFail(p, alias, "insert");
+                return;
             }
 
             StringBuilder text = new StringBuilder();
@@ -371,9 +373,10 @@ public class Lore extends SubCmd {
                 // text = ChatColor.translateAlternateColorCodes('&', text);
             }
 
-            int line = Integer.parseInt(args[2]) - 1;
-            if (line < 0) {
-                throw new IllegalArgumentException("Wrong line number");
+            IntParser line = new IntParser(args[2], -1);
+            if (!line.isNumberMin(0)) {
+                onSubFail(p, alias, "insert");
+                return;
             }
             ItemMeta itemMeta = ItemUtils.getMeta(item);
 
@@ -383,7 +386,7 @@ public class Lore extends SubCmd {
             } else {
                 lore = new ArrayList<>();
             }
-            if (!allowedLineLimit(p, Math.max(lore.size() + 1, line + 1))) {
+            if (!allowedLineLimit(p, Math.max(lore.size() + 1, line.getValue() + 1))) {
                 getPlugin().getTranslator().send(p, "blocked-by-lore-line-limit",
                         "%limit%", String.valueOf(lineLimit));
                 return;
@@ -397,7 +400,7 @@ public class Lore extends SubCmd {
             }
 
 
-            for (int i = lore.size(); i < line; i++) {
+            for (int i = lore.size(); i < line.getValue(); i++) {
                 lore.add(Component.empty());
             }
 
@@ -405,7 +408,7 @@ public class Lore extends SubCmd {
                 return;
             }
 
-            lore.add(line, lineText);
+            lore.add(line.getValue(), lineText);
             itemMeta.lore(lore);
             item.setItemMeta(itemMeta);
             updateView(p);
@@ -418,7 +421,8 @@ public class Lore extends SubCmd {
     private void loreSet(Player p, ItemStack item, String alias, String[] args) {
         try {
             if (args.length < 3) {
-                throw new IllegalArgumentException("Wrong param number");
+                onSubFail(p, alias, "set");
+                return;
             }
 
             StringBuilder text = new StringBuilder();
@@ -440,13 +444,15 @@ public class Lore extends SubCmd {
             } else {
                 lore = new ArrayList<>();
             }
-            int line = args[2].equalsIgnoreCase("last") ?
-                    lore.size() - 1 : Integer.parseInt(args[2]) - 1;
-            if (line < 0) {
-                throw new IllegalArgumentException("Wrong line number");
+            IntParser line = args[2].equalsIgnoreCase("last") ?
+                    new IntParser(lore.size() - 1) :
+                    new IntParser(args[2], -1);
+            if (!line.isNumberMin(0)) {
+                onSubFail(p, alias, "set");
+                return;
             }
 
-            if (lore.size() <= line && !allowedLineLimit(p, line + 1)) {
+            if (lore.size() <= line.getValue() && !allowedLineLimit(p, line.getValue() + 1)) {
                 getPlugin().getTranslator().send(p, "blocked-by-lore-line-limit",
                         "%limit%", String.valueOf(lineLimit));
                 return;
@@ -456,7 +462,7 @@ public class Lore extends SubCmd {
                         "%limit%", String.valueOf(lengthLimit));
                 return;
             }
-            for (int i = lore.size(); i <= line; i++) {
+            for (int i = lore.size(); i <= line.getValue(); i++) {
                 lore.add(Component.empty());
             }
 
@@ -464,7 +470,7 @@ public class Lore extends SubCmd {
                 return;
             }
 
-            lore.set(line, lineText);
+            lore.set(line.getValue(), lineText);
             itemMeta.lore(lore);
             item.setItemMeta(itemMeta);
             updateView(p);
@@ -486,21 +492,18 @@ public class Lore extends SubCmd {
                 return;
             }
             List<Component> lore = new ArrayList<>(itemMeta.lore());
-            int line;
-            if (args[2].equalsIgnoreCase("last")) {
-                line = lore.size() - 1;
-            } else {
-                line = Integer.parseInt(args[2]) - 1;
+            IntParser line = args[2].equalsIgnoreCase("last") ?
+                    new IntParser(lore.size() - 1) :
+                    new IntParser(args[2], -1);
+            if (!line.isNumberMin(0)) {
+                onSubFail(p, alias, "remove");
+                return;
             }
-            if (line < 0) {
-                throw new IllegalArgumentException("Wrong line number");
-            }
-
-            if (lore.size() <= line) {
+            if (lore.size() <= line.getValue()) {
                 return;
             }
 
-            lore.remove(line);
+            lore.remove(line.getValue());
             itemMeta.lore(lore);
             item.setItemMeta(itemMeta);
             updateView(p);

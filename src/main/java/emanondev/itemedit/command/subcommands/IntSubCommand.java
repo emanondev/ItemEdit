@@ -48,7 +48,7 @@ public class IntSubCommand extends SubCmd {
                 return;
             }
             Integer value = Integer.parseInt(args[1]);
-            ItemBuilder builder = new ItemBuilder(getItemInHand(player));
+            ItemBuilder builder = new ItemBuilder(getItemInMainHand(player));
             if (apply.apply(builder, value)) {
                 onSuccess(player, "%value%", String.valueOf(value));
                 //setItemInHand(player, builder.build());

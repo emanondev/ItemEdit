@@ -22,6 +22,7 @@ import org.bukkit.permissions.ServerOperator;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.io.File;
 import java.util.*;
@@ -432,7 +433,7 @@ public abstract class APlugin extends JavaPlugin {
         public List<String> onTabComplete(@NotNull CommandSender sender,
                                           @NotNull Command command,
                                           @NotNull String alias,
-                                          @NotNull String[] args) {
+                                          @NotNull String @NonNull [] args) {
             return List.of();
         }
 
@@ -440,7 +441,7 @@ public abstract class APlugin extends JavaPlugin {
         public boolean onCommand(@NotNull CommandSender sender,
                                  @NotNull Command command,
                                  @NotNull String label,
-                                 @NotNull String[] args) {
+                                 @NotNull String @NonNull [] args) {
             sender.sendMessage(msg);
             return true;
         }

@@ -27,7 +27,7 @@ public class TropicalFish extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
-        ItemBuilder item = new ItemBuilder(getItemInHand(p));
+        ItemBuilder item = new ItemBuilder(getItemInMainHand(p));
         if (!item.isMetaClass(TropicalFishBucketMeta.class)) {
             getPlugin().getTranslator().send(p, "generic.error.wrong-material_tropical_fish_bucket");
             return;
