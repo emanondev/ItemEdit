@@ -29,7 +29,7 @@ public class MapGui implements Gui {
         this.plugin = plugin;
         this.targetPlayer = target;
         this.inv = Bukkit.createInventory(this, rows * 9,
-                UtilsString.fix(title == null ? "" : title, target, true));
+                UtilsString.fix2(title == null ? "" : title, target, true));
     }
 
 

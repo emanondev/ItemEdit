@@ -8,6 +8,8 @@ import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.SchedulerUtils;
 import lombok.extern.slf4j.Slf4j;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -56,12 +58,12 @@ public class Drop extends SubCmd {
             });
 
             if (ItemEdit.get().getConfig().loadBoolean("log.action.drop", true)) {
-                String msg = UtilsString.fix(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
+                Component msg = UtilsString.fix2(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%world%", world.getName(), "%x%", args[4], "%y%", args[5], "%z%",
                         args[6]);
                 if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
-                    Util.sendMessage(Bukkit.getConsoleSender(), msg);
+                    Util.sendMessage2(Bukkit.getConsoleSender(), msg);
                 }
                 if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
                     Util.logToFile(msg);

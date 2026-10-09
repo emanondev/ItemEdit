@@ -37,12 +37,11 @@ import java.util.regex.Pattern;
 @Slf4j
 public final class Util {
 
+    private static final Pattern LEGACY_HEX_COLOR = Pattern.compile("(?i)&#([0-9a-f]{6})");
+    private static final Pattern LEGACY_REPEATED_HEX_COLOR = Pattern.compile("(?i)[&§]x(?:[&§][0-9a-f]){6}");
     private Util() {
         throw new UnsupportedOperationException();
     }
-
-    private static final Pattern LEGACY_HEX_COLOR = Pattern.compile("(?i)&#([0-9a-f]{6})");
-    private static final Pattern LEGACY_REPEATED_HEX_COLOR = Pattern.compile("(?i)[&§]x(?:[&§][0-9a-f]){6}");
 
     /**
      * takes an already formatted message
@@ -50,7 +49,7 @@ public final class Util {
      * @param sender
      * @param message
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     public static void sendMessage(@NotNull CommandSender sender, String message) {
         if (message == null || message.isEmpty()) {
             return;
@@ -58,7 +57,7 @@ public final class Util {
         sendMessage2(sender, MiniMessage.miniMessage().deserialize(message));
     }
 
-    @Deprecated
+    @Deprecated(forRemoval = true)
     public static void sendMessage(@NotNull CommandSender sender, List<String> message) {
         if (message == null || message.isEmpty()) {
             return;
@@ -122,6 +121,10 @@ public final class Util {
         sendMessage(Bukkit.getConsoleSender(), "<red>ERROR when executing /" + command.getName()
                 + " " + String.join(" ", args) + " by " + sender.getName()
                 + " (with " + (item == null ? "nothing" : item) + " in hand)");
+    }
+
+    public static void logToFile(Component msg) {
+        logToFile(PlainTextComponentSerializer.plainText().serialize(msg));
     }
 
     public static void logToFile(String message) {
@@ -247,31 +250,6 @@ public final class Util {
 
     public static boolean isDeferredItemTemplate(Component component) {
         return component instanceof TextComponent text && isDeferredItemTemplate(text.content());
-    }
-
-    private static int countCharacters(String text, char character) {
-        int count = 0;
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) == character) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    private static @Nullable String legacyHexToMiniMessage(@Nullable String text) {
-        if (text == null) {
-            return null;
-        }
-        String normalized = LEGACY_HEX_COLOR.matcher(text).replaceAll("<#$1>");
-        Matcher matcher = LEGACY_REPEATED_HEX_COLOR.matcher(normalized);
-        StringBuffer result = new StringBuffer();
-        while (matcher.find()) {
-            String hex = matcher.group().substring(2).replaceAll("[&§]", "");
-            matcher.appendReplacement(result, Matcher.quoteReplacement("<#" + hex + ">"));
-        }
-        matcher.appendTail(result);
-        return result.toString();
     }
 
     public static Component formatText(CommandSender sender, @Nullable Component text, String basePermission) {
@@ -453,5 +431,30 @@ public final class Util {
             return text;
         }
         return asHover(text, String.join("\n", hover));
+    }
+
+    private static int countCharacters(String text, char character) {
+        int count = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == character) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static @Nullable String legacyHexToMiniMessage(@Nullable String text) {
+        if (text == null) {
+            return null;
+        }
+        String normalized = LEGACY_HEX_COLOR.matcher(text).replaceAll("<#$1>");
+        Matcher matcher = LEGACY_REPEATED_HEX_COLOR.matcher(normalized);
+        StringBuffer result = new StringBuffer();
+        while (matcher.find()) {
+            String hex = matcher.group().substring(2).replaceAll("[&§]", "");
+            matcher.appendReplacement(result, Matcher.quoteReplacement("<#" + hex + ">"));
+        }
+        matcher.appendTail(result);
+        return result.toString();
     }
 }

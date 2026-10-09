@@ -4,6 +4,7 @@ import emanondev.itemedit.APlugin;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.utility.ItemUtils;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -95,9 +96,10 @@ public interface Gui extends InventoryHolder {
     @NotNull
     APlugin getPlugin();
 
+    @Deprecated(forRemoval = true)
     default String getLanguageMessage(@NotNull String fullPath,
                                       String... holders) {
-        return LegacyComponentSerializer.legacySection().serialize(getLanguageComponent(fullPath, holders));
+        return MiniMessage.miniMessage().serialize(getLanguageComponent(fullPath, holders));
     }
 
     default Component getLanguageComponent(@NotNull String fullPath,

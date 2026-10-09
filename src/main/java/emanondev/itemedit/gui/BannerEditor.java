@@ -5,6 +5,7 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.utility.ItemUtils;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -45,7 +46,7 @@ public class BannerEditor implements Gui {
         this.banner = item;
         this.meta = (BannerMeta) ItemUtils.getMeta(banner);
         this.target = target;
-        String title = getLanguageMessage(subPath + "title");
+        Component title = getLanguageComponent(subPath + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
         for (int i = 0; i < 8; i++) {
             if (i < meta.getPatterns().size()) {
@@ -259,9 +260,8 @@ public class BannerEditor implements Gui {
 
         public ColorSelector(BannerData data) {
             this.data = data;
-            String title = getLanguageMessage(subPath + "color_selector_title");
-            this.inventory = Bukkit.createInventory(this, (6) * 9,
-                    MiniMessage.miniMessage().deserialize(title));
+            Component title = getLanguageComponent(subPath + "color_selector_title");
+            this.inventory = Bukkit.createInventory(this, (6) * 9,                    title);
             int i = 0;
             for (DyeColor color : DyeColor.values()) {
                 ItemStack item = Util.getDyeItemFromColor(color);
@@ -336,7 +336,7 @@ public class BannerEditor implements Gui {
                 throw new NullPointerException();
             }
             this.data = data;
-            String title = getLanguageMessage(subPath + "pattern_selector_title");
+            Component title = getLanguageComponent(subPath + "pattern_selector_title");
             this.inventory = Bukkit.createInventory(this, (6) * 9, title);
             int i = 0;
             for (PatternType type : TYPES) {

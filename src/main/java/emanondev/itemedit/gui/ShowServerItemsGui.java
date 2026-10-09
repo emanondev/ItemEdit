@@ -9,6 +9,7 @@ import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.ItemUtils;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -24,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @Slf4j
 public class ShowServerItemsGui implements PagedGui {
@@ -59,7 +61,7 @@ public class ShowServerItemsGui implements PagedGui {
         }
         this.page = page;
 
-        String title = UtilsString.fix(GUI_CONFIG.loadMessage("gui.serveritems.title", "", false), player, true,
+        Component title = UtilsString.fix2(GUI_CONFIG.loadMessage("gui.serveritems.title", "", false), player, true,
                 "%player_name%", target.getName(), "%page%", String.valueOf(page));
         this.inventory = Bukkit.createInventory(this, (rows + 1) * 9, title);
         updateInventory();
@@ -95,8 +97,8 @@ public class ShowServerItemsGui implements PagedGui {
                 ItemStack display = item.clone();
                 ItemMeta meta = ItemUtils.getMeta(display);
                 meta.addItemFlags(ItemFlag.values());
-                meta.setLore(Collections.singletonList(UtilsString.fix("<blue>Nick: <yellow>" + storage.getNick(list.get(slot)), null, true)));
-                meta.setDisplayName(UtilsString.fix("<blue>ID: <yellow>" + list.get(slot), null, true));
+                meta.lore(List.of(UtilsString.fix2("<blue>Nick: <yellow>" + storage.getNick(list.get(slot)), null, true)));
+                meta.displayName(UtilsString.fix2("<blue>ID: <yellow>" + list.get(slot), null, true));
                 display.setItemMeta(meta);
                 this.inventory.setItem(i, display);
             }

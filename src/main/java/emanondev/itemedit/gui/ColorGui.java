@@ -3,6 +3,7 @@ package emanondev.itemedit.gui;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.utility.ItemUtils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Sound;
@@ -32,7 +33,7 @@ public class ColorGui implements Gui {
 
 
     public ColorGui(@NotNull Player target) {
-        String title = getLanguageMessage(subPath + "title");
+        Component title = getLanguageComponent(subPath + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
         this.target = target;
         this.colorable = ItemUtils.getHandMainItem(getTargetPlayer());

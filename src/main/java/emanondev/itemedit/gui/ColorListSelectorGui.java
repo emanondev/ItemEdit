@@ -6,6 +6,7 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.SchedulerUtils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.Player;
@@ -33,7 +34,7 @@ public class ColorListSelectorGui implements Gui {
     public ColorListSelectorGui(@NotNull Gui parent, @NotNull List<DyeColor> colors) {
         this.colors = colors;
         this.parent = parent;
-        String title = getLanguageMessage(subPath + "title");
+        Component title = getLanguageComponent(subPath + "title");
         this.inventory = Bukkit.createInventory(this, (2) * 9, title);
         inventory.setItem(inventory.getSize() - 1, this.getBackItem());
     }

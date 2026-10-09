@@ -4,6 +4,7 @@ import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.utility.ItemUtils;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
@@ -39,9 +40,8 @@ public class FireworkEditor implements Gui {
         this.firework = item.clone();
         this.meta = (FireworkMeta) ItemUtils.getMeta(firework);
         this.target = target;
-        String title = getLanguageMessage(subPath + "title");
-        this.inventory = Bukkit.createInventory(this, (6) * 9,
-                MiniMessage.miniMessage().deserialize(title));
+        Component title = getLanguageComponent(subPath + "title");
+        this.inventory = Bukkit.createInventory(this, (6) * 9,title);
         for (int i = 0; i < 9; i++) {
             if (i < meta.getEffects().size()) {
                 effects.add(new FireworkEffectData(meta.getEffects().get(i)));

@@ -8,6 +8,7 @@ import emanondev.itemedit.storage.PlayerStorage;
 import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.ItemUtils;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -59,7 +60,7 @@ public class ShowPlayerItemsGui implements PagedGui {
         }
         this.page = page;
 
-        String title = this.getLanguageMessage("gui.playeritems.title",
+        Component title = getLanguageComponent("gui.playeritems.title",
                 "%player_name%", target.getName(), "%page%", String.valueOf(page));
         this.inventory = Bukkit.createInventory(this, (rows + 1) * 9, title);
         updateInventory();
@@ -90,7 +91,7 @@ public class ShowPlayerItemsGui implements PagedGui {
                 ItemStack display = item.clone();
                 ItemMeta meta = ItemUtils.getMeta(display);
                 meta.addItemFlags(ItemFlag.values());
-                meta.setDisplayName(UtilsString.fix("<blue>ID: <yellow>" + list.get(slot), null, true));
+                meta.displayName(UtilsString.fix2("<blue>ID: <yellow>" + list.get(slot), null, true));
                 display.setItemMeta(meta);
                 this.inventory.setItem(i, display);
             }
