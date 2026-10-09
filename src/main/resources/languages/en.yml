@@ -109,6 +109,7 @@ itemedit:
   banner:
     description:
       - '<gold><b>Edit banner</b>'
+    params: '<add/set/remove/color> [...]'
     set:
       params: '<type> <color> <line>'
       description:
@@ -488,6 +489,12 @@ itemedit:
     header: "<blue><b>ItemEdit - Help</b>"
     header-sub: "<blue><b>ItemEdit %sub% - Help</b>"
     footer: "%prev_clickable% <blue><b>Help</b> [%page%/%max_page%] %next_clickable%"
+    description:
+      - '<gold><b>Shows ItemEdit help</b>'
+      - ''
+      - '<yellow>[page] <aqua>Help page'
+      - '<yellow>[subcommand] <aqua>Help for a subcommand'
+    params: '[page/subcommand]'
   rename:
     description:
       - '<gold><b>Set item''s name</b>'
@@ -496,6 +503,12 @@ itemedit:
       - '<aqua><b>Tip</b>: <aqua>type <yellow>/ie rename -copy <aqua>to copy the name'
       - '<aqua><b>Tip</b>: <aqua>type <yellow>/ie rename -paste <aqua>to paste previously copied value'
     params: '<name>'
+    feedback: '<blue>[<white>ItemEdit<blue>] <green>Item name updated'
+    rename-clear: '<blue>[<white>ItemEdit<blue>] <green>Item name cleared'
+    rename-copy: '<blue>[<white>ItemEdit<blue>] <green>Item name copied'
+    rename-paste-empty: '<dark_red>[<red>ItemEdit<dark_red>] <red>No copied item name to paste'
+    feedback-paste: '<blue>[<white>ItemEdit<blue>] <green>Copied item name pasted'
+    banned_words: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item name contains blocked words'
   lore:
     description:
       - '<gold><b>Edit lore</b>'
@@ -582,6 +595,12 @@ itemeditequipment:
       - '<aqua>for snowman'
     params: "[true/false]"
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Can shear property is now <yellow>%value%"
+  canbesheared:
+    description:
+      - '<gold><b>Sets whether this equipment can be sheared</b>'
+      - ''
+      - '<yellow>[true/false] <aqua>Whether the equipment can be sheared'
+    params: '[true/false]'
   cameraoverlay:
     description:
       - '<gold><b>Sets camera overlay</b>'
@@ -639,6 +658,12 @@ itemeditequipment:
     header: "<blue><b>ItemEditEquipment - Help</b>"
     header-sub: "<blue><b>ItemEditEquipment %sub% - Help</b>"
     footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
+    description:
+      - '<gold><b>Shows ItemEditEquipment help</b>'
+      - ''
+      - '<yellow>[page] <aqua>Help page'
+      - '<yellow>[subcommand] <aqua>Help for a subcommand'
+    params: '[page/subcommand]'
   model:
     description:
       - '<gold><b>Sets texture model</b>'
@@ -657,6 +682,13 @@ itemeditequipment:
     params: "[sound]"
     feedback: "<blue>[<white>ItemEdit<blue>] <green>Shear sound is now <yellow>%value%"
     feedback-reset: "<blue>[<white>ItemEdit<blue>] <green>Shear sound property has been reset to default"
+  shearingsound:
+    description:
+      - '<gold><b>Sets sound when item is removed by shear</b>'
+      - ''
+      - '<yellow>[sound] <aqua>Which sound should be made'
+      - '<aqua>when it''s removed by shear, like pumpkin for snowman'
+    params: '[sound]'
   slot:
     description:
       - '<gold><b>Sets equippable slot</b>'
@@ -783,6 +815,12 @@ itemeditfood:
     header: "<blue><b>ItemFood - Help</b>"
     header-sub: "<blue><b>ItemFood %sub% - Help</b>"
     footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
+    description:
+      - '<gold><b>Shows ItemFood help</b>'
+      - ''
+      - '<yellow>[page] <aqua>Help page'
+      - '<yellow>[subcommand] <aqua>Help for a subcommand'
+    params: '[page/subcommand]'
   info:
     not_food: "<blue>[<white>ItemEdit<blue>] <aqua>Item has no food property or has default property"
     message:
@@ -899,6 +937,12 @@ itemeditkinetic:
     header: "<blue><b>ItemKinetic - Help</b>"
     header-sub: "<blue><b>ItemKinetic %sub% - Help</b>"
     footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
+    description:
+      - '<gold><b>Shows ItemKinetic help</b>'
+      - ''
+      - '<yellow>[page] <aqua>Help page'
+      - '<yellow>[subcommand] <aqua>Help for a subcommand'
+    params: '[page/subcommand]'
   hitsound:
     description:
       - '<gold><b>Sets Kinetic hit sound</b>'
@@ -941,6 +985,12 @@ itemeditpiercing:
     header: "<blue><b>ItemPiercing - Help</b>"
     header-sub: "<blue><b>ItemPiercing %sub% - Help</b>"
     footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
+    description:
+      - '<gold><b>Shows ItemPiercing help</b>'
+      - ''
+      - '<yellow>[page] <aqua>Help page'
+      - '<yellow>[subcommand] <aqua>Help for a subcommand'
+    params: '[page/subcommand]'
   hitsound:
     description:
       - '<gold><b>Sets Piercing hit sound</b>'

@@ -188,24 +188,24 @@ public abstract class SubCmd {
     }
 
     protected void onSuccess(CommandSender sender, String... holders) {
-        Util.sendMessage2(sender, translate(this.PATH + "feedback", sender, holders));
+        Util.sendMessage2(sender, translate("feedback", sender, holders));
     }
 
     protected void onSubSuccess(CommandSender sender, String subSubCommand, String... holders) {
-        Util.sendMessage2(sender, translate(this.PATH + subSubCommand + ".feedback", sender, holders));
+        Util.sendMessage2(sender, translate(subSubCommand + ".feedback", sender, holders));
     }
 
     protected void sendFeedback(CommandSender target,
                                 @NotNull String feedbackPath,
                                 String... holders) {
-        Util.sendMessage2(target, this.translate(this.PATH + feedbackPath, target, holders));
+        Util.sendMessage2(target, this.translate(feedbackPath, target, holders));
     }
 
     protected void sendSubFeedback(CommandSender target,
                                    @NotNull String subSubCommand,
                                    @NotNull String feedbackPath,
                                    String... holders) {
-        Util.sendMessage2(target, this.translate(this.PATH + subSubCommand + "." + feedbackPath, target, holders));
+        Util.sendMessage2(target, this.translate(subSubCommand + "." + feedbackPath, target, holders));
     }
 
     protected void sendLanguageString(String path, CommandSender sender, String... holders) {

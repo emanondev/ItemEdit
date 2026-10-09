@@ -57,7 +57,7 @@ permissions:
     description: Gives full access to the plugin
     children:
       itemedit.itemedit.*: true
-      itemedit.itemfood.*: true
+      itemedit.itemeditfood.*: true
       itemedit.itemeditkinetic.*: true
       itemedit.itemeditequipment.*: true
       itemedit.itemeditpiercing.*: true
@@ -72,7 +72,7 @@ permissions:
     description: Gives full access to the plugin
     children:
       itemedit.itemedit.*: true
-      itemedit.itemfood.*: true
+      itemedit.itemeditfood.*: true
       itemedit.itemeditkinetic.*: true
       itemedit.itemeditequipment.*: true
       itemedit.itemeditpiercing.*: true
@@ -190,62 +190,174 @@ permissions:
   itemedit.itemstorage.get:
     default: op
     description: Allow to get stored items
-  itemedit.itemfood.*:
+  itemedit.itemeditfood.*:
     default: op
-    description: Gives full access to command /itemfood
+    description: Gives full access to command /itemeditfood
     children:
-      itemedit.itemfood.addeffect: true
-      itemedit.itemfood.animation: true
-      itemedit.itemfood.canalwayseat: true
-      itemedit.itemfood.clear: true
-      itemedit.itemfood.cleareffects: true
-      itemedit.itemfood.consumeparticles: true
-      itemedit.itemfood.convertto: true
-      itemedit.itemfood.eatticks: true
-      itemedit.itemfood.info: true
-      itemedit.itemfood.nutrition: true
-      itemedit.itemfood.removeeffect: true
-      itemedit.itemfood.saturation: true
-      itemedit.itemfood.sound: true
-  itemedit.itemfood.addeffect:
+      itemedit.itemeditfood.addeffect: true
+      itemedit.itemeditfood.animation: true
+      itemedit.itemeditfood.canalwayseat: true
+      itemedit.itemeditfood.consumeparticles: true
+      itemedit.itemeditfood.convertto: true
+      itemedit.itemeditfood.eatticks: true
+      itemedit.itemeditfood.info: true
+      itemedit.itemeditfood.nutrition: true
+      itemedit.itemeditfood.removeeffect: true
+      itemedit.itemeditfood.reset: true
+      itemedit.itemeditfood.reseteffects: true
+      itemedit.itemeditfood.saturation: true
+      itemedit.itemeditfood.sound: true
+  itemedit.itemeditfood.addeffect:
     default: op
     description: Allow adding consume effects on item
-  itemedit.itemfood.animation:
+  itemedit.itemeditfood.animation:
     default: op
     description: Allow setting animation when food is eaten
-  itemedit.itemfood.canalwayseat:
+  itemedit.itemeditfood.canalwayseat:
     default: op
-    description: Allow to set whenever a food can be always eaten
-  itemedit.itemfood.clear:
+    description: Allow setting whether food can always be eaten
+  itemedit.itemeditfood.consumeparticles:
     default: op
-    description: Allow to reset food property
-  itemedit.itemfood.cleareffects:
+    description: Allow setting whether eating particles are displayed
+  itemedit.itemeditfood.convertto:
     default: op
-    description: Allow to remove potion effects when eating the food
-  itemedit.itemfood.consumeparticles:
+    description: Allow setting what eaten food becomes
+  itemedit.itemeditfood.eatticks:
     default: op
-    description: Allows to set whenever eating particles should be displayed
-  itemedit.itemfood.convertto:
+    description: Allow setting how much time is required to eat the food
+  itemedit.itemeditfood.info:
     default: op
-    description: Allow set what eaten food becomes
-  itemedit.itemfood.eatticks:
+    description: Allow viewing food properties
+  itemedit.itemeditfood.nutrition:
     default: op
-    description: Allow to set how much time is required to eat the food
-  itemedit.itemfood.info:
+    description: Allow setting nutrition restored by food
+  itemedit.itemeditfood.removeeffect:
     default: op
-    description: Allow to see a recap of food properties
-  itemedit.itemfood.nutrition:
+    description: Allow removing a potion effect from food
+  itemedit.itemeditfood.reset:
     default: op
-    description: Allow to set nutrition as result of eating the food
-  itemedit.itemfood.removeeffect:
+    description: Allow resetting food properties
+  itemedit.itemeditfood.reseteffects:
     default: op
-    description: Allow to remove specific potion effects when eating the food
-  itemedit.itemfood.saturation:
+    description: Allow removing all potion effects from food
+  itemedit.itemeditfood.saturation:
     default: op
-    description: Allow to set saturation as result of eating the food
-  itemedit.itemfood.sound:
+    description: Allow setting saturation restored by food
+  itemedit.itemeditfood.sound:
     default: op
-    description: Allow to set eating sound
+    description: Allow setting eating sound
+  itemedit.itemeditequipment.*:
+    default: op
+    description: Gives full access to command /itemeditequipment
+    children:
+      itemedit.itemeditequipment.allowedentities: true
+      itemedit.itemeditequipment.cameraoverlay: true
+      itemedit.itemeditequipment.canbesheared: true
+      itemedit.itemeditequipment.clear: true
+      itemedit.itemeditequipment.damageonhurt: true
+      itemedit.itemeditequipment.dispensable: true
+      itemedit.itemeditequipment.equiponinteract: true
+      itemedit.itemeditequipment.equipsound: true
+      itemedit.itemeditequipment.model: true
+      itemedit.itemeditequipment.shearingsound: true
+      itemedit.itemeditequipment.slot: true
+      itemedit.itemeditequipment.swappable: true
+  itemedit.itemeditequipment.allowedentities:
+    default: op
+    description: Allow setting entities that can wear the equipment
+  itemedit.itemeditequipment.cameraoverlay:
+    default: op
+    description: Allow setting the equipment camera overlay
+  itemedit.itemeditequipment.canbesheared:
+    default: op
+    description: Allow setting whether the equipment can be sheared
+  itemedit.itemeditequipment.clear:
+    default: op
+    description: Allow clearing equipment properties
+  itemedit.itemeditequipment.damageonhurt:
+    default: op
+    description: Allow setting whether equipment takes damage on hurt
+  itemedit.itemeditequipment.dispensable:
+    default: op
+    description: Allow setting whether equipment is dispensable
+  itemedit.itemeditequipment.equiponinteract:
+    default: op
+    description: Allow setting whether equipment is equipped on interaction
+  itemedit.itemeditequipment.equipsound:
+    default: op
+    description: Allow setting equipment equip sound
+  itemedit.itemeditequipment.model:
+    default: op
+    description: Allow setting the equipment model
+  itemedit.itemeditequipment.shearingsound:
+    default: op
+    description: Allow setting equipment shearing sound
+  itemedit.itemeditequipment.slot:
+    default: op
+    description: Allow setting the equipment slot
+  itemedit.itemeditequipment.swappable:
+    default: op
+    description: Allow setting whether equipment is swappable
+  itemedit.itemeditkinetic.*:
+    default: op
+    description: Gives full access to command /itemeditkinetic
+    children:
+      itemedit.itemeditkinetic.contactcooldownticks: true
+      itemedit.itemeditkinetic.damagemultiplier: true
+      itemedit.itemeditkinetic.damageconditions: true
+      itemedit.itemeditkinetic.delayticks: true
+      itemedit.itemeditkinetic.dismountconditions: true
+      itemedit.itemeditkinetic.forwardmovement: true
+      itemedit.itemeditkinetic.hitsound: true
+      itemedit.itemeditkinetic.knockbackconditions: true
+      itemedit.itemeditkinetic.sound: true
+  itemedit.itemeditkinetic.contactcooldownticks:
+    default: op
+    description: Allow setting kinetic contact cooldown
+  itemedit.itemeditkinetic.damagemultiplier:
+    default: op
+    description: Allow setting kinetic damage multiplier
+  itemedit.itemeditkinetic.damageconditions:
+    default: op
+    description: Allow setting kinetic damage conditions
+  itemedit.itemeditkinetic.delayticks:
+    default: op
+    description: Allow setting kinetic delay
+  itemedit.itemeditkinetic.dismountconditions:
+    default: op
+    description: Allow setting kinetic dismount conditions
+  itemedit.itemeditkinetic.forwardmovement:
+    default: op
+    description: Allow setting kinetic forward movement
+  itemedit.itemeditkinetic.hitsound:
+    default: op
+    description: Allow setting kinetic hit sound
+  itemedit.itemeditkinetic.knockbackconditions:
+    default: op
+    description: Allow setting kinetic knockback conditions
+  itemedit.itemeditkinetic.sound:
+    default: op
+    description: Allow setting kinetic sound
+  itemedit.itemeditpiercing.*:
+    default: op
+    description: Gives full access to command /itemeditpiercing
+    children:
+      itemedit.itemeditpiercing.dealsknockback: true
+      itemedit.itemeditpiercing.dismounts: true
+      itemedit.itemeditpiercing.hitsound: true
+      itemedit.itemeditpiercing.sound: true
+  itemedit.itemeditpiercing.dealsknockback:
+    default: op
+    description: Allow setting whether piercing hits cause knockback
+  itemedit.itemeditpiercing.dismounts:
+    default: op
+    description: Allow setting whether piercing hits cause dismount
+  itemedit.itemeditpiercing.hitsound:
+    default: op
+    description: Allow setting piercing hit sound
+  itemedit.itemeditpiercing.sound:
+    default: op
+    description: Allow setting piercing sound
   itemedit.itemedit.*:
     default: op
     description: Gives full access to command /itemedit
@@ -276,8 +388,10 @@ permissions:
       itemedit.itemedit.axolotlvariant: true
       itemedit.itemedit.goathornsound: true
       itemedit.itemedit.armortrim: true
+      itemedit.itemedit.attribute: true
       itemedit.itemedit.bookenchant: true
       itemedit.itemedit.maxstacksize: true
+      itemedit.itemedit.maxdurability: true
       itemedit.itemedit.hidetooltip: true
       itemedit.itemedit.fireresistent: true
       itemedit.itemedit.glow: true
@@ -285,7 +399,10 @@ permissions:
       itemedit.itemedit.food: true
       itemedit.itemedit.glider: true
       itemedit.itemedit.itemmodel: true
+      itemedit.itemedit.tooltipstyle: true
       itemedit.itemedit.equipment: true
+      itemedit.itemedit.kinetic: true
+      itemedit.itemedit.pierce: true
   itemedit.itemedit.rename:
     default: op
     description: Allow editing item name
@@ -622,9 +739,15 @@ permissions:
   itemedit.itemedit.armortrim:
     default: op
     description: Allow setting trims on armor
+  itemedit.itemedit.attribute:
+    default: op
+    description: Allow editing item attributes
   itemedit.itemedit.maxstacksize:
     default: op
     description: Allow setting max stack size
+  itemedit.itemedit.maxdurability:
+    default: op
+    description: Allow setting max durability
   itemedit.itemedit.fireresistent:
     default: op
     description: Allow setting fire resistance of this stack
@@ -654,3 +777,12 @@ permissions:
   itemedit.itemedit.equipment:
     default: op
     description: Allow setting equipment properties
+  itemedit.itemedit.kinetic:
+    default: op
+    description: Allow editing kinetic properties through /itemedit
+  itemedit.itemedit.pierce:
+    default: op
+    description: Allow editing piercing properties through /itemedit
+  itemedit.itemedit.tooltipstyle:
+    default: op
+    description: Allow setting the tooltip style
