@@ -40,7 +40,7 @@ public class SoundSubCommand extends SubCmd {
         ItemBuilder builder = new ItemBuilder(getItemInMainHand(player));
         apply.accept(builder, value);
         setItemInHand(player, builder.build());
-        onSuccess(player);
+        onSuccess(player, "%value%", value.toString());
         updateView(player);
     }
 

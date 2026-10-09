@@ -3,6 +3,7 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.IntParser;
 import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -26,18 +27,17 @@ public class MaxDurability extends SubCmd {
             onFail(p, alias);
             return;
         }
-
         if (!item.isMetaClass(Damageable.class)) {
-            getPlugin().getTranslator().send(p, "generic.error.wrong-material_damageable");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.damageable");
             return;
         }
-        try {
-            int amount = Integer.parseInt(args[1]);//TODO check valid amount >0
-            item.setMaxDamage(amount).build();
-            onSuccess(p, "%value%", String.valueOf(amount));
-        } catch (NumberFormatException e) {
+        IntParser amount = new IntParser(args[1]);
+        if (!amount.isNumberMin(1)) {
             onFail(p, alias);
+            return;
         }
+        item.setMaxDamage(amount.getValue()).build();
+        onSuccess(p, "%value%", String.valueOf(amount.getValue()));
     }
 
     @Override

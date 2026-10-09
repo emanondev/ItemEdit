@@ -35,7 +35,7 @@ public class Banner extends SubCmd {
         Player p = (Player) sender;
         ItemBuilder item = new ItemBuilder(this.getItemInMainHand(p));
         if (!(item.isMetaClass(BannerMeta.class))) {
-            getPlugin().getTranslator().send(p, "generic.error.wrong-material_banner");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.banner");
             return;
         }
         if (args.length == 1) {

@@ -22,7 +22,7 @@ public class BookAuthor extends SubCmd {
         Player p = (Player) sender;
         ItemBuilder item = new ItemBuilder(this.getItemInMainHand(p));
         if (!(item.getType() == Material.WRITTEN_BOOK)) {
-            getPlugin().getTranslator().send(p, "generic.error.wrong-material_written_book");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.written_book");
             return;
         }
 

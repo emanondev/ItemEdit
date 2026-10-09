@@ -360,7 +360,10 @@ public final class Util {
     }
 
     public static Component asSuggestCommand(Component text, @Nullable String command) {
-        return command == null || command.isEmpty() ? text : text.clickEvent(ClickEvent.suggestCommand(command));
+        if (command == null || command.isEmpty()) {
+            return text;
+        }
+        return text.clickEvent(ClickEvent.suggestCommand(command));
     }
 
     public static String asExecuteCommand(String text, @Nullable String command) {

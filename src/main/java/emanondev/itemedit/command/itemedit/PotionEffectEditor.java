@@ -34,7 +34,7 @@ public class PotionEffectEditor extends SubCmd {
         ItemBuilder item = new ItemBuilder(getItemInMainHand(p));
         if (!item.isMetaClass(PotionMeta.class)
                 && (VersionUtils.isUpTo(1, 14) || !item.isMetaClass(SuspiciousStewMeta.class))) {
-            getPlugin().getTranslator().send(p, "generic.error.wrong-material_potion_effect_applicable");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.potion_effect_applicable");
             if (p.hasPermission("itemedit.admin")) {
                 Component msg = this.translate("itemtag-tip", sender);
                 if (Util.hasRenderableContent(msg)) {

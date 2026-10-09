@@ -278,7 +278,7 @@ public class Lore extends SubCmd {
         if (item.hasItemMeta()) {
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             if (!(itemMeta instanceof BookMeta meta)) {
-                getPlugin().getTranslator().send(p, "generic.error.wrong-material_writable_book");
+                getPlugin().getTranslator().send(p, "generic.wrong-material.writable_book");
                 return;
             }
             List<String> pages = meta.getPages();

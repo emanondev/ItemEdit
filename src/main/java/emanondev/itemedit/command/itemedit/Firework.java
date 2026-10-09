@@ -24,7 +24,7 @@ public class Firework extends SubCmd {
         Player p = (Player) sender;
         ItemBuilder item = new ItemBuilder(this.getItemInMainHand(p));
         if (!item.isMetaClass(FireworkMeta.class)) {
-            getPlugin().getTranslator().send(p, "generic.error.wrong-material_firework");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.firework");
             return;
         }
         p.openInventory(new FireworkEditor(p, item.build()).getInventory());

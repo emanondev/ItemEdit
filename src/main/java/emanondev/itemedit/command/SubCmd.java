@@ -8,6 +8,7 @@ import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -108,7 +109,7 @@ public abstract class SubCmd {
 
     protected void onSubFail(CommandSender target, String alias, String subSubCommand) {
         Component params = translate(subSubCommand + ".params", target);
-        String paramsText = params == null ? "" : MiniMessage.miniMessage().serialize(params);
+        String paramsText = params == null ? "" : PlainTextComponentSerializer.plainText().serialize(params);
         Util.sendMessage2(target, craftFailFeedback(alias, subSubCommand
                         + ((!Util.hasRenderableContent(params)) ? "" : " " + paramsText),
                 translateList(subSubCommand + ".description", target)));

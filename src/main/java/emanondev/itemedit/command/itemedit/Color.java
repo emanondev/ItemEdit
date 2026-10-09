@@ -4,6 +4,7 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.gui.ColorGui;
+import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemBuilder;
 import emanondev.itemedit.utility.VersionUtils;
 import org.bukkit.FireworkEffect;
@@ -17,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 public class Color extends SubCmd {
     private final String tippedArrowPerm;
@@ -38,7 +40,7 @@ public class Color extends SubCmd {
         ItemBuilder item = new ItemBuilder(this.getItemInMainHand(p));
         String perm = calculatePermission(item, args, p);
         if (perm == null) {
-            getPlugin().getTranslator().send(p, "generic.error.wrong-material_rgb_colorable");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.rgb_colorable");
             return;
         }
 
@@ -90,6 +92,9 @@ public class Color extends SubCmd {
     // itemedit bookauthor <name>
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        switch (args.length) {
+            case 2,3,4 -> CompleteUtility.complete(args[args.length - 1],"0","127","255");
+        }
         return List.of();
     }
 

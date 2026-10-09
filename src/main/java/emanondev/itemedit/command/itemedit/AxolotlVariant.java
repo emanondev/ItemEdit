@@ -25,7 +25,7 @@ public class AxolotlVariant extends SubCmd {
         Player p = (Player) sender;
         ItemBuilder item = new ItemBuilder(this.getItemInMainHand(p));
         if (!(item.isMetaClass(AxolotlBucketMeta.class))) {
-            getPlugin().getTranslator().send(p, "generic.error.wrong-material_axolotl_bucket");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.axolotl_bucket");
             return;
         }
 

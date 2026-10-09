@@ -29,7 +29,7 @@ public class TropicalFish extends SubCmd {
         Player p = (Player) sender;
         ItemBuilder item = new ItemBuilder(getItemInMainHand(p));
         if (!item.isMetaClass(TropicalFishBucketMeta.class)) {
-            getPlugin().getTranslator().send(p, "generic.error.wrong-material_tropical_fish_bucket");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.tropical_fish_bucket");
             return;
         }
 

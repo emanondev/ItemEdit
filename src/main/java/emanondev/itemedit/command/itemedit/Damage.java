@@ -3,6 +3,7 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.IntParser;
 import emanondev.itemedit.utility.ItemBuilder;
 import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.command.CommandSender;
@@ -26,17 +27,17 @@ public class Damage extends SubCmd {
             onFail(p, alias);
             return;
         }
-        try {
-            int amount = Integer.parseInt(args[1]); //TODO test bounds <0 >maxDurability
-            item.setDamage(amount).build();
-            updateView(p);
-            if (amount == 0) {
-                sendFeedback(p, "feedback-reset");
-            } else {
-                onSuccess(p);
-            }
-        } catch (NumberFormatException e) {
+        IntParser amount = new IntParser(args[1]);
+        if (!amount.isNumberMin(0)) {
             onFail(p, alias);
+            return;
+        }
+        item.setDamage(amount.getValue()).build();
+        updateView(p);
+        if (amount.getValue() == 0) {
+            sendFeedback(p, "feedback-reset");
+        } else {
+            onSuccess(p);
         }
     }
 

@@ -3,6 +3,7 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.IntParser;
 import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -25,16 +26,16 @@ public class MaxStackSize extends SubCmd {
             onFail(sender, alias);
             return;
         }
-        try {
-            Integer value = args.length == 1 ? null : Integer.parseInt(args[1]);
-            item.setMaxStackSize(value).build();
-            if (value != null) {
-                onSuccess(p, "%value%", String.valueOf(value));
-            } else {
-                sendFeedback(p, "feedback-reset");
-            }
-        } catch (NumberFormatException e) { //TODO test limit values
+        IntParser value = args.length == 1 ? null : new IntParser(args[1]);
+        if (value != null && !value.isNumberInRange(1, 99)) {
             onFail(p, alias);
+            return;
+        }
+        item.setMaxStackSize(value==null?null:value.getValue()).build();
+        if (value != null) {
+            onSuccess(p, "%value%", String.valueOf(value.getValue()));
+        } else {
+            sendFeedback(p, "feedback-reset");
         }
     }
 
