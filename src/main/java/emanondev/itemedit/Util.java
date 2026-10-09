@@ -6,7 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import net.kyori.adventure.text.*;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -27,6 +31,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Slf4j
@@ -35,6 +40,9 @@ public final class Util {
     private Util() {
         throw new UnsupportedOperationException();
     }
+
+    private static final Pattern LEGACY_HEX_COLOR = Pattern.compile("(?i)&#([0-9a-f]{6})");
+    private static final Pattern LEGACY_REPEATED_HEX_COLOR = Pattern.compile("(?i)[&§]x(?:[&§][0-9a-f]){6}");
 
     /**
      * takes an already formatted message
@@ -111,7 +119,7 @@ public final class Util {
 
     public static void logCommandError(AbstractCommand command, String[] args, CommandSender sender) {
         ItemStack item = sender instanceof Player p ? InventoryUtils.getItem(p, EquipmentSlot.HAND) : null;
-        sendMessage(sender, "<red>ERROR when executing /" + command.getName()
+        sendMessage(Bukkit.getConsoleSender(), "<red>ERROR when executing /" + command.getName()
                 + " " + String.join(" ", args) + " by " + sender.getName()
                 + " (with " + (item == null ? "nothing" : item) + " in hand)");
     }
@@ -181,29 +189,129 @@ public final class Util {
 
     }
 
-    public static String formatText(CommandSender sender, String text, String basePermission) {
-        //TODO formats
-        if (basePermission != null) {
-            for (ChatColor style : ChatColor.values())
-                if (style.isFormat()) {
-                    if (!sender.hasPermission(basePermission + ".format." + style.name().toLowerCase(Locale.ENGLISH)))
-                        text = text.replaceAll(style.toString(), "");
-                } else if (!sender.hasPermission(basePermission + ".color." + style.name().toLowerCase(Locale.ENGLISH)))
-                    text = text.replaceAll(style.toString(), "");
-            if (sender.hasPermission(basePermission + ".color.hexa")) {
-                try {
-                    int from = 0;
-                    while (text.indexOf("&#", from) >= 0) {
-                        from = text.indexOf("&#", from) + 1;
-                        text = text.replace(text.substring(from - 1, from + 7),
-                                net.md_5.bungee.api.ChatColor.of(text.substring(from, from + 7)).toString());
-                    }
-                } catch (Throwable ignored) {
-                }
+    public static @Nullable String formatText(CommandSender sender, @Nullable String text, String basePermission) {
+        if (text == null) {
+            return null;
+        }
+        Component formatted = formatComponent(sender, text, basePermission);
+        return MiniMessage.miniMessage().serialize(formatted);
+    }
+
+    public static Component formatComponent(CommandSender sender, @Nullable String text, String basePermission) {
+        return formatText(sender, UtilsString.fix2(legacyHexToMiniMessage(text), null, true), basePermission);
+    }
+
+    /**
+     * Formats text immediately unless it must remain a MiniMessage template until
+     * a server item is generated for its recipient.
+     */
+    public static Component formatItemTemplate(CommandSender sender, @Nullable String text, String basePermission) {
+        if (text == null) {
+            return Component.empty();
+        }
+
+        // These tags generate arbitrary RGB colors, so deferring them requires
+        // the same hexa-color permission that the regular formatter enforces.
+        if (isDeferredItemTemplate(text)
+                && (basePermission == null || sender.hasPermission(basePermission + ".color.hexa"))) {
+            return Component.text(text);
+        }
+        return formatComponent(sender, text, basePermission);
+    }
+
+    public static String getPlainTextItemTemplate(CommandSender sender, Component component, String basePermission) {
+        if (component instanceof TextComponent text
+                && isDeferredItemTemplate(text.content())
+                && (basePermission == null || sender.hasPermission(basePermission + ".color.hexa"))) {
+            return getPlainText(formatComponent(sender, text.content(), basePermission));
+        }
+        return getPlainText(formatText(sender, component, basePermission));
+    }
+
+    public static String serializeItemTemplate(Component component) {
+        if (component instanceof TextComponent text && isDeferredItemTemplate(text.content())) {
+            return text.content();
+        }
+        return MiniMessage.miniMessage().serialize(component);
+    }
+
+    public static boolean isDeferredItemTemplate(String text) {
+        String lowerCase = text.toLowerCase(Locale.ROOT);
+        return lowerCase.contains("<transition")
+                || (countCharacters(text, '%') >= 2
+                && (lowerCase.contains("<rainbow")
+                || lowerCase.contains("<gradient")
+                || lowerCase.contains("<pride")
+                || lowerCase.contains("<head")));
+    }
+
+    public static boolean isDeferredItemTemplate(Component component) {
+        return component instanceof TextComponent text && isDeferredItemTemplate(text.content());
+    }
+
+    private static int countCharacters(String text, char character) {
+        int count = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == character) {
+                count++;
             }
         }
-        return text;
+        return count;
+    }
 
+    private static @Nullable String legacyHexToMiniMessage(@Nullable String text) {
+        if (text == null) {
+            return null;
+        }
+        String normalized = LEGACY_HEX_COLOR.matcher(text).replaceAll("<#$1>");
+        Matcher matcher = LEGACY_REPEATED_HEX_COLOR.matcher(normalized);
+        StringBuffer result = new StringBuffer();
+        while (matcher.find()) {
+            String hex = matcher.group().substring(2).replaceAll("[&§]", "");
+            matcher.appendReplacement(result, Matcher.quoteReplacement("<#" + hex + ">"));
+        }
+        matcher.appendTail(result);
+        return result.toString();
+    }
+
+    public static Component formatText(CommandSender sender, @Nullable Component text, String basePermission) {
+        if (text == null || basePermission == null) {
+            return text == null ? Component.empty() : text;
+        }
+
+        TextColor color = text.color();
+        if (color != null) {
+            String colorName = color instanceof NamedTextColor named ? NamedTextColor.NAMES.key(named) : null;
+            String colorPermission = colorName == null ? "hexa" : colorName;
+            if (!sender.hasPermission(basePermission + ".color." + colorPermission)) {
+                text = text.color(null);
+            }
+        }
+
+        for (TextDecoration decoration : TextDecoration.values()) {
+            if (text.decoration(decoration) != TextDecoration.State.TRUE) {
+                continue;
+            }
+            String permissionName = switch (decoration) {
+                case OBFUSCATED -> "magic";
+                case BOLD -> "bold";
+                case STRIKETHROUGH -> "strikethrough";
+                case UNDERLINED -> "underline";
+                case ITALIC -> "italic";
+            };
+            if (!sender.hasPermission(basePermission + ".format." + permissionName)) {
+                text = text.decoration(decoration, TextDecoration.State.NOT_SET);
+            }
+        }
+
+        List<Component> children = text.children().stream()
+                .map(child -> formatText(sender, child, basePermission))
+                .toList();
+        return text.children(children);
+    }
+
+    public static String getPlainText(Component component) {
+        return PlainTextComponentSerializer.plainText().serialize(component);
     }
 
     public static boolean isAllowedRenameItem(CommandSender sender, Material type) {

@@ -38,6 +38,10 @@ public class AddEffect extends SubCmd {
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player player = (Player) sender;
         ItemBuilder builder = new ItemBuilder(getItemInHand(player));
+        if (args.length == 0) {
+            //TODO help message?
+            return;
+        }
         try {
             switch (args[1].toLowerCase(Locale.ENGLISH)) {
                 case "cleareffects" -> cleareffects(player, builder, alias, args);

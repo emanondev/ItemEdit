@@ -165,6 +165,11 @@ public final class UtilsString {
     @Contract("!null, _, _, _ -> !null")
     @Deprecated
     public static String fix(@Nullable String text, @Nullable Player player, boolean color, String... holders) {
+        return replacePlaceholders(text, player, holders);
+    }
+
+    @Contract("!null, _, _ -> !null")
+    public static @Nullable String replacePlaceholders(@Nullable String text, @Nullable Player player, String... holders) {
         if (text == null)
             return null;
 
@@ -186,11 +191,27 @@ public final class UtilsString {
 
     @Contract("!null, _, _, _ -> !null")
     public static @Nullable Component fix2(@Nullable String text, @Nullable Player player, boolean color, String... holders) {
-        String fixed = fix(text, player, color, holders);
+        String fixed = replacePlaceholders(text, player, holders);
         if (fixed == null) {
             return null;
         }
         return MINI_MESSAGE.deserialize(legacyToMiniMessage(fixed, color));
+    }
+
+    /**
+     * Replaces holders and PlaceholderAPI values in text nodes while preserving
+     * the formatting and events of an already parsed component.
+     */
+    public static Component replacePlaceholders(Component component, Player player, String... holders) {
+        Component replaced = component;
+        if (replaced instanceof net.kyori.adventure.text.TextComponent text) {
+            replaced = text.content(replacePlaceholders(text.content(), player, holders));
+        }
+
+        List<Component> children = replaced.children().stream()
+                .map(child -> replacePlaceholders(child, player, holders))
+                .toList();
+        return replaced.children(children);
     }
 
     public static Component toSingleComponent(@Nullable List<Component> components) {

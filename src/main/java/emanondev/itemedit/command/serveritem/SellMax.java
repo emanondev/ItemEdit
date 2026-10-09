@@ -8,13 +8,11 @@ import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.InventoryUtils;
-import emanondev.itemedit.utility.ItemUtils;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,17 +43,11 @@ public class SellMax extends SubCmd {
             if (amount < 1) {
                 throw new IllegalArgumentException("Wrong amount number");
             }
-            ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1]);
             Player target = Bukkit.getPlayer(args[3]);
+            ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1], target);
             double price = Double.parseDouble(args[4]);
             if (price <= 0) {
                 throw new IllegalArgumentException();
-            }
-            if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
-                ItemMeta meta = ItemUtils.getMeta(item);
-                meta.setDisplayName(UtilsString.fix(meta.getDisplayName(), target, true, "%player_name%", target.getName(), "%player_uuid%", target.getUniqueId().toString()));
-                meta.setLore(UtilsString.fix(meta.getLore(), target, true, "%player_name%", target.getName(), "%player_uuid%", target.getUniqueId().toString()));
-                item.setItemMeta(meta);
             }
             // have enough money?
             if (!economy.has(target, price / amount)) {

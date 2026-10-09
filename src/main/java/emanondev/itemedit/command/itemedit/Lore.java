@@ -2,13 +2,14 @@ package emanondev.itemedit.command.itemedit;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemUtils;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -24,7 +25,7 @@ public class Lore extends SubCmd {
 
     private static final String[] loreSub = new String[]{"add", "set", "remove", "reset", "insert", "copy",
             "copybook", "copyfile", "paste", "replace"};
-    private final Map<UUID, List<String>> copies = new HashMap<>();
+    private final Map<UUID, List<Component>> copies = new HashMap<>();
     private final YMLConfig loreCopy = ItemEdit.get().getConfig("loreCopy");
     private int lineLimit;
     private int lengthLimit;
@@ -107,7 +108,7 @@ public class Lore extends SubCmd {
                     if (!item.hasItemMeta() || !meta.hasLore()) {
                         yield CompleteUtility.complete(args[2], Arrays.asList("1", "last"));
                     }
-                    List<String> loreIndices = IntStream.range(0, meta.getLore().size())
+                    List<String> loreIndices = IntStream.range(0, meta.lore().size())
                             .mapToObj(i -> String.valueOf(i + 1))
                             .collect(Collectors.toList());
                     loreIndices.add("last");
@@ -126,7 +127,7 @@ public class Lore extends SubCmd {
                     ItemMeta meta = ItemUtils.getMeta(item);
                     if (!meta.hasLore()) yield List.of();
 
-                    List<String> lore = meta.getLore();
+                    List<Component> lore = meta.lore();
                     int line;
                     try {
                         line = args[2].equalsIgnoreCase("last") ? lore.size() - 1 : Integer.parseInt(args[2]) - 1;
@@ -136,7 +137,7 @@ public class Lore extends SubCmd {
 
                     if (line < 0 || line >= lore.size()) yield List.of();
 
-                    yield CompleteUtility.complete(args[3], lore.get(line).replace('§', '&'));
+                    yield CompleteUtility.complete(args[3], Util.serializeItemTemplate(lore.get(line)));
                 }
                 default -> List.of();
             };
@@ -171,7 +172,7 @@ public class Lore extends SubCmd {
             if (!meta.hasLore()) {
                 return;
             }
-            List<String> lore = meta.getLore();
+            List<Component> lore = meta.lore();
             String from;
             String to;
             if (args.length == 4) {
@@ -206,22 +207,33 @@ public class Lore extends SubCmd {
                 from = rawText.substring(1, i2);
                 to = rawText.substring(i3 + 1, i4);
             }
-            from = UtilsString.fix(from, null, true);
-            to = UtilsString.fix(to, null, true);
+            Component fromComponent = Util.formatComponent(p, from, getPermission());
+            String fromText = PlainTextComponentSerializer.plainText().serialize(fromComponent);
+            Component replacement = Util.formatItemTemplate(p, to, getPermission());
+            if (fromText.isEmpty()) {
+                onSubFail(p, alias, "replace");
+                return;
+            }
 
-            for (String s : lore) {
-                String text = s.replace(from, to);
-                if (!allowedLengthLimit(p, ChatColor.stripColor(text))) {
+            TextReplacementConfig replacementConfig = TextReplacementConfig.builder()
+                    .matchLiteral(fromText)
+                    .replacement(replacement)
+                    .build();
+            String replacementPlainText = Util.getPlainText(Util.formatComponent(p, to, getPermission()));
+            List<Component> replacedLore = new ArrayList<>(lore.size());
+            for (Component line : lore) {
+                Component replaced = line.replaceText(replacementConfig);
+                String plainText = PlainTextComponentSerializer.plainText().serialize(line)
+                        .replace(fromText, replacementPlainText);
+                if (!allowedLengthLimit(p, plainText)) {
                     getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
                             "%limit%", String.valueOf(lengthLimit));
                     return;
                 }
+                replacedLore.add(replaced);
             }
 
-            for (int i = 0; i < lore.size(); i++) {
-                lore.set(i, lore.get(i).replace(from, to));
-            }
-            meta.setLore(lore);
+            meta.lore(replacedLore);
             item.setItemMeta(meta);
             updateView(p);
         } catch (Exception e) {
@@ -235,18 +247,20 @@ public class Lore extends SubCmd {
             return;
         }
         ItemMeta meta = ItemUtils.getMeta(item);
-        meta.setLore(copies.get(p.getUniqueId()));
+        meta.lore(copies.get(p.getUniqueId()).stream()
+                .map(line -> Util.formatText(p, line, getPermission()))
+                .toList());
         item.setItemMeta(meta);
         Util.sendMessage2(p, this.translate("paste.feedback", p));
         updateView(p);
     }
 
     private void loreCopy(Player p, ItemStack item, String alias, String[] args) {
-        List<String> lore;
+        List<Component> lore;
         if (item.hasItemMeta()) {
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             if (itemMeta.hasLore()) {
-                lore = new ArrayList<>(itemMeta.getLore());
+                lore = new ArrayList<>(itemMeta.lore());
             } else {
                 lore = new ArrayList<>();
             }
@@ -259,7 +273,7 @@ public class Lore extends SubCmd {
 
     private void loreCopyBook(Player p, ItemStack item, String alias, String[] args) {
 
-        List<String> lore;
+        List<Component> lore;
         if (item.hasItemMeta()) {
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             if (!(itemMeta instanceof BookMeta meta)) {
@@ -273,12 +287,13 @@ public class Lore extends SubCmd {
                     if (page == null) {
                         continue;
                     }
-                    lore.addAll(Arrays.asList(page.split("\n")));
+                    for (String line : page.split("\n")) {
+                        lore.add(Util.formatItemTemplate(p, line, getPermission()));
+                    }
                 }
         } else {
             lore = new ArrayList<>();
         }
-        lore.replaceAll(text -> Util.formatText(p, text, getPermission()));
         copies.put(p.getUniqueId(), lore);
         Util.sendMessage2(p, this.translate("copyBook.feedback", p));
     }
@@ -292,8 +307,9 @@ public class Lore extends SubCmd {
             Util.sendMessage2(p, this.translate("copyFile.wrong-path", p));
             return;
         }
-        List<String> lore = new ArrayList<>(loreCopy.getStringList(args[2]));
-        lore.replaceAll(text -> Util.formatText(p, text, getPermission()));
+        List<Component> lore = loreCopy.getStringList(args[2]).stream()
+                .map(text -> Util.formatItemTemplate(p, text, getPermission()))
+                .toList();
         copies.put(p.getUniqueId(), lore);
         Util.sendMessage2(p, this.translate("copyFile.feedback", p));
     }
@@ -310,9 +326,9 @@ public class Lore extends SubCmd {
 
         ItemMeta itemMeta = ItemUtils.getMeta(item);
 
-        List<String> lore;
+        List<Component> lore;
         if (itemMeta.hasLore()) {
-            lore = new ArrayList<>(itemMeta.getLore());
+            lore = new ArrayList<>(itemMeta.lore());
         } else {
             lore = new ArrayList<>();
         }
@@ -322,18 +338,19 @@ public class Lore extends SubCmd {
             return;
         }
 
-        String lineText = Util.formatText(p, text.toString(), getPermission());
-        if (!allowedLengthLimit(p, ChatColor.stripColor(lineText))) {
+        Component lineText = Util.formatItemTemplate(p, text.toString(), getPermission());
+        String plainText = Util.getPlainTextItemTemplate(p, lineText, getPermission());
+        if (!allowedLengthLimit(p, plainText)) {
             getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
                     "%limit%", String.valueOf(lengthLimit));
             return;
         }
-        if (Util.checkBannedWords(p, lineText)) {
+        if (Util.checkBannedWords(p, plainText)) {
             return;
         }
 
         lore.add(lineText);
-        itemMeta.setLore(lore);
+        itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         updateView(p);
     }
@@ -360,9 +377,9 @@ public class Lore extends SubCmd {
             }
             ItemMeta itemMeta = ItemUtils.getMeta(item);
 
-            List<String> lore;
+            List<Component> lore;
             if (itemMeta.hasLore()) {
-                lore = new ArrayList<>(itemMeta.getLore());
+                lore = new ArrayList<>(itemMeta.lore());
             } else {
                 lore = new ArrayList<>();
             }
@@ -371,8 +388,9 @@ public class Lore extends SubCmd {
                         "%limit%", String.valueOf(lineLimit));
                 return;
             }
-            String lineText = Util.formatText(p, text.toString(), getPermission());
-            if (!allowedLengthLimit(p, ChatColor.stripColor(lineText))) {
+            Component lineText = Util.formatItemTemplate(p, text.toString(), getPermission());
+            String plainText = Util.getPlainTextItemTemplate(p, lineText, getPermission());
+            if (!allowedLengthLimit(p, plainText)) {
                 getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
                         "%limit%", String.valueOf(lengthLimit));
                 return;
@@ -380,15 +398,15 @@ public class Lore extends SubCmd {
 
 
             for (int i = lore.size(); i < line; i++) {
-                lore.add("");
+                lore.add(Component.empty());
             }
 
-            if (Util.checkBannedWords(p, lineText)) {
+            if (Util.checkBannedWords(p, plainText)) {
                 return;
             }
 
             lore.add(line, lineText);
-            itemMeta.setLore(lore);
+            itemMeta.lore(lore);
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
@@ -411,13 +429,14 @@ public class Lore extends SubCmd {
                 }
                 // text = ChatColor.translateAlternateColorCodes('&', text);
             }
-            String lineText = Util.formatText(p, text.toString(), getPermission());
+            Component lineText = Util.formatItemTemplate(p, text.toString(), getPermission());
+            String plainText = Util.getPlainTextItemTemplate(p, lineText, getPermission());
 
             ItemMeta itemMeta = ItemUtils.getMeta(item);
 
-            List<String> lore;
+            List<Component> lore;
             if (itemMeta.hasLore()) {
-                lore = new ArrayList<>(itemMeta.getLore());
+                lore = new ArrayList<>(itemMeta.lore());
             } else {
                 lore = new ArrayList<>();
             }
@@ -432,21 +451,21 @@ public class Lore extends SubCmd {
                         "%limit%", String.valueOf(lineLimit));
                 return;
             }
-            if (!allowedLengthLimit(p, ChatColor.stripColor(lineText))) {
+            if (!allowedLengthLimit(p, plainText)) {
                 getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
                         "%limit%", String.valueOf(lengthLimit));
                 return;
             }
             for (int i = lore.size(); i <= line; i++) {
-                lore.add("");
+                lore.add(Component.empty());
             }
 
-            if (Util.checkBannedWords(p, lineText)) {
+            if (Util.checkBannedWords(p, plainText)) {
                 return;
             }
 
             lore.set(line, lineText);
-            itemMeta.setLore(lore);
+            itemMeta.lore(lore);
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
@@ -463,10 +482,10 @@ public class Lore extends SubCmd {
                 return;
             }
             ItemMeta itemMeta = ItemUtils.getMeta(item);
-            if (!itemMeta.hasLore() || itemMeta.getLore().isEmpty()) {
+            if (!itemMeta.hasLore() || itemMeta.lore().isEmpty()) {
                 return;
             }
-            List<String> lore = new ArrayList<>(itemMeta.getLore());
+            List<Component> lore = new ArrayList<>(itemMeta.lore());
             int line;
             if (args[2].equalsIgnoreCase("last")) {
                 line = lore.size() - 1;
@@ -477,12 +496,12 @@ public class Lore extends SubCmd {
                 throw new IllegalArgumentException("Wrong line number");
             }
 
-            if (lore.size() < line) {
+            if (lore.size() <= line) {
                 return;
             }
 
             lore.remove(line);
-            itemMeta.setLore(lore);
+            itemMeta.lore(lore);
             item.setItemMeta(itemMeta);
             updateView(p);
         } catch (Exception e) {
@@ -492,7 +511,7 @@ public class Lore extends SubCmd {
 
     private void loreReset(Player p, ItemStack item, String alias, String[] args) {
         ItemMeta meta = ItemUtils.getMeta(item);
-        meta.setLore(null);
+        meta.lore(null);
         item.setItemMeta(meta);
         updateView(p);
     }

@@ -8,12 +8,10 @@ import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.InventoryUtils;
-import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -40,16 +38,8 @@ public class Give extends SubCmd {
             if (amount < 1) {
                 throw new IllegalArgumentException("Wrong amount number");
             }
-            ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1]);
             Player target = args.length >= 4 ? Bukkit.getPlayer(args[3]) : (Player) sender;
-            if (ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
-                ItemMeta meta = ItemUtils.getMeta(item);
-                meta.setDisplayName(UtilsString.fix(meta.getDisplayName(), target, true, "%player_name%",
-                        target.getName(), "%player_uuid%", target.getUniqueId().toString()));
-                meta.setLore(UtilsString.fix(meta.getLore(), target, true, "%player_name%", target.getName(),
-                        "%player_uuid%", target.getUniqueId().toString()));
-                item.setItemMeta(meta);
-            }
+            ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1], target);
             int given = InventoryUtils.giveAmount(target, item, amount, ItemEdit.get().getConfig()
                     .loadBoolean("serveritem.give-drops-excess", true) ?
                     InventoryUtils.ExcessMode.DROP_EXCESS : InventoryUtils.ExcessMode.DELETE_EXCESS);

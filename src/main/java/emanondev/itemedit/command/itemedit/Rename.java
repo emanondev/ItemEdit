@@ -5,7 +5,7 @@ import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemUtils;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -19,7 +19,7 @@ import java.util.UUID;
 
 public class Rename extends SubCmd {
 
-    private final Map<UUID, String> copies = new HashMap<>();
+    private final Map<UUID, Component> copies = new HashMap<>();
     private int lengthLimit;
 
     public Rename(@NotNull ItemEditCommand cmd) {
@@ -43,14 +43,14 @@ public class Rename extends SubCmd {
 
         ItemMeta itemMeta = ItemUtils.getMeta(item);
         if (args.length == 1) {
-            itemMeta.setDisplayName(" ");
+            itemMeta.displayName(Component.text(" "));
             item.setItemMeta(itemMeta);
             updateView(p);
             return;
         }
 
         if (args.length == 2 && args[1].equalsIgnoreCase("-clear")) {
-            itemMeta.setDisplayName(null);
+            itemMeta.displayName(null);
             item.setItemMeta(itemMeta);
             sendFeedback(p, "rename-clear");
             updateView(p);
@@ -58,41 +58,44 @@ public class Rename extends SubCmd {
         }
 
         if (args.length == 2 && args[1].equalsIgnoreCase("-copy")) {
-            copies.put(p.getUniqueId(), itemMeta.getDisplayName());
+            Component currentName = itemMeta.displayName();
+            copies.put(p.getUniqueId(), currentName);
             sendFeedback(p, "rename-copy");
             updateView(p);
             return;
         }
 
         boolean paste = false;
-        String name;
+        Component name;
         if (args.length == 2 && args[1].equalsIgnoreCase("-paste")) {
             paste = true;
             if (!copies.containsKey(p.getUniqueId())) {
                 sendFeedback(p, "rename-paste-empty");
                 return;
             }
-            name = Util.formatText(p, copies.get(p.getUniqueId()), getPermission());
+            Component copiedName = copies.get(p.getUniqueId());
+            name = copiedName == null ? null : Util.formatText(p, copiedName, getPermission());
         } else {
             StringBuilder bname = new StringBuilder(args[1]);
             for (int i = 2; i < args.length; i++) {
                 bname.append(" ").append(args[i]);
             }
-            name = Util.formatText(p, bname.toString(), getPermission());
+            name = Util.formatItemTemplate(p, bname.toString(), getPermission());
         }
 
-        if (Util.checkBannedWords(p, name)) {
+        String plainName = name == null ? "" : Util.getPlainTextItemTemplate(p, name, getPermission());
+        if (Util.checkBannedWords(p, plainName)) {
             sendFeedback(p, "banned_words");
             return;
         }
 
-        if (!allowedLengthLimit(p, ChatColor.stripColor(name))) {
+        if (!allowedLengthLimit(p, plainName)) {
             getPlugin().getTranslator().send(p, "blocked-by-rename-length-limit",
                     "%limit%", String.valueOf(lengthLimit));
             return;
         }
 
-        itemMeta.setDisplayName(name);
+        itemMeta.displayName(name);
         item.setItemMeta(itemMeta);
         if (paste) {
             sendFeedback(p, "feedback-paste");
@@ -116,7 +119,7 @@ public class Rename extends SubCmd {
             return List.of();
         }
         return CompleteUtility.complete(
-                args[1], meta.getDisplayName().replace('§', '&'),
+                args[1], Util.serializeItemTemplate(meta.displayName()),
                 "-clear", "-paste", "-copy");
     }
 
