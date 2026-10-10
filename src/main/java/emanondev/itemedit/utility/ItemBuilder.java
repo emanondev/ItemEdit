@@ -208,7 +208,7 @@ public class ItemBuilder {
         if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
-            setStackData(DataComponentTypes.CONSUMABLE, consumable);
+        setStackData(DataComponentTypes.CONSUMABLE, consumable);
 
         return this;
     }
@@ -281,7 +281,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setFoodComponent(FoodProperties food) {
-            setStackData(DataComponentTypes.FOOD, food);
+        setStackData(DataComponentTypes.FOOD, food);
         return this;
     }
 
@@ -524,7 +524,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder clearEquippable() {
-        setStackData(DataComponentTypes.EQUIPPABLE,null);
+        setStackData(DataComponentTypes.EQUIPPABLE, null);
         return this;
     }
 
@@ -1015,7 +1015,7 @@ public class ItemBuilder {
     }
 
     private <T> void setStackData(DataComponentType.Valued<T> type, T value) {
-        if (value!=null) {
+        if (value != null) {
             stack.setData(type, value);
             editedComponents.put(type, true);
             return;

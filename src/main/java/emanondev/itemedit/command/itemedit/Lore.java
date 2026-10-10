@@ -123,7 +123,7 @@ public class Lore extends SubCmd {
                     if (!(sender instanceof Player player)) yield List.of();
 
                     ItemStack item = getItemInMainHand(player);
-                    if (item == null || !item.hasItemMeta()) yield List.of();
+                    if (!item.hasItemMeta()) yield List.of();
 
                     ItemMeta meta = ItemUtils.getMeta(item);
                     if (!meta.hasLore()) yield List.of();
@@ -281,17 +281,17 @@ public class Lore extends SubCmd {
                 getPlugin().getTranslator().send(p, "generic.wrong-material.writable_book");
                 return;
             }
+            // TODO use components
             List<String> pages = meta.getPages();
             lore = new ArrayList<>();
-            if (pages != null)
-                for (String page : pages) {
-                    if (page == null) {
-                        continue;
-                    }
-                    for (String line : page.split("\n")) {
-                        lore.add(Util.formatItemTemplate(p, line, getPermission()));
-                    }
+            for (String page : pages) {
+                if (page == null) {
+                    continue;
                 }
+                for (String line : page.split("\n")) {
+                    lore.add(Util.formatItemTemplate(p, line, getPermission()));
+                }
+            }
         } else {
             lore = new ArrayList<>();
         }

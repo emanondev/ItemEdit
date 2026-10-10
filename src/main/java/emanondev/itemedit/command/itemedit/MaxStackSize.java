@@ -31,7 +31,7 @@ public class MaxStackSize extends SubCmd {
             onFail(p, alias);
             return;
         }
-        item.setMaxStackSize(value==null?null:value.getValue()).build();
+        item.setMaxStackSize(value == null ? null : value.getValue()).build();
         if (value != null) {
             onSuccess(p, "%value%", String.valueOf(value.getValue()));
         } else {

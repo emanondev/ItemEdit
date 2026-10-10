@@ -9,6 +9,7 @@ import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -292,13 +293,13 @@ public abstract class AbstractCommand implements TabExecutor {
         }
 
         public void help(CommandSender sender, String alias, SubCmd sub) {
-            MiniMessage miniMessage = MiniMessage.miniMessage();
-            String message = miniMessage.serialize(
-                    this.translateOrEmpty("header-sub", sender, "%sub%", sub.getName()))
-                    + "\n<dark_green>/" + alias + " <green>" + sub.getName() + " "
-                    + miniMessage.serialize(sub.translateOrEmpty("params", sender))
-                    + "\n" + miniMessage.serialize(sub.getDescription(sender));
-            Util.sendMessage(sender, message);
+            Component message = Component.empty()
+                    .append(this.translateOrEmpty("header-sub", sender, "%sub%", sub.getName()))
+                    .append(Component.newline())
+                    .append(sub.getHelpComponent(sender, alias))
+                    .append(Component.newline())
+                    .append(sub.getDescription(sender));
+            Util.sendMessage2(sender, message);
         }
 
         public void help(CommandSender sender, String alias, int page) {
@@ -310,17 +311,14 @@ public abstract class AbstractCommand implements TabExecutor {
             int maxPage = getMaxPageFor(cmds.size());
             page = Math.max(1, Math.min(maxPage, page));
 
-            MiniMessage miniMessage = MiniMessage.miniMessage();
-            StringBuilder body = new StringBuilder(miniMessage.serialize(this.translateOrEmpty("header", sender)))
-                    .append("<reset>\n");
-
+            Component body = Component.empty()
+                    .append(this.translateOrEmpty("header", sender))
+                    .append(Component.newline());
             for (SubCmd cmd : cmds.subList(commandPerPage * (page - 1), Math.min(cmds.size(), commandPerPage * page))) {
-                body.append(cmd.getHelp(sender, alias)).append("<reset>\n");
+                body = body.append(cmd.getHelpComponent(sender, alias)).append(Component.newline());
             }
-            body.append(miniMessage.serialize(this.translateOrEmpty("footer", sender)));
-
-
-            Util.sendMessage(sender, injectClickablePages(body.toString(), sender, alias, page, maxPage));
+            body = body.append(injectClickablePages(sender, alias, page, maxPage));
+            Util.sendMessage2(sender, body);
         }
 
         @Override
@@ -348,51 +346,42 @@ public abstract class AbstractCommand implements TabExecutor {
             return elements / commandPerPage + (elements % commandPerPage == 0 ? 0 : 1);
         }
 
-        private String injectClickablePages(String text, CommandSender sender,
-                                            String alias, int page, int maxPage) {
-            text = text.replace("%page%", String.valueOf(page))
-                    .replace("%max_page%", String.valueOf(maxPage));
+        private Component injectClickablePages(CommandSender sender,
+                                               String alias, int page, int maxPage) {
             Translator translator = getPlugin().getTranslator();
-            MiniMessage miniMessage = MiniMessage.miniMessage();
-            if (text.contains("%prev_clickable%")) {
-                String clickable;
-                if (page > 1) {
-                    Component component = Util.asHover(Util.asExecuteCommand(
-                                    translator.translateOrEmpty(sender, "generic.help.prev_text",
-                                            "%target%", String.valueOf(page - 1),
-                                            "%page%", String.valueOf(page)),
-                                    "/" + alias + " " + getName() + " " + (page - 1)),
-                            translator.translateOrEmpty(sender, "generic.help.prev_hover",
-                                    "%target%", String.valueOf(page - 1),
-                                    "%page%", String.valueOf(page),
-                                    "%max_page%", String.valueOf(maxPage)));
-                    clickable = miniMessage.serialize(component);
-                } else {
-                    clickable = miniMessage.serialize(translator.translateOrEmpty(sender, "generic.help.prev_void",
-                            "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage)));
-                }
-                text = text.replace("%prev_clickable%", "<reset>" + clickable + "<reset>");
-            }
-            if (text.contains("%next_clickable%")) {
-                String clickable;
-                if (page < maxPage) {
-                    Component component = Util.asHover(Util.asExecuteCommand(
-                                    translator.translateOrEmpty(sender, "generic.help.next_text",
-                                            "%target%", String.valueOf(page + 1),
-                                            "%page%", String.valueOf(page)),
-                                    "/" + alias + " " + getName() + " " + (page + 1)),
-                            translator.translateOrEmpty(sender, "generic.help.next_hover",
-                                    "%target%", String.valueOf(page + 1),
-                                    "%page%", String.valueOf(page),
-                                    "%max_page%", String.valueOf(maxPage)));
-                    clickable = miniMessage.serialize(component);
-                } else {
-                    clickable = miniMessage.serialize(translator.translateOrEmpty(sender, "generic.help.next_void",
-                            "%page%", String.valueOf(page), "%max_page%", String.valueOf(maxPage)));
-                }
-                text = text.replace("%next_clickable%", "<reset>" + clickable + "<reset>");
-            }
-            return text;
+            String currentPage = String.valueOf(page);
+            String lastPage = String.valueOf(maxPage);
+            Component footer = translateOrEmpty("footer", sender,
+                    "%page%", currentPage, "%max_page%", lastPage);
+            Component previous = page > 1
+                    ? pageControl(sender, translator, "prev", alias, page, page - 1, maxPage)
+                    : translator.translateOrEmpty(sender, "generic.help.prev_void",
+                    "%page%", currentPage, "%max_page%", lastPage);
+            Component next = page < maxPage
+                    ? pageControl(sender, translator, "next", alias, page, page + 1, maxPage)
+                    : translator.translateOrEmpty(sender, "generic.help.next_void",
+                    "%page%", currentPage, "%max_page%", lastPage);
+
+            return footer.replaceText(TextReplacementConfig.builder()
+                            .matchLiteral("%prev_clickable%")
+                            .replacement(previous)
+                            .build())
+                    .replaceText(TextReplacementConfig.builder()
+                            .matchLiteral("%next_clickable%")
+                            .replacement(next)
+                            .build());
+        }
+
+        private Component pageControl(CommandSender sender, Translator translator, String direction,
+                                      String alias, int page, int targetPage, int maxPage) {
+            Component text = translator.translateOrEmpty(sender, "generic.help." + direction + "_text",
+                    "%target%", String.valueOf(targetPage), "%page%", String.valueOf(page));
+            Component hover = translator.translateOrEmpty(sender, "generic.help." + direction + "_hover",
+                    "%target%", String.valueOf(targetPage),
+                    "%page%", String.valueOf(page),
+                    "%max_page%", String.valueOf(maxPage));
+            return Util.asHover(Util.asExecuteCommand(text,
+                    "/" + alias + " " + getName() + " " + targetPage), hover);
         }
 
     }

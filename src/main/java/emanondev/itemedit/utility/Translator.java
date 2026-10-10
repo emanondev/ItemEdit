@@ -6,7 +6,6 @@ import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.YMLConfig;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

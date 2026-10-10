@@ -40,6 +40,11 @@ public class Info extends SubCmd {
                 "%knockbackconditions%", formatCondition(weapon.knockbackConditions())));
     }
 
+    @Override
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        return List.of();
+    }
+
     private String formatCondition(KineticWeapon.Condition condition) {
         if (condition == null) {
             return "-";
@@ -47,10 +52,5 @@ public class Info extends SubCmd {
         return "maxDurationTicks=" + condition.maxDurationTicks()
                 + ", minSpeed=" + condition.minSpeed()
                 + ", minRelativeSpeed=" + condition.minRelativeSpeed();
-    }
-
-    @Override
-    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return List.of();
     }
 }

@@ -7,11 +7,7 @@ import emanondev.itemedit.utility.VersionUtils;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
-import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect.ApplyStatusEffects;
-import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect.ClearAllStatusEffects;
-import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect.PlaySound;
-import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect.RemoveStatusEffects;
-import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect.TeleportRandomly;
+import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -74,6 +70,11 @@ public class Info extends SubCmd {
         }
     }
 
+    @Override
+    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
+        return List.of();
+    }
+
     private void sendConsumeEffects(Player player, List<ConsumeEffect> effects) {
         int potionEffects = effects.stream()
                 .filter(ApplyStatusEffects.class::isInstance)
@@ -123,10 +124,5 @@ public class Info extends SubCmd {
                         "%type%", effect.getClass().getSimpleName()));
             }
         }
-    }
-
-    @Override
-    public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return List.of();
     }
 }

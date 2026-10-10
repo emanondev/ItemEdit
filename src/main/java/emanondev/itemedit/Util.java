@@ -39,6 +39,7 @@ public final class Util {
 
     private static final Pattern LEGACY_HEX_COLOR = Pattern.compile("(?i)&#([0-9a-f]{6})");
     private static final Pattern LEGACY_REPEATED_HEX_COLOR = Pattern.compile("(?i)[&§]x(?:[&§][0-9a-f]){6}");
+
     private Util() {
         throw new UnsupportedOperationException();
     }
@@ -452,7 +453,7 @@ public final class Util {
         }
         String normalized = LEGACY_HEX_COLOR.matcher(text).replaceAll("<#$1>");
         Matcher matcher = LEGACY_REPEATED_HEX_COLOR.matcher(normalized);
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         while (matcher.find()) {
             String hex = matcher.group().substring(2).replaceAll("[&§]", "");
             matcher.appendReplacement(result, Matcher.quoteReplacement("<#" + hex + ">"));

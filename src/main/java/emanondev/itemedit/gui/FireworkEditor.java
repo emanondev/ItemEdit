@@ -5,7 +5,6 @@ import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.utility.ItemUtils;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -41,7 +40,7 @@ public class FireworkEditor implements Gui {
         this.meta = (FireworkMeta) ItemUtils.getMeta(firework);
         this.target = target;
         Component title = getLanguageComponent(subPath + "title");
-        this.inventory = Bukkit.createInventory(this, (6) * 9,title);
+        this.inventory = Bukkit.createInventory(this, (6) * 9, title);
         for (int i = 0; i < 9; i++) {
             if (i < meta.getEffects().size()) {
                 effects.add(new FireworkEffectData(meta.getEffects().get(i)));
@@ -352,7 +351,7 @@ public class FireworkEditor implements Gui {
 
         public void onClick(int line, InventoryClickEvent event) {
             switch (line) {
-                case 1: {// type
+                case 1 -> {// type
                     if (event.isLeftClick()) {
                         type = FireworkEffect.Type.values()[(type.ordinal() + 1) % FireworkEffect.Type.values().length];
                     } else {
@@ -360,41 +359,14 @@ public class FireworkEditor implements Gui {
                                 % FireworkEffect.Type.values().length];
                     }
                 }
-                return;
-                case 2: {// color
-                    getTargetPlayer().openInventory(new ColorListSelectorGui(FireworkEditor.this, colors).getInventory());
-                    /*
+                case 2 -> // color
+                        getTargetPlayer().openInventory(
+                                new ColorListSelectorGui(FireworkEditor.this, colors).getInventory());
+                case 3 -> // fadecolor
+                        getTargetPlayer().openInventory(
+                                new ColorListSelectorGui(FireworkEditor.this, fadeColors).getInventory());
 
-                    if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE) {
-                        if (colors.size() < 9)
-                            colors.add(selectedColor);
-                    } else if (event.isShiftClick()) {
-                        if (colors.size() > 0)
-                            colors.remove(colors.size() - 1);
-                    } else if (event.isRightClick())
-                        selectedColor = DyeColor.values()[(selectedColor.ordinal() + 1) % DyeColor.values().length];
-                    else
-                        selectedColor = DyeColor.values()[(selectedColor.ordinal() - 1 + DyeColor.values().length)
-                                % DyeColor.values().length];*/
-                }
-                return;
-                case 3: {// fadecolor
-                    getTargetPlayer().openInventory(new ColorListSelectorGui(FireworkEditor.this, fadeColors).getInventory());
-                    /*
-                    if (event.getClick() == ClickType.MIDDLE || event.getClick() == ClickType.CREATIVE) {
-                        if (fadeColors.size() < 9)
-                            fadeColors.add(selectedFadeColor);
-                    } else if (event.isShiftClick()) {
-                        if (fadeColors.size() > 0)
-                            fadeColors.remove(fadeColors.size() - 1);
-                    } else if (event.isRightClick())
-                        selectedFadeColor = DyeColor.values()[(selectedFadeColor.ordinal() + 1) % DyeColor.values().length];
-                    else
-                        selectedFadeColor = DyeColor.values()[(selectedFadeColor.ordinal() - 1 + DyeColor.values().length)
-                                % DyeColor.values().length];*/
-                }
-                return;
-                case 4: {// flags
+                case 4 -> {// flags
                     if (event.isLeftClick()) {
                         trail = !trail;
                     }
@@ -402,7 +374,6 @@ public class FireworkEditor implements Gui {
                         flicker = !flicker;
                     }
                 }
-                return;
             }
         }
 

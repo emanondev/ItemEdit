@@ -102,11 +102,10 @@ public class Placeholders extends PlaceholderExpansion {
         try {
             String[] args = value.split("_");
             switch (args[0].toLowerCase(Locale.ENGLISH)) {
-                case "amount": {
+                case "amount" -> {
                     return amount(player, value.substring("amount_".length()));
                 }
-                default:
-                    throw new IllegalStateException();
+                default -> throw new IllegalStateException();
             }
 
         } catch (Exception e) {

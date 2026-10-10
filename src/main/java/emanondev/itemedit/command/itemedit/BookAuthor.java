@@ -38,7 +38,7 @@ public class BookAuthor extends SubCmd {
         for (int i = 2; i < args.length; i++) {
             name.append(" ").append(args[i]);
         }
-        item.setBookAuthor(UtilsString.fix2(name.toString(),p,true)).build();
+        item.setBookAuthor(UtilsString.fix2(name.toString(), p, true)).build();
         updateView(p);
         onSuccess(p);
     }

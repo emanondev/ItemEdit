@@ -5,7 +5,6 @@ import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.utility.ItemUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -71,7 +70,7 @@ public interface Gui extends InventoryHolder {
      * <p>
      * Any modifications to slots that are modified by the results of this
      * InventoryDragEvent will be overwritten. To change these slots, this event
-     * should be cancelled and the changes applied. Alternatively, scheduling a task
+     * should be canceled and the changes applied. Alternatively, scheduling a task
      * using <a href=
      * "https://hub.spigotmc.org/javadocs/spigot/org/bukkit/scheduler/BukkitScheduler.html#runTask-org.bukkit.plugin.Plugin-java.lang.Runnable-"><code>BukkitScheduler.runTask(Plugin, Runnable)</code></a>,
      * which would execute the task on the next tick, would work as well.

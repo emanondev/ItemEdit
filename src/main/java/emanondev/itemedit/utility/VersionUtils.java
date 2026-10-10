@@ -10,50 +10,24 @@ import org.bukkit.Bukkit;
 @Slf4j
 public final class VersionUtils {
 
-    private static int initVersion(int slot){
-        String[] split;
-        try {
-            split = Bukkit.getBukkitVersion().split("-")[0].split("\\.");
-        } catch (Exception e) {
-            log.warn("(slot "+slot+") Invalid Bukkit version format: " + Bukkit.getBukkitVersion(), e);
-            return 100; //avoid stopping the load, try to start with wrong version
-        }
-        try {
-            if (split.length<=slot) {
-                return 0;
-            }
-            if ("build".equals(split[slot])) {
-                return 0;
-            }
-            return Integer.parseInt(split[slot]);
-        } catch (Exception e){
-            log.warn("(slot "+slot+") Invalid Bukkit version format: " + Bukkit.getBukkitVersion(),e);
-            return 100; //avoid stopping the load, try to start with wrong version
-        }
-    }
-
     /**
      * The major version of the game (e.g., the first number in the version string).
      */
     public static final int GAME_MAIN_VERSION = initVersion(0);
-
     /**
      * The minor version of the game (e.g., the second number in the version string).
      */
     public static final int GAME_VERSION = initVersion(1);
-
     /**
      * The patch version of the game, or 0 if the version string has fewer than three parts.
      */
     public static final int GAME_SUB_VERSION = initVersion(2);
-
     private static final boolean HAS_PAPER = ReflectionUtils
             .isClassPresent("com.destroystokyo.paper.VersionHistoryManager$VersionData");
     private static final boolean HAS_FOLIA = ReflectionUtils
             .isClassPresent("io.papermc.paper.threadedregions.RegionizedServer");
     private static final boolean HAS_PURPUR = ReflectionUtils
             .isClassPresent("org.purpurmc.purpur.event.PlayerAFKEvent");
-
     private VersionUtils() {
         throw new UnsupportedOperationException();
     }
@@ -215,6 +189,28 @@ public final class VersionUtils {
      */
     public static boolean hasFoliaAPI() {
         return HAS_FOLIA;
+    }
+
+    private static int initVersion(int slot) {
+        String[] split;
+        try {
+            split = Bukkit.getBukkitVersion().split("-")[0].split("\\.");
+        } catch (Exception e) {
+            log.warn("(slot {}) Invalid Bukkit version format: {}", slot, Bukkit.getBukkitVersion(), e);
+            return 100; //avoid stopping the load, try to start with wrong version
+        }
+        try {
+            if (split.length <= slot) {
+                return 0;
+            }
+            if ("build".equals(split[slot])) {
+                return 0;
+            }
+            return Integer.parseInt(split[slot]);
+        } catch (Exception e) {
+            log.warn("(slot {}) Invalid Bukkit version format: {}", slot, Bukkit.getBukkitVersion(), e);
+            return 100; //avoid stopping the load, try to start with wrong version
+        }
     }
 
     private static String[] safeSplitVersion() {

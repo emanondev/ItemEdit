@@ -88,7 +88,7 @@ public class ShowServerItemsGui implements PagedGui {
             ItemStack item = storage.getItem(list.get(slot));
             if (item == null) {
                 NullPointerException e = new NullPointerException("invalid id " + list.get(slot));
-                    log.warn(e.getMessage(), e);
+                log.warn(e.getMessage(), e);
                 continue;
             }
             if (showItems) {

@@ -229,6 +229,35 @@ public final class UtilsString {
         return Component.join(JoinConfiguration.separator(Component.newline()), lines);
     }
 
+    /**
+     * @param text text to revert
+     * @return a string with original colors and formats but with <green>mp; instead of §
+     */
+    @Contract("!null -> !null")
+    public static @Nullable String revertColors(@Nullable String text) {
+        if (text == null)
+            return null;
+        return text.replace("§", "&");
+    }
+
+    /**
+     * @param text text clear
+     * @return a string with no colors and no formats
+     */
+    @Contract("!null -> !null")
+    public static @Nullable String clearColors(@Nullable String text) {
+        if (text == null)
+            return null;
+        return ChatColor.stripColor(text);
+    }
+
+    public static @NotNull String formatNumber(double value, int decimals, boolean optional) {
+        DecimalFormat df = new DecimalFormat("0");
+        df.setMaximumFractionDigits(decimals);
+        df.setMinimumFractionDigits(optional ? 0 : decimals);
+        return df.format(value);
+    }
+
     private static String legacyToMiniMessage(String text, boolean color) {
         Matcher matcher = LEGACY_CODE.matcher(text);
         StringBuilder result = new StringBuilder();
@@ -268,34 +297,5 @@ public final class UtilsString {
         }
         matcher.appendTail(result);
         return result.toString();
-    }
-
-    /**
-     * @param text text to revert
-     * @return a string with original colors and formats but with <green>mp; instead of §
-     */
-    @Contract("!null -> !null")
-    public static @Nullable String revertColors(@Nullable String text) {
-        if (text == null)
-            return null;
-        return text.replace("§", "&");
-    }
-
-    /**
-     * @param text text clear
-     * @return a string with no colors and no formats
-     */
-    @Contract("!null -> !null")
-    public static @Nullable String clearColors(@Nullable String text) {
-        if (text == null)
-            return null;
-        return ChatColor.stripColor(text);
-    }
-
-    public static @NotNull String formatNumber(double value, int decimals, boolean optional) {
-        DecimalFormat df = new DecimalFormat("0");
-        df.setMaximumFractionDigits(decimals);
-        df.setMinimumFractionDigits(optional ? 0 : decimals);
-        return df.format(value);
     }
 }

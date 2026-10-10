@@ -26,7 +26,7 @@ public class DamageConditions extends SubCmd {
             return;
         }
         IntParser maxDurationTicks = new IntParser(args[1]);
-        if (!maxDurationTicks.isNumberMin(0)){
+        if (!maxDurationTicks.isNumberMin(0)) {
             onFail(player, alias);
             return;
         }

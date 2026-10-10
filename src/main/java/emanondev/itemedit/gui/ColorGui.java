@@ -227,7 +227,7 @@ public class ColorGui implements Gui {
         String hex = String.format("%02X%02X%02X", red, green, blue);
         String currentHex = String.format("%02X%02X%02X", currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue());
         List<String> description = Arrays.asList(
-                "<#" +  currentHex + ">█ <white>-> <#" +  hex + ">█",
+                "<#" + currentHex + ">█ <white>-> <#" + hex + ">█",
                 "",
                 "",
                 "<white> -> (<red>█ %red%<white>, <green>█ %green%<white>, <blue>█ %blue%<white>)",
@@ -261,7 +261,7 @@ public class ColorGui implements Gui {
         String nextHex = String.format("%02X%02X%02X", nextRed, nextGreen, nextBlue);
         String currentHex = String.format("%02X%02X%02X", currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue());
         List<String> description = Arrays.asList(
-                "<#" +  currentHex + ">█ <white>-> <#" + nextHex+ ">█",
+                "<#" + currentHex + ">█ <white>-> <#" + nextHex + ">█",
                 title,
                 "",
                 "<white>(<red>█ %red%<white>, <green>█ %green%<white>, <blue>█ %blue%<white>)",

@@ -7,6 +7,7 @@ import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.command.CommandSender;
@@ -61,12 +62,18 @@ public abstract class SubCmd {
     }
 
     public @NotNull String getHelp(@NotNull CommandSender sender, @NotNull String alias) {
-        String help = "<dark_green>/" + alias + " <green>" + this.name + " ";
+        return MiniMessage.miniMessage().serialize(getHelpComponent(sender, alias));
+    }
+
+    public @NotNull Component getHelpComponent(@NotNull CommandSender sender, @NotNull String alias) {
         Component params = translateOrEmpty("params", sender);
-        return Util.asHover(Util.asSuggestCommand(
-                help + (params == null ? "" : MiniMessage.miniMessage().serialize(params)),
-                "/" + alias + " " + this.name + " "
-        ), getDescription(sender));
+        Component help = Component.text("/" + alias, NamedTextColor.DARK_GREEN)
+                .append(Component.space())
+                .append(Component.text(this.name, NamedTextColor.GREEN))
+                .append(Component.space())
+                .append(params);
+        return Util.asHover(Util.asSuggestCommand(help,
+                "/" + alias + " " + this.name + " "), getDescription(sender));
     }
 
     public void onFail(@NotNull CommandSender target, @NotNull String alias) {

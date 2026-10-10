@@ -18,7 +18,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
 
 public class Color extends SubCmd {
     private final String tippedArrowPerm;
@@ -93,7 +92,7 @@ public class Color extends SubCmd {
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         switch (args.length) {
-            case 2,3,4 -> CompleteUtility.complete(args[args.length - 1],"0","127","255");
+            case 2, 3, 4 -> CompleteUtility.complete(args[args.length - 1], "0", "127", "255");
         }
         return List.of();
     }

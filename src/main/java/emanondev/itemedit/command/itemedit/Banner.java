@@ -66,8 +66,8 @@ public class Banner extends SubCmd {
                     if (!item.hasItemMeta() || !(item.getItemMeta() instanceof BannerMeta meta)) {
                         yield List.of();
                     }
-                    yield CompleteUtility.complete(args[2], IntStream.range(1, meta.getPatterns().size()+1)
-                            .mapToObj(String::valueOf).toList() );
+                    yield CompleteUtility.complete(args[2], IntStream.range(1, meta.getPatterns().size() + 1)
+                            .mapToObj(String::valueOf).toList());
                 }
                 default -> List.of();
             };
@@ -83,8 +83,8 @@ public class Banner extends SubCmd {
                 if (!item.hasItemMeta() || !(item.getItemMeta() instanceof BannerMeta meta)) {
                     yield List.of();
                 }
-                yield CompleteUtility.complete(args[4], IntStream.range(1, meta.getPatterns().size()+1)
-                        .mapToObj(String::valueOf).toList() );
+                yield CompleteUtility.complete(args[4], IntStream.range(1, meta.getPatterns().size() + 1)
+                        .mapToObj(String::valueOf).toList());
             }
             default -> List.of();
         };
@@ -98,7 +98,7 @@ public class Banner extends SubCmd {
                 return;
             }
             IntParser index = new IntParser(args[2], -1);
-            if (!index.isNumberInRange(0,item.getBannerPatterns().size()-1)){
+            if (!index.isNumberInRange(0, item.getBannerPatterns().size() - 1)) {
                 onSubFail(p, alias, "remove");
                 return;
             }
@@ -126,7 +126,7 @@ public class Banner extends SubCmd {
                 return;
             }
             IntParser index = new IntParser(args[2], -1);
-            if (!index.isNumberInRange(0,item.getBannerPatterns().size()-1)){
+            if (!index.isNumberInRange(0, item.getBannerPatterns().size() - 1)) {
                 onSubFail(p, alias, "remove");
                 return;
             }
@@ -160,7 +160,7 @@ public class Banner extends SubCmd {
                 return;
             }
             IntParser index = new IntParser(args[4], -1);
-            if (!index.isNumberInRange(0,item.getBannerPatterns().size()-1)){
+            if (!index.isNumberInRange(0, item.getBannerPatterns().size() - 1)) {
                 onSubFail(p, alias, "set");
                 return;
             }

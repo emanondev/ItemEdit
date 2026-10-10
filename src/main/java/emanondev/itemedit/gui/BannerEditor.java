@@ -6,7 +6,6 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.utility.ItemUtils;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.GameMode;
@@ -234,12 +233,8 @@ public class BannerEditor implements Gui {
 
         public void onClick(int line, InventoryClickEvent event) {
             switch (line) {
-                case 2:
-                    target.openInventory(new PatternSelector(this).getInventory());
-                    return;
-                case 3:
-                    target.openInventory(new ColorSelector(this).getInventory());
-                    return;
+                case 2 -> target.openInventory(new PatternSelector(this).getInventory());
+                case 3 -> target.openInventory(new ColorSelector(this).getInventory());
             }
         }
 
@@ -261,7 +256,7 @@ public class BannerEditor implements Gui {
         public ColorSelector(BannerData data) {
             this.data = data;
             Component title = getLanguageComponent(subPath + "color_selector_title");
-            this.inventory = Bukkit.createInventory(this, (6) * 9,                    title);
+            this.inventory = Bukkit.createInventory(this, (6) * 9, title);
             int i = 0;
             for (DyeColor color : DyeColor.values()) {
                 ItemStack item = Util.getDyeItemFromColor(color);
