@@ -4,80 +4,22 @@ import emanondev.itemedit.ItemEdit;
 import org.bukkit.Location;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryEvent;
-import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 
-import java.lang.reflect.Method;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Set;
 
 public final class InventoryUtils {
 
-    private static final Map<Class<?>, Method> getTopInventory =
-            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
-    private static final Map<Class<?>, Method> getBottomInventory =
-            VersionUtils.hasFoliaAPI() ? new ConcurrentHashMap<>() : new HashMap<>();
     private static final Set<EquipmentSlot> playerEquipmentSlots = loadPlayerEquipmentSlot();
 
     private InventoryUtils() {
         throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Returns the top Inventory object from the event's InventoryView.<br><br>
-     * This method may use reflections to get the top Inventory object from the
-     * InventoryView associated with an InventoryEvent, to avoid runtime errors.<br><br>
-     * In API versions 1.20.6 and earlier, InventoryView is a class.<br>
-     * In API versions 1.21 and later, it is an interface.
-     *
-     * @param event The generic InventoryEvent with an InventoryView to inspect.
-     * @return The top Inventory object from the event's InventoryView.
-     */
-    public static Inventory getTopInventory(@NotNull InventoryEvent event) {
-        if (VersionUtils.isAfter(1, 21)) {
-            return event.getView().getTopInventory();
-        }
-        return getTopInventoryP(event.getView());
-    }
-
-    /**
-     * Returns the top Inventory object from the player's InventoryView.<br><br>
-     * This method may use reflections to get the top Inventory object from the
-     * InventoryView associated with an InventoryEvent, to avoid runtime errors.<br><br>
-     * In API versions 1.20.6 and earlier, InventoryView is a class.<br>
-     * In versions 1.21 and later, it is an interface.
-     *
-     * @param player The player with an InventoryView to inspect.
-     * @return The top Inventory object from the player's InventoryView.
-     */
-    public static Inventory getTopInventory(@NotNull Player player) {
-        if (VersionUtils.isAfter(1, 21)) {
-            return player.getOpenInventory().getTopInventory();
-        }
-        return getTopInventoryP(player.getOpenInventory());
-    }
-
-    /**
-     * Returns the bottom Inventory object from the event's InventoryView.<br><br>
-     * This method may use reflections to get the top Inventory object from the
-     * InventoryView associated with an InventoryEvent, to avoid runtime errors.<br><br>
-     * In API versions 1.20.6 and earlier, InventoryView is a class.<br>
-     * In API versions 1.21 and later, it is an interface.
-     *
-     * @param event The generic InventoryEvent with an InventoryView to inspect.
-     * @return The bottom Inventory object from the event's InventoryView.
-     */
-    public static Inventory getBottomInventory(@NotNull InventoryEvent event) {
-        if (VersionUtils.isAfter(1, 21)) {
-            return event.getView().getBottomInventory();
-        }
-        return getBottomInventoryP(event.getView());
     }
 
     /**
@@ -230,41 +172,6 @@ public final class InventoryUtils {
         return playerEquipmentSlots;
     }
 
-    public static @Nullable ItemStack getItem(@NotNull Player player, @NotNull EquipmentSlot slot) {
-        try {
-            return player.getInventory().getItem(slot);
-        } catch (Throwable ignored) {
-        }
-        EntityEquipment equip = player.getEquipment();
-        return switch (slot.name()) {
-            case "HAND" -> equip.getItemInMainHand();
-            case "LEGS" -> equip.getLeggings();
-            case "CHEST" -> equip.getChestplate();
-            case "HEAD" -> equip.getHelmet();
-            case "FEET" -> equip.getBoots();
-            case "OFF_HAND" -> equip.getItemInOffHand();
-            default -> throw new UnsupportedOperationException();
-        };
-    }
-
-    private static Inventory getTopInventoryP(@NotNull Object view) {
-        Method method = getTopInventory.get(view.getClass());
-        if (method == null) {
-            method = ReflectionUtils.getMethod(view.getClass(), "getTopInventory");
-            getTopInventory.put(view.getClass(), method);
-        }
-        return (Inventory) ReflectionUtils.invokeMethod(view, method);
-    }
-
-    private static Inventory getBottomInventoryP(@NotNull Object view) {
-        Method method = getBottomInventory.get(view.getClass());
-        if (method == null) {
-            method = ReflectionUtils.getMethod(view.getClass(), "getBottomInventory");
-            getBottomInventory.put(view.getClass(), method);
-        }
-        return (Inventory) ReflectionUtils.invokeMethod(view, method);
-    }
-
     private static Set<EquipmentSlot> loadPlayerEquipmentSlot() {
         EnumSet<EquipmentSlot> slots = EnumSet.noneOf(EquipmentSlot.class);
         slots.add(EquipmentSlot.HEAD);
@@ -272,11 +179,7 @@ public final class InventoryUtils {
         slots.add(EquipmentSlot.LEGS);
         slots.add(EquipmentSlot.FEET);
         slots.add(EquipmentSlot.HAND);
-        try {
-            slots.add(EquipmentSlot.valueOf("OFF_HAND"));
-        } catch (Throwable ignored) {
-            //1.8
-        }
+        slots.add(EquipmentSlot.OFF_HAND);
         return Collections.unmodifiableSet(slots);
     }
 

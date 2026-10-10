@@ -293,15 +293,26 @@ public class ItemBuilder {
         return stack.getData(DataComponentTypes.FOOD);
     }
 
-    public ItemBuilder setKineticContactCooldownTicks(int ticks) {
+    private KineticWeapon.Builder getKineticWeapon(){
         KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
         KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
         if (weapon != null) {
             inheritProperties(builder, weapon);
         }
-        builder.delayTicks(ticks);
-        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
+        return builder;
+    }
+
+    private ItemBuilder setKineticWeapon(KineticWeapon.Builder builder){
+        return setKineticWeapon(builder==null?null:builder.build());
+    }
+
+    private ItemBuilder setKineticWeapon(KineticWeapon weapon){
+        setStackData(DataComponentTypes.KINETIC_WEAPON, weapon);
         return this;
+    }
+
+    public ItemBuilder setKineticContactCooldownTicks(int ticks) {
+        return setKineticWeapon(getKineticWeapon().delayTicks(ticks));
     }
 
     public ItemBuilder setKineticDamageMultiplier(float multiplier) {

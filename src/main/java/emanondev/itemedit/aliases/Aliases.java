@@ -71,7 +71,7 @@ public class Aliases {
 
                 @Override
                 public String getName(Boolean value) {
-                    return value ? "true" : "false";
+                    return value.toString();
                 }
 
                 @Override

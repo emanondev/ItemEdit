@@ -13,7 +13,6 @@ import emanondev.itemedit.storage.mongo.MongoServerStorage;
 import emanondev.itemedit.storage.mongo.MongoStorage;
 import emanondev.itemedit.storage.yaml.YmlPlayerStorage;
 import emanondev.itemedit.storage.yaml.YmlServerStorage;
-import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.VersionUtils;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -89,7 +88,7 @@ public class ItemEdit extends APlugin {
     @Override
     public void disable() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-            if (InventoryUtils.getTopInventory(p).getHolder() instanceof Gui) {
+            if (p.getOpenInventory().getTopInventory().getHolder() instanceof Gui) {
                 p.closeInventory();
             }
         }

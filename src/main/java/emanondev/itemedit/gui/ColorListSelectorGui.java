@@ -3,7 +3,6 @@ package emanondev.itemedit.gui;
 import emanondev.itemedit.APlugin;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.aliases.Aliases;
-import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.SchedulerUtils;
 import net.kyori.adventure.text.Component;
@@ -28,7 +27,6 @@ public class ColorListSelectorGui implements Gui {
     private final Inventory inventory;
 
     /**
-     * @param parent
      * @param colors original list to be changed
      */
     public ColorListSelectorGui(@NotNull Gui parent, @NotNull List<DyeColor> colors) {
@@ -52,7 +50,7 @@ public class ColorListSelectorGui implements Gui {
             loadLanguageDescription(meta, subPath + "buttons.color", "%colors%",
                     String.join("<aqua>, <yellow>", list), "%color%", Aliases.COLOR.getName(color));
             item.setItemMeta(meta);
-            item.setAmount(Math.max(Math.min(101, colors.size()), 1));
+            item.setAmount(Math.clamp(colors.size(), 1, 101));
             inventory.setItem(i, item);
             i++;
         }
@@ -63,7 +61,7 @@ public class ColorListSelectorGui implements Gui {
     public void onClose(InventoryCloseEvent event) {
         SchedulerUtils.runLater(getPlugin(), 1L,
                 () -> {
-                    if (!InventoryUtils.getTopInventory(getTargetPlayer()).equals(parent.getInventory()))
+                    if (!getTargetPlayer().getOpenInventory().getTopInventory().equals(parent.getInventory()))
                         getTargetPlayer().openInventory(parent.getInventory());
                 });
     }
@@ -89,7 +87,7 @@ public class ColorListSelectorGui implements Gui {
                     updateInventory();
                     break;
                 case RIGHT:
-                    colors.remove(colors.size() - 1);
+                    colors.removeLast();
                     updateInventory();
                     break;
                 case SHIFT_RIGHT:

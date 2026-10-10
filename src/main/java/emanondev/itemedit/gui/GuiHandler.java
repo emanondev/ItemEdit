@@ -1,6 +1,5 @@
 package emanondev.itemedit.gui;
 
-import emanondev.itemedit.utility.InventoryUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,7 +14,7 @@ public class GuiHandler implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     private static void onOpen(InventoryOpenEvent event) {
-        Inventory topInventory = InventoryUtils.getTopInventory(event);
+        Inventory topInventory = event.getView().getTopInventory();
         if (!(topInventory.getHolder() instanceof Gui)) {
             return;
         }
@@ -27,7 +26,7 @@ public class GuiHandler implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     private static void onClose(InventoryCloseEvent event) {
-        Inventory topInventory = InventoryUtils.getTopInventory(event);
+        Inventory topInventory = event.getView().getTopInventory();
         if (!(topInventory.getHolder() instanceof Gui)) {
             return;
         }
@@ -39,7 +38,7 @@ public class GuiHandler implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private static void onClick(InventoryClickEvent event) {
-        Inventory topInventory = InventoryUtils.getTopInventory(event);
+        Inventory topInventory = event.getView().getTopInventory();
         if (!(topInventory.getHolder() instanceof Gui)) {
             return;
         }
@@ -53,7 +52,7 @@ public class GuiHandler implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private static void onDrag(InventoryDragEvent event) {
-        Inventory topInventory = InventoryUtils.getTopInventory(event);
+        Inventory topInventory = event.getView().getTopInventory();
         if (topInventory.getHolder() instanceof Gui) {
             event.setCancelled(true);
             ((Gui) topInventory.getHolder()).onDrag(event);

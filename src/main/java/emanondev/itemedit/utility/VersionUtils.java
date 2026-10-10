@@ -28,6 +28,7 @@ public final class VersionUtils {
             .isClassPresent("io.papermc.paper.threadedregions.RegionizedServer");
     private static final boolean HAS_PURPUR = ReflectionUtils
             .isClassPresent("org.purpurmc.purpur.event.PlayerAFKEvent");
+
     private VersionUtils() {
         throw new UnsupportedOperationException();
     }

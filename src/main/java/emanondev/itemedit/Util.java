@@ -1,7 +1,6 @@
 package emanondev.itemedit;
 
 import emanondev.itemedit.command.AbstractCommand;
-import emanondev.itemedit.utility.InventoryUtils;
 import lombok.extern.slf4j.Slf4j;
 import net.kyori.adventure.text.*;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -118,7 +117,7 @@ public final class Util {
     }
 
     public static void logCommandError(AbstractCommand command, String[] args, CommandSender sender) {
-        ItemStack item = sender instanceof Player p ? InventoryUtils.getItem(p, EquipmentSlot.HAND) : null;
+        ItemStack item = sender instanceof Player p ? p.getInventory().getItem(EquipmentSlot.HAND) : null;
         sendMessage(Bukkit.getConsoleSender(), "<red>ERROR when executing /" + command.getName()
                 + " " + String.join(" ", args) + " by " + sender.getName()
                 + " (with " + (item == null ? "nothing" : item) + " in hand)");
