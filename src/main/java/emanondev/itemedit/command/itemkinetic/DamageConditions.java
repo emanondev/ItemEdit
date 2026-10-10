@@ -21,7 +21,7 @@ public class DamageConditions extends SubCmd {
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player player = (Player) sender;
-        if (args.length >= 2 && args.length <= 4) {
+        if (args.length != 4) {
             onFail(player, alias);
             return;
         }
