@@ -45,9 +45,6 @@ public final class Util {
 
     /**
      * takes an already formatted message
-     *
-     * @param sender
-     * @param message
      */
     @Deprecated(forRemoval = true)
     public static void sendMessage(@NotNull CommandSender sender, String message) {
@@ -83,9 +80,6 @@ public final class Util {
 
     /**
      * takes an already formatted message
-     *
-     * @param sender
-     * @param message
      */
     public static void sendMessage2(@NotNull CommandSender sender, Component message) {
         if (!hasRenderableContent(message)) {
@@ -323,11 +317,7 @@ public final class Util {
      * @return An ItemStack of selected Dyed wool
      */
     public static Material getBannerItemFromColor(DyeColor color) {
-        try {
-            return Material.valueOf(color.name() + "_BANNER");
-        } catch (Exception e) {
-            return Material.valueOf("BANNER");
-        }
+        return Material.valueOf(color.name() + "_BANNER");
     }
 
     public static DyeColor getColorFromBanner(ItemStack banner) {
