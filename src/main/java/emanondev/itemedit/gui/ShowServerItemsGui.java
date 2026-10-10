@@ -2,7 +2,6 @@ package emanondev.itemedit.gui;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.UtilsString;
-import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.storage.ServerStorage;
 import emanondev.itemedit.utility.InventoryUtils;
@@ -29,7 +28,7 @@ import java.util.List;
 
 @Slf4j
 public class ShowServerItemsGui implements PagedGui {
-    private static final YMLConfig GUI_CONFIG = ItemEdit.get().getConfig("gui.yml");
+
     private final Inventory inventory;
     private final Player target;
 
@@ -48,7 +47,7 @@ public class ShowServerItemsGui implements PagedGui {
         }
 
         this.target = player;
-        rows = GUI_CONFIG.loadInteger("gui.serveritems.rows", 5);
+        rows = ItemEdit.get().getGuiConfig().loadInteger("serveritems.rows", 5);
         if (rows < 1 || rows > 5) {
             rows = Math.clamp(rows, 1, 5);
         }

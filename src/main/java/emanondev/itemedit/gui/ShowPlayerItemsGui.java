@@ -27,8 +27,6 @@ import java.util.Collections;
 
 public class ShowPlayerItemsGui implements PagedGui {
 
-
-    private static final YMLConfig GUI_CONFIG = ItemEdit.get().getConfig("gui.yml");
     private final Inventory inventory;
     private final Player target;
 
@@ -47,7 +45,7 @@ public class ShowPlayerItemsGui implements PagedGui {
         }
 
         this.target = player;
-        rows = GUI_CONFIG.loadInteger("gui.playeritems.rows", 5);
+        rows = ItemEdit.get().getGuiConfig().loadInteger("playeritems.rows", 5);
         if (rows < 1 || rows > 5) {
             rows = Math.clamp(rows, 1, 5);
         }
