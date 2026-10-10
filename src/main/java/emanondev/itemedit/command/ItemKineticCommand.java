@@ -21,7 +21,7 @@ public class ItemKineticCommand extends AbstractCommand {
         //version is >= 1.20.5
         this.registerSubCommand(() -> new IntSubCommand(this, "contactcooldownticks",
                 (b, v) -> {
-                    if (v == null || v >= 0) {
+                    if (v == null || v <= 0) {
                         return false;
                     }
                     b.setKineticContactCooldownTicks(v);
