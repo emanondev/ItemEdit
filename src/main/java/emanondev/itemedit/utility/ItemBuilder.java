@@ -293,7 +293,7 @@ public class ItemBuilder {
         return stack.getData(DataComponentTypes.FOOD);
     }
 
-    private KineticWeapon.Builder getKineticWeapon(){
+    public KineticWeapon.Builder getKineticWeapon() {
         KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
         KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
         if (weapon != null) {
@@ -302,59 +302,29 @@ public class ItemBuilder {
         return builder;
     }
 
-    private ItemBuilder setKineticWeapon(KineticWeapon.Builder builder){
-        return setKineticWeapon(builder==null?null:builder.build());
+    public ItemBuilder setKineticWeapon(KineticWeapon.Builder builder) {
+        return setKineticWeapon(builder == null ? null : builder.build());
     }
 
-    private ItemBuilder setKineticWeapon(KineticWeapon weapon){
+    public ItemBuilder setKineticWeapon(KineticWeapon weapon) {
         setStackData(DataComponentTypes.KINETIC_WEAPON, weapon);
         return this;
     }
 
     public ItemBuilder setKineticContactCooldownTicks(int ticks) {
-        return setKineticWeapon(getKineticWeapon().delayTicks(ticks));
+        return setKineticWeapon(getKineticWeapon().contactCooldownTicks(ticks));
     }
 
     public ItemBuilder setKineticDamageMultiplier(float multiplier) {
-        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
-        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
-
-        if (weapon != null) {
-            inheritProperties(builder, weapon);
-        }
-
-        builder.damageMultiplier(multiplier);
-
-        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
-        return this;
+        return setKineticWeapon(getKineticWeapon().damageMultiplier(multiplier));
     }
 
     public ItemBuilder setKineticDelayTicks(int ticks) {
-        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
-        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
-
-        if (weapon != null) {
-            inheritProperties(builder, weapon);
-        }
-
-        builder.delayTicks(ticks);
-
-        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
-        return this;
+        return setKineticWeapon(getKineticWeapon().delayTicks(ticks));
     }
 
     public ItemBuilder setKineticForwardMovement(float multiplier) {
-        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
-        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
-
-        if (weapon != null) {
-            inheritProperties(builder, weapon);
-        }
-
-        builder.forwardMovement(multiplier);
-
-        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
-        return this;
+        return setKineticWeapon(getKineticWeapon().forwardMovement(multiplier));
     }
 
     public ItemBuilder setKineticHitSound(Sound value) {
@@ -362,17 +332,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setKineticHitSound(Key value) {
-        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
-        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
-
-        if (weapon != null) {
-            inheritProperties(builder, weapon);
-        }
-
-        builder.hitSound(value);
-
-        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
-        return this;
+        return setKineticWeapon(getKineticWeapon().hitSound(value));
     }
 
     public ItemBuilder setKineticSound(Sound value) {
@@ -380,87 +340,45 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setKineticSound(Key value) {
-        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
-        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
-
-        if (weapon != null) {
-            inheritProperties(builder, weapon);
-        }
-
-        builder.sound(value);
-
-        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
-        return this;
+        return setKineticWeapon(getKineticWeapon().sound(value));
     }
 
     public ItemBuilder setKineticDamageConditions(KineticWeapon.Condition condition) {
-        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
-        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
-
-        if (weapon != null) {
-            inheritProperties(builder, weapon);
-        }
-
-        builder.damageConditions(condition);
-
-        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
-        return this;
+        return setKineticWeapon(getKineticWeapon().damageConditions(condition));
     }
 
     public ItemBuilder setKineticDismountConditions(KineticWeapon.Condition condition) {
-        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
-        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
-
-        if (weapon != null) {
-            inheritProperties(builder, weapon);
-        }
-
-        builder.dismountConditions(condition);
-
-        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
-        return this;
+        return setKineticWeapon(getKineticWeapon().dismountConditions(condition));
     }
 
     public ItemBuilder setKineticKnockbackConditions(KineticWeapon.Condition condition) {
-        KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
-        KineticWeapon.Builder builder = KineticWeapon.kineticWeapon();
+        return setKineticWeapon(getKineticWeapon().knockbackConditions(condition));
+    }
 
+    public PiercingWeapon.Builder getPiercingWeapon() {
+        PiercingWeapon weapon = stack.getData(DataComponentTypes.PIERCING_WEAPON);
+        PiercingWeapon.Builder builder = PiercingWeapon.piercingWeapon();
         if (weapon != null) {
             inheritProperties(builder, weapon);
         }
+        return builder;
+    }
 
-        builder.knockbackConditions(condition);
+    public ItemBuilder setPiercingWeapon(PiercingWeapon.Builder builder) {
+        return setPiercingWeapon(builder == null ? null : builder.build());
+    }
 
-        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
+    public ItemBuilder setPiercingWeapon(PiercingWeapon weapon) {
+        setStackData(DataComponentTypes.PIERCING_WEAPON, weapon);
         return this;
     }
 
     public ItemBuilder setPiercingDismounts(boolean value) {
-        PiercingWeapon weapon = stack.getData(DataComponentTypes.PIERCING_WEAPON);
-        PiercingWeapon.Builder builder = PiercingWeapon.piercingWeapon();
-
-        if (weapon != null) {
-            inheritProperties(builder, weapon);
-        }
-
-        builder.dismounts(value);
-
-        setStackData(DataComponentTypes.PIERCING_WEAPON, builder.build());
-        return this;
+        return setPiercingWeapon(getPiercingWeapon().dismounts(value));
     }
 
     public ItemBuilder setPiercingDealsKnockback(boolean value) {
-        PiercingWeapon weapon = stack.getData(DataComponentTypes.PIERCING_WEAPON);
-        PiercingWeapon.Builder builder = PiercingWeapon.piercingWeapon();
-
-        if (weapon != null) {
-            inheritProperties(builder, weapon);
-        }
-
-        builder.dealsKnockback(value);
-
-        setStackData(DataComponentTypes.PIERCING_WEAPON, builder.build());
-        return this;
+        return setPiercingWeapon(getPiercingWeapon().dealsKnockback(value));
     }
 
     public ItemBuilder setPiercingHitSound(Sound value) {
@@ -468,17 +386,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setPiercingHitSound(Key value) {
-        PiercingWeapon weapon = stack.getData(DataComponentTypes.PIERCING_WEAPON);
-        PiercingWeapon.Builder builder = PiercingWeapon.piercingWeapon();
-
-        if (weapon != null) {
-            inheritProperties(builder, weapon);
-        }
-
-        builder.hitSound(value);
-
-        setStackData(DataComponentTypes.PIERCING_WEAPON, builder.build());
-        return this;
+        return setPiercingWeapon(getPiercingWeapon().hitSound(value));
     }
 
     public ItemBuilder setPiercingSound(Sound value) {
@@ -486,17 +394,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setPiercingSound(Key value) {
-        PiercingWeapon weapon = stack.getData(DataComponentTypes.PIERCING_WEAPON);
-        PiercingWeapon.Builder builder = PiercingWeapon.piercingWeapon();
-
-        if (weapon != null) {
-            inheritProperties(builder, weapon);
-        }
-
-        builder.sound(value);
-
-        setStackData(DataComponentTypes.PIERCING_WEAPON, builder.build());
-        return this;
+        return setPiercingWeapon(getPiercingWeapon().sound(value));
     }
 
     public boolean isPiercingDismounts() {
@@ -521,22 +419,36 @@ public class ItemBuilder {
         return null;
     }
 
+    public Equippable.Builder getEquippable() {
+        Equippable equippable = stack.getData(DataComponentTypes.EQUIPPABLE);
+        Equippable.Builder builder = Equippable.equippable(
+                equippable == null ? EquipmentSlot.HAND : equippable.slot());
+        if (equippable != null) {
+            inheritProperties(builder, equippable);
+        }
+        return builder;
+    }
+
+    public ItemBuilder setEquippable(Equippable.Builder builder) {
+        return setEquippable(builder == null ? null : builder.build());
+    }
+
+    public ItemBuilder setEquippable(Equippable equippable) {
+        setStackData(DataComponentTypes.EQUIPPABLE, equippable);
+        return this;
+    }
+
     public boolean isEquippableCanBeSheared() {
         return stack.getDataOrDefault(DataComponentTypes.EQUIPPABLE,
                 Equippable.equippable(EquipmentSlot.HEAD).build()).canBeSheared();
     }
 
     public ItemBuilder setEquippableCanBeSheared(boolean canBeSheared) {
-        Equippable.Builder builder = stack.getDataOrDefault(DataComponentTypes.EQUIPPABLE,
-                Equippable.equippable(EquipmentSlot.HAND).build()).toBuilder();
-        builder.canBeSheared(canBeSheared);
-        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
-        return this;
+        return setEquippable(getEquippable().canBeSheared(canBeSheared));
     }
 
     public ItemBuilder clearEquippable() {
-        setStackData(DataComponentTypes.EQUIPPABLE, null);
-        return this;
+        return setEquippable((Equippable) null);
     }
 
     public ItemBuilder setEquippableSlot(EquipmentSlot slot) {
@@ -548,8 +460,7 @@ public class ItemBuilder {
         if (equippable != null) {
             inheritProperties(builder, equippable);
         }
-        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
-        return this;
+        return setEquippable(builder);
     }
 
     public ItemBuilder setEquippableEquipSound(Sound value) {
@@ -557,11 +468,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setEquippableEquipSound(Key value) {
-        Equippable.Builder builder = stack.getDataOrDefault(DataComponentTypes.EQUIPPABLE,
-                Equippable.equippable(EquipmentSlot.HAND).build()).toBuilder();
-        builder.equipSound(value);
-        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
-        return this;
+        return setEquippable(getEquippable().equipSound(value));
     }
 
     public ItemBuilder setEquippableShearingSound(Sound value) {
@@ -569,15 +476,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setEquippableShearingSound(Key value) {
-        Equippable.Builder builder = stack.getDataOrDefault(
-                DataComponentTypes.EQUIPPABLE,
-                Equippable.equippable(EquipmentSlot.HAND).build()
-        ).toBuilder();
-
-        builder.shearSound(value);
-
-        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
-        return this;
+        return setEquippable(getEquippable().shearSound(value));
     }
 
     public ItemBuilder setEquippableAllowedEntities(EntityType entityType) {
@@ -586,13 +485,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setEquippableAllowedEntities(RegistryKeySet<@NotNull EntityType> entityType) {
-        Equippable.Builder builder = stack.getDataOrDefault(
-                DataComponentTypes.EQUIPPABLE,
-                Equippable.equippable(EquipmentSlot.HAND).build()
-        ).toBuilder();
-        builder.allowedEntities(entityType);
-        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
-        return this;
+        return setEquippable(getEquippable().allowedEntities(entityType));
     }
 
     public ItemBuilder setEquippableAllowedEntities(Collection<EntityType> entityType) {
@@ -606,15 +499,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setEquipmentSwappable(boolean value) {
-        Equippable.Builder builder = stack.getDataOrDefault(
-                DataComponentTypes.EQUIPPABLE,
-                Equippable.equippable(EquipmentSlot.HAND).build()
-        ).toBuilder();
-
-        builder.swappable(value);
-
-        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
-        return this;
+        return setEquippable(getEquippable().swappable(value));
     }
 
     public boolean isEquipmentDispensable() {
@@ -623,15 +508,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setEquipmentDispensable(boolean value) {
-        Equippable.Builder builder = stack.getDataOrDefault(
-                DataComponentTypes.EQUIPPABLE,
-                Equippable.equippable(EquipmentSlot.HAND).build()
-        ).toBuilder();
-
-        builder.dispensable(value);
-
-        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
-        return this;
+        return setEquippable(getEquippable().dispensable(value));
     }
 
     public boolean isEquipmentEquipOnInteract() {
@@ -640,15 +517,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setEquipmentEquipOnInteract(boolean value) {
-        Equippable.Builder builder = stack.getDataOrDefault(
-                DataComponentTypes.EQUIPPABLE,
-                Equippable.equippable(EquipmentSlot.HAND).build()
-        ).toBuilder();
-
-        builder.equipOnInteract(value);
-
-        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
-        return this;
+        return setEquippable(getEquippable().equipOnInteract(value));
     }
 
     public boolean isEquipmentDamageOnHurt() {
@@ -657,31 +526,14 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setEquipmentDamageOnHurt(boolean value) {
-        Equippable.Builder builder = stack.getDataOrDefault(
-                DataComponentTypes.EQUIPPABLE,
-                Equippable.equippable(EquipmentSlot.HAND).build()
-        ).toBuilder();
-
-        builder.damageOnHurt(value);
-
-        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
-        return this;
+        return setEquippable(getEquippable().damageOnHurt(value));
     }
 
     public ItemBuilder setEquipmentCameraOverlay(Key key) {
         if (key == null && !stack.hasData(DataComponentTypes.EQUIPPABLE)) {
             return this;
         }
-
-        Equippable.Builder builder = stack.getDataOrDefault(
-                DataComponentTypes.EQUIPPABLE,
-                Equippable.equippable(EquipmentSlot.HAND).build()
-        ).toBuilder();
-
-        builder.cameraOverlay(key);
-
-        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
-        return this;
+        return setEquippable(getEquippable().cameraOverlay(key));
     }
 
     public boolean hasEquippableComponent() {
@@ -692,16 +544,7 @@ public class ItemBuilder {
         if (key == null && !stack.hasData(DataComponentTypes.EQUIPPABLE)) {
             return this;
         }
-
-        Equippable.Builder builder = stack.getDataOrDefault(
-                DataComponentTypes.EQUIPPABLE,
-                Equippable.equippable(EquipmentSlot.HAND).build()
-        ).toBuilder();
-
-        builder.assetId(key);
-
-        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
-        return this;
+        return setEquippable(getEquippable().assetId(key));
     }
 
     /**
