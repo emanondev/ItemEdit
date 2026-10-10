@@ -29,7 +29,7 @@ import java.util.List;
 
 @Slf4j
 public class ShowServerItemsGui implements PagedGui {
-    private static final YMLConfig GUI_CONFIG = ItemEdit.get().getConfig();
+    private static final YMLConfig GUI_CONFIG = ItemEdit.get().getConfig("gui.yml");
     private final Inventory inventory;
     private final Player target;
 
@@ -48,9 +48,9 @@ public class ShowServerItemsGui implements PagedGui {
         }
 
         this.target = player;
-        rows = GUI_CONFIG.loadInteger("gui.serveritems.rows", 6);
+        rows = GUI_CONFIG.loadInteger("gui.serveritems.rows", 5);
         if (rows < 1 || rows > 5) {
-            rows = Math.min(5, Math.max(1, rows));
+            rows = Math.clamp(rows, 1, 5);
         }
         ServerStorage storage = ItemEdit.get().getServerStorage();
         ArrayList<String> list = new ArrayList<>(storage.getIds());
@@ -61,8 +61,9 @@ public class ShowServerItemsGui implements PagedGui {
         }
         this.page = page;
 
-        Component title = UtilsString.fix2(GUI_CONFIG.loadMessage("gui.serveritems.title", "", false), player, true,
-                "%player_name%", target.getName(), "%page%", String.valueOf(page));
+        Component title = getLanguageComponent("gui.serveritems.title",
+                "%player_name%", target.getName(),
+                "%page%", String.valueOf(page));
         this.inventory = Bukkit.createInventory(this, (rows + 1) * 9, title);
         updateInventory();
         this.inventory.setItem(rows * 9 + 4, getPageInfoItem());

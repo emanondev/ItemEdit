@@ -26,7 +26,7 @@ import java.util.List;
 
 public class BannerEditor implements Gui {
 
-    private static final String subPath = "gui.banner.";
+    private static final String SUB_PATH = "gui.banner.";
     private final static PatternType[] TYPES = ItemUtils.getPatternTypesFiltered();
     private final Player target;
     private final Inventory inventory;
@@ -45,7 +45,7 @@ public class BannerEditor implements Gui {
         this.banner = item;
         this.meta = (BannerMeta) ItemUtils.getMeta(banner);
         this.target = target;
-        Component title = getLanguageComponent(subPath + "title");
+        Component title = getLanguageComponent(SUB_PATH + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
         for (int i = 0; i < 8; i++) {
             if (i < meta.getPatterns().size()) {
@@ -153,7 +153,7 @@ public class BannerEditor implements Gui {
         item = Util.getDyeItemFromColor(bcolor);
         ItemMeta bmeta = ItemUtils.getMeta(item);
         bmeta.addItemFlags(ItemFlag.values());
-        loadLanguageDescription(bmeta, subPath + "buttons.color", "%color%", Aliases.COLOR.getName(bcolor));
+        loadLanguageDescription(bmeta, SUB_PATH + "buttons.color", "%color%", Aliases.COLOR.getName(bcolor));
         item.setItemMeta(bmeta);
         this.getInventory().setItem(27, item);
 
@@ -203,7 +203,7 @@ public class BannerEditor implements Gui {
             BannerMeta bMeta = (BannerMeta) ItemUtils.getMeta(item);
             bMeta.addPattern(new Pattern(DyeColor.BLACK, pattern.getPattern()));
             bMeta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(bMeta, subPath + "buttons.type", "%type%",
+            loadLanguageDescription(bMeta, SUB_PATH + "buttons.type", "%type%",
                     Aliases.PATTERN_TYPE.getName(pattern.getPattern()));
             item.setItemMeta(bMeta);
             return item;
@@ -215,7 +215,7 @@ public class BannerEditor implements Gui {
             ItemStack item = Util.getDyeItemFromColor(pattern.getColor());
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.color", "%color%",
+            loadLanguageDescription(meta, SUB_PATH + "buttons.color", "%color%",
                     Aliases.COLOR.getName(pattern.getColor()));
             item.setItemMeta(meta);
             return item;
@@ -225,7 +225,7 @@ public class BannerEditor implements Gui {
             ItemStack item = active ? new ItemStack(Material.ITEM_FRAME) : Util.getDyeItemFromColor(DyeColor.GRAY);
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.position", "%middle_click%",
+            loadLanguageDescription(meta, SUB_PATH + "buttons.position", "%middle_click%",
                     getLanguageMessage("gui.middleclick." + (getTargetPlayer().getGameMode() == GameMode.CREATIVE ? "creative" : "other")));
             item.setItemMeta(meta);
             return item;
@@ -255,13 +255,13 @@ public class BannerEditor implements Gui {
 
         public ColorSelector(BannerData data) {
             this.data = data;
-            Component title = getLanguageComponent(subPath + "color_selector_title");
+            Component title = getLanguageComponent(SUB_PATH + "color_selector_title");
             this.inventory = Bukkit.createInventory(this, (6) * 9, title);
             int i = 0;
             for (DyeColor color : DyeColor.values()) {
                 ItemStack item = Util.getDyeItemFromColor(color);
                 ItemMeta meta = ItemUtils.getMeta(item);
-                loadLanguageDescription(meta, subPath + "buttons.color_selector_info", "%color%",
+                loadLanguageDescription(meta, SUB_PATH + "buttons.color_selector_info", "%color%",
                         Aliases.COLOR.getName(color));
                 item.setItemMeta(meta);
                 this.inventory.setItem(i, item);
@@ -331,7 +331,7 @@ public class BannerEditor implements Gui {
                 throw new NullPointerException();
             }
             this.data = data;
-            Component title = getLanguageComponent(subPath + "pattern_selector_title");
+            Component title = getLanguageComponent(SUB_PATH + "pattern_selector_title");
             this.inventory = Bukkit.createInventory(this, (6) * 9, title);
             int i = 0;
             for (PatternType type : TYPES) {
@@ -343,7 +343,7 @@ public class BannerEditor implements Gui {
                 }
                 BannerMeta bMeta = (BannerMeta) ItemUtils.getMeta(item);
                 bMeta.addPattern(new Pattern(DyeColor.BLACK, type));
-                loadLanguageDescription(bMeta, subPath + "buttons.pattern_selector_info", "%type%",
+                loadLanguageDescription(bMeta, SUB_PATH + "buttons.pattern_selector_info", "%type%",
                         Aliases.PATTERN_TYPE.getName(type));
                 item.setItemMeta(bMeta);
                 this.inventory.setItem(i, item);

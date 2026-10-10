@@ -118,8 +118,8 @@ public interface ServerStorage {
                         .toList());
             }
 
-            if (meta instanceof BookMeta bookMeta && bookMeta.getAuthor() != null) {
-                bookMeta.setAuthor(UtilsString.replacePlaceholders(bookMeta.getAuthor(), player, holders));
+            if (meta instanceof BookMeta bookMeta && bookMeta.author() != null) {
+                bookMeta.author(UtilsString.replacePlaceholders(bookMeta.author(), player, holders));
             }
             item.setItemMeta(meta);
         }

@@ -21,7 +21,7 @@ import java.util.List;
 
 public class FireworkEditor implements Gui {
 
-    private static final String subPath = "gui.firework.";
+    private static final String SUB_PATH = "gui.firework.";
     private final FireworkMeta meta;
     private final Player target;
     private final Inventory inventory;
@@ -39,7 +39,7 @@ public class FireworkEditor implements Gui {
         this.firework = item.clone();
         this.meta = (FireworkMeta) ItemUtils.getMeta(firework);
         this.target = target;
-        Component title = getLanguageComponent(subPath + "title");
+        Component title = getLanguageComponent(SUB_PATH + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
         for (int i = 0; i < 9; i++) {
             if (i < meta.getEffects().size()) {
@@ -189,7 +189,7 @@ public class FireworkEditor implements Gui {
         item.setAmount(meta.getPower() + 1);
         ItemMeta powerMeta = ItemUtils.getMeta(item);
         powerMeta.addItemFlags(ItemFlag.values());
-        loadLanguageDescription(powerMeta, subPath + "buttons.power", "%power%",
+        loadLanguageDescription(powerMeta, SUB_PATH + "buttons.power", "%power%",
                 String.valueOf(meta.getPower() + 1));
         item.setItemMeta(powerMeta);
         this.getInventory().setItem(47, item);
@@ -269,7 +269,7 @@ public class FireworkEditor implements Gui {
             }
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.type", "%type%", Aliases.FIREWORK_TYPE.getName(type));
+            loadLanguageDescription(meta, SUB_PATH + "buttons.type", "%type%", Aliases.FIREWORK_TYPE.getName(type));
             item.setItemMeta(meta);
             return item;
         }
@@ -285,7 +285,7 @@ public class FireworkEditor implements Gui {
             for (DyeColor color : colors) {
                 colorNames.add(Aliases.COLOR.getName(color));
             }
-            loadLanguageDescription(meta, subPath + "buttons.colors",
+            loadLanguageDescription(meta, SUB_PATH + "buttons.colors",
                     "%colors%", String.join("<aqua>, <yellow>", colorNames));
             item.setItemMeta(meta);
             item.setAmount(Math.max(Math.min(101, colors.size()), 1));
@@ -304,7 +304,7 @@ public class FireworkEditor implements Gui {
                 colorNames.add(Aliases.COLOR.getName(color));
             }
 
-            loadLanguageDescription(meta, subPath + "buttons.fadecolors",
+            loadLanguageDescription(meta, SUB_PATH + "buttons.fadecolors",
                     "%colors%", String.join("<aqua>, <yellow>", colorNames));
 
             item.setItemMeta(meta);
@@ -322,9 +322,9 @@ public class FireworkEditor implements Gui {
             if (flicker) {
                 meta.addEnchant(Enchantment.LURE, 1, true);
             }
-            loadLanguageDescription(meta, subPath + "buttons.flags.info",
+            loadLanguageDescription(meta, SUB_PATH + "buttons.flags.info",
                     "%status%",
-                    getLanguageMessage(subPath + "buttons.flags."
+                    getLanguageMessage(SUB_PATH + "buttons.flags."
                             + (trail ? (flicker ? "both" : "trail") : (flicker ? "flicker" : "none"))
                     ));
             item.setItemMeta(meta);
@@ -338,7 +338,7 @@ public class FireworkEditor implements Gui {
             ItemMeta meta = ItemUtils.getMeta(item);
 
             meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.position", "%middle_click%",
+            loadLanguageDescription(meta, SUB_PATH + "buttons.position", "%middle_click%",
                     getLanguageMessage("gui.middleclick." + (getTargetPlayer().getGameMode() == GameMode.CREATIVE ? "creative" : "other")));
             item.setItemMeta(meta);
             return item;

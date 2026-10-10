@@ -9,6 +9,7 @@ import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.InventoryUtils;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -66,8 +67,9 @@ public class Buy extends SubCmd {
                 // error
                 InventoryUtils.giveAmount(target, item, amount, InventoryUtils.ExcessMode.DROP_EXCESS);
                 if (!silent) {
-                    Util.sendMessage(target,
-                            "<red>An error occurred, try again, if this message shows again try to contact the server administrators");
+                    Util.sendMessage2(target, Component.text(
+                            "An error occurred, try again, if this message shows again try to contact the server administrators",
+                            NamedTextColor.RED));
                     Util.logToFile("[transaction failed] no errors, is your Economy provider stable?");
                 }
                 return;

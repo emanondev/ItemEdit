@@ -24,7 +24,7 @@ import java.util.List;
 public class ColorGui implements Gui {
 
 
-    private static final String subPath = "gui.color.";
+    private static final String SUB_PATH = "gui.color.";
     private final Player target;
     private final Inventory inventory;
     private final ItemStack colorable;
@@ -33,7 +33,7 @@ public class ColorGui implements Gui {
 
 
     public ColorGui(@NotNull Player target) {
-        Component title = getLanguageComponent(subPath + "title");
+        Component title = getLanguageComponent(SUB_PATH + "title");
         this.inventory = Bukkit.createInventory(this, (6) * 9, title);
         this.target = target;
         this.colorable = ItemUtils.getHandMainItem(getTargetPlayer());

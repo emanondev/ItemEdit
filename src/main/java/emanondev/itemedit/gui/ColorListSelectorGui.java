@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ColorListSelectorGui implements Gui {
 
-    private static final String subPath = "gui.colorselector.";
+    private static final String SUB_PATH = "gui.colorselector.";
     private final List<DyeColor> colors;
     private final Gui parent;
     private final Inventory inventory;
@@ -32,7 +32,7 @@ public class ColorListSelectorGui implements Gui {
     public ColorListSelectorGui(@NotNull Gui parent, @NotNull List<DyeColor> colors) {
         this.colors = colors;
         this.parent = parent;
-        Component title = getLanguageComponent(subPath + "title");
+        Component title = getLanguageComponent(SUB_PATH + "title");
         this.inventory = Bukkit.createInventory(this, (2) * 9, title);
         inventory.setItem(inventory.getSize() - 1, this.getBackItem());
     }
@@ -47,7 +47,7 @@ public class ColorListSelectorGui implements Gui {
             ItemStack item = Util.getDyeItemFromColor(color);
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
-            loadLanguageDescription(meta, subPath + "buttons.color", "%colors%",
+            loadLanguageDescription(meta, SUB_PATH + "buttons.color", "%colors%",
                     String.join("<aqua>, <yellow>", list), "%color%", Aliases.COLOR.getName(color));
             item.setItemMeta(meta);
             item.setAmount(Math.clamp(colors.size(), 1, 101));

@@ -159,7 +159,8 @@ public final class Util {
         for (String regex : ItemEdit.get().getConfig().getStringList("blocked.regex"))
             if (Pattern.compile(regex).matcher(message).find()) {
                 if (ItemEdit.get().getConfig().getBoolean("blocked.log.console", true))
-                    sendMessage(Bukkit.getConsoleSender(), "user: <yellow>" + user.getName() + "<white> attempt to write '" + text
+                    Util.sendMessage(Bukkit.getConsoleSender(),
+                            "user: <yellow>" + user.getName() + "<white> attempt to write '" + text
                             + "'<reset> (stripped by colors and lowcased) was blocked by regex: <yellow>" + regex);
                 if (ItemEdit.get().getConfig().getBoolean("blocked.log.file", true))
                     logToFile("user: '" + user.getName() + "' attempt to write '" + text
