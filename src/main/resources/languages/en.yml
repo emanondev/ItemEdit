@@ -752,7 +752,7 @@ itemeditfood:
         - '<yellow><range> <aqua>how far teleport the player'
         - ''
         - '<aqua>Randomly teleport player when food is eaten'
-      params: '<potion>'
+      params: '<range>'
       feedback: "<blue>[<white>ItemEdit<blue>] <green>Added teleport effect when food is eaten"
     applyeffects:
       description:

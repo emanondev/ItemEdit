@@ -159,7 +159,7 @@ public class AddEffect extends SubCmd {
     }
 
     private void teleport(@NotNull Player player, ItemBuilder item, @NotNull String alias, String[] args) {
-        float val = Float.parseFloat(args[1]);
+        float val = Float.parseFloat(args[2]);
         item.addConsumeEffect(ConsumeEffect.teleportRandomlyEffect(val)).build();
         onSubSuccess(player, "teleport");
     }
