@@ -3,6 +3,7 @@ package emanondev.itemedit.command;
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.command.itemkinetic.DamageConditions;
 import emanondev.itemedit.command.itemkinetic.DismountConditions;
+import emanondev.itemedit.command.itemkinetic.Info;
 import emanondev.itemedit.command.itemkinetic.KnockbackConditions;
 import emanondev.itemedit.command.subcommands.DoubleSubCommand;
 import emanondev.itemedit.command.subcommands.IntSubCommand;
@@ -55,6 +56,7 @@ public class ItemKineticCommand extends AbstractCommand {
         this.registerSubCommand(() -> new DamageConditions(this));
         this.registerSubCommand(() -> new KnockbackConditions(this));
         this.registerSubCommand(() -> new DismountConditions(this));
+        this.registerSubCommand(() -> new Info(this));
     }
 
     public static ItemKineticCommand get() {

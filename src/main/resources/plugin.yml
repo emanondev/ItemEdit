@@ -258,6 +258,7 @@ permissions:
       itemedit.itemeditequipment.dispensable: true
       itemedit.itemeditequipment.equiponinteract: true
       itemedit.itemeditequipment.equipsound: true
+      itemedit.itemeditequipment.info: true
       itemedit.itemeditequipment.model: true
       itemedit.itemeditequipment.shearingsound: true
       itemedit.itemeditequipment.slot: true
@@ -286,6 +287,9 @@ permissions:
   itemedit.itemeditequipment.equipsound:
     default: op
     description: Allow setting equipment equip sound
+  itemedit.itemeditequipment.info:
+    default: op
+    description: Allow viewing equipment properties
   itemedit.itemeditequipment.model:
     default: op
     description: Allow setting the equipment model
@@ -309,6 +313,7 @@ permissions:
       itemedit.itemeditkinetic.dismountconditions: true
       itemedit.itemeditkinetic.forwardmovement: true
       itemedit.itemeditkinetic.hitsound: true
+      itemedit.itemeditkinetic.info: true
       itemedit.itemeditkinetic.knockbackconditions: true
       itemedit.itemeditkinetic.sound: true
   itemedit.itemeditkinetic.contactcooldownticks:
@@ -332,6 +337,9 @@ permissions:
   itemedit.itemeditkinetic.hitsound:
     default: op
     description: Allow setting kinetic hit sound
+  itemedit.itemeditkinetic.info:
+    default: op
+    description: Allow viewing kinetic properties
   itemedit.itemeditkinetic.knockbackconditions:
     default: op
     description: Allow setting kinetic knockback conditions
@@ -345,6 +353,7 @@ permissions:
       itemedit.itemeditpiercing.dealsknockback: true
       itemedit.itemeditpiercing.dismounts: true
       itemedit.itemeditpiercing.hitsound: true
+      itemedit.itemeditpiercing.info: true
       itemedit.itemeditpiercing.sound: true
   itemedit.itemeditpiercing.dealsknockback:
     default: op
@@ -355,6 +364,9 @@ permissions:
   itemedit.itemeditpiercing.hitsound:
     default: op
     description: Allow setting piercing hit sound
+  itemedit.itemeditpiercing.info:
+    default: op
+    description: Allow viewing piercing properties
   itemedit.itemeditpiercing.sound:
     default: op
     description: Allow setting piercing sound

@@ -4,6 +4,7 @@ import emanondev.itemedit.aliases.Aliases;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.IntParser;
 import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -44,13 +45,13 @@ public class BookEnchant extends SubCmd {
             onFail(p, alias);
             return;
         }
-        try {
-            if (args.length == 3) {
-                lv = Integer.parseInt(args[2]);
+        if (args.length == 3) {
+            IntParser lvParsed = new IntParser(args[2]);
+            if (!lvParsed.isNumberInRange(0, 255)) {
+                onFail(p, alias);
+                return;
             }
-        } catch (NumberFormatException e) {
-            onFail(p, alias);
-            return;
+            lv = lvParsed.getValue();
         }
         if (lv == 0) {
             meta.removeStoredEnchant(ench);
@@ -58,7 +59,6 @@ public class BookEnchant extends SubCmd {
         } else {
             if (!p.hasPermission(this.getPermission() + ".bypass_max_level")) {
                 lv = Math.min(ench.getMaxLevel(), lv);
-                //TODO feedback?
             }
             meta.addStoredEnchant(ench, lv, true);
             onSuccess(p, "%enchant%", args[1], "%lv%", String.valueOf(lv));

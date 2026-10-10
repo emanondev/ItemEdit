@@ -197,6 +197,8 @@ itemeditequipment:
     name: shearingsound
   model:
     name: model
+  info:
+    name: info
 
 itemeditkinetic:
   help:
@@ -220,6 +222,8 @@ itemeditkinetic:
     name: knockbackconditions
   dismountconditions:
     name: dismountconditions
+  info:
+    name: info
 
 itemeditpiercing:
   help:
@@ -233,3 +237,5 @@ itemeditpiercing:
     name: hitsound
   sound:
     name: sound
+  info:
+    name: info

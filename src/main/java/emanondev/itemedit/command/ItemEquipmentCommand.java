@@ -37,6 +37,7 @@ public class ItemEquipmentCommand extends AbstractCommand {
         this.registerSubCommand(() -> new SoundSubCommand(this, "shearingsound",
                 ItemBuilder::setEquippableShearingSound));
         this.registerSubCommand(() -> new Model(this));
+        this.registerSubCommand(() -> new Info(this));
     }
 
     public static ItemEquipmentCommand get() {

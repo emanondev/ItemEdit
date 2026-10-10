@@ -1,6 +1,7 @@
 package emanondev.itemedit.command;
 
 import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.command.itempiercing.Info;
 import emanondev.itemedit.command.subcommands.BooleanSubCommand;
 import emanondev.itemedit.command.subcommands.SoundSubCommand;
 import emanondev.itemedit.utility.ItemBuilder;
@@ -22,6 +23,7 @@ public class ItemPiercingCommand extends AbstractCommand {
                 ItemBuilder::setPiercingHitSound));
         this.registerSubCommand(() -> new SoundSubCommand(this, "sound",
                 ItemBuilder::setPiercingSound));
+        this.registerSubCommand(() -> new Info(this));
     }
 
     public static ItemPiercingCommand get() {

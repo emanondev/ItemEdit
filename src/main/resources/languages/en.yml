@@ -606,6 +606,7 @@ itemeditequipment:
       - ''
       - '<yellow>[true/false] <aqua>Whether the equipment can be sheared'
     params: '[true/false]'
+    feedback: "<blue>[<white>ItemEdit<blue>] <green>Can be sheared property is now <yellow>%value%"
   cameraoverlay:
     description:
       - '<gold><b>Sets camera overlay</b>'
@@ -669,6 +670,24 @@ itemeditequipment:
       - '<yellow>[page] <aqua>Help page'
       - '<yellow>[subcommand] <aqua>Help for a subcommand'
     params: '[page/subcommand]'
+  info:
+    description:
+      - '<gold><b>Shows the equipment properties on this item</b>'
+    params: ''
+    not_set: '<blue>[<white>ItemEdit<blue>] <aqua>This item has no equippable component'
+    message:
+      - '<blue>[<white>ItemEdit<blue>] <dark_green><b>Equippable</b>'
+      - '<green>Slot: <yellow>%slot%'
+      - '<green>Can be sheared: <yellow>%canbesheared%'
+      - '<green>Damage on hurt: <yellow>%damageonhurt%'
+      - '<green>Dispensable: <yellow>%dispensable%'
+      - '<green>Equip on interact: <yellow>%equiponinteract%'
+      - '<green>Swappable: <yellow>%swappable%'
+      - '<green>Equip sound: <yellow>%equipsound%'
+      - '<green>Shear sound: <yellow>%shearsound%'
+      - '<green>Allowed entities: <yellow>%allowedentities%'
+      - '<green>Camera overlay: <yellow>%cameraoverlay%'
+      - '<green>Asset id: <yellow>%assetid%'
   model:
     description:
       - '<gold><b>Sets texture model</b>'
@@ -694,6 +713,7 @@ itemeditequipment:
       - '<yellow>[sound] <aqua>Which sound should be made'
       - '<aqua>when it''s removed by shear, like pumpkin for snowman'
     params: '[sound]'
+    feedback: "<blue>[<white>ItemEdit<blue>] <green>Shearing sound is now <yellow>%value%"
   slot:
     description:
       - '<gold><b>Sets equippable slot</b>'
@@ -839,10 +859,14 @@ itemeditfood:
     apply_effect:
       - '<green>%index%. Type: <yellow><aqua>%type% <dark_gray>| <green>Lv: <yellow>%level% <dark_gray>| <green>Duration: <yellow>%duration_s%<green> s <dark_gray>(<gray>%duration_ticks%<dark_gray> ticks)'
       - '<green>   Particles: <yellow>%hasparticle% <dark_gray>| <green>Ambient: <yellow>%isambient% <dark_gray>| <green>Icon: <yellow>%hasicon% <dark_gray>| <green>Chance: <yellow>%chance_perc%<green>%'
+    consume_effect_teleport: '<green>Random teleport diameter: <yellow>%diameter%'
+    consume_effect_sound: '<green>Additional consume sound: <yellow>%sound%'
+    consume_effect_remove: '<green>Removed effects: <yellow>%effects%'
+    consume_effect_clear: '<green>Clears all active status effects'
+    consume_effect_unknown: '<green>Other consume effect: <yellow>%type%'
     description:
       - '<gold><b>Describe current food info for item</b>'
     params: ''
-    feedback: "<dark_red>currently unimplemented"
   nutrition:
     description:
       - '<gold><b>Sets recovered nutrition</b>'
@@ -948,6 +972,22 @@ itemeditkinetic:
       - '<yellow>[page] <aqua>Help page'
       - '<yellow>[subcommand] <aqua>Help for a subcommand'
     params: '[page/subcommand]'
+  info:
+    description:
+      - '<gold><b>Shows the kinetic weapon properties on this item</b>'
+    params: ''
+    not_set: '<blue>[<white>ItemEdit<blue>] <aqua>This item has no kinetic weapon component'
+    message:
+      - '<blue>[<white>ItemEdit<blue>] <dark_green><b>Kinetic Weapon</b>'
+      - '<green>Contact cooldown: <yellow>%contactcooldownticks% <green>ticks'
+      - '<green>Damage multiplier: <yellow>%damagemultiplier%'
+      - '<green>Delay: <yellow>%delayticks% <green>ticks'
+      - '<green>Forward movement: <yellow>%forwardmovement%'
+      - '<green>Hit sound: <yellow>%hitsound%'
+      - '<green>Sound: <yellow>%sound%'
+      - '<green>Damage conditions: <yellow>%damageconditions%'
+      - '<green>Dismount conditions: <yellow>%dismountconditions%'
+      - '<green>Knockback conditions: <yellow>%knockbackconditions%'
   hitsound:
     description:
       - '<gold><b>Sets Kinetic hit sound</b>'
@@ -996,6 +1036,17 @@ itemeditpiercing:
       - '<yellow>[page] <aqua>Help page'
       - '<yellow>[subcommand] <aqua>Help for a subcommand'
     params: '[page/subcommand]'
+  info:
+    description:
+      - '<gold><b>Shows the piercing weapon properties on this item</b>'
+    params: ''
+    not_set: '<blue>[<white>ItemEdit<blue>] <aqua>This item has no piercing weapon component'
+    message:
+      - '<blue>[<white>ItemEdit<blue>] <dark_green><b>Piercing Weapon</b>'
+      - '<green>Deals knockback: <yellow>%dealsknockback%'
+      - '<green>Dismounts: <yellow>%dismounts%'
+      - '<green>Hit sound: <yellow>%hitsound%'
+      - '<green>Sound: <yellow>%sound%'
   hitsound:
     description:
       - '<gold><b>Sets Piercing hit sound</b>'

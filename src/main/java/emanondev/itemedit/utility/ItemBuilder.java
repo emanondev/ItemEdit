@@ -1,6 +1,7 @@
 package emanondev.itemedit.utility;
 
 import com.google.common.collect.Multimap;
+import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.*;
 import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
@@ -31,9 +32,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -41,6 +40,7 @@ public class ItemBuilder {
 
     private final @NotNull ItemStack stack;
     private final @NotNull ItemMeta meta;
+    private final Map<DataComponentType.Valued<?>, Boolean> editedComponents = new HashMap<>();
 
     public ItemBuilder(@NotNull Material material) {
         this(new ItemStack(material));
@@ -52,7 +52,24 @@ public class ItemBuilder {
     }
 
     public ItemStack build() {
+        Map<DataComponentType.Valued<?>, Object> editedValues = new HashMap<>();
+
+        editedComponents.forEach((type, overwrite) -> {
+            if (overwrite) {
+                editedValues.put(type, stack.getData(type));
+            }
+        });
+
         stack.setItemMeta(meta);
+
+        editedComponents.forEach((type, overwrite) -> {
+            if (overwrite) {
+                setDataUnchecked(type, editedValues.get(type));
+            } else {
+                stack.unsetData(type);
+            }
+        });
+
         return stack;
     }
 
@@ -87,7 +104,7 @@ public class ItemBuilder {
         }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().addEffect(effect).build();
-        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
+        setStackData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
@@ -138,7 +155,7 @@ public class ItemBuilder {
         }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().animation(animation).build();
-        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
+        setStackData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
@@ -148,7 +165,7 @@ public class ItemBuilder {
         }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().hasConsumeParticles(consumeParticles).build();
-        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
+        setStackData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
@@ -158,7 +175,7 @@ public class ItemBuilder {
         }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().consumeSeconds(consumeSeconds).build();
-        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
+        setStackData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
@@ -168,7 +185,7 @@ public class ItemBuilder {
         }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().effects(effects).build();
-        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
+        setStackData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
@@ -182,7 +199,7 @@ public class ItemBuilder {
         }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().sound(sound).build();
-        stack.setData(DataComponentTypes.CONSUMABLE, consumable);
+        setStackData(DataComponentTypes.CONSUMABLE, consumable);
         return this;
     }
 
@@ -190,11 +207,8 @@ public class ItemBuilder {
         if (!VersionUtils.isAfter(1, 21, 4)) {
             throw new UnsupportedOperationException();
         }
-        if (consumable == null) {
-            stack.unsetData(DataComponentTypes.CONSUMABLE);
-        } else {
-            stack.setData(DataComponentTypes.CONSUMABLE, consumable);
-        }
+            setStackData(DataComponentTypes.CONSUMABLE, consumable);
+
         return this;
     }
 
@@ -208,8 +222,6 @@ public class ItemBuilder {
         }
         return stack.getData(DataComponentTypes.CONSUMABLE);
     }
-
-    //FOOD COMPONENT
 
     public boolean canAlwaysEat() {
         if (!VersionUtils.isAfter(1, 20, 5)) {
@@ -227,6 +239,8 @@ public class ItemBuilder {
                 FoodProperties.food().build()).nutrition();
     }
 
+    //FOOD COMPONENT
+
     public float getSaturation() {
         if (!VersionUtils.isAfter(1, 20, 5)) {
             throw new UnsupportedOperationException();
@@ -241,7 +255,7 @@ public class ItemBuilder {
         }
         FoodProperties food = stack.getDataOrDefault(DataComponentTypes.FOOD,
                 FoodProperties.food().build()).toBuilder().canAlwaysEat(canAlwaysEat).build();
-        stack.setData(DataComponentTypes.FOOD, food);
+        setStackData(DataComponentTypes.FOOD, food);
         return this;
     }
 
@@ -251,7 +265,7 @@ public class ItemBuilder {
         }
         FoodProperties food = stack.getDataOrDefault(DataComponentTypes.FOOD,
                 FoodProperties.food().build()).toBuilder().nutrition(nutrition).build();
-        stack.setData(DataComponentTypes.FOOD, food);
+        setStackData(DataComponentTypes.FOOD, food);
         return this;
     }
 
@@ -261,16 +275,12 @@ public class ItemBuilder {
         }
         FoodProperties food = stack.getDataOrDefault(DataComponentTypes.FOOD,
                 FoodProperties.food().build()).toBuilder().saturation(saturation).build();
-        stack.setData(DataComponentTypes.FOOD, food);
+        setStackData(DataComponentTypes.FOOD, food);
         return this;
     }
 
     public ItemBuilder setFoodComponent(FoodProperties food) {
-        if (food != null) {
-            stack.setData(DataComponentTypes.FOOD, food);
-        } else {
-            stack.unsetData(DataComponentTypes.FOOD);
-        }
+            setStackData(DataComponentTypes.FOOD, food);
         return this;
     }
 
@@ -289,7 +299,7 @@ public class ItemBuilder {
             inheritProperties(builder, weapon);
         }
         builder.delayTicks(ticks);
-        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
+        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
@@ -303,7 +313,7 @@ public class ItemBuilder {
 
         builder.damageMultiplier(multiplier);
 
-        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
+        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
@@ -317,7 +327,7 @@ public class ItemBuilder {
 
         builder.delayTicks(ticks);
 
-        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
+        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
@@ -331,14 +341,13 @@ public class ItemBuilder {
 
         builder.forwardMovement(multiplier);
 
-        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
+        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
     public ItemBuilder setKineticHitSound(Sound value) {
         return setKineticHitSound(RegistryKey.SOUND_EVENT.typedKey(Registry.SOUNDS.getKeyOrThrow(value)));
     }
-
 
     public ItemBuilder setKineticHitSound(Key value) {
         KineticWeapon weapon = stack.getData(DataComponentTypes.KINETIC_WEAPON);
@@ -350,7 +359,7 @@ public class ItemBuilder {
 
         builder.hitSound(value);
 
-        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
+        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
@@ -368,7 +377,7 @@ public class ItemBuilder {
 
         builder.sound(value);
 
-        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
+        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
@@ -382,7 +391,7 @@ public class ItemBuilder {
 
         builder.damageConditions(condition);
 
-        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
+        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
@@ -396,7 +405,7 @@ public class ItemBuilder {
 
         builder.dismountConditions(condition);
 
-        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
+        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
@@ -410,7 +419,7 @@ public class ItemBuilder {
 
         builder.knockbackConditions(condition);
 
-        stack.setData(DataComponentTypes.KINETIC_WEAPON, builder.build());
+        setStackData(DataComponentTypes.KINETIC_WEAPON, builder.build());
         return this;
     }
 
@@ -424,7 +433,7 @@ public class ItemBuilder {
 
         builder.dismounts(value);
 
-        stack.setData(DataComponentTypes.PIERCING_WEAPON, builder.build());
+        setStackData(DataComponentTypes.PIERCING_WEAPON, builder.build());
         return this;
     }
 
@@ -438,10 +447,9 @@ public class ItemBuilder {
 
         builder.dealsKnockback(value);
 
-        stack.setData(DataComponentTypes.PIERCING_WEAPON, builder.build());
+        setStackData(DataComponentTypes.PIERCING_WEAPON, builder.build());
         return this;
     }
-
 
     public ItemBuilder setPiercingHitSound(Sound value) {
         return setPiercingHitSound(RegistryKey.SOUND_EVENT.typedKey(Registry.SOUNDS.getKeyOrThrow(value)));
@@ -457,7 +465,7 @@ public class ItemBuilder {
 
         builder.hitSound(value);
 
-        stack.setData(DataComponentTypes.PIERCING_WEAPON, builder.build());
+        setStackData(DataComponentTypes.PIERCING_WEAPON, builder.build());
         return this;
     }
 
@@ -475,7 +483,7 @@ public class ItemBuilder {
 
         builder.sound(value);
 
-        stack.setData(DataComponentTypes.PIERCING_WEAPON, builder.build());
+        setStackData(DataComponentTypes.PIERCING_WEAPON, builder.build());
         return this;
     }
 
@@ -510,12 +518,12 @@ public class ItemBuilder {
         Equippable.Builder builder = stack.getDataOrDefault(DataComponentTypes.EQUIPPABLE,
                 Equippable.equippable(EquipmentSlot.HAND).build()).toBuilder();
         builder.canBeSheared(canBeSheared);
-        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
+        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
     public ItemBuilder clearEquippable() {
-        stack.unsetData(DataComponentTypes.EQUIPPABLE);
+        setStackData(DataComponentTypes.EQUIPPABLE,null);
         return this;
     }
 
@@ -528,7 +536,7 @@ public class ItemBuilder {
         if (equippable != null) {
             inheritProperties(builder, equippable);
         }
-        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
+        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
@@ -540,7 +548,7 @@ public class ItemBuilder {
         Equippable.Builder builder = stack.getDataOrDefault(DataComponentTypes.EQUIPPABLE,
                 Equippable.equippable(EquipmentSlot.HAND).build()).toBuilder();
         builder.equipSound(value);
-        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
+        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
@@ -556,7 +564,7 @@ public class ItemBuilder {
 
         builder.shearSound(value);
 
-        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
+        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
@@ -571,7 +579,7 @@ public class ItemBuilder {
                 Equippable.equippable(EquipmentSlot.HAND).build()
         ).toBuilder();
         builder.allowedEntities(entityType);
-        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
+        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
@@ -593,7 +601,7 @@ public class ItemBuilder {
 
         builder.swappable(value);
 
-        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
+        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
@@ -610,7 +618,7 @@ public class ItemBuilder {
 
         builder.dispensable(value);
 
-        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
+        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
@@ -627,7 +635,7 @@ public class ItemBuilder {
 
         builder.equipOnInteract(value);
 
-        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
+        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
@@ -644,7 +652,7 @@ public class ItemBuilder {
 
         builder.damageOnHurt(value);
 
-        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
+        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
@@ -660,7 +668,7 @@ public class ItemBuilder {
 
         builder.cameraOverlay(key);
 
-        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
+        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
@@ -680,7 +688,7 @@ public class ItemBuilder {
 
         builder.assetId(key);
 
-        stack.setData(DataComponentTypes.EQUIPPABLE, builder.build());
+        setStackData(DataComponentTypes.EQUIPPABLE, builder.build());
         return this;
     }
 
@@ -1003,6 +1011,21 @@ public class ItemBuilder {
             tropicalFishBucketMeta.setPattern(pattern);
         }
         return this;
+    }
+
+    private <T> void setStackData(DataComponentType.Valued<T> type, T value) {
+        if (value!=null) {
+            stack.setData(type, value);
+            editedComponents.put(type, true);
+            return;
+        }
+        stack.unsetData(type);
+        editedComponents.put(type, false);
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> void setDataUnchecked(DataComponentType.Valued<T> type, Object value) {
+        stack.setData(type, (T) value);
     }
 
     private void inheritProperties(Equippable.Builder builder, Equippable equippable) {
