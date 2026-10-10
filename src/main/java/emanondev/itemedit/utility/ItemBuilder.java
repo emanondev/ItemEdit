@@ -11,6 +11,7 @@ import io.papermc.paper.registry.TypedKey;
 import io.papermc.paper.registry.set.RegistryKeySet;
 import io.papermc.paper.registry.set.RegistrySet;
 import net.kyori.adventure.key.Key;
+import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -763,9 +764,9 @@ public class ItemBuilder {
         return stack.getType();
     }
 
-    public ItemBuilder setBookAuthor(String author) {
+    public ItemBuilder setBookAuthor(Component author) {
         if (meta instanceof BookMeta bookMeta) {
-            bookMeta.setAuthor(author);
+            bookMeta.author(author);
         }
         return this;
     }

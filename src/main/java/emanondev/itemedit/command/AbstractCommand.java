@@ -293,7 +293,8 @@ public abstract class AbstractCommand implements TabExecutor {
 
         public void help(CommandSender sender, String alias, SubCmd sub) {
             MiniMessage miniMessage = MiniMessage.miniMessage();
-            String message = miniMessage.serialize(this.translateOrEmpty("header-sub", sender, "%sub%", sub.getName()))
+            String message = miniMessage.serialize(
+                    this.translateOrEmpty("header-sub", sender, "%sub%", sub.getName()))
                     + "\n<dark_green>/" + alias + " <green>" + sub.getName() + " "
                     + miniMessage.serialize(sub.translateOrEmpty("params", sender))
                     + "\n" + miniMessage.serialize(sub.getDescription(sender));

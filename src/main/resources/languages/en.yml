@@ -62,7 +62,7 @@ generic:
     entitygroups: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong EntityGroup Value! <dark_red>[<gold>hover here<dark_red>]'
     consumable_effect: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Consumable Effect Value! <dark_red>[<gold>hover here<dark_red>]'
     goat_horn_sound: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Goat Horn Sound Value! <dark_red>[<gold>hover here<dark_red>]'
-    error-pre-hover: '<gold><b>Aliases:</b>'
+    error-pre-hover: '<gold><b>Aliases:</b></gold>'
     first_color: '<aqua>'
     second_color: '<yellow>'
 itemedit:

@@ -1,5 +1,6 @@
 package emanondev.itemedit.command.itemedit;
 
+import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
@@ -37,7 +38,7 @@ public class BookAuthor extends SubCmd {
         for (int i = 2; i < args.length; i++) {
             name.append(" ").append(args[i]);
         }
-        item.setBookAuthor(name.toString()).build();
+        item.setBookAuthor(UtilsString.fix2(name.toString(),p,true)).build();
         updateView(p);
         onSuccess(p);
     }
