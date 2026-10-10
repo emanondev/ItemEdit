@@ -47,6 +47,6 @@ public class SoundSubCommand extends SubCmd {
     //command sound <sound>
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return args.length == 2 ? CompleteUtility.complete(args[1], Aliases.SOUND) : null;
+        return args.length == 2 ? CompleteUtility.complete(args[1], Aliases.SOUND) : List.of();
     }
 }

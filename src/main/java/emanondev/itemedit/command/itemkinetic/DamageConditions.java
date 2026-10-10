@@ -3,6 +3,7 @@ package emanondev.itemedit.command.itemkinetic;
 import emanondev.itemedit.command.ItemKineticCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
+import emanondev.itemedit.utility.IntParser;
 import emanondev.itemedit.utility.ItemBuilder;
 import io.papermc.paper.datacomponent.item.KineticWeapon;
 import org.bukkit.command.CommandSender;
@@ -24,11 +25,15 @@ public class DamageConditions extends SubCmd {
             onFail(player, alias);
             return;
         }
-        int maxDurationTicks = Integer.parseInt(args[1]);
+        IntParser maxDurationTicks = new IntParser(args[1]);
+        if (!maxDurationTicks.isNumberMin(0)){
+            onFail(player, alias);
+            return;
+        }
         double minSpeed = Double.parseDouble(args[2]);
         double minRelativeSpeed = Double.parseDouble(args[3]);
         KineticWeapon.Condition condition = KineticWeapon.condition(
-                maxDurationTicks, (float) minSpeed, (float) minRelativeSpeed);
+                maxDurationTicks.getValue(), (float) minSpeed, (float) minRelativeSpeed);
         new ItemBuilder(getItemInMainHand(player)).setKineticDamageConditions(condition).build();
         onSuccess(player);
         updateView(player);

@@ -30,7 +30,7 @@ public class DoubleSubCommand extends SubCmd {
         this.suggestions = suggestions;
     }
 
-    //command sound <sound>
+    //command subcommand <value>
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player player = (Player) sender;
@@ -53,9 +53,9 @@ public class DoubleSubCommand extends SubCmd {
         }
     }
 
-    //command sound <sound>
+    //command subcommand <value>
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
-        return args.length == 2 ? CompleteUtility.complete(args[1], suggestions) : null;
+        return args.length == 2 ? CompleteUtility.complete(args[1], suggestions) : List.of();
     }
 }

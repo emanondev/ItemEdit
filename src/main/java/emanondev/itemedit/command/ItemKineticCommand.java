@@ -37,7 +37,7 @@ public class ItemKineticCommand extends AbstractCommand {
                 }, List.of("1", "1.5", "0.5")));
         this.registerSubCommand(() -> new IntSubCommand(this, "delayticks",
                 (b, v) -> {
-                    if (v == null || v >= 0) {
+                    if (v == null || v <= 0) {
                         return false;
                     }
                     b.setKineticDelayTicks(v);

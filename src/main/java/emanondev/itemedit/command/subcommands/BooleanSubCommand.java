@@ -15,7 +15,6 @@ import java.util.function.Function;
 
 public class BooleanSubCommand extends SubCmd {
 
-
     private final BiConsumer<ItemBuilder, Boolean> applier;
     private final Function<ItemBuilder, Boolean> getter;
 
@@ -27,7 +26,7 @@ public class BooleanSubCommand extends SubCmd {
         this.getter = getter;
     }
 
-    //command sound <sound>
+    //command subcommand [boolean]
     @Override
     public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
         Player p = (Player) sender;
@@ -47,7 +46,7 @@ public class BooleanSubCommand extends SubCmd {
         onSuccess(p, "%value%", String.valueOf(value));
     }
 
-    //command sound <sound>
+    //command subcommand [boolean]
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         return args.length == 2 ? CompleteUtility.complete(args[1], Aliases.BOOLEAN) : List.of();
