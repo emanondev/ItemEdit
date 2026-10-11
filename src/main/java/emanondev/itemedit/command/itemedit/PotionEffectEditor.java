@@ -39,7 +39,7 @@ public class PotionEffectEditor extends SubCmd {
             if (p.hasPermission("itemedit.admin")) {
                 Component msg = this.translate("itemtag-tip", sender);
                 if (Util.hasRenderableContent(msg)) {
-                    Util.sendMessage2(p, Util.asHover(Util.asOpenUrl(
+                    Util.sendComponent(p, Util.asHover(Util.asOpenUrl(
                             msg,
                             "https://modrinth.com/plugin/itemtag"
                     ), this.translate("itemtag-tip-hover", p)));

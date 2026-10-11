@@ -265,7 +265,7 @@ public abstract class AbstractCommand implements TabExecutor {
             }
         }
         if (any) {
-            Util.sendMessage2(sender, message);
+            Util.sendComponent(sender, message);
         } else {
             sendPermissionLackGenericMessage(sender);
         }
@@ -306,7 +306,7 @@ public abstract class AbstractCommand implements TabExecutor {
                     .append(sub.getHelpComponent(sender, alias))
                     .append(Component.newline())
                     .append(sub.getDescription(sender));
-            Util.sendMessage2(sender, message);
+            Util.sendComponent(sender, message);
         }
 
         public void help(CommandSender sender, String alias, int page) {
@@ -326,7 +326,7 @@ public abstract class AbstractCommand implements TabExecutor {
                 body = body.append(cmd.getHelpComponent(sender, alias)).append(Component.newline());
             }
             body = body.append(injectClickablePages(sender, alias, page, maxPage));
-            Util.sendMessage2(sender, body);
+            Util.sendComponent(sender, body);
         }
 
         @Override

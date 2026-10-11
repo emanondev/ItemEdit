@@ -72,7 +72,7 @@ public class BuyMax extends SubCmd {
                 // error
                 InventoryUtils.giveAmount(target, item, amount, InventoryUtils.ExcessMode.DROP_EXCESS);
                 if (!silent) {
-                    Util.sendMessage2(target, Component.text(
+                    Util.sendComponent(target, Component.text(
                             "An error occurred, try again, if this message shows again try to contact the server administrators",
                             NamedTextColor.RED));
                 }
@@ -88,11 +88,11 @@ public class BuyMax extends SubCmd {
             }
 
             if (ItemEdit.get().getConfig().loadBoolean("log.action.buy", true)) {
-                Component msg = UtilsString.fix2(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
+                Component msg = UtilsString.fix(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%player_name%", target.getName(), "%price%", economy.format(price));
                 if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
-                    Util.sendMessage2(Bukkit.getConsoleSender(), msg);
+                    Util.sendComponent(Bukkit.getConsoleSender(), msg);
                 }
                 if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
                     Util.logToFile(msg);

@@ -82,7 +82,7 @@ public abstract class SubCmd {
                         MiniMessage.miniMessage().deserialize("<red>/" + alias + " " + this.name + " " + paramsText),
                         "/" + alias + " " + this.name + " " + paramsText),
                 getDescription(target));
-        Util.sendMessage2(target, feedback);
+        Util.sendComponent(target, feedback);
     }
 
     abstract public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args);
@@ -116,7 +116,7 @@ public abstract class SubCmd {
     protected void onSubFail(CommandSender target, String alias, String subSubCommand) {
         Component params = translate(subSubCommand + ".params", target);
         String paramsText = params == null ? "" : PlainTextComponentSerializer.plainText().serialize(params);
-        Util.sendMessage2(target, craftFailFeedback(alias, subSubCommand
+        Util.sendComponent(target, craftFailFeedback(alias, subSubCommand
                         + ((!Util.hasRenderableContent(params)) ? "" : " " + paramsText),
                 translateList(subSubCommand + ".description", target)));
     }
@@ -204,28 +204,28 @@ public abstract class SubCmd {
     }
 
     protected void onSuccess(CommandSender sender, String... holders) {
-        Util.sendMessage2(sender, translate("feedback", sender, holders));
+        Util.sendComponent(sender, translate("feedback", sender, holders));
     }
 
     protected void onSubSuccess(CommandSender sender, String subSubCommand, String... holders) {
-        Util.sendMessage2(sender, translate(subSubCommand + ".feedback", sender, holders));
+        Util.sendComponent(sender, translate(subSubCommand + ".feedback", sender, holders));
     }
 
     protected void sendFeedback(CommandSender target,
                                 @NotNull String feedbackPath,
                                 String... holders) {
-        Util.sendMessage2(target, this.translate(feedbackPath, target, holders));
+        Util.sendComponent(target, this.translate(feedbackPath, target, holders));
     }
 
     protected void sendSubFeedback(CommandSender target,
                                    @NotNull String subSubCommand,
                                    @NotNull String feedbackPath,
                                    String... holders) {
-        Util.sendMessage2(target, this.translate(subSubCommand + "." + feedbackPath, target, holders));
+        Util.sendComponent(target, this.translate(subSubCommand + "." + feedbackPath, target, holders));
     }
 
     protected void sendLanguageString(String path, CommandSender sender, String... holders) {
-        Util.sendMessage2(sender, translate(path, sender, holders));
+        Util.sendComponent(sender, translate(path, sender, holders));
     }
 
     protected List<Component> translateList(String path, CommandSender sender, String... holders) {

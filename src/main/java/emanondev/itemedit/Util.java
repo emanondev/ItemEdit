@@ -51,7 +51,7 @@ public final class Util {
         if (message == null || message.isEmpty()) {
             return;
         }
-        sendMessage2(sender, MiniMessage.miniMessage().deserialize(message));
+        sendComponent(sender, MiniMessage.miniMessage().deserialize(message));
     }
 
     @Deprecated(forRemoval = true)
@@ -62,7 +62,7 @@ public final class Util {
         sendMessage(sender, String.join("\n", message));
     }
 
-    public static void sendMessage2(@NotNull CommandSender sender, List<Component> message) {
+    public static void sendComponent(@NotNull CommandSender sender, List<Component> message) {
         if (message == null || message.isEmpty()) {
             return;
         }
@@ -75,13 +75,13 @@ public final class Util {
         }
 
         Component combined = Component.join(JoinConfiguration.separator(Component.newline()), lines);
-        sendMessage2(sender, combined);
+        sendComponent(sender, combined);
     }
 
     /**
      * takes an already formatted message
      */
-    public static void sendMessage2(@NotNull CommandSender sender, Component message) {
+    public static void sendComponent(@NotNull CommandSender sender, Component message) {
         if (!hasRenderableContent(message)) {
             return;
         }
@@ -198,7 +198,7 @@ public final class Util {
     }
 
     public static Component formatComponent(CommandSender sender, @Nullable String text, String basePermission) {
-        return formatText(sender, UtilsString.fix2(legacyHexToMiniMessage(text), null, true), basePermission);
+        return formatText(sender, UtilsString.fix(legacyHexToMiniMessage(text), null, true), basePermission);
     }
 
     /**

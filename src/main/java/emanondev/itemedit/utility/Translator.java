@@ -78,7 +78,7 @@ public class Translator {
         if (message == null) {
             return List.of();
         }
-        return UtilsString.fix2(message, placeholderApi && target instanceof Player ? ((Player) target) : null, true, holders);
+        return UtilsString.fix(message, placeholderApi && target instanceof Player ? ((Player) target) : null, true, holders);
     }
 
     public Component translate(CommandSender target, String path, String... holders) {
@@ -117,7 +117,7 @@ public class Translator {
         if (message == null) {
             return null;
         }
-        return UtilsString.fix2(message, placeholderApi && target instanceof Player ? ((Player) target) : null, true, holders);
+        return UtilsString.fix(message, placeholderApi && target instanceof Player ? ((Player) target) : null, true, holders);
     }
 
     public String translateOrEmptyRaw(CommandSender target, String path, String... holders) {
@@ -152,7 +152,7 @@ public class Translator {
         if (message == null) {
             return null;
         }
-        return UtilsString.fix(message, null, false, holders);
+        return UtilsString.fixToString(message, null, false, holders);
     }
 
     public Component translateOrEmpty(CommandSender target, String path, String... holders) {
@@ -168,7 +168,7 @@ public class Translator {
     }
 
     public void send(CommandSender target, String path, String... holders) {
-        Util.sendMessage2(target, translate(target, path, holders));
+        Util.sendComponent(target, translate(target, path, holders));
     }
 
     private List<YMLConfig> getLocaleFiles(String fullLocale) {

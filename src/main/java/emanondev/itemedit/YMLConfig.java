@@ -300,7 +300,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable String loadMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
                                         boolean color, String... args) {
         setComments(path, args);
-        return UtilsString.fix(load(path, def, String.class), target, color, args);
+        return UtilsString.fixToString(load(path, def, String.class), target, color, args);
     }
 
     /**
@@ -318,7 +318,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable String getMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
                                        boolean color, String... args) {
         setComments(path, args);
-        return UtilsString.fix(get(path, def, String.class), target, color, args);
+        return UtilsString.fixToString(get(path, def, String.class), target, color, args);
     }
 
     /**
@@ -335,7 +335,7 @@ public class YMLConfig extends YamlConfiguration {
     public @Nullable String getMessage(@NotNull String path, @Nullable String def, @Nullable Player target,
                                        String... args) {
         setComments(path, args);
-        return UtilsString.fix(get(path, def, String.class), target, true, args);
+        return UtilsString.fixToString(get(path, def, String.class), target, true, args);
     }
 
     /**
@@ -427,10 +427,10 @@ public class YMLConfig extends YamlConfiguration {
             }
         }
         try {
-            return UtilsString.fix(load(path, def, List.class), target, color, holders);
+            return UtilsString.fixToString(load(path, def, List.class), target, color, holders);
         } catch (Exception e) {
             log.warn(e.getMessage(), e);
-            return UtilsString.fix(def, target, color, holders);
+            return UtilsString.fixToString(def, target, color, holders);
         }
     }
 
@@ -487,10 +487,10 @@ public class YMLConfig extends YamlConfiguration {
             }
         }
         try {
-            return UtilsString.fix(get(path, def, List.class), target, color, holders);
+            return UtilsString.fixToString(get(path, def, List.class), target, color, holders);
         } catch (Exception e) {
             log.warn(e.getMessage(), e);
-            return UtilsString.fix(def, target, color, holders);
+            return UtilsString.fixToString(def, target, color, holders);
         }
     }
 

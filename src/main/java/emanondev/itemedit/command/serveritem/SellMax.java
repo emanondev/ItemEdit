@@ -71,7 +71,7 @@ public class SellMax extends SubCmd {
             if (!economy.withdrawPlayer(target, price).transactionSuccess()) {
                 // error
                 if (!silent) {
-                    Util.sendMessage2(target, Component.text(
+                    Util.sendComponent(target, Component.text(
                             "An error occurred, try again, if this message shows again try to contact the server administrators",
                             NamedTextColor.RED));
                 }
@@ -90,7 +90,7 @@ public class SellMax extends SubCmd {
                 if (!economy.depositPlayer(target, price).transactionSuccess()) {
                     // error
                     if (!silent) {
-                        Util.sendMessage2(target, Component.text(
+                        Util.sendComponent(target, Component.text(
                                 "An error occurred, try again, if this message shows again try to contact the server administrators",
                                 NamedTextColor.RED));
                     }
@@ -123,11 +123,11 @@ public class SellMax extends SubCmd {
             }
 
             if (ItemEdit.get().getConfig().loadBoolean("log.action.sell", true)) {
-                Component msg = UtilsString.fix2(this.getConfigString("log"), target, true, "%id%", args[1].toLowerCase(),
+                Component msg = UtilsString.fix(this.getConfigString("log"), target, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         String.valueOf(amount), "%player_name%", target.getName(), "%price%", economy.format(price));
                 if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
-                    Util.sendMessage2(Bukkit.getConsoleSender(), msg);
+                    Util.sendComponent(Bukkit.getConsoleSender(), msg);
                 }
                 if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
                     Util.logToFile(msg);

@@ -85,13 +85,13 @@ public final class UtilsString {
 
         // apply title and lore to item
         ItemMeta meta = ItemUtils.getMeta(item);
-        meta.displayName(fix2(title, p, color, holders));
+        meta.displayName(fix(title, p, color, holders));
         if (lore == null) {
             meta.lore(null);
         } else {
             List<Component> componentLore = new ArrayList<>(lore.size());
             for (String line : lore) {
-                componentLore.add(fix2(line, p, color, holders));
+                componentLore.add(fix(line, p, color, holders));
             }
             meta.lore(componentLore);
         }
@@ -108,13 +108,13 @@ public final class UtilsString {
      * @return a new list with fixed text, or null if list was null
      */
     @Contract("!null, _, _, _ -> !null")
-    public static @Nullable ArrayList<String> fix(@Nullable List<String> list, @Nullable Player player, boolean color, String... holders) {
+    public static @Nullable ArrayList<String> fixToString(@Nullable List<String> list, @Nullable Player player, boolean color, String... holders) {
         if (list == null) {
             return null;
         }
         ArrayList<String> newList = new ArrayList<>();
         for (String line : list) {
-            newList.add(fix(line, player, color, holders));
+            newList.add(fixToString(line, player, color, holders));
         }
         return newList;
     }
@@ -128,13 +128,13 @@ public final class UtilsString {
      * @return a new list with fixed text, or null if list was null
      */
     @Contract("!null, _, _, _ -> !null")
-    public static @Nullable ArrayList<Component> fix2(@Nullable List<String> list, @Nullable Player player, boolean color, String... holders) {
+    public static @Nullable ArrayList<Component> fix(@Nullable List<String> list, @Nullable Player player, boolean color, String... holders) {
         if (list == null) {
             return null;
         }
         ArrayList<Component> newList = new ArrayList<>();
         for (String line : list) {
-            newList.add(fix2(line, player, color, holders));
+            newList.add(fix(line, player, color, holders));
         }
         return newList;
     }
@@ -163,8 +163,7 @@ public final class UtilsString {
     }
 
     @Contract("!null, _, _, _ -> !null")
-    @Deprecated
-    public static String fix(@Nullable String text, @Nullable Player player, boolean color, String... holders) {
+    public static String fixToString(@Nullable String text, @Nullable Player player, boolean color, String... holders) {
         return replacePlaceholders(text, player, holders);
     }
 
@@ -190,7 +189,7 @@ public final class UtilsString {
     }
 
     @Contract("!null, _, _, _ -> !null")
-    public static @Nullable Component fix2(@Nullable String text, @Nullable Player player, boolean color, String... holders) {
+    public static @Nullable Component fix(@Nullable String text, @Nullable Player player, boolean color, String... holders) {
         String fixed = replacePlaceholders(text, player, holders);
         if (fixed == null) {
             return null;

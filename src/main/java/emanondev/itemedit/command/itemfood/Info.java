@@ -32,7 +32,7 @@ public class Info extends SubCmd {
         Consumable consumable = supportsConsumable ? item.getData(DataComponentTypes.CONSUMABLE) : null;
 
         if (!hasFood && consumable == null) {
-            Util.sendMessage2(player, translate("not_food", player));
+            Util.sendComponent(player, translate("not_food", player));
             return;
         }
 
@@ -54,7 +54,7 @@ public class Info extends SubCmd {
             }
         }
 
-        Util.sendMessage2(player, translateList("message", player,
+        Util.sendComponent(player, translateList("message", player,
                 "%eatseconds%", eatSeconds,
                 "%eatticks%", eatTicks,
                 "%nutrition%", nutrition,
@@ -82,7 +82,7 @@ public class Info extends SubCmd {
                 .mapToInt(effect -> effect.effects().size())
                 .sum();
         if (potionEffects > 0) {
-            Util.sendMessage2(player, translateList("apply_effect_prefix", player,
+            Util.sendComponent(player, translateList("apply_effect_prefix", player,
                     "%effects%", String.valueOf(potionEffects)));
         }
 
@@ -93,7 +93,7 @@ public class Info extends SubCmd {
                     index++;
                     int duration = potion.getDuration();
                     String durationSeconds = duration < 0 ? "∞" : String.format(Locale.ENGLISH, "%.1f", duration / 20.0);
-                    Util.sendMessage2(player, translateList("apply_effect", player,
+                    Util.sendComponent(player, translateList("apply_effect", player,
                             "%index%", String.valueOf(index),
                             "%type%", potion.getType().getKey().toString(),
                             "%level%", String.valueOf(potion.getAmplifier() + 1),
@@ -108,19 +108,19 @@ public class Info extends SubCmd {
             }
 
             if (effect instanceof TeleportRandomly teleport) {
-                Util.sendMessage2(player, translate("consume_effect_teleport", player,
+                Util.sendComponent(player, translate("consume_effect_teleport", player,
                         "%diameter%", String.valueOf(teleport.diameter())));
             } else if (effect instanceof PlaySound playSound) {
-                Util.sendMessage2(player, translate("consume_effect_sound", player,
+                Util.sendComponent(player, translate("consume_effect_sound", player,
                         "%sound%", playSound.sound().toString()));
             } else if (effect instanceof RemoveStatusEffects remove) {
-                Util.sendMessage2(player, translate("consume_effect_remove", player,
+                Util.sendComponent(player, translate("consume_effect_remove", player,
                         "%effects%", remove.removeEffects().values().stream()
                                 .map(Object::toString).collect(Collectors.joining(", "))));
             } else if (effect instanceof ClearAllStatusEffects) {
-                Util.sendMessage2(player, translate("consume_effect_clear", player));
+                Util.sendComponent(player, translate("consume_effect_clear", player));
             } else {
-                Util.sendMessage2(player, translate("consume_effect_unknown", player,
+                Util.sendComponent(player, translate("consume_effect_unknown", player,
                         "%type%", effect.getClass().getSimpleName()));
             }
         }

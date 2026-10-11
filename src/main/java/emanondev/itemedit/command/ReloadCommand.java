@@ -49,7 +49,7 @@ public class ReloadCommand implements TabExecutor {
     public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender.hasPermission(permission)) {
             plugin.onReload();
-            Util.sendMessage2(sender, plugin.getTranslator().translate(sender,
+            Util.sendComponent(sender, plugin.getTranslator().translate(sender,
                     plugin.getName().toLowerCase(Locale.ENGLISH) + "reload.success"));
         } else
             sendPermissionLackMessage(permission, sender);

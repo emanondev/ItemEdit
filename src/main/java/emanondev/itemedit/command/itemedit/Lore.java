@@ -245,7 +245,7 @@ public class Lore extends SubCmd {
 
     private void lorePaste(Player p, ItemStack item, String alias, String[] args) {
         if (!copies.containsKey(p.getUniqueId())) {
-            Util.sendMessage2(p, this.translate("paste.no-copy", p));
+            Util.sendComponent(p, this.translate("paste.no-copy", p));
             return;
         }
         ItemMeta meta = ItemUtils.getMeta(item);
@@ -253,7 +253,7 @@ public class Lore extends SubCmd {
                 .map(line -> Util.formatText(p, line, getPermission()))
                 .toList());
         item.setItemMeta(meta);
-        Util.sendMessage2(p, this.translate("paste.feedback", p));
+        Util.sendComponent(p, this.translate("paste.feedback", p));
         updateView(p);
     }
 
@@ -270,7 +270,7 @@ public class Lore extends SubCmd {
             lore = new ArrayList<>();
 
         copies.put(p.getUniqueId(), lore);
-        Util.sendMessage2(p, this.translate("copy.feedback", p));
+        Util.sendComponent(p, this.translate("copy.feedback", p));
     }
 
     private void loreCopyBook(Player p, ItemStack item, String alias, String[] args) {
@@ -298,23 +298,23 @@ public class Lore extends SubCmd {
             lore = new ArrayList<>();
         }
         copies.put(p.getUniqueId(), lore);
-        Util.sendMessage2(p, this.translate("copyBook.feedback", p));
+        Util.sendComponent(p, this.translate("copyBook.feedback", p));
     }
 
     private void loreCopyFile(Player p, ItemStack item, String alias, String[] args) {
         if (args.length < 2) {
-            Util.sendMessage2(p, this.translate("copyFile.no-path", p));
+            Util.sendComponent(p, this.translate("copyFile.no-path", p));
             return;
         }
         if (!loreCopy.contains(args[2])) {
-            Util.sendMessage2(p, this.translate("copyFile.wrong-path", p));
+            Util.sendComponent(p, this.translate("copyFile.wrong-path", p));
             return;
         }
         List<Component> lore = loreCopy.getStringList(args[2]).stream()
                 .map(text -> Util.formatItemTemplate(p, text, getPermission()))
                 .toList();
         copies.put(p.getUniqueId(), lore);
-        Util.sendMessage2(p, this.translate("copyFile.feedback", p));
+        Util.sendComponent(p, this.translate("copyFile.feedback", p));
     }
 
     // /itemedit lore add

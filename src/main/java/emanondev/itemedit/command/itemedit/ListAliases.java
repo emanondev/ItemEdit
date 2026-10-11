@@ -65,7 +65,7 @@ public class ListAliases extends SubCmd {
         if (Util.hasRenderableContent(postfix)) {
             feedback = feedback.appendNewline().append(postfix);
         }
-        Util.sendMessage2(sender, feedback);
+        Util.sendComponent(sender, feedback);
     }
 
     @SuppressWarnings({"deprecation", "unchecked", "rawtypes"})
@@ -99,7 +99,7 @@ public class ListAliases extends SubCmd {
         if (Util.hasRenderableContent(postfix)) {
             feedback = feedback.appendNewline().append(postfix);
         }
-        Util.sendMessage2(sender, feedback);
+        Util.sendComponent(sender, feedback);
     }
 
 }

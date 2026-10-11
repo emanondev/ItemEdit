@@ -25,13 +25,13 @@ public class Info extends SubCmd {
         ItemStack item = getItemInMainHand(player);
         Equippable equipment = item.getData(DataComponentTypes.EQUIPPABLE);
         if (equipment == null) {
-            Util.sendMessage2(player, translate("not_set", player));
+            Util.sendComponent(player, translate("not_set", player));
             return;
         }
 
         String allowedEntities = equipment.allowedEntities() == null ? "all"
                 : equipment.allowedEntities().values().stream().map(Object::toString).collect(Collectors.joining(", "));
-        Util.sendMessage2(player, translateList("message", player,
+        Util.sendComponent(player, translateList("message", player,
                 "%slot%", equipment.slot().toString(),
                 "%canbesheared%", String.valueOf(equipment.canBeSheared()),
                 "%damageonhurt%", String.valueOf(equipment.damageOnHurt()),

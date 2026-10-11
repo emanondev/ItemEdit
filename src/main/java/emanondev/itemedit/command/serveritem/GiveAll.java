@@ -65,11 +65,11 @@ public class GiveAll extends SubCmd {
                     sb.append(target.getName()).append(", ");
                 }
 
-                Component msg = UtilsString.fix2(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
+                Component msg = UtilsString.fix(this.getConfigString("log"), null, true, "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
                         amount + " (for a total of " + total + " given)", "%targets%", sb.delete(sb.length() - 2, sb.length()).append("]").toString());
                 if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
-                    Util.sendMessage2(Bukkit.getConsoleSender(), msg);
+                    Util.sendComponent(Bukkit.getConsoleSender(), msg);
                 }
                 if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
                     Util.logToFile(msg);

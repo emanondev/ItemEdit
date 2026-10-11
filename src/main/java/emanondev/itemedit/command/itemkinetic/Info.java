@@ -24,11 +24,11 @@ public class Info extends SubCmd {
         ItemStack item = getItemInMainHand(player);
         KineticWeapon weapon = item.getData(DataComponentTypes.KINETIC_WEAPON);
         if (weapon == null) {
-            Util.sendMessage2(player, translate("not_set", player));
+            Util.sendComponent(player, translate("not_set", player));
             return;
         }
 
-        Util.sendMessage2(player, translateList("message", player,
+        Util.sendComponent(player, translateList("message", player,
                 "%contactcooldownticks%", String.valueOf(weapon.contactCooldownTicks()),
                 "%damagemultiplier%", String.valueOf(weapon.damageMultiplier()),
                 "%delayticks%", String.valueOf(weapon.delayTicks()),

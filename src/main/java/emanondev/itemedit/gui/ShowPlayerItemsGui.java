@@ -2,7 +2,6 @@ package emanondev.itemedit.gui;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.UtilsString;
-import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.command.ItemStorageCommand;
 import emanondev.itemedit.storage.PlayerStorage;
 import emanondev.itemedit.utility.InventoryUtils;
@@ -89,7 +88,7 @@ public class ShowPlayerItemsGui implements PagedGui {
                 ItemStack display = item.clone();
                 ItemMeta meta = ItemUtils.getMeta(display);
                 meta.addItemFlags(ItemFlag.values());
-                meta.displayName(UtilsString.fix2("<blue>ID: <yellow>" + list.get(slot), null, true));
+                meta.displayName(UtilsString.fix("<blue>ID: <yellow>" + list.get(slot), null, true));
                 display.setItemMeta(meta);
                 this.inventory.setItem(i, display);
             }

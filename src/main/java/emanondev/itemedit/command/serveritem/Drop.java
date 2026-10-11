@@ -60,7 +60,7 @@ public class Drop extends SubCmd {
             });
 
             if (ItemEdit.get().getConfig().loadBoolean("log.action.drop", true)) {
-                Component msg = UtilsString.fix2(this.getConfigString("log"), null, true,
+                Component msg = UtilsString.fix(this.getConfigString("log"), null, true,
                         "%id%", args[1].toLowerCase(),
                         "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
                         "%amount%", String.valueOf(amount),
@@ -69,7 +69,7 @@ public class Drop extends SubCmd {
                         "%y%", args[5],
                         "%z%", args[6]);
                 if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
-                    Util.sendMessage2(Bukkit.getConsoleSender(), msg);
+                    Util.sendComponent(Bukkit.getConsoleSender(), msg);
                 }
                 if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
                     Util.logToFile(msg);
