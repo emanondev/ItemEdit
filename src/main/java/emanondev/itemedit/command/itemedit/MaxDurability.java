@@ -28,7 +28,8 @@ public class MaxDurability extends SubCmd {
             return;
         }
         if (!item.isMetaClass(Damageable.class)) {
-            getPlugin().getTranslator().send(p, "generic.wrong-material.damageable");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.damageable",
+                    "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
             return;
         }
         IntParser amount = new IntParser(args[1]);

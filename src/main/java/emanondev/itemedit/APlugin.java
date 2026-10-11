@@ -296,7 +296,8 @@ public abstract class APlugin extends JavaPlugin {
                 configs.remove(key);
             }
         }
-        translator.translate(Bukkit.getConsoleSender(), "player-only");
+        //force load lang file
+        translator.translate(Bukkit.getConsoleSender(), "generic.help.player-only");
     }
 
     /**
@@ -411,7 +412,7 @@ public abstract class APlugin extends JavaPlugin {
                 }
             }
         }
-        translator.translate(null, "player-only");
+        translator.translate(null, "generic.help.player-only");
     }
 
     /**

@@ -30,7 +30,8 @@ public class BookEnchant extends SubCmd {
             item.setType(Material.ENCHANTED_BOOK);
         }
         if (!(item.getItemMeta() instanceof EnchantmentStorageMeta)) {
-            getPlugin().getTranslator().send(p, "generic.wrong-material.enchantment_storage");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.enchantment_storage",
+                    "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
             return;
         }
         EnchantmentStorageMeta meta = (EnchantmentStorageMeta) ItemUtils.getMeta(item);

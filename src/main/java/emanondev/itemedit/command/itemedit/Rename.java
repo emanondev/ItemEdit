@@ -91,7 +91,8 @@ public class Rename extends SubCmd {
 
         if (!allowedLengthLimit(p, plainName)) {
             getPlugin().getTranslator().send(p, "blocked-by-rename-length-limit",
-                    "%limit%", String.valueOf(lengthLimit));
+                    "%limit%", String.valueOf(lengthLimit),
+                    "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
             return;
         }
 

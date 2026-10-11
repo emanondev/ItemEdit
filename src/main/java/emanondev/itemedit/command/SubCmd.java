@@ -7,7 +7,6 @@ import emanondev.itemedit.utility.ItemUtils;
 import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.command.CommandSender;
@@ -17,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Stream;
 
 public abstract class SubCmd {
 
@@ -66,12 +66,11 @@ public abstract class SubCmd {
     }
 
     public @NotNull Component getHelpComponent(@NotNull CommandSender sender, @NotNull String alias) {
-        Component params = translateOrEmpty("params", sender);
-        Component help = Component.text("/" + alias, NamedTextColor.DARK_GREEN)
-                .append(Component.space())
-                .append(Component.text(this.name, NamedTextColor.GREEN))
-                .append(Component.space())
-                .append(params);
+        String params = translateOrEmptyRaw("params", sender);
+        Component help = getPlugin().getTranslator().translate(sender, "generic.help.command-format",
+                "%command%", alias,
+                "%sub%", this.name,
+                "%params%", params);
         return Util.asHover(Util.asSuggestCommand(help,
                 "/" + alias + " " + this.name + " "), getDescription(sender));
     }
@@ -79,11 +78,11 @@ public abstract class SubCmd {
     public void onFail(@NotNull CommandSender target, @NotNull String alias) {
         Component params = translateOrEmpty("params", target);
         String paramsText = params == null ? "" : MiniMessage.miniMessage().serialize(params);
-        String feedback = Util.asHover(Util.asSuggestCommand(
-                        "<red>/" + alias + " " + this.name + " " + paramsText,
+        Component feedback = Util.asHover(Util.asSuggestCommand(
+                        MiniMessage.miniMessage().deserialize("<red>/" + alias + " " + this.name + " " + paramsText),
                         "/" + alias + " " + this.name + " " + paramsText),
                 getDescription(target));
-        Util.sendMessage(target, feedback);
+        Util.sendMessage2(target, feedback);
     }
 
     abstract public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args);
@@ -122,18 +121,19 @@ public abstract class SubCmd {
                 translateList(subSubCommand + ".description", target)));
     }
 
-    protected <T> void onWrongAlias(CommandSender sender, IAliasSet<T> set, String... holders) {
+    protected <T> void onWrongAlias(CommandSender sender, IAliasSet<T> set) {
         Translator pluginTranslator = getPlugin().getTranslator();
         Translator itemeditTranslator = ItemEdit.get().getTranslator();
-        Component msg = pluginTranslator.translate(sender, "generic.wrongalias." + set.getId(), holders);
+        Component msg = pluginTranslator.translate(sender, "generic.wrong-alias." + set.getId(),
+                "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
         if (!Util.hasRenderableContent(msg)) {
             return;
         }
-        Component hover = itemeditTranslator.translate(sender, "generic.wrongalias.error-pre-hover")
+        Component hover = itemeditTranslator.translate(sender, "generic.wrong-alias.error-pre-hover")
                 .append(Component.newline());
 
-        Component color1 = itemeditTranslator.translate(sender, "generic.wrongalias.first_color");
-        Component color2 = itemeditTranslator.translate(sender, "generic.wrongalias.second_color");
+        Component color1 = itemeditTranslator.translate(sender, "generic.wrong-alias.first_color");
+        Component color2 = itemeditTranslator.translate(sender, "generic.wrong-alias.second_color");
         boolean color = true;
         int counter = 0;
         for (T value : set.getValues()) {
@@ -161,11 +161,11 @@ public abstract class SubCmd {
             return;
         }
         Translator translator = getPlugin().getTranslator();
-        Component hover = translator.translateOrEmpty(sender, "wrongalias.error-pre-hover")
+        Component hover = translator.translateOrEmpty(sender, "wrong-alias.error-pre-hover")
                 .append(Component.newline());
 
-        Component color1 = translator.translateOrEmpty(sender, "wrongalias.first_color");
-        Component color2 = translator.translateOrEmpty(sender, "wrongalias.second_color");
+        Component color1 = translator.translateOrEmpty(sender, "wrong-alias.first_color");
+        Component color2 = translator.translateOrEmpty(sender, "wrong-alias.second_color");
         boolean color = true;
         int counter = 0;
         for (T value : set.getValues()) {
@@ -188,11 +188,19 @@ public abstract class SubCmd {
     }
 
     protected Component translate(String path, CommandSender sender, String... holders) {
+        String[] prefix = new String[]{"%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix")};
+        holders = holders == null ? prefix : Stream.concat(Stream.of(holders), Stream.of(prefix)).toArray(String[]::new);
         return getPlugin().getTranslator().translate(sender, this.PATH + path, holders);
     }
 
     protected Component translateOrEmpty(String path, CommandSender sender, String... holders) {
+        String[] prefix = new String[]{"%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix")};
+        holders = holders == null ? prefix : Stream.concat(Stream.of(holders), Stream.of(prefix)).toArray(String[]::new);
         return getPlugin().getTranslator().translateOrEmpty(sender, this.PATH + path, holders);
+    }
+
+    protected String translateOrEmptyRaw(String path, CommandSender sender, String... holders) {
+        return getPlugin().getTranslator().translateOrEmptyRaw(sender, this.PATH + path, holders);
     }
 
     protected void onSuccess(CommandSender sender, String... holders) {

@@ -166,7 +166,8 @@ public final class Util {
                     logToFile("user: '" + user.getName() + "' attempt to write '" + text
                             + "' (stripped by colors and lowcased to '" + message + "') was blocked by regex: '" + regex
                             + "'");
-                ItemEdit.get().getTranslator().send(user, "blocked-by-censure");
+                ItemEdit.get().getTranslator().send(user, "blocked-by-censure",
+                        "%prefix%", ItemEdit.get().getTranslator().translateOrEmptyRaw(user, "generic.help.prefix"));
                 return true;
             }
         for (String bannedWord : ItemEdit.get().getConfig().getStringList("blocked.words"))
@@ -180,7 +181,8 @@ public final class Util {
                     logToFile("user: '" + user.getName() + "' attempt to write '" + text
                             + "' (stripped by colors and lowcased to '" + message + "') was blocked by word: '"
                             + bannedWord.toLowerCase(Locale.ENGLISH) + "'");
-                ItemEdit.get().getTranslator().send(user, "blocked-by-censure");
+                ItemEdit.get().getTranslator().send(user, "blocked-by-censure",
+                        "%prefix%", ItemEdit.get().getTranslator().translateOrEmptyRaw(user, "generic.help.prefix"));
                 return true;
             }
         return false;
@@ -299,7 +301,8 @@ public final class Util {
         String id = type.name();
         for (String name : values)
             if (id.equalsIgnoreCase(name)) {
-                ItemEdit.get().getTranslator().send(sender, "blocked-by-type-restriction");
+                ItemEdit.get().getTranslator().send(sender, "blocked-by-type-restriction",
+                        "%prefix%", ItemEdit.get().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
                 return false;
             }
         return true;
@@ -337,7 +340,8 @@ public final class Util {
         String id = type.name();
         for (String name : values)
             if (id.equalsIgnoreCase(name)) {
-                ItemEdit.get().getTranslator().send(sender, "blocked-by-type-restriction-lore");
+                ItemEdit.get().getTranslator().send(sender, "blocked-by-type-restriction-lore",
+                        "%prefix%", ItemEdit.get().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
                 return false;
             }
         return true;

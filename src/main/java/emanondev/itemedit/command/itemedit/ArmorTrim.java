@@ -28,7 +28,8 @@ public class ArmorTrim extends SubCmd {
         Player p = (Player) sender;
         ItemBuilder item = new ItemBuilder(getItemInMainHand(p));
         if (!item.isMetaClass(ArmorMeta.class)) {
-            getPlugin().getTranslator().send(p, "generic.wrong-material.armor");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.armor",
+                    "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
             return;
         }
         if (args.length == 2 && args[1].equalsIgnoreCase("clear")) {

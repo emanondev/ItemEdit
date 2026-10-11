@@ -158,19 +158,23 @@ public abstract class AbstractCommand implements TabExecutor {
     }
 
     public void sendPermissionLackMessage(@NotNull String permission, @NotNull CommandSender sender) {
-        getPlugin().getTranslator().send(sender, "lack-permission", "%permission%", permission);
+        getPlugin().getTranslator().send(sender, "generic.help.lack-permission", "%permission%", permission,
+                "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
     }
 
     public void sendPermissionLackGenericMessage(@NotNull CommandSender sender) {
-        getPlugin().getTranslator().send(sender, "lack-permission-generic");
+        getPlugin().getTranslator().send(sender, "generic.help.lack-permission-generic",
+                "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
     }
 
     public void sendPlayerOnly(@NotNull CommandSender sender) {
-        getPlugin().getTranslator().send(sender, "player-only");
+        getPlugin().getTranslator().send(sender, "generic.help.player-only",
+                "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
     }
 
     public void sendNoItemInHand(@NotNull CommandSender sender) {
-        getPlugin().getTranslator().send(sender, "no-item-on-hand");
+        getPlugin().getTranslator().send(sender, "generic.help.no-item-on-hand",
+                "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
     }
 
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
@@ -295,7 +299,9 @@ public abstract class AbstractCommand implements TabExecutor {
 
         public void help(CommandSender sender, String alias, SubCmd sub) {
             Component message = Component.empty()
-                    .append(this.translateOrEmpty("header-sub", sender, "%sub%", sub.getName()))
+                    .append(getPlugin().getTranslator().translateOrEmpty(sender, "generic.help.header-sub-format",
+                            "%header%", translateOrEmptyRaw("header-name", sender),
+                            "%sub%", sub.getName()))
                     .append(Component.newline())
                     .append(sub.getHelpComponent(sender, alias))
                     .append(Component.newline())
@@ -310,10 +316,11 @@ public abstract class AbstractCommand implements TabExecutor {
                 return;
             }
             int maxPage = getMaxPageFor(cmds.size());
-            page = Math.max(1, Math.min(maxPage, page));
+            page = Math.clamp(page, 1, maxPage);
 
             Component body = Component.empty()
-                    .append(this.translateOrEmpty("header", sender))
+                    .append(getPlugin().getTranslator().translateOrEmpty(sender, "generic.help.header-format",
+                            "%header%", translateOrEmptyRaw("header-name", sender)))
                     .append(Component.newline());
             for (SubCmd cmd : cmds.subList(commandPerPage * (page - 1), Math.min(cmds.size(), commandPerPage * page))) {
                 body = body.append(cmd.getHelpComponent(sender, alias)).append(Component.newline());
@@ -352,7 +359,7 @@ public abstract class AbstractCommand implements TabExecutor {
             Translator translator = getPlugin().getTranslator();
             String currentPage = String.valueOf(page);
             String lastPage = String.valueOf(maxPage);
-            Component footer = translateOrEmpty("footer", sender,
+            Component footer = getPlugin().getTranslator().translateOrEmpty( sender,"generic.help.footer-format",
                     "%page%", currentPage, "%max_page%", lastPage);
             Component previous = page > 1
                     ? pageControl(sender, translator, "prev", alias, page, page - 1, maxPage)

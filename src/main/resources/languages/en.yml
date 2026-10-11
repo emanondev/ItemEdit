@@ -1,15 +1,21 @@
-player-only: '<dark_red>[<red>ItemEdit<dark_red>] <red>Command for Players only'
-no-item-on-hand: '<dark_red>[<red>ItemEdit<dark_red>] <red>You need to hold an item in hand'
-lack-permission: '<dark_red>[<red>ItemEdit<dark_red>] <red>You lack of permission %permission%'
-lack-permission-generic: '<dark_red>[<red>ItemEdit<dark_red>] <red>You don''t have permission to use this command'
-blocked-by-censure: '<dark_red>[<red>ItemEdit<dark_red>] <red>You can''t use this text, it contains blocked words'
-blocked-by-type-restriction: '<dark_red>[<red>ItemEdit<dark_red>] <red>You can''t rename this item'
-blocked-by-type-restriction-lore: '<dark_red>[<red>ItemEdit<dark_red>] <red>You can''t edit lore on this item'
-blocked-by-lore-line-limit: '<dark_red>[<red>ItemEdit<dark_red>] <red>You can''t add more lore lines on this item'
-blocked-by-lore-length-limit: '<dark_red>[<red>ItemEdit<dark_red>] <red>You can''t set lines longer than %limit% chars'
-blocked-by-rename-length-limit: '<dark_red>[<red>ItemEdit<dark_red>] <red>You can''t set names longer than %limit% chars'
 generic:
   help:
+    player-only: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Command for Players only'
+    no-item-on-hand: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>You need to hold an item in hand'
+    lack-permission: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>You lack of permission %permission%'
+    lack-permission-generic: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>You don''t have permission to use this command'
+    blocked-by-censure: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>You can''t use this text, it contains blocked words'
+    blocked-by-type-restriction: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>You can''t rename this item'
+    blocked-by-type-restriction-lore: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>You can''t edit lore on this item'
+    blocked-by-lore-line-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>You can''t add more lore lines on this item'
+    blocked-by-lore-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>You can''t set lines longer than %limit% chars'
+    blocked-by-rename-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>You can''t set names longer than %limit% chars'
+
+    prefix: "<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray>"
+    header-format: "<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Help</bold></#A78BFA>"
+    header-sub-format: "<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <gradient:#A78BFA:#54acff><bold>%sub%</bold></gradient> <dark_gray>»</dark_gray> <#55d6ff><bold>Help</#55d6ff>"
+    command-format: "<gray>/%command%</gray> <#bad1ff>%sub%</#bad1ff> <#d7bbff>%params%</#d7bbff>"
+    footer-format: "%prev_clickable% <#7E9CFD><b>Help</b> [%page%/%max_page%]</#7E9CFD> %next_clickable%"
     next_text: " <light_purple><b>><st>> ></st> "
     prev_text: " <light_purple><b><st>< <</st>< "
     next_void: " <dark_gray><b>><st>> ></st> "
@@ -19,556 +25,549 @@ generic:
     description:
       - '<gold><b>Shows help</b>'
       - ''
-      - '<yellow>[page] <aqua>help page'
-      - '<yellow>[subcommand] <aqua>help for subcommand'
+      - '<gray><yellow>[page] </yellow>help page'
+      - '<gray><yellow>[subcommand] </yellow>help for subcommand'
     params: '[page/subcommand]'
 
   wrong-material:
-    axolotl_bucket: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a axolotl bucket'
-    banner: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a banner'
-    damageable: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must have a durability like tools and armors'
-    player_head: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a player head'
-    rgb_colorable: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be colorable type like leather armors, firework stars, potions or tipped arrows'
-    written_book: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a written book'
-    potion_effect_applicable: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a potion or a tipped arrow or a suspicious stew'
-    firework: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a firework'
-    spawner_egg: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a spawner egg'
-    tropical_fish_bucket: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a tropical fish bucket'
-    writable_book: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a written book or book and quill'
-    compass: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a compass'
-    music_instrument: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a goat horn'
-    armor: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be an armor'
-    enchantment_storage: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item must be a book or enchanted book'
-  wrongalias:
-    axolotl_variant: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Axolotl Value! <dark_red>[<gold>hover here<dark_red>]'
-    potion_effect: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Effect Value! <dark_red>[<gold>hover here<dark_red>]'
-    animations: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Animation Value! <dark_red>[<gold>hover here<dark_red>]'
-    sound: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Sound Value! <dark_red>[<gold>hover here<dark_red>]'
-    enchant: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Enchant Value! <dark_red>[<gold>hover here<dark_red>]'
-    flag_type: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Flag Value! <dark_red>[<gold>hover here<dark_red>]'
-    book_type: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Book type Value! <dark_red>[<gold>hover here<dark_red>]'
-    equip_slot: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Equipment Slot Value! <dark_red>[<gold>hover here<dark_red>]'
-    banner_pattern: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Pattern Value! <dark_red>[<gold>hover here<dark_red>]'
-    color: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Color Value! <dark_red>[<gold>hover here<dark_red>]'
-    mob_type: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Egg type Value! <dark_red>[<gold>hover here<dark_red>]'
-    trim_material: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Trim Material Value! <dark_red>[<gold>hover here<dark_red>]'
-    tropical_fish_pattern: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Pattern Value! <dark_red>[<gold>hover here<dark_red>]'
-    trim_pattern: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Trim Pattern Value! <dark_red>[<gold>hover here<dark_red>]'
-    boolean: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Boolean Value! <dark_red>[<gold>hover here<dark_red>]'
-    attribute: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Attribute Value! <dark_red>[<gold>hover here<dark_red>]'
-    operation: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Operation Value! <dark_red>[<gold>hover here<dark_red>]'
-    itemrarity: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Rarity Value! <dark_red>[<gold>hover here<dark_red>]'
-    entitytype: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong EntityType Value! <dark_red>[<gold>hover here<dark_red>]'
-    entitygroups: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong EntityGroup Value! <dark_red>[<gold>hover here<dark_red>]'
-    consumable_effect: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Consumable Effect Value! <dark_red>[<gold>hover here<dark_red>]'
-    goat_horn_sound: '<dark_red>[<red>ItemEdit<dark_red>] <red>Wrong Goat Horn Sound Value! <dark_red>[<gold>hover here<dark_red>]'
-    error-pre-hover: '<gold><b>Aliases:</b></gold>'
+    axolotl_bucket: '%prefix% <red>Item must be a axolotl bucket'
+    banner: '%prefix% <red>Item must be a banner'
+    damageable: '%prefix% <red>Item must have a durability like tools and armors'
+    player_head: '%prefix% <red>Item must be a player head'
+    rgb_colorable: '%prefix% <red>Item must be colorable type like leather armors, firework stars, potions or tipped arrows'
+    written_book: '%prefix% <red>Item must be a written book'
+    potion_effect_applicable: '%prefix% <red>Item must be a potion or a tipped arrow or a suspicious stew'
+    firework: '%prefix% <red>Item must be a firework'
+    spawner_egg: '%prefix% <red>Item must be a spawner egg'
+    tropical_fish_bucket: '%prefix% <red>Item must be a tropical fish bucket'
+    writable_book: '%prefix% <red>Item must be a written book or book and quill'
+    compass: '%prefix% <red>Item must be a compass'
+    music_instrument: '%prefix% <red>Item must be a goat horn'
+    armor: '%prefix% <red>Item must be an armor'
+    enchantment_storage: '%prefix% <red>Item must be a book or enchanted book'
+  wrong-alias:
+    axolotl_variant: '%prefix% <red>Wrong Axolotl Value! <dark_red>[<gold>hover here<dark_red>]'
+    potion_effect: '%prefix% <red>Wrong Effect Value! <dark_red>[<gold>hover here<dark_red>]'
+    animations: '%prefix% <red>Wrong Animation Value! <dark_red>[<gold>hover here<dark_red>]'
+    sound: '%prefix% <red>Wrong Sound Value! <dark_red>[<gold>hover here<dark_red>]'
+    enchant: '%prefix% <red>Wrong Enchant Value! <dark_red>[<gold>hover here<dark_red>]'
+    flag_type: '%prefix% <red>Wrong Flag Value! <dark_red>[<gold>hover here<dark_red>]'
+    book_type: '%prefix% <red>Wrong Book type Value! <dark_red>[<gold>hover here<dark_red>]'
+    equip_slot: '%prefix% <red>Wrong Equipment Slot Value! <dark_red>[<gold>hover here<dark_red>]'
+    banner_pattern: '%prefix% <red>Wrong Pattern Value! <dark_red>[<gold>hover here<dark_red>]'
+    color: '%prefix% <red>Wrong Color Value! <dark_red>[<gold>hover here<dark_red>]'
+    mob_type: '%prefix% <red>Wrong Egg type Value! <dark_red>[<gold>hover here<dark_red>]'
+    trim_material: '%prefix% <red>Wrong Trim Material Value! <dark_red>[<gold>hover here<dark_red>]'
+    tropical_fish_pattern: '%prefix% <red>Wrong Pattern Value! <dark_red>[<gold>hover here<dark_red>]'
+    trim_pattern: '%prefix% <red>Wrong Trim Pattern Value! <dark_red>[<gold>hover here<dark_red>]'
+    boolean: '%prefix% <red>Wrong Boolean Value! <dark_red>[<gold>hover here<dark_red>]'
+    attribute: '%prefix% <red>Wrong Attribute Value! <dark_red>[<gold>hover here<dark_red>]'
+    operation: '%prefix% <red>Wrong Operation Value! <dark_red>[<gold>hover here<dark_red>]'
+    itemrarity: '%prefix% <red>Wrong Rarity Value! <dark_red>[<gold>hover here<dark_red>]'
+    entitytype: '%prefix% <red>Wrong EntityType Value! <dark_red>[<gold>hover here<dark_red>]'
+    entitygroups: '%prefix% <red>Wrong EntityGroup Value! <dark_red>[<gold>hover here<dark_red>]'
+    consumable_effect: '%prefix% <red>Wrong Consumable Effect Value! <dark_red>[<gold>hover here<dark_red>]'
+    goat_horn_sound: '%prefix% <red>Wrong Goat Horn Sound Value! <dark_red>[<gold>hover here<dark_red>]'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>Aliases:</b></gradient>'
     first_color: '<aqua>'
     second_color: '<yellow>'
 itemedit:
   amount:
     description:
-      - '<gold><b>Set amount</b>'
+      - '<gradient:#A78BFA:gold><b>Set amount</b></gradient>'
       - ''
-      - '<yellow><amount> <aqua>amount to set (up to 127)'
-      - '<aqua><b>Tip</b>: <aqua>Negative amounts are subtracted'
-      - '<aqua> from item current amount'
+      - '<gray><yellow><amount> </yellow>amount to set (up to 127)'
+      - '<gold><b>Tip</b></gold> <gray>Negative amounts are subtracted'
+      - '<gray> from item current amount'
     params: '<amount>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Item amount set to <yellow>%amount%'
-    feedback-decrease: '<blue>[<white>ItemEdit<blue>] <green>Item amount decreased by <yellow>%amount%'
+    feedback: '%prefix% <green>Item amount set to <yellow>%amount%'
+    feedback-decrease: '%prefix% <green>Item amount decreased by <yellow>%amount%'
   attribute:
     description:
-      - '<gold><b>Edit attribute modifiers</b>'
+      - '<gradient:#A78BFA:gold><b>Edit attribute modifiers</b></gradient>'
       - ''
-      - '<yellow>Add <attribute> <amount> [operation] [slot] <aqua>- add new modifiers'
-      - '<yellow>Remove <attribute/slot> <aqua>- removes some modifiers'
+      - '<gray><yellow>Add <attribute> <amount> [operation] [slot] </yellow><dark_gray>»</dark_gray> add new modifiers'
+      - '<gray><yellow>Remove <attribute/slot> </yellow><dark_gray>»</dark_gray> removes some modifiers'
     params: '<add/remove> [...]'
     add:
       params: '<attribute> <amount> [operation] [slot]'
       description:
-        - '<gold><b>Add attribute modifier</b>'
+        - '<gradient:#A78BFA:gold><b>Add attribute modifier</b></gradient>'
         - ''
-        - '<yellow><attribute> <aqua>attribute type'
-        - '<yellow><amount> <aqua>amount to set'
-        - '<yellow>[operation] <aqua>how the modifier is added, by default sums'
-        - '<yellow>[slot] <aqua>apply this modifier only when item is on selected'
-        - '<yellow>       equipment slot or any equipment slot if not selected'
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Added modifier'
+        - '<gray><yellow><attribute> </yellow>attribute type'
+        - '<gray><yellow><amount> </yellow>amount to set'
+        - '<gray><yellow>[operation] </yellow>how the modifier is added, by default sums'
+        - '<gray><yellow>[slot] </yellow>apply this modifier only when item is on selected'
+        - '<gray>       equipment slot or any equipment slot if not selected'
+      feedback: '%prefix% <green>Added modifier'
     remove:
       params: '<attribute/slot>'
       description:
-        - '<gold><b>Remove modifiers</b>'
+        - '<gradient:#A78BFA:gold><b>Remove modifiers</b></gradient>'
         - ''
-        - '<yellow><attribute/slot> <aqua>type to remove, any modifiers with'
-        - '<aqua>                 selected value are removed'
-      feedback-attribute: '<blue>[<white>ItemEdit<blue>] <green>Removed modifiers of attribute'
-      feedback-equipment: '<blue>[<white>ItemEdit<blue>] <green>Removed modifiers of equipment slot'
+        - '<gray><yellow><attribute/slot> </yellow>type to remove, any modifiers with'
+        - '<gray>                 selected value are removed'
+      feedback-attribute: '%prefix% <green>Removed modifiers of attribute'
+      feedback-equipment: '%prefix% <green>Removed modifiers of equipment slot'
   axolotlvariant:
     description:
-      - '<gold><b>Edit Axolotl Variant on Axolotl bucket</b>'
-      - ''
-      - '<yellow><type> <aqua>the type of axolotl'
+      - '<gradient:#A78BFA:gold><b>Edit Axolotl Variant on Axolotl bucket</b></gradient>'
+      - '<white><sprite:items:item/axolotl_bucket>'
+      - '<gray><yellow><type> </yellow>the type of axolotl'
     params: '<type>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Changed Axolotl variant to <yellow>%variant%'
+    feedback: '%prefix% <green>Changed Axolotl variant to <yellow>%variant%'
   banner:
     description:
-      - '<gold><b>Edit banner</b>'
+      - '<gradient:#A78BFA:gold><b>Edit banner</b></gradient>'
     params: '<add/set/remove/color> [...]'
     set:
       params: '<type> <color> <line>'
       description:
-        - '<gold><b>Replace the pattern on selected line</b>'
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Pattern set'
+        - '<gradient:#A78BFA:gold><b>Replace the pattern on selected line</b></gradient>'
+      feedback: '%prefix% <green>Pattern set'
     add:
       params: '<type> <color>'
       description:
-        - '<gold><b>Add a pattern</b>'
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Pattern added'
+        - '<gradient:#A78BFA:gold><b>Add a pattern</b></gradient>'
+      feedback: '%prefix% <green>Pattern added'
     remove:
       params: '<line>'
       description:
-        - '<gold><b>Remove pattern on selected line</b>'
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Pattern removed'
+        - '<gradient:#A78BFA:gold><b>Remove pattern on selected line</b></gradient>'
+      feedback: '%prefix% <green>Pattern removed'
     color:
       params: '<line> <color>'
       description:
-        - '<gold><b>Change pattern color on selected line</b>'
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Pattern recolored'
+        - '<gradient:#A78BFA:gold><b>Change pattern color on selected line</b></gradient>'
+      feedback: '%prefix% <green>Pattern recolored'
   bookauthor:
     description:
-      - '<gold><b>Set author</b>'
-      - ''
-      - '<aqua>Author name may contains spaces and be colored too'
-      - '<aqua>Works only on Written books'
+      - '<gradient:#A78BFA:gold><b>Set author</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>Author name may contains spaces and be colored too'
+      - '<gray>Works only on Written books'
     params: '<name>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated book author'
-    feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset book author'
+    feedback: '%prefix% <green>Updated book author'
+    feedback-reset: '%prefix% <green>Reset book author'
   bookenchant:
     description:
-      - '<gold><b>Set enchants on the book</b>'
-      - '<aqua>The difference between enchant and bookenchant is that'
-      - '<aqua>a book with enchant fire aspect sets hit targets on fire'
-      - '<aqua>while a book with bookenchant doesn''t'
+      - '<gradient:#A78BFA:gold><b>Set enchants on the book</b></gradient>'
+      - '<white><sprite:items:item/enchanted_book> <sprite:items:item/book>'
+      - '<gray>The difference between enchant and bookenchant is that'
+      - '<gray>a book with enchant fire aspect sets hit targets on fire'
+      - '<gray>while a book with bookenchant doesn''t'
       - ''
-      - '<yellow><enchant> <aqua>enchant type'
-      - '<yellow>[level] <aqua>level of the enchant, by default <yellow>1'
+      - '<gray><yellow><enchant> </yellow>enchant type'
+      - '<gray><yellow>[level] </yellow>level of the enchant, by default <yellow>1'
       - ''
-      - '<aqua><b>Tip</b>: <aqua>Set <yellow>[level] <aqua>to <yellow>0 <aqua>to remove an enchant'
+      - '<gold><b>Tip</b></gold> <gray>Set <yellow>[level] </yellow>to <yellow>0 </yellow>to remove an enchant'
     params: '<enchant> [level]'
-    feedback-removed: '<blue>[<white>ItemEdit<blue>] <green>Removed book enchantment <yellow>%enchant%'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Applied book enchantment <yellow>%enchant% <green>lv <yellow>%lv%'
+    feedback-removed: '%prefix% <green>Removed book enchantment <yellow>%enchant%'
+    feedback: '%prefix% <green>Applied book enchantment <yellow>%enchant% <green>lv <yellow>%lv%'
   booktype:
     description:
-      - '<gold><b>Set book type</b>'
-      - ''
-      - '<aqua>Works only on Written books'
+      - '<gradient:#A78BFA:gold><b>Set book type</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>Works only on Written books'
     params: '<booktype>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated book generation to <yellow>%generation%'
-    feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset book generation'
+    feedback: '%prefix% <green>Updated book generation to <yellow>%generation%'
+    feedback-reset: '%prefix% <green>Reset book generation'
   color:
     description:
-      - '<gold><b>Set color</b>'
-      - ''
-      - '<aqua>Works on leather armor and firework stars, on servers'
-      - '<aqua> 1.11+ works on any Potion and Tipped arrows too!'
-      - '<yellow>[red (0-255)] [green (0-255)] [blue (0-255)] <aqua>are the amount of each color to combine'
-      - '<aqua>Each color is an int value between 0 and 255'
-      - '<aqua>If you are confused google "<yellow>RGB color picker<aqua>"'
-    params: '[red (0-255)] [green (0-255)] [blue (0-255)]'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Color updated'
+      - '<gradient:#A78BFA:gold><b>Set color</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/tipped_arrow_base> <sprite:items:item/firework_star> <sprite:items:item/leather_chestplate>'
+      - '<gray>Works on leather armor and firework stars, potions and Tipped arrows too!'
+      - '<gray><yellow>[red] [green] [blue] </yellow>are the amount of each color to combine'
+      - '<gray>Each color is an int value between 0 and 255'
+      - '<gray>If you are confused google "<yellow>RGB color picker</yellow>"'
+    params: '[red] [green] [blue]'
+    feedback: '%prefix% <green>Color updated'
   compass:
     description:
-      - '<gold><b>Set compass target location</b>'
-      - ''
-      - '<yellow>Set <aqua>- set your location as compass target'
-      - '<yellow>Clear <aqua>- clear compass target'
+      - '<gradient:#A78BFA:gold><b>Set compass target location</b></gradient>'
+      - '<white><sprite:items:item/compass_00>'
+      - '<gray><yellow>Set </yellow><dark_gray>»</dark_gray> set your location as compass target'
+      - '<gray><yellow>Clear </yellow><dark_gray>»</dark_gray> clear compass target'
     params: '<set/clear>'
     set:
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Compass now points to <yellow>%world% %x% %y% %z%'
+      feedback: '%prefix% <green>Compass now points to <yellow>%world% %x% %y% %z%'
     clear:
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Compass target cleared'
+      feedback: '%prefix% <green>Compass target cleared'
   custommodeldata:
     description:
-      - '<gold><b>Edit custom model data</b>'
+      - '<gradient:#A78BFA:gold><b>Edit custom model data</b></gradient>'
       - ''
-      - '<aqua>Used for texture packs'
-      - '<yellow>[value] <aqua>positive int of target data model'
-      - '<aqua>Note: modern servers use itemmodel instead of custommodeldata'
-      - '<aqua> for textures, this command is for legacy clients'
+      - '<gray>Used for texture packs'
+      - '<gray><yellow>[value] </yellow>positive int of target data model'
+      - '<gray>Note: modern servers use itemmodel instead of custommodeldata'
+      - '<gray> for textures, this command is for legacy clients'
     params: '<value>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Custom model data updated'
-    feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Custom model data reset'
+    feedback: '%prefix% <green>Custom model data updated'
+    feedback-reset: '%prefix% <green>Custom model data reset'
   damage:
     description:
-      - '<gold><b>Edit durability</b>'
+      - '<gradient:#A78BFA:gold><b>Edit durability</b></gradient>'
       - ''
-      - '<yellow><durability> <aqua>damage to apply'
-      - '<aqua><b>N.B.</b> <yellow>0 <aqua>means no damage, full durability'
+      - '<gray><yellow><durability> </yellow>damage to apply'
+      - '<gray><gold>N.B.</gold> <yellow>0 </yellow>means no damage, full durability'
     params: '<durability>'
-    feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Durability restored'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Durability updated'
+    feedback-reset: '%prefix% <green>Durability restored'
+    feedback: '%prefix% <green>Durability updated'
   equipment:
     description:
-      - '<gold><b>Sets food property of the item</b>'
+      - '<gradient:#A78BFA:gold><b>Sets Equipment property of the item</b></gradient>'
       - ''
-      - '<aqua>Tip: Use /itemequip or /iee'
-      - '<aqua>N.B. your drinkable items cannot be eaten'
+      - '<gray><gold><b>Tip</b></gold> Use /itemequip or /iee'
+      - '<gray><gold>N.B.</gold> your drinkable items cannot be eaten'
     params: ''
   enchant:
     description:
-      - '<gold><b>Set enchants</b>'
+      - '<gradient:#A78BFA:gold><b>Set enchants</b></gradient>'
       - ''
-      - '<yellow><enchant> <aqua>enchant type'
-      - '<yellow>[level] <aqua>level of the enchant, by default <yellow>1'
+      - '<gray><yellow><enchant> </yellow>enchant type'
+      - '<gray><yellow>[level] </yellow>level of the enchant, by default <yellow>1'
       - ''
-      - '<aqua><b>Tip</b>: <aqua>Set <yellow>[level] <aqua>to <yellow>0 <aqua>to remove an enchant'
+      - '<gold><b>Tip</b></gold> <gray>Set <yellow>[level] </yellow>to <yellow>0 </yellow>to remove an enchant'
     params: '<enchant> [level]'
-    feedback-removed: '<blue>[<white>ItemEdit<blue>] <green>Removed enchantment <yellow>%enchant%'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Applied enchantment <yellow>%enchant% <green>lv <yellow>%lv%'
+    feedback-removed: '%prefix% <green>Removed enchantment <yellow>%enchant%'
+    feedback: '%prefix% <green>Applied enchantment <yellow>%enchant% <green>lv <yellow>%lv%'
   fireresistent:
     description:
-      - '<gold><b>Set item resistence to fire/lava</b>'
+      - '<gradient:#A78BFA:gold><b>Set item resistence to fire/lava</b></gradient>'
       - ''
-      - '<yellow>[true/false] <aqua>set the value, by default toggle'
+      - '<gray><yellow>[true/false] </yellow>set the value, by default toggle'
       - ''
-      - '<aqua>An item with fire resistance won''t be destroyed'
-      - '<aqua> when falling into fire and will float over lava'
+      - '<gray>An item with fire resistance won''t be destroyed'
+      - '<gray> when falling into fire and will float over lava'
     params: '[true/false]'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Fire resistance set to <yellow>%value%'
+    feedback: '%prefix% <green>Fire resistance set to <yellow>%value%'
   fireworkpower:
     description:
-      - '<gold><b>Set firework power</b>'
-      - ''
-      - '<yellow><power> <aqua>power of the firework, a value betwheen <yellow>0 <aqua>and <yellow>5'
+      - '<gradient:#A78BFA:gold><b>Set firework power</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+      - '<gray><yellow><power> </yellow>power of the firework, a value betwheen <yellow>0 </yellow>and <yellow>5'
     params: '<power>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated firework power'
+    feedback: '%prefix% <green>Updated firework power'
   firework:
     description:
-      - '<gold><b>Edit firework with a GUI</b>'
+      - '<gradient:#A78BFA:gold><b>Edit firework with a GUI</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
     params: ''
   food:
     description:
-      - '<gold><b>Sets food property of the item</b>'
+      - '<gradient:#A78BFA:gold><b>Sets food property of the item</b></gradient>'
       - ''
-      - '<aqua>Tip: Use /itemfood or /if'
-      - '<aqua>N.B. your drinkable items cannot be eaten'
+      - '<gray><gold><b>Tip</b></gold> Use /itemfood or /if'
+      - '<gray><gold>N.B.</gold> your drinkable items cannot be eaten'
     params: ''
   glider:
     description:
-      - '<gold><b>Set Glider state</b>'
+      - '<gradient:#A78BFA:gold><b>Set Glider state</b></gradient>'
       - ''
-      - '<aqua>Glider item should allow gliding like on elytras'
-      - '<yellow>[true/false] <aqua>set glider value, by default toggle'
+      - '<gray>Glider item should allow gliding like on elytras'
+      - '<gray><yellow>[true/false] </yellow>set glider value, by default toggle'
     params: '[true/false]'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Gliding set to <yellow>%value%'
+    feedback: '%prefix% <green>Updated Gliding set to <yellow>%value%'
   glow:
     description:
-      - '<gold><b>Override enchantment glow effect</b>'
+      - '<gradient:#A78BFA:gold><b>Override enchantment glow effect</b></gradient>'
       - ''
-      - '<yellow>[true/false] <aqua>set the value, by default reset'
+      - '<gray><yellow>[true/false] </yellow>set the value, by default reset'
       - ''
-      - '<aqua><b>Tip</b>: <yellow>no value specified <aqua>restore vanilla behavior'
+      - '<gold><b>Tip</b></gold> <gray><yellow>no value specified </yellow>restore vanilla behavior'
     params: '[true/false/default]'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Glow set to <yellow>%value%'
-    feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset glow value to default'
+    feedback: '%prefix% <green>Glow set to <yellow>%value%'
+    feedback-reset: '%prefix% <green>Reset glow value to default'
   goathornsound:
     description:
-      - '<gold><b>Set Goat Horn sound</b>'
-      - ''
-      - '<yellow><type> <aqua>the type of sound'
+      - '<gradient:#A78BFA:gold><b>Set Goat Horn sound</b></gradient>'
+      - '<white><sprite:items:item/goat_horn>'
+      - '<gray><yellow><type> </yellow>the type of sound'
     params: '<type>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Sound'
+    feedback: '%prefix% <green>Updated Sound'
   hide:
     description:
-      - '<gold><b>Hide or show components</b>'
+      - '<gradient:#A78BFA:gold><b>Hide or show components</b></gradient>'
       - ''
-      - '<yellow><flag> <aqua>item flag to edit'
-      - '<yellow>[true/false] <aqua>set the flag value, by default toggle'
+      - '<gray><yellow><flag> </yellow>item flag to edit'
+      - '<gray><yellow>[true/false] </yellow>set the flag value, by default toggle'
       - ''
-      - '<aqua><b>Tip</b>: <aqua>hide banner pannerns with potion_effects flag'
-      - '<aqua><b>Tip</b>: <aqua>hide all flags at once with <yellow>/itemedit hideall'
+      - '<gold><b>Tip</b></gold> <gray>hide banner pannerns with potion_effects flag'
+      - '<gold><b>Tip</b></gold> <gray>hide all flags at once with <yellow>/itemedit hideall'
     params: '<flag> [true/false]'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Flag is now <yellow>%value%'
+    feedback: '%prefix% <green>Flag is now <yellow>%value%'
   hidetooltip:
     description:
-      - '<gold><b>Hide or show tooltips</b>'
+      - '<gradient:#A78BFA:gold><b>Hide or show tooltips</b></gradient>'
       - ''
-      - '<yellow>[true/false] <aqua>set the flag value, by default toggle'
+      - '<gray><yellow>[true/false] </yellow>set the flag value, by default toggle'
     params: '[true/false]'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Tooltip hidden status is now <yellow>%value%'
+    feedback: '%prefix% <green>Tooltip hidden status is now <yellow>%value%'
   hideall:
     description:
-      - '<gold><b>Hide all components</b>'
+      - '<gradient:#A78BFA:gold><b>Hide all components</b></gradient>'
       - ''
-      - '<aqua>Hides: enchants, potion effects, banner layers, attributes ...'
+      - '<gray>Hides: enchants, potion effects, banner layers, attributes ...'
       - ''
-      - '<aqua><b>Tip</b>: <aqua>hide single components with <yellow>/itemedit hide <flag> true'
+      - '<gold><b>Tip</b></gold> <gray>hide single components with <yellow>/itemedit hide <flag> true'
     params: ''
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Hidden all the flags'
+    feedback: '%prefix% <green>Hidden all the flags'
   itemmodel:
     description:
-      - '<gold><b>Edit item model</b>'
+      - '<gradient:#A78BFA:gold><b>Edit item model</b></gradient>'
       - ''
-      - '<yellow><namespaced key> <aqua>key to set for texture reference'
-      - '<aqua>Example: /ie itemmodel <yellow>iron_sword'
-      - '<aqua>Example: /ie itemmodel <yellow>minecraft:iron_sword'
+      - '<gray><yellow><namespaced key> </yellow>key to set for texture reference'
+      - '<gray>Example: /ie itemmodel <yellow>iron_sword'
+      - '<gray>Example: /ie itemmodel <yellow>minecraft:iron_sword'
       - ''
-      - '<yellow><namespace><aqua>:<yellow><id> <aqua>will reference model:'
-      - '  /assets/<yellow><namespace><aqua>/models/item/<yellow><id>'
+      - '<gray><yellow><namespace></yellow>:<yellow><id></yellow> will reference model:'
+      - '  /assets/<yellow><namespace></yellow>/models/item/<yellow><id>'
     params: '<namespaced key>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Item Model'
-    feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset Item Model'
+    feedback: '%prefix% <green>Updated Item Model'
+    feedback-reset: '%prefix% <green>Reset Item Model'
   kinetic:
     description:
-      - '<gold><b>Sets kinetic property of the item</b>'
-      - ''
-      - '<aqua>Tip: Use /itemkinetic or /iek'
+      - '<gradient:#A78BFA:gold><b>Sets kinetic property of the item</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gray><gold><b>Tip</b></gold> Use /itemkinetic or /iek'
     params: ''
   maxdurability:
     description:
-      - '<gold><b>Sets item max durability</b>'
+      - '<gradient:#A78BFA:gold><b>Sets item max durability</b></gradient>'
       - ''
-      - '<yellow><max durability> <aqua>item new durability value, must be bigger than 1'
+      - '<gray><yellow><max durability> </yellow>item new durability value,'
+      - '<gray>  must be bigger than 1'
     params: '<max durability>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Max durability to <yellow>%value%'
+    feedback: '%prefix% <green>Updated Max durability to <yellow>%value%'
   maxstacksize:
     description:
-      - '<gold><b>Sets item max stack size</b>'
+      - '<gradient:#A78BFA:gold><b>Sets item max stack size</b></gradient>'
       - ''
-      - '<yellow>[1-99] <aqua>set the flag value'
+      - '<gray><yellow>[1-99] </yellow>set the flag value'
       - ''
-      - '<yellow>no value <aqua>will restore common stack size which is <yellow>64'
-      - '<aqua> for most items, <yellow>1<aqua> for armors and tools, and other'
-      - '<aqua> values for a few items'
+      - '<gray><yellow>no value </yellow>will restore common stack size which is <yellow>64'
+      - '<gray> for most items, <yellow>1</yellow> for armors and tools, and other'
+      - '<gray> values for a few items'
     params: '[1-99]'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Max stack size to <yellow>%value%'
-    feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset Max stack size'
+    feedback: '%prefix% <green>Updated Max stack size to <yellow>%value%'
+    feedback-reset: '%prefix% <green>Reset Max stack size'
   pierce:
     description:
-      - '<gold><b>Sets piercing property of the item</b>'
-      - ''
-      - '<aqua><b>Tip</b>: Use /itempiercing or /iep'
+      - '<gradient:#A78BFA:gold><b>Sets piercing property of the item</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gold><b>Tip</b></gold><gray> Use /itempiercing or /iep'
     params: ''
   potioneffect:
-    itemtag-tip: '<blue>[<white>ItemEdit<blue>] <aqua>You need to add potion effects to common items? try >ItemTag<'
+    itemtag-tip: '%prefix% <gray>You need to add potion effects to common items? try >ItemTag<'
     itemtag-tip-hover:
-      - '<gold>Click me'
+      - '<gradient:#A78BFA:gold>Click me</gradient>'
     description:
-      - '<gold><b>Edit potion''s effects</b>'
-      - ''
-      - '<aqua>Works on any Potion, Tipped arrows and Suspicious stew!'
-      - '<yellow>Add <effect> <duration> [level] <aqua>- add effect'
-      - '<yellow>Remove <effect> <aqua>- removes selected effect'
-      - '<yellow>Reset <aqua>- remove all effects'
+      - '<gradient:#A78BFA:gold><b>Edit potion''s effects</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/suspicious_stew> <sprite:items:item/tipped_arrow_base>'
+      - '<gray>Works on any Potion, Tipped arrows and Suspicious stew!'
+      - '<gray><yellow>Add <effect> <duration> [level] </yellow><dark_gray>»</dark_gray> add effect'
+      - '<gray><yellow>Remove <effect> </yellow><dark_gray>»</dark_gray> removes selected effect'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> remove all effects'
     params: '<add/remove/reset> [...]'
     add:
       params: '<effect> <duration> [level] [particles] [ambient] [icon]'
       description:
-        - '<gold><b>Adds/Override selected effect</b>'
+        - '<gradient:#A78BFA:gold><b>Adds/Override selected effect</b></gradient>'
         - ''
-        - '<yellow><effect> <aqua>effect type'
-        - '<yellow><duration> <aqua>duration in seconds'
-        - '<yellow>[level] <aqua>Up to 127, by default <yellow>1'
-        - '<yellow>[particles] <aqua>Should show particles? <yellow>true<aqua>/<yellow>false'
-        - '<yellow>[ambient] <aqua>Particles should have ambient flag? <yellow>true<aqua>/<yellow>false'
-        - '<yellow>[icon] <aqua>Show icon on top-right corner? <yellow>true<aqua>/<yellow>false <aqua>(for 1.13+ only)'
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Added potion effect'
+        - '<gray><yellow><effect> </yellow>effect type'
+        - '<gray><yellow><duration> </yellow>duration in seconds'
+        - '<gray><yellow>[level] </yellow>Up to 127, by default <yellow>1'
+        - '<gray><yellow>[particles] </yellow>Should show particles? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[ambient] </yellow>Particles should have ambient flag? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[icon] </yellow>Show icon on top-right corner? <yellow>true</yellow>/<yellow>false'
+      feedback: '%prefix% <green>Added potion effect'
     remove:
       params: '<effect>'
       description:
-        - '<gold><b>Remove selected effect</b>'
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Removed potion effect'
+        - '<gradient:#A78BFA:gold><b>Remove selected effect</b></gradient>'
+      feedback: '%prefix% <green>Removed potion effect'
     reset:
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Reset potion effects'
+      feedback: '%prefix% <green>Reset potion effects'
   rarity:
     description:
-      - '<gold><b>Sets item rarity</b>'
+      - '<gradient:#A78BFA:gold><b>Sets item rarity</b></gradient>'
       - ''
-      - '<yellow>[rarity] <aqua>set item rarity'
+      - '<gray><yellow>[rarity] </yellow>set item rarity'
       - ''
-      - '<aqua><b>Tip</b>: setting no rarity value will restore default'
+      - '<gold><b>Tip</b><gold><gray> setting no rarity value will restore default'
     params: '[rarity]'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated rarity'
-    feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset Rarity'
+    feedback: '%prefix% <green>Updated rarity'
+    feedback-reset: '%prefix% <green>Reset Rarity'
   repaircost:
     description:
-      - '<gold><b>Edit Anvil Repair Cost</b>'
+      - '<gradient:#A78BFA:gold><b>Edit Anvil Repair Cost</b></gradient>'
       - ''
-      - '<yellow><cost> <aqua>levels amount'
-      - '<aqua><b>N.B.</b> <aqua>anvil repair/rename price is always at least <yellow>1'
-      - '<aqua><b>N.B.</b> <aqua>this command set base repair cost of the item, final levels cost on anvil is based what you do'
-      - '<aqua>More info at <yellow>minecraft.gamepedia.com/Anvil/Mechanics'
+      - '<gray><yellow><cost> </yellow>levels amount'
+      - '<gray><gold>N.B.</gold> anvil repair/rename price is always at least <yellow>1'
+      - '<gray><gold>N.B.</gold> this command set base repair cost of the item, final levels cost on anvil is based what you do'
+      - '<gray>More info at <yellow>minecraft.gamepedia.com/Anvil/Mechanics'
     params: '<cost>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Repair cost updated'
+    feedback: '%prefix% <green>Repair cost updated'
   skullowner:
     description:
-      - '<gold><b>Set skull owner</b>'
+      - '<gradient:#A78BFA:gold><b>Set skull owner</b></gradient>'
       - ''
-      - '<aqua>Works only on Player''s skulls'
-      - '<yellow>[name] <aqua>name of the owner'
+      - '<gray>Works only on Player''s skulls'
+      - '<gray><yellow>[name] </yellow>name of the owner'
       - ''
-      - '<aqua><b>Tip</b>: <aqua>Place and break the skull to update skins'
+      - '<gold><b>Tip</b></gold> <gray>Place and break the skull to update skins'
     params: '[name]'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Head owner'
-    feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset Head owner'
-  spawnereggtype:
-    description:
-      - '<gold><b>Set type of entity spawned by spawner egg</b>'
-      - ''
-      - '<yellow><type> <aqua>type of the entity'
-      - '<aqua>Only some entity type are spawnable by eggs'
-    params: '<type>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Egg type'
+    feedback: '%prefix% <green>Updated Head owner'
+    feedback-reset: '%prefix% <green>Reset Head owner'
   tooltipstyle:
     description:
-      - '<gold><b>Edit item tooltip style</b>'
+      - '<gradient:#A78BFA:gold><b>Edit item tooltip style</b></gradient>'
       - ''
-      - '<yellow><style> <aqua>key to set for texture reference'
-      - '<aqua>  style is composed by <namespace>:<id>'
-      - '<aqua>Example: /ie tooltipstyle <yellow>my_style'
-      - '<aqua>Example: /ie tooltipstyle <yellow>minecraft:my_style'
-      - '<aqua>where minecraft is the <namespace> and'
-      - '<aqua>my_style is the <id>'
-      - '<aqua>when set, this item can use custom sprites for'
-      - '<aqua>its tooltip background and frame.'
-      - '<aqua><namespace>:tooltip/<id>_background'
-      - '<aqua>and <namespace>:tooltip/<id>_frame'
+      - '<gray><yellow><style> </yellow>key to set for texture reference'
+      - '<gray>  style is composed by <white><namespace>:<id>'
+      - '<gray>Example: /ie tooltipstyle <yellow>my_style'
+      - '<gray>Example: /ie tooltipstyle <yellow>minecraft:my_style'
+      - '<gray>where <yellow>minecraft</yellow> is the <white><namespace></white> and'
+      - '<gray><yellow>my_style</yellow> is the <white><id>'
+      - '<gray>when set, this item can use custom sprites for'
+      - '<gray>its tooltip background and frame.'
+      - '<gray><white><namespace>:tooltip/<id>_background'
+      - '<gray>and <white><namespace>:tooltip/<id>_frame'
     params: '<style/clear>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated tooltip style'
-    feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Reset tooltip style'
+    feedback: '%prefix% <green>Updated tooltip style'
+    feedback-reset: '%prefix% <green>Reset tooltip style'
   armortrim:
     description:
-      - '<gold><b>Set Armor Trim</b>'
-      - ''
-      - '<yellow><material> <aqua>the trim material'
-      - '<yellow><pattern> <aqua>the trim pattern'
+      - '<gradient:#A78BFA:gold><b>Set Armor Trim</b></gradient>'
+      - '<white><sprite:items:item/iron_chestplate>'
+      - '<gray><yellow><material> </yellow>the trim material'
+      - '<gray><yellow><pattern> </yellow>the trim pattern'
     params: '<material> <pattern>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Trim'
-    feedback-reset: '<blue>[<white>ItemEdit<blue>] <green>Trim removed'
+    feedback: '%prefix% <green>Updated Trim'
+    feedback-reset: '%prefix% <green>Trim removed'
   tropicalfish:
     description:
-      - '<gold><b>Set property of tropical fish bucket</b>'
-      - ''
-      - '<yellow>pattern <pattern type> <aqua>- type of fish'
-      - '<yellow>patterncolor <color> <aqua>- pattern color of fish'
-      - '<yellow>bodycolor <color> <aqua>- body color of fish'
+      - '<gradient:#A78BFA:gold><b>Set property of tropical fish bucket</b></gradient>'
+      - '<white><sprite:items:item/tropical_fish_bucket>'
+      - '<gray><yellow>pattern <pattern type> </yellow><dark_gray>»</dark_gray> type of fish'
+      - '<gray><yellow>patterncolor <color> </yellow><dark_gray>»</dark_gray> pattern color of fish'
+      - '<gray><yellow>bodycolor <color> </yellow><dark_gray>»</dark_gray> body color of fish'
     params: '[...]'
     pattern:
       params: '<type>'
       description:
-        - '<gold><b>Set tropical fish pattern type</b>'
+        - '<gradient:#A78BFA:gold><b>Set tropical fish pattern type</b></gradient>'
         - ''
-        - '<yellow><type> <aqua>pattern type of the fish'
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Pattern'
+        - '<gray><yellow><type> </yellow>pattern type of the fish'
+      feedback: '%prefix% <green>Updated Pattern'
     patterncolor:
       params: '<color>'
       description:
-        - '<gold><b>Set tropical fish pattern color</b>'
+        - '<gradient:#A78BFA:gold><b>Set tropical fish pattern color</b></gradient>'
         - ''
-        - '<yellow><color> <aqua>pattern color of the fish'
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Color'
+        - '<gray><yellow><color> </yellow>pattern color of the fish'
+      feedback: '%prefix% <green>Updated Color'
     bodycolor:
       params: '<color>'
       description:
-        - '<gold><b>Set tropical fish body color</b>'
+        - '<gradient:#A78BFA:gold><b>Set tropical fish body color</b></gradient>'
         - ''
-        - '<yellow><color> <aqua>body color of the fish'
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Color'
+        - '<gray><yellow><color> </yellow>body color of the fish'
+      feedback: '%prefix% <green>Updated Color'
   type:
     description:
-      - '<gold><b>Set item''s type</b>'
+      - '<gradient:#A78BFA:gold><b>Set item''s type</b></gradient>'
       - ''
-      - '<aqua><b>N.B. <aqua>a few types as Air won''t work</b>'
+      - '<gray><gold>N.B.</gold> a few types as Air won''t work</b>'
     params: '<type>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Item Material'
+    feedback: '%prefix% <green>Updated Item Material'
   unbreakable:
     description:
-      - '<gold><b>Set unbreakable state</b>'
+      - '<gradient:#A78BFA:gold><b>Set unbreakable state</b></gradient>'
       - ''
-      - '<aqua>Unbreakable tools and armors won''t lost durability'
-      - '<yellow>[true/false] <aqua>set unbreakable value, by default toggle'
+      - '<gray>Unbreakable tools and armors won''t lost durability'
+      - '<gray><yellow>[true/false] </yellow>set unbreakable value, by default toggle'
     params: '[true/false]'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Updated Item Unbreakable to <yellow>%value%'
+    feedback: '%prefix% <green>Updated Item Unbreakable to <yellow>%value%'
   help:
-    header: "<blue><b>ItemEdit - Help</b>"
-    header-sub: "<blue><b>ItemEdit %sub% - Help</b>"
+    header-name: "ItemEdit"
     footer: "%prev_clickable% <blue><b>Help</b> [%page%/%max_page%] %next_clickable%"
     description:
-      - '<gold><b>Shows ItemEdit help</b>'
+      - '<gradient:#A78BFA:gold><b>Shows ItemEdit help</b></gradient>'
       - ''
-      - '<yellow>[page] <aqua>Help page'
-      - '<yellow>[subcommand] <aqua>Help for a subcommand'
+      - '<gray><yellow>[page] </yellow>Help page'
+      - '<gray><yellow>[subcommand] </yellow>Help for a subcommand'
     params: '[page/subcommand]'
   rename:
     description:
-      - '<gold><b>Set item''s name</b>'
+      - '<gradient:#A78BFA:gold><b>Set item''s name</b></gradient>'
       - ''
-      - '<aqua><b>Tip</b>: <aqua>type <yellow>/ie rename -clear <aqua>to revert name to default'
-      - '<aqua><b>Tip</b>: <aqua>type <yellow>/ie rename -copy <aqua>to copy the name'
-      - '<aqua><b>Tip</b>: <aqua>type <yellow>/ie rename -paste <aqua>to paste previously copied value'
+      - '<gold><b>Tip</b></gold> <gray>type <yellow>/ie rename -clear </yellow>to revert name to default'
+      - '<gold><b>Tip</b></gold> <gray>type <yellow>/ie rename -copy </yellow>to copy the name'
+      - '<gold><b>Tip</b></gold> <gray>type <yellow>/ie rename -paste </yellow>to paste previously copied value'
     params: '<name>'
-    feedback: '<blue>[<white>ItemEdit<blue>] <green>Item name updated'
-    rename-clear: '<blue>[<white>ItemEdit<blue>] <green>Item name cleared'
-    rename-copy: '<blue>[<white>ItemEdit<blue>] <green>Item name copied'
-    rename-paste-empty: '<dark_red>[<red>ItemEdit<dark_red>] <red>No copied item name to paste'
-    feedback-paste: '<blue>[<white>ItemEdit<blue>] <green>Copied item name pasted'
-    banned_words: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item name contains blocked words'
+    feedback: '%prefix% <green>Item name updated'
+    rename-clear: '%prefix% <green>Item name cleared'
+    rename-copy: '%prefix% <green>Item name copied'
+    rename-paste-empty: '%prefix% <red>No copied item name to paste'
+    feedback-paste: '%prefix% <green>Copied item name pasted'
+    banned_words: '%prefix% <red>Item name contains blocked words'
   lore:
     description:
-      - '<gold><b>Edit lore</b>'
+      - '<gradient:#A78BFA:gold><b>Edit lore</b></gradient>'
       - ''
-      - '<yellow>Add <text> <aqua>- add text on a new line'
-      - '<yellow>Insert <line> <text> <aqua>- add text on selected line'
-      - '<yellow>Set <line> <text> <aqua>- set or replace text on chosen line'
-      - '<yellow>Remove <line> <aqua>- remove chosen line'
-      - '<yellow>Reset <aqua>- remove all lines'
-      - '<yellow>Copy <aqua>- copy current item lore to paste it later'
-      - '<yellow>CopyBook <aqua>- same as copy but from pages of a book as lines'
-      - '<yellow>CopyFile <path> <aqua>- same as copy but from loreCopy.yml'
-      - '<yellow>Paste <aqua>- paste the last copied lore'
-      - '<yellow>Replace <replaced> <replacer> <aqua>- replace all occurrences'
+      - '<gray><yellow>Add <text> </yellow><dark_gray>»</dark_gray> add text on a new line'
+      - '<gray><yellow>Insert <line> <text> </yellow><dark_gray>»</dark_gray> add text on selected line'
+      - '<gray><yellow>Set <line> <text> </yellow><dark_gray>»</dark_gray> set or replace text on chosen line'
+      - '<gray><yellow>Remove <line> </yellow><dark_gray>»</dark_gray> remove chosen line'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> remove all lines'
+      - '<gray><yellow>Copy </yellow><dark_gray>»</dark_gray> copy current item lore to paste it later'
+      - '<gray><yellow>CopyBook </yellow><dark_gray>»</dark_gray> same as copy but from pages of a book as lines'
+      - '<gray><yellow>CopyFile <path> </yellow><dark_gray>»</dark_gray> same as copy but from loreCopy.yml'
+      - '<gray><yellow>Paste </yellow><dark_gray>»</dark_gray> paste the last copied lore'
+      - '<gray><yellow>Replace <replaced> <replacer> </yellow><dark_gray>»</dark_gray> replace all occurrences'
     params: '<add/set/remove...> [...]'
     set:
       params: '<line> <text>'
       description:
-        - '<gold><b>Set or replace text on selected line</b>'
+        - '<gradient:#A78BFA:gold><b>Set or replace text on selected line</b></gradient>'
     remove:
       params: '<line>'
       description:
-        - '<gold><b>Remove selected line</b>'
+        - '<gradient:#A78BFA:gold><b>Remove selected line</b></gradient>'
     insert:
       params: '<line> <text>'
       description:
-        - '<gold><b>Add text on selected line</b>'
+        - '<gradient:#A78BFA:gold><b>Add text on selected line</b></gradient>'
     copy:
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Lore copied'
+      feedback: '%prefix% <green>Lore copied'
     copyBook:
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Book pages copied, and ready to be pasted'
+      feedback: '%prefix% <green>Book pages copied, and ready to be pasted'
     copyFile:
-      wrong-path: '<blue>[<white>ItemEdit<blue>] <red>Invalid path, remember to reload the configuration and check the CaPs'
-      no-path: '<dark_red>[<red>ItemEdit<dark_red>] <red>Select a path /ie lore copyfile <gold><path>'
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Configuration copied, and ready to be pasted'
+      wrong-path: '%prefix% <red>Invalid path, remember to reload the configuration and check the CaPs'
+      no-path: '%prefix% <red>Select a path /ie lore copyfile <gold><path>'
+      feedback: '%prefix% <green>Configuration copied, and ready to be pasted'
     paste:
-      feedback: '<blue>[<white>ItemEdit<blue>] <green>Lore pasted'
-      no-copy: '<dark_red>[<red>ItemEdit<dark_red>] <red>Copy a lore first'
+      feedback: '%prefix% <green>Lore pasted'
+      no-copy: '%prefix% <red>Copy a lore first'
     replace:
       params: '<replaced> <replacer>'
       description:
-        - '<gold><b>Replace all occurrences on the lore</b>'
+        - '<gold><b>Replace all occurrences on the lore</b></gradient>'
         - ''
-        - '<aqua>If you need to replace more than a word you have'
-        - '<aqua> to close them inside <yellow>{ }'
+        - '<gray>If you need to replace more than a word you have'
+        - '<gray> to close them inside <yellow>{ }'
         - ''
-        - '<aqua>Example: <yellow>/ie lore replace New Rusty'
-        - '<aqua>''<yellow>New sword<aqua>'' -> ''<yellow>Rusty sword<aqua>'''
+        - '<gray>Example: <yellow>/ie lore replace New Rusty'
+        - '<gray>''<yellow>New sword</yellow>'' -> ''<yellow>Rusty sword</yellow>'''
         - ''
-        - '<aqua>Example 2: <yellow>/ie lore replace {Heavy} {Very light}'
-        - '<aqua>''<yellow>Heavy sword<aqua>'' -> ''<yellow>Very light sword<aqua>'''
+        - '<gray>Example 2: <yellow>/ie lore replace {Heavy} {Very light}'
+        - '<gray>''<yellow>Heavy sword</yellow>'' -> ''<yellow>Very light sword</yellow>'''
   listaliases:
     description:
-      - '<gold><b>Shows allowed aliases parameters</b>'
+      - '<gradient:#A78BFA:gold><b>Shows allowed aliases parameters</b>'
       - ''
-      - '<yellow><type> <aqua>the type of parameter to show'
+      - '<gray><yellow><type> </yellow>the type of parameter to show'
     params: '<type>'
     prefix_line: '<dark_blue> ◆  ◆  ◆  ◆  <blue>Aliases  <dark_blue>◆  ◆  ◆  ◆'
     postfix_line: '<dark_blue> ◆  ◆  ◆  ◆  <blue>Aliases  <dark_blue>◆  ◆  ◆  ◆'
@@ -576,107 +575,106 @@ itemedit:
     second_color: '<yellow>'
     hover_info: '<blue>Original value: <yellow>%default%'
     hover_type: '<gold>Click to examine'
-    error-pre-hover: "<gold><b>Aliases:</b>"
+    error-pre-hover: "<gradient:#A78BFA:gold><b>Aliases:</b></gradient>"
 itemeditequipment:
   allowedentities:
-    invalid-type: '<dark_red>[<red>ItemEdit<dark_red>] <red>The value <gold>%value% <red>is neither a valid entity nor a valid group of entities'
+    invalid-type: '%prefix% <red>The value <gold>%value% <red>is neither a valid entity nor a valid group of entities'
     description:
-      - '<gold><b>Sets entity types allowed to wear this equipment</b>'
+      - '<gradient:#A78BFA:gold><b>Sets entity types allowed to wear this equipment</b></gradient>'
       - ''
-      - '<yellow>[entity] <aqua>which entity type'
-      - '<yellow>[group] <aqua>which entity group'
+      - '<gray><yellow>[entity] </yellow>which entity type'
+      - '<gray><yellow>[group] </yellow>which entity group'
       - ''
-      - '<aqua>All selected types are added'
+      - '<gray>All selected types are added'
     params: "[entity/group] [entity/group] ..."
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Allowed entity types are now: <yellow>%value%"
-    feedback-reset: "<blue>[<white>ItemEdit<blue>] <green>Allowed entity types have been reset"
+    feedback: "%prefix% <green>Allowed entity types are now: <yellow>%value%"
+    feedback-reset: "%prefix% <green>Allowed entity types have been reset"
   canshear:
-    unsupported-version: '<dark_red>[<red>ItemEdit<dark_red>] <red>You server version (<gold>%value%<red>) doesn''t support this feature'
+    unsupported-version: '%prefix% <red>You server version (<gold>%value%<red>) doesn''t support this feature'
     description:
-      - '<gold><b>Sets equip on interaction</b>'
+      - '<gradient:#A78BFA:gold><b>Sets equip on interaction</b></gradient>'
       - ''
-      - '<yellow>[true/false] <aqua>true be able to shear the'
-      - '<aqua>equipment from and entity, like pumpkin'
-      - '<aqua>for snowman'
+      - '<gray><yellow>[true/false] </yellow>true be able to shear the'
+      - '<gray>equipment from and entity, like pumpkin'
+      - '<gray>for snowman'
     params: "[true/false]"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Can shear property is now <yellow>%value%"
+    feedback: "%prefix% <green>Can shear property is now <yellow>%value%"
   canbesheared:
     description:
-      - '<gold><b>Sets whether this equipment can be sheared</b>'
+      - '<gradient:#A78BFA:gold><b>Sets whether this equipment can be sheared</b></gradient>'
       - ''
-      - '<yellow>[true/false] <aqua>Whether the equipment can be sheared'
+      - '<gray><yellow>[true/false] </yellow>Whether the equipment can be sheared'
     params: '[true/false]'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Can be sheared property is now <yellow>%value%"
+    feedback: "%prefix% <green>Can be sheared property is now <yellow>%value%"
   cameraoverlay:
     description:
-      - '<gold><b>Sets camera overlay</b>'
+      - '<gradient:#A78BFA:gold><b>Sets camera overlay</b></gradient>'
       - ''
-      - '<yellow>[namespacedkey] <aqua>which overlay you want'
-      - '<aqua>Overlays are set on texturepacks, the only vanilla'
-      - '<aqua>overlay is the minecraft:misc/pumpkinblur'
+      - '<gray><yellow>[namespacedkey] </yellow>which overlay you want'
+      - '<gray>Overlays are set on texturepacks, the only vanilla'
+      - '<gray>overlay is the minecraft:misc/pumpkinblur'
     params: "[namespacedkey]"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Camera overlay has been updated"
-    feedback-reset: "<blue>[<white>ItemEdit<blue>] <green>Camera overlay has been removed"
+    feedback: "%prefix% <green>Camera overlay has been updated"
+    feedback-reset: "%prefix% <green>Camera overlay has been removed"
     invalid-namespacedkey: "<red>Namespacedkey <gold>%value% <red> is invalid"
   clear:
     description:
-      - '<gold><b>Completely remove equipment property on item</b>'
+      - '<gradient:#A78BFA:gold><b>Completely remove equipment property on item</b></gradient>'
       - ''
-      - '<aqua>Or restore defaults if item is a vanilla equipment'
+      - '<gray>Or restore defaults if item is a vanilla equipment'
     params: ""
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Equipment properties have been reset to default"
+    feedback: "%prefix% <green>Equipment properties have been reset to default"
   damageonhurt:
     description:
-      - '<gold><b>Sets damageable'
+      - '<gradient:#A78BFA:gold><b>Sets damageable</gradient>'
       - ''
-      - '<yellow>[true/false] <aqua>true to reduce durability with damage'
+      - '<gray><yellow>[true/false] </yellow>true to reduce durability with damage'
       - ''
-      - '<aqua>N.B. only item with max stack size of 1 can be damaged'
-      - '<aqua>  use <yellow>/ie maxstacksize 1'
-      - '<aqua>Tip: remember to set item max durability with'
+      - '<gray><gold>N.B.</gold> only item with max stack size of 1 can be damaged'
+      - '<gray>  use <yellow>/ie maxstacksize 1'
+      - '<gray><gold><b>Tip</b></gold> remember to set item max durability with'
       - '  <yellow>/ie maxdurability <amount>'
     params: "[true/false]"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Damage on hurt property is now <yellow>%value%"
-    warning-maxstacksize: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item max stack size must be <gold>1 <red>to be damageable <dark_red>[<gold>click to fix<dark_red>]'
+    feedback: "%prefix% <green>Damage on hurt property is now <yellow>%value%"
+    warning-maxstacksize: '%prefix% <red>Item max stack size must be <gold>1 <red>to be damageable <dark_red>[<gold>click to fix<dark_red>]'
   dispensable:
     description:
-      - '<gold><b>Sets dispensable</b>'
+      - '<gradient:#A78BFA:gold><b>Sets dispensable</b>'
       - ''
-      - '<yellow>[true/false] <aqua>true to equip with dispenser'
+      - '<gray><yellow>[true/false] </yellow>true to equip with dispenser'
     params: "[true/false]"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Dispensable property is now <yellow>%value%"
+    feedback: "%prefix% <green>Dispensable property is now <yellow>%value%"
   equiponinteract:
     description:
-      - '<gold><b>Sets equip on interaction</b>'
+      - '<gradient:#A78BFA:gold><b>Sets equip on interaction</b>'
       - ''
-      - '<yellow>[true/false] <aqua>true to equip with interaction'
+      - '<gray><yellow>[true/false] </yellow>true to equip with interaction'
     params: "[true/false]"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Equip on interact property is now <yellow>%value%"
+    feedback: "%prefix% <green>Equip on interact property is now <yellow>%value%"
   equipsound:
     description:
-      - '<gold><b>Sets equipping sound</b>'
+      - '<gradient:#A78BFA:gold><b>Sets equipping sound</b></gradient>'
       - ''
-      - '<yellow>[sound] <aqua>which sound should be made'
+      - '<gray><yellow>[sound] </yellow>which sound should be made'
     params: "[sound]"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Equip sound property is now <yellow>%value%"
-    feedback-reset: "<blue>[<white>ItemEdit<blue>] <green>Equip sound property has been reset to default"
+    feedback: "%prefix% <green>Equip sound property is now <yellow>%value%"
+    feedback-reset: "%prefix% <green>Equip sound property has been reset to default"
   help:
-    header: "<blue><b>ItemEditEquipment - Help</b>"
-    header-sub: "<blue><b>ItemEditEquipment %sub% - Help</b>"
+    header-name: "ItemEquipment"
     footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
     description:
-      - '<gold><b>Shows ItemEditEquipment help</b>'
+      - '<gradient:#A78BFA:gold><b>Shows ItemEditEquipment help</b></gradient>'
       - ''
-      - '<yellow>[page] <aqua>Help page'
-      - '<yellow>[subcommand] <aqua>Help for a subcommand'
+      - '<gray><yellow>[page] </yellow>Help page'
+      - '<gray><yellow>[subcommand] </yellow>Help for a subcommand'
     params: '[page/subcommand]'
   info:
     description:
-      - '<gold><b>Shows the equipment properties on this item</b>'
+      - '<gradient:#A78BFA:gold><b>Shows the equipment properties on this item</b></gradient>'
     params: ''
-    not_set: '<blue>[<white>ItemEdit<blue>] <aqua>This item has no equippable component'
+    not_set: '%prefix% <gray>This item has no equippable component'
     message:
-      - '<blue>[<white>ItemEdit<blue>] <dark_green><b>Equippable</b>'
+      - '%prefix% <dark_green><b>Equippable</b>'
       - '<green>Slot: <yellow>%slot%'
       - '<green>Can be sheared: <yellow>%canbesheared%'
       - '<green>Damage on hurt: <yellow>%damageonhurt%'
@@ -690,166 +688,165 @@ itemeditequipment:
       - '<green>Asset id: <yellow>%assetid%'
   model:
     description:
-      - '<gold><b>Sets texture model</b>'
+      - '<gradient:#A78BFA:gold><b>Sets texture model</b></gradient>'
       - ''
-      - '<yellow>[key] <aqua>Namespaced ID of the equipment model to use when equipped'
+      - '<gray><yellow>[key] </yellow>Namespaced ID of the equipment model to use when equipped'
     params: "[key]"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Equipment model is now <yellow>%key%"
-    feedback-reset: "<blue>[<white>ItemEdit<blue>] <green>Equipment model has been reset"
+    feedback: "%prefix% <green>Equipment model is now <yellow>%key%"
+    feedback-reset: "%prefix% <green>Equipment model has been reset"
   shearsound:
     description:
-      - '<gold><b>Sets sound when item is removed by shear</b>'
+      - '<gradient:#A78BFA:gold><b>Sets sound when item is removed by shear</b></gradient>'
       - ''
-      - '<yellow>[sound] <aqua>which sound should be made'
-      - '<aqua>when it''s removed by shear, like pumpkin'
-      - '<aqua>for snowman'
+      - '<gray><yellow>[sound] </yellow>which sound should be made'
+      - '<gray>when it''s removed by shear, like pumpkin'
+      - '<gray>for snowman'
     params: "[sound]"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Shear sound is now <yellow>%value%"
-    feedback-reset: "<blue>[<white>ItemEdit<blue>] <green>Shear sound property has been reset to default"
+    feedback: "%prefix% <green>Shear sound is now <yellow>%value%"
+    feedback-reset: "%prefix% <green>Shear sound property has been reset to default"
   shearingsound:
     description:
-      - '<gold><b>Sets sound when item is removed by shear</b>'
+      - '<gradient:#A78BFA:gold><b>Sets sound when item is removed by shear</b></gradient>'
       - ''
-      - '<yellow>[sound] <aqua>Which sound should be made'
-      - '<aqua>when it''s removed by shear, like pumpkin for snowman'
+      - '<gray><yellow>[sound] </yellow>Which sound should be made'
+      - '<gray>when it''s removed by shear, like pumpkin for snowman'
     params: '[sound]'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Shearing sound is now <yellow>%value%"
+    feedback: "%prefix% <green>Shearing sound is now <yellow>%value%"
   slot:
     description:
-      - '<gold><b>Sets equippable slot</b>'
+      - '<gradient:#A78BFA:gold><b>Sets equippable slot</b></gradient>'
       - ''
-      - '<yellow><slot> <aqua>where the item can be equipped'
+      - '<gray><yellow><slot> </yellow>where the item can be equipped'
     params: "<slot>"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Equipment Slot is now <yellow>%value%"
+    feedback: "%prefix% <green>Equipment Slot is now <yellow>%value%"
   swappable:
     description:
-      - '<gold><b>Sets the item swappable</b>'
+      - '<gradient:#A78BFA:gold><b>Sets the item swappable</b></gradient>'
       - ''
-      - '<yellow>[true/false] <aqua>true for the item to be swappable'
+      - '<gray><yellow>[true/false] </yellow>true for the item to be swappable'
     params: "[true/false]"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Swappable property is now <yellow>%value%"
+    feedback: "%prefix% <green>Swappable property is now <yellow>%value%"
 itemeditfood:
   addeffect:
     description:
-      - '<gold><b>Add an effect to the item</b>'
-      - '<yellow>/ief addeffect <aqua>cleareffects'
-      - '<yellow>/ief addeffect <aqua>teleport <range>'
-      - '<yellow>/ief addeffect <aqua>applyeffects [chance] <potion> <lv> <duration> [ambient] [particle] [icon]'
-      - '<yellow>/ief addeffect <aqua>removeeffects <potion>'
-      - '<yellow>/ief addeffect <aqua>playsound <sound>'
+      - '<gradient:#A78BFA:gold><b>Add an effect to the item</b></gradient>'
+      - '<gray><yellow>/ief addeffect </yellow>cleareffects'
+      - '<gray><yellow>/ief addeffect </yellow>teleport <range>'
+      - '<gray><yellow>/ief addeffect </yellow>applyeffects [chance] <potion> <lv> <duration> [ambient] [particle] [icon]'
+      - '<gray><yellow>/ief addeffect </yellow>removeeffects <potion>'
+      - '<gray><yellow>/ief addeffect </yellow>playsound <sound>'
       - ''
     params: '[...]'
     cleareffects:
       description:
-        - '<gold><b>Add an effect to the item</b>'
+        - '<gradient:#A78BFA:gold><b>Add an effect to the item</b></gradient>'
         - ''
-        - '<aqua>Remove any potion effect on the player, like milk bucket'
+        - '<gray>Remove any potion effect on the player, like milk bucket'
       params: '<potion>'
-      feedback: "<blue>[<white>ItemEdit<blue>] <green>Added teleport effect when food is eaten"
+      feedback: "%prefix% <green>Added teleport effect when food is eaten"
     teleport:
       description:
-        - '<gold><b>Add an effect to the item</b>'
-        - '<yellow><range> <aqua>how far teleport the player'
+        - '<gradient:#A78BFA:gold><b>Add an effect to the item</b></gradient>'
+        - '<gray><yellow><range> </yellow>how far teleport the player'
         - ''
-        - '<aqua>Randomly teleport player when food is eaten'
+        - '<gray>Randomly teleport player when food is eaten'
       params: '<range>'
-      feedback: "<blue>[<white>ItemEdit<blue>] <green>Added teleport effect when food is eaten"
+      feedback: "%prefix% <green>Added teleport effect when food is eaten"
     applyeffects:
       description:
-        - '<gold><b>Add an effect to the item</b>'
-        - '<yellow>[chance] <aqua>what''s the % chance to apply the effect?'
-        - '  <aqua>must be bigger than <yellow>0<aqua> and lower equals to <yellow>100'
-        - '<yellow><potion> <aqua>The potion effect type'
-        - '<yellow><lv> <aqua>level of the effect, <yellow>1<aqua> by default'
-        - '<yellow><duration> <aqua>Duration as seconds of the effect or <yellow>-1 <aqua>for permanent effect'
-        - '<yellow>[ambient] [particle] [icon] <aqua>true/false potioneffect customizations'
+        - '<gradient:#A78BFA:gold><b>Add an effect to the item</b></gradient>'
+        - '<gray><yellow>[chance] </yellow>what''s the % chance to apply the effect?'
+        - '<gray>  must be bigger than <yellow>0</yellow> and lower equals to <yellow>100'
+        - '<gray><yellow><potion> </yellow>The potion effect type'
+        - '<gray><yellow><lv> </yellow>level of the effect, <yellow>1</yellow> by default'
+        - '<gray><yellow><duration> </yellow>Duration as seconds of the effect or <yellow>-1 </yellow>for permanent effect'
+        - '<gray><yellow>[ambient] [particle] [icon] </yellow>true/false potioneffect customizations'
         - ''
-        - '<aqua>Apply selected effect to the player when food is eaten'
+        - '<gray>Apply selected effect to the player when food is eaten'
       params: '<potion>'
-      feedback: "<blue>[<white>ItemEdit<blue>] <green>Added apply effect when food is eaten"
+      feedback: "%prefix% <green>Added apply effect when food is eaten"
     removeeffects:
       description:
-        - '<gold><b>Add an effect to the item</b>'
-        - '<yellow><potion> <aqua>clear selected effect'
+        - '<gradient:#A78BFA:gold><b>Add an effect to the item</b></gradient>'
+        - '<gray><yellow><potion> </yellow>clear selected effect'
         - ''
-        - '<aqua>Remove selected effect from the player when food is eaten'
+        - '<gray>Remove selected effect from the player when food is eaten'
       params: '<potion>'
-      feedback: "<blue>[<white>ItemEdit<blue>] <green>Added remove effect when food is eaten"
+      feedback: "%prefix% <green>Added remove effect when food is eaten"
     playsound:
       description:
-        - '<gold><b>Add an effect to the item</b>'
-        - '<yellow><sound> <aqua>sound to play'
+        - '<gradient:#A78BFA:gold><b>Add an effect to the item</b></gradient>'
+        - '<gray><yellow><sound> </yellow>sound to play'
         - ''
-        - '<aqua>Play selected sound when food is eaten'
+        - '<gray>Play selected sound when food is eaten'
       params: '<sound>'
-      feedback: "<blue>[<white>ItemEdit<blue>] <green>Added sound when food is eaten"
+      feedback: "%prefix% <green>Added sound when food is eaten"
   animation:
     description:
-      - '<gold><b>Sets eat animation</b>'
-      - '<aqua>Only for <red>1.21.2+'
+      - '<gradient:#A78BFA:gold><b>Sets eat animation</b></gradient>'
+      - '<gray>Only for <red>1.21.2+'
       - ''
-      - '<yellow><animation> <aqua>The value to set, by default toggle'
+      - '<gray><yellow><animation> </yellow>The value to set, by default toggle'
       - ''
-      - '<aqua>Some animations are shown only on first person view,'
-      - '<aqua>some animations are shown only on third person view,'
-      - '<aqua>some animations are shown on both first and third person view'
+      - '<gray>Some animations are shown only on first person view,'
+      - '<gray>some animations are shown only on third person view,'
+      - '<gray>some animations are shown on both first and third person view'
     params: '<animation>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Applied animation"
+    feedback: "%prefix% <green>Applied animation"
   canalwayseat:
     description:
-      - '<gold><b>Sets whenever the item can be eaten</b>'
+      - '<gradient:#A78BFA:gold><b>Sets whenever the item can be eaten</b></gradient>'
       - ''
-      - '<yellow>[true/false] <aqua>The value to set, by default toggle'
+      - '<gray><yellow>[true/false] </yellow>The value to set, by default toggle'
       - ''
-      - '<aqua>Usually food require hunger to be eaten,'
-      - '<aqua>setting true will mimic golden apple behavior'
+      - '<gray>Usually food require hunger to be eaten,'
+      - '<gray>setting true will mimic golden apple behavior'
     params: '[true/false]'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Item has Can always eat to <yellow>%value%"
+    feedback: "%prefix% <green>Item has Can always eat to <yellow>%value%"
   consumeparticles:
     description:
-      - '<gold><b>Sets whenever the item show particles when eaten</b>'
-      - '<aqua>Only for <red>1.21.2+'
+      - '<gradient:#A78BFA:gold><b>Sets whenever the item show particles when eaten</b></gradient>'
+      - '<gray>Only for <red>1.21.2+'
       - ''
-      - '<yellow>[true/false] <aqua>The value to set, by default toggle'
+      - '<gray><yellow>[true/false] </yellow>The value to set, by default toggle'
     params: '[true/false]'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Consume particles is now <yellow>%value%"
+    feedback: "%prefix% <green>Consume particles is now <yellow>%value%"
   convertto:
     description:
-      - '<gold><b>Sets an item give when food is consumed</b>'
-      - '<aqua>Only for <red>1.21+'
+      - '<gradient:#A78BFA:gold><b>Sets an item give when food is consumed</b></gradient>'
+      - '<gray>Only for <red>1.21+'
       - ''
-      - '<yellow>[type/serveritem id] <aqua>the item to return'
-      - '  <aqua>you can set a Material or you can'
-      - '  <aqua>select an item from ServerItem saved items'
+      - '<gray><yellow>[type/serveritem id] </yellow>the item to return'
+      - '<gray>  you can set a Material or you can'
+      - '<gray>  select an item from ServerItem saved items'
       - ''
-      - '<aqua>Mimic bucket milk behavior where a bucket is'
-      - '<aqua>returned when milk is consumed'
+      - '<gray>Mimic bucket milk behavior where a bucket is'
+      - '<gray>returned when milk is consumed'
     params: '[type/serveritem id]'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Convert to updated"
+    feedback: "%prefix% <green>Convert to updated"
   eatticks:
     description:
-      - '<gold><b>Sets the time required to eat the item</b>'
+      - '<gradient:#A78BFA:gold><b>Sets the time required to eat the item</b></gradient>'
       - ''
-      - '<yellow><ticks> <aqua>The amount of time to eat the item'
-      - '  <aqua>must be <yellow>1 <aqua>or bigger'
+      - '<gray><yellow><ticks> </yellow>The amount of time to eat the item'
+      - '<gray>  must be <yellow>1 </yellow>or bigger'
       - ''
-      - '<yellow>20 <aqua>ticks = <yellow>1 <aqua>second'
+      - '<gray><yellow>20 </yellow>ticks = <yellow>1 </yellow>second'
     params: '<ticks>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Eat ticks updated to <yellow>%value%"
+    feedback: "%prefix% <green>Eat ticks updated to <yellow>%value%"
   help:
-    header: "<blue><b>ItemFood - Help</b>"
-    header-sub: "<blue><b>ItemFood %sub% - Help</b>"
+    header-name: "ItemFood"
     footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
     description:
-      - '<gold><b>Shows ItemFood help</b>'
+      - '<gradient:#A78BFA:gold><b>Shows ItemFood help</b></gradient>'
       - ''
-      - '<yellow>[page] <aqua>Help page'
-      - '<yellow>[subcommand] <aqua>Help for a subcommand'
+      - '<gray><yellow>[page] </yellow>Help page'
+      - '<gray><yellow>[subcommand] </yellow>Help for a subcommand'
     params: '[page/subcommand]'
   info:
-    not_food: "<blue>[<white>ItemEdit<blue>] <aqua>Item has no food property or has default property"
+    not_food: "%prefix% <dark_green>Item has no food property or has default property"
     message:
-      - '<blue>[<white>ItemEdit<blue>] <dark_green><b>Item Food Property</b>'
+      - '%prefix% <dark_green><b>Item Food Property</b>'
       - '<green>Eat time: <yellow>%eatseconds%<green> s <dark_gray>(<gray>%eatticks%<dark_gray> ticks)'
       - '<green>Restore Hunger: <yellow>%nutrition% <dark_gray>| <green>Saturation: <yellow>%saturation%<green> '
       - '<green>Animation: <yellow>%animation% <dark_gray>| <green>Sound: <yellow>%sound% <dark_gray>| <green>Particles: <yellow>%consumeparticles%'
@@ -857,7 +854,7 @@ itemeditfood:
     apply_effect_prefix:
       - '<dark_green><b>Contains <yellow>%effects%<dark_green> possible potion effects:</b>'
     apply_effect:
-      - '<green>%index%. Type: <yellow><aqua>%type% <dark_gray>| <green>Lv: <yellow>%level% <dark_gray>| <green>Duration: <yellow>%duration_s%<green> s <dark_gray>(<gray>%duration_ticks%<dark_gray> ticks)'
+      - '<green>%index%. Type: <yellow>%type% <dark_gray>| <green>Lv: <yellow>%level% <dark_gray>| <green>Duration: <yellow>%duration_s%<green> s <dark_gray>(<gray>%duration_ticks%<dark_gray> ticks)'
       - '<green>   Particles: <yellow>%hasparticle% <dark_gray>| <green>Ambient: <yellow>%isambient% <dark_gray>| <green>Icon: <yellow>%hasicon% <dark_gray>| <green>Chance: <yellow>%chance_perc%<green>%'
     consume_effect_teleport: '<green>Random teleport diameter: <yellow>%diameter%'
     consume_effect_sound: '<green>Additional consume sound: <yellow>%sound%'
@@ -865,120 +862,119 @@ itemeditfood:
     consume_effect_clear: '<green>Clears all active status effects'
     consume_effect_unknown: '<green>Other consume effect: <yellow>%type%'
     description:
-      - '<gold><b>Describe current food info for item</b>'
+      - '<gradient:#A78BFA:gold><b>Describe current food info for item</b></gradient>'
     params: ''
   nutrition:
     description:
-      - '<gold><b>Sets recovered nutrition</b>'
+      - '<gradient:#A78BFA:gold><b>Sets recovered nutrition</b></gradient>'
       - ''
-      - '<yellow><amount> <aqua>The amount hunger to restore'
-      - '  <aqua>must be <yellow>0 <aqua>or bigger'
+      - '<gray><yellow><amount> </yellow>The amount hunger to restore'
+      - '<gray>  must be <yellow>0 </yellow>or bigger'
       - ''
-      - '<aqua>A full hunger bar is <yellow>20'
+      - '<gray>A full hunger bar is <yellow>20'
     params: '<amount>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Nutrition value is now <yellow>%value%"
+    feedback: "%prefix% <green>Nutrition value is now <yellow>%value%"
   removeeffect:
     description:
-      - '<gold><b>Remove an effect from the item</b>'
+      - '<gradient:#A78BFA:gold><b>Remove an effect from the item</b></gradient>'
       - ''
-      - '<yellow><index> <aqua>Remove selected effect'
+      - '<gray><yellow><index> </yellow>Remove selected effect'
     params: '<index>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Removed selected food effect"
+    feedback: "%prefix% <green>Removed selected food effect"
   reset:
     description:
-      - '<gold><b>Completely remove food property on item</b>'
+      - '<gradient:#A78BFA:gold><b>Completely remove food property on item</b></gradient>'
       - ''
-      - '<aqua>Or restore defaults if item is a vanilla food'
+      - '<gray>Or restore defaults if item is a vanilla food'
     params: ''
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Food properties removed"
+    feedback: "%prefix% <green>Food properties removed"
   reseteffects:
     description:
-      - '<gold><b>Remove effects from the item</b>'
+      - '<gradient:#A78BFA:gold><b>Remove effects from the item</b></gradient>'
     params: ''
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Food effects removed"
+    feedback: "%prefix% <green>Food effects removed"
   saturation:
     description:
-      - '<gold><b>Sets recovered saturation</b>'
+      - '<gradient:#A78BFA:gold><b>Sets recovered saturation</b></gradient>'
       - ''
-      - '<yellow><amount> <aqua>The amount saturation to add'
-      - '  <aqua>negative values are allowed'
+      - '<gray><yellow><amount> </yellow>The amount saturation to add'
+      - '<gray>  negative values are allowed'
       - ''
-      - '<aqua>Saturation controls how fast food level'
-      - '<aqua>  (nutrition) decrease'
+      - '<gray>Saturation controls how fast food level'
+      - '<gray>  (nutrition) decrease'
     params: '<amount>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Saturation is now <yellow>%value%"
+    feedback: "%prefix% <green>Saturation is now <yellow>%value%"
   sound:
     description:
-      - '<gold><b>Sets eat sound</b>'
-      - '<aqua>Only for <red>1.21.2+'
+      - '<gradient:#A78BFA:gold><b>Sets eat sound</b></gradient>'
+      - '<gray>Only for <red>1.21.2+'
       - ''
-      - '<yellow><sound> <aqua>The value to set'
+      - '<gray><yellow><sound> </yellow>The value to set'
     params: '<sound>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Eating sound is now <yellow>%value%"
+    feedback: "%prefix% <green>Eating sound is now <yellow>%value%"
 itemeditkinetic:
   contactcooldownticks:
     description:
-      - '<gold><b>Sets Kinetic Contact cooldown</b>'
+      - '<gradient:#A78BFA:gold><b>Sets Kinetic Contact cooldown</b></gradient>'
       - ''
-      - '<yellow><cooldown> <aqua>contact cooldown ticks'
+      - '<gray><yellow><cooldown> </yellow>contact cooldown ticks'
     params: '<delay>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Contact cooldown set"
+    feedback: "%prefix% <green>Contact cooldown set"
   damageconditions:
     description:
-      - '<gold><b>Sets kinetic Damage conditions</b>'
+      - '<gradient:#A78BFA:gold><b>Sets kinetic Damage conditions</b></gradient>'
       - ''
-      - '<yellow><max duration> <aqua>Max damage duration ticks'
-      - '<yellow><min speed> <aqua>Minimal speed'
-      - '<yellow><min relative speed> <aqua>minimal relative speed'
+      - '<gray><yellow><max duration> </yellow>Max damage duration ticks'
+      - '<gray><yellow><min speed> </yellow>Minimal speed'
+      - '<gray><yellow><min relative speed> </yellow>minimal relative speed'
     params: '<max duration> <min speed> <min relative speed>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Damage condition set"
+    feedback: "%prefix% <green>Damage condition set"
   damagemultiplier:
     description:
-      - '<gold><b>Sets Kinetic Damage multiplier</b>'
+      - '<gradient:#A78BFA:gold><b>Sets Kinetic Damage multiplier</b></gradient>'
       - ''
-      - '<yellow><multiplier> <aqua>damage multiplier'
+      - '<gray><yellow><multiplier> </yellow>damage multiplier'
     params: '<delay>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Kinetic damage multiplier set"
+    feedback: "%prefix% <green>Kinetic damage multiplier set"
   delayticks:
     description:
-      - '<gold><b>Sets Kinetic Delay ticks</b>'
+      - '<gradient:#A78BFA:gold><b>Sets Kinetic Delay ticks</b></gradient>'
       - ''
-      - '<yellow><delay> <aqua>kinetic delay ticks'
+      - '<gray><yellow><delay> </yellow>kinetic delay ticks'
     params: '<delay>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Delay ticks set"
+    feedback: "%prefix% <green>Delay ticks set"
   dismountconditions:
     description:
-      - '<gold><b>Sets Kinetic Dismount conditions</b>'
+      - '<gradient:#A78BFA:gold><b>Sets Kinetic Dismount conditions</b></gradient>'
       - ''
-      - '<yellow><max duration> <aqua>Max dismount duration ticks'
-      - '<yellow><min speed> <aqua>Minimal speed to dismount'
-      - '<yellow><min relative speed> <aqua>minimal relative speed to dismount'
+      - '<gray><yellow><max duration> </yellow>Max dismount duration ticks'
+      - '<gray><yellow><min speed> </yellow>Minimal speed to dismount'
+      - '<gray><yellow><min relative speed> </yellow>minimal relative speed to dismount'
     params: '<max duration> <min speed> <min relative speed>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Dismount condition set"
+    feedback: "%prefix% <green>Dismount condition set"
   forwardmovement:
     description:
-      - '<gold><b>Sets Kinetic Forward movement</b>'
+      - '<gradient:#A78BFA:gold><b>Sets Kinetic Forward movement</b></gradient>'
       - ''
-      - '<yellow><movement> <aqua>Forward movement amount'
+      - '<gray><yellow><movement> </yellow>Forward movement amount'
     params: '<movement>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Forward movement set"
+    feedback: "%prefix% <green>Forward movement set"
   help:
-    header: "<blue><b>ItemKinetic - Help</b>"
-    header-sub: "<blue><b>ItemKinetic %sub% - Help</b>"
+    header-name: "ItemKinetic"
     footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
     description:
-      - '<gold><b>Shows ItemKinetic help</b>'
+      - '<gradient:#A78BFA:gold><b>Shows ItemKinetic help</b></gradient>'
       - ''
-      - '<yellow>[page] <aqua>Help page'
-      - '<yellow>[subcommand] <aqua>Help for a subcommand'
+      - '<gray><yellow>[page] </yellow>Help page'
+      - '<gray><yellow>[subcommand] </yellow>Help for a subcommand'
     params: '[page/subcommand]'
   info:
     description:
-      - '<gold><b>Shows the kinetic weapon properties on this item</b>'
+      - '<gradient:#A78BFA:gold><b>Shows the kinetic weapon properties on this item</b></gradient>'
     params: ''
-    not_set: '<blue>[<white>ItemEdit<blue>] <aqua>This item has no kinetic weapon component'
+    not_set: '%prefix% <green>This item has no kinetic weapon component'
     message:
-      - '<blue>[<white>ItemEdit<blue>] <dark_green><b>Kinetic Weapon</b>'
+      - '%prefix% <dark_green><b>Kinetic Weapon</b>'
       - '<green>Contact cooldown: <yellow>%contactcooldownticks% <green>ticks'
       - '<green>Damage multiplier: <yellow>%damagemultiplier%'
       - '<green>Delay: <yellow>%delayticks% <green>ticks'
@@ -990,91 +986,90 @@ itemeditkinetic:
       - '<green>Knockback conditions: <yellow>%knockbackconditions%'
   hitsound:
     description:
-      - '<gold><b>Sets Kinetic hit sound</b>'
+      - '<gradient:#A78BFA:gold><b>Sets Kinetic hit sound</b></gradient>'
       - ''
-      - '<yellow><sound> <aqua>The value to set'
+      - '<gray><yellow><sound> </yellow>The value to set'
     params: '<sound>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Hit sound is now <yellow>%value%"
+    feedback: "%prefix% <green>Hit sound is now <yellow>%value%"
   knockbackconditions:
     description:
-      - '<gold><b>Sets Kinetic Knockback conditions</b>'
+      - '<gradient:#A78BFA:gold><b>Sets Kinetic Knockback conditions</b></gradient>'
       - ''
-      - '<yellow><max duration> <aqua>Max knockback duration ticks'
-      - '<yellow><min speed> <aqua>Minimal speed to knockback'
-      - '<yellow><min relative speed> <aqua>minimal relative speed to knockback'
+      - '<gray><yellow><max duration> </yellow>Max knockback duration ticks'
+      - '<gray><yellow><min speed> </yellow>Minimal speed to knockback'
+      - '<gray><yellow><min relative speed> </yellow>minimal relative speed to knockback'
     params: '<max duration> <min speed> <min relative speed>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Knockback condition set"
+    feedback: "%prefix% <green>Knockback condition set"
   sound:
     description:
-      - '<gold><b>Sets Kinetic sound</b>'
+      - '<gradient:#A78BFA:gold><b>Sets Kinetic sound</b></gradient>'
       - ''
-      - '<yellow><sound> <aqua>The value to set'
+      - '<gray><yellow><sound> </yellow>The value to set'
     params: '<sound>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Sound is now <yellow>%value%"
+    feedback: "%prefix% <green>Sound is now <yellow>%value%"
 itemeditpiercing:
   dealsknockback:
     description:
-      - '<gold><b>Sets whenever the hit cause knockback</b>'
+      - '<gradient:#A78BFA:gold><b>Sets whenever the hit cause knockback</b></gradient>'
       - ''
-      - '<yellow>[true/false] <aqua>true to apply knockback'
+      - '<gray><yellow>[true/false] </yellow>true to apply knockback'
     params: "[true/false]"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Knockback is now <yellow>%value%"
+    feedback: "%prefix% <green>Knockback is now <yellow>%value%"
   dismounts:
     description:
-      - '<gold><b>Sets whenever the hit cause dismount</b>'
+      - '<gradient:#A78BFA:gold><b>Sets whenever the hit cause dismount</b></gradient>'
       - ''
-      - '<yellow>[true/false] <aqua>true to dismount'
+      - '<gray><yellow>[true/false] </yellow>true to dismount'
     params: "[true/false]"
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Dismount is now <yellow>%value%"
+    feedback: "%prefix% <green>Dismount is now <yellow>%value%"
   help:
-    header: "<blue><b>ItemPiercing - Help</b>"
-    header-sub: "<blue><b>ItemPiercing %sub% - Help</b>"
+    header-name: "ItemPiercing"
     footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
     description:
-      - '<gold><b>Shows ItemPiercing help</b>'
+      - '<gradient:#A78BFA:gold><b>Shows ItemPiercing help</b></gradient>'
       - ''
-      - '<yellow>[page] <aqua>Help page'
-      - '<yellow>[subcommand] <aqua>Help for a subcommand'
+      - '<gray><yellow>[page] </yellow>Help page'
+      - '<gray><yellow>[subcommand] </yellow>Help for a subcommand'
     params: '[page/subcommand]'
   info:
     description:
-      - '<gold><b>Shows the piercing weapon properties on this item</b>'
+      - '<gradient:#A78BFA:gold><b>Shows the piercing weapon properties on this item</b></gradient>'
     params: ''
-    not_set: '<blue>[<white>ItemEdit<blue>] <aqua>This item has no piercing weapon component'
+    not_set: '%prefix% <green>This item has no piercing weapon component'
     message:
-      - '<blue>[<white>ItemEdit<blue>] <dark_green><b>Piercing Weapon</b>'
+      - '%prefix% <dark_green><b>Piercing Weapon</b>'
       - '<green>Deals knockback: <yellow>%dealsknockback%'
       - '<green>Dismounts: <yellow>%dismounts%'
       - '<green>Hit sound: <yellow>%hitsound%'
       - '<green>Sound: <yellow>%sound%'
   hitsound:
     description:
-      - '<gold><b>Sets Piercing hit sound</b>'
+      - '<gradient:#A78BFA:gold><b>Sets Piercing hit sound</b></gradient>'
       - ''
-      - '<yellow><sound> <aqua>The value to set'
+      - '<gray><yellow><sound> </yellow>The value to set'
     params: '<sound>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Hit sound is now <yellow>%value%"
+    feedback: "%prefix% <green>Hit sound is now <yellow>%value%"
   sound:
     description:
-      - '<gold><b>Sets Piercing sound</b>'
+      - '<gradient:#A78BFA:gold><b>Sets Piercing sound</b></gradient>'
       - ''
-      - '<yellow><sound> <aqua>The value to set'
+      - '<gray><yellow><sound> </yellow>The value to set'
     params: '<sound>'
-    feedback: "<blue>[<white>ItemEdit<blue>] <green>Sound is now <yellow>%value%"
+    feedback: "%prefix% <green>Sound is now <yellow>%value%"
 serveritem:
-  help-header: '<blue><b>ServerItem - Help</b>'
+  help-header: '<gradient:#54acff:#A78BFA><bold>ServerItem</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Help</bold></#A78BFA>'
   give:
     #Holders: %id% %nick% %amount%
     feedback: '<green>Obtained <yellow>%amount% <green>of <yellow>%nick%'
     #Holders: %id% %nick% %amount% %player_name%
     log: '[serveritem][give] %player_name% obtained %amount% of %id% (%nick%)'
     description:
-      - '<gold><b>Give selected item to player</b>'
+      - '<gradient:#A78BFA:gold><b>Give selected item to player</b></gradient>'
       - ''
-      - '<yellow><id> <aqua>Id of the item'
-      - '<yellow>[amount] <aqua>amount of items to give, by default 1'
-      - '<yellow>[player] <aqua>who gets the items, by default you'
-      - '<yellow>[silent] <aqua>true if no feedback should be send to player'
+      - '<gray><yellow><id> </yellow>Id of the item'
+      - '<gray><yellow>[amount] </yellow>amount of items to give, by default 1'
+      - '<gray><yellow>[player] </yellow>who gets the items, by default you'
+      - '<gray><yellow>[silent] </yellow>true if no feedback should be send to player'
     params: '<id> [amount] [player] [silent]'
   giveall:
     #Holders: %id% %nick% %amount%
@@ -1082,22 +1077,22 @@ serveritem:
     #Holders: %id% %nick% %amount% %targets%
     log: '[serveritem][giveall] %targets% obtained %amount% of %id% (%nick%)'
     description:
-      - '<gold><b>Give selected item to all online players</b>'
+      - '<gradient:#A78BFA:gold><b>Give selected item to all online players</b></gradient>'
       - ''
-      - '<yellow><id> <aqua>Id of the item'
-      - '<yellow>[amount] <aqua>amount of items to give, by default 1'
-      - '<yellow>[silent] <aqua>true if no feedback should be send to players'
+      - '<gray><yellow><id> </yellow>Id of the item'
+      - '<gray><yellow>[amount] </yellow>amount of items to give, by default 1'
+      - '<gray><yellow>[silent] </yellow>true if no feedback should be send to players'
     params: '<id> [amount] [silent]'
   drop:
     #Holders: %id% %nick% %amount% %world% %x% %y% %z%
     log: '[serveritem][drop] dropped %amount% of %id% (%nick%) at %world% %x% %y% %z%'
     description:
-      - '<gold><b>Drop selected item at chosen location</b>'
+      - '<gradient:#A78BFA:gold><b>Drop selected item at chosen location</b></gradient>'
       - ''
-      - '<yellow><id> <aqua>Id of the item'
-      - '<yellow><amount> <aqua>amount of items to drop, 1 to 2304'
-      - '<yellow><world> <aqua>which world'
-      - '<yellow><x> <y> <z> <aqua>coordinates'
+      - '<gray><yellow><id> </yellow>Id of the item'
+      - '<gray><yellow><amount> </yellow>amount of items to drop, 1 to 2304'
+      - '<gray><yellow><world> </yellow>which world'
+      - '<gray><yellow><x> <y> <z> </yellow>coordinates'
     params: '<id> <amount> <world> <x> <y> <z>'
   take:
     #Holders: %id% %nick% %amount%
@@ -1105,66 +1100,66 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name%
     log: '[serveritem][take] %player_name% gave %amount% of %id% (%nick%)'
     description:
-      - '<gold><b>Take selected item from player</b>'
+      - '<gradient:#A78BFA:gold><b>Take selected item from player</b></gradient>'
       - ''
-      - '<yellow><id> <aqua>Id of the item'
-      - '<yellow>[amount] <aqua>amount of items to give, by default 1'
-      - '<yellow>[player] <aqua>who gets the items, by default you'
-      - '<yellow>[silent] <aqua>true if no feedback should be send to player'
+      - '<gray><yellow><id> </yellow>Id of the item'
+      - '<gray><yellow>[amount] </yellow>amount of items to give, by default 1'
+      - '<gray><yellow>[player] </yellow>who gets the items, by default you'
+      - '<gray><yellow>[silent] </yellow>true if no feedback should be send to player'
     params: '<id> [amount] [player] [silent]'
   save:
     #Holders: %id%
-    success: '<blue>[<white>ItemEdit<blue>] <green>Item <yellow>%id% <green>registered'
-    already_used_id: '<dark_red>[<red>ItemEdit<dark_red>] <red>Item with id <yellow>%id% <red>already exists, change the id or do /si update to override'
+    success: '%prefix% <green>Item <yellow>%id% <green>registered'
+    already_used_id: '%prefix% <red>Item with id <yellow>%id% <red>already exists, change the id or do /si update to override'
     description:
-      - '<aqua>Register the item in your hand'
+      - '<gradient:#A78BFA:gold><b>Register the item in your hand</b></gradient>'
       - ''
-      - '<yellow><id> <aqua>identify the item, case insensitive and can''t'
-      - '<aqua>     contain spaces or dots also you can''t select'
-      - '<aqua>     any already used id'
+      - '<gray><yellow><id> </yellow>identify the item, case insensitive and can''t'
+      - '<gray>     contain spaces or dots also you can''t select'
+      - '<gray>     any already used id'
       - ''
-      - '<aqua><b>Tip</b>: <aqua>use <yellow>/serveritem update <id><aqua>, to change an existing item'
-      - '<aqua><b>Tip</b>: <aqua>retrieve saved items with <yellow>/serveritem give <id>'
+      - '<gold><b>Tip</b></gold> <gray>use <yellow>/serveritem update <id></yellow>, to change an existing item'
+      - '<gold><b>Tip</b></gold> <gray>retrieve saved items with <yellow>/serveritem give <id>'
     params: '<id>'
   delete:
     #Holders: %id%
-    success: '<blue>[<white>ItemEdit<blue>] <green>Item <yellow>%id% <green>unregistered'
+    success: '%prefix% <green>Item <yellow>%id% <green>unregistered'
     description:
-      - '<gold><b>Delete selected item</b>'
+      - '<gradient:#A78BFA:gold><b>Delete selected item</b></gradient>'
       - ''
-      - '<yellow><id> <aqua>Id of the item'
+      - '<gray><yellow><id> </yellow>Id of the item'
     params: '<id>'
   update:
     #Holders: %id%
-    success: '<blue>[<white>ItemEdit<blue>] <green>Item <yellow>%id% <green>has been updated'
+    success: '%prefix% <green>Item <yellow>%id% <green>has been updated'
     description:
-      - '<gold><b>Update selected item</b>'
+      - '<gradient:#A78BFA:gold><b>Update selected item</b></gradient>'
       - ''
-      - '<aqua>Change the item associated with id with your hand item'
-      - '<yellow><id> <aqua>Id of the item'
+      - '<gray>Change the item associated with id with your hand item'
+      - '<gray><yellow><id> </yellow>Id of the item'
       - ''
-      - '<aqua><b>Tip</b>: <aqua>use <yellow>/serveritem save <id><aqua>, to create a new item'
-      - '<aqua><b>Tip</b>: <aqua>use <yellow>/serveritem delete <id><aqua>, to delete an item'
+      - '<gold><b>Tip</b></gold> <gray>use <yellow>/serveritem save <id></yellow>, to create a new item'
+      - '<gold><b>Tip</b></gold> <gray>use <yellow>/serveritem delete <id></yellow>, to delete an item'
     params: '<id>'
   show:
     description:
-      - '<gold><b>Open a gui with server saved items</b>'
+      - '<gradient:#A78BFA:gold><b>Open a gui with server saved items</b></gradient>'
       - ''
-      - '<yellow>[page] <aqua>page of the gui, by default 1'
+      - '<gray><yellow>[page] </yellow>page of the gui, by default 1'
     params: '[page]'
   setnick:
     #Holders: %id% %nick%
-    success: '<blue>[<white>ItemEdit<blue>] <green>Item <yellow>%id% <green>nick has been updated to <yellow>%nick%'
+    success: '%prefix% <green>Item <yellow>%id% <green>nick has been updated to <yellow>%nick%'
     description:
-      - '<aqua>Set display name of selected item'
+      - '<gradient:#A78BFA:gold><b>Set display name of selected item</b></gradient>'
       - ''
-      - '<aqua>Nick is used for holder <yellow>%nick%<aqua> on buy/sell messages, by'
-      - '<aqua>  default is the name of the item, or item type if has no name'
+      - '<gray>Nick is used for holder <yellow>%nick%</yellow> on buy/sell messages, by'
+      - '<gray>  default is the name of the item, or item type if has no name'
       - ''
-      - '<yellow><id> <aqua>Id of the item'
-      - '<yellow>[nick] <aqua>name to set'
+      - '<gray><yellow><id> </yellow>Id of the item'
+      - '<gray><yellow>[nick] </yellow>name to set'
       - ''
-      - '<aqua><b>Tip</b>: <aqua>to reset to default just use <yellow>/serveritem setnick <id>'
+      - '<gold><b>Tip</b></gold> <gray>to reset to default just use <yellow>/serveritem setnick <id>'
     params: '<id> [nick]'
   sell:
     #Holders: %id% %nick% %amount% %price%
@@ -1176,19 +1171,19 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)'
     description:
-      - '<gold><b>Sell items to player</b>'
+      - '<gradient:#A78BFA:gold><b>Sell items to player</b></gradient>'
       - ''
-      - '<aqua>Sell differs from SellMax because you sell the whole amount'
-      - '<aqua>  to player or you sell none'
-      - '<yellow><id> <aqua>id of the item'
-      - '<yellow><amount> <aqua>amount of items'
-      - '<yellow><player> <aqua>who should pay money and get items'
-      - '<yellow><price> <aqua>price for the whole amount of items, must be positive'
-      - '<yellow>[silent] <aqua>true to send feedback to player'
+      - '<gray>Sell differs from SellMax because you sell the whole amount'
+      - '<gray>  to player or you sell none'
+      - '<gray><yellow><id> </yellow>id of the item'
+      - '<gray><yellow><amount> </yellow>amount of items'
+      - '<gray><yellow><player> </yellow>who should pay money and get items'
+      - '<gray><yellow><price> </yellow>price for the whole amount of items, must be positive'
+      - '<gray><yellow>[silent] </yellow>true to send feedback to player'
       - ''
-      - '<aqua>Transaction fails if player has not enough money or enough'
-      - '<aqua>  inventory space for the whole <yellow><amount>'
-      - '<aqua>N.B. balance of the command executor is untouched'
+      - '<gray>Transaction fails if player has not enough money or enough'
+      - '<gray>  inventory space for the whole <yellow><amount>'
+      - '<gray><gold>N.B.</gold> balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
   buy:
     #Holders: %id% %nick% %amount% %price%
@@ -1198,19 +1193,19 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%'
     description:
-      - '<gold><b>Buy items from player</b>'
+      - '<gradient:#A78BFA:gold><b>Buy items from player</b></gradient>'
       - ''
-      - '<aqua>Buy differs from BuyMax because you buy the whole amount'
-      - '<aqua>  from player or you buy none'
-      - '<yellow><id> <aqua>id of the item'
-      - '<yellow><amount> <aqua>amount of items'
-      - '<yellow><player> <aqua>who should pay items and get money'
-      - '<yellow><price> <aqua>price for the whole amount of items, must be positive'
-      - '<yellow>[silent] <aqua>true to send feedback to player'
+      - '<gray>Buy differs from BuyMax because you buy the whole amount'
+      - '<gray>  from player or you buy none'
+      - '<gray><yellow><id> </yellow>id of the item'
+      - '<gray><yellow><amount> </yellow>amount of items'
+      - '<gray><yellow><player> </yellow>who should pay items and get money'
+      - '<gray><yellow><price> </yellow>price for the whole amount of items, must be positive'
+      - '<gray><yellow>[silent] </yellow>true to send feedback to player'
       - ''
-      - '<aqua>Transaction fails if player has not at least <yellow><amount>'
-      - '<aqua>  of <yellow><id> <aqua>items'
-      - '<aqua>N.B. balance of the command executor is untouched'
+      - '<gray>Transaction fails if player has not at least <yellow><amount>'
+      - '<gray>  of <yellow><id> </yellow>items'
+      - '<gray><gold>N.B.</gold> balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
   sellmax:
     #Holders: %id% %nick% %amount% %price%
@@ -1222,20 +1217,20 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][sell] %player_name% paid %price% for %amount% of %id% (%nick%)'
     description:
-      - '<gold><b>Sell items to player</b>'
+      - '<gradient:#A78BFA:gold><b>Sell items to player</b></gradient>'
       - ''
-      - '<aqua>SellMax differs from Sell because you may sell the less of amount'
-      - '<aqua>  to player if there are not enough money or space for the whole'
-      - '<yellow><id> <aqua>id of the item'
-      - '<yellow><amount> <aqua>amount of items'
-      - '<yellow><player> <aqua>who should pay money and get items'
-      - '<yellow><price> <aqua>price for the whole amount of items, must be positive'
-      - '<yellow>[silent] <aqua>true to send feedback to player'
+      - '<gray>SellMax differs from Sell because you may sell the less of amount'
+      - '<gray>  to player if there are not enough money or space for the whole'
+      - '<gray><yellow><id> </yellow>id of the item'
+      - '<gray><yellow><amount> </yellow>amount of items'
+      - '<gray><yellow><player> </yellow>who should pay money and get items'
+      - '<gray><yellow><price> </yellow>price for the whole amount of items, must be positive'
+      - '<gray><yellow>[silent] </yellow>true to send feedback to player'
       - ''
-      - '<aqua>Transaction fails if player has not enough money or enough'
-      - '<aqua>  inventory space at least an item'
-      - '<aqua>If player buy less than <yellow><price><aqua> paid price will be scaled'
-      - '<aqua>N.B. balance of the command executor is untouched'
+      - '<gray>Transaction fails if player has not enough money or enough'
+      - '<gray>  inventory space at least an item'
+      - '<gray>If player buy less than <yellow><price></yellow> paid price will be scaled'
+      - '<gray><gold>N.B.</gold> balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
   buymax:
     #Holders: %id% %nick% %amount% %price%
@@ -1245,93 +1240,93 @@ serveritem:
     #Holders: %id% %nick% %amount% %player_name% %price%
     log: '[serveritem][buy] %player_name% sold %amount% of %id% (%nick%) for a total of %price%'
     description:
-      - '<gold><b>Buy items from player</b>'
+      - '<gradient:#A78BFA:gold><b>Buy items from player</b></gradient>'
       - ''
-      - '<aqua>BuyMax differs from Buy because you may buy less of amount'
-      - '<aqua>  from player if he has less than amount items in inventory'
-      - '<yellow><id> <aqua>id of the item'
-      - '<yellow><amount> <aqua>amount of items'
-      - '<yellow><player> <aqua>who should pay items and get money'
-      - '<yellow><price> <aqua>price for the whole amount of items, must be positive'
-      - '<yellow>[silent] <aqua>true to send feedback to player'
+      - '<gray>BuyMax differs from Buy because you may buy less of amount'
+      - '<gray>  from player if he has less than amount items in inventory'
+      - '<gray><yellow><id> </yellow>id of the item'
+      - '<gray><yellow><amount> </yellow>amount of items'
+      - '<gray><yellow><player> </yellow>who should pay items and get money'
+      - '<gray><yellow><price> </yellow>price for the whole amount of items, must be positive'
+      - '<gray><yellow>[silent] </yellow>true to send feedback to player'
       - ''
-      - '<aqua>Transaction fails if player has not at least an <yellow><id> <aqua>item'
-      - '<aqua>  on inventory'
-      - '<aqua>If player sell less than <yellow><amount><aqua> price will be scaled'
-      - '<aqua>N.B. balance of the command executor is untouched'
+      - '<gray>Transaction fails if player has not at least an <yellow><id> </yellow>item'
+      - '<gray>  on inventory'
+      - '<gray>If player sell less than <yellow><amount></yellow> price will be scaled'
+      - '<gray><gold>N.B.</gold> balance of the command executor is untouched'
     params: '<id> <amount> <player> <price> [silent]'
 itemstorage:
-  help-header: '<blue><b>ItemStorage - Help</b>'
+  help-header: '<gradient:#54acff:#A78BFA><bold>ItemStorage</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Help</bold></#A78BFA>'
   get:
     #Holders: %id% %amount%
-    success: '<blue>[<white>ItemEdit<blue>] <green>Obtained <yellow>%amount% <green>of <yellow>%id%'
-    no-inventory-space: '<dark_red>[<red>ItemEdit<dark_red>] <red>You don''t have space in your inventory'
+    success: '%prefix% <green>Obtained <yellow>%amount% <green>of <yellow>%id%'
+    no-inventory-space: '%prefix% <red>You don''t have space in your inventory'
     description:
-      - '<gold><b>Get selected item</b>'
+      - '<gradient:#A78BFA:gold><b>Get selected item</b></gradient>'
       - ''
-      - '<yellow><id> <aqua>Id of the item'
-      - '<yellow>[amount] <aqua>amount to get, by default 1'
+      - '<gray><yellow><id> </yellow>Id of the item'
+      - '<gray><yellow>[amount] </yellow>amount to get, by default 1'
     params: '<id> [amount]'
   save:
     #Holders: %id%
-    success: '<blue>[<white>ItemEdit<blue>] <green>Item <yellow>%id% <green>registered'
+    success: '%prefix% <green>Item <yellow>%id% <green>registered'
     #Holders: %limit%
-    limit-reached: '<dark_red>[<red>ItemEdit<dark_red>] <red>You reached the maximus number of savable items (%limit%)'
+    limit-reached: '%prefix% <red>You reached the maximus number of savable items (%limit%)'
     description:
-      - '<gold><b>Register the item in your hand</b>'
+      - '<gradient:#A78BFA:gold><b>Register the item in your hand</b></gradient>'
       - ''
-      - '<yellow><id> <aqua>identify your item, case insensitive and can''t'
-      - '<aqua>     contain spaces or dots also you can''t select'
-      - '<aqua>     any already used id'
+      - '<gray><yellow><id> </yellow>identify your item, case insensitive and can''t'
+      - '<gray>     contain spaces or dots also you can''t select'
+      - '<gray>     any already used id'
       - ''
-      - '<aqua><b>Tip</b>: <aqua>use <yellow>/itemstorage update <id><aqua>, to change an existing item'
-      - '<aqua><b>Tip</b>: <aqua>retrieve your saved items with <yellow>/itemstorage get <id>'
+      - '<gold><b>Tip</b></gold> <gray>use <yellow>/itemstorage update <id></yellow>, to change an existing item'
+      - '<gold><b>Tip</b></gold> <gray>retrieve your saved items with <yellow>/itemstorage get <id>'
     params: '<id>'
   delete:
     #Holders: %id%
-    success: '<blue>[<white>ItemEdit<blue>] <green>Item <yellow>%id% <green>unregistered'
+    success: '%prefix% <green>Item <yellow>%id% <green>unregistered'
     description:
-      - '<gold><b>Delete selected item</b>'
+      - '<gradient:#A78BFA:gold><b>Delete selected item</b></gradient>'
       - ''
-      - '<yellow><id> <aqua>Id of the item'
+      - '<gray><yellow><id> </yellow>Id of the item'
     params: '<id>'
   update:
     #Holders: %id%
-    success: '<blue>[<white>ItemEdit<blue>] <green>Item <yellow>%id% <green>has been updated'
+    success: '%prefix% <green>Item <yellow>%id% <green>has been updated'
     description:
-      - '<gold><b>Update selected item</b>'
+      - '<gradient:#A78BFA:gold><b>Update selected item</b></gradient>'
       - ''
-      - '<aqua>Change the item associated with id with your hand item'
-      - '<yellow><id> <aqua>Id of the item'
+      - '<gray>Change the item associated with id with your hand item'
+      - '<gray><yellow><id> </yellow>Id of the item'
       - ''
-      - '<aqua>Tip: use <yellow>/itemstorage save <id><aqua>, to create a new item'
-      - '<aqua>Tip: use <yellow>/itemstorage delete <id><aqua>, to delete an item'
+      - '<gray><gold><b>Tip</b></gold> use <yellow>/itemstorage save <id></yellow>, to create a new item'
+      - '<gray><gold><b>Tip</b></gold> use <yellow>/itemstorage delete <id></yellow>, to delete an item'
     params: '<id>'
   show:
     description:
-      - '<gold><b>Open a gui with your saved items</b>'
+      - '<gradient:#A78BFA:gold><b>Open a gui with your saved items</b></gradient>'
       - ''
-      - '<yellow>[page] <aqua>page of the gui, by default 1'
+      - '<gray><yellow>[page] <gray>page of the gui, by default 1'
     params: '[page]'
 itemeditimport:
   help:
     - '<green>/itemeditimport ItemEditor <dark_green>- import items from ItemEditor plugin'
   itemeditor:
     unable-to-get-item:
-      - '<dark_red>[<red>ItemEdit<dark_red>] <red>Unable to load item <gold>%id%'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Unable to load item <gold>%id%'
     already-used-id:
-      - '<dark_red>[<red>ItemEdit<dark_red>] <gold>%id% <red>is already used, maybe you already did this command before otherwise you may rename the file ItemEditor/items/%id%.yml'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>is already used, maybe you already did this command before otherwise you may rename the file ItemEditor/items/%id%.yml'
     invalid-id:
-      - '<dark_red>[<red>ItemEdit<dark_red>] <gold>%id% <red>is not an acceptable id, you may rename the file ItemEditor/items/%id%.yml to an alphanumeric name'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>is not an acceptable id, you may rename the file ItemEditor/items/%id%.yml to an alphanumeric name'
     import-unsuccess:
-      - '<dark_red>[<red>ItemEdit<dark_red>] <red>No items of <gold>%max% <red>were imported, maybe you already did this command before(?)'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>No items of <gold>%max% <red>were imported, maybe you already did this command before(?)'
     import-success:
-      - '<blue>[<white>ItemEdit<blue>] <green>Imported <yellow>%done% <green>of <yellow>%max% <green>items from ItemEditor'
-      - '<blue>[<white>ItemEdit<blue>] <green>Imported items: <yellow>%ids%'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Imported <yellow>%done% <green>of <yellow>%max% <green>items from ItemEditor'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Imported items: <yellow>%ids%'
     import-empty:
-      - '<dark_red>[<red>ItemEdit<dark_red>] <red>ItemEditor has no items to import'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>ItemEditor has no items to import'
 itemeditreload:
-  success: '<blue>[<white>ItemEdit<blue>] <green>Reloaded'
+  success: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Reloaded'
 gui:
   color:
     title: '<blue>Color Editor'
@@ -1342,114 +1337,114 @@ gui:
     title: '<blue>Choose colors'
     buttons:
       color:
-        - '<gold>Colors:'
-        - '<yellow>%colors%'
-        - '<gray>[<white>Right Click<gray>]<aqua> Add <yellow>%color%'
-        - '<gray>[<white>Left Click<gray>]<aqua> Remove last color'
-        - '<gray>[<white>Shift+Right Click<gray>]<aqua> Clear colors'
+        - '<gradient:#A78BFA:gold>Colors:</gradient>'
+        - '<gray><yellow>%colors%'
+        - '<gray>[<white>Right Click<gray>] Add <yellow>%color%'
+        - '<gray>[<white>Left Click<gray>] Remove last color'
+        - '<gray>[<white>Shift+Right Click<gray>] Clear colors'
   banner:
     title: '<blue>Banner Editor'
     color_selector_title: '<blue>Color selector'
     pattern_selector_title: '<blue>Pattern selector'
     buttons:
       pattern_selector_info:
-        - '<aqua>Select <gold><b>%type%</b>'
+        - '<gray>Select <gold><b>%type%</b>'
       color_selector_info:
-        - '<aqua>Select <gold><b>%color%</b>'
+        - '<gray>Select <gold><b>%color%</b>'
       position:
-        - '<gold>Pattern Controller'
+        - '<gradient:#A78BFA:gold>Pattern Controller</gradient>'
         - ''
-        - '<gray>[<white>%middle_click%<gray>] <aqua>Toggle pattern'
-        - '<gray>[<white>Left/Right Click<gray>]<aqua> << Move pattern >>'
+        - '<gray>[<white>%middle_click%<gray>] Toggle pattern'
+        - '<gray>[<white>Left/Right Click<gray>] << Move pattern >>'
       type:
-        - '<gold>Type Selector'
-        - '<aqua>Type: <yellow>%type%'
+        - '<gradient:#A78BFA:gold>Type Selector</gradient>'
+        - '<gray>Type: <yellow>%type%'
         - ''
-        - '<gray>[<white>Click<gray>]<aqua> Change type'
+        - '<gray>[<white>Click<gray>] Change type'
       color:
-        - '<gold>Color Selector'
-        - '<aqua>Color: <yellow>%color%'
+        - '<gradient:#A78BFA:gold>Color Selector</gradient>'
+        - '<gray>Color: <yellow>%color%'
         - ''
-        - '<gray>[<white>Click<gray>]<aqua> Change color'
+        - '<gray>[<white>Click<gray>] Change color'
   firework:
     title: '<blue>Firework Editor'
     buttons:
       type:
-        - '<gold>Type Selector'
-        - '<aqua>Type: <yellow>%type%'
+        - '<gradient:#A78BFA:gold>Type Selector</gradient>'
+        - '<gray>Type: <yellow>%type%'
         - ''
-        - '<gray>[<white>Click<gray>]<aqua> Change type'
+        - '<gray>[<white>Click<gray>] Change type'
       colors:
-        - '<gold>Colors Selector'
-        - '<aqua>Colors: <yellow>%colors%'
+        - '<gradient:#A78BFA:gold>Colors Selector</gradient>'
+        - '<gray>Colors: <yellow>%colors%'
         - ''
-        - '<gray>[<white>Click<gray>]<aqua> to change colors'
+        - '<gray>[<white>Click<gray>] to change colors'
       fadecolors:
-        - '<gold>Fade Colors Selector'
-        - '<aqua>Fade Colors: <yellow>%colors%'
+        - '<gradient:#A78BFA:gold>Fade Colors Selector</gradient>'
+        - '<gray>Fade Colors: <yellow>%colors%'
         - ''
-        - '<gray>[<white>Click<gray>]<aqua> to change colors'
+        - '<gray>[<white>Click<gray>] to change colors'
       flags:
         none: '<red>Nothing active'
         trail: '<yellow>Trail <green>Active'
         flicker: '<yellow>Flicker <green>Active'
-        both: '<yellow>Trail<aqua> and <yellow>Flicker <green>Active'
+        both: '<gray><yellow>Trail</yellow> and <yellow>Flicker <green>Active'
         info:
-          - '<gold>Trail and Flicker Activator'
+          - '<gradient:#A78BFA:gold>Trail and Flicker Activator</gradient>'
           - '%status%'
           - ''
-          - '<gray>[<white>Right Click<gray>]<aqua> Toggle Flicker effect'
-          - '<gray>[<white>Left Click<gray>]<aqua> Toggle Trail effect'
+          - '<gray>[<white>Right Click<gray>] Toggle Flicker effect'
+          - '<gray>[<white>Left Click<gray>] Toggle Trail effect'
       position:
-        - '<aqua>Effect Controller'
+        - '<gray>Effect Controller'
         - ''
-        - '<gray>[<white>%middle_click%<gray>]<aqua> Toggle effect'
-        - '<gray>[<white>Left/Right Click<gray>]<aqua> Move this effect'
+        - '<gray>[<white>%middle_click%<gray>] Toggle effect'
+        - '<gray>[<white>Left/Right Click<gray>] Move this effect'
       power:
-        - '<aqua>Power: <yellow>%power%'
+        - '<gray>Power: <yellow>%power%'
         - ''
-        - '<gray>[<white>Left/Right Click<gray>]<aqua> << Change >>'
+        - '<gray>[<white>Left/Right Click<gray>] << Change >>'
   previous-page:
     #Holders: %player_name% %page% %target_page%
     description:
       - '<gold><b>Previous Page</b>'
       - ''
-      - '<gray>[<white>Click<gray>]<aqua> Go to page <yellow>%target_page%'
+      - '<gray>[<white>Click<gray>] Go to page <yellow>%target_page%'
   next-page:
     #Holders: %player_name% %page% %target_page%
     description:
       - '<gold><b>Next Page</b>'
       - ''
-      - '<gray>[<white>Click<gray>]<aqua> Go to page <yellow>%target_page%'
+      - '<gray>[<white>Click<gray>] Go to page <yellow>%target_page%'
   back:
     #Holders: %player_name%
     description:
       - '<gold><b>Go Back</b>'
       - ''
-      - '<gray>[<white>Click<gray>]<aqua> Go to previous gui'
+      - '<gray>[<white>Click<gray>] Go to previous gui'
   playeritems:
     #Holders: %player_name% %page%
     title: '<blue>%player_name% items - page <aqua>%page%'
     page-info:
       #Holders: %player_name% %page%
       description:
-        - '<gold><b>Page <yellow>%page%</b>'
-        - '<gray>[<white>Click<gray>]<aqua> Toggle view of <yellow>item<aqua>/<yellow>ID'
+        - '<gradient:#A78BFA:gold><b>Page <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] Toggle view of <yellow>item</yellow>/<yellow>ID'
         - ''
-        - '<aqua>Click on items:'
-        - '<gray>> [<white>Left Click<gray>]<aqua> Gain <yellow>1'
-        - '<gray>> [<white>Shift+Left Click<gray>]<aqua> Gain <yellow>64'
-        - '<gray>> [<white>Shift+Right Click<gray>]<aqua> Delete item'
+        - '<gray>Click on items:'
+        - '<gray>> [<white>Left Click<gray>] Gain <yellow>1'
+        - '<gray>> [<white>Shift+Left Click<gray>] Gain <yellow>64'
+        - '<gray>> [<white>Shift+Right Click<gray>] Delete item'
   serveritems:
     #Holders: %player_name% %page%
     title: '<blue>Server items - page <aqua>%page%'
     page-info:
       #Holders: %player_name% %page%
       description:
-        - '<gold><b>Page <yellow>%page%</b>'
-        - '<gray>[<white>Click<gray>]<aqua> Toggle view of <yellow>item<aqua>/<yellow>ID'
+        - '<gradient:#A78BFA:gold><b>Page <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] Toggle view of <yellow>item</yellow>/<yellow>ID'
         - ''
-        - '<aqua>Click on items:'
-        - '<gray>> [<white>Left Click<gray>]<aqua> Gain <yellow>1'
-        - '<gray>> [<white>Shift+Left Click<gray>]<aqua> Gain <yellow>64'
-        - '<gray>> [<white>Shift+Right Click<gray>]<aqua> Delete item'
+        - '<gray>Click on items:'
+        - '<gray>> [<white>Left Click<gray>] Gain <yellow>1'
+        - '<gray>> [<white>Shift+Left Click<gray>] Gain <yellow>64'
+        - '<gray>> [<white>Shift+Right Click<gray>] Delete item'

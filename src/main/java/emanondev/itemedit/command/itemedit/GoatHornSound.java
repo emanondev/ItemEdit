@@ -24,7 +24,8 @@ public class GoatHornSound extends SubCmd {
         Player player = (Player) sender;
         ItemBuilder item = new ItemBuilder(getItemInMainHand(player));
         if (!item.isMetaClass(MusicInstrumentMeta.class)) {
-            getPlugin().getTranslator().send(player, "generic.wrong-material.music_instrument");
+            getPlugin().getTranslator().send(player, "generic.wrong-material.music_instrument",
+                    "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
             return;
         }
 

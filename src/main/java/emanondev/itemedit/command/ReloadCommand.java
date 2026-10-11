@@ -40,8 +40,9 @@ public class ReloadCommand implements TabExecutor {
     }
 
     public void sendPermissionLackMessage(@NotNull String permission, CommandSender sender) {
-        Util.sendMessage2(sender, plugin.getTranslator().translate(sender, "lack-permission",
-                "%permission%", permission));
+        plugin.getTranslator().send(sender, "lack-permission",
+                "%permission%", permission,
+                "%prefix%", plugin.getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
     }
 
     @Override

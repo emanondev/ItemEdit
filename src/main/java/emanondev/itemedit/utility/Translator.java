@@ -120,6 +120,40 @@ public class Translator {
         return UtilsString.fix2(message, placeholderApi && target instanceof Player ? ((Player) target) : null, true, holders);
     }
 
+    public String translateOrEmptyRaw(CommandSender target, String path, String... holders) {
+        String locale = VersionUtils.isAfter(1, 12)
+                && isUseMultiLanguage()
+                && target instanceof Player player ?
+                (player.locale().toString()).toLowerCase(Locale.ENGLISH) : null;
+        if (locale == null) {
+            locale = getDefaultLocale();
+        }
+        List<YMLConfig> locales = getLocaleFiles(locale);
+        String message = null;
+        for (YMLConfig file : locales) {
+            Object obj = file.get(path, null);
+            if (obj instanceof String) {
+                message = (String) obj;
+                break;
+            }
+            try {
+                if (obj instanceof List) {
+                    @SuppressWarnings("unchecked")
+                    List<String> values = (List<String>) obj;
+                    message = String.join("\n", values);
+                    break;
+                }
+            } catch (Exception ignored) {
+            }
+            if (logMissingMessages) {
+                getPlugin().log("Missing language messages at: '" + path + "' for " + file.getFileName());
+            }
+        }
+        if (message == null) {
+            return null;
+        }
+        return UtilsString.fix(message, null, false, holders);
+    }
 
     public Component translateOrEmpty(CommandSender target, String path, String... holders) {
         return translateOrEmpty(target, path, true, holders);

@@ -39,7 +39,8 @@ public class Color extends SubCmd {
         ItemBuilder item = new ItemBuilder(this.getItemInMainHand(p));
         String perm = calculatePermission(item, args, p);
         if (perm == null) {
-            getPlugin().getTranslator().send(p, "generic.wrong-material.rgb_colorable");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.rgb_colorable",
+                    "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
             return;
         }
 

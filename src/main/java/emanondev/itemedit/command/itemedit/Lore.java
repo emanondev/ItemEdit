@@ -228,7 +228,8 @@ public class Lore extends SubCmd {
                         .replace(fromText, replacementPlainText);
                 if (!allowedLengthLimit(p, plainText)) {
                     getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
-                            "%limit%", String.valueOf(lengthLimit));
+                            "%limit%", String.valueOf(lengthLimit),
+                            "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(p, "generic.help.prefix"));
                     return;
                 }
                 replacedLore.add(replaced);
@@ -278,7 +279,8 @@ public class Lore extends SubCmd {
         if (item.hasItemMeta()) {
             ItemMeta itemMeta = ItemUtils.getMeta(item);
             if (!(itemMeta instanceof BookMeta meta)) {
-                getPlugin().getTranslator().send(p, "generic.wrong-material.writable_book");
+                getPlugin().getTranslator().send(p, "generic.wrong-material.writable_book",
+                        "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(p, "generic.help.prefix"));
                 return;
             }
             // TODO use components
@@ -335,7 +337,8 @@ public class Lore extends SubCmd {
         }
         if (!allowedLineLimit(p, lore.size() + 1)) {
             getPlugin().getTranslator().send(p, "blocked-by-lore-line-limit",
-                    "%limit%", String.valueOf(lineLimit));
+                    "%limit%", String.valueOf(lineLimit),
+                    "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(p, "generic.help.prefix"));
             return;
         }
 
@@ -343,7 +346,8 @@ public class Lore extends SubCmd {
         String plainText = Util.getPlainTextItemTemplate(p, lineText, getPermission());
         if (!allowedLengthLimit(p, plainText)) {
             getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
-                    "%limit%", String.valueOf(lengthLimit));
+                    "%limit%", String.valueOf(lengthLimit),
+                    "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(p, "generic.help.prefix"));
             return;
         }
         if (Util.checkBannedWords(p, plainText)) {
@@ -388,14 +392,16 @@ public class Lore extends SubCmd {
             }
             if (!allowedLineLimit(p, Math.max(lore.size() + 1, line.getValue() + 1))) {
                 getPlugin().getTranslator().send(p, "blocked-by-lore-line-limit",
-                        "%limit%", String.valueOf(lineLimit));
+                        "%limit%", String.valueOf(lineLimit),
+                        "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(p, "generic.help.prefix"));
                 return;
             }
             Component lineText = Util.formatItemTemplate(p, text.toString(), getPermission());
             String plainText = Util.getPlainTextItemTemplate(p, lineText, getPermission());
             if (!allowedLengthLimit(p, plainText)) {
                 getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
-                        "%limit%", String.valueOf(lengthLimit));
+                        "%limit%", String.valueOf(lengthLimit),
+                        "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(p, "generic.help.prefix"));
                 return;
             }
 
@@ -454,12 +460,14 @@ public class Lore extends SubCmd {
 
             if (lore.size() <= line.getValue() && !allowedLineLimit(p, line.getValue() + 1)) {
                 getPlugin().getTranslator().send(p, "blocked-by-lore-line-limit",
-                        "%limit%", String.valueOf(lineLimit));
+                        "%limit%", String.valueOf(lineLimit),
+                        "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(p, "generic.help.prefix"));
                 return;
             }
             if (!allowedLengthLimit(p, plainText)) {
                 getPlugin().getTranslator().send(p, "blocked-by-lore-length-limit",
-                        "%limit%", String.valueOf(lengthLimit));
+                        "%limit%", String.valueOf(lengthLimit),
+                        "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(p, "generic.help.prefix"));
                 return;
             }
             for (int i = lore.size(); i <= line.getValue(); i++) {

@@ -24,7 +24,8 @@ public class SkullOwner extends SubCmd {
         Player p = (Player) sender;
         ItemBuilder item = new ItemBuilder(getItemInMainHand(p));
         if (!item.isMetaClass(SkullMeta.class)) {
-            getPlugin().getTranslator().send(p, "generic.wrong-material.player_head");
+            getPlugin().getTranslator().send(p, "generic.wrong-material.player_head",
+                    "%prefix%", getPlugin().getTranslator().translateOrEmptyRaw(sender, "generic.help.prefix"));
             return;
         }
 
