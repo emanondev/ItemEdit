@@ -354,7 +354,10 @@ public final class Util {
         return "<click:suggest_command:'" + command.replace("'", "''") + "'>" + text + "</click>";
     }
 
-    public static Component asSuggestCommand(Component text, @Nullable String command) {
+    public static Component asSuggestCommand(@Nullable Component text, @Nullable String command) {
+        if (text == null) {
+            return Component.empty();
+        }
         if (command == null || command.isEmpty()) {
             return text;
         }
@@ -368,7 +371,8 @@ public final class Util {
         return "<click:run_command:'" + command.replace("'", "''") + "'>" + text + "</click>";
     }
 
-    public static Component asExecuteCommand(Component text, @Nullable String command) {
+    public static Component asExecuteCommand(@Nullable Component text, @Nullable String command) {
+        text = text == null ? Component.empty() : text;
         return command == null || command.isEmpty() ? text : text.clickEvent(ClickEvent.runCommand(command));
     }
 
@@ -379,7 +383,8 @@ public final class Util {
         return "<click:copy_to_clipboard:'" + copied.replace("'", "''") + "'>" + text + "</click>";
     }
 
-    public static Component asCopyToClipboard(Component text, @Nullable String copied) {
+    public static Component asCopyToClipboard(@Nullable Component text, @Nullable String copied) {
+        text = text == null ? Component.empty() : text;
         return copied == null || copied.isEmpty() ? text : text.clickEvent(ClickEvent.copyToClipboard(copied));
     }
 
@@ -390,7 +395,8 @@ public final class Util {
         return "<click:open_url:'" + url.replace("'", "''") + "'>" + text + "</click>";
     }
 
-    public static Component asOpenUrl(Component text, @Nullable String url) {
+    public static Component asOpenUrl(@Nullable Component text, @Nullable String url) {
+        text = text == null ? Component.empty() : text;
         return url == null || url.isEmpty() ? text : text.clickEvent(ClickEvent.openUrl(url));
     }
 
@@ -408,17 +414,20 @@ public final class Util {
         return asHover(text, MiniMessage.miniMessage().serialize(hover));
     }
 
-    public static Component asHover(Component text, @Nullable Component hover) {
+    public static Component asHover(@Nullable Component text, @Nullable Component hover) {
+        text = text == null ? Component.empty() : text;
         return hover == null ? text : text.hoverEvent(HoverEvent.showText(hover));
     }
 
-    public static Component asHover(Component text, @Nullable String hover) {
+    public static Component asHover(@Nullable Component text, @Nullable String hover) {
+        text = text == null ? Component.empty() : text;
         return hover == null || hover.isEmpty()
                 ? text
                 : asHover(text, MiniMessage.miniMessage().deserialize(hover));
     }
 
-    public static Component asHover(Component text, @Nullable List<Component> hover) {
+    public static Component asHover(@Nullable Component text, @Nullable List<Component> hover) {
+        text = text == null ? Component.empty() : text;
         return hover == null || hover.isEmpty()
                 ? text
                 : asHover(text, Component.join(JoinConfiguration.newlines(), hover));
