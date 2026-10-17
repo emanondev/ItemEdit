@@ -280,7 +280,7 @@ public abstract class APlugin extends JavaPlugin {
                     check = true;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                log.warn("Unable to reload language configuration", e);
             }
         if (check) {
             ArrayList<String> toRemove = new ArrayList<>();

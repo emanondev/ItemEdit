@@ -134,7 +134,7 @@ public class Aliases {
             }
             types.put(set.getId(), set);
         } catch (Throwable t) {
-            t.printStackTrace();
+            log.warn("Unable to register alias type; skipping it", t);
         }
     }
 

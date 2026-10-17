@@ -21,7 +21,10 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 @Slf4j
@@ -148,10 +151,7 @@ public abstract class AbstractCommand implements TabExecutor {
             } catch (Throwable t) {
                 subCmd.onFail(sender, label);
                 Util.logCommandError(this, args, sender);
-                getPlugin().getLogger().info(
-                        String.join("\n",
-                                Arrays.stream(t.getStackTrace()).map(StackTraceElement::toString).toList()));
-                t.printStackTrace();
+                log.warn("Command execution failed for /{} {}", label, String.join(" ", args), t);
             }
         }
         return true;

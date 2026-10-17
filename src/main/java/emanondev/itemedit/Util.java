@@ -148,7 +148,7 @@ public final class Util {
             pw.flush();
             pw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warn("Unable to append message to log file", e);
         }
     }
 

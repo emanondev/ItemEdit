@@ -93,7 +93,7 @@ public class ItemEditImportCommand implements TabExecutor {
                         Util.sendComponent(sender, plugin.getTranslator()
                                 .translate(sender, "itemeditimport.itemeditor.unable-to-get-item",
                                         "%id%", name));
-                        e.printStackTrace();
+                        log.warn("Unable to import item '{}'", name, e);
                         continue;
                     }
                 }

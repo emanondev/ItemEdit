@@ -693,9 +693,8 @@ public class YMLConfig extends YamlConfiguration {
             try {
                 return Enum.valueOf(clazz, value.toUpperCase());
             } catch (IllegalArgumentException e2) {
-                e2.printStackTrace();
-                new IllegalArgumentException(getError(errorPath) + "; can't find value for '" + value + "' from enum '"
-                        + clazz.getName() + "' using default").printStackTrace();
+                log.warn("{}; can't find value for '{}' from enum '{}', using default",
+                        getError(errorPath), value, clazz.getName(), e2);
             }
         }
         return def;
