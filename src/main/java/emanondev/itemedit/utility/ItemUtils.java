@@ -84,29 +84,19 @@ public final class ItemUtils {
     public static AttributeModifier createAttributeModifier(double amount,
                                                             @NotNull AttributeModifier.Operation operation,
                                                             @Nullable String slot) {
-        if (VersionUtils.isAfter(1, 20, 6)) {
-            EquipmentSlotGroup group;
-            if (slot == null) {
-                group = EquipmentSlotGroup.ANY;
-            } else {
-                group = EquipmentSlotGroup.getByName(slot.toUpperCase(Locale.ENGLISH));
-                if (group == null) {
-                    group = EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)).getGroup();
-                }
+        EquipmentSlotGroup group;
+        if (slot == null) {
+            group = EquipmentSlotGroup.ANY;
+        } else {
+            group = EquipmentSlotGroup.getByName(slot.toUpperCase(Locale.ENGLISH));
+            if (group == null) {
+                group = EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)).getGroup();
             }
-            if (VersionUtils.isAfter(1, 21, 2)) {
-                return new AttributeModifier(Objects.requireNonNull(NamespacedKey.fromString(UUID.randomUUID().toString())),
-                        amount, operation, group);
-            }
-            UUID uuid = UUID.randomUUID();
-            return ReflectionUtils.invokeConstructor(AttributeModifier.class,
-                    UUID.class, uuid,
-                    String.class, uuid.toString(),
-                    double.class, amount,
-                    AttributeModifier.Operation.class, operation,
-                    EquipmentSlotGroup.class, group);
         }
-
+        if (VersionUtils.isAfter(1, 21, 2)) {
+            return new AttributeModifier(Objects.requireNonNull(NamespacedKey.fromString(UUID.randomUUID().toString())),
+                    amount, operation, group);
+        }
         UUID uuid = UUID.randomUUID();
         return ReflectionUtils.invokeConstructor(AttributeModifier.class,
                 UUID.class, uuid,
@@ -118,23 +108,14 @@ public final class ItemUtils {
     }
 
     /**
-     * Retrieves all available {@link PatternType}s based on the current Minecraft version.
+     * Retrieves all available {@link PatternType}s.
      *
-     * @return An array of {@link PatternType} objects. In versions after 1.20.6, patterns are retrieved from
-     * the {@code Registry.BANNER_PATTERN}. For earlier versions, they are retrieved via reflection.
+     * @return An array of {@link PatternType} objects retrieved from the {@code Registry.BANNER_PATTERN}.
      */
     public static PatternType[] getPatternTypes() {
-        try {
-            if (VersionUtils.isAfter(1, 20, 6)) {
-                List<PatternType> result = new ArrayList<>();
-                Registry.BANNER_PATTERN.forEach(result::add);
-                return result.toArray(new PatternType[0]);
-            }
-        } catch (Throwable ignored) {
-        }
-        PatternType[] result = Objects.requireNonNull((PatternType[]) ReflectionUtils
-                .invokeStaticMethod(PatternType.class, "values"));
-        return Arrays.copyOfRange(result, 1, result.length);
+        List<PatternType> result = new ArrayList<>();
+        Registry.BANNER_PATTERN.forEach(result::add);
+        return result.toArray(new PatternType[0]);
     }
 
     /**
@@ -148,11 +129,6 @@ public final class ItemUtils {
         PatternType[] val = getPatternTypes();
         ArrayList<PatternType> list = new ArrayList<>(Arrays.asList(val));
         list.remove(PatternType.BASE);
-        if (VersionUtils.isAfter(1, 20, 6) &&
-                !VersionUtils.isAfter(1, 21)) { //those are not craftable items on 1.20.6
-            list.remove(PatternType.FLOW);
-            list.remove(PatternType.GUSTER);
-        }
         return list.toArray(new PatternType[0]);
     }
 

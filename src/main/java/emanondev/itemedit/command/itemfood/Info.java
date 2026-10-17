@@ -28,8 +28,7 @@ public class Info extends SubCmd {
         Player player = (Player) sender;
         ItemStack item = getItemInMainHand(player);
         boolean hasFood = item.hasData(DataComponentTypes.FOOD);
-        boolean supportsConsumable = VersionUtils.isAfter(1, 20, 5);
-        Consumable consumable = supportsConsumable ? item.getData(DataComponentTypes.CONSUMABLE) : null;
+        Consumable consumable = item.getData(DataComponentTypes.CONSUMABLE);
 
         if (!hasFood && consumable == null) {
             Util.sendComponent(player, translate("not_food", player));

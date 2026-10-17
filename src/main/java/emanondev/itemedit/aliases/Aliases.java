@@ -98,12 +98,7 @@ public class Aliases {
     public static final GoatHornSoundAliases GOAT_HORN_SOUND = createAndRegister(GoatHornSoundAliases::new);
     public static final EquipmentSlotGroupAliases EQUIPMENT_SLOTGROUPS = createAndRegister(() ->
             VersionUtils.isAfter(1, 21) ? new EquipmentSlotGroupAliases() : null);
-    public static final SoundAliases SOUND = createAndRegister(() -> {
-        if (VersionUtils.isAfter(1, 20, 5)) {
-            return new SoundAliases();
-        }
-        return null;
-    });
+    public static final SoundAliases SOUND = createAndRegister(SoundAliases::new);
     public static final AliasSet<EntityType> ENTITY_TYPE =
             createAndRegister(() -> new EnumAliasSet<>(ItemEdit.get(), EntityType.class));
     public static final AliasSet<TagContainer<EntityType>> ENTITY_GROUPS =

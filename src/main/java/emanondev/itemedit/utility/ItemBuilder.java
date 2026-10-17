@@ -118,9 +118,6 @@ public class ItemBuilder {
     }
 
     public float getConsumeSeconds() {
-        if (!VersionUtils.isAfter(1, 20, 5)) {
-            throw new UnsupportedOperationException();
-        }
         return stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).consumeSeconds();
     }
@@ -171,9 +168,6 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConsumeSeconds(float consumeSeconds) {
-        if (!VersionUtils.isAfter(1, 20, 5)) {
-            throw new UnsupportedOperationException();
-        }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().consumeSeconds(consumeSeconds).build();
         setStackData(DataComponentTypes.CONSUMABLE, consumable);
@@ -225,17 +219,11 @@ public class ItemBuilder {
     }
 
     public boolean canAlwaysEat() {
-        if (!VersionUtils.isAfter(1, 20, 5)) {
-            throw new UnsupportedOperationException();
-        }
         return stack.getDataOrDefault(DataComponentTypes.FOOD,
                 FoodProperties.food().build()).canAlwaysEat();
     }
 
     public int getNutrition() {
-        if (!VersionUtils.isAfter(1, 20, 5)) {
-            throw new UnsupportedOperationException();
-        }
         return stack.getDataOrDefault(DataComponentTypes.FOOD,
                 FoodProperties.food().build()).nutrition();
     }
@@ -243,17 +231,11 @@ public class ItemBuilder {
     //FOOD COMPONENT
 
     public float getSaturation() {
-        if (!VersionUtils.isAfter(1, 20, 5)) {
-            throw new UnsupportedOperationException();
-        }
         return stack.getDataOrDefault(DataComponentTypes.FOOD,
                 FoodProperties.food().build()).saturation();
     }
 
     public ItemBuilder setCanAlwaysEat(boolean canAlwaysEat) {
-        if (!VersionUtils.isAfter(1, 20, 5)) {
-            throw new UnsupportedOperationException();
-        }
         FoodProperties food = stack.getDataOrDefault(DataComponentTypes.FOOD,
                 FoodProperties.food().build()).toBuilder().canAlwaysEat(canAlwaysEat).build();
         setStackData(DataComponentTypes.FOOD, food);
@@ -261,9 +243,6 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setNutrition(int nutrition) {
-        if (!VersionUtils.isAfter(1, 20, 5)) {
-            throw new UnsupportedOperationException();
-        }
         FoodProperties food = stack.getDataOrDefault(DataComponentTypes.FOOD,
                 FoodProperties.food().build()).toBuilder().nutrition(nutrition).build();
         setStackData(DataComponentTypes.FOOD, food);
@@ -271,9 +250,6 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setSaturation(float saturation) {
-        if (!VersionUtils.isAfter(1, 20, 5)) {
-            throw new UnsupportedOperationException();
-        }
         FoodProperties food = stack.getDataOrDefault(DataComponentTypes.FOOD,
                 FoodProperties.food().build()).toBuilder().saturation(saturation).build();
         setStackData(DataComponentTypes.FOOD, food);

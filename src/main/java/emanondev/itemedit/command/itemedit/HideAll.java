@@ -40,7 +40,6 @@ public class HideAll extends SubCmd {
 
     private void handleFlagChange(ItemBuilder item) {
         if (!VersionUtils.hasPaperAPI() ||
-                !VersionUtils.isAfter(1, 20, 5) ||
                 !ItemEdit.get().getConfig().loadBoolean("itemedit.paper_hide_fix", true)) {
             return;
         }

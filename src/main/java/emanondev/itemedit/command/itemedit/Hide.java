@@ -67,7 +67,6 @@ public class Hide extends SubCmd {
 
     private void handleFlagChange(boolean put, ItemFlag flag, ItemBuilder item) {
         if (!VersionUtils.hasPaperAPI() ||
-                !VersionUtils.isAfter(1, 20, 5) ||
                 !ItemEdit.get().getConfig().loadBoolean("itemedit.paper_hide_fix", true)) {
             return;
         }
