@@ -221,7 +221,7 @@ public class ItemEdit extends APlugin {
         //TODO add a command to change storage type (aka conversion)
     }
 
-    public YMLConfig getGuiConfig(){
+    public YMLConfig getGuiConfig() {
         return getConfig("gui.yml");
     }
 

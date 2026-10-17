@@ -359,7 +359,7 @@ public abstract class AbstractCommand implements TabExecutor {
             Translator translator = getPlugin().getTranslator();
             String currentPage = String.valueOf(page);
             String lastPage = String.valueOf(maxPage);
-            Component footer = getPlugin().getTranslator().translateOrEmpty( sender,"generic.help.footer-format",
+            Component footer = getPlugin().getTranslator().translateOrEmpty(sender, "generic.help.footer-format",
                     "%page%", currentPage, "%max_page%", lastPage);
             Component previous = page > 1
                     ? pageControl(sender, translator, "prev", alias, page, page - 1, maxPage)

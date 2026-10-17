@@ -169,7 +169,7 @@ public class PotionEffectEditor extends SubCmd {
         if (!p.hasPermission(this.getPermission() + ".bypass_limits")) {
             level = Math.min(level, 1);
         }
-        PotionEffect effect =                 new PotionEffect(type, duration, level, ambient, particles, icon);
+        PotionEffect effect = new PotionEffect(type, duration, level, ambient, particles, icon);
 
         item.addCustomEffect(effect).build();
         onSubSuccess(p, "add");
