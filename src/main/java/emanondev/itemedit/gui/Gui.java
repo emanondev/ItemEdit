@@ -2,11 +2,10 @@ package emanondev.itemedit.gui;
 
 import emanondev.itemedit.APlugin;
 import emanondev.itemedit.YMLConfig;
-import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.ItemBuilder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -145,19 +144,10 @@ public interface Gui extends InventoryHolder {
                                  @NotNull Material defMaterial,
                                  int defDurability) {
         YMLConfig config = getPlugin().getConfig("gui.yml");
-        ItemStack item = new ItemStack(config.loadMaterial(path + ".material", defMaterial));
-        ItemMeta meta = ItemUtils.getMeta(item);
-        meta.addItemFlags(ItemFlag.values());
-        if (config.getBoolean(path + ".glow", false)) {
-            meta.addEnchant(Enchantment.LURE, 1, true);
-        }
-
-        item.setItemMeta(meta);
-        int dur = config.loadInteger(path + ".durability", defDurability);
-        if (dur > 0) {
-            item.setDurability((short) dur);
-        }
-        return item;
+        return new ItemBuilder(config.loadMaterial(path + ".material", defMaterial))
+                .setItemFlags(ItemFlag.values(), true)
+                .setEnchantmentGlintOverride(config.getBoolean(path + ".glow", false))
+                .build();
     }
 
     @NotNull
