@@ -334,15 +334,3 @@ animations:
   spyglass: spyglass
   toot_horn: toot_horn
   brush: brush
-# ItemTag flags https://www.spigotmc.org/resources/89634/
-custom_flags:
-  placeable: placeable
-  usable: usable
-  recipeingredient: recipeingredient
-  smelt: smelt
-  furnacefuel: furnacefuel
-  enchantable: enchantable
-  renamable: renamable
-  grindable: grindable
-  equipment: equipment
-  entityfood: entityfood

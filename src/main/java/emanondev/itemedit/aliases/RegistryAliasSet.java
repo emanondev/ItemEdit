@@ -13,12 +13,6 @@ public class RegistryAliasSet<T extends Keyed> extends AliasSet<T> {
 
     private final Registry<T> registry;
 
-    @Deprecated
-    public RegistryAliasSet(String path, Registry<T> registry) {
-        super(path);
-        this.registry = registry;
-    }
-
     public RegistryAliasSet(String path, APlugin plugin, Registry<T> registry) {
         super(path, plugin);
         this.registry = registry;

@@ -1,5 +1,7 @@
 package emanondev.itemedit.aliases;
 
+import emanondev.itemedit.APlugin;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -31,4 +33,7 @@ public interface IAliasSet<T> {
     List<String> getAliases();
 
     T convertAlias(String alias);
+
+    APlugin getPlugin();
+
 }

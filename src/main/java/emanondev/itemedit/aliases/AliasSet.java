@@ -5,28 +5,24 @@ import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.YMLConfig;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
 @Slf4j
 public abstract class AliasSet<T> implements IAliasSet<T> {
-
-    private static final YMLConfig config = ItemEdit.get().getConfig("aliases.yml");
     @Getter
     private final String id;
     private final HashMap<String, T> map = new HashMap<>();
     @Getter
     private final APlugin plugin;
+    private final YMLConfig config;
 
-    @Deprecated
-    public AliasSet(String id) {
-        this(id, null);
-    }
-
-    public AliasSet(String id, APlugin plugin) {
+    public AliasSet(String id, @NotNull APlugin plugin) {
         this.id = id.toLowerCase(Locale.ENGLISH);
-        this.plugin = plugin == null ? ItemEdit.get() : plugin;
+        this.plugin = plugin;
+        this.config = plugin.getConfig("aliases.yml");
     }
 
     public void reload() {

@@ -10,17 +10,6 @@ public class EnumAliasSet<T extends Enum<T>> extends AliasSet<T> {
 
     private final Class<T> clazz;
 
-    @Deprecated
-    public EnumAliasSet(Class<T> clazz) {
-        this(clazz.getSimpleName().toLowerCase(Locale.ENGLISH), clazz);
-    }
-
-    @Deprecated
-    public EnumAliasSet(String path, Class<T> clazz) {
-        super(path);
-        this.clazz = clazz;
-    }
-
     public EnumAliasSet(APlugin plugin, Class<T> clazz) {
         this(clazz.getSimpleName().toLowerCase(Locale.ENGLISH), plugin, clazz);
     }

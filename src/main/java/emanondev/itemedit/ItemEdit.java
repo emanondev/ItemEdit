@@ -53,7 +53,7 @@ public class ItemEdit extends APlugin {
 
     @Override
     public void enable() {
-        ItemEdit.get().log("Hooking into <rainbow>MiniMessageAPI</rainbow><white> see https://webui.advntr.dev/");
+        log("Hooking into <rainbow>MiniMessageAPI</rainbow><white> see https://webui.advntr.dev/");
         Aliases.reload();
         Bukkit.getPluginManager().registerEvents(new GuiHandler(), this);
 

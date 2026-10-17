@@ -22,12 +22,11 @@ import java.util.function.Supplier;
 @Slf4j
 public class Aliases {
 
-    private static final Map<String, IAliasSet<?>> types = new HashMap<>();
-
     public static final AnimationAliases ANIMATION = createAndRegister(
             VersionUtils.isAfter(1, 21, 4), AnimationAliases::new);
+    private static final Map<String, IAliasSet<?>> types = new HashMap<>();
     public static final EnchAliases ENCHANT = createAndRegister(EnchAliases::new);
-    public static final AliasSet<PatternType> PATTERN_TYPE = createAndRegister(BannerPatternAliasesNew::new);
+    public static final AliasSet<PatternType> PATTERN_TYPE = createAndRegister(BannerPatternAliases::new);
     public static final GenAliases BOOK_TYPE = createAndRegister(GenAliases::new);
     public static final AliasSet<PotionEffectType> POTION_EFFECT = createAndRegister(() ->
             new AliasSet<PotionEffectType>("potion_effect", ItemEdit.get()) {
@@ -90,8 +89,8 @@ public class Aliases {
     public static final OperationAliases OPERATIONS = createAndRegister(OperationAliases::new);
     public static final RarityAliases RARITY = createAndRegister(RarityAliases::new);
     public static final TropicalFishPatternAliases TROPICALPATTERN = createAndRegister(TropicalFishPatternAliases::new);
-    public static final TrimMaterialAliases TRIM_MATERIAL = createAndRegister(TrimMaterialAliasesNew::new);
-    public static final TrimPatternAliases TRIM_PATTERN = createAndRegister(TrimPatternAliasesNew::new);
+    public static final TrimMaterialAliases TRIM_MATERIAL = createAndRegister(TrimMaterialAliases::new);
+    public static final TrimPatternAliases TRIM_PATTERN = createAndRegister(TrimPatternAliases::new);
     public static final EnumAliasSet<FireworkEffect.Type> FIREWORK_TYPE = createAndRegister(() ->
             new EnumAliasSet<>("firework_type", ItemEdit.get(), FireworkEffect.Type.class));
     public static final AxolotlVariantAliases AXOLOTL_VARIANT = createAndRegister(AxolotlVariantAliases::new);
