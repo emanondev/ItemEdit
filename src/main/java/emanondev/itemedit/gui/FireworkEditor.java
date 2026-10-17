@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FireworkEditor implements Gui {
 
@@ -180,12 +181,7 @@ public class FireworkEditor implements Gui {
         }
         firework.setItemMeta(meta);
         this.getInventory().setItem(49, firework);
-        ItemStack item;
-        try {
-            item = new ItemStack(Material.GUNPOWDER);
-        } catch (Throwable t) {
-            item = new ItemStack(Material.valueOf("SULPHUR"));
-        }
+        ItemStack item = getGuiItem("firework.buttons.power", Material.GUNPOWDER);
         item.setAmount(meta.getPower() + 1);
         ItemMeta powerMeta = ItemUtils.getMeta(item);
         powerMeta.addItemFlags(ItemFlag.values());
@@ -237,16 +233,9 @@ public class FireworkEditor implements Gui {
             if (!active) {
                 return null;
             }
-            ItemStack item = switch (type) {
-                case BALL -> new ItemStack(Material.FIREWORK_STAR); //TODO use gui config for materials
-                case BALL_LARGE -> new ItemStack(Material.FIRE_CHARGE);
-                case BURST -> new ItemStack(Material.FEATHER);
-                case CREEPER -> new ItemStack(Material.CREEPER_HEAD);
-                case STAR -> new ItemStack(Material.GOLD_NUGGET);
-                default -> new ItemStack(Material.ARROW);
-            };
+            ItemStack item = getGuiItem("firework.buttons.type-" + type.name().toLowerCase(Locale.ENGLISH), Material.ARROW);
+
             ItemMeta meta = ItemUtils.getMeta(item);
-            meta.addItemFlags(ItemFlag.values());
             loadLanguageDescription(meta, SUB_PATH + "buttons.type", "%type%", Aliases.FIREWORK_TYPE.getName(type));
             item.setItemMeta(meta);
             return item;
@@ -294,7 +283,8 @@ public class FireworkEditor implements Gui {
             if (!active) {
                 return null;
             }
-            ItemStack item = trail ? new ItemStack(Material.DIAMOND) : Util.getDyeItemFromColor(DyeColor.GRAY);
+            ItemStack item = trail ? getGuiItem("firework.buttons.flags-trail", Material.DIAMOND)
+                    : getGuiItem("firework.buttons.flags-no-trail", Material.GRAY_DYE);
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             if (flicker) {

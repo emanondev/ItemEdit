@@ -222,7 +222,8 @@ public class BannerEditor implements Gui {
         }
 
         public ItemStack getPositionItem() {
-            ItemStack item = active ? new ItemStack(Material.ITEM_FRAME) : Util.getDyeItemFromColor(DyeColor.GRAY);
+            ItemStack item = active ? getGuiItem("banner.buttons.position-active", Material.ITEM_FRAME)
+                    : getGuiItem("banner.buttons.position-inactive", Material.GRAY_DYE);
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             loadLanguageDescription(meta, SUB_PATH + "buttons.position", "%middle_click%",
@@ -335,12 +336,7 @@ public class BannerEditor implements Gui {
             this.inventory = Bukkit.createInventory(this, (6) * 9, title);
             int i = 0;
             for (PatternType type : TYPES) {
-                ItemStack item;
-                try {
-                    item = new ItemStack(Material.WHITE_BANNER);
-                } catch (Throwable t) {
-                    item = new ItemStack(Material.valueOf("BANNER"));
-                }
+                ItemStack item = new ItemStack(Material.WHITE_BANNER);
                 BannerMeta bMeta = (BannerMeta) ItemUtils.getMeta(item);
                 bMeta.addPattern(new Pattern(DyeColor.BLACK, type));
                 loadLanguageDescription(bMeta, SUB_PATH + "buttons.pattern_selector_info", "%type%",
