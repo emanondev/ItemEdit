@@ -22,9 +22,10 @@ import java.util.function.Supplier;
 @Slf4j
 public class Aliases {
 
+    private static final Map<String, IAliasSet<?>> types = new HashMap<>();
+
     public static final AnimationAliases ANIMATION = createAndRegister(
             VersionUtils.isAfter(1, 21, 4), AnimationAliases::new);
-    private static final Map<String, IAliasSet<?>> types = new HashMap<>();
     public static final EnchAliases ENCHANT = createAndRegister(EnchAliases::new);
     public static final AliasSet<PatternType> PATTERN_TYPE = createAndRegister(BannerPatternAliases::new);
     public static final GenAliases BOOK_TYPE = createAndRegister(GenAliases::new);
@@ -102,7 +103,6 @@ public class Aliases {
     public static final AliasSet<TagContainer<EntityType>> ENTITY_GROUPS =
             createAndRegister(() -> VersionUtils.isAfter(1, 21) ?
                     new TagAliasSet<>("entitygroups", ItemEdit.get(), EntityType.class, Tag.REGISTRY_ENTITY_TYPES) : null);
-    private static boolean loaded = false;
 
     public static <T> void registerAliasType(@Nullable IAliasSet<T> set) {
         registerAliasType(set, false);
@@ -142,9 +142,6 @@ public class Aliases {
     }
 
     public static void reload() {
-        if (!loaded) {
-            loaded = true;
-        }
         for (IAliasSet<?> set : types.values()) {
             set.reload();
         }
