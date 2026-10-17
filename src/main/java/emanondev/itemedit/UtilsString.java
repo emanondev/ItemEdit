@@ -53,21 +53,21 @@ public final class UtilsString {
             title = " ";
             lore = null;
         } else if (desc.size() == 1) {
-            if (desc.get(0) != null) {
-                if (!desc.get(0).startsWith(ChatColor.RESET + "")) {
-                    title = ChatColor.RESET + desc.get(0);
+            if (desc.getFirst() != null) {
+                if (!desc.getFirst().startsWith(ChatColor.RESET + "")) {
+                    title = ChatColor.RESET + desc.getFirst();
                 } else {
-                    title = desc.get(0);
+                    title = desc.getFirst();
                 }
             } else {
                 title = null;
             }
             lore = null;
         } else {
-            if (!desc.get(0).startsWith(ChatColor.RESET + "")) {
-                title = ChatColor.RESET + desc.get(0);
+            if (!desc.getFirst().startsWith(ChatColor.RESET + "")) {
+                title = ChatColor.RESET + desc.getFirst();
             } else {
-                title = desc.get(0);
+                title = desc.getFirst();
             }
             lore = new ArrayList<>();
             for (int i = 1; i < desc.size(); i++) {

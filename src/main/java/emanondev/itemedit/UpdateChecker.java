@@ -94,7 +94,7 @@ public class UpdateChecker {
                         .get("version_number")
                         .getAsString();
             } catch (NoSuchMethodError e) {
-                JsonElement element = new JsonParser().parse(json); // Compatible with old Gson
+                JsonElement element = JsonParser.parseString(json);
                 newVersion = element
                         .getAsJsonArray()
                         .get(0)

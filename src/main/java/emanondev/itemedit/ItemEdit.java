@@ -60,10 +60,11 @@ public class ItemEdit extends APlugin {
         StorageType storageType = getStorageType();
         log("Selected Storage Type: " + storageType.name());
         switch (storageType) {
-            case YAML:
+            case YAML: {
                 this.playerStorage = new YmlPlayerStorage();
                 this.serverStorage = new YmlServerStorage();
                 break;
+            }
             case MONGODB: {
                 String connectionString = this.getConfig().load("storage.mongodb.uri", "mongodb://127.0.0.1:27017", String.class);
                 String database = this.getConfig().load("storage.mongodb.database", "itemedit", String.class);

@@ -237,36 +237,14 @@ public class FireworkEditor implements Gui {
             if (!active) {
                 return null;
             }
-            ItemStack item;
-            switch (type) {
-                case BALL:
-                    try {
-                        item = new ItemStack(Material.FIREWORK_STAR);
-                    } catch (Throwable t) {
-                        item = new ItemStack(Material.valueOf("FIREWORK_CHARGE"));
-                    }
-                    break;
-                case BALL_LARGE:
-                    try {
-                        item = new ItemStack(Material.FIRE_CHARGE);
-                    } catch (Exception e) {
-                        item = new ItemStack(Material.valueOf("FIREBALL"));
-                    }
-
-                    break;
-                case BURST:
-                    item = new ItemStack(Material.FEATHER);
-                    break;
-                case CREEPER:
-                    item = new ItemStack(Material.CREEPER_HEAD);
-                    break;
-                case STAR:
-                    item = new ItemStack(Material.GOLD_NUGGET);
-                    break;
-                default:
-                    item = new ItemStack(Material.ARROW);
-                    break;
-            }
+            ItemStack item = switch (type) {
+                case BALL -> new ItemStack(Material.FIREWORK_STAR); //TODO use gui config for materials
+                case BALL_LARGE -> new ItemStack(Material.FIRE_CHARGE);
+                case BURST -> new ItemStack(Material.FEATHER);
+                case CREEPER -> new ItemStack(Material.CREEPER_HEAD);
+                case STAR -> new ItemStack(Material.GOLD_NUGGET);
+                default -> new ItemStack(Material.ARROW);
+            };
             ItemMeta meta = ItemUtils.getMeta(item);
             meta.addItemFlags(ItemFlag.values());
             loadLanguageDescription(meta, SUB_PATH + "buttons.type", "%type%", Aliases.FIREWORK_TYPE.getName(type));
@@ -359,13 +337,10 @@ public class FireworkEditor implements Gui {
                                 % FireworkEffect.Type.values().length];
                     }
                 }
-                case 2 -> // color
-                        getTargetPlayer().openInventory(
-                                new ColorListSelectorGui(FireworkEditor.this, colors).getInventory());
-                case 3 -> // fadecolor
-                        getTargetPlayer().openInventory(
-                                new ColorListSelectorGui(FireworkEditor.this, fadeColors).getInventory());
-
+                case 2 -> getTargetPlayer().openInventory(// color
+                        new ColorListSelectorGui(FireworkEditor.this, colors).getInventory());
+                case 3 -> getTargetPlayer().openInventory(// fadecolor
+                        new ColorListSelectorGui(FireworkEditor.this, fadeColors).getInventory());
                 case 4 -> {// flags
                     if (event.isLeftClick()) {
                         trail = !trail;

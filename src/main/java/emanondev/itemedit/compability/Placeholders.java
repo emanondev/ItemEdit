@@ -168,52 +168,43 @@ public class Placeholders extends PlaceholderExpansion {
             }
         }
         switch (slot.toLowerCase(Locale.ENGLISH)) {
-            case "main_hand":
-            case "mainhand":
-            case "hand": {
+            case "main_hand", "mainhand", "hand" -> {
                 ItemStack copy = ItemUtils.getHandMainItem(player);
                 if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
                 }
-                break;
             }
-            case "off_hand":
-            case "offhand": {
+            case "off_hand", "offhand" -> {
                 ItemStack copy = player.getEquipment().getItemInOffHand();
                 if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
                 }
-                break;
             }
-            case "legs": {
+            case "legs" -> {
                 ItemStack copy = player.getEquipment().getLeggings();
                 if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
                 }
-                break;
             }
-            case "chest": {
+            case "chest" -> {
                 ItemStack copy = player.getEquipment().getChestplate();
                 if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
                 }
-                break;
             }
-            case "head": {
+            case "head" -> {
                 ItemStack copy = player.getEquipment().getHelmet();
                 if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
                 }
-                break;
             }
-            case "feet": {
+            case "feet" -> {
                 ItemStack copy = player.getEquipment().getBoots();
                 if (item.isSimilar(copy)) {
                     amount = amount + copy.getAmount();
                 }
-                break;
             }
-            case "inventory": {
+            case "inventory" -> {
                 for (ItemStack copy : player.getInventory().getStorageContents()) {
                     if (item.isSimilar(copy)) {
                         amount += copy.getAmount();
@@ -222,9 +213,8 @@ public class Placeholders extends PlaceholderExpansion {
                 if (item.isSimilar(player.getInventory().getItemInOffHand())) {
                     amount += player.getInventory().getItemInOffHand().getAmount();
                 }
-                break;
             }
-            case "equip": {
+            case "equip" -> {
                 for (ItemStack copy : player.getInventory().getArmorContents()) {
                     if (item.isSimilar(copy)) {
                         amount = amount + copy.getAmount();
@@ -234,9 +224,8 @@ public class Placeholders extends PlaceholderExpansion {
                     amount += player.getInventory().getItemInOffHand().getAmount();
 
                 }
-                break;
             }
-            case "inventoryandequip": {
+            case "inventoryandequip" -> {
                 for (ItemStack copy : player.getInventory().getStorageContents()) {
                     if (item.isSimilar(copy)) {
                         amount += copy.getAmount();
@@ -250,11 +239,8 @@ public class Placeholders extends PlaceholderExpansion {
                 if (item.isSimilar(player.getInventory().getItemInOffHand())) {
                     amount += player.getInventory().getItemInOffHand().getAmount();
                 }
-                break;
             }
-            default: {
-                throw new IllegalStateException();
-            }
+            default -> throw new IllegalStateException();
         }
         return String.valueOf(amount);
     }

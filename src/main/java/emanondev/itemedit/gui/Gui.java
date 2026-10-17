@@ -127,7 +127,7 @@ public interface Gui extends InventoryHolder {
             return null;
         }
         List<Component> list = getPlugin().getTranslator().translateList(getTargetPlayer(), fullPath, holders);
-        meta.displayName(list == null || list.isEmpty() ? Component.text(" ") : list.get(0));
+        meta.displayName(list == null || list.isEmpty() ? Component.text(" ") : list.getFirst());
         if (list != null && list.size() > 1) {
             meta.lore(list.subList(1, list.size()));
         }
