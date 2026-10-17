@@ -697,9 +697,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setDamage(int amount) {
-        if (!VersionUtils.isAfter(1, 13)) {
-            stack.setDurability((short) Math.max(0, Math.min(amount, stack.getType().getMaxDurability())));
-        } else if (meta instanceof Damageable damageable) {
+        if (meta instanceof Damageable damageable) {
             damageable.setDamage(amount);
         }
         return this;
@@ -820,9 +818,7 @@ public class ItemBuilder {
     }
 
     public int getDamage() {
-        if (!VersionUtils.isAfter(1, 13)) {
-            return stack.getDurability();
-        } else if (meta instanceof Damageable damageable) {
+        if (meta instanceof Damageable damageable) {
             return damageable.getDamage();
         }
         return 0;

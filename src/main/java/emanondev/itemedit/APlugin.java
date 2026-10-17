@@ -199,8 +199,8 @@ public abstract class APlugin extends JavaPlugin {
                 log(ChatColor.GREEN, "#", "Enabled (took <yellow>" + (System.currentTimeMillis() - now) + "<white> ms)");
                 return;
             }
-            if (!VersionUtils.isAfter(1, 8)) {
-                enableWithError("1.7.x is not supported!!! use 1.8+");
+            if (!VersionUtils.isAfter(1, 21)) {
+                enableWithError("Your version is not supported!!! use 1.21+ (or plugin version 3.x for 1.8+ support)");
                 log(ChatColor.GREEN, "#", "Enabled (took <yellow>" + (System.currentTimeMillis() - now) + "<white> ms)");
                 return;
             }
@@ -336,9 +336,6 @@ public abstract class APlugin extends JavaPlugin {
                 Predicate<Player> isAdmin = languagesMetricsIsAdmin();
                 Predicate<Player> isUser = languagesMetricsIsUser();
 
-                if (!VersionUtils.isAfter(1, 12)) {
-                    return;
-                }
                 bstatsMetrics.addCustomChart(new Metrics.DrilldownPie("admins_languages", () -> {
                     Map<String, Map<String, Integer>> mainMap = new HashMap<>();
                     for (Player player : Bukkit.getOnlinePlayers()) {

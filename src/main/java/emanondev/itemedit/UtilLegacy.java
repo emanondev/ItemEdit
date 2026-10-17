@@ -23,7 +23,7 @@ public final class UtilLegacy {
         }
 
         // Infinite duration
-        return VersionUtils.isAfter(1, 19, 4) ? -1 : Integer.MAX_VALUE;
+        return -1;
     }
 
     /**

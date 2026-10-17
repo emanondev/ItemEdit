@@ -54,16 +54,16 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new Firework(this));
         this.registerSubCommand(() -> new PotionEffectEditor(this)); // 1.15+ adds suspicious stew
         this.registerSubCommand(() -> new BookAuthor(this));
-        this.registerSubCommand(() -> new BookType(this), VersionUtils.isAfter(1, 10));
-        this.registerSubCommand(() -> new Attribute(this), VersionUtils.isAfter(1, 13)); // 1.13+
-        this.registerSubCommand(() -> new TropicalFish(this), VersionUtils.isAfter(1, 13)); // 1.13+
-        this.registerSubCommand(() -> new CustomModelData(this), VersionUtils.isAfter(1, 14)); // 1.14+
+        this.registerSubCommand(() -> new BookType(this));
+        this.registerSubCommand(() -> new Attribute(this)); // 1.13+
+        this.registerSubCommand(() -> new TropicalFish(this)); // 1.13+
+        this.registerSubCommand(() -> new CustomModelData(this)); // 1.14+
         this.registerSubCommand(() -> new ItemModel(this), VersionUtils.isAfter(1, 21, 2)); // 1.21.2+
         this.registerSubCommand(() -> new ToolTipStyle(this), VersionUtils.isAfter(1, 21, 2));
-        this.registerSubCommand(() -> new Compass(this), VersionUtils.isAfter(1, 16)); // 1.16+
-        this.registerSubCommand(() -> new AxolotlVariant(this), VersionUtils.isAfter(1, 17)); // 1.17+
+        this.registerSubCommand(() -> new Compass(this)); // 1.16+
+        this.registerSubCommand(() -> new AxolotlVariant(this)); // 1.17+
 
-        this.registerSubCommand(() -> new GoatHornSound(this), VersionUtils.isAfter(1, 19, 3)); // 1.19.3+
+        this.registerSubCommand(() -> new GoatHornSound(this)); // 1.19.3+
         this.registerSubCommand(() -> new ArmorTrim(this), VersionUtils.isAfter(1, 20)); // 1.20+
         this.registerSubCommand(() -> new BookEnchant(this));
 

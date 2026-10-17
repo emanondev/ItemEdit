@@ -94,7 +94,7 @@ public class PotionEffectEditor extends SubCmd {
                 yield List.of();
             }
             case 8 -> {
-                if (VersionUtils.isAfter(1, 13) && args[1].equalsIgnoreCase("add")) {
+                if (args[1].equalsIgnoreCase("add")) {
                     yield CompleteUtility.complete(args[args.length - 1], Aliases.BOOLEAN);
                 }
                 yield List.of();
@@ -158,7 +158,7 @@ public class PotionEffectEditor extends SubCmd {
             }
         }
         Boolean icon = true;
-        if (VersionUtils.isAfter(1, 13) && args.length == 8) {
+        if (args.length == 8) {
             icon = Aliases.BOOLEAN.convertAlias(args[7]);
             if (icon == null) {
                 onWrongAlias(p, Aliases.BOOLEAN);
@@ -169,9 +169,7 @@ public class PotionEffectEditor extends SubCmd {
         if (!p.hasPermission(this.getPermission() + ".bypass_limits")) {
             level = Math.min(level, 1);
         }
-        PotionEffect effect = VersionUtils.isAfter(1, 13) ?
-                new PotionEffect(type, duration, level, ambient, particles, icon) :
-                new PotionEffect(type, duration, level, ambient, particles);
+        PotionEffect effect =                 new PotionEffect(type, duration, level, ambient, particles, icon);
 
         item.addCustomEffect(effect).build();
         onSubSuccess(p, "add");

@@ -2,7 +2,6 @@ package emanondev.itemedit.compability;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.utility.ItemUtils;
-import emanondev.itemedit.utility.VersionUtils;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -220,10 +219,8 @@ public class Placeholders extends PlaceholderExpansion {
                         amount += copy.getAmount();
                     }
                 }
-                if (VersionUtils.isAfter(1, 9)) {
-                    if (item.isSimilar(player.getInventory().getItemInOffHand())) {
-                        amount += player.getInventory().getItemInOffHand().getAmount();
-                    }
+                if (item.isSimilar(player.getInventory().getItemInOffHand())) {
+                    amount += player.getInventory().getItemInOffHand().getAmount();
                 }
                 break;
             }
@@ -233,10 +230,9 @@ public class Placeholders extends PlaceholderExpansion {
                         amount = amount + copy.getAmount();
                     }
                 }
-                if (VersionUtils.isAfter(1, 9)) {
-                    if (item.isSimilar(player.getInventory().getItemInOffHand())) {
-                        amount += player.getInventory().getItemInOffHand().getAmount();
-                    }
+                if (item.isSimilar(player.getInventory().getItemInOffHand())) {
+                    amount += player.getInventory().getItemInOffHand().getAmount();
+
                 }
                 break;
             }
@@ -246,18 +242,14 @@ public class Placeholders extends PlaceholderExpansion {
                         amount += copy.getAmount();
                     }
                 }
-
                 for (ItemStack copy : player.getInventory().getArmorContents()) {
                     if (item.isSimilar(copy)) {
                         amount += copy.getAmount();
                     }
                 }
-                if (VersionUtils.isAfter(1, 9)) {
-                    if (item.isSimilar(player.getInventory().getItemInOffHand())) {
-                        amount += player.getInventory().getItemInOffHand().getAmount();
-                    }
+                if (item.isSimilar(player.getInventory().getItemInOffHand())) {
+                    amount += player.getInventory().getItemInOffHand().getAmount();
                 }
-
                 break;
             }
             default: {

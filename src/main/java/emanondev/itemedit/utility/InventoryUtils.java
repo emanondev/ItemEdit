@@ -133,23 +133,21 @@ public final class InventoryUtils {
                 }
 
                 int left = map.get(0).getAmount();
-                if (VersionUtils.isAfter(1, 9)) {
-                    ItemStack[] extras = player.getInventory().getExtraContents();
-                    for (int i = 0; i < extras.length; i++) {
-                        ItemStack extra = extras[i];
-                        if (extra != null && itemClone.isSimilar(extra)) {
-                            int toRemove = Math.min(left, extra.getAmount());
-                            left -= toRemove;
-                            if (toRemove == extra.getAmount()) {
-                                extras[i] = null;
-                            } else {
-                                extra.setAmount(extra.getAmount() - toRemove);
-                                extras[i] = extra;
-                            }
+                ItemStack[] extras = player.getInventory().getExtraContents();
+                for (int i = 0; i < extras.length; i++) {
+                    ItemStack extra = extras[i];
+                    if (extra != null && itemClone.isSimilar(extra)) {
+                        int toRemove = Math.min(left, extra.getAmount());
+                        left -= toRemove;
+                        if (toRemove == extra.getAmount()) {
+                            extras[i] = null;
+                        } else {
+                            extra.setAmount(extra.getAmount() - toRemove);
+                            extras[i] = extra;
                         }
                     }
-                    player.getInventory().setExtraContents(extras);
                 }
+                player.getInventory().setExtraContents(extras);
                 yield amount - left;
 
             }

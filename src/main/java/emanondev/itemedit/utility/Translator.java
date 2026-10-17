@@ -49,8 +49,7 @@ public class Translator {
 
     @SuppressWarnings("unchecked")
     public List<Component> translateList(CommandSender target, String path, boolean placeholderApi, String... holders) {
-        String locale = VersionUtils.isAfter(1, 12)
-                && isUseMultiLanguage()
+        String locale = isUseMultiLanguage()
                 && target instanceof Player ?
                 ((Player) target).getLocale() : null;
         if (locale == null) {
@@ -86,8 +85,7 @@ public class Translator {
     }
 
     public Component translate(CommandSender target, String path, boolean placeholderApi, String... holders) {
-        String locale = VersionUtils.isAfter(1, 12)
-                && isUseMultiLanguage()
+        String locale = isUseMultiLanguage()
                 && target instanceof Player player ?
                 (player.locale().toString()).toLowerCase(Locale.ENGLISH) : null;
         if (locale == null) {
@@ -121,8 +119,7 @@ public class Translator {
     }
 
     public String translateOrEmptyRaw(CommandSender target, String path, String... holders) {
-        String locale = VersionUtils.isAfter(1, 12)
-                && isUseMultiLanguage()
+        String locale = isUseMultiLanguage()
                 && target instanceof Player player ?
                 (player.locale().toString()).toLowerCase(Locale.ENGLISH) : null;
         if (locale == null) {
