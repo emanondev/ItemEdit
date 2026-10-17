@@ -44,8 +44,7 @@ public class ItemFoodCommand extends AbstractCommand {
                 VersionUtils.isAfter(1, 21, 4));
         this.registerSubCommand(() -> new Animation(this),
                 VersionUtils.isAfter(1, 21, 2));
-        this.registerSubCommand(() -> new ConvertTo(this),
-                VersionUtils.isAfter(1, 21));
+        this.registerSubCommand(() -> new ConvertTo(this));
         this.registerSubCommand(() -> new BooleanSubCommand(this, "consumeparticles",
                         ItemBuilder::hasConsumeParticles, ItemBuilder::setConsumeParticles),
                 VersionUtils.isAfter(1, 21, 2));

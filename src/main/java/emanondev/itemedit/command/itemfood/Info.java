@@ -46,11 +46,9 @@ public class Info extends SubCmd {
         String sound = consumable == null ? "-" : consumable.sound().toString();
         String particles = consumable == null ? "-" : String.valueOf(consumable.hasConsumeParticles());
         String remainder = "-";
-        if (VersionUtils.isAfter(1, 21)) {
-            ItemStack convertsTo = item.getItemMeta().getUseRemainder();
-            if (convertsTo != null) {
-                remainder = convertsTo.getType().getKey().toString();
-            }
+        ItemStack convertsTo = item.getItemMeta().getUseRemainder();
+        if (convertsTo != null) {
+            remainder = convertsTo.getType().getKey().toString();
         }
 
         Util.sendComponent(player, translateList("message", player,

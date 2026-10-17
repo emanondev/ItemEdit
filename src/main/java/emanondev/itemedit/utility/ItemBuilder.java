@@ -75,16 +75,10 @@ public class ItemBuilder {
     }
 
     public ItemStack getConvertsTo() {
-        if (!VersionUtils.isAfter(1, 21)) {
-            throw new UnsupportedOperationException();
-        }
         return meta.getUseRemainder();
     }
 
     public ItemBuilder setConvertsTo(ItemStack itemStack) {
-        if (!VersionUtils.isAfter(1, 21)) {
-            throw new UnsupportedOperationException();
-        }
         if (!VersionUtils.isAfter(1, 21, 2)) {
             FoodComponent food = meta.getFood();
             try {

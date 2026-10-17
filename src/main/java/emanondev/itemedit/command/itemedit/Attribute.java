@@ -55,9 +55,7 @@ public class Attribute extends SubCmd {
             case "add" -> switch (args.length) {
                 case 3 -> CompleteUtility.complete(args[2], Aliases.ATTRIBUTE);
                 case 5 -> CompleteUtility.complete(args[4], Aliases.OPERATIONS);
-                case 6 -> VersionUtils.isAfter(1, 21)
-                        ? CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS)
-                        : CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTS);
+                case 6 -> CompleteUtility.complete(args[5], Aliases.EQUIPMENT_SLOTGROUPS);
                 default -> List.of();
             };
             case "remove" -> args.length == 3 ? Stream.concat(
