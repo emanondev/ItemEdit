@@ -59,7 +59,7 @@ public class ColorListSelectorGui implements Gui {
 
     @Override
     public void onClose(InventoryCloseEvent event) {
-        SchedulerUtils.runLater(getPlugin(), 1L,
+        SchedulerUtils.runLater(getPlugin(), getTargetPlayer(), 1L,
                 () -> {
                     if (!getTargetPlayer().getOpenInventory().getTopInventory().equals(parent.getInventory()))
                         getTargetPlayer().openInventory(parent.getInventory());
