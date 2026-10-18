@@ -3,7 +3,6 @@ package emanondev.itemedit.command.itemfood;
 import emanondev.itemedit.Util;
 import emanondev.itemedit.command.ItemFoodCommand;
 import emanondev.itemedit.command.SubCmd;
-import emanondev.itemedit.utility.VersionUtils;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;

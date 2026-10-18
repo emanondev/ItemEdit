@@ -1,7 +1,6 @@
 package emanondev.itemedit.aliases;
 
 import emanondev.itemedit.APlugin;
-import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.YMLConfig;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

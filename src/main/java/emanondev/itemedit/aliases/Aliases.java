@@ -2,7 +2,6 @@ package emanondev.itemedit.aliases;
 
 import emanondev.itemedit.ItemEdit;
 import emanondev.itemedit.utility.TagContainer;
-import emanondev.itemedit.utility.VersionUtils;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import lombok.extern.slf4j.Slf4j;
 import org.bukkit.*;
@@ -55,38 +54,38 @@ public class Aliases {
     public static final AliasSet<TropicalFish.Pattern> TROPICALPATTERN;
 
     static {
-        ANIMATION = createAndRegister(()-> new EnumAliasSet<>("animation", ItemEdit.get(), ItemUseAnimation.class));
+        ANIMATION = createAndRegister(() -> new EnumAliasSet<>("animation", ItemEdit.get(), ItemUseAnimation.class));
         ATTRIBUTE = createAndRegister(() -> new RegistryAliasSet<>("attribute", ItemEdit.get(), Registry.ATTRIBUTE));
-        AXOLOTL_VARIANT = createAndRegister(()-> new EnumAliasSet<>("axolotl_variant", ItemEdit.get(), Axolotl.Variant.class));
+        AXOLOTL_VARIANT = createAndRegister(() -> new EnumAliasSet<>("axolotl_variant", ItemEdit.get(), Axolotl.Variant.class));
         BOOK_TYPE = createAndRegister(() -> new EnumAliasSet<>("book_type", ItemEdit.get(), BookMeta.Generation.class));
         BOOLEAN = createAndRegister(() -> new AliasSet<Boolean>("boolean", ItemEdit.get()) {
-                @Override
-                public String getName(Boolean value) {
-                    return value.toString();
-                }
+            @Override
+            public String getName(Boolean value) {
+                return value.toString();
+            }
 
-                @Override
-                public Collection<Boolean> getValues() {
-                    return List.of(Boolean.FALSE, Boolean.TRUE);
-                }
-            });
-        COLOR = createAndRegister(() -> new EnumAliasSet<>( ItemEdit.get(), DyeColor.class));
-        ENCHANT = createAndRegister(()-> new RegistryAliasSet<>("enchant", ItemEdit.get(), Registry.ENCHANTMENT)); //TODO deprecated code
+            @Override
+            public Collection<Boolean> getValues() {
+                return List.of(Boolean.FALSE, Boolean.TRUE);
+            }
+        });
+        COLOR = createAndRegister(() -> new EnumAliasSet<>(ItemEdit.get(), DyeColor.class));
+        ENCHANT = createAndRegister(() -> new RegistryAliasSet<>("enchant", ItemEdit.get(), Registry.ENCHANTMENT)); //TODO deprecated code
         ENTITY_GROUPS = createAndRegister(() -> new TagAliasSet<>("entitygroups", ItemEdit.get(), EntityType.class, Tag.REGISTRY_ENTITY_TYPES));
         ENTITY_TYPE = createAndRegister(() -> new EnumAliasSet<>(ItemEdit.get(), EntityType.class));
         EQUIPMENT_SLOTGROUPS = createAndRegister(EquipmentSlotGroupAliases::new);
         EQUIPMENT_SLOTS = createAndRegister(() -> new EnumAliasSet<>("equip_slot", ItemEdit.get(), EquipmentSlot.class));
         FIREWORK_TYPE = createAndRegister(() -> new EnumAliasSet<>("firework_type", ItemEdit.get(), FireworkEffect.Type.class));
         FLAG_TYPE = createAndRegister(() -> new EnumAliasSet<>("flag_type", ItemEdit.get(), ItemFlag.class));
-        GOAT_HORN_SOUND = createAndRegister(()-> new RegistryAliasSet<>("goat_horn_sound", ItemEdit.get(), Registry.INSTRUMENT));
-        OPERATIONS = createAndRegister(()-> new EnumAliasSet<>(ItemEdit.get(), AttributeModifier.Operation.class));
+        GOAT_HORN_SOUND = createAndRegister(() -> new RegistryAliasSet<>("goat_horn_sound", ItemEdit.get(), Registry.INSTRUMENT));
+        OPERATIONS = createAndRegister(() -> new EnumAliasSet<>(ItemEdit.get(), AttributeModifier.Operation.class));
         PATTERN_TYPE = createAndRegister(BannerPatternAliases::new);
-        POTION_EFFECT = createAndRegister(() -> new RegistryAliasSet<>("potion_effect", ItemEdit.get(),Registry.EFFECT));
-        RARITY = createAndRegister(()->new EnumAliasSet<>(ItemEdit.get(), ItemRarity.class));
-        SOUND = createAndRegister(()->new RegistryAliasSet<>("sound", ItemEdit.get(), Registry.SOUNDS));
-        TRIM_MATERIAL = createAndRegister(()->new RegistryAliasSet<>("trim_material", ItemEdit.get(), Registry.TRIM_MATERIAL));
-        TRIM_PATTERN = createAndRegister(()->new RegistryAliasSet<>("trim_pattern", ItemEdit.get(), Registry.TRIM_PATTERN));
-        TROPICALPATTERN = createAndRegister(()->new EnumAliasSet<>("tropical_fish_pattern", ItemEdit.get(), TropicalFish.Pattern.class));
+        POTION_EFFECT = createAndRegister(() -> new RegistryAliasSet<>("potion_effect", ItemEdit.get(), Registry.EFFECT));
+        RARITY = createAndRegister(() -> new EnumAliasSet<>(ItemEdit.get(), ItemRarity.class));
+        SOUND = createAndRegister(() -> new RegistryAliasSet<>("sound", ItemEdit.get(), Registry.SOUNDS));
+        TRIM_MATERIAL = createAndRegister(() -> new RegistryAliasSet<>("trim_material", ItemEdit.get(), Registry.TRIM_MATERIAL));
+        TRIM_PATTERN = createAndRegister(() -> new RegistryAliasSet<>("trim_pattern", ItemEdit.get(), Registry.TRIM_PATTERN));
+        TROPICALPATTERN = createAndRegister(() -> new EnumAliasSet<>("tropical_fish_pattern", ItemEdit.get(), TropicalFish.Pattern.class));
     }
 
     public static <T> void registerAliasType(@Nullable IAliasSet<T> set) {

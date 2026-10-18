@@ -5,7 +5,6 @@ import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemUtils;
-import emanondev.itemedit.utility.VersionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.command.CommandSender;
@@ -102,12 +101,12 @@ public class Attribute extends SubCmd {
         String equip = null;
 
         if (args.length > 5) {
-                equip = Aliases.EQUIPMENT_SLOTGROUPS.convertAlias(args[5]).toString();
-                if (equip == null) {
-                    onWrongAlias(p, Aliases.EQUIPMENT_SLOTGROUPS);
-                    onSubFail(p, alias, "add");
-                    return;
-                }
+            equip = Aliases.EQUIPMENT_SLOTGROUPS.convertAlias(args[5]).toString();
+            if (equip == null) {
+                onWrongAlias(p, Aliases.EQUIPMENT_SLOTGROUPS);
+                onSubFail(p, alias, "add");
+                return;
+            }
         }
 
         ItemMeta itemMeta = ItemUtils.getMeta(item);

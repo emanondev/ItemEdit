@@ -93,8 +93,8 @@ public final class ItemUtils {
                 group = EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)).getGroup();
             }
         }
-            return new AttributeModifier(Objects.requireNonNull(NamespacedKey.fromString(UUID.randomUUID().toString())),
-                    amount, operation, group);
+        return new AttributeModifier(Objects.requireNonNull(NamespacedKey.fromString(UUID.randomUUID().toString())),
+                amount, operation, group);
     }
 
     /**

@@ -35,7 +35,7 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new BooleanSubCommand(this, "fireresistent",
                 ItemBuilder::isFireResistent, ItemBuilder::setFireResistent));
         this.registerSubCommand(() -> new BooleanSubCommand(this, "glider",
-                        ItemBuilder::isGlider, ItemBuilder::setGlider));
+                ItemBuilder::isGlider, ItemBuilder::setGlider));
 
         this.registerSubCommand(() -> new Glow(this));
         this.registerSubCommand(() -> new Rarity(this));

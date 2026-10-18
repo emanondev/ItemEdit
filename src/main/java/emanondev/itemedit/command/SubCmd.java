@@ -237,7 +237,7 @@ public abstract class SubCmd {
     }
 
     protected int getConfigInt(String path) {
-        return getConfigInt(path,0);
+        return getConfigInt(path, 0);
     }
 
     protected int getConfigInt(String path, int def) {

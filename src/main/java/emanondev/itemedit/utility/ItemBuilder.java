@@ -26,7 +26,6 @@ import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
 import org.bukkit.inventory.meta.Repairable;
-import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;

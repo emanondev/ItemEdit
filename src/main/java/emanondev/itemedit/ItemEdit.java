@@ -206,7 +206,7 @@ public class ItemEdit extends APlugin {
 
     private void initCommands() {
         registerCommand(ItemFoodCommand.get(), List.of("ief"));
-            registerCommand(ItemEquipmentCommand.get(), List.of("iee"));
+        registerCommand(ItemEquipmentCommand.get(), List.of("iee"));
 
         if (VersionUtils.isAfter(1, 21, 11)) {
             registerCommand(ItemKineticCommand.get(), List.of("iek"));

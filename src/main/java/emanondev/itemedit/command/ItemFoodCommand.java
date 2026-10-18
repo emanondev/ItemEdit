@@ -7,7 +7,6 @@ import emanondev.itemedit.command.subcommands.DoubleSubCommand;
 import emanondev.itemedit.command.subcommands.IntSubCommand;
 import emanondev.itemedit.command.subcommands.SoundSubCommand;
 import emanondev.itemedit.utility.ItemBuilder;
-import emanondev.itemedit.utility.VersionUtils;
 
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class ItemFoodCommand extends AbstractCommand {
         this.registerSubCommand(() -> new Animation(this));
         this.registerSubCommand(() -> new ConvertTo(this));
         this.registerSubCommand(() -> new BooleanSubCommand(this, "consumeparticles",
-                        ItemBuilder::hasConsumeParticles, ItemBuilder::setConsumeParticles));
+                ItemBuilder::hasConsumeParticles, ItemBuilder::setConsumeParticles));
         this.registerSubCommand(() -> new Nutrition(this));
         this.registerSubCommand(() -> new SoundSubCommand(this, "sound", ItemBuilder::setConsumeSound));
         this.registerSubCommand(() -> new Info(this));
