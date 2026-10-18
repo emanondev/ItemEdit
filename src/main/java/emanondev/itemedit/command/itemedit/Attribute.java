@@ -102,21 +102,12 @@ public class Attribute extends SubCmd {
         String equip = null;
 
         if (args.length > 5) {
-            if (VersionUtils.isAfter(1, 21)) {
                 equip = Aliases.EQUIPMENT_SLOTGROUPS.convertAlias(args[5]).toString();
                 if (equip == null) {
                     onWrongAlias(p, Aliases.EQUIPMENT_SLOTGROUPS);
                     onSubFail(p, alias, "add");
                     return;
                 }
-            } else {
-                equip = Aliases.EQUIPMENT_SLOTS.convertAlias(args[5]).toString();
-                if (equip == null) {
-                    onWrongAlias(p, Aliases.EQUIPMENT_SLOTS);
-                    onSubFail(p, alias, "add");
-                    return;
-                }
-            }
         }
 
         ItemMeta itemMeta = ItemUtils.getMeta(item);

@@ -199,8 +199,8 @@ public abstract class APlugin extends JavaPlugin {
                 log(ChatColor.GREEN, "#", "Enabled (took <yellow>" + (System.currentTimeMillis() - now) + "<white> ms)");
                 return;
             }
-            if (!VersionUtils.isAfter(1, 21)) {
-                enableWithError("Your version is not supported!!! use 1.21+ (or plugin version 3.x for 1.8+ support)");
+            if (!VersionUtils.isAfter(1, 21,4)) {
+                enableWithError("Your version is not supported!!! use 1.21.4+ (or plugin version 3.x for 1.8+ support)");
                 log(ChatColor.GREEN, "#", "Enabled (took <yellow>" + (System.currentTimeMillis() - now) + "<white> ms)");
                 return;
             }

@@ -62,7 +62,7 @@ public class Info extends SubCmd {
                 "%canalwayseat%", canAlwaysEat,
                 "%convertto%", remainder));
 
-        if (consumable != null && VersionUtils.isAfter(1, 21, 4)) {
+        if (consumable != null) {
             sendConsumeEffects(player, consumable.consumeEffects());
         }
     }

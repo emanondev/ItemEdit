@@ -93,18 +93,8 @@ public final class ItemUtils {
                 group = EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)).getGroup();
             }
         }
-        if (VersionUtils.isAfter(1, 21, 2)) {
             return new AttributeModifier(Objects.requireNonNull(NamespacedKey.fromString(UUID.randomUUID().toString())),
                     amount, operation, group);
-        }
-        UUID uuid = UUID.randomUUID();
-        return ReflectionUtils.invokeConstructor(AttributeModifier.class,
-                UUID.class, uuid,
-                String.class, uuid.toString(),
-                double.class, amount,
-                AttributeModifier.Operation.class, operation,
-                EquipmentSlot.class, slot == null ? null : EquipmentSlot.valueOf(slot.toUpperCase(Locale.ENGLISH)));
-
     }
 
     /**

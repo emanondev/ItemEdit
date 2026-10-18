@@ -79,24 +79,11 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConvertsTo(ItemStack itemStack) {
-        if (!VersionUtils.isAfter(1, 21, 2)) {
-            FoodComponent food = meta.getFood();
-            try {
-                food.getClass().getMethod("setUsingConvertsTo", ItemStack.class).invoke(food, itemStack);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            meta.setFood(food);
-            return this;
-        }
         meta.setUseRemainder(itemStack);
         return this;
     }
 
     public ItemBuilder addConsumeEffect(@NotNull ConsumeEffect effect) {
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            throw new UnsupportedOperationException();
-        }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().addEffect(effect).build();
         setStackData(DataComponentTypes.CONSUMABLE, consumable);
@@ -104,9 +91,6 @@ public class ItemBuilder {
     }
 
     public ItemUseAnimation getConsumeAnimation() {
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            throw new UnsupportedOperationException();
-        }
         return stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).animation();
     }
@@ -117,34 +101,22 @@ public class ItemBuilder {
     }
 
     public List<ConsumeEffect> getConsumeEffects() {
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            throw new UnsupportedOperationException();
-        }
         return stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).consumeEffects();
 
     }
 
     public Key getConsumeSound() {
-        if (!VersionUtils.isAfter(1, 21, 2)) {
-            throw new UnsupportedOperationException();
-        }
         return stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).sound();
     }
 
     public boolean hasConsumeParticles() {
-        if (!VersionUtils.isAfter(1, 21, 2)) {
-            throw new UnsupportedOperationException();
-        }
         return stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).hasConsumeParticles();
     }
 
     public ItemBuilder setConsumeAnimation(ItemUseAnimation animation) {
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            throw new UnsupportedOperationException();
-        }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().animation(animation).build();
         setStackData(DataComponentTypes.CONSUMABLE, consumable);
@@ -152,9 +124,6 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConsumeParticles(boolean consumeParticles) {
-        if (!VersionUtils.isAfter(1, 21, 2)) {
-            throw new UnsupportedOperationException();
-        }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().hasConsumeParticles(consumeParticles).build();
         setStackData(DataComponentTypes.CONSUMABLE, consumable);
@@ -169,9 +138,6 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConsumeEffects(List<ConsumeEffect> effects) {
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            throw new UnsupportedOperationException();
-        }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().effects(effects).build();
         setStackData(DataComponentTypes.CONSUMABLE, consumable);
@@ -183,9 +149,6 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConsumeSound(Key sound) {
-        if (!VersionUtils.isAfter(1, 21, 2)) {
-            throw new UnsupportedOperationException();
-        }
         Consumable consumable = stack.getDataOrDefault(DataComponentTypes.CONSUMABLE,
                 Consumable.consumable().build()).toBuilder().sound(sound).build();
         setStackData(DataComponentTypes.CONSUMABLE, consumable);
@@ -193,9 +156,6 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setConsumableComponent(@Nullable Consumable consumable) {
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            throw new UnsupportedOperationException();
-        }
         setStackData(DataComponentTypes.CONSUMABLE, consumable);
 
         return this;
@@ -206,9 +166,6 @@ public class ItemBuilder {
     }
 
     public Consumable getConsumableComponent() {
-        if (!VersionUtils.isAfter(1, 21, 4)) {
-            throw new UnsupportedOperationException();
-        }
         return stack.getData(DataComponentTypes.CONSUMABLE);
     }
 

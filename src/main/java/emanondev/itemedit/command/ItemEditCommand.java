@@ -23,8 +23,7 @@ public class ItemEditCommand extends AbstractCommand {
                 ItemBuilder::isHideToolTip, ItemBuilder::setHideToolTip));
         this.registerSubCommand(() -> new BooleanSubCommand(this, "unbreakable",
                 ItemBuilder::isUnbreakable, ItemBuilder::setUnbreakable));
-        this.registerSubCommand(() -> new SubCmdLink("equipment", this, true, true, ItemEquipmentCommand.get()),
-                VersionUtils.isAfter(1, 21, 2));
+        this.registerSubCommand(() -> new SubCmdLink("equipment", this, true, true, ItemEquipmentCommand.get()));
         this.registerSubCommand(() -> new RepairCost(this));
         this.registerSubCommand(() -> new SubCmdLink("food", this, true, true, ItemFoodCommand.get()));
         this.registerSubCommand(() -> new SubCmdLink("kinetic", this, true, true, ItemKineticCommand.get()),
@@ -36,8 +35,7 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new BooleanSubCommand(this, "fireresistent",
                 ItemBuilder::isFireResistent, ItemBuilder::setFireResistent));
         this.registerSubCommand(() -> new BooleanSubCommand(this, "glider",
-                        ItemBuilder::isGlider, ItemBuilder::setGlider),
-                VersionUtils.isAfter(1, 21, 2));
+                        ItemBuilder::isGlider, ItemBuilder::setGlider));
 
         this.registerSubCommand(() -> new Glow(this));
         this.registerSubCommand(() -> new Rarity(this));
@@ -55,8 +53,8 @@ public class ItemEditCommand extends AbstractCommand {
         this.registerSubCommand(() -> new Attribute(this)); // 1.13+
         this.registerSubCommand(() -> new TropicalFish(this)); // 1.13+
         this.registerSubCommand(() -> new CustomModelData(this)); // 1.14+
-        this.registerSubCommand(() -> new ItemModel(this), VersionUtils.isAfter(1, 21, 2)); // 1.21.2+
-        this.registerSubCommand(() -> new ToolTipStyle(this), VersionUtils.isAfter(1, 21, 2));
+        this.registerSubCommand(() -> new ItemModel(this)); // 1.21.2+
+        this.registerSubCommand(() -> new ToolTipStyle(this));
         this.registerSubCommand(() -> new Compass(this)); // 1.16+
         this.registerSubCommand(() -> new AxolotlVariant(this)); // 1.17+
 
