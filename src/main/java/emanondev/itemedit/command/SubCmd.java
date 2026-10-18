@@ -237,7 +237,11 @@ public abstract class SubCmd {
     }
 
     protected int getConfigInt(String path) {
-        return config.loadInteger(this.PATH + path, 0);
+        return getConfigInt(path,0);
+    }
+
+    protected int getConfigInt(String path, int def) {
+        return config.loadInteger(this.PATH + path, def);
     }
 
     protected Component getDescription(@NotNull CommandSender target) {

@@ -22,13 +22,6 @@ generic:
     prev_void: " <dark_gray><b><st>< <</st>< "
     next_hover: "<gold><b>Go to page %target%"
     prev_hover: "<gold><b>Go to page %target%"
-    description:
-      - '<gold><b>Shows help</b>'
-      - ''
-      - '<gray><yellow>[page] </yellow>help page'
-      - '<gray><yellow>[subcommand] </yellow>help for subcommand'
-    params: '[page/subcommand]'
-
   wrong-material:
     axolotl_bucket: '%prefix% <red>Item must be a axolotl bucket'
     banner: '%prefix% <red>Item must be a banner'
@@ -491,7 +484,6 @@ itemedit:
     feedback: '%prefix% <green>Updated Item Unbreakable to <yellow>%value%'
   help:
     header-name: "ItemEdit"
-    footer: "%prev_clickable% <blue><b>Help</b> [%page%/%max_page%] %next_clickable%"
     description:
       - '<gradient:#A78BFA:gold><b>Shows ItemEdit help</b></gradient>'
       - ''
@@ -661,7 +653,6 @@ itemeditequipment:
     feedback-reset: "%prefix% <green>Equip sound property has been reset to default"
   help:
     header-name: "ItemEquipment"
-    footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
     description:
       - '<gradient:#A78BFA:gold><b>Shows ItemEditEquipment help</b></gradient>'
       - ''
@@ -836,7 +827,6 @@ itemeditfood:
     feedback: "%prefix% <green>Eat ticks updated to <yellow>%value%"
   help:
     header-name: "ItemFood"
-    footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
     description:
       - '<gradient:#A78BFA:gold><b>Shows ItemFood help</b></gradient>'
       - ''
@@ -961,7 +951,6 @@ itemeditkinetic:
     feedback: "%prefix% <green>Forward movement set"
   help:
     header-name: "ItemKinetic"
-    footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
     description:
       - '<gradient:#A78BFA:gold><b>Shows ItemKinetic help</b></gradient>'
       - ''
@@ -1024,7 +1013,6 @@ itemeditpiercing:
     feedback: "%prefix% <green>Dismount is now <yellow>%value%"
   help:
     header-name: "ItemPiercing"
-    footer: "%prev_clickable% <blue><b>Help [%page%/%max_page%]</b> %next_clickable%"
     description:
       - '<gradient:#A78BFA:gold><b>Shows ItemPiercing help</b></gradient>'
       - ''
