@@ -79,7 +79,7 @@ public class BannerEditor implements Gui {
             return;
         }
         if (event.getSlot() % 9 == 0) {
-            target.openInventory(new ColorSelector(null).getInventory());
+            openGuiNextTick(() -> new ColorSelector(null));
             return;
         }
         BannerData layer = layers.get(event.getSlot() % 9 - 1);
@@ -234,8 +234,8 @@ public class BannerEditor implements Gui {
 
         public void onClick(int line, InventoryClickEvent event) {
             switch (line) {
-                case 2 -> target.openInventory(new PatternSelector(this).getInventory());
-                case 3 -> target.openInventory(new ColorSelector(this).getInventory());
+                case 2 -> BannerEditor.this.openGuiNextTick(() -> new PatternSelector(this));
+                case 3 -> BannerEditor.this.openGuiNextTick(() -> new ColorSelector(this));
             }
         }
 
@@ -299,7 +299,7 @@ public class BannerEditor implements Gui {
                 meta = (BannerMeta) ItemUtils.getMeta(banner);
             }
             BannerEditor.this.updateInventory();
-            BannerEditor.this.getTargetPlayer().openInventory(BannerEditor.this.getInventory());
+            BannerEditor.this.openGuiNextTick(() -> BannerEditor.this);
         }
 
         @Override
@@ -365,7 +365,7 @@ public class BannerEditor implements Gui {
             }
             data.setPattern(TYPES[event.getSlot()]);
             BannerEditor.this.updateInventory();
-            BannerEditor.this.getTargetPlayer().openInventory(BannerEditor.this.getInventory());
+            BannerEditor.this.openGuiNextTick(() -> BannerEditor.this);
         }
 
         @Override

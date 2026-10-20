@@ -3,6 +3,7 @@ package emanondev.itemedit.gui;
 import emanondev.itemedit.APlugin;
 import emanondev.itemedit.YMLConfig;
 import emanondev.itemedit.utility.ItemBuilder;
+import emanondev.itemedit.utility.SchedulerUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public interface Gui extends InventoryHolder {
 
@@ -88,6 +90,14 @@ public interface Gui extends InventoryHolder {
      */
     @NotNull
     Inventory getInventory();
+
+    /**
+     * Defers opening a GUI until after the current inventory click has completed.
+     */
+    default void openGuiNextTick(@NotNull Supplier<? extends Gui> guiSupplier) {
+        SchedulerUtils.run(getPlugin(), getTargetPlayer(), () ->
+                getTargetPlayer().openInventory(guiSupplier.get().getInventory()));
+    }
 
     Player getTargetPlayer();
 

@@ -327,10 +327,10 @@ public class FireworkEditor implements Gui {
                                 % FireworkEffect.Type.values().length];
                     }
                 }
-                case 2 -> getTargetPlayer().openInventory(// color
-                        new ColorListSelectorGui(FireworkEditor.this, colors).getInventory());
-                case 3 -> getTargetPlayer().openInventory(// fadecolor
-                        new ColorListSelectorGui(FireworkEditor.this, fadeColors).getInventory());
+                case 2 -> FireworkEditor.this.openGuiNextTick(// color
+                        () -> new ColorListSelectorGui(FireworkEditor.this, colors));
+                case 3 -> FireworkEditor.this.openGuiNextTick(// fadecolor
+                        () -> new ColorListSelectorGui(FireworkEditor.this, fadeColors));
                 case 4 -> {// flags
                     if (event.isLeftClick()) {
                         trail = !trail;

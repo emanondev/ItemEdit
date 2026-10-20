@@ -98,7 +98,7 @@ public class ColorListSelectorGui implements Gui {
             return;
         }
         if (event.getSlot() == inventory.getSize() - 1) {
-            getTargetPlayer().openInventory(parent.getInventory());
+            openGuiNextTick(() -> parent);
         }
     }
 

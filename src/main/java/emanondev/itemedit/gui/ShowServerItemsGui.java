@@ -123,14 +123,14 @@ public class ShowServerItemsGui implements PagedGui {
         if (event.getSlot() > inventory.getSize() - 9) {
             switch (inventory.getSize() - event.getSlot()) {
                 case 2:
-                    target.openInventory(new ShowServerItemsGui(target, page + 1).getInventory());
+                    openGuiNextTick(() -> new ShowServerItemsGui(target, page + 1));
                     return;
                 case 5:
                     showItems = !showItems;
                     updateInventory();
                     return;
                 default:
-                    target.openInventory(new ShowServerItemsGui(target, page - 1).getInventory());
+                    openGuiNextTick(() -> new ShowServerItemsGui(target, page - 1));
                     return;
             }
         }

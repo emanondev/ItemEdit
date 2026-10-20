@@ -112,12 +112,12 @@ public class ShowPlayerItemsGui implements PagedGui {
         }
         if (event.getSlot() > inventory.getSize() - 9) {
             if (event.getSlot() == inventory.getSize() - 2) {
-                target.openInventory(new ShowPlayerItemsGui(target, page + 1).getInventory());
+                openGuiNextTick(() -> new ShowPlayerItemsGui(target, page + 1));
             } else if (event.getSlot() == inventory.getSize() - 5) {
                 showItems = !showItems;
                 updateInventory();
             } else {
-                target.openInventory(new ShowPlayerItemsGui(target, page - 1).getInventory());
+                openGuiNextTick(() -> new ShowPlayerItemsGui(target, page - 1));
             }
             return;
         }
