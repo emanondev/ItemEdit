@@ -1,5 +1,9 @@
 package emanondev.itemedit.utility;
 
+import emanondev.itemedit.ItemEdit;
+import emanondev.itemedit.Util;
+import emanondev.itemedit.UtilsString;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -10,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -26,7 +31,6 @@ import java.util.*;
 public final class ItemUtils {
 
     private ItemUtils() {
-        throw new UnsupportedOperationException();
     }
 
     /**
@@ -122,14 +126,6 @@ public final class ItemUtils {
         return list.toArray(new PatternType[0]);
     }
 
-    public static boolean isItem(@NotNull Material material) {
-        if (material.name().startsWith("LEGACY_")) {
-            return false;
-        }
-        return material.isItem();
-    }
-
-
     public static ItemMeta setColor(@NotNull ItemMeta meta, @NotNull Color color) {
         if ((meta instanceof PotionMeta)) {
             ((PotionMeta) meta).setColor(color);
@@ -159,12 +155,60 @@ public final class ItemUtils {
         return toColor(0, 0, 0);
     }
 
-    private static Color toColor(int red, int green, int blue) {
-        return Color.fromRGB(limit(red), limit(green), limit(blue));
+    /**
+     * Update the item, resolving player placeholders.
+     *
+     * @param item   stored item template
+     * @param player player whose placeholders should be resolved, or null to return a copy unchanged
+     */
+    public static void updateTemplate(@Nullable ItemStack item,
+                                      @Nullable Player player) {
+        if (item == null || player == null) {
+            return;
+        }
+        if (!ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
+            return;
+        }
+
+        String[] holders = new String[]{"%player_name%", player.getName(),
+                "%player_uuid%", player.getUniqueId().toString()};
+        ItemMeta meta = ItemUtils.getMeta(item);
+        Component displayName = meta.displayName();
+        if (displayName != null) {
+            if (Util.isDeferredItemTemplate(displayName)) {
+                String raw = ((net.kyori.adventure.text.TextComponent) displayName).content();
+                String expanded = UtilsString.replacePlaceholders(raw, player, holders);
+                meta.displayName(Util.formatComponent(player, expanded, null));
+            } else {
+                meta.displayName(UtilsString.replacePlaceholders(displayName, player, holders));
+            }
+        }
+
+        if (meta.hasLore()) {
+            meta.lore(meta.lore().stream()
+                    .map(line -> {
+                        if (Util.isDeferredItemTemplate(line)) {
+                            String raw = ((net.kyori.adventure.text.TextComponent) line).content();
+                            String expanded = UtilsString.replacePlaceholders(raw, player, holders);
+                            return Util.formatComponent(player, expanded, null);
+                        }
+                        return UtilsString.replacePlaceholders(line, player, holders);
+                    })
+                    .toList());
+        }
+
+        if (meta instanceof BookMeta bookMeta && bookMeta.author() != null) {
+            bookMeta.author(UtilsString.replacePlaceholders(bookMeta.author(), player, holders));
+        }
+        item.setItemMeta(meta);
     }
 
-    private static int limit(int color) {
-        return Math.max(0, Math.min(255, color));
+    private static Color toColor(int red, int green, int blue) {
+        return Color.fromRGB(limitColor(red), limitColor(green), limitColor(blue));
+    }
+
+    private static int limitColor(int color) {
+        return Math.clamp(color, 0, 255);
     }
 
 }

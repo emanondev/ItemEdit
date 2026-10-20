@@ -19,14 +19,12 @@ import io.lumine.mythic.bukkit.adapters.item.ItemComponentBukkitItemStack;
 import io.lumine.mythic.bukkit.events.MythicDropLoadEvent;
 import io.lumine.mythic.bukkit.events.MythicMechanicLoadEvent;
 import lombok.extern.slf4j.Slf4j;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
@@ -193,27 +191,19 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, IT
         if (Math.random() > chance) {
             return SkillResult.CONDITION_FAILED;
         }
-        if (Bukkit.isPrimaryThread()) {
-            drop(target.getLocation());
-        } else {//TODO folia compability
-            new BukkitRunnable() {
-                public void run() {
-                    drop(target.getLocation());
-                }
-            }.runTask(ItemEdit.get());
-        }
+        Entity entity = BukkitAdapter.adapt(target);
+        SchedulerUtils.run(ItemEdit.get(), entity, () -> drop(entity.getLocation()));
         return SkillResult.SUCCESS;
     }
 
-    public void drop(AbstractLocation location) {
-        Location loc = BukkitAdapter.adapt(location);
+    public void drop(Location location) {
         ItemStack item = ItemEdit.get().getServerStorage().getItem(id);
         if (item == null) {
             ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid id, '" + id + "' is not a registered serveritem");
             return;
         }
         item.setAmount((int) (amount + Math.random() * diff));
-        loc.getWorld().dropItem(loc, item);
+        location.getWorld().dropItem(location, item);
     }
 
     @Override
@@ -221,15 +211,8 @@ class DropServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill, IT
         if (Math.random() > chance) {
             return SkillResult.CONDITION_FAILED;
         }
-        if (Bukkit.isPrimaryThread()) {
-            drop(location);
-        } else { //TODO folia compability
-            new BukkitRunnable() {
-                public void run() {
-                    drop(location);
-                }
-            }.runTask(ItemEdit.get());
-        }
+        Location bukkitLocation = BukkitAdapter.adapt(location);
+        SchedulerUtils.run(ItemEdit.get(), bukkitLocation, () -> drop(bukkitLocation));
         return SkillResult.SUCCESS;
     }
 }
@@ -301,20 +284,12 @@ class GiveServerItemMechanic implements ISkillMechanic, ITargetedEntitySkill {
             absPlayer = (AbstractPlayer) target;
         }
 
-        if (Bukkit.isPrimaryThread()) {
-            give(absPlayer);
-        } else {
-            new BukkitRunnable() {
-                public void run() {
-                    give(absPlayer);
-                }
-            }.runTask(ItemEdit.get());
-        }
+        Player player = BukkitAdapter.adapt(absPlayer);
+        SchedulerUtils.run(ItemEdit.get(), player, () -> give(player));
         return SkillResult.SUCCESS;
     }
 
-    public void give(AbstractPlayer target) {
-        Player player = BukkitAdapter.adapt(target);
+    public void give(Player player) {
         ItemStack item = ItemEdit.get().getServerStorage().getItem(id);
         if (item == null) {
             ItemEdit.get().log("<blue>[<white>MythicMobs<blue>] <white>Invalid id, '" + id + "' is not a registered serveritem");

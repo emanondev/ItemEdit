@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Update extends SubCmd {
 
@@ -23,8 +24,9 @@ public class Update extends SubCmd {
             if (args.length < 2) {
                 throw new IllegalArgumentException("Wrong param number");
             }
-            if (ItemEdit.get().getServerStorage().getItem(args[1]) != null) {
-                ItemEdit.get().getServerStorage().setItem(args[1], this.getItemInMainHand(p).clone());
+            String id = args[1].toLowerCase(Locale.ENGLISH);
+            if (ItemEdit.get().getServerStorage().getItem(id) != null) {
+                ItemEdit.get().getServerStorage().setItem(id, this.getItemInMainHand(p).clone());
             } else {
                 throw new IllegalArgumentException();
             }

@@ -1,14 +1,8 @@
 package emanondev.itemedit.storage;
 
-import emanondev.itemedit.ItemEdit;
-import emanondev.itemedit.Util;
-import emanondev.itemedit.UtilsString;
 import emanondev.itemedit.utility.ItemUtils;
-import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BookMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -86,43 +80,7 @@ public interface ServerStorage {
     default ItemStack getItem(@NotNull String id,
                               @Nullable Player player) {
         ItemStack item = getItem(id);
-        if (item == null || player == null) {
-            return item;
-        }
-        if (item.hasItemMeta() &&
-                ItemEdit.get().getConfig().loadBoolean("serveritem.replace-holders", true)) {
-            String[] holders = new String[]{"%player_name%", player.getName(),
-                    "%player_uuid%", player.getUniqueId().toString()};
-            ItemMeta meta = ItemUtils.getMeta(item);
-            Component displayName = meta.displayName();
-            if (displayName != null) {
-                if (Util.isDeferredItemTemplate(displayName)) {
-                    String raw = ((net.kyori.adventure.text.TextComponent) displayName).content();
-                    String expanded = UtilsString.replacePlaceholders(raw, player, holders);
-                    meta.displayName(Util.formatComponent(player, expanded, null));
-                } else {
-                    meta.displayName(UtilsString.replacePlaceholders(displayName, player, holders));
-                }
-            }
-
-            if (meta.hasLore()) {
-                meta.lore(meta.lore().stream()
-                        .map(line -> {
-                            if (Util.isDeferredItemTemplate(line)) {
-                                String raw = ((net.kyori.adventure.text.TextComponent) line).content();
-                                String expanded = UtilsString.replacePlaceholders(raw, player, holders);
-                                return Util.formatComponent(player, expanded, null);
-                            }
-                            return UtilsString.replacePlaceholders(line, player, holders);
-                        })
-                        .toList());
-            }
-
-            if (meta instanceof BookMeta bookMeta && bookMeta.author() != null) {
-                bookMeta.author(UtilsString.replacePlaceholders(bookMeta.author(), player, holders));
-            }
-            item.setItemMeta(meta);
-        }
+        ItemUtils.updateTemplate(item, player);
         return item;
     }
 

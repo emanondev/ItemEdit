@@ -5,7 +5,6 @@ import emanondev.itemedit.command.ItemFoodCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemBuilder;
-import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -34,7 +33,7 @@ public class ConvertTo extends SubCmd {
             if (target == null) {
                 try {
                     Material mat = Material.valueOf(name.toUpperCase(Locale.ENGLISH));
-                    if (!ItemUtils.isItem(mat)) {
+                    if (!mat.isItem()) {
                         throw new IllegalArgumentException();
                     }
                     target = new ItemStack(mat);

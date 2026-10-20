@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Save extends SubCmd {
 
@@ -22,13 +23,14 @@ public class Save extends SubCmd {
             if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
             }
-            if (ItemEdit.get().getServerStorage().getItem(args[1]) == null) {
-                ItemEdit.get().getServerStorage().setItem(args[1], this.getItemInMainHand(p).clone());
+            String id = args[1].toLowerCase(Locale.ENGLISH);
+            if (ItemEdit.get().getServerStorage().getItem(id) == null) {
+                ItemEdit.get().getServerStorage().setItem(id, this.getItemInMainHand(p).clone());
             } else {
-                sendLanguageString("already_used_id", p, "%id%", args[1].toLowerCase());
+                sendLanguageString("already_used_id", p, "%id%", id);
                 return;
             }
-            sendLanguageString("success", p, "%id%", args[1].toLowerCase());
+            sendLanguageString("success", p, "%id%", id);
         } catch (Exception e) {
             onFail(p, alias);
         }

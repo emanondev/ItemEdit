@@ -8,6 +8,8 @@ import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.SchedulerUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.milkbowl.vault.economy.Economy;
@@ -20,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class Buy extends SubCmd {
 
@@ -46,54 +49,23 @@ public class Buy extends SubCmd {
                 throw new IllegalArgumentException("Wrong amount number");
             }
             Player target = Bukkit.getPlayer(args[3]);
-            ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1], target);
+            if (target == null) {
+                throw new IllegalArgumentException("Unknown player");
+            }
+            String id = args[1].toLowerCase(Locale.ENGLISH);
+            ItemStack item = ItemEdit.get().getServerStorage().getItem(id);
+            if (item == null) {
+                throw new IllegalArgumentException("Unknown server item");
+            }
             double price = Double.parseDouble(args[4]);
-            if (price <= 0) {
-                throw new IllegalArgumentException();
+            if (!Double.isFinite(price) || price <= 0) {
+                throw new IllegalArgumentException("Price must be positive");
             }
-            int removed = InventoryUtils.removeAmount(target, item, amount, InventoryUtils.LackMode.CANCEL);
-
-            // have enough items?
-            if (removed == 0) {
-                // not enough items, aborting
-                if (!silent) {
-                    this.sendLanguageString("not-enough-items", target, "%id%",
-                            args[1].toLowerCase(), "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
-                            "%amount%", String.valueOf(amount), "%price%", economy.format(price));
-                }
-                return;
-            }
-            if (!economy.depositPlayer(target, price).transactionSuccess()) {
-                // error
-                InventoryUtils.giveAmount(target, item, amount, InventoryUtils.ExcessMode.DROP_EXCESS);
-                if (!silent) {
-                    Util.sendComponent(target, Component.text(
-                            "An error occurred, try again, if this message shows again try to contact the server administrators",
-                            NamedTextColor.RED));
-                    Util.logToFile("[transaction failed] no errors, is your Economy provider stable?");
-                }
-                return;
-            }
-
-            // success, giving some feedback
-            if (!silent) {
-                this.sendLanguageString("feedback", target, "%id%", args[1].toLowerCase(),
-                        "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
-                        String.valueOf(amount), "%price%", economy.format(price));
-            }
-
-            if (ItemEdit.get().getConfig().loadBoolean("log.action.buy", true)) {
-                Component msg = UtilsString.fix(this.getConfigString("log"), null, true,
-                        "%id%", args[1].toLowerCase(),
-                        "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
-                        String.valueOf(amount), "%player_name%", target.getName(), "%price%", economy.format(price));
-                if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
-                    Util.sendComponent(Bukkit.getConsoleSender(), msg);
-                }
-                if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
-                    Util.logToFile(msg);
-                }
-            }
+            String nick = ItemEdit.get().getServerStorage().getNick(id);
+            boolean silentFeedback = silent;
+            SchedulerUtils.run(getPlugin(), target,
+                    () -> buyFromTarget(sender, alias, target, id, item, nick, amount, silentFeedback, price),
+                    () -> scheduleFail(sender, alias));
         } catch (Exception e) {
             onFail(sender, alias);
         }
@@ -112,6 +84,61 @@ public class Buy extends SubCmd {
             case 6 -> CompleteUtility.complete(args[4], Aliases.BOOLEAN);
             default -> List.of();
         };
+    }
+
+    private void buyFromTarget(CommandSender sender, String alias, Player target, String id, ItemStack item, String nick,
+                               int amount,
+                               boolean silent, double price) {
+        try {
+            ItemUtils.updateTemplate(item, target);
+            int removed = InventoryUtils.removeAmount(target, item, amount, InventoryUtils.LackMode.CANCEL);
+
+            if (removed == 0) {
+                if (!silent) {
+                    sendLanguageString("not-enough-items", target,
+                            "%id%", id,
+                            "%nick%", nick,
+                            "%amount%", String.valueOf(amount),
+                            "%price%", economy.format(price));
+                }
+                return;
+            }
+            if (!economy.depositPlayer(target, price).transactionSuccess()) {
+                InventoryUtils.giveAmount(target, item, amount, InventoryUtils.ExcessMode.DROP_EXCESS);
+                if (!silent) {
+                    Util.sendComponent(target, Component.text(
+                            "An error occurred, try again, if this message shows again try to contact the server administrators",
+                            NamedTextColor.RED));
+                    Util.logToFile("[transaction failed] no errors, is your Economy provider stable?");
+                }
+                return;
+            }
+
+            if (!silent) {
+                sendLanguageString("feedback", target,
+                        "%id%", id,
+                        "%nick%", nick,
+                        "%amount%", String.valueOf(amount),
+                        "%price%", economy.format(price));
+            }
+
+            if (ItemEdit.get().getConfig().loadBoolean("log.action.buy", true)) {
+                Component msg = UtilsString.fix(this.getConfigString("log"), null, true,
+                        "%id%", id,
+                        "%nick%", nick,
+                        "%amount%", String.valueOf(amount),
+                        "%player_name%", target.getName(),
+                        "%price%", economy.format(price));
+                if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
+                    Util.sendComponent(Bukkit.getConsoleSender(), msg);
+                }
+                if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
+                    Util.logToFile(msg);
+                }
+            }
+        } catch (Exception e) {
+            scheduleFail(sender, alias);
+        }
     }
 
     private void setupEconomy() {

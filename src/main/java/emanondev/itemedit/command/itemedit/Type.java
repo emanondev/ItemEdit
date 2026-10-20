@@ -3,7 +3,6 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import emanondev.itemedit.utility.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -39,7 +38,7 @@ public class Type extends SubCmd {
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2) {
-            return CompleteUtility.complete(args[1], Material.class, ItemUtils::isItem);
+            return CompleteUtility.complete(args[1], Material.class, Material::isItem);
         }
         return List.of();
     }

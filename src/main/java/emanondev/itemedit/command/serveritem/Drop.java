@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 @Slf4j
 public class Drop extends SubCmd {
@@ -43,12 +44,21 @@ public class Drop extends SubCmd {
                 return;
             }
 
-            ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1]);
+            String id = args[1].toLowerCase(Locale.ENGLISH);
+            ItemStack item = ItemEdit.get().getServerStorage().getItem(id);
+            if (item == null) {
+                throw new IllegalArgumentException("Unknown server item");
+            }
             World world = Bukkit.getWorld(args[3]);
+            if (world == null) {
+                throw new IllegalArgumentException("Unknown world");
+            }
 
             int stackSize = item.getMaxStackSize();
             Location loc = new Location(world, Double.parseDouble(args[4]), Double.parseDouble(args[5]),
                     Double.parseDouble(args[6]));
+            boolean logAction = ItemEdit.get().getConfig().loadBoolean("log.action.drop", true);
+            String nick = logAction ? ItemEdit.get().getServerStorage().getNick(id) : null;
 
             SchedulerUtils.run(getPlugin(), loc, () -> {
                 int toGive = amount.getValue();
@@ -59,10 +69,10 @@ public class Drop extends SubCmd {
                 }
             });
 
-            if (ItemEdit.get().getConfig().loadBoolean("log.action.drop", true)) {
+            if (logAction) {
                 Component msg = UtilsString.fix(this.getConfigString("log"), null, true,
-                        "%id%", args[1].toLowerCase(),
-                        "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]),
+                        "%id%", id,
+                        "%nick%", nick,
                         "%amount%", String.valueOf(amount),
                         "%world%", world.getName(),
                         "%x%", args[4],

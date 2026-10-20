@@ -8,6 +8,8 @@ import emanondev.itemedit.command.ServerItemCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.InventoryUtils;
+import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.SchedulerUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -17,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class Take extends SubCmd {
 
@@ -40,25 +43,19 @@ public class Take extends SubCmd {
                 throw new IllegalArgumentException("Wrong amount number");
             }
             Player target = args.length >= 4 ? Bukkit.getPlayer(args[3]) : (Player) sender;
-            ItemStack item = ItemEdit.get().getServerStorage().getItem(args[1], target);
-            amount = InventoryUtils.removeAmount(target, item, amount, InventoryUtils.LackMode.REMOVE_MAX_POSSIBLE);
-            if (!silent) {
-                sendLanguageString("feedback", target, "%id%", args[1].toLowerCase(),
-                        "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
-                        String.valueOf(amount));
+            if (target == null) {
+                throw new IllegalArgumentException("Unknown player");
             }
+            String id = args[1].toLowerCase(Locale.ENGLISH);
+            ItemStack item = ItemEdit.get().getServerStorage().getItem(id);
+            if (item == null) {
+                throw new IllegalArgumentException("Unknown server item");
+            }
+            String nick = ItemEdit.get().getServerStorage().getNick(id);
 
-            if (ItemEdit.get().getConfig().loadBoolean("log.action.take", true)) {
-                Component msg = UtilsString.fix(this.getConfigString("log"), target, true, "%id%", args[1].toLowerCase(),
-                        "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]), "%amount%",
-                        String.valueOf(amount), "%player_name%", target.getName());
-                if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
-                    Util.sendComponent(Bukkit.getConsoleSender(), msg);
-                }
-                if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
-                    Util.logToFile(msg);
-                }
-            }
+            boolean silentFeedback = silent;
+            SchedulerUtils.run(getPlugin(), target, () -> takeFromTarget(sender, alias, target,
+                    id, item, nick, amount, silentFeedback), () -> scheduleFail(sender, alias));
         } catch (Exception e) {
             onFail(sender, alias);
         }
@@ -76,6 +73,36 @@ public class Take extends SubCmd {
             case 5 -> CompleteUtility.complete(args[4], Aliases.BOOLEAN);
             default -> List.of();
         };
+    }
+
+    private void takeFromTarget(CommandSender sender, String alias, Player target, String id, ItemStack item,
+                                String nick, int amount, boolean silent) {
+        try {
+            ItemUtils.updateTemplate(item, target);
+            int removed = InventoryUtils.removeAmount(target, item, amount, InventoryUtils.LackMode.REMOVE_MAX_POSSIBLE);
+            if (!silent) {
+                sendLanguageString("feedback", target,
+                        "%id%", id,
+                        "%nick%", nick,
+                        "%amount%", String.valueOf(removed));
+            }
+
+            if (ItemEdit.get().getConfig().loadBoolean("log.action.take", true)) {
+                Component msg = UtilsString.fix(this.getConfigString("log"), target, true,
+                        "%id%", id,
+                        "%nick%", nick,
+                        "%amount%", String.valueOf(removed),
+                        "%player_name%", target.getName());
+                if (ItemEdit.get().getConfig().loadBoolean("log.console", true)) {
+                    Util.sendComponent(Bukkit.getConsoleSender(), msg);
+                }
+                if (ItemEdit.get().getConfig().loadBoolean("log.file", true)) {
+                    Util.logToFile(msg);
+                }
+            }
+        } catch (Exception e) {
+            scheduleFail(sender, alias);
+        }
     }
 
 }

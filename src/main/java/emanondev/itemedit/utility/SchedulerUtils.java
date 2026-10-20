@@ -1,9 +1,10 @@
 package emanondev.itemedit.utility;
 
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 
 /**
@@ -13,7 +14,6 @@ import org.jetbrains.annotations.Range;
 public final class SchedulerUtils {
 
     private SchedulerUtils() {
-        throw new UnsupportedOperationException();
     }
 
     /**
@@ -59,21 +59,31 @@ public final class SchedulerUtils {
     }
 
     /**
-     * Runs a task on the scheduler owned by the player.
+     * Runs a task on the scheduler owned by the entity.
      */
     public static void run(@NotNull Plugin plugin,
-                           @NotNull Player player,
+                           @NotNull Entity entity,
                            @NotNull Runnable task) {
-        player.getScheduler().run(plugin, scheduledTask -> task.run(), null);
+        run(plugin, entity, task, null);
     }
 
     /**
-     * Schedules a task on the scheduler owned by the player after a number of ticks.
+     * Runs a task on the scheduler owned by the entity, or the retired callback if it is no longer schedulable.
+     */
+    public static void run(@NotNull Plugin plugin,
+                           @NotNull Entity entity,
+                           @NotNull Runnable task,
+                           @Nullable Runnable retired) {
+        entity.getScheduler().run(plugin, scheduledTask -> task.run(), retired);
+    }
+
+    /**
+     * Schedules a task on the scheduler owned by the entity after a number of ticks.
      */
     public static void runLater(@NotNull Plugin plugin,
-                                @NotNull Player player,
+                                @NotNull Entity entity,
                                 @Range(from = 1L, to = Long.MAX_VALUE) long delayTicks,
                                 @NotNull Runnable task) {
-        player.getScheduler().runDelayed(plugin, scheduledTask -> task.run(), null, delayTicks);
+        entity.getScheduler().runDelayed(plugin, scheduledTask -> task.run(), null, delayTicks);
     }
 }

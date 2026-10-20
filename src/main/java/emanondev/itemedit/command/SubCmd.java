@@ -4,6 +4,7 @@ import emanondev.itemedit.*;
 import emanondev.itemedit.aliases.IAliasSet;
 import emanondev.itemedit.utility.InventoryUtils;
 import emanondev.itemedit.utility.ItemUtils;
+import emanondev.itemedit.utility.SchedulerUtils;
 import emanondev.itemedit.utility.Translator;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
@@ -83,6 +84,15 @@ public abstract class SubCmd {
                         "/" + alias + " " + this.name + " " + paramsText),
                 getDescription(target));
         Util.sendComponent(target, feedback);
+    }
+
+    protected final void scheduleFail(@NotNull CommandSender sender, @NotNull String alias) {
+        Runnable task = () -> onFail(sender, alias);
+        if (sender instanceof Player player) {
+            SchedulerUtils.run(getPlugin(), player, task);
+        } else {
+            SchedulerUtils.run(getPlugin(), task);
+        }
     }
 
     abstract public void onCommand(@NotNull CommandSender sender, @NotNull String alias, String[] args);

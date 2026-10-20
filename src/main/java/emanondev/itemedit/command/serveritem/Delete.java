@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Delete extends SubCmd {
 
@@ -23,8 +24,9 @@ public class Delete extends SubCmd {
             if (args.length != 2) {
                 throw new IllegalArgumentException("Wrong param number");
             }
-            if (ItemEdit.get().getServerStorage().getItem(args[1]) != null) {
-                ItemEdit.get().getServerStorage().remove(args[1]);
+            String id = args[1].toLowerCase(Locale.ENGLISH);
+            if (ItemEdit.get().getServerStorage().getItem(id) != null) {
+                ItemEdit.get().getServerStorage().remove(id);
             } else {
                 throw new IllegalArgumentException();
             }

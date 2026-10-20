@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Locale;
 
 public class SetNick extends SubCmd {
 
@@ -23,17 +24,19 @@ public class SetNick extends SubCmd {
             if (args.length < 2) {
                 throw new IllegalArgumentException("Wrong param number");
             }
+            String id = args[1].toLowerCase(Locale.ENGLISH);
             if (args.length == 2) {
-                ItemEdit.get().getServerStorage().setNick(args[1], null);
+                ItemEdit.get().getServerStorage().setNick(id, null);
             } else {
                 StringBuilder builder = new StringBuilder(args[2]);
                 for (int i = 3; i < args.length; i++) {
                     builder.append(" ").append(args[i]);
                 }
-                ItemEdit.get().getServerStorage().setNick(args[1], builder.toString());
+                ItemEdit.get().getServerStorage().setNick(id, builder.toString());
             }
-            sendLanguageString("success", p, "%id%", args[1].toLowerCase(),
-                    "%nick%", ItemEdit.get().getServerStorage().getNick(args[1]));
+            sendLanguageString("success", p,
+                    "%id%", id,
+                    "%nick%", ItemEdit.get().getServerStorage().getNick(id));
         } catch (Exception e) {
             onFail(p, alias);
         }
