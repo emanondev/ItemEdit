@@ -471,7 +471,7 @@ itemedit:
     description:
       - '<gradient:#A78BFA:gold><b>Set item''s type</b></gradient>'
       - ''
-      - '<gray><gold>N.B.</gold> a few types as Air won''t work</b>'
+      - '<gray><gold>N.B.</gold> a few types as Air won''t work'
     params: '<type>'
     feedback: '%prefix% <green>Updated Item Material'
   unbreakable:
