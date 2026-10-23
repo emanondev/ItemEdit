@@ -1,0 +1,1438 @@
+generic:
+  help:
+    player-only: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>仅限玩家命令'
+    no-item-on-hand: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>你需要手里拿着一个物品'
+    lack-permission: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>您没有权限%permission%'
+    lack-permission-generic: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>您没有权限使用此命令'
+    blocked-by-censure: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>您不能使用此文本，它包含被阻止的单词'
+    blocked-by-type-restriction: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>您无法重命名该物品'
+    blocked-by-type-restriction-lore: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>您无法编辑该商品的商品描述'
+    blocked-by-lore-line-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>您无法在此物品上添加更多物品描述行'
+    blocked-by-lore-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>设置的行长度不能超过 %limit% 个字符'
+    blocked-by-rename-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>您设置的名称不能超过 %limit% 个字符'
+
+    prefix: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray>'
+    header-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>帮助</bold></#A78BFA>'
+    header-sub-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <gradient:#A78BFA:#54acff><bold>%sub%</bold></gradient> <dark_gray>»</dark_gray> <#55d6ff><bold>帮助</#55d6ff>'
+    command-format: '<gray>/%command%</gray> <#bad1ff>%sub%</#bad1ff> <#d7bbff>%params%</#d7bbff>'
+    footer-format: '%prev_clickable% <#7E9CFD><b>帮助</b> [%page%/%max_page%]</#7E9CFD> %next_clickable%'
+    next_text: ' <light_purple><b>><st>> ></st> '
+    prev_text: ' <light_purple><b><st>< <</st>< '
+    next_void: ' <dark_gray><b>><st>> ></st> '
+    prev_void: ' <dark_gray><b><st>< <</st>< '
+    next_hover: '<gold><b>转到第%target%页'
+    prev_hover: '<gold><b>转到第%target%页'
+  wrong-material:
+    axolotl_bucket: '%prefix% <red>物品必须是蝾螈桶'
+    banner: '%prefix% <red>商品必须是横幅'
+    damageable: '%prefix% <red>物品必须像工具和盔甲一样具有耐用性'
+    player_head: '%prefix% <red>物品必须是玩家头像'
+    rgb_colorable: '%prefix% <red>物品必须是可着色类型，如皮甲、烟花星星、药水或具有药水效果的箭头'
+    written_book: '%prefix% <red>物品必须是书面书籍'
+    potion_effect_applicable: '%prefix% <red>物品必须是药水或具有药水效果的箭或谜之炖菜'
+    firework: '%prefix% <red>物品必须是烟花'
+    spawner_egg: '%prefix% <red>物品必须是刷怪蛋'
+    tropical_fish_bucket: '%prefix% <red>物品必须是热带鱼桶'
+    writable_book: '%prefix% <red>物品必须是书面书籍或书籍和羽毛笔'
+    compass: '%prefix% <red>物品必须是指南针'
+    music_instrument: '%prefix% <red>物品必须是山羊角'
+    armor: '%prefix% <red>物品必须是盔甲'
+    enchantment_storage: '%prefix% <red>物品必须是书或附魔书'
+  wrong-alias:
+    axolotl_variant: '%prefix% <red>蝾螈价值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    potion_effect: '%prefix% <red>效果值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    animations: '%prefix% <red>动画值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    sound: '%prefix% <red>声音值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    enchant: '%prefix% <red>附魔值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    flag_type: '%prefix% <red>错误的标志值！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    book_type: '%prefix% <red>书籍类型值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    equip_slot: '%prefix% <red>装备栏值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    banner_pattern: '%prefix% <red>图案值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    color: '%prefix% <red>颜色值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    mob_type: '%prefix% <red>鸡蛋类型值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    trim_material: '%prefix% <red>装甲装饰材质值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    tropical_fish_pattern: '%prefix% <red>图案值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    trim_pattern: '%prefix% <red>错误的装甲装饰图案值！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    boolean: '%prefix% <red>布尔值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    attribute: '%prefix% <red>属性值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    operation: '%prefix% <red>运算值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    itemrarity: '%prefix% <red>稀有度值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    entitytype: '%prefix% <red>实体类型值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    entitygroups: '%prefix% <red>实体组值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    consumable_effect: '%prefix% <red>消耗品效果值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    goat_horn_sound: '%prefix% <red>羊角声音值错误！ <dark_red>[<gold>悬停在此处<dark_red>]'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>别名：</b></gradient>'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+itemedit:
+  amount:
+    description:
+      - '<gradient:#A78BFA:gold><b>设定金额</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>设定数量（最多127个）'
+      - '<gold><b>提示</b></gold> <gray>减去负数'
+      - '<gray> 来自物品当前金额'
+    params: '<amount>'
+    feedback: '%prefix% <green>物品数量设置为<yellow>%amount%'
+    feedback-decrease: '%prefix% <green>物品数量减少<yellow>%amount%'
+  attribute:
+    description:
+      - '<gradient:#A78BFA:gold><b>编辑属性修饰符</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <attribute> <amount> [operation] [slot] </yellow><dark_gray>»</dark_gray>添加新修饰符'
+      - '<gray><yellow>Remove <attribute/slot> </yellow><dark_gray>»</dark_gray> 删除一些修饰符'
+    params: '<add/remove> [...]'
+    add:
+      params: '<attribute> <amount> [operation] [slot]'
+      description:
+        - '<gradient:#A78BFA:gold><b>添加属性修饰符</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute> </yellow>属性类型'
+        - '<gray><yellow><amount> </yellow>设定数量'
+        - '<gray><yellow>[operation] </yellow>如何添加修饰符，默认求和'
+        - '<gray><yellow>[slot] </yellow>仅当物品处于选中状态时应用此修饰符'
+        - '<gray> 设备槽位或任意设备槽位（如果未选择）'
+      feedback: '%prefix% <green>添加修改器'
+    remove:
+      params: '<attribute/slot>'
+      description:
+        - '<gradient:#A78BFA:gold><b>删除修饰符</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute/slot> </yellow>要删除的类型，任何带有的修饰符'
+        - '<gray> 所选值被删除'
+      feedback-attribute: '%prefix% <green>删除属性修饰符'
+      feedback-equipment: '%prefix% <green>删除了装备槽的修饰语'
+  axolotlvariant:
+    description:
+      - '<gradient:#A78BFA:gold><b>在蝾螈桶上编辑蝾螈变体</b></gradient>'
+      - '<white><sprite:items:item/axolotl_bucket>'
+      - '<gray><yellow><type> </yellow>蝾螈的种类'
+    params: '<type>'
+    feedback: '%prefix% <green>将蝾螈变种更改为<yellow>%variant%'
+  banner:
+    description:
+      - '<gradient:#A78BFA:gold><b>编辑横幅</b></gradient>'
+    params: '<add/set/remove/color> [...]'
+    set:
+      params: '<type> <color> <line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>替换所选行上的图案</b></gradient>'
+      feedback: '%prefix% <green>图案组'
+    add:
+      params: '<type> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>添加图案</b></gradient>'
+      feedback: '%prefix% <green>添加图案'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>删除所选行上的图案</b></gradient>'
+      feedback: '%prefix% <green>图案已移除'
+    color:
+      params: '<line> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>更改所选行上的图案颜色</b></gradient>'
+      feedback: '%prefix% <green>图案重新着色'
+  bookauthor:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置作者</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>作者姓名可能包含空格并且也可能带有颜色'
+      - '<gray>仅适用于书面书籍'
+    params: '<name>'
+    feedback: '%prefix% <green>更新书籍作者'
+    feedback-reset: '%prefix% <green>重置书籍作者'
+  bookenchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>在书本上设置魔咒</b></gradient>'
+      - '<white><sprite:items:item/enchanted_book> <sprite:items:item/book>'
+      - '<gray>enchant和bookenchant的区别在于'
+      - '<gray>一本具有enchant火属性的书在击中时会使目标着火'
+      - '<gray>而一本带有bookenchant的书则没有'
+      - ''
+      - '<gray><yellow><enchant> </yellow>结界类型'
+      - '<gray><yellow>[level] </yellow>附魔等级，默认<yellow>1'
+      - ''
+      - '<gold><b>提示</b></gold> <gray>将<yellow>[level] </yellow>设置为<yellow>0</yellow>以移除附魔'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>移除书籍附魔<yellow>%enchant%'
+    feedback: '%prefix% <green>应用书籍附魔<yellow>%enchant% <green>lv<yellow>%lv%'
+  booktype:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置书籍类型</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>仅适用于书面书籍'
+    params: '<booktype>'
+    feedback: '%prefix% <green>将书籍生成更新为<yellow>%generation%'
+    feedback-reset: '%prefix% <green>重置书籍生成'
+  color:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置颜色</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/tipped_arrow_base> <sprite:items:item/firework_star> <sprite:items:item/leather_chestplate>'
+      - '<gray>也适用于皮甲和烟火星星、药水和具有药水效果的箭！'
+      - '<gray><yellow>[red] [green] [blue] </yellow>是每种颜色要组合的数量'
+      - '<gray>每种颜色都是 0 到 255 之间的 int 值'
+      - '<gray>如果你感到困惑谷歌“<yellow>RGB颜色选择器</yellow>”'
+    params: '[red] [green] [blue]'
+    feedback: '%prefix% <green>颜色已更新'
+  compass:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置罗盘目标位置</b></gradient>'
+      - '<white><sprite:items:item/compass_00>'
+      - '<gray><yellow>Set </yellow><dark_gray>»</dark_gray> 将您的位置设置为罗盘目标'
+      - '<gray><yellow>Clear </yellow><dark_gray>»</dark_gray> 清晰指南针目标'
+    params: '<set/clear>'
+    set:
+      feedback: '%prefix% <green>罗盘现在指向<yellow>%world% %x% %y% %z%'
+    clear:
+      feedback: '%prefix% <green>罗盘目标已清除'
+  custommodeldata:
+    description:
+      - '<gradient:#A78BFA:gold><b>编辑自定义模型数据</b></gradient>'
+      - ''
+      - '<gray>用于材质包'
+      - '<gray><yellow>[value] </yellow>目标数据模型的正整数'
+      - '<gray>注意：现代服务器使用itemmodel而不是custommodeldata'
+      - '<gray> 对于纹理，此命令适用于旧版客户端'
+    params: '<value>'
+    feedback: '%prefix% <green>更新自定义模型数据'
+    feedback-reset: '%prefix% <green>自定义模型数据重置'
+  damage:
+    description:
+      - '<gradient:#A78BFA:gold><b>编辑耐久度</b></gradient>'
+      - ''
+      - '<gray><yellow><durability> </yellow>适用伤害'
+      - '<gray><gold>N.B.</gold> <yellow>0 </yellow>表示无损坏，完全耐久'
+    params: '<durability>'
+    feedback-reset: '%prefix% <green>恢复耐久度'
+    feedback: '%prefix% <green>耐久性更新'
+  equipment:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品的装备属性</b></gradient>'
+      - ''
+      - '<gray><gold><b>提示</b></gold>使用/itemequip or /iee'
+      - '<gray><gold>NB.</gold> 您的饮用水不能食用'
+    params: ''
+  enchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置魔咒</b></gradient>'
+      - ''
+      - '<gray><yellow><enchant> </yellow>结界类型'
+      - '<gray><yellow>[level] </yellow>附魔等级，默认<yellow>1'
+      - ''
+      - '<gold><b>提示</b></gold> <gray>将<yellow>[level] </yellow>设置为<yellow>0</yellow>以移除附魔'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>移除附魔<yellow>%enchant%'
+    feedback: '%prefix% <green>已应用附魔<yellow>%enchant% <green>lv<yellow>%lv%'
+  fireresistent:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品对火/熔岩的抵抗力</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>设置值，默认切换'
+      - ''
+      - '<gray>具有耐火性的物品不会被摧毁'
+      - '<gray> 落入火中时会漂浮在熔岩上'
+    params: '[true/false]'
+    feedback: '%prefix% <green>防火设置为<yellow>%value%'
+  fireworkpower:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置烟花威力</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+      - '<gray><yellow><power> </yellow>烟花威力，介于<yellow>0 </yellow>和<yellow>5之间的值'
+    params: '<power>'
+    feedback: '%prefix% <green>更新烟火威力'
+  firework:
+    description:
+      - '<gradient:#A78BFA:gold><b>使用 GUI 编辑烟花</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+    params: ''
+  food:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品的食物属性</b></gradient>'
+      - ''
+      - '<gray><gold><b>提示</b></gold>使用/itemfood or /if'
+      - '<gray><gold>NB.</gold> 您的饮用水不能食用'
+    params: ''
+  glider:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置滑翔机状态</b></gradient>'
+      - ''
+      - '<gray>滑翔机物品应该允许像鞘翅一样滑翔'
+      - '<gray><yellow>[true/false] </yellow>设置滑翔机值，默认切换'
+    params: '[true/false]'
+    feedback: '%prefix% <green>更新滑翔设置为<yellow>%value%'
+  glow:
+    description:
+      - '<gradient:#A78BFA:gold><b>覆盖附魔发光效果</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>设置值，默认重置'
+      - ''
+      - '<gold><b>提示</b></gold> <gray><yellow>未指定值</yellow>恢复原版行为'
+    params: '[true/false/default]'
+    feedback: '%prefix% <green>发光设置为 <yellow>%value%'
+    feedback-reset: '%prefix% <green>将发光值重置为默认值'
+  goathornsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置山羊角声音</b></gradient>'
+      - '<white><sprite:items:item/goat_horn>'
+      - '<gray><yellow><type> </yellow>声音类型'
+    params: '<type>'
+    feedback: '%prefix% <green>更新声音'
+  hide:
+    description:
+      - '<gradient:#A78BFA:gold><b>隐藏或显示组件</b></gradient>'
+      - ''
+      - '<gray><yellow><flag> </yellow>要编辑的物品标志'
+      - '<gray><yellow>[true/false] </yellow>设置flag值，默认切换'
+      - ''
+      - '<gold><b>提示</b></gold> <gray>隐藏带有potion_effects标志的横幅图案'
+      - '<gold><b>提示</b></gold> <gray>使用<yellow>/itemedit hideall一次隐藏所有标志'
+    params: '<flag> [true/false]'
+    feedback: '%prefix% <green>标志现在是<yellow>%value%'
+  hidetooltip:
+    description:
+      - '<gradient:#A78BFA:gold><b>隐藏或显示工具提示</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>设置flag值，默认切换'
+    params: '[true/false]'
+    feedback: '%prefix% <green>工具提示隐藏状态现在为<yellow>%value%'
+  hideall:
+    description:
+      - '<gradient:#A78BFA:gold><b>隐藏所有组件</b></gradient>'
+      - ''
+      - '<gray>隐藏：附魔、药水效果、横幅层、属性......'
+      - ''
+      - '<gold><b>提示</b></gold> <gray>使用<yellow>/itemedit hide <flag> true隐藏单个组件'
+    params: ''
+    feedback: '%prefix% <green>隐藏所有标志'
+  itemmodel:
+    description:
+      - '<gradient:#A78BFA:gold><b>编辑物品模型</b></gradient>'
+      - ''
+      - '<gray><yellow><namespaced key> </yellow>设置纹理参考的键'
+      - '<gray>示例：/ie itemmodel <yellow>iron_sword'
+      - '<gray>示例：/ie itemmodel <yellow>minecraft:iron_sword'
+      - ''
+      - '<gray><yellow><namespace></yellow>:<yellow><id></yellow> 将参考模型：'
+      - '  /assets/<yellow><namespace></yellow>/models/item/<yellow><id>'
+    params: '<namespaced key>'
+    feedback: '%prefix% <green>更新了物品模型'
+    feedback-reset: '%prefix% <green>重置物品模型'
+  kinetic:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品的动能属性</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gray><gold><b>提示</b></gold>使用/itemkinetic or /iek'
+    params: ''
+  maxdurability:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品最大耐久度</b></gradient>'
+      - ''
+      - '<gray><yellow><max durability> </yellow>物品新的耐久值，'
+      - '<gray> 必须大于 1'
+    params: '<max durability>'
+    feedback: '%prefix% <green>更新最大耐久度至<yellow>%value%'
+  maxstacksize:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品最大堆叠大小</b></gradient>'
+      - ''
+      - '<gray><yellow>[1-99] </yellow>设置标志值'
+      - ''
+      - '<gray><yellow>无值</yellow>将恢复公共堆栈大小，即<yellow>64'
+      - '<gray>适用于大多数物品，<yellow>1</yellow>适用于盔甲和工具，以及其他'
+      - '<gray> 一些物品的值'
+    params: '[1-99]'
+    feedback: '%prefix% <green>将最大堆栈大小更新为<yellow>%value%'
+    feedback-reset: '%prefix% <green>重置最大堆栈大小'
+  pierce:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品的穿刺武器属性</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gold><b>提示</b></gold><gray>使用/itempiercing or /iep'
+    params: ''
+  potioneffect:
+    itemtag-tip: '%prefix% <gray>您需要为普通物品添加药水效果吗？尝试>ItemTag<'
+    itemtag-tip-hover:
+      - '<gradient:#A78BFA:gold>点我</gradient>'
+    description:
+      - '<gradient:#A78BFA:gold><b>编辑药水效果</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/suspicious_stew> <sprite:items:item/tipped_arrow_base>'
+      - '<gray>适用于任何药水、具有药水效果的箭头和谜之炖菜！'
+      - '<gray><yellow>Add <effect> <duration> [level] </yellow><dark_gray>»</dark_gray> 添加效果'
+      - '<gray><yellow>Remove <effect> </yellow><dark_gray>»</dark_gray> 删除选定的效果'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> 删除所有效果'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
+      description:
+        - '<gradient:#A78BFA:gold><b>添加/覆盖所选效果</b></gradient>'
+        - ''
+        - '<gray><yellow><effect> </yellow>效果类型'
+        - '<gray><yellow><duration> </yellow>持续时间（以秒为单位）'
+        - '<gray><yellow>[level] </yellow>最多127，默认<yellow>1'
+        - '<gray><yellow>[particles] </yellow>应该显示颗粒吗？ <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[ambient] </yellow>粒子应该有环境标志吗？ <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[icon] </yellow>在右上角显示图标？ <yellow>true</yellow>/<yellow>false'
+      feedback: '%prefix% <green>增加药水效果'
+    remove:
+      params: '<effect>'
+      description:
+        - '<gradient:#A78BFA:gold><b>删除所选效果</b></gradient>'
+      feedback: '%prefix% <green>移除药水效果'
+    reset:
+      feedback: '%prefix% <green>重置药水效果'
+  rarity:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品稀有度</b></gradient>'
+      - ''
+      - '<gray><yellow>[rarity] </yellow>设置物品稀有度'
+      - ''
+      - '<gold><b>提示</b><gold><gray>不设置稀有度值将恢复默认值'
+    params: '[rarity]'
+    feedback: '%prefix% <green>更新了稀有度'
+    feedback-reset: '%prefix% <green>重置稀有度'
+  repaircost:
+    description:
+      - '<gradient:#A78BFA:gold><b>编辑铁砧修理费用</b></gradient>'
+      - ''
+      - '<gray><yellow><cost> </yellow>等级数量'
+      - '<gray><gold>NB.</gold> 铁砧维修/重命名价格始终至少为<yellow>1'
+      - '<gray><gold>N.B.</gold>此命令设置了该物品的基本维修成本，铁砧上的最终级别成本取决于你所做的'
+      - '<gray>更多信息<yellow>minecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<cost>'
+    feedback: '%prefix% <green>更新维修费用'
+  skullowner:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置玩家头像所有者</b></gradient>'
+      - ''
+      - '<gray>仅适用于玩家头部'
+      - '<gray><yellow>[name] </yellow> 所有者姓名'
+      - ''
+      - '<gold><b>提示</b></gold> <gray>放置并打破玩家头部以更新其皮肤'
+    params: '[name]'
+    feedback: '%prefix% <green>更新了玩家头像所有者'
+    feedback-reset: '%prefix% <green>玩家头像所有者重置'
+  tooltipstyle:
+    description:
+      - '<gradient:#A78BFA:gold><b>编辑物品工具提示样式</b></gradient>'
+      - ''
+      - '<gray><yellow><style> </yellow>设置纹理参考的键'
+      - '<gray>风格由<white><namespace>:<id>组成'
+      - '<gray>示例：/ie tooltipstyle <yellow>my_style'
+      - '<gray>示例：/ie tooltipstyle <yellow>minecraft:my_style'
+      - '<gray>其中<yellow>minecraft</yellow>是<white><namespace></white>并且'
+      - '<gray><yellow>my_style</yellow> 是 <white><id>'
+      - '<gray>设置后，该物品可以使用自定义精灵'
+      - '<gray>其工具提示背景和框架。'
+      - '<gray><white><namespace>:tooltip/<id>_background'
+      - '<gray>和<white><namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
+    feedback: '%prefix% <green>更新了工具提示样式'
+    feedback-reset: '%prefix% <green>重置工具提示样式'
+  armortrim:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置装甲装饰</b></gradient>'
+      - '<white><sprite:items:item/iron_chestplate>'
+      - '<gray><yellow><material> </yellow>装甲装饰材质'
+      - '<gray><yellow><pattern> </yellow>装甲装饰图案'
+    params: '<material> <pattern>'
+    feedback: '%prefix% <green>更新了装甲装饰'
+    feedback-reset: '%prefix% <green>装甲装饰已移除'
+  tropicalfish:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置热带鱼桶属性</b></gradient>'
+      - '<white><sprite:items:item/tropical_fish_bucket>'
+      - '<gray><yellow>pattern <pattern type> </yellow><dark_gray>»</dark_gray> 鱼的类型'
+      - '<gray><yellow>patterncolor <color> </yellow><dark_gray>»</dark_gray> 鱼的图案颜色'
+      - '<gray><yellow>bodycolor <color> </yellow><dark_gray>»</dark_gray> 鱼体颜色'
+    params: '[...]'
+    pattern:
+      params: '<type>'
+      description:
+        - '<gradient:#A78BFA:gold><b>设置热带鱼图案类型</b></gradient>'
+        - ''
+        - '<gray><yellow><type> </yellow>鱼的图案类型'
+      feedback: '%prefix% <green>更新图案'
+    patterncolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>设置热带鱼图案颜色</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>鱼的图案颜色'
+      feedback: '%prefix% <green>更新颜色'
+    bodycolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>设置热带鱼身体颜色</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>鱼的体色'
+      feedback: '%prefix% <green>更新颜色'
+  type:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品类型</b></gradient>'
+      - ''
+      - '<gray><gold>N.B.</gold> 一些类型，因为 Air 不起作用'
+    params: '<type>'
+    feedback: '%prefix% <green>更新物品材质'
+  unbreakable:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置牢不可破的状态</b></gradient>'
+      - ''
+      - '<gray>牢不可破的工具和盔甲不会失去耐久度'
+      - '<gray><yellow>[true/false] </yellow>设置不可破坏的值，默认切换'
+    params: '[true/false]'
+    feedback: '%prefix% <green>将坚不可摧的物品更新为<yellow>%value%'
+  help:
+    header-name: 'ItemEdit'
+    description:
+      - '<gradient:#A78BFA:gold><b>显示ItemEdit帮助</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>帮助页面'
+      - '<gray><yellow>[subcommand] </yellow>子命令帮助'
+    params: '[page/subcommand]'
+  rename:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品名称</b></gradient>'
+      - ''
+      - '<gold><b>提示</b></gold> <gray>键入<yellow>/ie rename -clear </yellow>将名称恢复为默认值'
+      - '<gold><b>提示</b></gold> <gray>输入<yellow>/ie rename -copy </yellow>复制名称'
+      - '<gold><b>提示</b></gold> <gray>键入<yellow>/ie rename -paste </yellow>粘贴之前复制的值'
+    params: '<name>'
+    feedback: '%prefix% <green>物品名称已更新'
+    rename-clear: '%prefix% <green>物品名称已清除'
+    rename-copy: '%prefix% <green>已复制物品名称'
+    rename-paste-empty: '%prefix% <red>没有复制的物品名称可粘贴'
+    feedback-paste: '%prefix% <green>粘贴复制的物品名称'
+    banned_words: '%prefix% <red>商品名称包含屏蔽词'
+  lore:
+    description:
+      - '<gradient:#A78BFA:gold><b>编辑物品描述</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <text> </yellow><dark_gray>»</dark_gray> 在新行上添加文本'
+      - '<gray><yellow>Insert <line> <text> </yellow><dark_gray>»</dark_gray> 在选定行上添加文本'
+      - '<gray><yellow>Set <line> <text> </yellow><dark_gray>»</dark_gray> 设置或替换所选行上的文本'
+      - '<gray><yellow>Remove <line> </yellow><dark_gray>»</dark_gray> 删除所选行'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> 删除所有行'
+      - '<gray><yellow>Copy </yellow><dark_gray>»</dark_gray> 复制当前物品物品描述以供稍后粘贴'
+      - '<gray><yellow>CopyBook </yellow><dark_gray>»</dark_gray> 与副本相同，但来自书页作为线条'
+      - '<gray><yellow>CopyFile <path> </yellow><dark_gray>»</dark_gray> 与副本相同，但来自 loreCopy.yml'
+      - '<gray><yellow>Paste </yellow><dark_gray>»</dark_gray> 粘贴上次复制的物品描述'
+      - '<gray><yellow>Replace <replaced> <replacer> </yellow><dark_gray>»</dark_gray> 替换所有出现的情况'
+    params: '<add/set/remove...> [...]'
+    set:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>设置或替换所选行上的文本</b></gradient>'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>删除所选行</b></gradient>'
+    insert:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>在选定行上添加文本</b></gradient>'
+    copy:
+      feedback: '%prefix% <green>已复制商品描述'
+    copyBook:
+      feedback: '%prefix% <green>书籍页面已复制，准备粘贴'
+    copyFile:
+      wrong-path: '%prefix% <red>无效路径，记得重新加载配置并检查CaP'
+      no-path: '%prefix% <red>选择路径/ie lore copyfile <gold><path>'
+      feedback: '%prefix% <green>配置已复制，准备粘贴'
+    paste:
+      feedback: '%prefix% <green>已粘贴物品描述'
+      no-copy: '%prefix% <red>先复制物品描述'
+    replace:
+      params: '<replaced> <replacer>'
+      description:
+        - '<gold><b>替换物品描述中出现的所有</b></gradient>'
+        - ''
+        - '<gray>如果您需要替换的单词超过一个'
+        - '<gray> 将它们关闭在 <yellow>{ }'
+        - ''
+        - '<gray>示例：<yellow>/ie lore replace New Rusty'
+        - '<gray>''<yellow>New sword</yellow>'' -> ''<yellow>Rusty sword</yellow>'''
+        - ''
+        - '<gray>示例2：<yellow>/ie lore replace {Heavy} {Very light}'
+        - '<gray>''<yellow>Heavy sword</yellow>'' -> ''<yellow>Very light sword</yellow>'''
+  listaliases:
+    description:
+      - '<gradient:#A78BFA:gold><b>显示允许的别名参数</b>'
+      - ''
+      - '<gray><yellow><type> </yellow>要显示的参数类型'
+    params: '<type>'
+    prefix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>别名 <dark_blue>◆ ◆ ◆ ◆'
+    postfix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>别名 <dark_blue>◆ ◆ ◆ ◆'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+    hover_info: '<blue>原值：<yellow>%default%'
+    hover_type: '<gold>点击查看'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>别名：</b></gradient>'
+itemeditequipment:
+  allowedentities:
+    invalid-type: '%prefix% <red>值<gold>%value% <red>既不是有效实体，也不是有效实体组'
+    description:
+      - '<gradient:#A78BFA:gold><b>设置允许佩戴该装备的实体类型</b></gradient>'
+      - ''
+      - '<gray><yellow>[entity] </yellow>哪种实体类型'
+      - '<gray><yellow>[group] </yellow>哪个实体组'
+      - ''
+      - '<gray>添加所有选定类型'
+    params: '[entity/group] [entity/group] ...'
+    feedback: '%prefix% <green>现在允许的实体类型为：<yellow>%value%'
+    feedback-reset: '%prefix% <green>允许的实体类型已重置'
+  canshear:
+    unsupported-version: '%prefix% <red>您的服务器版本（<gold>%value%<red>）不支持此功能'
+    description:
+      - '<gradient:#A78BFA:gold><b>设置交互装备</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 能够剪切'
+      - '<gray>来自实体的装备，例如南瓜'
+      - '<gray>雪人'
+    params: '[true/false]'
+    feedback: '%prefix% <green>可剪切属性现在为<yellow>%value%'
+  canbesheared:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置该装备是否可以剪切</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>设备是否可剪切'
+    params: '[true/false]'
+    feedback: '%prefix% <green>可剪切属性现在为<yellow>%value%'
+  cameraoverlay:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置相机覆盖</b></gradient>'
+      - ''
+      - '<gray><yellow>[namespacedkey] </yellow>您想要的叠加层'
+      - '<gray>叠加层设置在纹理包上，这是唯一的原版'
+      - '<gray>叠加是minecraft:misc/pumpkinblur'
+    params: '[namespacedkey]'
+    feedback: '%prefix% <green>相机覆盖已更新'
+    feedback-reset: '%prefix% <green>相机覆盖已被删除'
+    invalid-namespacedkey: '<red>Namespacedkey <gold>%value% <red> 无效'
+  clear:
+    description:
+      - '<gradient:#A78BFA:gold><b>完全移除物品</b></gradient>的装备属性'
+      - ''
+      - '<gray>如果物品是普通装备，则恢复默认值'
+    params: ''
+    feedback: '%prefix% <green>装备属性已重置为默认值'
+  damageonhurt:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置可损坏</gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 因损坏而降低耐久度'
+      - ''
+      - '<gray><gold>NB.</gold>只有最大堆叠大小为1的物品才会被损坏'
+      - '<gray>使用<yellow>/ie maxstacksize 1'
+      - '<gray><gold><b>提示</b></gold>记得设置物品最大耐久度'
+      - '  <yellow>/ie maxdurability <amount>'
+    params: '[true/false]'
+    feedback: '%prefix% <green>受伤财产的伤害现在为<yellow>%value%'
+    warning-maxstacksize: '%prefix% <red>物品最大堆叠尺寸必须为<gold>1<red>才可损坏<dark_red>[<gold>点击修复<dark_red>]'
+  dispensable:
+    description:
+      - '<gradient:#A78BFA:gold><b>套装可有可无</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 配备分配器'
+    params: '[true/false]'
+    feedback: '%prefix% <green>可有可无的财产现在是<yellow>%value%'
+  equiponinteract:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置交互装备</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 配备互动'
+    params: '[true/false]'
+    feedback: '%prefix% <green>交互属性装备现在为<yellow>%value%'
+  equipsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置装备声音</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>应该发出哪个声音'
+    params: '[sound]'
+    feedback: '%prefix% <green>装备声音属性现在为<yellow>%value%'
+    feedback-reset: '%prefix% <green>装备声音属性已重置为默认值'
+  help:
+    header-name: 'ItemEquipment'
+    description:
+      - '<gradient:#A78BFA:gold><b>显示ItemEditEquipment帮助</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>帮助页面'
+      - '<gray><yellow>[subcommand] </yellow>子命令帮助'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>显示该物品的装备属性</b></gradient>'
+    params: ''
+    not_set: '%prefix% <gray>该物品没有可装备的组件'
+    message:
+      - '%prefix% <dark_green><b>可装备</b>'
+      - '<green>插槽：<yellow>%slot%'
+      - '<green>可剪切：<yellow>%canbesheared%'
+      - '<green>伤害伤害：<yellow>%damageonhurt%'
+      - '<green>可有可无：<yellow>%dispensable%'
+      - '<green>互动装备：<yellow>%equiponinteract%'
+      - '<green>可互换：<yellow>%swappable%'
+      - '<green>装备音效：<yellow>%equipsound%'
+      - '<green>剪切声：<yellow>%shearsound%'
+      - '<green>允许的实体：<yellow>%allowedentities%'
+      - '<green>相机叠加：<yellow>%cameraoverlay%'
+      - '<green>资产 ID：<yellow>%assetid%'
+  model:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置纹理模型</b></gradient>'
+      - ''
+      - '<gray><yellow>[key] </yellow>装备时使用的设备型号的命名空间ID'
+    params: '[key]'
+    feedback: '%prefix% <green>装备型号现为<yellow>%key%'
+    feedback-reset: '%prefix% <green>装备型号已重置'
+  shearsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品被剪切移除时的声音</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>应该发出哪个声音'
+      - '<gray>当它被剪掉时，就像南瓜一样'
+      - '<gray>雪人'
+    params: '[sound]'
+    feedback: '%prefix% <green>剪切声音现在<yellow>%value%'
+    feedback-reset: '%prefix% <green>剪切声音属性已重置为默认值'
+  shearingsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品被剪切移除时的声音</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>应该发出哪种声音'
+      - '<gray>当它被剪掉时，就像雪人的南瓜一样'
+    params: '[sound]'
+    feedback: '%prefix% <green>剪切声音现在是<yellow>%value%'
+  slot:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置可装备槽位</b></gradient>'
+      - ''
+      - '<gray><yellow><slot> </yellow>可以装备该物品的地方'
+    params: '<slot>'
+    feedback: '%prefix% <green>装备栏位现在为<yellow>%value%'
+  swappable:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品可交换</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 表示可交换的物品'
+    params: '[true/false]'
+    feedback: '%prefix% <green>可交换属性现在为<yellow>%value%'
+itemeditfood:
+  addeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>为物品添加效果</b></gradient>'
+      - '<gray><yellow>/ief addeffect </yellow>cleareffects'
+      - '<gray><yellow>/ief addeffect </yellow>teleport <range>'
+      - '<gray><yellow>/ief addeffect </yellow>applyeffects [chance] <potion> <lv> <duration> [ambient] [particle] [icon]'
+      - '<gray><yellow>/ief addeffect </yellow>removeeffects <potion>'
+      - '<gray><yellow>/ief addeffect </yellow>playsound <sound>'
+      - ''
+    params: '[...]'
+    cleareffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>为物品添加效果</b></gradient>'
+        - ''
+        - '<gray>移除玩家身上的任何药水效果，例如牛奶桶'
+      params: '<potion>'
+      feedback: '%prefix% <green>增加了进食时的传送效果'
+    teleport:
+      description:
+        - '<gradient:#A78BFA:gold><b>为物品添加效果</b></gradient>'
+        - '<gray><yellow><range> </yellow>将玩家传送多远'
+        - ''
+        - '<gray>吃完食物后随机传送玩家'
+      params: '<range>'
+      feedback: '%prefix% <green>增加了进食时的传送效果'
+    applyeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>为物品添加效果</b></gradient>'
+        - '<gray><yellow>[chance] </yellow>应用该效果的几率是多少？'
+        - '<gray> 必须大于 <yellow>0</yellow> 且小于<yellow>100'
+        - '<gray><yellow><potion> </yellow>药水效果类型'
+        - '<gray><yellow><lv> </yellow>效果级别，默认为<yellow>1</yellow>'
+        - '<gray><yellow><duration> </yellow>持续时间（秒）或<yellow>-1 </yellow>永久效果'
+        - '<gray><yellow>[ambient] [particle] [icon] </yellow>true/false药水效果自定义'
+        - ''
+        - '<gray>当玩家吃食物时应用选定的效果'
+      params: '<potion>'
+      feedback: '%prefix% <green>增加了进食时的涂抹效果'
+    removeeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>为物品添加效果</b></gradient>'
+        - '<gray><yellow><potion> </yellow>清除所选效果'
+        - ''
+        - '<gray>吃完食物后从玩家身上移除选定的效果'
+      params: '<potion>'
+      feedback: '%prefix% <green>增加了进食时去除效果'
+    playsound:
+      description:
+        - '<gradient:#A78BFA:gold><b>为物品添加效果</b></gradient>'
+        - '<gray><yellow><sound> </yellow>播放声音'
+        - ''
+        - '<gray>吃东西时播放选定的声音'
+      params: '<sound>'
+      feedback: '%prefix% <green>添加了吃东西时的声音'
+  animation:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置吃动画</b></gradient>'
+      - '<gray>仅适用于<red>1.21.2+'
+      - ''
+      - '<gray><yellow><animation> </yellow>要设置的值，默认切换'
+      - ''
+      - '<gray>部分动画仅在第一人称视角下显示，'
+      - '<gray>一些动画仅在第三人称视角下显示，'
+      - '<gray>一些动画在第一人称和第三人称视图中显示'
+    params: '<animation>'
+    feedback: '%prefix% <green>应用动画'
+  canalwayseat:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置该物品是否可以吃</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>要设置的值，默认切换'
+      - ''
+      - '<gray>通常食物需要饥饿才能吃，'
+      - '<gray>设置true将模仿金苹果行为'
+    params: '[true/false]'
+    feedback: '%prefix% <green>物品有可以一直吃到<yellow>%value%'
+  consumeparticles:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置物品食用时是否显示颗粒</b></gradient>'
+      - '<gray>仅适用于<red>1.21.2+'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>要设置的值，默认切换'
+    params: '[true/false]'
+    feedback: '%prefix% <green>消耗粒子现在为<yellow>%value%'
+  convertto:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置消耗食物时赠送的物品</b></gradient>'
+      - '<gray>仅限<red>1.21+'
+      - ''
+      - '<gray><yellow>[type/serveritem id] </yellow>要退货的商品'
+      - '<gray> 您可以设置材质，也可以'
+      - '<gray> 从 ServerItem 保存的物品中选择一个物品'
+      - ''
+      - '<gray>模仿桶所在位置的牛奶行为'
+      - '<gray>喝完牛奶后返回'
+    params: '[type/serveritem id]'
+    feedback: '%prefix% <green>转换为更新'
+  eatticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置吃该物品所需的时间</b></gradient>'
+      - ''
+      - '<gray><yellow><ticks> </yellow>吃该物品的时间'
+      - '<gray> 必须是 <yellow>1 </yellow> 或更大'
+      - ''
+      - '<gray><yellow>20 </yellow>刻度 = <yellow>1 </yellow>秒'
+    params: '<ticks>'
+    feedback: '%prefix% <green>吃蜱虫更新为<yellow>%value%'
+  help:
+    header-name: 'ItemFood'
+    description:
+      - '<gradient:#A78BFA:gold><b>显示ItemFood帮助</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>帮助页面'
+      - '<gray><yellow>[subcommand] </yellow>子命令帮助'
+    params: '[page/subcommand]'
+  info:
+    not_food: '%prefix% <dark_green>物品没有食物属性或有默认属性'
+    message:
+      - '%prefix% <dark_green><b>物品食品属性</b>'
+      - '<green>吃饭时间：<yellow>%eatseconds%<green>秒<dark_gray>（<gray>%eatticks%<dark_gray>刻度）'
+      - '<green>恢复饥饿：<yellow>%nutrition% <dark_gray>| <green>饱和度：<yellow>%saturation%<green>'
+      - '<green>动画：<yellow>%animation% <dark_gray>| <green>声音：<yellow>%sound% <dark_gray>| <green>颗粒：<yellow>%consumeparticles%'
+      - '<green>吃饱了：<yellow>%canalwayseat% <dark_gray>| <green>食用后获得：<yellow>%convertto%'
+    apply_effect_prefix:
+      - '<dark_green><b>包含<yellow>%effects%<dark_green>可能的药水效果：</b>'
+    apply_effect:
+      - '<green>%index%。类型：<yellow>%type% <dark_gray>| <green>Lv：<yellow>%level% <dark_gray>| <green>持续时间：<yellow>%duration_s%<green>秒<dark_gray>（<gray>%duration_ticks%<dark_gray>刻度）'
+      - '<green>粒子：<yellow>%hasparticle% <dark_gray>| <green>环境：<yellow>%isambient% <dark_gray>| <green>图标：<yellow>%hasicon% <dark_gray>| <green>几率：<yellow>%chance_perc%<green>%'
+    consume_effect_teleport: '<green>随机传送直径：<yellow>%diameter%'
+    consume_effect_sound: '<green>额外消耗声音：<yellow>%sound%'
+    consume_effect_remove: '<green>删除的效果：<yellow>%effects%'
+    consume_effect_clear: '<green>清除所有活动状态效果'
+    consume_effect_unknown: '<green>其他消耗效果：<yellow>%type%'
+    description:
+      - '<gradient:#A78BFA:gold><b>描述物品</b></gradient>当前的食物信息'
+    params: ''
+  nutrition:
+    description:
+      - '<gradient:#A78BFA:gold><b>恢复营养</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>恢复的饥饿量'
+      - '<gray> 必须是 <yellow>0 </yellow> 或更大'
+      - ''
+      - '<gray>满饥饿条是<yellow>20'
+    params: '<amount>'
+    feedback: '%prefix% <green>营养价值现在<yellow>%value%'
+  removeeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>移除物品的效果</b></gradient>'
+      - ''
+      - '<gray><yellow><index> </yellow>删除所选效果'
+    params: '<index>'
+    feedback: '%prefix% <green>删除了选定的食物效果'
+  reset:
+    description:
+      - '<gradient:#A78BFA:gold><b>完全去除物品上的食品属性</b></gradient>'
+      - ''
+      - '<gray>如果物品是香草食物，则恢复默认值'
+    params: ''
+    feedback: '%prefix% <green>食物属性已删除'
+  reseteffects:
+    description:
+      - '<gradient:#A78BFA:gold><b>移除物品效果</b></gradient>'
+    params: ''
+    feedback: '%prefix% <green>食物效果已移除'
+  saturation:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置恢复饱和度</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>添加量饱和度'
+      - '<gray> 允许负值'
+      - ''
+      - '<gray>饱和度控制食物水平的快慢'
+      - '<gray>（营养）减少'
+    params: '<amount>'
+    feedback: '%prefix% <green>现在饱和度<yellow>%value%'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置吃东西的声音</b></gradient>'
+      - '<gray>仅适用于<red>1.21.2+'
+      - ''
+      - '<gray><yellow><sound> </yellow>要设置的值'
+    params: '<sound>'
+    feedback: '%prefix% <green>吃声音现在是<yellow>%value%'
+itemeditkinetic:
+  contactcooldownticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置动能接触冷却时间</b></gradient>'
+      - ''
+      - '<gray><yellow><cooldown> </yellow>接触冷却时间'
+    params: '<delay>'
+    feedback: '%prefix% <green>接触冷却时间设置'
+  damageconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置动能损伤条件</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>最大伤害持续时间刻度'
+      - '<gray><yellow><min speed> </yellow>最小速度'
+      - '<gray><yellow><min relative speed> </yellow>最小相对速度'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>损伤条件设定'
+  damagemultiplier:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置动能伤害倍数</b></gradient>'
+      - ''
+      - '<gray><yellow><multiplier> </yellow>伤害倍数'
+    params: '<delay>'
+    feedback: '%prefix% <green>动能伤害倍数设置'
+  delayticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置动能延迟刻度</b></gradient>'
+      - ''
+      - '<gray><yellow><delay> </yellow>动能延迟刻度'
+    params: '<delay>'
+    feedback: '%prefix% <green>延迟刻度设置'
+  dismountconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置使用动能武器将目标从坐骑上击落的条件</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>将目标从坐骑上击落的最大时间窗口（以蜱为单位）'
+      - '<gray><yellow><min speed> </yellow>将目标从坐骑上击落的最低速度'
+      - '<gray><yellow><min relative speed> </yellow>将目标从坐骑上击落的最小相对速度'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>将目标从坐骑上击落的条件设定'
+  forwardmovement:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置向前运动</b></gradient>'
+      - ''
+      - '<gray><yellow><movement> </yellow>向前移动量'
+    params: '<movement>'
+    feedback: '%prefix% <green>前进动作设定'
+  help:
+    header-name: 'ItemKinetic'
+    description:
+      - '<gradient:#A78BFA:gold><b>显示ItemKinetic帮助</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>帮助页面'
+      - '<gray><yellow>[subcommand] </yellow>子命令帮助'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>显示该物品的动能武器属性</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>该物品没有动能武器组件'
+    message:
+      - '%prefix% <dark_green><b>动能武器</b>'
+      - '<green>接触冷却时间：<yellow>%contactcooldownticks% <green>ticks'
+      - '<green>伤害倍数：<yellow>%damagemultiplier%'
+      - '<green>延迟：<yellow>%delayticks% <green>刻度'
+      - '<green>向前移动：<yellow>%forwardmovement%'
+      - '<green>击中声音：<yellow>%hitsound%'
+      - '<green>声音：<yellow>%sound%'
+      - '<green>损坏情况：<yellow>%damageconditions%'
+      - '<green>将目标击落坐骑的条件：<yellow>%dismountconditions%'
+      - '<green>击退条件：<yellow>%knockbackconditions%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置动能击打声音</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>要设置的值'
+    params: '<sound>'
+    feedback: '%prefix% <green>点击声音现在为<yellow>%value%'
+  knockbackconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置动能击退条件</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>最大击退持续时间刻度'
+      - '<gray><yellow><min speed> </yellow>击退的最小速度'
+      - '<gray><yellow><min relative speed> </yellow>击退的最小相对速度'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>击退条件设定'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置动感声音</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>要设置的值'
+    params: '<sound>'
+    feedback: '%prefix% <green>声音现在为<yellow>%value%'
+itemeditpiercing:
+  dealsknockback:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置击中是否造成击退</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 应用击退'
+    params: '[true/false]'
+    feedback: '%prefix% <green>击退现在为<yellow>%value%'
+  dismounts:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置击中是否将目标从坐骑上击落</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 将目标从坐骑上击落'
+    params: '[true/false]'
+    feedback: '%prefix% <green>将目标从坐骑上击落现在为<yellow>%value%'
+  help:
+    header-name: 'ItemPiercing'
+    description:
+      - '<gradient:#A78BFA:gold><b>显示ItemPiercing帮助</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>帮助页面'
+      - '<gray><yellow>[subcommand] </yellow>子命令帮助'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>显示该物品的穿刺武器属性</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>该物品没有穿刺武器组件'
+    message:
+      - '%prefix% <dark_green><b>穿刺武器</b>'
+      - '<green>优惠击退：<yellow>%dealsknockback%'
+      - '<green>将目标从坐骑上击落：<yellow>%dismounts%'
+      - '<green>击中声音：<yellow>%hitsound%'
+      - '<green>声音：<yellow>%sound%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置穿刺武器的撞击声音</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>要设置的值'
+    params: '<sound>'
+    feedback: '%prefix% <green>点击声音现在为<yellow>%value%'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>设置穿刺武器的声音</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>要设置的值'
+    params: '<sound>'
+    feedback: '%prefix% <green>声音现在为<yellow>%value%'
+serveritem:
+  help-header: '<gradient:#54acff:#A78BFA><bold>ServerItem</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>帮助</bold></#A78BFA>'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>获得<yellow>%amount% <green>共<yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][give] %player_name% 获得%amount% / %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>将所选物品给予玩家</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>商品 ID'
+      - '<gray><yellow>[amount] </yellow>给予的物品数量，默认1'
+      - '<gray><yellow>[player] </yellow>谁获得物品，默认你'
+      - '<gray><yellow>[silent] </yellow>true 如果没有反馈应发送给玩家'
+    params: '<id> [amount] [player] [silent]'
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>获得<yellow>%amount% <green>共<yellow>%nick%'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets% 获得%amount% / %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>将所选物品赠送给所有在线玩家</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>商品 ID'
+      - '<gray><yellow>[amount] </yellow>给予的物品数量，默认1'
+      - '<gray><yellow>[silent] </yellow>true 如果不应该向玩家发送反馈'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] 掉落 %amount% 的 %id% (%nick%） 在 %world% %x% %y% %z%'
+    description:
+      - '<gradient:#A78BFA:gold><b>将所选物品拖放到所选位置</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>商品 ID'
+      - '<gray><yellow><amount> </yellow>掉落物品数量，1 到 2304'
+      - '<gray><yellow><world> </yellow>哪个世界'
+      - '<gray><yellow><x> <y> <z> </yellow>坐标'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>丢失<yellow>%amount% <green>共<yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][take] %player_name% 给出了%amount% / %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>从玩家中获取所选物品</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>商品 ID'
+      - '<gray><yellow>[amount] </yellow>给予的物品数量，默认1'
+      - '<gray><yellow>[player] </yellow>谁获得物品，默认你'
+      - '<gray><yellow>[silent] </yellow>true 如果没有反馈应发送给玩家'
+    params: '<id> [amount] [player] [silent]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>物品<yellow>%id% <green>已注册'
+    already_used_id: '%prefix% <red>id <yellow>%id% <red>的物品已存在，请更改 id 或执行 /si update 覆盖'
+    description:
+      - '<gradient:#A78BFA:gold><b>登记手中的物品</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>识别物品，不区分大小写，不能'
+      - '<gray> 包含空格或点也无法选择'
+      - '<gray> 任何已使用的 ID'
+      - ''
+      - '<gold><b>提示</b></gold> <gray>使用<yellow>/serveritem update <id></yellow>，更改现有物品'
+      - '<gold><b>提示</b></gold> <gray>使用<yellow>/serveritem give <id>检索已保存的物品'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>物品<yellow>%id% <green>未注册'
+    description:
+      - '<gradient:#A78BFA:gold><b>删除所选物品</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>商品 ID'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>物品<yellow>%id% <green>已更新'
+    description:
+      - '<gradient:#A78BFA:gold><b>更新所选物品</b></gradient>'
+      - ''
+      - '<gray>将id关联的物品更改为你手上的物品'
+      - '<gray><yellow><id> </yellow>商品 ID'
+      - ''
+      - '<gold><b>提示</b></gold> <gray>使用<yellow>/serveritem save <id></yellow>，创建一个新物品'
+      - '<gold><b>提示</b></gold> <gray>使用<yellow>/serveritem delete <id></yellow>，删除物品'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>打开带有服务器保存物品的图形用户界面</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>gui页面，默认1'
+    params: '[page]'
+  setnick:
+    #Holders: %id% %nick%
+    success: '%prefix% <green>物品<yellow>%id% <green>昵称已更新为<yellow>%nick%'
+    description:
+      - '<gradient:#A78BFA:gold><b>设置所选物品的显示名称</b></gradient>'
+      - ''
+      - '<gray>Nick 用于持有者 <yellow>%nick%</yellow> 购买/出售消息，由'
+      - '<gray> 默认是物品名称，如果没有名称则为物品类型'
+      - ''
+      - '<gray><yellow><id> </yellow>商品 ID'
+      - '<gray><yellow>[nick] </yellow>要设置的名称'
+      - ''
+      - '<gold><b>提示</b></gold> <gray>要重置为默认值只需使用<yellow>/serveritem setnick <id>'
+    params: '<id> [nick]'
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>购买了<yellow>%amount% <green>共<yellow>%nick% <green>用于<yellow>%price%'
+    #Holders: %id% %nick% %amount%
+    not-enough-space: '<red>您没有足够的库存空间来购买<gold>%amount% <red>共<gold>%nick%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: '<red>您没有<gold>%price% <red>购买<gold>%amount% <red>共<gold>%nick%'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% 支付%price% %amount% %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>向玩家出售物品</b></gradient>'
+      - ''
+      - '<gray>Sell 与 SellMax 不同，因为您出售全部金额'
+      - '<gray> 给玩家，否则你什么也不卖'
+      - '<gray><yellow><id> </yellow> 商品 ID'
+      - '<gray><yellow><amount> </yellow>物品数量'
+      - '<gray><yellow><player> </yellow>谁应该付款并获得物品'
+      - '<gray><yellow><price> </yellow>全部商品的价格，必须为正数'
+      - '<gray><yellow>[silent] </yellow>true 表示不向玩家发送消息'
+      - ''
+      - '<gray>余额不足，或背包空间不足时，交易会失败。'
+      - '<gray>  背包必须能容纳全部指定数量：<yellow><amount>'
+      - '<gray><gold>N.B.</gold> 命令执行器的平衡未受影响'
+    params: '<id> <amount> <player> <price> [silent]'
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>已售出<yellow>%amount% <green>共<yellow>%nick% <yellow>共<green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>您的库存中没有 <gold>%amount% <red>（共 <gold>%nick% <red>）'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% 已售出 %amount% 共 %id% (%nick%)，总计 %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>向玩家购买物品</b></gradient>'
+      - ''
+      - '<gray>Buy 与 BuyMax 不同，因为您购买了全部金额'
+      - '<gray> 来自玩家，否则你什么也不买'
+      - '<gray><yellow><id> </yellow> 商品 ID'
+      - '<gray><yellow><amount> </yellow>物品数量'
+      - '<gray><yellow><player> </yellow>谁应该支付物品并获得金钱'
+      - '<gray><yellow><price> </yellow>全部商品的价格，必须为正数'
+      - '<gray><yellow>[silent] </yellow>true 表示不向玩家发送消息'
+      - ''
+      - '<gray>交易要求背包中至少有 <yellow><amount>'
+      - '<gray>  个 <yellow><id> </yellow>物品'
+      - '<gray><gold>N.B.</gold> 命令执行器的平衡未受影响'
+    params: '<id> <amount> <player> <price> [silent]'
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>购买了<yellow>%amount% <green>共<yellow>%nick% <yellow>用于<green>%price%'
+    #Holders: %id% %nick%
+    not-enough-space: '<red>您没有足够的库存空间来购买任何<gold>%nick%'
+    #Holders: %id% %nick% %price%
+    not-enough-money: '<red>您没有足够的钱购买<gold>%nick% <red>每个<gold>%price% <red>'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% 支付%price% %amount% %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>向玩家出售物品</b></gradient>'
+      - ''
+      - '<gray>SellMax 与 Sell 不同，因为您可能会卖出较少的金额'
+      - '<gray>给玩家'
+      - '<gray><yellow><id> </yellow> 商品 ID'
+      - '<gray><yellow><amount> </yellow>物品数量'
+      - '<gray><yellow><player> </yellow>谁应该付款并获得物品'
+      - '<gray><yellow><price> </yellow>全部商品的价格，必须为正数'
+      - '<gray><yellow>[silent] </yellow>true 表示不向玩家发送消息'
+      - ''
+      - '<gray>余额不足，或背包空间不足时，交易会失败。'
+      - '<gray>  背包至少要有容纳一个物品的空间'
+      - '<gray>仅购买部分数量时，价格 <yellow><price></yellow> 会按比例降低'
+      - '<gray><gold>N.B.</gold> 命令执行器的平衡未受影响'
+    params: '<id> <amount> <player> <price> [silent]'
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>已售出<yellow>%amount% <green>共<yellow>%nick% <yellow>共<green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>您的库存中没有任何<gold>%nick% <red>可出售'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% 已售出 %amount% 共 %id% (%nick%)，总计 %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>向玩家购买物品</b></gradient>'
+      - ''
+      - '<gray>BuyMax 与 Buy 不同，因为您可能会购买更少的数量'
+      - '如果玩家库存中的物品少于数量，则来自玩家的<gray>'
+      - '<gray><yellow><id> </yellow> 商品 ID'
+      - '<gray><yellow><amount> </yellow>物品数量'
+      - '<gray><yellow><player> </yellow>谁应该支付物品并获得金钱'
+      - '<gray><yellow><price> </yellow>全部商品的价格，必须为正数'
+      - '<gray><yellow>[silent] </yellow>true 表示不向玩家发送消息'
+      - ''
+      - '<gray>交易要求背包中至少有一个 <yellow><id> </yellow>物品'
+      - '<gray>'
+      - '<gray>如果玩家卖出少于<yellow><amount></yellow>价格将按比例调整'
+      - '<gray><gold>N.B.</gold> 命令执行器的平衡未受影响'
+    params: '<id> <amount> <player> <price> [silent]'
+itemstorage:
+  help-header: '<gradient:#54acff:#A78BFA><bold>物品存储</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>帮助</bold></#A78BFA>'
+  get:
+    #Holders: %id% %amount%
+    success: '%prefix% <green>已获得<yellow>%amount% <green>共<yellow>%id%'
+    no-inventory-space: '%prefix% <red>您的库存中没有空间'
+    description:
+      - '<gradient:#A78BFA:gold><b>获取所选物品</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>商品 ID'
+      - '<gray><yellow>[amount] </yellow>获取数量，默认1'
+    params: '<id> [amount]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>物品<yellow>%id% <green>已注册'
+    #Holders: %limit%
+    limit-reached: '%prefix% <red>您已达到可保存物品的最大数量（%limit%）'
+    description:
+      - '<gradient:#A78BFA:gold><b>登记手中的物品</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>识别您的物品，不区分大小写，不能'
+      - '<gray> 包含空格或点也无法选择'
+      - '<gray> 任何已使用的 ID'
+      - ''
+      - '<gold><b>提示</b></gold> <gray>使用<yellow>/itemstorage update <id></yellow>，更改现有物品'
+      - '<gold><b>提示</b></gold> <gray>使用<yellow>/itemstorage get <id>检索已保存的物品'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>物品<yellow>%id% <green>未注册'
+    description:
+      - '<gradient:#A78BFA:gold><b>删除所选物品</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>商品 ID'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>物品<yellow>%id% <green>已更新'
+    description:
+      - '<gradient:#A78BFA:gold><b>更新所选物品</b></gradient>'
+      - ''
+      - '<gray>将id关联的物品更改为你手上的物品'
+      - '<gray><yellow><id> </yellow>商品 ID'
+      - ''
+      - '<gray><gold><b>提示</b></gold>使用<yellow>/itemstorage save <id></yellow>，创建一个新物品'
+      - '<gray><gold><b>提示</b></gold>使用<yellow>/itemstorage delete <id></yellow>，删除物品'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>打开包含已保存物品的图形用户界面</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] <gray>gui页面，默认1'
+    params: '[page]'
+itemeditimport:
+  help:
+    - '<green>/itemeditimport ItemEditor <dark_green>-从ItemEditor插件导入物品'
+  itemeditor:
+    unable-to-get-item:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>无法加载物品<gold>%id%'
+    already-used-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>已被使用，也许你之前已经执行过此命令，否则你可以重命名文件ItemEditor/items/%id%.yml'
+    invalid-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>不是可接受的 ID，您可以将文件ItemEditor/items/%id%.yml重命名为字母数字名称'
+    import-unsuccess:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>没有导入<gold>%max% <red>的物品，也许你之前已经执行过这个命令了（？）'
+    import-success:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>进口 <yellow>%done% <green>的 <yellow>%max% <green>物品来自 ItemEditor'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>进口商品：<yellow>%ids%'
+    import-empty:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>ItemEditor 没有要导入的物品'
+itemeditreload:
+  success: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>重装上阵'
+gui:
+  color:
+    title: '<blue>颜色编辑器'
+  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
+    creative: '中键单击'
+    other: '按1'
+  colorselector:
+    title: '<blue>选择颜色'
+    buttons:
+      color:
+        - '<gradient:#A78BFA:gold>颜色：</gradient>'
+        - '<gray><yellow>%colors%'
+        - '<gray>[<white>右键<gray>]添加<yellow>%color%'
+        - '<gray>[<white>左键单击<gray>] 删除最后一个颜色'
+        - '<gray>[<white>Shift+右键单击<gray>] 清除颜色'
+  banner:
+    title: '<blue>横幅编辑器'
+    color_selector_title: '<blue>颜色选择器'
+    pattern_selector_title: '<blue>模式选择器'
+    buttons:
+      pattern_selector_info:
+        - '<gray>选择<gold><b>%type%</b>'
+      color_selector_info:
+        - '<gray>选择<gold><b>%color%</b>'
+      position:
+        - '<gradient:#A78BFA:gold>模式控制器</gradient>'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] 切换模式'
+        - '<gray>[<white>左/右键<gray>] << Move pattern >>'
+      type:
+        - '<gradient:#A78BFA:gold>类型选择器</gradient>'
+        - '<gray>类型：<yellow>%type%'
+        - ''
+        - '<gray>[<white>点击<gray>] 更改类型'
+      color:
+        - '<gradient:#A78BFA:gold>颜色选择器</gradient>'
+        - '<gray>颜色：<yellow>%color%'
+        - ''
+        - '<gray>[<white>点击<gray>]更改颜色'
+  firework:
+    title: '<blue>烟花编辑器'
+    buttons:
+      type:
+        - '<gradient:#A78BFA:gold>类型选择器</gradient>'
+        - '<gray>类型：<yellow>%type%'
+        - ''
+        - '<gray>[<white>点击<gray>] 更改类型'
+      colors:
+        - '<gradient:#A78BFA:gold>颜色选择器</gradient>'
+        - '<gray>颜色：<yellow>%colors%'
+        - ''
+        - '<gray>[<white>点击<gray>]更改颜色'
+      fadecolors:
+        - '<gradient:#A78BFA:gold>淡入淡出颜色选择器</gradient>'
+        - '<gray>褪色：<yellow>%colors%'
+        - ''
+        - '<gray>[<white>点击<gray>]更改颜色'
+      flags:
+        none: '<red>没有活动'
+        trail: '<yellow>踪迹<green>活跃'
+        flicker: '<yellow>闪烁 <green>活跃'
+        both: '<gray><yellow>轨迹</yellow>和<yellow>闪烁<green>活动'
+        info:
+          - '<gradient:#A78BFA:gold>轨迹和闪烁激活器</gradient>'
+          - '%status%'
+          - ''
+          - '<gray>[<white>右键<gray>] 切换闪烁效果'
+          - '<gray>[<white>左键<gray>]切换轨迹效果'
+      position:
+        - '<gray>效果控制器'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] 切换效果'
+        - '<gray>[<white>左/右键单击<gray>] 移动此效果'
+      power:
+        - '<gray>功率：<yellow>%power%'
+        - ''
+        - '<gray>[<white>左/右键<gray>] << Change >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>上一页</b>'
+      - ''
+      - '<gray>[<white>点击<gray>]前往页面<yellow>%target_page%'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>下一页</b>'
+      - ''
+      - '<gray>[<white>点击<gray>]前往页面<yellow>%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '<gold><b>返回</b>'
+      - ''
+      - '<gray>[<white>单击<gray>] 转到上一个图形用户界面'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '<blue>%player_name% 物品 - 第 <aqua>%page% 页'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>页<yellow>%page%</b></gradient>'
+        - '<gray>[<white>单击<gray>] 切换<yellow>物品</yellow>/<yellow>ID 的视图'
+        - ''
+        - '<gray>点击物品：'
+        - '<gray>> [<white>左键<gray>]增益<yellow>1'
+        - '<gray>> [<white>Shift+左键单击<gray>] 增益<yellow>64'
+        - '<gray>> [<white>Shift+右键<gray>] 删除物品'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '<blue>服务器物品 - 第<aqua>%page%页'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>页<yellow>%page%</b></gradient>'
+        - '<gray>[<white>单击<gray>] 切换<yellow>物品</yellow>/<yellow>ID 的视图'
+        - ''
+        - '<gray>点击物品：'
+        - '<gray>> [<white>左键<gray>]增益<yellow>1'
+        - '<gray>> [<white>Shift+左键单击<gray>] 增益<yellow>64'
+        - '<gray>> [<white>Shift+右键<gray>] 删除物品'

@@ -1,0 +1,1438 @@
+generic:
+  help:
+    player-only: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Команда лише для гравців'
+    no-item-on-hand: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Вам потрібно тримати предмет у руці'
+    lack-permission: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>У вас немає дозволу %permission%'
+    lack-permission-generic: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Ви не маєте дозволу використовувати цю команду'
+    blocked-by-censure: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Ви не можете використовувати цей текст, він містить заблоковані слова'
+    blocked-by-type-restriction: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Ви не можете перейменувати цей елемент'
+    blocked-by-type-restriction-lore: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Ви не можете редагувати опис цього товару'
+    blocked-by-lore-line-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Ви не можете додати більше рядків опису цього товару'
+    blocked-by-lore-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Ви не можете встановити рядки довше %limit% символів'
+    blocked-by-rename-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Ви не можете встановлювати імена, довші ніж %limit% символів'
+
+    prefix: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray>'
+    header-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Допомога</bold></#A78BFA>'
+    header-sub-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <gradient:#A78BFA:#54acff><bold>%sub%</bold></gradient> <dark_gray>»</dark_gray> <#55d6ff><bold>Допомога</#55d6ff>'
+    command-format: '<gray>/%command%</gray> <#bad1ff>%sub%</#bad1ff> <#d7bbff>%params%</#d7bbff>'
+    footer-format: '%prev_clickable% <#7E9CFD><b>Допомога</b> [%page%/%max_page%]</#7E9CFD> %next_clickable%'
+    next_text: ' <light_purple><b>><st>> ></st> '
+    prev_text: ' <light_purple><b><st>< <</st>< '
+    next_void: ' <dark_gray><b>><st>> ></st> '
+    prev_void: ' <dark_gray><b><st>< <</st>< '
+    next_hover: '<gold><b>Перейти на сторінку %target%'
+    prev_hover: '<gold><b>Перейти на сторінку %target%'
+  wrong-material:
+    axolotl_bucket: '%prefix% <red>Елемент має бути відром для аксолотля'
+    banner: '%prefix% <red>Елемент має бути банером'
+    damageable: '%prefix% <red>Предмет повинен мати міцність, як інструменти та броня'
+    player_head: '%prefix% <red>Елемент має бути головою гравця'
+    rgb_colorable: '%prefix% <red>Елемент має бути кольоровим, як-от шкіряні обладунки, феєрверкові зірки, зілля або стріли з ефектами зілля'
+    written_book: '%prefix% <red>Елемент має бути письмовою книгою'
+    potion_effect_applicable: '%prefix% <red>Елемент має бути зіллям або стрілою з ефектом зілля або підозрілим рагу'
+    firework: '%prefix% <red>Предмет має бути феєрверком'
+    spawner_egg: '%prefix% <red>Елемент має бути яйцем спавна'
+    tropical_fish_bucket: '%prefix% <red>Елементом має бути відро з тропічною рибою'
+    writable_book: '%prefix% <red>Елемент має бути письмовою книгою або книгою та пером'
+    compass: '%prefix% <red>Елемент має бути компасом'
+    music_instrument: '%prefix% <red>Предметом має бути козячий ріг'
+    armor: '%prefix% <red>Предмет має бути бронею'
+    enchantment_storage: '%prefix% <red>Елемент має бути книгою або зачарованою книгою'
+  wrong-alias:
+    axolotl_variant: '%prefix% <red>Неправильне значення Аксолотля! <dark_red>[<gold>навести сюди<dark_red>]'
+    potion_effect: '%prefix% <red>Неправильне значення ефекту! <dark_red>[<gold>навести сюди<dark_red>]'
+    animations: '%prefix% <red>Неправильне значення анімації! <dark_red>[<gold>навести сюди<dark_red>]'
+    sound: '%prefix% <red>Неправильне звукове значення! <dark_red>[<gold>навести сюди<dark_red>]'
+    enchant: '%prefix% <red>Неправильне значення зачарування! <dark_red>[<gold>навести сюди<dark_red>]'
+    flag_type: '%prefix% <red>Неправильне значення прапорця! <dark_red>[<gold>навести сюди<dark_red>]'
+    book_type: '%prefix% <red>Неправильне значення типу книги! <dark_red>[<gold>навести сюди<dark_red>]'
+    equip_slot: '%prefix% <red>Неправильне значення слота обладнання! <dark_red>[<gold>навести сюди<dark_red>]'
+    banner_pattern: '%prefix% <red>Неправильне значення шаблону! <dark_red>[<gold>навести сюди<dark_red>]'
+    color: '%prefix% <red>Неправильне значення кольору! <dark_red>[<gold>навести сюди<dark_red>]'
+    mob_type: '%prefix% <red>Неправильне значення типу яйця! <dark_red>[<gold>навести сюди<dark_red>]'
+    trim_material: '%prefix% <red>Неправильна обробка броні Цінність матеріалу! <dark_red>[<gold>навести сюди<dark_red>]'
+    tropical_fish_pattern: '%prefix% <red>Неправильне значення шаблону! <dark_red>[<gold>навести сюди<dark_red>]'
+    trim_pattern: '%prefix% <red>Неправильне значення шаблону обшивки броні! <dark_red>[<gold>навести сюди<dark_red>]'
+    boolean: '%prefix% <red>Неправильне логічне значення! <dark_red>[<gold>навести сюди<dark_red>]'
+    attribute: '%prefix% <red>Неправильне значення атрибута! <dark_red>[<gold>навести сюди<dark_red>]'
+    operation: '%prefix% <red>Неправильне значення операції! <dark_red>[<gold>навести сюди<dark_red>]'
+    itemrarity: '%prefix% <red>Неправильне значення рідкості! <dark_red>[<gold>навести сюди<dark_red>]'
+    entitytype: '%prefix% <red>Неправильне значення EntityType! <dark_red>[<gold>навести сюди<dark_red>]'
+    entitygroups: '%prefix% <red>Неправильне значення EntityGroup! <dark_red>[<gold>навести сюди<dark_red>]'
+    consumable_effect: '%prefix% <red>Неправильне значення ефекту витратного матеріалу! <dark_red>[<gold>навести сюди<dark_red>]'
+    goat_horn_sound: '%prefix% <red>Неправильне значення звуку козячого рогу! <dark_red>[<gold>навести сюди<dark_red>]'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>Псевдоніми:</b></gradient>'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+itemedit:
+  amount:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установлена сума</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>кількість для встановлення (до 127)'
+      - '<gold><b>Порада</b></gold> <gray>Від''ємні суми віднімаються'
+      - '<gray> від поточної суми товару'
+    params: '<amount>'
+    feedback: '%prefix% <green>Кількість товару встановлено на <yellow>%amount%'
+    feedback-decrease: '%prefix% <green>Кількість товару зменшено на <yellow>%amount%'
+  attribute:
+    description:
+      - '<gradient:#A78BFA:gold><b>Редагувати модифікатори атрибутів</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <attribute> <amount> [operation] [slot] </yellow><dark_gray>»</dark_gray> додати нові модифікатори'
+      - '<gray><yellow>Remove <attribute/slot> </yellow><dark_gray>»</dark_gray> видаляє деякі модифікатори'
+    params: '<add/remove> [...]'
+    add:
+      params: '<attribute> <amount> [operation] [slot]'
+      description:
+        - '<gradient:#A78BFA:gold><b>Додати модифікатор атрибута</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute> </yellow>тип атрибута'
+        - '<gray><yellow><amount> </yellow>сума для встановлення'
+        - '<gray><yellow>[operation] </yellow>як додається модифікатор, за замовчуванням суми'
+        - '<gray><yellow>[slot] </yellow>застосовує цей модифікатор лише тоді, коли елемент вибрано'
+        - '<gray> слот обладнання або будь-який слот обладнання, якщо не вибрано'
+      feedback: '%prefix% <green>Додано модифікатор'
+    remove:
+      params: '<attribute/slot>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Видалити модифікатори</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute/slot> </yellow>введіть, щоб видалити, будь-які модифікатори з'
+        - '<gray> вибране значення видалено'
+      feedback-attribute: '%prefix% <green>Вилучено модифікатори атрибута'
+      feedback-equipment: '%prefix% <green>Вилучено модифікатори слота обладнання'
+  axolotlvariant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Редагувати варіант Аксолотля на відрі Аксолотля</b></gradient>'
+      - '<white><sprite:items:item/axolotl_bucket>'
+      - '<gray><yellow><type> </yellow>вид аксолотля'
+    params: '<type>'
+    feedback: '%prefix% <green>Змінено варіант Аксолотля на <yellow>%variant%'
+  banner:
+    description:
+      - '<gradient:#A78BFA:gold><b>Редагувати банер</b></gradient>'
+    params: '<add/set/remove/color> [...]'
+    set:
+      params: '<type> <color> <line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Замінити шаблон на вибраному рядку</b></gradient>'
+      feedback: '%prefix% <green>Набір шаблонів'
+    add:
+      params: '<type> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Додати візерунок</b></gradient>'
+      feedback: '%prefix% <green>Додано шаблон'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Видалити візерунок у вибраному рядку</b></gradient>'
+      feedback: '%prefix% <green>Візерунок видалено'
+    color:
+      params: '<line> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Змінити колір візерунка на вибраній лінії</b></gradient>'
+      feedback: '%prefix% <green>Візерунок змінено'
+  bookauthor:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити автора</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>Ім’я автора може містити пробіли та бути пофарбованим'
+      - '<gray>Працює лише з письмовими книгами'
+    params: '<name>'
+    feedback: '%prefix% <green>Оновлений автор книги'
+    feedback-reset: '%prefix% <green>Скинути автора книги'
+  bookenchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установіть чари на книгу</b></gradient>'
+      - '<white><sprite:items:item/enchanted_book> <sprite:items:item/book>'
+      - '<gray>Різниця між enchant і bookenchant полягає в тому, що'
+      - '<gray>книга з аспектом вогню enchant підпалює цілі при попаданні'
+      - '<gray>, тоді як книга з bookenchant ні'
+      - ''
+      - '<gray><yellow><enchant> </yellow>тип зачарування'
+      - '<gray><yellow>[level] </yellow>рівень чар, за замовчуванням <yellow>1'
+      - ''
+      - '<gold><b>Tip</b></gold> <gray>Установіть <yellow>[level] </yellow> на <yellow>0 </yellow>, щоб зняти чари'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>Вилучено зачарування книги <yellow>%enchant%'
+    feedback: '%prefix% <green>Застосовано книжкове зачарування <yellow>%enchant% <green>lv <yellow>%lv%'
+  booktype:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити тип книги</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>Працює лише з письмовими книгами'
+    params: '<booktype>'
+    feedback: '%prefix% <green>Оновлено генерацію книги до <yellow>%generation%'
+    feedback-reset: '%prefix% <green>Скинути створення книги'
+  color:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити колір</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/tipped_arrow_base> <sprite:items:item/firework_star> <sprite:items:item/leather_chestplate>'
+      - '<gray>Працює на шкіряній броні та феєрверкових зірках, зіллях і стрілах із ефектами зілля!'
+      - '<gray><yellow>[red] [green] [blue] </yellow>– це кількість кожного кольору для поєднання'
+      - '<gray>Кожен колір має значення int від 0 до 255'
+      - '<gray>Якщо ви заплуталися, погугліть "<yellow>вибір кольорів RGB</yellow>"'
+    params: '[red] [green] [blue]'
+    feedback: '%prefix% <green>Колір оновлено'
+  compass:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити цільове розташування за компасом</b></gradient>'
+      - '<white><sprite:items:item/compass_00>'
+      - '<gray><yellow>Set </yellow><dark_gray>»</dark_gray> установіть своє місцезнаходження як ціль за компасом'
+      - '<gray><yellow>Clear </yellow><dark_gray>»</dark_gray> чітка ціль за компасом'
+    params: '<set/clear>'
+    set:
+      feedback: '%prefix% <green>Компас тепер вказує на <yellow>%world% %x% %y% %z%'
+    clear:
+      feedback: '%prefix% <green>Ціль компаса очищено'
+  custommodeldata:
+    description:
+      - '<gradient:#A78BFA:gold><b>Редагувати власні дані моделі</b></gradient>'
+      - ''
+      - '<gray>Використовується для пакетів текстур'
+      - '<gray><yellow>[value] </yellow>позитивний int цільової моделі даних'
+      - '<gray>Примітка: сучасні сервери використовують itemmodel замість custommodeldata'
+      - '<gray> для текстур, ця команда для застарілих клієнтів'
+    params: '<value>'
+    feedback: '%prefix% <green>Дані власної моделі оновлено'
+    feedback-reset: '%prefix% <green>Скидання даних власної моделі'
+  damage:
+    description:
+      - '<gradient:#A78BFA:gold><b>Редагувати довговічність</b></gradient>'
+      - ''
+      - '<gray><yellow><durability> </yellow>пошкодження для застосування'
+      - '<gray><gold>N.B.</gold> <yellow>0 </yellow>означає відсутність пошкоджень, повна довговічність'
+    params: '<durability>'
+    feedback-reset: '%prefix% <green>Стійкість відновлено'
+    feedback: '%prefix% <green>Стійкість оновлено'
+  equipment:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює властивість обладнання для предмета</b></gradient>'
+      - ''
+      - '<gray><gold><b>Порада</b></gold> Використовуйте /itemequip or /iee'
+      - '<gray><gold>N.B.</gold> ваші напої не можна їсти'
+    params: ''
+  enchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити зачарування</b></gradient>'
+      - ''
+      - '<gray><yellow><enchant> </yellow>тип зачарування'
+      - '<gray><yellow>[level] </yellow>рівень чар, за замовчуванням <yellow>1'
+      - ''
+      - '<gold><b>Tip</b></gold> <gray>Установіть <yellow>[level] </yellow> на <yellow>0 </yellow>, щоб зняти чари'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>Знято зачарування <yellow>%enchant%'
+    feedback: '%prefix% <green>Застосовано зачарування <yellow>%enchant% <green>lv <yellow>%lv%'
+  fireresistent:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити стійкість предмета до вогню/лави</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>встановіть значення, за замовчуванням перемикач'
+      - ''
+      - '<gray>Вогневостійкий предмет не буде знищено'
+      - '<gray> під час падіння у вогонь і буде плавати над лавою'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Вогнестійкість встановлена на <yellow>%value%'
+  fireworkpower:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити потужність феєрверку</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+      - '<gray><yellow><power> </yellow>сила феєрверку, значення між <yellow>0 </yellow>і <yellow>5'
+    params: '<power>'
+    feedback: '%prefix% <green>Оновлено потужність феєрверку'
+  firework:
+    description:
+      - '<gradient:#A78BFA:gold><b>Редагувати феєрверк за допомогою GUI</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+    params: ''
+  food:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює харчову властивість елемента</b></gradient>'
+      - ''
+      - '<gray><gold><b>Порада</b></gold> Використовуйте /itemfood or /if'
+      - '<gray><gold>N.B.</gold> ваші напої не можна їсти'
+    params: ''
+  glider:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити стан Glider</b></gradient>'
+      - ''
+      - '<gray>Планер має дозволяти ковзати, як на надкрилах'
+      - '<gray><yellow>[true/false] </yellow>встановити значення планера, перемикач за замовчуванням'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Оновлено ковзання встановлено на <yellow>%value%'
+  glow:
+    description:
+      - '<gradient:#A78BFA:gold><b>Зміна ефекту зачарування</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>встановити значення, за умовчанням скинути'
+      - ''
+      - '<gold><b>Tip</b></gold> <gray><yellow>не вказано значення </yellow>відновити ванільну поведінку'
+    params: '[true/false/default]'
+    feedback: '%prefix% <green>Свічення встановлено на <yellow>%value%'
+    feedback-reset: '%prefix% <green>Скинути значення світіння до значення за замовчуванням'
+  goathornsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити звук козячого рога</b></gradient>'
+      - '<white><sprite:items:item/goat_horn>'
+      - '<gray><yellow><type> </yellow>тип звуку'
+    params: '<type>'
+    feedback: '%prefix% <green>Оновлений звук'
+  hide:
+    description:
+      - '<gradient:#A78BFA:gold><b>Приховати або показати компоненти</b></gradient>'
+      - ''
+      - '<gray><yellow><flag> </yellow>прапорець елемента для редагування'
+      - '<gray><yellow>[true/false] </yellow>встановити значення прапорця, за замовчуванням перемикач'
+      - ''
+      - '<gold><b>Tip</b></gold> <gray>сховати шаблони банерів за допомогою прапорця potion_effects'
+      - '<gold><b>Tip</b></gold> <gray>сховайте всі прапорці одночасно за допомогою <yellow>/itemedit hideall'
+    params: '<flag> [true/false]'
+    feedback: '%prefix% <green>Прапорець тепер <yellow>%value%'
+  hidetooltip:
+    description:
+      - '<gradient:#A78BFA:gold><b>Приховати або показати спливаючі підказки</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>встановити значення прапорця, за замовчуванням перемикач'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Статус прихованої підказки тепер <yellow>%value%'
+  hideall:
+    description:
+      - '<gradient:#A78BFA:gold><b>Сховати всі компоненти</b></gradient>'
+      - ''
+      - '<gray>Hides: чари, ефекти зілля, шари банерів, атрибути ...'
+      - ''
+      - '<gold><b>Порада</b></gold> <gray>сховайте окремі компоненти за допомогою <yellow>/itemedit hide <flag> true'
+    params: ''
+    feedback: '%prefix% <green>Приховано всі прапорці'
+  itemmodel:
+    description:
+      - '<gradient:#A78BFA:gold><b>Редагувати модель елемента</b></gradient>'
+      - ''
+      - '<gray><yellow><namespaced key> </yellow>клавіша для налаштування текстури'
+      - '<gray>Приклад: /ie itemmodel <yellow>iron_sword'
+      - '<gray>Приклад: /ie itemmodel <yellow>minecraft:iron_sword'
+      - ''
+      - '<gray><yellow><namespace></yellow>:<yellow><id></yellow> посилатиметься на модель:'
+      - '  /assets/<yellow><namespace></yellow>/models/item/<yellow><id>'
+    params: '<namespaced key>'
+    feedback: '%prefix% <green>Оновлена модель товару'
+    feedback-reset: '%prefix% <green>Скинути модель елемента'
+  kinetic:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установлює кінетичну властивість предмета</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gray><gold><b>Порада</b></gold> Використовуйте /itemkinetic or /iek'
+    params: ''
+  maxdurability:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установлює максимальну довговічність предмета</b></gradient>'
+      - ''
+      - '<gray><yellow><max durability> </yellow>item нове значення довговічності,'
+      - '<gray> має бути більше 1'
+    params: '<max durability>'
+    feedback: '%prefix% <green>Максимальна довговічність оновлено до <yellow>%value%'
+  maxstacksize:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює максимальний розмір стосу елементів</b></gradient>'
+      - ''
+      - '<gray><yellow>[1-99] </yellow>встановити значення прапорця'
+      - ''
+      - '<gray><yellow>немає значення </yellow>відновить загальний розмір стеку, який становить <yellow>64'
+      - '<gray> для більшості предметів, <yellow>1</yellow> для броні та інструментів та інше'
+      - '<gray> значення для кількох елементів'
+    params: '[1-99]'
+    feedback: '%prefix% <green>Оновлено максимальний розмір стека до <yellow>%value%'
+    feedback-reset: '%prefix% <green>Скинути максимальний розмір стека'
+  pierce:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановити властивості колючої зброї предмета</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gold><b>Порада</b></gold><gray> Використовуйте /itempiercing or /iep'
+    params: ''
+  potioneffect:
+    itemtag-tip: '%prefix% <gray>Вам потрібно додати ефекти зілля до звичайних предметів? спробуйте >ItemTag<'
+    itemtag-tip-hover:
+      - '<gradient:#A78BFA:gold>Натисни мене</gradient>'
+    description:
+      - '<gradient:#A78BFA:gold><b>Редагувати ефекти зілля</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/suspicious_stew> <sprite:items:item/tipped_arrow_base>'
+      - '<gray>Працює з будь-яким зіллям, стрілами з ефектами зілля та підозрілим рагу!'
+      - '<gray><yellow>Add <effect> <duration> [level] </yellow><dark_gray>»</dark_gray> додати ефект'
+      - '<gray><yellow>Remove <effect> </yellow><dark_gray>»</dark_gray> видаляє вибраний ефект'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> видалити всі ефекти'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
+      description:
+        - '<gradient:#A78BFA:gold><b>Додає/замінює вибраний ефект</b></gradient>'
+        - ''
+        - '<gray><yellow><effect> </yellow>тип ефекту'
+        - '<gray><yellow><duration> </yellow>тривалість у секундах'
+        - '<gray><yellow>[level] </yellow>До 127, за замовчуванням <yellow>1'
+        - '<gray><yellow>[particles] </yellow>Потрібно показувати частинки? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[ambient] </yellow>Частинки повинні мати прапорець навколишнього середовища? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[icon] </yellow>Показати значок у верхньому правому куті? <yellow>true</yellow>/<yellow>false'
+      feedback: '%prefix% <green>Додано ефект зілля'
+    remove:
+      params: '<effect>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Видалити вибраний ефект</b></gradient>'
+      feedback: '%prefix% <green>Вилучено ефект зілля'
+    reset:
+      feedback: '%prefix% <green>Скинути ефекти зілля'
+  rarity:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює рідкість предметів</b></gradient>'
+      - ''
+      - '<gray><yellow>[rarity] </yellow>набір рідкісних предметів'
+      - ''
+      - '<gold><b>Tip</b><gold><gray> якщо не встановити значення рідкості, відновиться значення за умовчанням'
+    params: '[rarity]'
+    feedback: '%prefix% <green>Оновлений раритет'
+    feedback-reset: '%prefix% <green>Скинути рідкість'
+  repaircost:
+    description:
+      - '<gradient:#A78BFA:gold><b>Редагувати вартість ремонту ковадла</b></gradient>'
+      - ''
+      - '<gray><yellow><cost> </yellow>кількість рівнів'
+      - '<gray><gold>N.B.</gold> ціна ремонту/перейменування ковадла завжди становить щонайменше <yellow>1'
+      - '<gray><gold>N.B.</gold> ця команда встановлює базову вартість ремонту предмета, вартість кінцевого рівня на ковадлі залежить від того, що ви робите'
+      - '<gray>Більше інформації на <yellow>minecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<cost>'
+    feedback: '%prefix% <green>Вартість ремонту оновлено'
+  skullowner:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити власника голови гравця</b></gradient>'
+      - ''
+      - '<gray>Працює лише з головами гравців'
+      - '<gray><yellow>[name] </yellow>ім''я власника'
+      - ''
+      - '<gold><b>Tip</b></gold> <gray>Помістіть і розбийте голову гравця, щоб оновити її шкіру'
+    params: '[name]'
+    feedback: '%prefix% <green>Оновлено власника голови гравця'
+    feedback-reset: '%prefix% <green>Скидання власника голови гравця'
+  tooltipstyle:
+    description:
+      - '<gradient:#A78BFA:gold><b>Редагувати стиль спливаючої підказки елемента</b></gradient>'
+      - ''
+      - '<gray><yellow><style> </yellow>клавіша для налаштування текстури'
+      - '<gray> стиль складається з <white><namespace>:<id>'
+      - '<gray>Приклад: /ie tooltipstyle <yellow>my_style'
+      - '<gray>Приклад: /ie tooltipstyle <yellow>minecraft:my_style'
+      - '<gray>де <yellow>minecraft</yellow> це <white><namespace></white> і'
+      - '<gray><yellow>my_style</yellow> це <white><id>'
+      - '<gray>якщо встановлено, цей предмет може використовувати спеціальні спрайти для'
+      - '<gray>його фон підказки та рамка.'
+      - '<gray><white><namespace>:tooltip/<id>_background'
+      - '<gray>і <white><namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
+    feedback: '%prefix% <green>Оновлений стиль підказки'
+    feedback-reset: '%prefix% <green>Скинути стиль підказки'
+  armortrim:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити обладунок броні</b></gradient>'
+      - '<white><sprite:items:item/iron_chestplate>'
+      - '<gray><yellow><material> </yellow>матеріал обробки броні'
+      - '<gray><yellow><pattern> </yellow>схема оздоблення броні'
+    params: '<material> <pattern>'
+    feedback: '%prefix% <green>Оновлена окантовка броні'
+    feedback-reset: '%prefix% <green>знято броню'
+  tropicalfish:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити властивість відра для тропічної риби</b></gradient>'
+      - '<white><sprite:items:item/tropical_fish_bucket>'
+      - '<gray><yellow>pattern <pattern type> </yellow><dark_gray>»</dark_gray> вид риби'
+      - '<gray><yellow>patterncolor <color> </yellow><dark_gray>»</dark_gray> колір риби'
+      - '<gray><yellow>bodycolor <color> </yellow><dark_gray>»</dark_gray> колір тіла риби'
+    params: '[...]'
+    pattern:
+      params: '<type>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Установити тип візерунка тропічної рибки</b></gradient>'
+        - ''
+        - '<gray><yellow><type> </yellow>тип візерунка риби'
+      feedback: '%prefix% <green>Оновлений шаблон'
+    patterncolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Установити колір візерунка тропічної рибки</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>колір візерунка риби'
+      feedback: '%prefix% <green>Оновлений колір'
+    bodycolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Установити колір тіла тропічної рибки</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>колір тіла риби'
+      feedback: '%prefix% <green>Оновлений колір'
+  type:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановити тип елемента</b></gradient>'
+      - ''
+      - '<gray><gold>N.B.</gold> кілька типів, оскільки Air не працюватиме'
+    params: '<type>'
+    feedback: '%prefix% <green>Оновлений матеріал предмета'
+  unbreakable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити незламний стан</b></gradient>'
+      - ''
+      - '<gray>Незламні інструменти та обладунки не втратять міцності'
+      - '<gray><yellow>[true/false] </yellow>встановити непорушне значення, перемикач за замовчуванням'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Оновлено Незламний предмет до <yellow>%value%'
+  help:
+    header-name: 'ItemEdit'
+    description:
+      - '<gradient:#A78BFA:gold><b>Показує ItemEdit довідку</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Сторінка довідки'
+      - '<gray><yellow>[subcommand] </yellow>Довідка для підкоманди'
+    params: '[page/subcommand]'
+  rename:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити назву елемента</b></gradient>'
+      - ''
+      - '<gold><b>Tip</b></gold> <gray>введіть <yellow>/ie rename -clear </yellow>, щоб повернути назву до стандартної'
+      - '<gold><b>Tip</b></gold> <gray>введіть <yellow>/ie rename -copy </yellow>, щоб скопіювати назву'
+      - '<gold><b>Tip</b></gold> <gray>введіть <yellow>/ie rename -paste </yellow>, щоб вставити попередньо скопійоване значення'
+    params: '<name>'
+    feedback: '%prefix% <green>Назву товару оновлено'
+    rename-clear: '%prefix% <green>Назву елемента видалено'
+    rename-copy: '%prefix% <green>Назву елемента скопійовано'
+    rename-paste-empty: '%prefix% <red>Немає скопійованої назви елемента для вставлення'
+    feedback-paste: '%prefix% <green>Скопійована назва елемента вставлена'
+    banned_words: '%prefix% <red>Назва елемента містить заблоковані слова'
+  lore:
+    description:
+      - '<gradient:#A78BFA:gold><b>Редагувати опис товару</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <text> </yellow><dark_gray>»</dark_gray> додати текст у новому рядку'
+      - '<gray><yellow>Insert <line> <text> </yellow><dark_gray>»</dark_gray> додати текст у вибраний рядок'
+      - '<gray><yellow>Set <line> <text> </yellow><dark_gray>»</dark_gray> встановити або замінити текст у вибраному рядку'
+      - '<gray><yellow>Remove <line> </yellow><dark_gray>»</dark_gray> видалити вибраний рядок'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> видалити всі рядки'
+      - '<gray><yellow>Copy </yellow><dark_gray>»</dark_gray> скопіюйте поточний опис елемента, щоб вставити його пізніше'
+      - '<gray><yellow>CopyBook </yellow><dark_gray>»</dark_gray> те саме, що копія, але зі сторінок книги у вигляді рядків'
+      - '<gray><yellow>CopyFile <path> </yellow><dark_gray>»</dark_gray> те саме, що копія, але з loreCopy.yml'
+      - '<gray><yellow>Paste </yellow><dark_gray>»</dark_gray> вставити останній скопійований опис елемента'
+      - '<gray><yellow>Replace <replaced> <replacer> </yellow><dark_gray>»</dark_gray> замінити всі випадки'
+    params: '<add/set/remove...> [...]'
+    set:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Установити або замінити текст у вибраному рядку</b></gradient>'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Видалити вибраний рядок</b></gradient>'
+    insert:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Додати текст у вибраний рядок</b></gradient>'
+    copy:
+      feedback: '%prefix% <green>опис товару скопійовано'
+    copyBook:
+      feedback: '%prefix% <green>Сторінки книги скопійовано та готові до вставлення'
+    copyFile:
+      wrong-path: '%prefix% <red>Недійсний шлях, не забудьте перезавантажити конфігурацію та перевірити CaPs'
+      no-path: '%prefix% <red>Виберіть шлях /ie lore copyfile <gold><path>'
+      feedback: '%prefix% <green>Конфігурацію скопійовано та готово до вставлення'
+    paste:
+      feedback: '%prefix% <green>опис товару вставлено'
+      no-copy: '%prefix% <red>Спочатку скопіюйте опис товару'
+    replace:
+      params: '<replaced> <replacer>'
+      description:
+        - '<gold><b>Замінити всі випадки в описі товару</b></gradient>'
+        - ''
+        - '<gray>Якщо вам потрібно замінити більше ніж одне слово, яке у вас є'
+        - '<gray>, щоб закрити їх усередині <yellow>{ }'
+        - ''
+        - '<gray>Приклад: <yellow>/ie lore replace New Rusty'
+        - '<gray>''<yellow>New sword</yellow>'' -> ''<yellow>Rusty sword</yellow>'''
+        - ''
+        - '<gray>Приклад 2: <yellow>/ie lore replace {Heavy} {Very light}'
+        - '<gray>''<yellow>Heavy sword</yellow>'' -> ''<yellow>Very light sword</yellow>'''
+  listaliases:
+    description:
+      - '<gradient:#A78BFA:gold><b>Показує дозволені параметри псевдонімів</b>'
+      - ''
+      - '<gray><yellow><type> </yellow>тип параметра для показу'
+    params: '<type>'
+    prefix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>Псевдоніми <dark_blue>◆ ◆ ◆ ◆'
+    postfix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>Псевдоніми <dark_blue>◆ ◆ ◆ ◆'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+    hover_info: '<blue>Оригінальне значення: <yellow>%default%'
+    hover_type: '<gold>Натисніть, щоб перевірити'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>Псевдоніми:</b></gradient>'
+itemeditequipment:
+  allowedentities:
+    invalid-type: '%prefix% <red>Значення <gold>%value% <red>не є ні дійсною сутністю, ні допустимою групою сутностей'
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює типи об’єктів, яким дозволено носити це спорядження</b></gradient>'
+      - ''
+      - '<gray><yellow>[entity] </yellow>який тип сутності'
+      - '<gray><yellow>[group] </yellow>яка група сутностей'
+      - ''
+      - '<gray>Додано всі вибрані типи'
+    params: '[entity/group] [entity/group] ...'
+    feedback: '%prefix% <green>Тепер дозволені типи об’єктів: <yellow>%value%'
+    feedback-reset: '%prefix% <green>Дозволені типи сутностей скинуто'
+  canshear:
+    unsupported-version: '%prefix% <red>Ваша версія сервера (<gold>%value%<red>) не підтримує цю функцію'
+    description:
+      - '<gradient:#A78BFA:gold><b>Набір екіпірування при взаємодії</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true вміти стригти'
+      - '<gray>обладнання від сутності, як гарбуз'
+      - '<gray>для сніговика'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Властивість Can shear тепер <yellow>%value%'
+  canbesheared:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює, чи можна стригти це обладнання</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Чи можна стригти обладнання'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Власність, яку можна зрізати, тепер <yellow>%value%'
+  cameraoverlay:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює накладання камери</b></gradient>'
+      - ''
+      - '<gray><yellow>[namespacedkey] </yellow>потрібне накладання'
+      - '<gray>Накладки встановлюються на пакетах текстур, єдиний ванільний'
+      - '<gray>накладка є minecraft:misc/pumpkinblur'
+    params: '[namespacedkey]'
+    feedback: '%prefix% <green>Оверлей камери оновлено'
+    feedback-reset: '%prefix% <green>Накладання камери видалено'
+    invalid-namespacedkey: '<red>Іменний ключ <gold>%value% <red> недійсний'
+  clear:
+    description:
+      - '<gradient:#A78BFA:gold><b>Повністю видалити майно обладнання на елементі</b></gradient>'
+      - ''
+      - '<gray>Або відновіть значення за замовчуванням, якщо предмет є ванільним обладнанням'
+    params: ''
+    feedback: '%prefix% <green>Властивості обладнання скинуто до стандартних'
+  damageonhurt:
+    description:
+      - '<gradient:#A78BFA:gold><b>Набори, які можна пошкодити</gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true, щоб зменшити довговічність із пошкодженням'
+      - ''
+      - '<gray><gold>N.B.</gold> може бути пошкоджено лише предмет із максимальним розміром стопки 1'
+      - '<gray> використовувати <yellow>/ie maxstacksize 1'
+      - '<gray><gold><b>Tip</b></gold> не забудьте встановити максимальну міцність предмета за'
+      - '  <yellow>/ie maxdurability <amount>'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Пошкодження пошкодженого майна тепер <yellow>%value%'
+    warning-maxstacksize: '%prefix% <red>Максимальний розмір стопки предметів має бути <gold>1 <red>, щоб його можна було пошкодити <dark_red>[<gold>натисніть, щоб виправити<dark_red>]'
+  dispensable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Видаткові набори</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true для оснащення диспенсером'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Відмінна властивість тепер <yellow>%value%'
+  equiponinteract:
+    description:
+      - '<gradient:#A78BFA:gold><b>Набір екіпірування при взаємодії</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true для оснащення взаємодією'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Спорядження на властивості взаємодії тепер <yellow>%value%'
+  equipsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установлює звук обладнання</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>який звук потрібно видавати'
+    params: '[sound]'
+    feedback: '%prefix% <green>Властивість Equip sound тепер <yellow>%value%'
+    feedback-reset: '%prefix% <green>Властивість Equip sound скинуто до стандартних'
+  help:
+    header-name: 'ItemEquipment'
+    description:
+      - '<gradient:#A78BFA:gold><b>Показує ItemEditEquipment довідку</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Сторінка довідки'
+      - '<gray><yellow>[subcommand] </yellow>Довідка для підкоманди'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Показує властивості обладнання для цього елемента</b></gradient>'
+    params: ''
+    not_set: '%prefix% <gray>Цей предмет не має компонентів, які можна екіпірувати'
+    message:
+      - '%prefix% <dark_green><b>Може бути оснащений</b>'
+      - '<green>Слот: <yellow>%slot%'
+      - '<green>Можна стригти: <yellow>%canbesheared%'
+      - '<green>Пошкодження від травми: <yellow>%damageonhurt%'
+      - '<green>Відмінні: <yellow>%dispensable%'
+      - '<green>Озброєння на interact: <yellow>%equiponinteract%'
+      - '<green>Можна замінити: <yellow>%swappable%'
+      - '<green>Озброїти звук: <yellow>%equipsound%'
+      - '<green>Звук зсуву: <yellow>%shearsound%'
+      - '<green>Дозволені сутності: <yellow>%allowedentities%'
+      - '<green>Накладання камери: <yellow>%cameraoverlay%'
+      - '<green>Ідентифікатор активу: <yellow>%assetid%'
+  model:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює модель текстури</b></gradient>'
+      - ''
+      - '<gray><yellow>[key] </yellow>Ідентифікатор моделі обладнання з простором імен, який буде використовуватися, коли є'
+    params: '[key]'
+    feedback: '%prefix% <green>Модель обладнання тепер <yellow>%key%'
+    feedback-reset: '%prefix% <green>Модель обладнання скинуто'
+  shearsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює звук, коли предмет видаляється зсувом</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>який звук потрібно видавати'
+      - '<gray>коли його видаляють зсувом, як гарбуз'
+      - '<gray>для сніговика'
+    params: '[sound]'
+    feedback: '%prefix% <green>Звук зсуву тепер <yellow>%value%'
+    feedback-reset: '%prefix% <green>Властивість звуку зсуву скинуто до стандартних'
+  shearingsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює звук, коли предмет видаляється зсувом</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>Який звук потрібно видавати'
+      - '<gray>коли його видаляють зсувом, як гарбуз для сніговика'
+    params: '[sound]'
+    feedback: '%prefix% <green>Звук зсуву тепер <yellow>%value%'
+  slot:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установлює слот, який можна використовувати</b></gradient>'
+      - ''
+      - '<gray><yellow><slot> </yellow>де можна спорядити предмет'
+    params: '<slot>'
+    feedback: '%prefix% <green>Слот для обладнання тепер <yellow>%value%'
+  swappable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює можливість заміни елемента</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true, щоб предмет можна було замінити'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Властивість, яку можна замінити, тепер <yellow>%value%'
+itemeditfood:
+  addeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>Додайте ефект до елемента</b></gradient>'
+      - '<gray><yellow>/ief addeffect </yellow>cleareffects'
+      - '<gray><yellow>/ief addeffect </yellow>teleport <range>'
+      - '<gray><yellow>/ief addeffect </yellow>applyeffects [chance] <potion> <lv> <duration> [ambient] [particle] [icon]'
+      - '<gray><yellow>/ief addeffect </yellow>removeeffects <potion>'
+      - '<gray><yellow>/ief addeffect </yellow>playsound <sound>'
+      - ''
+    params: '[...]'
+    cleareffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Додайте ефект до елемента</b></gradient>'
+        - ''
+        - '<gray>Видалити будь-який ефект зілля на гравця, як-от відро молока'
+      params: '<potion>'
+      feedback: '%prefix% <green>Додано ефект телепортації під час споживання їжі'
+    teleport:
+      description:
+        - '<gradient:#A78BFA:gold><b>Додайте ефект до елемента</b></gradient>'
+        - '<gray><yellow><range> </yellow>на яку відстань телепортувати гравця'
+        - ''
+        - '<gray>Випадкове телепортування гравця, коли з’їдено їжу'
+      params: '<range>'
+      feedback: '%prefix% <green>Додано ефект телепортації під час споживання їжі'
+    applyeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Додайте ефект до елемента</b></gradient>'
+        - '<gray><yellow>[chance] </yellow>який % шансів застосувати ефект?'
+        - '<gray> має бути більше за <yellow>0</yellow> і менше дорівнювати <yellow>100'
+        - '<gray><yellow><potion> </yellow>Тип ефекту зілля'
+        - '<gray><yellow><lv> </yellow>рівень ефекту, <yellow>1</yellow> за замовчуванням'
+        - '<gray><yellow><duration> </yellow>Тривалість у секундах ефекту або <yellow>-1 </yellow>для постійного ефекту'
+        - '<gray><yellow>[ambient] [particle] [icon] </yellow>true/false налаштування ефекту зілля'
+        - ''
+        - '<gray>Застосувати вибраний ефект до гравця під час споживання їжі'
+      params: '<potion>'
+      feedback: '%prefix% <green>Додано ефект застосування під час споживання їжі'
+    removeeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Додайте ефект до елемента</b></gradient>'
+        - '<gray><yellow><potion> </yellow>очистити вибраний ефект'
+        - ''
+        - '<gray>Видалити вибраний ефект із гравця під час споживання їжі'
+      params: '<potion>'
+      feedback: '%prefix% <green>Додано ефект видалення під час споживання їжі'
+    playsound:
+      description:
+        - '<gradient:#A78BFA:gold><b>Додайте ефект до елемента</b></gradient>'
+        - '<gray><yellow><sound> </yellow>звук для відтворення'
+        - ''
+        - '<gray>Відтворення вибраного звуку під час їжі'
+      params: '<sound>'
+      feedback: '%prefix% <green>Додано звук під час споживання їжі'
+  animation:
+    description:
+      - '<gradient:#A78BFA:gold><b>Набори їдять анімацію</b></gradient>'
+      - '<gray>Тільки для <red>1.21.2+'
+      - ''
+      - '<gray><yellow><animation> </yellow>Значення для встановлення, перемикач за замовчуванням'
+      - ''
+      - '<gray>Деякі анімації відображаються лише від першої особи,'
+      - '<gray>деякі анімації відображаються лише від третьої особи,'
+      - '<gray>деякі анімації відображаються як від першої, так і від третьої особи'
+    params: '<animation>'
+    feedback: '%prefix% <green>Застосована анімація'
+  canalwayseat:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює, чи можна їсти предмет</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Значення для встановлення, перемикач за замовчуванням'
+      - ''
+      - '<gray>Зазвичай їжа потребує відчуття голоду,'
+      - '<gray>налаштування true імітує поведінку золотого яблука'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Предмет завжди можна з’їсти до <yellow>%value%'
+  consumeparticles:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює, чи відображатимуться частинки під час споживання предмета</b></gradient>'
+      - '<gray>Тільки для <red>1.21.2+'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Значення для встановлення, перемикач за замовчуванням'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Споживання частинок тепер <yellow>%value%'
+  convertto:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює пункт, який дається під час споживання їжі</b></gradient>'
+      - '<gray>Тільки за <red>1,21+'
+      - ''
+      - '<gray><yellow>[type/serveritem id] </yellow>товар для повернення'
+      - '<gray> ви можете встановити матеріал або ви можете'
+      - '<gray> виберіть елемент із ServerItem збережених елементів'
+      - ''
+      - '<gray>Імітація поведінки молока у відрі, де є відро'
+      - '<gray> повертається, коли молоко спожито'
+    params: '[type/serveritem id]'
+    feedback: '%prefix% <green>Перетворити на оновлений'
+  eatticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює час, необхідний для споживання продукту</b></gradient>'
+      - ''
+      - '<gray><yellow><ticks> </yellow>Кількість часу для споживання продукту'
+      - '<gray> має бути <yellow>1 </yellow>або більше'
+      - ''
+      - '<gray><yellow>20 </yellow>тактів = <yellow>1 </yellow>секунди'
+    params: '<ticks>'
+    feedback: '%prefix% <green>Eat ticks оновлено до <yellow>%value%'
+  help:
+    header-name: 'ItemFood'
+    description:
+      - '<gradient:#A78BFA:gold><b>Показує ItemFood довідку</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Сторінка довідки'
+      - '<gray><yellow>[subcommand] </yellow>Довідка для підкоманди'
+    params: '[page/subcommand]'
+  info:
+    not_food: '%prefix% <dark_green>Елемент не має властивості їжі або має властивість за замовчуванням'
+    message:
+      - '%prefix% <dark_green><b>Елемент харчової власності</b>'
+      - '<green>Час прийому їжі: <yellow>%eatseconds%<green> с <dark_gray>(<gray>%eatticks%<dark_gray> галочки)'
+      - '<green>Відновити голод: <yellow>%nutrition% <dark_gray>| <green>Насиченість: <yellow>%saturation%<green>'
+      - '<green>Анімація: <yellow>%animation% <dark_gray>| <green>Звук: <yellow>%sound% <dark_gray>| <green>Частинки: <yellow>%consumeparticles%'
+      - '<green>Можна їсти, коли ситий: <yellow>%canalwayseat% <dark_gray>| <green>Після з''їдання отримуєте: <yellow>%convertto%'
+    apply_effect_prefix:
+      - '<dark_green><b>Містить <yellow>%effects%<dark_green> можливі ефекти зілля:</b>'
+    apply_effect:
+      - '<green>%index%. Тип: <yellow>%type% <dark_gray>| <green>Lv: <yellow>%level% <dark_gray>| <green>Тривалість: <yellow>%duration_s%<green> с <dark_gray>(<gray>%duration_ticks%<dark_gray> тиків)'
+      - '<green> Частинки: <yellow>%hasparticle% <dark_gray>| <green>Амбієнт: <yellow>%isambient% <dark_gray>| <green>Значок: <yellow>%hasicon% <dark_gray>| <green>Шанс: <yellow>%chance_perc%<green>%'
+    consume_effect_teleport: '<green>Випадковий діаметр телепорту: <yellow>%diameter%'
+    consume_effect_sound: '<green>Додатковий споживаний звук: <yellow>%sound%'
+    consume_effect_remove: '<green>Вилучено ефекти: <yellow>%effects%'
+    consume_effect_clear: '<green>Очищає всі ефекти активного стану'
+    consume_effect_unknown: '<green>Інший ефект споживання: <yellow>%type%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Опишіть поточну інформацію про їжу для продукту</b></gradient>'
+    params: ''
+  nutrition:
+    description:
+      - '<gradient:#A78BFA:gold><b>Набір відновленого харчування</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>Кількість голоду для відновлення'
+      - '<gray> має бути <yellow>0 </yellow>або більше'
+      - ''
+      - '<gray>Повний батончик голоду коштує <yellow>20'
+    params: '<amount>'
+    feedback: '%prefix% <green>Харчова цінність тепер <yellow>%value%'
+  removeeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>Видалити ефект із елемента</b></gradient>'
+      - ''
+      - '<gray><yellow><index> </yellow>Видалити вибраний ефект'
+    params: '<index>'
+    feedback: '%prefix% <green>Вилучено вибраний ефект їжі'
+  reset:
+    description:
+      - '<gradient:#A78BFA:gold><b>Повністю видаліть властивість їжі на предметі</b></gradient>'
+      - ''
+      - '<gray>Або відновіть стандартні, якщо продукт ванільний'
+    params: ''
+    feedback: '%prefix% <green>Властивості харчових продуктів видалено'
+  reseteffects:
+    description:
+      - '<gradient:#A78BFA:gold><b>Видалити ефекти з елемента</b></gradient>'
+    params: ''
+    feedback: '%prefix% <green>Ефекти їжі видалено'
+  saturation:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установлює відновлену насиченість</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>Насиченість кількості, яку потрібно додати'
+      - '<gray> дозволено негативні значення'
+      - ''
+      - '<gray>Насиченість контролює рівень швидкої їжі'
+      - '<gray> (поживність) зниження'
+    params: '<amount>'
+    feedback: '%prefix% <green>Насиченість тепер <yellow>%value%'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Набори з''їдають звук</b></gradient>'
+      - '<gray>Тільки для <red>1.21.2+'
+      - ''
+      - '<gray><yellow><sound> </yellow>Значення для встановлення'
+    params: '<sound>'
+    feedback: '%prefix% <green>Звук їжі тепер <yellow>%value%'
+itemeditkinetic:
+  contactcooldownticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установлює час відновлення Kinetic Contact</b></gradient>'
+      - ''
+      - '<gray><yellow><cooldown> </yellow>зарядка контакту'
+    params: '<delay>'
+    feedback: '%prefix% <green>Установлено час відновлення контакту'
+  damageconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установлює умови кінетичної шкоди</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Відзначається максимальна тривалість шкоди'
+      - '<gray><yellow><min speed> </yellow>Мінімальна швидкість'
+      - '<gray><yellow><min relative speed> </yellow>мінімальна відносна швидкість'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>Установлена умова пошкодження'
+  damagemultiplier:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установлює множник кінетичної шкоди</b></gradient>'
+      - ''
+      - '<gray><yellow><multiplier> </yellow>множник шкоди'
+    params: '<delay>'
+    feedback: '%prefix% <green>Набір множників кінетичної шкоди'
+  delayticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює кінетичні затримки</b></gradient>'
+      - ''
+      - '<gray><yellow><delay> </yellow>кінетична затримка'
+    params: '<delay>'
+    feedback: '%prefix% <green>Установлені галочки затримки'
+  dismountconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установіть умови для збивання цілей з їхніх кріплень за допомогою кінетичної зброї</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Максимальне вікно часу для збивання цілей з їх скакунів, у тиках'
+      - '<gray><yellow><min speed> </yellow>Мінімальна швидкість, щоб збити ціль з верхової їзди'
+      - '<gray><yellow><min relative speed> </yellow>Мінімальна відносна швидкість, щоб збити ціль з кріплення'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>Встановлено умови для збивання цілей з кріплення'
+  forwardmovement:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установлює кінетичний рух вперед</b></gradient>'
+      - ''
+      - '<gray><yellow><movement> </yellow>Обсяг руху вперед'
+    params: '<movement>'
+    feedback: '%prefix% <green>Набір руху вперед'
+  help:
+    header-name: 'ItemKinetic'
+    description:
+      - '<gradient:#A78BFA:gold><b>Показує ItemKinetic довідку</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Сторінка довідки'
+      - '<gray><yellow>[subcommand] </yellow>Довідка для підкоманди'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Показує властивості кінетичної зброї на цьому предметі</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>Цей предмет не має компонента кінетичної зброї'
+    message:
+      - '%prefix% <dark_green><b>Кінетична зброя</b>'
+      - '<green>Зарядка контакту: <yellow>%contactcooldownticks% <green>галочки'
+      - '<green>Множник шкоди: <yellow>%damagemultiplier%'
+      - '<green>Затримка: <yellow>%delayticks% <green>тактів'
+      - '<green>Рух вперед: <yellow>%forwardmovement%'
+      - '<green>Звук удару: <yellow>%hitsound%'
+      - '<green>Звук: <yellow>%sound%'
+      - '<green>Умови пошкодження: <yellow>%damageconditions%'
+      - '<green>Умови для збивання цілей з кріплень: <yellow>%dismountconditions%'
+      - '<green>Умови відкидання: <yellow>%knockbackconditions%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює звук кінетичного удару</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Значення для встановлення'
+    params: '<sound>'
+    feedback: '%prefix% <green>Звук хіта тепер <yellow>%value%'
+  knockbackconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює умови кінетичного відкидання</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Макс. тривалість відкидання'
+      - '<gray><yellow><min speed> </yellow>Мінімальна швидкість до відкидання'
+      - '<gray><yellow><min relative speed> </yellow>мінімальна відносна швидкість до відкидання'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>Установлена умова відкидання'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює кінетичний звук</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Значення для встановлення'
+    params: '<sound>'
+    feedback: '%prefix% <green>Звук тепер <yellow>%value%'
+itemeditpiercing:
+  dealsknockback:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановлює, чи удар викликає відкидання</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true, щоб застосувати відкидання'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Відкидання тепер <yellow>%value%'
+  dismounts:
+    description:
+      - '<gradient:#A78BFA:gold><b>Встановити, чи збиває ціль з кріплення</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true, щоб збити ціль з скакуна'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Збивання цілей із скакунів тепер <yellow>%value%'
+  help:
+    header-name: 'ItemPiercing'
+    description:
+      - '<gradient:#A78BFA:gold><b>Показує ItemPiercing довідку</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Сторінка довідки'
+      - '<gray><yellow>[subcommand] </yellow>Довідка для підкоманди'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Показує властивості колючої зброї на цьому предметі</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>Цей предмет не має компонента колючої зброї'
+    message:
+      - '%prefix% <dark_green><b>Пронизлива зброя</b>'
+      - '<green>Надає відкат: <yellow>%dealsknockback%'
+      - '<green>Збиває цілі з скакунів: <yellow>%dismounts%'
+      - '<green>Звук удару: <yellow>%hitsound%'
+      - '<green>Звук: <yellow>%sound%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити звук удару для колючої зброї</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Значення для встановлення'
+    params: '<sound>'
+    feedback: '%prefix% <green>Звук хіта тепер <yellow>%value%'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити звук колючої зброї</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Значення для встановлення'
+    params: '<sound>'
+    feedback: '%prefix% <green>Звук тепер <yellow>%value%'
+serveritem:
+  help-header: '<gradient:#54acff:#A78BFA><bold>ServerItem</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Допомога</bold></#A78BFA>'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Отримано <yellow>%amount% <green>з <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][give] %player_name% отримано %amount% з %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Віддати вибраний предмет гравцеві</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id елемента'
+      - '<gray><yellow>[amount] </yellow>кількість предметів, за умовчанням 1'
+      - '<gray><yellow>[player] </yellow>хто отримує предмети, за замовчуванням ви'
+      - '<gray><yellow>[silent] </yellow>true, якщо немає відгуків, потрібно надіслати гравцеві'
+    params: '<id> [amount] [player] [silent]'
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Отримано <yellow>%amount% <green>з <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets% отримано %amount% з %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Віддати вибраний предмет усім онлайн-гравцям</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id елемента'
+      - '<gray><yellow>[amount] </yellow>кількість предметів, за умовчанням 1'
+      - '<gray><yellow>[silent] </yellow>true, якщо немає відгуків, потрібно надіслати гравцям'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] впав %amount% з %id% (%nick%) на %world% %x% %y% %z%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Відкинути вибраний елемент у вибране місце</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id елемента'
+      - '<gray><yellow><amount> </yellow>кількість предметів для випадання, від 1 до 2304'
+      - '<gray><yellow><world> </yellow>який світ'
+      - '<gray><yellow><x> <y> <z> </yellow>координати'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Втрачено <yellow>%amount% <green>з <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][take] %player_name% дав %amount% з %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Візьміть вибраний предмет у гравця</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id елемента'
+      - '<gray><yellow>[amount] </yellow>кількість предметів, за умовчанням 1'
+      - '<gray><yellow>[player] </yellow>хто отримує предмети, за замовчуванням ви'
+      - '<gray><yellow>[silent] </yellow>true, якщо немає відгуків, потрібно надіслати гравцеві'
+    params: '<id> [amount] [player] [silent]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>Товар <yellow>%id% <green>зареєстровано'
+    already_used_id: '%prefix% <red>Елемент з ідентифікатором <yellow>%id% <red>вже існує, змініть ідентифікатор або виконайте оновлення /si, щоб перевизначити'
+    description:
+      - '<gradient:#A78BFA:gold><b>Зареєструвати предмет у вашій руці</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>ідентифікувати елемент, регістр не чутливий і не може'
+      - '<gray> містять пробіли або крапки, які також не можна вибрати'
+      - '<gray> будь-який уже використаний ідентифікатор'
+      - ''
+      - '<gold><b>Порада</b></gold> <gray>використовуйте <yellow>/serveritem update <id></yellow>, щоб змінити існуючий елемент'
+      - '<gold><b>Tip</b></gold> <gray>отримайте збережені елементи за допомогою <yellow>/serveritem give <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>Товар <yellow>%id% <green>незареєстрований'
+    description:
+      - '<gradient:#A78BFA:gold><b>Видалити вибраний елемент</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id елемента'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>Пункт <yellow>%id% <green>оновлено'
+    description:
+      - '<gradient:#A78BFA:gold><b>Оновити вибраний елемент</b></gradient>'
+      - ''
+      - '<gray>Змініть предмет, пов’язаний з ідентифікатором, за допомогою предмета вашої руки'
+      - '<gray><yellow><id> </yellow>Id елемента'
+      - ''
+      - '<gold><b>Tip</b></gold> <gray>використовуйте <yellow>/serveritem save <id></yellow>, щоб створити новий елемент'
+      - '<gold><b>Порада</b></gold> <gray>використовуйте <yellow>/serveritem delete <id></yellow>, щоб видалити елемент'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>Відкрити графічний інтерфейс із збереженими на сервері елементами</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>сторінка графічного інтерфейсу, за замовчуванням 1'
+    params: '[page]'
+  setnick:
+    #Holders: %id% %nick%
+    success: '%prefix% <green>Елемент <yellow>%id% <green>нік оновлено на <yellow>%nick%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Установити відображувану назву вибраного елемента</b></gradient>'
+      - ''
+      - '<gray>Нік використовується для власника <yellow>%nick%</yellow> у повідомленнях купівлі/продажу,'
+      - '<gray> за замовчуванням це назва елемента або тип елемента, якщо він не має назви'
+      - ''
+      - '<gray><yellow><id> </yellow>Id елемента'
+      - '<gray><yellow>[nick] </yellow>ім’я для встановлення'
+      - ''
+      - '<gold><b>Порада</b></gold> <gray>щоб скинути налаштування за умовчанням, просто скористайтеся <yellow>/serveritem setnick <id>'
+    params: '<id> [nick]'
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Куплено <yellow>%amount% <green>з <yellow>%nick% <green>за <yellow>%price%'
+    #Holders: %id% %nick% %amount%
+    not-enough-space: '<red>У вас недостатньо місця в інвентарі, щоб купити <gold>%amount% <red>з <gold>%nick%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: '<red>У вас немає <gold>%price% <red>, щоб купити <gold>%amount% <red>з <gold>%nick%'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% заплатив %price% за %amount% з %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Продати предмети гравцеві</b></gradient>'
+      - ''
+      - '<gray>Sell відрізняється від SellMax, оскільки ви продаєте всю суму'
+      - '<gray> гравцеві або ви нічого не продасте'
+      - '<gray><yellow><id> </yellow>id елемента'
+      - '<gray><yellow><amount> </yellow>кількість предметів'
+      - '<gray><yellow><player> </yellow>хто повинен заплатити гроші та отримати речі'
+      - '<gray><yellow><price> </yellow>ціна на всю кількість товарів, має бути позитивною'
+      - '<gray><yellow>[silent] </yellow>true — не надсилати повідомлення гравцеві'
+      - ''
+      - '<gray>Угода не відбудеться за браку грошей або'
+      - '<gray>  місця для всієї кількості предметів: <yellow><amount>'
+      - '<gray><gold>N.B.</gold> баланс виконавця команди не змінено'
+    params: '<id> <amount> <player> <price> [silent]'
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Продано <yellow>%amount% <green>з <yellow>%nick% <yellow>за <green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>У вашому інвентарі немає <gold>%amount% <red>з <gold>%nick% <red>'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% продано %amount% з %id% (%nick%) на загальну суму %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Купуйте предмети у гравця</b></gradient>'
+      - ''
+      - '<gray>Buy відрізняється від BuyMax, оскільки ви купуєте всю суму'
+      - '<gray> від гравця або ви нічого не купуєте'
+      - '<gray><yellow><id> </yellow>id елемента'
+      - '<gray><yellow><amount> </yellow>кількість предметів'
+      - '<gray><yellow><player> </yellow>хто повинен оплачувати предмети та отримувати гроші'
+      - '<gray><yellow><price> </yellow>ціна на всю кількість товарів, має бути позитивною'
+      - '<gray><yellow>[silent] </yellow>true — не надсилати повідомлення гравцеві'
+      - ''
+      - '<gray>Угода не відбудеться, якщо у гравця менше ніж <yellow><amount>'
+      - '<gray>  предметів типу <yellow><id> </yellow>в інвентарі'
+      - '<gray><gold>N.B.</gold> баланс виконавця команди не змінено'
+    params: '<id> <amount> <player> <price> [silent]'
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Куплено <yellow>%amount% <green>з <yellow>%nick% <yellow>за <green>%price%'
+    #Holders: %id% %nick%
+    not-enough-space: '<red>У вас недостатньо місця в інвентарі, щоб купити <gold>%nick%'
+    #Holders: %id% %nick% %price%
+    not-enough-money: '<red>У вас недостатньо грошей, щоб купити <gold>%nick% <red>за <gold>%price% <red>кожен'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% заплатив %price% за %amount% з %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Продати предмети гравцеві</b></gradient>'
+      - ''
+      - '<gray>SellMax відрізняється від Sell, оскільки ви можете продати меншу суму'
+      - '<gray> гравцеві, якщо не вистачає грошей або місця для всього'
+      - '<gray><yellow><id> </yellow>id елемента'
+      - '<gray><yellow><amount> </yellow>кількість предметів'
+      - '<gray><yellow><player> </yellow>хто повинен заплатити гроші та отримати речі'
+      - '<gray><yellow><price> </yellow>ціна на всю кількість товарів, має бути позитивною'
+      - '<gray><yellow>[silent] </yellow>true — не надсилати повідомлення гравцеві'
+      - ''
+      - '<gray>Угода не відбудеться за браку грошей або'
+      - '<gray>  місця хоча б для одного предмета'
+      - '<gray>При купівлі частини кількості ціна <yellow><price></yellow> зменшується пропорційно'
+      - '<gray><gold>N.B.</gold> баланс виконавця команди не змінено'
+    params: '<id> <amount> <player> <price> [silent]'
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Продано <yellow>%amount% <green>з <yellow>%nick% <yellow>за <green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>У вашому інвентарі немає <gold>%nick% <red>для продажу'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% продано %amount% з %id% (%nick%) на загальну суму %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Купуйте предмети у гравця</b></gradient>'
+      - ''
+      - '<gray>BuyMax відрізняється від Buy, оскільки ви можете купити меншу суму'
+      - '<gray> від гравця, якщо в нього в інвентарі менше ніж кількість предметів'
+      - '<gray><yellow><id> </yellow>id елемента'
+      - '<gray><yellow><amount> </yellow>кількість предметів'
+      - '<gray><yellow><player> </yellow>хто повинен оплачувати предмети та отримувати гроші'
+      - '<gray><yellow><price> </yellow>ціна на всю кількість товарів, має бути позитивною'
+      - '<gray><yellow>[silent] </yellow>true — не надсилати повідомлення гравцеві'
+      - ''
+      - '<gray>Для угоди потрібен хоча б один предмет <yellow><id> </yellow>в інвентарі'
+      - '<gray> в інвентарі'
+      - '<gray>Якщо гравець продає менше ніж <yellow><amount></yellow>, ціна буде змінена'
+      - '<gray><gold>N.B.</gold> баланс виконавця команди не змінено'
+    params: '<id> <amount> <player> <price> [silent]'
+itemstorage:
+  help-header: '<gradient:#54acff:#A78BFA><bold>ItemStorage</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Довідка</bold></#A78BFA>'
+  get:
+    #Holders: %id% %amount%
+    success: '%prefix% <green>Отримано <yellow>%amount% <green>з <yellow>%id%'
+    no-inventory-space: '%prefix% <red>У вас немає місця в інвентарі'
+    description:
+      - '<gradient:#A78BFA:gold><b>Отримати вибраний предмет</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id елемента'
+      - '<gray><yellow>[amount] </yellow>сума для отримання, за умовчанням 1'
+    params: '<id> [amount]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>Товар <yellow>%id% <green>зареєстровано'
+    #Holders: %limit%
+    limit-reached: '%prefix% <red>Ви досягли максимальної кількості елементів, які можна зберегти (%limit%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Зареєструвати предмет у вашій руці</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>ідентифікувати свій товар, не враховуючи регістр і не можу'
+      - '<gray> містять пробіли або крапки, які також не можна вибрати'
+      - '<gray> будь-який уже використаний ідентифікатор'
+      - ''
+      - '<gold><b>Порада</b></gold> <gray>скористайтеся <yellow>/itemstorage update <id></yellow>, щоб змінити існуючий елемент'
+      - '<gold><b>Tip</b></gold> <gray>отримайте збережені елементи за допомогою <yellow>/itemstorage get <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>Товар <yellow>%id% <green>незареєстрований'
+    description:
+      - '<gradient:#A78BFA:gold><b>Видалити вибраний елемент</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id елемента'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>Пункт <yellow>%id% <green>оновлено'
+    description:
+      - '<gradient:#A78BFA:gold><b>Оновити вибраний елемент</b></gradient>'
+      - ''
+      - '<gray>Змініть предмет, пов’язаний з ідентифікатором, за допомогою предмета вашої руки'
+      - '<gray><yellow><id> </yellow>Id елемента'
+      - ''
+      - '<gray><gold><b>Tip</b></gold> використовуйте <yellow>/itemstorage save <id></yellow>, щоб створити новий елемент'
+      - '<gray><gold><b>Порада</b></gold> використовуйте <yellow>/itemstorage delete <id></yellow>, щоб видалити елемент'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>Відкрийте графічний інтерфейс із збереженими елементами</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] <gray>сторінка графічного інтерфейсу, за умовчанням 1'
+    params: '[page]'
+itemeditimport:
+  help:
+    - '<green>/itemeditimport ItemEditor <dark_green> - імпортувати елементи з плагіна ItemEditor'
+  itemeditor:
+    unable-to-get-item:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Не вдалося завантажити елемент <gold>%id%'
+    already-used-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>вже використовується, можливо, ви вже виконували цю команду раніше, інакше ви можете перейменувати файл ItemEditor/items/%id%.yml'
+    invalid-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red> не є прийнятним ідентифікатором, ви можете перейменувати файл ItemEditor/items/%id%.yml на буквено-цифрове ім’я'
+    import-unsuccess:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Не було імпортовано жодного елемента <gold>%max% <red>, можливо, ви вже виконували цю команду раніше (?)'
+    import-success:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Імпортовано <yellow>%done% <green>із <yellow>%max% <green>елементів із ItemEditor'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Імпортовані елементи: <yellow>%ids%'
+    import-empty:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>ItemEditor немає елементів для імпорту'
+itemeditreload:
+  success: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Перезавантажено'
+gui:
+  color:
+    title: '<blue>Редактор кольорів'
+  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
+    creative: 'Середній клік'
+    other: 'Натисніть 1'
+  colorselector:
+    title: '<blue>Вибери кольори'
+    buttons:
+      color:
+        - '<gradient:#A78BFA:gold>Кольори:</gradient>'
+        - '<gray><yellow>%colors%'
+        - '<gray>[<white>клацніть правою кнопкою миші<gray>] Додати <yellow>%color%'
+        - '<gray>[<white>Лівий клік<gray>] Видалити останній колір'
+        - '<gray>[<white>Shift+правий клік<gray>] Чіткі кольори'
+  banner:
+    title: '<blue>Редактор банерів'
+    color_selector_title: '<blue>Селектор кольорів'
+    pattern_selector_title: '<blue>Селектор шаблону'
+    buttons:
+      pattern_selector_info:
+        - '<gray>Виберіть <gold><b>%type%</b>'
+      color_selector_info:
+        - '<gray>Виберіть <gold><b>%color%</b>'
+      position:
+        - '<gradient:#A78BFA:gold>Контролер шаблонів</gradient>'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] Перемкнути шаблон'
+        - '<gray>[<white>Лівий/правий клік<gray>] << Move pattern >>'
+      type:
+        - '<gradient:#A78BFA:gold>Вибір типу</gradient>'
+        - '<gray>Тип: <yellow>%type%'
+        - ''
+        - '<gray>[<white>Click<gray>] Змінити тип'
+      color:
+        - '<gradient:#A78BFA:gold>Вибір кольору</gradient>'
+        - '<gray>Колір: <yellow>%color%'
+        - ''
+        - '<gray>[<white>Click<gray>] Змінити колір'
+  firework:
+    title: '<blue>Редактор феєрверків'
+    buttons:
+      type:
+        - '<gradient:#A78BFA:gold>Вибір типу</gradient>'
+        - '<gray>Тип: <yellow>%type%'
+        - ''
+        - '<gray>[<white>Click<gray>] Змінити тип'
+      colors:
+        - '<gradient:#A78BFA:gold>Селектор кольорів</gradient>'
+        - '<gray>Кольори: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>Click<gray>], щоб змінити кольори'
+      fadecolors:
+        - '<gradient:#A78BFA:gold>Селектор зникнення кольорів</gradient>'
+        - '<gray>Зниклі кольори: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>Click<gray>], щоб змінити кольори'
+      flags:
+        none: '<red>Нічого активного'
+        trail: '<yellow>Trail <green>Активний'
+        flicker: '<yellow>Мерехтіння <green>Активний'
+        both: '<gray><yellow>Trail</yellow> та <yellow>Flicker <green>Active'
+        info:
+          - '<gradient:#A78BFA:gold>Активатор слідів і мерехтіння</gradient>'
+          - '%status%'
+          - ''
+          - '<gray>[<white>клацніть правою кнопкою миші<gray>] Перемкнути ефект мерехтіння'
+          - '<gray>[<white>Лівий клік<gray>] Перемкнути ефект сліду'
+      position:
+        - '<gray>Контролер ефектів'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] Перемкнути ефект'
+        - '<gray>[<white>Лівий/правий клік<gray>] Перемістити цей ефект'
+      power:
+        - '<gray>Потужність: <yellow>%power%'
+        - ''
+        - '<gray>[<white>Лівий/правий клік<gray>] << Change >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>Попередня сторінка</b>'
+      - ''
+      - '<gray>[<white>Click<gray>] Перейти на сторінку <yellow>%target_page%'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>Наступна сторінка</b>'
+      - ''
+      - '<gray>[<white>Click<gray>] Перейти на сторінку <yellow>%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '<gold><b>Назад</b>'
+      - ''
+      - '<gray>[<white>Click<gray>] Перейти до попереднього інтерфейсу'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '<blue>%player_name% пунктів - сторінка <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>Сторінка <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] Перемкнути перегляд <yellow>item</yellow>/<yellow>ID'
+        - ''
+        - '<gray>Натисніть елементи:'
+        - '<gray>> [<white>Лівий клік<gray>] Посилення <yellow>1'
+        - '<gray>> [<white>Shift+клацання лівою кнопкою миші<gray>] Приріст <yellow>64'
+        - '<gray>> [<white>Shift+правий клік<gray>] Видалити елемент'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '<blue>Елементи сервера - сторінка <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>Сторінка <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] Перемкнути перегляд <yellow>item</yellow>/<yellow>ID'
+        - ''
+        - '<gray>Натисніть елементи:'
+        - '<gray>> [<white>Лівий клік<gray>] Посилення <yellow>1'
+        - '<gray>> [<white>Shift+клацання лівою кнопкою миші<gray>] Приріст <yellow>64'
+        - '<gray>> [<white>Shift+правий клік<gray>] Видалити елемент'

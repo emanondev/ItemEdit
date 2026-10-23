@@ -1,0 +1,1438 @@
+generic:
+  help:
+    player-only: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Lệnh chỉ dành cho người chơi'
+    no-item-on-hand: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bạn cần cầm một vật phẩm trên tay'
+    lack-permission: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bạn không có quyền %permission%'
+    lack-permission-generic: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bạn không có quyền sử dụng lệnh này'
+    blocked-by-censure: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bạn không thể sử dụng văn bản này, nó chứa các từ bị chặn'
+    blocked-by-type-restriction: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bạn không thể đổi tên mục này'
+    blocked-by-type-restriction-lore: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bạn không thể chỉnh sửa mô tả mục trên mục này'
+    blocked-by-lore-line-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bạn không thể thêm dòng mô tả vật phẩm khác vào vật phẩm này'
+    blocked-by-lore-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bạn không thể đặt dòng dài hơn %limit% ký tự'
+    blocked-by-rename-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bạn không thể đặt tên dài hơn %limit% ký tự'
+
+    prefix: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray>'
+    header-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Trợ giúp</bold></#A78BFA>'
+    header-sub-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <gradient:#A78BFA:#54acff><bold>%sub%</bold></gradient> <dark_gray>»</dark_gray> <#55d6ff><bold>Trợ giúp</#55d6ff>'
+    command-format: '<gray>/%command%</gray> <#bad1ff>%sub%</#bad1ff> <#d7bbff>%params%</#d7bbff>'
+    footer-format: '%prev_clickable% <#7E9CFD><b>Trợ giúp</b> [%page%/%max_page%]</#7E9CFD> %next_clickable%'
+    next_text: ' <light_purple><b>><st>> ></st> '
+    prev_text: ' <light_purple><b><st>< <</st>< '
+    next_void: ' <dark_gray><b>><st>> ></st> '
+    prev_void: ' <dark_gray><b><st>< <</st>< '
+    next_hover: '<gold><b>Chuyển đến trang %target%'
+    prev_hover: '<gold><b>Chuyển đến trang %target%'
+  wrong-material:
+    axolotl_bucket: '%prefix% <red>Sản phẩm phải là xô axolotl'
+    banner: '%prefix% <red>Mục phải là banner'
+    damageable: '%prefix% <red>Vật phẩm phải có độ bền như công cụ và áo giáp'
+    player_head: '%prefix% <red>Vật phẩm phải là đầu người chơi'
+    rgb_colorable: '%prefix% <red>Vật phẩm phải là loại có màu sắc như áo giáp da, sao pháo hoa, bình thuốc hoặc mũi tên có hiệu ứng thuốc'
+    written_book: '%prefix% <red>Sản phẩm phải là sách viết'
+    potion_effect_applicable: '%prefix% <red>Vật phẩm phải là lọ thuốc hoặc mũi tên có tác dụng thuốc hoặc súp đáng ngờ'
+    firework: '%prefix% <red>Vật phẩm phải là pháo hoa'
+    spawner_egg: '%prefix% <red>Vật phẩm phải là trứng hồi sinh'
+    tropical_fish_bucket: '%prefix% <red>Sản phẩm phải là xô đựng cá nhiệt đới'
+    writable_book: '%prefix% <red>Sản phẩm phải là sách viết hoặc sách và bút lông'
+    compass: '%prefix% <red>Vật phẩm phải là la bàn'
+    music_instrument: '%prefix% <red>Sản phẩm phải là sừng dê'
+    armor: '%prefix% <red>Vật phẩm phải là áo giáp'
+    enchantment_storage: '%prefix% <red>Vật phẩm phải là sách hoặc sách phù phép'
+  wrong-alias:
+    axolotl_variant: '%prefix% <red>Giá trị Axolotl sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    potion_effect: '%prefix% <red>Giá trị hiệu ứng sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    animations: '%prefix% <red>Giá trị hoạt hình sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    sound: '%prefix% <red>Giá trị âm thanh sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    enchant: '%prefix% <red>Giá trị bùa mê sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    flag_type: '%prefix% <red>Giá trị cờ sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    book_type: '%prefix% <red>Sai loại giá trị! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    equip_slot: '%prefix% <red>Giá trị ô trang bị sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    banner_pattern: '%prefix% <red>Giá trị mẫu sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    color: '%prefix% <red>Giá trị màu sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    mob_type: '%prefix% <red>Giá trị loại trứng sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    trim_material: '%prefix% <red>Giá trị vật liệu trang trí áo giáp sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    tropical_fish_pattern: '%prefix% <red>Giá trị mẫu sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    trim_pattern: '%prefix% <red>Giá trị mẫu trang trí áo giáp sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    boolean: '%prefix% <red>Giá trị Boolean sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    attribute: '%prefix% <red>Giá trị thuộc tính sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    operation: '%prefix% <red>Giá trị hoạt động sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    itemrarity: '%prefix% <red>Giá trị độ hiếm sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    entitytype: '%prefix% <red>Giá trị loại thực thể sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    entitygroups: '%prefix% <red>Giá trị nhóm thực thể sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    consumable_effect: '%prefix% <red>Giá trị hiệu ứng tiêu hao sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    goat_horn_sound: '%prefix% <red>Giá trị âm thanh sừng dê sai! <dark_red>[<gold>di chuột vào đây<dark_red>]'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>Bí danh:</b></gradient>'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+itemedit:
+  amount:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt số tiền</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>số tiền cần đặt (tối đa 127)'
+      - '<gold><b>Mẹo</b></gold> <gray>Số âm sẽ bị trừ'
+      - '<gray> từ số tiền hiện tại của vật phẩm'
+    params: '<amount>'
+    feedback: '%prefix% <green>Số lượng vật phẩm được đặt thành <yellow>%amount%'
+    feedback-decrease: '%prefix% <green>Số lượng vật phẩm giảm <yellow>%amount%'
+  attribute:
+    description:
+      - '<gradient:#A78BFA:gold><b>Chỉnh sửa công cụ sửa đổi thuộc tính</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <attribute> <amount> [operation] [slot] </yellow><dark_gray>»</dark_gray> thêm công cụ sửa đổi mới'
+      - '<gray><yellow>Remove <attribute/slot> </yellow><dark_gray>»</dark_gray> xóa một số sửa đổi'
+    params: '<add/remove> [...]'
+    add:
+      params: '<attribute> <amount> [operation] [slot]'
+      description:
+        - '<gradient:#A78BFA:gold><b>Thêm công cụ sửa đổi thuộc tính</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute> </yellow>loại thuộc tính'
+        - '<gray><yellow><amount> </yellow>số tiền cần đặt'
+        - '<gray><yellow>[operation] </yellow>cách thêm công cụ sửa đổi, theo tổng mặc định'
+        - '<gray><yellow>[slot] </yellow>chỉ áp dụng công cụ sửa đổi này khi mục được chọn'
+        - '<gray> ô trang bị hoặc bất kỳ ô trang bị nào nếu không được chọn'
+      feedback: '%prefix% <green>Đã thêm công cụ sửa đổi'
+    remove:
+      params: '<attribute/slot>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Xóa phần sửa đổi</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute/slot> </yellow>loại để xóa, bất kỳ công cụ sửa đổi nào có'
+        - '<gray> giá trị đã chọn sẽ bị xóa'
+      feedback-attribute: '%prefix% <green>Đã xóa phần sửa đổi thuộc tính'
+      feedback-equipment: '%prefix% <green>Đã loại bỏ các sửa đổi của ô trang bị'
+  axolotlvariant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Chỉnh sửa Biến thể Axolotl trên thùng Axolotl</b></gradient>'
+      - '<white><sprite:items:item/axolotl_bucket>'
+      - '<gray><yellow><type> </yellow>loại axolotl'
+    params: '<type>'
+    feedback: '%prefix% <green>Đã thay đổi biến thể Axolotl thành <yellow>%variant%'
+  banner:
+    description:
+      - '<gradient:#A78BFA:gold><b>Chỉnh sửa banner</b></gradient>'
+    params: '<add/set/remove/color> [...]'
+    set:
+      params: '<type> <color> <line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Thay thế mẫu trên dòng đã chọn</b></gradient>'
+      feedback: '%prefix% <green>Bộ họa tiết'
+    add:
+      params: '<type> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Thêm mẫu</b></gradient>'
+      feedback: '%prefix% <green>Đã thêm mẫu'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Xóa mẫu trên dòng đã chọn</b></gradient>'
+      feedback: '%prefix% <green>Đã xóa mẫu'
+    color:
+      params: '<line> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Thay đổi màu mẫu trên dòng đã chọn</b></gradient>'
+      feedback: '%prefix% <green>Đổi màu hoa văn'
+  bookauthor:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt tác giả</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>Tên tác giả có thể chứa dấu cách và bị tô màu'
+      - '<gray>Chỉ hoạt động trên sách Viết'
+    params: '<name>'
+    feedback: '%prefix% <green>Tác giả sách cập nhật'
+    feedback-reset: '%prefix% <green>Đặt lại tác giả sách'
+  bookenchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt bùa chú vào cuốn sách</b></gradient>'
+      - '<white><sprite:items:item/enchanted_book> <sprite:items:item/book>'
+      - '<gray>Sự khác biệt giữa enchant và bookenchant là ở chỗ'
+      - '<gray>a cuốn sách có khía cạnh lửa enchant khiến mục tiêu bốc cháy khi bị bắn trúng'
+      - '<gray>trong khi một cuốn sách có bookenchant thì không'
+      - ''
+      - '<gray><yellow><enchant> </yellow>loại bùa mê'
+      - '<gray><yellow>[level] </yellow>mức độ phù phép, theo mặc định <yellow>1'
+      - ''
+      - '<gold><b>Mẹo</b></gold> <gray>Đặt <yellow>[level] </yellow>to <yellow>0 </yellow>để loại bỏ bùa mê'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>Bùa mê sách đã bị xóa <yellow>%enchant%'
+    feedback: '%prefix% <green>Bùa mê sách ứng dụng <yellow>%enchant% <green>lv <yellow>%lv%'
+  booktype:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt loại sách</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>Chỉ hoạt động trên sách Viết'
+    params: '<booktype>'
+    feedback: '%prefix% <green>Đã cập nhật thế hệ sách lên <yellow>%generation%'
+    feedback-reset: '%prefix% <green>Đặt lại thế hệ sách'
+  color:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt màu</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/tipped_arrow_base> <sprite:items:item/firework_star> <sprite:items:item/leather_chestplate>'
+      - '<gray>Hoạt động trên áo giáp da và các ngôi sao pháo hoa, bình thuốc và mũi tên có hiệu ứng thuốc!'
+      - '<gray><yellow>[red] [green] [blue] </yellow>là số lượng mỗi màu cần kết hợp'
+      - '<gray>Mỗi màu là một giá trị int trong khoảng từ 0 đến 255'
+      - '<gray>Nếu bạn bối rối hãy google "<yellow>Bộ chọn màu RGB</yellow>"'
+    params: '[red] [green] [blue]'
+    feedback: '%prefix% <green>Đã cập nhật màu'
+  compass:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt vị trí mục tiêu của la bàn</b></gradient>'
+      - '<white><sprite:items:item/compass_00>'
+      - '<gray><yellow>Set </yellow><dark_gray>»</dark_gray> đặt vị trí của bạn làm mục tiêu la bàn'
+      - '<gray><yellow>Clear </yellow><dark_gray>»</dark_gray> mục tiêu la bàn rõ ràng'
+    params: '<set/clear>'
+    set:
+      feedback: '%prefix% <green>La bàn hiện trỏ tới <yellow>%world% %x% %y% %z%'
+    clear:
+      feedback: '%prefix% <green>Đã xóa mục tiêu la bàn'
+  custommodeldata:
+    description:
+      - '<gradient:#A78BFA:gold><b>Chỉnh sửa dữ liệu mô hình tùy chỉnh</b></gradient>'
+      - ''
+      - '<gray>Dùng cho gói họa tiết'
+      - '<gray><yellow>[value] </yellow>int dương của mô hình dữ liệu đích'
+      - '<gray>Lưu ý: máy chủ hiện đại sử dụng itemmodel thay vì custommodeldata'
+      - '<gray> đối với họa tiết, lệnh này dành cho khách hàng cũ'
+    params: '<value>'
+    feedback: '%prefix% <green>Dữ liệu mô hình tùy chỉnh được cập nhật'
+    feedback-reset: '%prefix% <green>Đặt lại dữ liệu mô hình tùy chỉnh'
+  damage:
+    description:
+      - '<gradient:#A78BFA:gold><b>Chỉnh sửa độ bền</b></gradient>'
+      - ''
+      - '<gray><yellow><durability> </yellow>thiệt hại áp dụng'
+      - '<gray><gold>N.B.</gold> <yellow>0 </yellow>có nghĩa là không hư hỏng, hoàn toàn bền bỉ'
+    params: '<durability>'
+    feedback-reset: '%prefix% <green>Độ bền được phục hồi'
+    feedback: '%prefix% <green>Độ bền được cập nhật'
+  equipment:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt thuộc tính Trang bị của vật phẩm</b></gradient>'
+      - ''
+      - '<gray><gold><b>Mẹo</b></gold> Sử dụng /itemequip or /iee'
+      - '<gray><gold>N.B.</gold> đồ uống của bạn không thể ăn được'
+    params: ''
+  enchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt bùa chú</b></gradient>'
+      - ''
+      - '<gray><yellow><enchant> </yellow>loại bùa mê'
+      - '<gray><yellow>[level] </yellow>mức độ phù phép, theo mặc định <yellow>1'
+      - ''
+      - '<gold><b>Mẹo</b></gold> <gray>Đặt <yellow>[level] </yellow>to <yellow>0 </yellow>để loại bỏ bùa mê'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>Bùa mê đã bị loại bỏ <yellow>%enchant%'
+    feedback: '%prefix% <green>Bùa mê áp dụng <yellow>%enchant% <green>lv <yellow>%lv%'
+  fireresistent:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt vật phẩm có khả năng kháng lửa/dung nham</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>đặt giá trị, chuyển đổi theo mặc định'
+      - ''
+      - '<gray>Một vật phẩm có khả năng chống cháy sẽ không bị phá hủy'
+      - '<gray> khi rơi vào lửa và sẽ nổi trên dung nham'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Khả năng chống cháy được đặt thành <yellow>%value%'
+  fireworkpower:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt sức mạnh pháo hoa</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+      - '<gray><yellow><power> </yellow>sức mạnh của pháo hoa, giá trị trong khoảng <yellow>0 </yellow>và <yellow>5'
+    params: '<power>'
+    feedback: '%prefix% <green>Cập nhật sức mạnh pháo hoa'
+  firework:
+    description:
+      - '<gradient:#A78BFA:gold><b>Chỉnh sửa pháo hoa bằng GUI</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+    params: ''
+  food:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt thuộc tính thực phẩm của vật phẩm</b></gradient>'
+      - ''
+      - '<gray><gold><b>Mẹo</b></gold> Sử dụng /itemfood or /if'
+      - '<gray><gold>N.B.</gold> đồ uống của bạn không thể ăn được'
+    params: ''
+  glider:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt trạng thái Tàu lượn</b></gradient>'
+      - ''
+      - '<gray>Vật phẩm tàu lượn sẽ cho phép lướt như trên elytras'
+      - '<gray><yellow>[true/false] </yellow>đặt giá trị tàu lượn, chuyển đổi theo mặc định'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Đã cập nhật Trượt được đặt thành <yellow>%value%'
+  glow:
+    description:
+      - '<gradient:#A78BFA:gold><b>Ghi đè hiệu ứng ánh sáng bùa mê</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>đặt giá trị, đặt lại theo mặc định'
+      - ''
+      - '<gold><b>Mẹo</b></gold> <gray><yellow>không có giá trị nào được chỉ định </yellow>khôi phục hành vi vanilla'
+    params: '[true/false/default]'
+    feedback: '%prefix% <green>Ánh sáng được đặt thành <yellow>%value%'
+    feedback-reset: '%prefix% <green>Đặt lại giá trị phát sáng về mặc định'
+  goathornsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt âm thanh Sừng Dê</b></gradient>'
+      - '<white><sprite:items:item/goat_horn>'
+      - '<gray><yellow><type> </yellow>loại âm thanh'
+    params: '<type>'
+    feedback: '%prefix% <green>Âm thanh được cập nhật'
+  hide:
+    description:
+      - '<gradient:#A78BFA:gold><b>Ẩn hoặc hiển thị các thành phần</b></gradient>'
+      - ''
+      - '<gray><yellow><flag> </yellow>cờ mục cần chỉnh sửa'
+      - '<gray><yellow>[true/false] </yellow>đặt giá trị cờ, chuyển đổi theo mặc định'
+      - ''
+      - '<gold><b>Mẹo</b></gold> <gray>ẩn các mẫu biểu ngữ bằng cờ potion_effects'
+      - '<gold><b>Mẹo</b></gold> <gray>ẩn tất cả các cờ cùng một lúc bằng <yellow>/itemedit hideall'
+    params: '<flag> [true/false]'
+    feedback: '%prefix% <green>Cờ hiện là <yellow>%value%'
+  hidetooltip:
+    description:
+      - '<gradient:#A78BFA:gold><b>Ẩn hoặc hiển thị chú giải công cụ</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>đặt giá trị cờ, chuyển đổi theo mặc định'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Trạng thái ẩn của chú giải công cụ hiện là <yellow>%value%'
+  hideall:
+    description:
+      - '<gradient:#A78BFA:gold><b>Ẩn tất cả các thành phần</b></gradient>'
+      - ''
+      - '<gray>Ẩn: bùa mê, hiệu ứng thuốc, lớp biểu ngữ, thuộc tính ...'
+      - ''
+      - '<gold><b>Mẹo</b></gold> <gray>ẩn các thành phần đơn lẻ bằng <yellow>/itemedit hide <flag> true'
+    params: ''
+    feedback: '%prefix% <green>Ẩn tất cả các cờ'
+  itemmodel:
+    description:
+      - '<gradient:#A78BFA:gold><b>Chỉnh sửa mẫu vật phẩm</b></gradient>'
+      - ''
+      - '<gray><yellow><namespaced key> </yellow>key để đặt tham chiếu kết cấu'
+      - '<gray>Ví dụ: /ie itemmodel <yellow>iron_sword'
+      - '<gray>Ví dụ: /ie itemmodel <yellow>minecraft:iron_sword'
+      - ''
+      - '<gray><yellow><namespace></yellow>:<yellow><id></yellow> sẽ tham khảo mô hình:'
+      - '  /assets/<yellow><namespace></yellow>/models/item/<yellow><id>'
+    params: '<namespaced key>'
+    feedback: '%prefix% <green>Mẫu vật phẩm được cập nhật'
+    feedback-reset: '%prefix% <green>Đặt lại mẫu vật phẩm'
+  kinetic:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt thuộc tính động học của vật phẩm</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gray><gold><b>Mẹo</b></gold> Sử dụng /itemkinetic or /iek'
+    params: ''
+  maxdurability:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt độ bền tối đa của vật phẩm</b></gradient>'
+      - ''
+      - '<gray><yellow><max durability> </yellow>giá trị độ bền mới của vật phẩm,'
+      - '<gray> phải lớn hơn 1'
+    params: '<max durability>'
+    feedback: '%prefix% <green>Đã cập nhật độ bền tối đa lên <yellow>%value%'
+  maxstacksize:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt kích thước ngăn xếp tối đa của vật phẩm</b></gradient>'
+      - ''
+      - '<gray><yellow>[1-99] </yellow>đặt giá trị cờ'
+      - ''
+      - '<gray><yellow>không có giá trị </yellow>sẽ khôi phục kích thước ngăn xếp chung là <yellow>64'
+      - "<gray> cho hầu hết các vật phẩm, <yellow>1</yellow> cho áo giáp và công cụ, v.v.\ngiá trị"
+      - '<gray> cho một số mặt hàng'
+    params: '[1-99]'
+    feedback: '%prefix% <green>Đã cập nhật kích thước ngăn xếp tối đa lên <yellow>%value%'
+    feedback-reset: '%prefix% <green>Đặt lại kích thước ngăn xếp tối đa'
+  pierce:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt thuộc tính vũ khí xuyên thấu của vật phẩm</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gold><b>Mẹo</b></gold><gray> Sử dụng /itempiercing or /iep'
+    params: ''
+  potioneffect:
+    itemtag-tip: '%prefix% <gray>Bạn cần thêm hiệu ứng thuốc vào các vật phẩm thông thường? thử >ItemTag<'
+    itemtag-tip-hover:
+      - '<gradient:#A78BFA:gold>Nhấp vào tôi</gradient>'
+    description:
+      - '<gradient:#A78BFA:gold><b>Chỉnh sửa hiệu ứng của thuốc</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/suspicious_stew> <sprite:items:item/tipped_arrow_base>'
+      - '<gray>Hoạt động trên mọi loại Thuốc, mũi tên có hiệu ứng thuốc và súp đáng ngờ!'
+      - '<gray><yellow>Add <effect> <duration> [level] </yellow><dark_gray>»</dark_gray> thêm hiệu ứng'
+      - '<gray><yellow>Remove <effect> </yellow><dark_gray>»</dark_gray> loại bỏ hiệu ứng đã chọn'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> xóa tất cả hiệu ứng'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
+      description:
+        - '<gradient:#A78BFA:gold><b>Thêm/Ghi đè hiệu ứng đã chọn</b></gradient>'
+        - ''
+        - '<gray><yellow><effect> </yellow>loại hiệu ứng'
+        - '<gray><yellow><duration> </yellow>thời lượng tính bằng giây'
+        - '<gray><yellow>[level] </yellow>Theo mặc định lên tới 127 <yellow>1'
+        - '<gray><yellow>[particles] </yellow>Có nên hiển thị các hạt? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[ambient] </yellow>Các hạt nên có cờ xung quanh? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[icon] </yellow>Hiển thị biểu tượng ở góc trên bên phải? <yellow>true</yellow>/<yellow>false'
+      feedback: '%prefix% <green>Thêm hiệu ứng thuốc'
+    remove:
+      params: '<effect>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Xóa hiệu ứng đã chọn</b></gradient>'
+      feedback: '%prefix% <green>Loại bỏ hiệu ứng thuốc'
+    reset:
+      feedback: '%prefix% <green>Đặt lại hiệu ứng thuốc'
+  rarity:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt độ hiếm của vật phẩm</b></gradient>'
+      - ''
+      - '<gray><yellow>[rarity] </yellow>đặt độ hiếm của vật phẩm'
+      - ''
+      - '<gold><b>Tip</b><gold><gray> cài đặt không có giá trị hiếm sẽ khôi phục mặc định'
+    params: '[rarity]'
+    feedback: '%prefix% <green>Cập nhật độ hiếm'
+    feedback-reset: '%prefix% <green>Đặt lại độ hiếm'
+  repaircost:
+    description:
+      - '<gradient:#A78BFA:gold><b>Chỉnh sửa Chi phí Sửa chữa Đe</b></gradient>'
+      - ''
+      - '<gray><yellow><cost> </yellow>số lượng cấp độ'
+      - '<gray><gold>N.B.</gold> giá sửa/đổi tên đe luôn ít nhất là <yellow>1'
+      - '<gray><gold>N.B.</gold> lệnh này đặt chi phí sửa chữa cơ bản của vật phẩm, chi phí cấp độ cuối cùng trên đe dựa trên những gì bạn làm'
+      - '<gray>Thông tin thêm tại <yellow>minecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<cost>'
+    feedback: '%prefix% <green>Cập nhật chi phí sửa chữa'
+  skullowner:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt chủ sở hữu đầu người chơi</b></gradient>'
+      - ''
+      - '<gray>Chỉ hoạt động với đầu người chơi'
+      - '<gray><yellow>[name] </yellow>tên chủ sở hữu'
+      - ''
+      - '<gold><b>Mẹo</b></gold> <gray>Đặt và bẻ gãy đầu người chơi để cập nhật giao diện của nó'
+    params: '[name]'
+    feedback: '%prefix% <green>Đã cập nhật chủ sở hữu đầu người chơi'
+    feedback-reset: '%prefix% <green>Đặt lại chủ sở hữu đầu người chơi'
+  tooltipstyle:
+    description:
+      - '<gradient:#A78BFA:gold><b>Chỉnh sửa kiểu chú giải công cụ mục</b></gradient>'
+      - ''
+      - "<gray><yellow><style> </yellow>key để đặt tham chiếu kết cấu\nPhong cách"
+      - '<gray> được sáng tác bởi <white><namespace>:<id>'
+      - '<gray>Ví dụ: /ie tooltipstyle <yellow>my_style'
+      - '<gray>Ví dụ: /ie tooltipstyle <yellow>minecraft:my_style'
+      - '<gray>trong đó <yellow>minecraft</yellow> là <white><namespace></white> và'
+      - '<gray><yellow>my_style</yellow> là <white><id>'
+      - '<gray>khi được đặt, mục này có thể sử dụng các họa tiết tùy chỉnh cho'
+      - '<gray>nền và khung của chú giải công cụ.'
+      - '<gray><white><namespace>:tooltip/<id>_background'
+      - '<gray>và <white><namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
+    feedback: '%prefix% <green>Cập nhật kiểu chú giải công cụ'
+    feedback-reset: '%prefix% <green>Đặt lại kiểu chú giải công cụ'
+  armortrim:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt trang trí giáp</b></gradient>'
+      - '<white><sprite:items:item/iron_chestplate>'
+      - '<gray><yellow><material> </yellow>chất liệu trang trí áo giáp'
+      - '<gray><yellow><pattern> </yellow>mô hình trang trí áo giáp'
+    params: '<material> <pattern>'
+    feedback: '%prefix% <green>Cập nhật trang trí giáp'
+    feedback-reset: '%prefix% <green>đã loại bỏ phần giáp'
+  tropicalfish:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt thuộc tính của xô cá nhiệt đới</b></gradient>'
+      - '<white><sprite:items:item/tropical_fish_bucket>'
+      - '<gray><yellow>pattern <pattern type> </yellow><dark_gray>»</dark_gray> loại cá'
+      - '<gray><yellow>patterncolor <color> </yellow><dark_gray>»</dark_gray> màu hoa văn của cá'
+      - '<gray><yellow>bodycolor <color> </yellow><dark_gray>»</dark_gray> màu sắc cơ thể của cá'
+    params: '[...]'
+    pattern:
+      params: '<type>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Đặt kiểu mẫu cá nhiệt đới</b></gradient>'
+        - ''
+        - '<gray><yellow><type> </yellow>loại hoa văn của cá'
+      feedback: '%prefix% <green>Mẫu cập nhật'
+    patterncolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Đặt màu mẫu cá nhiệt đới</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>màu hoa văn của cá'
+      feedback: '%prefix% <green>Màu được cập nhật'
+    bodycolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Đặt màu cơ thể cá nhiệt đới</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>màu sắc cơ thể của cá'
+      feedback: '%prefix% <green>Màu được cập nhật'
+  type:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt loại vật phẩm</b></gradient>'
+      - ''
+      - '<gray><gold>N.B.</gold> một số loại như Air sẽ không hoạt động'
+    params: '<type>'
+    feedback: '%prefix% <green>Tài liệu vật phẩm được cập nhật'
+  unbreakable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt trạng thái không thể phá vỡ</b></gradient>'
+      - ''
+      - '<gray>Các công cụ và áo giáp không thể phá vỡ sẽ không bị mất độ bền'
+      - '<gray><yellow>[true/false] </yellow>đặt giá trị không thể phá vỡ, chuyển đổi theo mặc định'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Đã cập nhật Vật phẩm không thể phá vỡ thành <yellow>%value%'
+  help:
+    header-name: 'ItemEdit'
+    description:
+      - '<gradient:#A78BFA:gold><b>Hiển thị ItemEdit trợ giúp</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Trang trợ giúp'
+      - '<gray><yellow>[subcommand] </yellow>Trợ giúp về lệnh phụ'
+    params: '[page/subcommand]'
+  rename:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt tên vật phẩm</b></gradient>'
+      - ''
+      - '<gold><b>Mẹo</b></gold> <gray>loại <yellow>/ie rename -clear </yellow>để hoàn nguyên tên về mặc định'
+      - '<gold><b>Mẹo</b></gold> <gray>gõ <yellow>/ie rename -copy </yellow>để sao chép tên'
+      - '<gold><b>Mẹo</b></gold> <gray>nhập <yellow>/ie rename -paste </yellow>để dán giá trị đã sao chép trước đó'
+    params: '<name>'
+    feedback: '%prefix% <green>Tên vật phẩm đã được cập nhật'
+    rename-clear: '%prefix% <green>Tên vật phẩm đã được xóa'
+    rename-copy: '%prefix% <green>Tên mục được sao chép'
+    rename-paste-empty: '%prefix% <red>Không sao chép tên mục để dán'
+    feedback-paste: '%prefix% <green>Đã dán tên mục đã sao chép'
+    banned_words: '%prefix% <red>Tên mục chứa các từ bị chặn'
+  lore:
+    description:
+      - '<gradient:#A78BFA:gold><b>Chỉnh sửa mô tả mục</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <text> </yellow><dark_gray>»</dark_gray> thêm văn bản trên một dòng mới'
+      - '<gray><yellow>Insert <line> <text> </yellow><dark_gray>»</dark_gray> thêm văn bản trên dòng đã chọn'
+      - '<gray><yellow>Set <line> <text> </yellow><dark_gray>»</dark_gray> đặt hoặc thay thế văn bản trên dòng đã chọn'
+      - '<gray><yellow>Remove <line> </yellow><dark_gray>»</dark_gray> xóa dòng đã chọn'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> xóa tất cả các dòng'
+      - '<gray><yellow>Copy </yellow><dark_gray>»</dark_gray> sao chép mô tả mục hiện tại để dán sau'
+      - '<gray><yellow>CopyBook </yellow><dark_gray>»</dark_gray> giống như bản sao nhưng từ các trang sách dưới dạng dòng'
+      - '<gray><yellow>CopyFile <path> </yellow><dark_gray>»</dark_gray> giống như bản sao nhưng từ loreCopy.yml'
+      - '<gray><yellow>Paste </yellow><dark_gray>»</dark_gray> dán mô tả mục được sao chép cuối cùng'
+      - '<gray><yellow>Replace <replaced> <replacer> </yellow><dark_gray>»</dark_gray> thay thế tất cả các lần xuất hiện'
+    params: '<add/set/remove...> [...]'
+    set:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Đặt hoặc thay thế văn bản trên dòng đã chọn</b></gradient>'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Xóa dòng đã chọn</b></gradient>'
+    insert:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Thêm văn bản trên dòng đã chọn</b></gradient>'
+    copy:
+      feedback: '%prefix% <green>mô tả mục đã được sao chép'
+    copyBook:
+      feedback: '%prefix% <green>Trang sách đã được sao chép và sẵn sàng để dán'
+    copyFile:
+      wrong-path: '%prefix% <red>Đường dẫn không hợp lệ, nhớ tải lại cấu hình và kiểm tra CaPs'
+      no-path: '%prefix% <red>Chọn đường dẫn /ie lore copyfile <gold><path>'
+      feedback: '%prefix% <green>Đã sao chép cấu hình và sẵn sàng dán'
+    paste:
+      feedback: '%prefix% <green>đã dán mô tả mục'
+      no-copy: '%prefix% <red>Sao chép mô tả mục trước'
+    replace:
+      params: '<replaced> <replacer>'
+      description:
+        - '<gold><b>Thay thế tất cả các lần xuất hiện trên mô tả mặt hàng</b></gradient>'
+        - ''
+        - '<gray>Nếu bạn cần thay thế nhiều hơn một từ bạn có'
+        - '<gray> để đóng chúng lại bên trong <yellow>{ }'
+        - ''
+        - '<gray>Ví dụ: <yellow>/ie lore replace New Rusty'
+        - '<gray>''<yellow>New sword</yellow>'' -> ''<yellow>Rusty sword</yellow>'''
+        - ''
+        - '<gray>Ví dụ 2: <yellow>/ie lore replace {Heavy} {Very light}'
+        - '<gray>''<yellow>Heavy sword</yellow>'' -> ''<yellow>Very light sword</yellow>'''
+  listaliases:
+    description:
+      - '<gradient:#A78BFA:gold><b>Hiển thị các tham số bí danh được phép</b>'
+      - ''
+      - '<gray><yellow><type> </yellow>loại tham số cần hiển thị'
+    params: '<type>'
+    prefix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>Bí danh <dark_blue>◆ ◆ ◆ ◆'
+    postfix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>Bí danh <dark_blue>◆ ◆ ◆ ◆'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+    hover_info: '<blue>Giá trị ban đầu: <yellow>%default%'
+    hover_type: '<gold>Click để kiểm tra'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>Bí danh:</b></gradient>'
+itemeditequipment:
+  allowedentities:
+    invalid-type: '%prefix% <red>Giá trị <gold>%value% <red>không phải là thực thể hợp lệ cũng không phải là nhóm thực thể hợp lệ'
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt các loại thực thể được phép đeo trang bị này</b></gradient>'
+      - ''
+      - '<gray><yellow>[entity] </yellow>loại thực thể nào'
+      - '<gray><yellow>[group] </yellow>nhóm thực thể nào'
+      - ''
+      - '<gray>Tất cả các loại đã chọn đều được thêm vào'
+    params: '[entity/group] [entity/group] ...'
+    feedback: '%prefix% <green>Các loại thực thể được phép hiện nay là: <yellow>%value%'
+    feedback-reset: '%prefix% <green>Các loại thực thể được phép đã được đặt lại'
+  canshear:
+    unsupported-version: '%prefix% <red>Phiên bản máy chủ của bạn (<gold>%value%<red>) không hỗ trợ tính năng này'
+    description:
+      - '<gradient:#A78BFA:gold><b>Bộ trang bị khi tương tác</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true có thể cắt'
+      - '<gray>trang bị từ một thực thể, như bí ngô'
+      - '<gray>cho người tuyết'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Có thể cắt tài sản hiện tại là <yellow>%value%'
+  canbesheared:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt xem trang bị này có thể bị cắt hay không</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Liệu thiết bị có thể cắt được hay không'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Tài sản có thể cắt xén bây giờ là <yellow>%value%'
+  cameraoverlay:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt lớp phủ camera</b></gradient>'
+      - ''
+      - '<gray><yellow>[namespacedkey] </yellow>lớp phủ nào bạn muốn'
+      - '<gray>Lớp phủ được đặt trên gói kết cấu, vanilla duy nhất'
+      - '<gray>lớp phủ là minecraft:misc/pumpkinblur'
+    params: '[namespacedkey]'
+    feedback: '%prefix% <green>Lớp phủ camera đã được cập nhật'
+    feedback-reset: '%prefix% <green> Lớp phủ camera đã bị xóa'
+    invalid-namespacedkey: '<red>Khóa cách tên <gold>%value% <red> không hợp lệ'
+  clear:
+    description:
+      - '<gradient:#A78BFA:gold><b>Xóa hoàn toàn thuộc tính trang bị trên vật phẩm</b></gradient>'
+      - ''
+      - '<gray>Hoặc khôi phục mặc định nếu vật phẩm là trang bị vani'
+    params: ''
+    feedback: '%prefix% <green>Thuộc tính trang bị đã được đặt lại về mặc định'
+  damageonhurt:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bộ có thể gây sát thương</gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true để giảm độ bền khi bị sát thương'
+      - ''
+      - '<gray><gold>N.B.</gold> chỉ vật phẩm có kích thước ngăn xếp tối đa là 1 mới có thể bị hỏng'
+      - '<gray> sử dụng <yellow>/ie maxstacksize 1'
+      - '<gray><gold><b>Mẹo</b></gold> nhớ đặt độ bền tối đa của vật phẩm với'
+      - '  <yellow>/ie maxdurability <amount>'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Thiệt hại về tài sản bị thiệt hại hiện là <yellow>%value%'
+    warning-maxstacksize: '%prefix% <red>Kích thước ngăn xếp tối đa của vật phẩm phải là <gold>1 <red>để có thể bị hư hỏng <dark_red>[<gold>nhấp để sửa<dark_red>]'
+  dispensable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bộ có thể phân phối</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true để trang bị bộ phân phối'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Tài sản có thể phân phối hiện là <yellow>%value%'
+  equiponinteract:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bộ trang bị khi tương tác</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true để trang bị tương tác'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Trang bị trên thuộc tính tương tác hiện là <yellow>%value%'
+  equipsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bộ trang bị âm thanh</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>âm thanh nào sẽ được tạo ra'
+    params: '[sound]'
+    feedback: '%prefix% <green>Thuộc tính âm thanh trang bị hiện là <yellow>%value%'
+    feedback-reset: '%prefix% <green>Thuộc tính âm thanh trang bị đã được đặt lại về mặc định'
+  help:
+    header-name: 'ItemEquipment'
+    description:
+      - '<gradient:#A78BFA:gold><b>Hiển thị ItemEditEquipment trợ giúp</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Trang trợ giúp'
+      - '<gray><yellow>[subcommand] </yellow>Trợ giúp về lệnh phụ'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Hiển thị thuộc tính trang bị trên vật phẩm này</b></gradient>'
+    params: ''
+    not_set: '%prefix% <gray>Vật phẩm này không có thành phần nào có thể trang bị được'
+    message:
+      - '%prefix% <dark_green><b>Có thể trang bị</b>'
+      - '<green>Vị trí: <yellow>%slot%'
+      - '<green>Có thể cắt được: <yellow>%canbesheared%'
+      - '<green>Sát thương khi bị thương: <yellow>%damageonhurt%'
+      - '<green>Có thể phân phối: <yellow>%dispensable%'
+      - '<green>Trang bị khi tương tác: <yellow>%equiponinteract%'
+      - '<green>Có thể hoán đổi: <yellow>%swappable%'
+      - '<green>Trang bị âm thanh: <yellow>%equipsound%'
+      - '<green>Âm thanh biến dạng: <yellow>%shearsound%'
+      - '<green>Đối tượng được phép: <yellow>%allowedentities%'
+      - '<green>Lớp phủ camera: <yellow>%cameraoverlay%'
+      - '<green>Id tài sản: <yellow>%assetid%'
+  model:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt mô hình kết cấu</b></gradient>'
+      - ''
+      - '<gray><yellow>[key] </yellow>ID cách tên của mẫu thiết bị sẽ sử dụng khi được trang bị'
+    params: '[key]'
+    feedback: '%prefix% <green>Mẫu thiết bị hiện tại là <yellow>%key%'
+    feedback-reset: '%prefix% <green>Mẫu thiết bị đã được đặt lại'
+  shearsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt âm thanh khi vật phẩm được lấy ra bằng cách cắt</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>âm thanh nào sẽ được tạo ra'
+      - '<gray>khi nó bị cắt bỏ bằng dao cắt, như quả bí ngô'
+      - '<gray>cho người tuyết'
+    params: '[sound]'
+    feedback: '%prefix% <green>Âm thanh biến dạng bây giờ là <yellow>%value%'
+    feedback-reset: '%prefix% <green>Thuộc tính âm thanh cắt đã được đặt lại về mặc định'
+  shearingsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt âm thanh khi vật phẩm được lấy ra bằng cách cắt</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>Nên tạo ra âm thanh nào'
+      - '<gray>khi nó được cắt bỏ bằng cách cắt, giống như quả bí ngô dành cho người tuyết'
+    params: '[sound]'
+    feedback: '%prefix% <green>Tiếng cắt bây giờ là <yellow>%value%'
+  slot:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt ô có thể trang bị</b></gradient>'
+      - ''
+      - '<gray><yellow><slot> </yellow>nơi có thể trang bị vật phẩm'
+    params: '<slot>'
+    feedback: '%prefix% <green> Ô trang bị hiện là <yellow>%value%'
+  swappable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt vật phẩm có thể hoán đổi</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true để vật phẩm có thể hoán đổi được'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Tài sản có thể hoán đổi hiện là <yellow>%value%'
+itemeditfood:
+  addeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>Thêm hiệu ứng cho vật phẩm</b></gradient>'
+      - '<gray><yellow>/ief addeffect </yellow>cleareffects'
+      - '<gray><yellow>/ief addeffect </yellow>teleport <range>'
+      - '<gray><yellow>/ief addeffect </yellow>applyeffects [chance] <potion> <lv> <duration> [ambient] [particle] [icon]'
+      - '<gray><yellow>/ief addeffect </yellow>removeeffects <potion>'
+      - '<gray><yellow>/ief addeffect </yellow>playsound <sound>'
+      - ''
+    params: '[...]'
+    cleareffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Thêm hiệu ứng cho vật phẩm</b></gradient>'
+        - ''
+        - '<gray>Xóa mọi hiệu ứng thuốc lên người chơi, như xô sữa'
+      params: '<potion>'
+      feedback: '%prefix% <green>Thêm hiệu ứng dịch chuyển khi ăn thức ăn'
+    teleport:
+      description:
+        - '<gradient:#A78BFA:gold><b>Thêm hiệu ứng cho vật phẩm</b></gradient>'
+        - '<gray><yellow><range> </yellow> Dịch chuyển người chơi bao xa'
+        - ''
+        - '<gray>Dịch chuyển ngẫu nhiên người chơi khi ăn xong thức ăn'
+      params: '<range>'
+      feedback: '%prefix% <green>Thêm hiệu ứng dịch chuyển khi ăn thức ăn'
+    applyeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Thêm hiệu ứng cho vật phẩm</b></gradient>'
+        - '<gray><yellow>[chance] </yellow>% cơ hội áp dụng hiệu ứng là bao nhiêu?'
+        - '<gray> phải lớn hơn <yellow>0</yellow> và nhỏ hơn bằng <yellow>100'
+        - '<gray><yellow><potion> </yellow>Loại hiệu ứng thuốc'
+        - '<gray><yellow><lv> </yellow>mức độ hiệu ứng, <yellow>1</yellow> theo mặc định'
+        - '<gray><yellow><duration> </yellow>Thời lượng tính bằng giây của hiệu ứng hoặc <yellow>-1 </yellow>đối với hiệu ứng vĩnh viễn'
+        - '<gray><yellow>[ambient] [particle] [icon] </yellow>true/false tùy chỉnh hiệu ứng thuốc'
+        - ''
+        - '<gray>Áp dụng hiệu ứng đã chọn cho người chơi khi ăn thức ăn'
+      params: '<potion>'
+      feedback: '%prefix% <green>Thêm hiệu ứng áp dụng khi ăn'
+    removeeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Thêm hiệu ứng cho vật phẩm</b></gradient>'
+        - '<gray><yellow><potion> </yellow>xóa hiệu ứng đã chọn'
+        - ''
+        - '<gray>Xóa hiệu ứng đã chọn khỏi trình phát khi ăn thức ăn'
+      params: '<potion>'
+      feedback: '%prefix% <green>Thêm hiệu ứng loại bỏ khi ăn'
+    playsound:
+      description:
+        - '<gradient:#A78BFA:gold><b>Thêm hiệu ứng cho vật phẩm</b></gradient>'
+        - '<gray><yellow><sound> </yellow>âm thanh để phát'
+        - ''
+        - '<gray>Phát âm thanh đã chọn khi ăn'
+      params: '<sound>'
+      feedback: '%prefix% <green>Thêm âm thanh khi ăn'
+  animation:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bộ ăn hoạt hình</b></gradient>'
+      - '<gray>Chỉ dành cho <red>1.21.2+'
+      - ''
+      - '<gray><yellow><animation> </yellow>Giá trị cần đặt, chuyển đổi theo mặc định'
+      - ''
+      - '<gray>Một số hoạt ảnh chỉ được hiển thị ở góc nhìn thứ nhất,'
+      - '<gray>một số hình ảnh động chỉ được hiển thị ở góc nhìn thứ ba,'
+      - '<gray>một số hình ảnh động được hiển thị ở cả góc nhìn thứ nhất và góc nhìn thứ ba'
+    params: '<animation>'
+    feedback: '%prefix% <green>Hoạt hình ứng dụng'
+  canalwayseat:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt xem vật phẩm có thể ăn được hay không</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Giá trị cần đặt, chuyển đổi theo mặc định'
+      - ''
+      - '<gray>Thường thì đói mới ăn được,'
+      - '<gray>setting true sẽ bắt chước hành vi của quả táo vàng'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Sản phẩm có Có thể ăn luôn tới <yellow>%value%'
+  consumeparticles:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt xem vật phẩm có hiển thị hạt khi ăn hay không</b></gradient>'
+      - '<gray>Chỉ dành cho <red>1.21.2+'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Giá trị cần đặt, chuyển đổi theo mặc định'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Tiêu thụ hạt bây giờ là <yellow>%value%'
+  convertto:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt một vật phẩm khi tiêu thụ thực phẩm</b></gradient>'
+      - '<gray>Chỉ dành cho <red>1.21+'
+      - ''
+      - '<gray><yellow>[type/serveritem id] </yellow>mặt hàng được trả lại'
+      - '<gray> bạn có thể đặt Vật liệu hoặc bạn có thể'
+      - '<gray> chọn một mục từ ServerItem mục đã lưu'
+      - ''
+      - '<gray>Bắt chước hành vi xô đựng sữa ở nơi có xô'
+      - '<gray>trả lại khi uống sữa'
+    params: '[type/serveritem id]'
+    feedback: '%prefix% <green>Chuyển sang cập nhật'
+  eatticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt thời gian cần thiết để ăn vật phẩm</b></gradient>'
+      - ''
+      - '<gray><yellow><ticks> </yellow>Thời gian ăn đồ'
+      - '<gray> phải là <yellow>1 </yellow>hoặc lớn hơn'
+      - ''
+      - '<gray><yellow>20 </yellow>tick = <yellow>1 </yellow>giây'
+    params: '<ticks>'
+    feedback: '%prefix% <green>Tiết ăn được cập nhật lên <yellow>%value%'
+  help:
+    header-name: 'ItemFood'
+    description:
+      - '<gradient:#A78BFA:gold><b>Hiển thị ItemFood trợ giúp</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Trang trợ giúp'
+      - '<gray><yellow>[subcommand] </yellow>Trợ giúp về lệnh phụ'
+    params: '[page/subcommand]'
+  info:
+    not_food: '%prefix% <dark_green>Sản phẩm không có thuộc tính thực phẩm hoặc có thuộc tính mặc định'
+    message:
+      - '%prefix% <dark_green><b>Sản phẩm Thực phẩm</b>'
+      - '<green>Thời gian ăn: <yellow>%eatseconds%<green> s <dark_gray>(<gray>%eatticks%<dark_gray> tích tắc)'
+      - '<green>Khôi phục cơn đói: <yellow>%nutrition% <dark_gray>| <green>Độ bão hòa: <yellow>%saturation%<green>'
+      - '<green>Hoạt hình: <yellow>%animation% <dark_gray>| <green>Âm thanh: <yellow>%sound% <dark_gray>| <green>Các hạt: <yellow>%consumeparticles%'
+      - '<green>Ăn được khi no: <yellow>%canalwayseat% <dark_gray>| <green>Khi ăn thu được: <yellow>%convertto%'
+    apply_effect_prefix:
+      - '<dark_green><b>Chứa <yellow>%effects%<dark_green> tác dụng thuốc có thể có:</b>'
+    apply_effect:
+      - '<green>%index%. Loại: <yellow>%type% <dark_gray>| <green>Lv: <yellow>%level% <dark_gray>| <green>Duration: <yellow>%duration_s%<green> s <dark_gray>(<gray>%duration_ticks%<dark_gray> tích tắc)'
+      - '<green> Hạt: <yellow>%hasparticle% <dark_gray>| <green>Môi trường xung quanh: <yellow>%isambient% <dark_gray>| <green>Biểu tượng: <yellow>%hasicon% <dark_gray>| <green>Cơ hội: <yellow>%chance_perc%<green>%'
+    consume_effect_teleport: '<green>Đường kính dịch chuyển ngẫu nhiên: <yellow>%diameter%'
+    consume_effect_sound: '<green>Âm thanh tiêu thụ bổ sung: <yellow>%sound%'
+    consume_effect_remove: '<green>Hiệu ứng đã xóa: <yellow>%effects%'
+    consume_effect_clear: '<green>Xóa tất cả các hiệu ứng trạng thái hoạt động'
+    consume_effect_unknown: '<green>Hiệu ứng tiêu hao khác: <yellow>%type%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Mô tả thông tin thực phẩm hiện tại cho mặt hàng</b></gradient>'
+    params: ''
+  nutrition:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bộ dinh dưỡng phục hồi</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>Số lượng cơn đói cần phục hồi'
+      - '<gray> phải là <yellow>0 </yellow>hoặc lớn hơn'
+      - ''
+      - '<gray>Thanh đói đầy đủ là <yellow>20'
+    params: '<amount>'
+    feedback: '%prefix% <green>Giá trị dinh dưỡng hiện nay là <yellow>%value%'
+  removeeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>Xóa hiệu ứng khỏi vật phẩm</b></gradient>'
+      - ''
+      - '<gray><yellow><index> </yellow>Xóa hiệu ứng đã chọn'
+    params: '<index>'
+    feedback: '%prefix% <green>Đã xóa hiệu ứng thực phẩm đã chọn'
+  reset:
+    description:
+      - '<gradient:#A78BFA:gold><b>Loại bỏ hoàn toàn thuộc tính thực phẩm trên mặt hàng</b></gradient>'
+      - ''
+      - '<gray>Hoặc khôi phục cài đặt mặc định nếu mặt hàng là thực phẩm vani'
+    params: ''
+    feedback: '%prefix% <green>Thuộc tính thực phẩm đã bị xóa'
+  reseteffects:
+    description:
+      - '<gradient:#A78BFA:gold><b>Xóa hiệu ứng khỏi vật phẩm</b></gradient>'
+    params: ''
+    feedback: '%prefix% <green>Loại bỏ hiệu ứng thực phẩm'
+  saturation:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt độ bão hòa đã phục hồi</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>Lượng bão hòa cần thêm'
+      - '<gray> giá trị âm được cho phép'
+      - ''
+      - '<gray>Độ bão hòa kiểm soát tốc độ thức ăn'
+      - '<gray> (dinh dưỡng) giảm'
+    params: '<amount>'
+    feedback: '%prefix% <green>Độ bão hòa hiện là <yellow>%value%'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bộ ăn âm thanh</b></gradient>'
+      - '<gray>Chỉ dành cho <red>1.21.2+'
+      - ''
+      - '<gray><yellow><sound> </yellow>Giá trị cần đặt'
+    params: '<sound>'
+    feedback: '%prefix% <green>Âm thanh ăn uống bây giờ là <yellow>%value%'
+itemeditkinetic:
+  contactcooldownticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt thời gian hồi chiêu của Kinetic Contact</b></gradient>'
+      - ''
+      - '<gray><yellow><cooldown> </yellow>điểm hồi chiêu tiếp xúc'
+    params: '<delay>'
+    feedback: '%prefix% <green>Bộ thời gian hồi chiêu khi tiếp xúc'
+  damageconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt điều kiện sát thương động học</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Thời gian gây sát thương tối đa'
+      - '<gray><yellow><min speed> </yellow>Tốc độ tối thiểu'
+      - '<gray><yellow><min relative speed> </yellow>tốc độ tương đối tối thiểu'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>Điều kiện thiệt hại được đặt'
+  damagemultiplier:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt hệ số sát thương động học</b></gradient>'
+      - ''
+      - '<gray><yellow><multiplier> </yellow>hệ số sát thương'
+    params: '<delay>'
+    feedback: '%prefix% <green>Bộ nhân sát thương động học'
+  delayticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt dấu tích Độ trễ động học</b></gradient>'
+      - ''
+      - '<gray><yellow><delay> </yellow>tích tắc độ trễ động học'
+    params: '<delay>'
+    feedback: '%prefix% <green>Đã đặt dấu trễ'
+  dismountconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt điều kiện để hạ gục mục tiêu khỏi vật cưỡi của chúng bằng vũ khí động học</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow> Khoảng thời gian tối đa để hạ gục mục tiêu khỏi vật cưỡi của chúng, tính bằng tích tắc'
+      - '<gray><yellow><min speed> </yellow>Tốc độ tối thiểu để hạ gục mục tiêu khỏi vật cưỡi của nó'
+      - '<gray><yellow><min relative speed> </yellow>Tốc độ tương đối tối thiểu để hạ gục mục tiêu khỏi vật cưỡi của nó'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>Điều kiện hạ gục mục tiêu đã đặt'
+  forwardmovement:
+    description:
+      - '<gradient:#A78BFA:gold><b>Thiết lập chuyển động Kinetic Forward</b></gradient>'
+      - ''
+      - '<gray><yellow><movement> </yellow>Số lượng chuyển động tiến tới'
+    params: '<movement>'
+    feedback: '%prefix% <green>Bộ chuyển động tiến về phía trước'
+  help:
+    header-name: 'ItemKinetic'
+    description:
+      - '<gradient:#A78BFA:gold><b>Hiển thị ItemKinetic trợ giúp</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Trang trợ giúp'
+      - '<gray><yellow>[subcommand] </yellow>Trợ giúp về lệnh phụ'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Hiển thị đặc tính động học của vũ khí trên vật phẩm này</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>Vật phẩm này không có thành phần vũ khí động học'
+    message:
+      - '%prefix% <dark_green><b>Vũ khí động học</b>'
+      - '<green>Thời gian hồi chiêu khi tiếp xúc: <yellow>%contactcooldownticks% <green>ticks'
+      - '<green>Hệ số sát thương: <yellow>%damagemultiplier%'
+      - '<green>Độ trễ: <yellow>%delayticks% <green>tick'
+      - '<green>Chuyển tiếp: <yellow>%forwardmovement%'
+      - '<green>Âm thanh nhấn: <yellow>%hitsound%'
+      - '<green>Âm thanh: <yellow>%sound%'
+      - '<green>Điều kiện thiệt hại: <yellow>%damageconditions%'
+      - '<green>Điều kiện để hạ gục mục tiêu khỏi thú cưỡi: <yellow>%dismountconditions%'
+      - '<green>Điều kiện phản công: <yellow>%knockbackconditions%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt âm thanh Kinetic hit</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Giá trị cần đặt'
+    params: '<sound>'
+    feedback: '%prefix% <green>Âm thanh nhấn bây giờ là <yellow>%value%'
+  knockbackconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt điều kiện Phản đòn Kinetic</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Thời gian đánh bật tối đa'
+      - '<gray><yellow><min speed> </yellow>Tốc độ đẩy lùi tối thiểu'
+      - '<gray><yellow><min relative speed> </yellow>tốc độ tương đối tối thiểu để đẩy lùi'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>Bộ điều kiện phản hồi'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt âm thanh động học</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Giá trị cần đặt'
+    params: '<sound>'
+    feedback: '%prefix% <green>Âm thanh bây giờ là <yellow>%value%'
+itemeditpiercing:
+  dealsknockback:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt xem đòn đánh có gây phản đòn hay không</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true để áp dụng hiệu ứng đẩy lùi'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Knockback bây giờ là <yellow>%value%'
+  dismounts:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt xem một đòn đánh có đánh bật mục tiêu khỏi thú cưỡi hay không</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true để đánh bật mục tiêu khỏi vật cưỡi của nó'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Hạ gục mục tiêu khỏi vật cưỡi của chúng bây giờ là <yellow>%value%'
+  help:
+    header-name: 'ItemPiercing'
+    description:
+      - '<gradient:#A78BFA:gold><b>Hiển thị ItemPiercing trợ giúp</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Trang trợ giúp'
+      - '<gray><yellow>[subcommand] </yellow>Trợ giúp về lệnh phụ'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Hiển thị thuộc tính vũ khí xuyên thấu trên vật phẩm này</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>Vật phẩm này không có thành phần vũ khí xuyên thấu'
+    message:
+      - '%prefix% <dark_green><b>Vũ khí xuyên thấu</b>'
+      - '<green>Ưu đãi giảm giá: <yellow>%dealsknockback%'
+      - '<green>Hạ gục mục tiêu khỏi vật cưỡi của chúng: <yellow>%dismounts%'
+      - '<green>Âm thanh nhấn: <yellow>%hitsound%'
+      - '<green>Âm thanh: <yellow>%sound%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt âm thanh va chạm cho vũ khí xuyên thấu</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Giá trị cần đặt'
+    params: '<sound>'
+    feedback: '%prefix% <green>Âm thanh nhấn bây giờ là <yellow>%value%'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt âm thanh cho vũ khí xuyên thấu</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Giá trị cần đặt'
+    params: '<sound>'
+    feedback: '%prefix% <green>Âm thanh bây giờ là <yellow>%value%'
+serveritem:
+  help-header: '<gradient:#54acff:#A78BFA><bold>ServerItem</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Trợ giúp</bold></#A78BFA>'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Đã đạt được <yellow>%amount% <green>trong số <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][give] %player_name% thu được %amount% của %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Tặng vật phẩm đã chọn cho người chơi</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id của mặt hàng'
+      - '<gray><yellow>[amount] </yellow>số lượng vật phẩm cần tặng, theo mặc định là 1'
+      - '<gray><yellow>[player] </yellow>ai nhận được vật phẩm, theo mặc định bạn'
+      - '<gray><yellow>[silent] </yellow>true nếu không có phản hồi sẽ được gửi đến người chơi'
+    params: '<id> [amount] [player] [silent]'
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Đã đạt được <yellow>%amount% <green>trong số <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets% thu được %amount% trên %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Tặng vật phẩm đã chọn cho tất cả người chơi trực tuyến</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id của mặt hàng'
+      - '<gray><yellow>[amount] </yellow>số lượng vật phẩm cần tặng, theo mặc định là 1'
+      - '<gray><yellow>[silent] </yellow>true nếu không có phản hồi sẽ gửi cho người chơi'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] giảm %amount% trên %id% (%nick%) tại %world% %x% %y% %z%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Thả mục đã chọn vào vị trí đã chọn</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id của mặt hàng'
+      - '<gray><yellow><amount> </yellow>số lượng vật phẩm rơi ra, 1 đến 2304'
+      - "<gray><yellow><world> </yellow>thế giới nào\ntọa độ"
+      - '<gray><yellow><x> <y> <z> </yellow>'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Mất <yellow>%amount% <green>trong số <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][take] %player_name% đã cho %amount% trên %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Lấy vật phẩm đã chọn từ người chơi</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id của mặt hàng'
+      - '<gray><yellow>[amount] </yellow>số lượng vật phẩm cần tặng, theo mặc định là 1'
+      - '<gray><yellow>[player] </yellow>ai nhận được vật phẩm, theo mặc định bạn'
+      - '<gray><yellow>[silent] </yellow>true nếu không có phản hồi sẽ được gửi đến người chơi'
+    params: '<id> [amount] [player] [silent]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>Mục <yellow>%id% <green>đã đăng ký'
+    already_used_id: '%prefix% <red>Mục có id <yellow>%id% <red>đã tồn tại, hãy thay đổi id hoặc thực hiện /si update để ghi đè'
+    description:
+      - '<gradient:#A78BFA:gold><b>Đăng ký vật phẩm trên tay</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>xác định mục, không phân biệt chữ hoa chữ thường và không thể'
+      - '<gray> chứa dấu cách hoặc dấu chấm bạn không thể chọn'
+      - '<gray> bất kỳ id nào đã được sử dụng'
+      - ''
+      - '<gold><b>Mẹo</b></gold> <gray>sử dụng <yellow>/serveritem update <id></yellow>, để thay đổi mục hiện có'
+      - '<gold><b>Mẹo</b></gold> <gray>truy xuất các mục đã lưu bằng <yellow>/serveritem give <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>Mục <yellow>%id% <green>chưa đăng ký'
+    description:
+      - '<gradient:#A78BFA:gold><b>Xóa mục đã chọn</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id của mặt hàng'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>Mục <yellow>%id% <green>đã được cập nhật'
+    description:
+      - '<gradient:#A78BFA:gold><b>Cập nhật mục đã chọn</b></gradient>'
+      - ''
+      - '<gray>Thay đổi vật phẩm liên kết với id bằng vật phẩm trên tay của bạn'
+      - '<gray><yellow><id> </yellow>Id của mặt hàng'
+      - ''
+      - '<gold><b>Mẹo</b></gold> <gray>sử dụng <yellow>/serveritem save <id></yellow>, để tạo một mục mới'
+      - '<gold><b>Mẹo</b></gold> <gray>sử dụng <yellow>/serveritem delete <id></yellow>, để xóa một mục'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>Mở gui với các mục đã lưu trên máy chủ</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>trang của gui, mặc định là 1'
+    params: '[page]'
+  setnick:
+    #Holders: %id% %nick%
+    success: '%prefix% <green>Mục <yellow>%id% <green>nick đã được cập nhật thành <yellow>%nick%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Đặt tên hiển thị của mục đã chọn</b></gradient>'
+      - ''
+      - '<gray>Nick được sử dụng cho người nắm giữ <yellow>%nick%</yellow> trên các tin nhắn mua/bán, bởi'
+      - '<gray> mặc định là tên của vật phẩm hoặc loại vật phẩm nếu không có tên'
+      - ''
+      - '<gray><yellow><id> </yellow>Id của mặt hàng'
+      - '<gray><yellow>[nick] </yellow>tên cần đặt'
+      - ''
+      - '<gold><b>Mẹo</b></gold> <gray>để đặt lại về mặc định chỉ cần sử dụng <yellow>/serveritem setnick <id>'
+    params: '<id> [nick]'
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Đã mua <yellow>%amount% <green>trong số <yellow>%nick% <green>cho <yellow>%price%'
+    #Holders: %id% %nick% %amount%
+    not-enough-space: '<red>Bạn không có đủ chỗ trong kho để mua <gold>%amount% <red>trong số <gold>%nick%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: '<red>Bạn không có <gold>%price% <red>để mua <gold>%amount% <red>trong số <gold>%nick%'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% đã trả %price% cho %amount% của %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Bán vật phẩm cho người chơi</b></gradient>'
+      - ''
+      - '<gray>Sell khác với SellMax vì bạn bán toàn bộ số tiền'
+      - '<gray> cho người chơi hoặc bạn không bán gì'
+      - '<gray><yellow><id> </yellow>id của mặt hàng'
+      - '<gray><yellow><amount> </yellow>số lượng vật phẩm'
+      - '<gray><yellow><player> </yellow>ai nên trả tiền và nhận vật phẩm'
+      - '<gray><yellow><price> </yellow>giá cho toàn bộ số lượng mặt hàng, phải dương'
+      - '<gray><yellow>[silent] </yellow>true để không gửi thông báo cho người chơi'
+      - ''
+      - '<gray>Giao dịch thất bại nếu không đủ tiền hoặc'
+      - '<gray>  chỗ trống để nhận toàn bộ số lượng: <yellow><amount>'
+      - '<gray><gold>N.B.</gold> số dư của người thực thi lệnh không bị ảnh hưởng'
+    params: '<id> <amount> <player> <price> [silent]'
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Đã bán <yellow>%amount% <green>trong số <yellow>%nick% <yellow>với giá <green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>Bạn không có <gold>%amount% <red>trong số <gold>%nick% <red>trong kho của mình'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% đã bán %amount% trong số %id% (%nick%) với tổng số %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Mua vật phẩm từ người chơi</b></gradient>'
+      - ''
+      - '<gray>Buy khác với BuyMax vì bạn mua toàn bộ số tiền'
+      - '<gray> từ người chơi hoặc bạn không mua gì'
+      - '<gray><yellow><id> </yellow>id của mặt hàng'
+      - '<gray><yellow><amount> </yellow>số lượng vật phẩm'
+      - '<gray><yellow><player> </yellow>ai nên thanh toán vật phẩm và nhận tiền'
+      - '<gray><yellow><price> </yellow>giá cho toàn bộ số lượng mặt hàng, phải dương'
+      - '<gray><yellow>[silent] </yellow>true để không gửi thông báo cho người chơi'
+      - ''
+      - '<gray>Giao dịch thất bại nếu người chơi có ít hơn <yellow><amount>'
+      - '<gray>  vật phẩm loại <yellow><id> </yellow>trong túi đồ'
+      - '<gray><gold>N.B.</gold> số dư của người thực thi lệnh không bị ảnh hưởng'
+    params: '<id> <amount> <player> <price> [silent]'
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Đã mua <yellow>%amount% <green>trong số <yellow>%nick% <yellow>cho <green>%price%'
+    #Holders: %id% %nick%
+    not-enough-space: '<red>Bạn không còn đủ chỗ trong kho để mua bất kỳ <gold>%nick%'
+    #Holders: %id% %nick% %price%
+    not-enough-money: '<red>Bạn không có đủ tiền để mua bất kỳ <gold>%nick% <red>cho <gold>%price% <red>mỗi cái'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% đã trả %price% cho %amount% của %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Bán vật phẩm cho người chơi</b></gradient>'
+      - ''
+      - '<gray>SellMax khác với Sell vì bạn có thể bán số lượng ít hơn'
+      - '<gray> cho người chơi nếu không có đủ tiền hoặc không gian cho toàn bộ'
+      - '<gray><yellow><id> </yellow>id của mặt hàng'
+      - '<gray><yellow><amount> </yellow>số lượng vật phẩm'
+      - '<gray><yellow><player> </yellow>ai nên trả tiền và nhận vật phẩm'
+      - '<gray><yellow><price> </yellow>giá cho toàn bộ số lượng mặt hàng, phải dương'
+      - '<gray><yellow>[silent] </yellow>true để không gửi thông báo cho người chơi'
+      - ''
+      - '<gray>Giao dịch thất bại nếu không đủ tiền hoặc'
+      - '<gray>  chỗ trống để nhận ít nhất một vật phẩm'
+      - '<gray>Khi chỉ mua một phần số lượng, giá <yellow><price></yellow> được giảm theo tỷ lệ'
+      - '<gray><gold>N.B.</gold> số dư của người thực thi lệnh không bị ảnh hưởng'
+    params: '<id> <amount> <player> <price> [silent]'
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Đã bán <yellow>%amount% <green>trong số <yellow>%nick% <yellow>với giá <green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>Bạn không có <gold>%nick% <red>để bán trong kho của mình'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% đã bán %amount% trong số %id% (%nick%) với tổng số %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Mua vật phẩm từ người chơi</b></gradient>'
+      - ''
+      - '<gray>BuyMax khác với Buy vì bạn có thể mua số lượng ít hơn'
+      - '<gray> từ người chơi nếu anh ta có ít hơn số lượng vật phẩm trong kho'
+      - '<gray><yellow><id> </yellow>id của mặt hàng'
+      - '<gray><yellow><amount> </yellow>số lượng vật phẩm'
+      - '<gray><yellow><player> </yellow>ai nên thanh toán vật phẩm và nhận tiền'
+      - '<gray><yellow><price> </yellow>giá cho toàn bộ số lượng mặt hàng, phải dương'
+      - '<gray><yellow>[silent] </yellow>true để không gửi thông báo cho người chơi'
+      - ''
+      - '<gray>Giao dịch cần ít nhất một vật phẩm <yellow><id> </yellow>trong túi đồ'
+      - '<gray> trong kho'
+      - '<gray>Nếu người chơi bán ít hơn <yellow><amount></yellow> giá sẽ được điều chỉnh'
+      - '<gray><gold>N.B.</gold> số dư của người thực thi lệnh không bị ảnh hưởng'
+    params: '<id> <amount> <player> <price> [silent]'
+itemstorage:
+  help-header: '<gradient:#54acff:#A78BFA><bold>Lưu trữ vật phẩm</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Trợ giúp</bold></#A78BFA>'
+  get:
+    #Holders: %id% %amount%
+    success: '%prefix% <green>Đã đạt được <yellow>%amount% <green>trong số <yellow>%id%'
+    no-inventory-space: '%prefix% <red>Bạn không còn chỗ trống trong kho của mình'
+    description:
+      - '<gradient:#A78BFA:gold><b>Nhận vật phẩm đã chọn</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id của mặt hàng'
+      - '<gray><yellow>[amount] </yellow>số tiền cần nhận, theo mặc định là 1'
+    params: '<id> [amount]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>Mục <yellow>%id% <green>đã đăng ký'
+    #Holders: %limit%
+    limit-reached: '%prefix% <red>Bạn đã đạt đến số lượng vật phẩm có thể lưu tối đa (%limit%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Đăng ký vật phẩm trên tay</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>xác định mặt hàng của bạn, không phân biệt chữ hoa chữ thường và không thể'
+      - '<gray> chứa dấu cách hoặc dấu chấm bạn không thể chọn'
+      - '<gray> bất kỳ id nào đã được sử dụng'
+      - ''
+      - '<gold><b>Mẹo</b></gold> <gray>sử dụng <yellow>/itemstorage update <id></yellow>, để thay đổi một mục hiện có'
+      - '<gold><b>Mẹo</b></gold> <gray>truy xuất các mục đã lưu của bạn bằng <yellow>/itemstorage get <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>Mục <yellow>%id% <green>chưa đăng ký'
+    description:
+      - '<gradient:#A78BFA:gold><b>Xóa mục đã chọn</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id của mặt hàng'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>Mục <yellow>%id% <green>đã được cập nhật'
+    description:
+      - '<gradient:#A78BFA:gold><b>Cập nhật mục đã chọn</b></gradient>'
+      - ''
+      - '<gray>Thay đổi vật phẩm liên kết với id bằng vật phẩm trên tay của bạn'
+      - '<gray><yellow><id> </yellow>Id của mặt hàng'
+      - ''
+      - '<gray><gold><b>Mẹo</b></gold> sử dụng <yellow>/itemstorage save <id></yellow>, để tạo một mục mới'
+      - '<gray><gold><b>Mẹo</b></gold> sử dụng <yellow>/itemstorage delete <id></yellow>, để xóa một mục'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>Mở gui với các mục đã lưu của bạn</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] <gray>trang của gui, mặc định là 1'
+    params: '[page]'
+itemeditimport:
+  help:
+    - '<green>/itemeditimport ItemEditor <dark_green>- nhập các mục từ plugin ItemEditor'
+  itemeditor:
+    unable-to-get-item:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Không thể tải mục <gold>%id%'
+    already-used-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>đã được sử dụng, có thể bạn đã thực hiện lệnh này trước đó nếu không bạn có thể đổi tên tệp ItemEditor/items/%id%.yml'
+    invalid-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>không phải là id được chấp nhận, bạn có thể đổi tên tệp ItemEditor/items/%id%.yml thành tên chữ và số'
+    import-unsuccess:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Không có mục nào của <gold>%max% <red> được nhập, có thể bạn đã thực hiện lệnh này trước đây(?)'
+    import-success:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Đã nhập <yellow>%done% <green>of <yellow>%max% <green>mục từ ItemEditor'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Hàng nhập khẩu: <yellow>%ids%'
+    import-empty:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>ItemEditor không có mặt hàng nào để nhập'
+itemeditreload:
+  success: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Đã tải lại'
+gui:
+  color:
+    title: '<blue>Trình chỉnh sửa màu'
+  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
+    creative: 'Nhấp chuột giữa'
+    other: 'Nhấn phím 1'
+  colorselector:
+    title: '<blue>Chọn màu'
+    buttons:
+      color:
+        - '<gradient:#A78BFA:gold>Màu sắc:</gradient>'
+        - '<gray><yellow>%colors%'
+        - '<gray>[<white>Nhấp chuột phải<gray>] Thêm <yellow>%color%'
+        - '<gray>[<white>Nhấp chuột trái<gray>] Xóa màu cuối cùng'
+        - '<gray>[<white>Shift+Nhấp chuột phải<gray>] Màu sắc rõ ràng'
+  banner:
+    title: '<blue>Trình chỉnh sửa biểu ngữ'
+    color_selector_title: '<blue>Bộ chọn màu'
+    pattern_selector_title: '<blue>Bộ chọn mẫu'
+    buttons:
+      pattern_selector_info:
+        - '<gray>Chọn <gold><b>%type%</b>'
+      color_selector_info:
+        - '<gray>Chọn <gold><b>%color%</b>'
+      position:
+        - '<gradient:#A78BFA:gold>Bộ điều khiển mẫu</gradient>'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] Chuyển đổi mẫu'
+        - '<gray>[<white>Nhấp chuột trái/phải<gray>] << Move pattern >>'
+      type:
+        - '<gradient:#A78BFA:gold>Bộ chọn loại</gradient>'
+        - '<gray>Loại: <yellow>%type%'
+        - ''
+        - '<gray>[<white>Click<gray>] Thay đổi loại'
+      color:
+        - '<gradient:#A78BFA:gold>Bộ chọn màu</gradient>'
+        - '<gray>Màu sắc: <yellow>%color%'
+        - ''
+        - '<gray>[<white>Click<gray>] Thay đổi màu'
+  firework:
+    title: '<blue>Trình chỉnh sửa pháo hoa'
+    buttons:
+      type:
+        - '<gradient:#A78BFA:gold>Bộ chọn loại</gradient>'
+        - '<gray>Loại: <yellow>%type%'
+        - ''
+        - '<gray>[<white>Click<gray>] Thay đổi loại'
+      colors:
+        - '<gradient:#A78BFA:gold>Bộ chọn màu</gradient>'
+        - '<gray>Màu sắc: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>Click<gray>] để thay đổi màu sắc'
+      fadecolors:
+        - '<gradient:#A78BFA:gold>Bộ chọn màu làm mờ</gradient>'
+        - '<gray>Màu nhạt dần: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>Click<gray>] để thay đổi màu sắc'
+      flags:
+        none: '<red>Không có gì hoạt động'
+        trail: '<yellow>Đường mòn <green>Đang hoạt động'
+        flicker: '<yellow>Nhấp nháy <green>Đang hoạt động'
+        both: '<gray><yellow>Trail</yellow> và <yellow>Nhấp nháy <green>Đang hoạt động'
+        info:
+          - '<gradient:#A78BFA:gold>Trình kích hoạt đường mòn và nhấp nháy</gradient>'
+          - '%status%'
+          - ''
+          - '<gray>[<white>Nhấp chuột phải<gray>] Chuyển đổi hiệu ứng Nhấp nháy'
+          - '<gray>[<white>Nhấp chuột trái<gray>] Chuyển đổi hiệu ứng Đường mòn'
+      position:
+        - '<gray>Bộ điều khiển hiệu ứng'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] Hiệu ứng chuyển đổi'
+        - '<gray>[<white>Nhấp chuột trái/phải<gray>] Di chuyển hiệu ứng này'
+      power:
+        - '<gray>Sức mạnh: <yellow>%power%'
+        - ''
+        - '<gray>[<white>Nhấp chuột trái/phải<gray>] << Change >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>Trang trước</b>'
+      - ''
+      - '<gray>[<white>Click<gray>] Chuyển đến trang <yellow>%target_page%'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>Trang tiếp theo</b>'
+      - ''
+      - '<gray>[<white>Click<gray>] Chuyển đến trang <yellow>%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '<gold><b>Quay lại</b>'
+      - ''
+      - '<gray>[<white>Click<gray>] Đi tới gui trước'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '<blue>%player_name% mục - trang <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>Trang <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] Chuyển đổi chế độ xem của <yellow>item</yellow>/<yellow>ID'
+        - ''
+        - '<gray>Click vào các mục:'
+        - '<gray>> [<white>Nhấp chuột trái<gray>] Tăng <yellow>1'
+        - '<gray>> [<white>Shift+Chuột trái<gray>] Tăng <yellow>64'
+        - '<gray>> [<white>Shift+Click chuột phải<gray>] Xóa mục'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '<blue>Mục máy chủ - trang <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>Trang <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] Chuyển đổi chế độ xem của <yellow>item</yellow>/<yellow>ID'
+        - ''
+        - '<gray>Click vào các mục:'
+        - '<gray>> [<white>Nhấp chuột trái<gray>] Tăng <yellow>1'
+        - '<gray>> [<white>Shift+Chuột trái<gray>] Tăng <yellow>64'
+        - '<gray>> [<white>Shift+Click chuột phải<gray>] Xóa mục'

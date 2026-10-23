@@ -1,0 +1,1438 @@
+generic:
+  help:
+    player-only: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>플레이어 전용 명령'
+    no-item-on-hand: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>아이템을 손에 들고 있어야 합니다'
+    lack-permission: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>권한이 없습니다 %permission%'
+    lack-permission-generic: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>이 명령을 사용할 권한이 없습니다.'
+    blocked-by-censure: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> 차단된 단어가 포함되어 있어 이 텍스트를 사용할 수 없습니다.'
+    blocked-by-type-restriction: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>이 아이템의 이름을 바꿀 수 없습니다.'
+    blocked-by-type-restriction-lore: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>이 아이템에 대한 아이템 설명을 편집할 수 없습니다.'
+    blocked-by-lore-line-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>이 아이템에 아이템 설명 줄을 더 추가할 수 없습니다.'
+    blocked-by-lore-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>줄은 %limit%자보다 길게 설정할 수 없습니다.'
+    blocked-by-rename-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> 이름은 %limit% 문자보다 길게 설정할 수 없습니다.'
+
+    prefix: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray>'
+    header-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>도움말</bold></#A78BFA>'
+    header-sub-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <gradient:#A78BFA:#54acff><bold>%sub%</bold></gradient> <dark_gray>»</dark_gray> <#55d6ff><bold>도움말</#55d6ff>'
+    command-format: '<gray>/%command%</gray> <#bad1ff>%sub%</#bad1ff> <#d7bbff>%params%</#d7bbff>'
+    footer-format: '%prev_clickable% <#7E9CFD><b>도움말</b> [%page%/%max_page%]</#7E9CFD> %next_clickable%'
+    next_text: ' <light_purple><b>><st>> ></st> '
+    prev_text: ' <light_purple><b><st>< <</st>< '
+    next_void: ' <dark_gray><b>><st>> ></st> '
+    prev_void: ' <dark_gray><b><st>< <</st>< '
+    next_hover: '<gold><b>페이지로 이동 %target%'
+    prev_hover: '<gold><b>페이지로 이동 %target%'
+  wrong-material:
+    axolotl_bucket: '%prefix% <red>아이템은 axolotl 버킷이어야 합니다.'
+    banner: '%prefix% <red>아이템은 배너여야 합니다.'
+    damageable: '%prefix% <red>아이템은 도구나 방어구처럼 내구성이 있어야 합니다.'
+    player_head: '%prefix% <red>아이템은 플레이어 머리여야 합니다'
+    rgb_colorable: '%prefix% <red>아이템은 가죽 갑옷, 폭죽 별, 물약 또는 물약 효과가 있는 화살과 같이 색상을 지정할 수 있는 유형이어야 합니다.'
+    written_book: '%prefix% <red>상품은 책이어야 합니다.'
+    potion_effect_applicable: '%prefix% <red>아이템은 물약이나 물약 효과가 있는 화살, 수상한 스튜여야 합니다.'
+    firework: '%prefix% <red>아이템은 불꽃이어야 합니다'
+    spawner_egg: '%prefix% <red>아이템은 생성 알이어야 합니다.'
+    tropical_fish_bucket: '%prefix% <red>상품은 열대어 통이어야 합니다'
+    writable_book: '%prefix% <red>아이템은 책이나 책과 깃펜이어야 합니다.'
+    compass: '%prefix% <red>아이템은 나침반이어야 합니다.'
+    music_instrument: '%prefix% <red>아이템은 염소뿔이어야 합니다'
+    armor: '%prefix% <red>아이템은 갑옷이어야 합니다'
+    enchantment_storage: '%prefix% <red>아이템은 책 또는 마법이 부여된 책이어야 합니다.'
+  wrong-alias:
+    axolotl_variant: '%prefix% <red>Axolotl 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    potion_effect: '%prefix% <red>효과 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    animations: '%prefix% <red> 애니메이션 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    sound: '%prefix% <red>사운드 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    enchant: '%prefix% <red>인챈트 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    flag_type: '%prefix% <red>플래그 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    book_type: '%prefix% <red> 도서 유형 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    equip_slot: '%prefix% <red>장비 슬롯 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    banner_pattern: '%prefix% <red>패턴 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    color: '%prefix% <red>색상값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    mob_type: '%prefix% <red>계란 유형 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    trim_material: '%prefix% <red>갑옷 장식 재료 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    tropical_fish_pattern: '%prefix% <red>패턴 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    trim_pattern: '%prefix% <red>방어구 트림 패턴 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    boolean: '%prefix% <red>부울 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    attribute: '%prefix% <red>속성 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    operation: '%prefix% <red>작업 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    itemrarity: '%prefix% <red>희귀도 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    entitytype: '%prefix% <red> EntityType 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    entitygroups: '%prefix% <red>EntityGroup 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    consumable_effect: '%prefix% <red>소모 효과 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    goat_horn_sound: '%prefix% <red>염소뿔 소리 값이 잘못되었습니다! <dark_red>[<gold>여기에 마우스를 올리세요<dark_red>]'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>별칭:</b></gradient>'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+itemedit:
+  amount:
+    description:
+      - '<gradient:#A78BFA:gold><b>설정금액</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>설정량 (최대 127)'
+      - '<gold><b>팁</b></gold> <gray>마이너스 금액은 차감됩니다.'
+      - '<gray> 아이템 현재 금액에서'
+    params: '<amount>'
+    feedback: '%prefix% <green>아이템 금액이 <yellow>%amount%로 설정됨'
+    feedback-decrease: '%prefix% <green>아이템 수량이 <yellow>%amount% 감소했습니다.'
+  attribute:
+    description:
+      - '<gradient:#A78BFA:gold><b>속성 수정자 편집</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <attribute> <amount> [operation] [slot] </yellow><dark_gray>»</dark_gray> 새 수식어 추가'
+      - '<gray><yellow>Remove <attribute/slot> </yellow><dark_gray>»</dark_gray> 일부 수정자를 제거합니다.'
+    params: '<add/remove> [...]'
+    add:
+      params: '<attribute> <amount> [operation] [slot]'
+      description:
+        - '<gradient:#A78BFA:gold><b>속성 수정자 추가</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute> </yellow>속성 유형'
+        - '<gray><yellow><amount> </yellow>설정할 금액'
+        - '<gray><yellow>[operation] </yellow>수정자가 추가되는 방식, 기본적으로 합계'
+        - '<gray><yellow>[slot] </yellow>아이템이 선택된 경우에만 이 수정자를 적용합니다.'
+        - '<gray> 장비 슬롯 또는 선택하지 않은 경우 모든 장비 슬롯'
+      feedback: '%prefix% <green>수정자 추가됨'
+    remove:
+      params: '<attribute/slot>'
+      description:
+        - '<gradient:#A78BFA:gold><b>수정자 제거</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute/slot> </yellow> 제거하려면 유형을 입력하세요.'
+        - '<gray> 선택한 값이 제거됩니다.'
+      feedback-attribute: '%prefix% <green>속성 수식어 제거됨'
+      feedback-equipment: '%prefix% <green>장비 슬롯 수정자를 제거했습니다.'
+  axolotlvariant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Axolotl 버킷의 Axolotl 변형 편집</b></gradient>'
+      - '<white><sprite:items:item/axolotl_bucket>'
+      - '<gray><yellow><type> </yellow>아홀로틀의 종류'
+    params: '<type>'
+    feedback: '%prefix% <green>Axolotl 변형을 <yellow>%variant%로 변경했습니다.'
+  banner:
+    description:
+      - '<gradient:#A78BFA:gold><b>배너 수정</b></gradient>'
+    params: '<add/set/remove/color> [...]'
+    set:
+      params: '<type> <color> <line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>선택한 줄의 패턴 바꾸기</b></gradient>'
+      feedback: '%prefix% <green>패턴 세트'
+    add:
+      params: '<type> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>패턴 추가</b></gradient>'
+      feedback: '%prefix% <green> 패턴 추가됨'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>선택한 줄의 패턴 제거</b></gradient>'
+      feedback: '%prefix% <green> 패턴이 삭제됨'
+    color:
+      params: '<line> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>선택한 라인의 패턴 색상 변경</b></gradient>'
+      feedback: '%prefix% <green> 패턴이 다시 칠해짐'
+  bookauthor:
+    description:
+      - '<gradient:#A78BFA:gold><b>작성자 설정</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>저자 이름에는 공백이 포함될 수 있으며 색상도 표시될 수 있습니다.'
+      - '<gray>기록된 책에서만 작동합니다.'
+    params: '<name>'
+    feedback: '%prefix% <green>업데이트된 책 저자'
+    feedback-reset: '%prefix% <green>책 저자 재설정'
+  bookenchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>책에 마법 부여</b></gradient>'
+      - '<white><sprite:items:item/enchanted_book> <sprite:items:item/book>'
+      - '<gray> enchant과 bookenchant의 차이점은 다음과 같습니다.'
+      - '<gray>불 속성이 enchant인 책은 적중 시 대상에 불을 붙입니다.'
+      - '<gray> 반면 bookenchant이 포함된 책은 그렇지 않습니다.'
+      - ''
+      - '<gray><yellow><enchant> </yellow>마법 유형'
+      - '<gray><yellow>[level] </yellow>인챈트 레벨, 기본적으로 <yellow>1'
+      - ''
+      - '<gold><b>팁</b></gold> <gray>마법을 제거하려면 <yellow>[level] </yellow>를 <yellow>0 </yellow>로 설정하세요'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>책 마법 부여 제거 <yellow>%enchant%'
+    feedback: '%prefix% <green>도서 마법 적용 <yellow>%enchant% <green>lv <yellow>%lv%'
+  booktype:
+    description:
+      - '<gradient:#A78BFA:gold><b>책 유형 설정</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>기록된 책에서만 작동합니다.'
+    params: '<booktype>'
+    feedback: '%prefix% <green>도서 생성을 <yellow>%generation%로 업데이트했습니다.'
+    feedback-reset: '%prefix% <green>도서 생성 재설정'
+  color:
+    description:
+      - '<gradient:#A78BFA:gold><b>색상 설정</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/tipped_arrow_base> <sprite:items:item/firework_star> <sprite:items:item/leather_chestplate>'
+      - '<gray>가죽 갑옷과 폭죽 별, 물약 효과가 있는 물약과 화살에도 작동합니다!'
+      - '<gray><yellow>[red] [green] [blue] </yellow>는 각 색상을 합치는 양입니다.'
+      - '<gray>각 색상은 0에서 255 사이의 int 값입니다.'
+      - '<gray>헷갈리신다면 구글 "<yellow>RGB 색상 선택기</yellow>"'
+    params: '[red] [green] [blue]'
+    feedback: '%prefix% <green>색상 업데이트됨'
+  compass:
+    description:
+      - '<gradient:#A78BFA:gold><b>나침반 목표 위치 설정</b></gradient>'
+      - '<white><sprite:items:item/compass_00>'
+      - '<gray><yellow>Set </yellow><dark_gray>»</dark_gray> 위치를 나침반 목표로 설정'
+      - '<gray><yellow>Clear </yellow><dark_gray>»</dark_gray> 나침반 타겟 지우기'
+    params: '<set/clear>'
+    set:
+      feedback: '%prefix% <green>나침반은 이제 <yellow>%world% %x% %y% %z%를 가리킵니다.'
+    clear:
+      feedback: '%prefix% <green>나침반 목표가 삭제되었습니다.'
+  custommodeldata:
+    description:
+      - '<gradient:#A78BFA:gold><b>맞춤 모델 데이터 편집</b></gradient>'
+      - ''
+      - '<gray>텍스처 팩에 사용됨'
+      - '<gray><yellow>[value] </yellow>대상 데이터 모델의 양수 정수'
+      - '<gray>참고: 최신 서버에서는 itemmodel 대신에 custommodeldata'
+      - '<gray> 텍스처의 경우 이 명령은 레거시 클라이언트용입니다.'
+    params: '<value>'
+    feedback: '%prefix% <green>맞춤 모델 데이터가 업데이트되었습니다.'
+    feedback-reset: '%prefix% <green>맞춤 모델 데이터 재설정'
+  damage:
+    description:
+      - '<gradient:#A78BFA:gold><b>내구도 편집</b></gradient>'
+      - ''
+      - '<gray><yellow><durability> </yellow> 피해 적용'
+      - '<gray><gold>N.B.</gold> <yellow>0 </yellow>는 손상이 없고 완전한 내구성을 의미합니다.'
+    params: '<durability>'
+    feedback-reset: '%prefix% <green>내구도 회복'
+    feedback: '%prefix% <green>내구도 업데이트'
+  equipment:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템의 장비 속성을 설정</b></gradient>'
+      - ''
+      - '<gray><gold><b>팁</b></gold> /itemequip or /iee 사용'
+      - '<gray><gold>N.B.</gold> 마실 수 있는 품목은 먹을 수 없습니다.'
+    params: ''
+  enchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>인챈트 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><enchant> </yellow>마법 유형'
+      - '<gray><yellow>[level] </yellow>인챈트 레벨, 기본적으로 <yellow>1'
+      - ''
+      - '<gold><b>팁</b></gold> <gray>마법을 제거하려면 <yellow>[level] </yellow>를 <yellow>0 </yellow>로 설정하세요'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>마법 제거됨 <yellow>%enchant%'
+    feedback: '%prefix% <green>인챈트 적용 <yellow>%enchant% <green>lv <yellow>%lv%'
+  fireresistent:
+    description:
+      - '<gradient:#A78BFA:gold><b>불/용암에 대한 아이템 저항 설정</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow> 값 설정, 기본적으로 토글'
+      - ''
+      - '<gray>내화성이 있는 아이템은 파괴되지 않습니다.'
+      - '<gray> 불 속에 떨어지면 용암 위로 떠오릅니다.'
+    params: '[true/false]'
+    feedback: '%prefix% <green>화염 저항이 <yellow>%value%로 설정되었습니다.'
+  fireworkpower:
+    description:
+      - '<gradient:#A78BFA:gold><b>폭죽 세기 설정</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+      - '<gray><yellow><power> </yellow>폭죽의 위력, <yellow>0 </yellow>~<yellow>5 사이의 값'
+    params: '<power>'
+    feedback: '%prefix% <green>폭죽 성능 업데이트'
+  firework:
+    description:
+      - '<gradient:#A78BFA:gold><b>GUI로 불꽃 편집</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+    params: ''
+  food:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템의 식품 속성을 설정</b></gradient>'
+      - ''
+      - '<gray><gold><b>팁</b></gold> /itemfood or /if 사용'
+      - '<gray><gold>N.B.</gold> 마실 수 있는 품목은 먹을 수 없습니다.'
+    params: ''
+  glider:
+    description:
+      - '<gradient:#A78BFA:gold><b>글라이더 상태 설정</b></gradient>'
+      - ''
+      - '<gray> 글라이더 아이템은 겉날개처럼 활공할 수 있어야 합니다.'
+      - '<gray><yellow>[true/false] </yellow>글라이더 값 설정, 기본적으로 토글'
+    params: '[true/false]'
+    feedback: '%prefix% <green>글라이딩 설정이 <yellow>%value%로 업데이트되었습니다.'
+  glow:
+    description:
+      - '<gradient:#A78BFA:gold><b>마법 발광 효과 무시</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow> 값 설정, 기본적으로 재설정'
+      - ''
+      - '<gold><b>도움말</b></gold> <gray><yellow>지정된 값 없음 </yellow>바닐라 동작 복원'
+    params: '[true/false/default]'
+    feedback: '%prefix% <green>빛이 <yellow>%value%로 설정됨'
+    feedback-reset: '%prefix% <green>광선 값을 기본값으로 재설정'
+  goathornsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>염소뿔 소리 설정</b></gradient>'
+      - '<white><sprite:items:item/goat_horn>'
+      - '<gray><yellow><type> </yellow>소리 유형'
+    params: '<type>'
+    feedback: '%prefix% <green>사운드 업데이트'
+  hide:
+    description:
+      - '<gradient:#A78BFA:gold><b>구성요소 숨기기 또는 표시</b></gradient>'
+      - ''
+      - '<gray><yellow><flag> </yellow>수정할 아이템 플래그'
+      - '<gray><yellow>[true/false] </yellow> 플래그 값 설정, 기본적으로 토글'
+      - ''
+      - '<gold><b>팁</b></gold> <gray>potion_effects 플래그로 배너 패턴 숨기기'
+      - '<gold><b>팁</b></gold> <gray> <yellow>/itemedit hideall로 모든 플래그를 한 번에 숨길 수 있습니다'
+    params: '<flag> [true/false]'
+    feedback: '%prefix% <green>플래그은 이제 <yellow>%value%입니다.'
+  hidetooltip:
+    description:
+      - '<gradient:#A78BFA:gold><b>툴팁 숨기기 또는 표시</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow> 플래그 값 설정, 기본적으로 토글'
+    params: '[true/false]'
+    feedback: '%prefix% <green>툴팁 숨김 상태는 이제 <yellow>%value%입니다.'
+  hideall:
+    description:
+      - '<gradient:#A78BFA:gold><b>모든 구성요소 숨기기</b></gradient>'
+      - ''
+      - '<gray>숨기기: 마법부여, 물약 효과, 배너 레이어, 속성 ...'
+      - ''
+      - '<gold><b>팁</b></gold> <gray> <yellow>/itemedit hide <flag> true로 단일 구성요소 숨기기'
+    params: ''
+    feedback: '%prefix% <green>모든 플래그를 숨겼습니다.'
+  itemmodel:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템 모델 편집</b></gradient>'
+      - ''
+      - '<gray><yellow><namespaced key> </yellow> 텍스처 참조용으로 설정하는 키'
+      - '<gray>예: /ie itemmodel <yellow>iron_sword'
+      - '<gray>예: /ie itemmodel <yellow>minecraft:iron_sword'
+      - ''
+      - '<gray><yellow><namespace></yellow>:<yellow><id></yellow> 참조 모델:'
+      - '  /assets/<yellow><namespace></yellow>/models/item/<yellow><id>'
+    params: '<namespaced key>'
+    feedback: '%prefix% <green>업데이트된 아이템 모델'
+    feedback-reset: '%prefix% <green>아이템 모델 재설정'
+  kinetic:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템의 운동적 속성을 설정</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gray><gold><b>팁</b></gold> /itemkinetic or /iek 사용'
+    params: ''
+  maxdurability:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템 최대 내구도 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><max durability> </yellow>아이템의 새로운 내구도 값,'
+      - '<gray>은 1보다 커야 합니다.'
+    params: '<max durability>'
+    feedback: '%prefix% <green>최대 내구성을 <yellow>%value%로 업데이트했습니다.'
+  maxstacksize:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템 최대 스택 크기 설정</b></gradient>'
+      - ''
+      - '<gray><yellow>[1-99] </yellow>플래그 값 설정'
+      - ''
+      - "<gray><yellow>값 없음 </yellow>는 <yellow>64인 공통 스택 크기를 복원합니다.\n대부분의 아이템은"
+      - '<gray>, 갑옷과 도구는 <yellow>1</yellow>, 기타'
+      - '<gray> 일부 아이템의 값'
+    params: '[1-99]'
+    feedback: '%prefix% <green>최대 스택 크기를 <yellow>%value%로 업데이트했습니다.'
+    feedback-reset: '%prefix% <green>최대 스택 크기 재설정'
+  pierce:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템의 관통 무기 속성 설정</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gold><b>팁</b></gold><gray> /itempiercing or /iep 사용'
+    params: ''
+  potioneffect:
+    itemtag-tip: '%prefix% <gray>일반 아이템에 포션 효과를 추가해야 하나요? 시도해 보세요 >ItemTag<'
+    itemtag-tip-hover:
+      - '<gradient:#A78BFA:gold>나를 클릭하세요</gradient>'
+    description:
+      - '<gradient:#A78BFA:gold><b>물약 효과 편집</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/suspicious_stew> <sprite:items:item/tipped_arrow_base>'
+      - '<gray>모든 물약, 물약 효과가 있는 화살, 수상한 스튜에 작동합니다!'
+      - '<gray><yellow>Add <effect> <duration> [level] </yellow><dark_gray>»</dark_gray> 효과 추가'
+      - '<gray><yellow>Remove <effect> </yellow><dark_gray>»</dark_gray> 선택한 효과 제거'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> 모든 효과 제거'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
+      description:
+        - '<gradient:#A78BFA:gold><b>선택한 효과 추가/재정의</b></gradient>'
+        - ''
+        - '<gray><yellow><effect> </yellow>효과 종류'
+        - '<gray><yellow><duration> </yellow> 지속 시간(초)'
+        - '<gray><yellow>[level] </yellow>최대 127, 기본적으로 <yellow>1'
+        - '<gray><yellow>[particles] </yellow>입자를 표시해야 합니까? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[ambient] </yellow>입자에 주변 플래그가 있어야 합니까? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[icon] </yellow>오른쪽 상단에 아이콘을 표시하시겠습니까? <yellow>true</yellow>/<yellow>false'
+      feedback: '%prefix% <green>포션 효과 추가'
+    remove:
+      params: '<effect>'
+      description:
+        - '<gradient:#A78BFA:gold><b>선택한 효과 제거</b></gradient>'
+      feedback: '%prefix% <green>포션 효과 제거'
+    reset:
+      feedback: '%prefix% <green>물약 효과 재설정'
+  rarity:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템 희귀도 설정</b></gradient>'
+      - ''
+      - '<gray><yellow>[rarity] </yellow>아이템 희귀도 설정'
+      - ''
+      - '<gold><b>팁</b><gold><gray> 희귀도 값을 설정하지 않으면 기본값이 복원됩니다.'
+    params: '[rarity]'
+    feedback: '%prefix% <green>업데이트된 희귀도'
+    feedback-reset: '%prefix% <green>희귀도 재설정'
+  repaircost:
+    description:
+      - '<gradient:#A78BFA:gold><b>모루 수리 비용 수정</b></gradient>'
+      - ''
+      - '<gray><yellow><cost> </yellow> 레벨 금액'
+      - '<gray><gold>N.B.</gold> 모루 수리/이름 변경 가격은 항상 최소 <yellow>1 이상입니다.'
+      - '<gray><gold>N.B.</gold> 이 명령은 아이템의 기본 수리 비용을 설정하며, 모루의 최종 레벨 비용은 수행하는 작업에 따라 결정됩니다.'
+      - '<gray>자세한 내용은 <yellow>minecraft.gamepedia.com/Anvil/Mechanics에서 확인하세요.'
+    params: '<cost>'
+    feedback: '%prefix% <green>수리 비용 업데이트됨'
+  skullowner:
+    description:
+      - '<gradient:#A78BFA:gold><b>플레이어 헤드 소유자 설정</b></gradient>'
+      - ''
+      - '<gray>플레이어 헤드에서만 작동합니다.'
+      - '<gray><yellow>[name] </yellow>소유주 이름'
+      - ''
+      - '<gold><b>팁</b></gold> <gray>플레이어 머리를 배치하고 부수어 스킨을 업데이트하세요.'
+    params: '[name]'
+    feedback: '%prefix% <green>플레이어 헤드 소유자 업데이트됨'
+    feedback-reset: '%prefix% <green>플레이어 헤드 소유자 재설정'
+  tooltipstyle:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템 툴팁 스타일 수정</b></gradient>'
+      - ''
+      - '<gray><yellow><style> </yellow> 텍스처 참조용으로 설정하는 키'
+      - '<gray> 스타일은 <white><namespace>:<id>로 구성됩니다.'
+      - '<gray>예: /ie tooltipstyle <yellow>my_style'
+      - '<gray>예: /ie tooltipstyle <yellow>minecraft:my_style'
+      - '<gray>여기서 <yellow>minecraft</yellow>는 <white><namespace></white>이고'
+      - '<gray><yellow>my_style</yellow>은 <white><id>입니다'
+      - '<gray>설정 시 이 아이템은 맞춤 스프라이트를 사용할 수 있습니다.'
+      - '<gray>툴팁 배경과 프레임입니다.'
+      - '<gray><white><namespace>:tooltip/<id>_background'
+      - '<gray> 및 <white><namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
+    feedback: '%prefix% <green>툴팁 스타일 업데이트됨'
+    feedback-reset: '%prefix% <green>툴팁 스타일 재설정'
+  armortrim:
+    description:
+      - '<gradient:#A78BFA:gold><b>방어구 다듬기 설정</b></gradient>'
+      - '<white><sprite:items:item/iron_chestplate>'
+      - '<gray><yellow><material> </yellow>방어구 장식 재료'
+      - '<gray><yellow><pattern> </yellow>갑옷 장식 패턴'
+    params: '<material> <pattern>'
+    feedback: '%prefix% <green>방어구 장식 업데이트'
+    feedback-reset: '%prefix% <green> 방어구 장식 제거됨'
+  tropicalfish:
+    description:
+      - '<gradient:#A78BFA:gold><b>열대어 양동이 속성 설정</b></gradient>'
+      - '<white><sprite:items:item/tropical_fish_bucket>'
+      - '<gray><yellow>pattern <pattern type> </yellow><dark_gray>»</dark_gray> 물고기 종류'
+      - '<gray><yellow>patterncolor <color> </yellow><dark_gray>»</dark_gray> 물고기 패턴 색상'
+      - '<gray><yellow>bodycolor <color> </yellow><dark_gray>»</dark_gray> 물고기의 몸 색깔'
+    params: '[...]'
+    pattern:
+      params: '<type>'
+      description:
+        - '<gradient:#A78BFA:gold><b>열대어 패턴 종류 설정</b></gradient>'
+        - ''
+        - '<gray><yellow><type> </yellow> 물고기의 패턴 종류'
+      feedback: '%prefix% <green>업데이트된 패턴'
+    patterncolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>열대어 패턴 색상 설정</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>물고기의 패턴 색상'
+      feedback: '%prefix% <green>업데이트된 색상'
+    bodycolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>열대어 몸색 설정</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow> 물고기의 몸 색깔'
+      feedback: '%prefix% <green>업데이트된 색상'
+  type:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템 종류 설정</b></gradient>'
+      - ''
+      - '<gray><gold>N.B.</gold> 공기가 작동하지 않으므로 몇 가지 유형'
+    params: '<type>'
+    feedback: '%prefix% <green>업데이트된 아이템 재료'
+  unbreakable:
+    description:
+      - '<gradient:#A78BFA:gold><b>깨지지 않는 상태 설정</b></gradient>'
+      - ''
+      - '<gray>깨지지 않는 도구와 방어구는 내구성을 잃지 않습니다.'
+      - '<gray><yellow>[true/false] </yellow> 깨지지 않는 값 설정, 기본적으로 토글'
+    params: '[true/false]'
+    feedback: '%prefix% <green>깨지지 않는 아이템을 <yellow>%value%로 업데이트했습니다.'
+  help:
+    header-name: 'ItemEdit'
+    description:
+      - '<gradient:#A78BFA:gold><b>쇼 ItemEdit 도움말</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>도움말 페이지'
+      - '<gray><yellow>[subcommand] </yellow>하위 명령 도움말'
+    params: '[page/subcommand]'
+  rename:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템 이름 설정</b></gradient>'
+      - ''
+      - '<gold><b>팁</b></gold> <gray>이름을 기본값으로 되돌리려면 <yellow>/ie rename -clear </yellow>를 입력하세요'
+      - '<gold><b>팁</b></gold> <gray>이름을 복사하려면 <yellow>/ie rename -copy </yellow>를 입력하세요'
+      - '<gold><b>팁</b></gold> <gray>입력 <yellow>/ie rename -paste </yellow>이전에 복사한 값을 붙여넣기'
+    params: '<name>'
+    feedback: '%prefix% <green>아이템 이름이 업데이트되었습니다.'
+    rename-clear: '%prefix% <green>아이템 이름 삭제됨'
+    rename-copy: '%prefix% <green>아이템 이름 복사됨'
+    rename-paste-empty: '%prefix% <red>붙여넣을 복사된 아이템 이름이 없습니다.'
+    feedback-paste: '%prefix% <green>복사한 아이템 이름 붙여넣기'
+    banned_words: '%prefix% <red>아이템 이름에 차단된 단어가 포함되어 있습니다.'
+  lore:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템 설명 수정</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <text> </yellow><dark_gray>»</dark_gray> 새 줄에 텍스트 추가'
+      - '<gray><yellow>Insert <line> <text> </yellow><dark_gray>»</dark_gray> 선택한 줄에 텍스트 추가'
+      - '<gray><yellow>Set <line> <text> </yellow><dark_gray>»</dark_gray> 선택한 줄의 텍스트 설정 또는 바꾸기'
+      - '<gray><yellow>Remove <line> </yellow><dark_gray>»</dark_gray> 선택한 줄 제거'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> 모든 줄 삭제'
+      - '<gray><yellow>Copy </yellow><dark_gray>»</dark_gray> 현재 아이템 아이템 설명을 복사하여 나중에 붙여넣으세요'
+      - '<gray><yellow>CopyBook </yellow><dark_gray>»</dark_gray> 사본과 동일하지만 책의 페이지에서 줄로 표시됩니다.'
+      - '<gray><yellow>CopyFile <path> </yellow><dark_gray>»</dark_gray> 사본과 동일하지만 loreCopy.yml에서 유래'
+      - '<gray><yellow>Paste </yellow><dark_gray>»</dark_gray> 마지막으로 복사한 아이템 설명 붙여넣기'
+      - '<gray><yellow>Replace <replaced> <replacer> </yellow><dark_gray>»</dark_gray> 모든 아이템 바꾸기'
+    params: '<add/set/remove...> [...]'
+    set:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>선택한 줄의 텍스트 설정 또는 바꾸기</b></gradient>'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>선택한 줄 삭제</b></gradient>'
+    insert:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>선택한 줄에 텍스트 추가</b></gradient>'
+    copy:
+      feedback: '%prefix% <green>아이템 설명 복사됨'
+    copyBook:
+      feedback: '%prefix% <green>책 페이지가 복사되어 붙여넣을 준비가 되었습니다.'
+    copyFile:
+      wrong-path: '%prefix% <red>경로가 잘못되었습니다. 구성을 다시 로드하고 CaP를 확인하세요.'
+      no-path: '%prefix% <red>경로 선택 /ie lore copyfile <gold><path>'
+      feedback: '%prefix% <green>구성이 복사되었으며 붙여넣을 준비가 되었습니다.'
+    paste:
+      feedback: '%prefix% <green>아이템 설명 붙여넣기'
+      no-copy: '%prefix% <red>아이템 설명을 먼저 복사하세요'
+    replace:
+      params: '<replaced> <replacer>'
+      description:
+        - '<gold><b>아이템 설명에 있는 모든 아이템 바꾸기</b></gradient>'
+        - ''
+        - '<gray>한 단어 이상을 바꿔야 하는 경우'
+        - '<gray> 내부를 닫으려면 <yellow>{ }'
+        - ''
+        - '<gray>예: <yellow>/ie lore replace New Rusty'
+        - '<gray>''<yellow>New sword</yellow>'' -> ''<yellow>Rusty sword</yellow>'''
+        - ''
+        - '<gray>예 2: <yellow>/ie lore replace {Heavy} {Very light}'
+        - '<gray>''<yellow>Heavy sword</yellow>'' -> ''<yellow>Very light sword</yellow>'''
+  listaliases:
+    description:
+      - '<gradient:#A78BFA:gold><b>허용된 별칭 매개변수 표시</b>'
+      - ''
+      - '<gray><yellow><type> </yellow>표시할 매개변수 유형'
+    params: '<type>'
+    prefix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>별칭 <dark_blue>◆ ◆ ◆ ◆'
+    postfix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>별칭 <dark_blue>◆ ◆ ◆ ◆'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+    hover_info: '<blue>원래 값: <yellow>%default%'
+    hover_type: '<gold>클릭하여 살펴보세요'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>별칭:</b></gradient>'
+itemeditequipment:
+  allowedentities:
+    invalid-type: '%prefix% <red>값 <gold>%value% <red>은 유효한 아이템이나 유효한 아이템 그룹이 아닙니다.'
+    description:
+      - '<gradient:#A78BFA:gold><b>이 장비를 착용할 수 있는 개체 유형을 설정합니다</b></gradient>'
+      - ''
+      - '<gray><yellow>[entity] </yellow>엔티티 유형'
+      - '<gray><yellow>[group] </yellow>어떤 엔터티 그룹'
+      - ''
+      - '<gray>선택한 유형이 모두 추가됩니다.'
+    params: '[entity/group] [entity/group] ...'
+    feedback: '%prefix% <green>이제 허용되는 아이템 유형은 다음과 같습니다: <yellow>%value%'
+    feedback-reset: '%prefix% <green>허용된 아이템 유형이 재설정되었습니다.'
+  canshear:
+    unsupported-version: '%prefix% <red>귀하의 서버 버전(<gold>%value%<red>)은 이 기능을 지원하지 않습니다.'
+    description:
+      - '<gradient:#A78BFA:gold><b>상호작용 시 장비 설정</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 자를 수 있다'
+      - '<gray>호박과 같은 개체의 장비'
+      - '<gray> 눈사람용'
+    params: '[true/false]'
+    feedback: '%prefix% <green>털을 깎을 수 있는 속성은 이제 <yellow>%value%입니다.'
+  canbesheared:
+    description:
+      - '<gradient:#A78BFA:gold><b>이 장비를 절단할 수 있는지 여부를 설정합니다</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>장비 절단 가능 여부'
+    params: '[true/false]'
+    feedback: '%prefix% <green>전단 가능 재산은 현재 <yellow>%value%입니다.'
+  cameraoverlay:
+    description:
+      - '<gradient:#A78BFA:gold><b>카메라 오버레이 설정</b></gradient>'
+      - ''
+      - '<gray><yellow>[namespacedkey] </yellow>원하는 오버레이'
+      - '<gray>오버레이는 유일한 바닐라 텍스처팩에 설정됩니다.'
+      - '<gray>오버레이는 minecraft:misc/pumpkinblur입니다.'
+    params: '[namespacedkey]'
+    feedback: '%prefix% <green>카메라 오버레이가 업데이트되었습니다.'
+    feedback-reset: '%prefix% <green>카메라 오버레이가 제거되었습니다.'
+    invalid-namespacedkey: '<red>Namespacedkey <gold>%value% <red>가 잘못되었습니다.'
+  clear:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템의 장비 속성을 완전히 제거</b></gradient>'
+      - ''
+      - '<gray>또는 아이템이 바닐라 장비인 경우 기본값을 복원합니다.'
+    params: ''
+    feedback: '%prefix% <green>장비 속성이 기본값으로 재설정되었습니다.'
+  damageonhurt:
+    description:
+      - '<gradient:#A78BFA:gold><b>데미지 가능 세트</gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 손상으로 인해 내구성이 감소함'
+      - ''
+      - '<gray><gold>N.B.</gold> 최대 스택 크기가 1인 아이템만 손상될 수 있습니다.'
+      - '<gray> 사용 <yellow>/ie maxstacksize 1'
+      - '<gray><gold><b>팁</b></gold> 아이템 최대 내구도를 다음과 같이 설정하세요.'
+      - '  <yellow>/ie maxdurability <amount>'
+    params: '[true/false]'
+    feedback: '%prefix% <green>피해 재산 피해는 이제 <yellow>%value%입니다.'
+    warning-maxstacksize: '%prefix% <red>아이템 최대 스택 크기는 <gold>1 <red>이어야 손상될 수 있습니다. <dark_red>[<gold>수정하려면 클릭<dark_red>]'
+  dispensable:
+    description:
+      - '<gradient:#A78BFA:gold><b>사용 가능한 세트</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 디스펜서 장착'
+    params: '[true/false]'
+    feedback: '%prefix% <green>불필요한 속성은 이제 <yellow>%value%입니다.'
+  equiponinteract:
+    description:
+      - '<gradient:#A78BFA:gold><b>상호작용 시 장비 설정</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 상호작용을 갖추다'
+    params: '[true/false]'
+    feedback: '%prefix% <green>상호작용 속성 장착은 이제 <yellow>%value%입니다.'
+  equipsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>장착 사운드 설정</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow> 어떤 소리를 내야 할까요?'
+    params: '[sound]'
+    feedback: '%prefix% <green>장착 사운드 속성은 이제 <yellow>%value%입니다.'
+    feedback-reset: '%prefix% <green>장착 사운드 속성이 기본값으로 재설정되었습니다.'
+  help:
+    header-name: 'ItemEquipment'
+    description:
+      - '<gradient:#A78BFA:gold><b>프로그램 ItemEditEquipment 도움말</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>도움말 페이지'
+      - '<gray><yellow>[subcommand] </yellow>하위 명령 도움말'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>이 아이템의 장비 속성을 표시합니다</b></gradient>'
+    params: ''
+    not_set: '%prefix% <gray>이 아이템에는 장착 가능한 구성품이 없습니다.'
+    message:
+      - '%prefix% <dark_green><b>장착 가능</b>'
+      - '<green>슬롯: <yellow>%slot%'
+      - '<green>깎기 가능: <yellow>%canbesheared%'
+      - '<green>상처 피해량: <yellow>%damageonhurt%'
+      - '<green>사용 불가: <yellow>%dispensable%'
+      - '<green>상호작용 시 장착: <yellow>%equiponinteract%'
+      - '<green>교체 가능: <yellow>%swappable%'
+      - '<green>장착 사운드: <yellow>%equipsound%'
+      - '<green>깎는 소리: <yellow>%shearsound%'
+      - '<green>허용되는 아이템: <yellow>%allowedentities%'
+      - '<green>카메라 오버레이: <yellow>%cameraoverlay%'
+      - '<green>애셋 ID: <yellow>%assetid%'
+  model:
+    description:
+      - '<gradient:#A78BFA:gold><b>텍스처 모델 설정</b></gradient>'
+      - ''
+      - '<gray><yellow>[key] </yellow> 장착 시 사용할 장비 모델의 네임스페이스 ID'
+    params: '[key]'
+    feedback: '%prefix% <green>장비 모델은 현재 <yellow>%key%입니다.'
+    feedback-reset: '%prefix% <green>장비 모델이 재설정되었습니다.'
+  shearsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>전단으로 아이템을 제거할 때 소리를 설정합니다</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow> 어떤 소리를 내야 할까요?'
+      - '<gray>호박처럼 가위로 떼어냈을 때'
+      - '<gray> 눈사람용'
+    params: '[sound]'
+    feedback: '%prefix% <green>전단음은 이제 <yellow>%value%입니다.'
+    feedback-reset: '%prefix% <green>전단음 속성이 기본값으로 재설정되었습니다.'
+  shearingsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>전단으로 아이템을 제거할 때 소리를 설정합니다</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>어떤 소리를 내야 할까요?'
+      - '<gray> 눈사람용 호박처럼 가위로 떼어낼 때'
+    params: '[sound]'
+    feedback: '%prefix% <green>깎는 소리는 이제 <yellow>%value%입니다.'
+  slot:
+    description:
+      - '<gradient:#A78BFA:gold><b>장착 가능한 슬롯 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><slot> </yellow>아이템 장착 가능 장소'
+    params: '<slot>'
+    feedback: '%prefix% <green>장비 슬롯은 이제 <yellow>%value%입니다.'
+  swappable:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템 교환 가능 설정</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 아이템 교환 가능'
+    params: '[true/false]'
+    feedback: '%prefix% <green>스왑 가능한 속성은 이제 <yellow>%value%입니다.'
+itemeditfood:
+  addeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템에 효과 추가</b></gradient>'
+      - '<gray><yellow>/ief addeffect </yellow>cleareffects'
+      - '<gray><yellow>/ief addeffect </yellow>teleport <range>'
+      - '<gray><yellow>/ief addeffect </yellow>applyeffects [chance] <potion> <lv> <duration> [ambient] [particle] [icon]'
+      - '<gray><yellow>/ief addeffect </yellow>removeeffects <potion>'
+      - '<gray><yellow>/ief addeffect </yellow>playsound <sound>'
+      - ''
+    params: '[...]'
+    cleareffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>아이템에 효과 추가</b></gradient>'
+        - ''
+        - '<gray>우유 양동이와 같이 플레이어에게 적용된 물약 효과를 제거합니다.'
+      params: '<potion>'
+      feedback: '%prefix% <green>음식 섭취 시 순간이동 효과 추가'
+    teleport:
+      description:
+        - '<gradient:#A78BFA:gold><b>아이템에 효과 추가</b></gradient>'
+        - '<gray><yellow><range> </yellow>플레이어를 순간이동하는 거리'
+        - ''
+        - '<gray>음식을 먹으면 무작위로 플레이어를 순간이동시킵니다.'
+      params: '<range>'
+      feedback: '%prefix% <green>음식 섭취 시 순간이동 효과 추가'
+    applyeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>아이템에 효과 추가</b></gradient>'
+        - '<gray><yellow>[chance] </yellow>효과 적용 확률은 몇%인가요?'
+        - '<gray>는 <yellow>0</yellow>보다 커야 하고 이하는 <yellow>100과 같아야 합니다.'
+        - '<gray><yellow><potion> </yellow>포션 효과 유형'
+        - '<gray><yellow><lv> </yellow>효과 레벨, 기본적으로 <yellow>1</yellow>'
+        - '<gray><yellow><duration> </yellow>효과 지속 시간(초) 또는 <yellow>-1 </yellow>영구 효과'
+        - '<gray><yellow>[ambient] [particle] [icon] </yellow>true/false 물약 효과 사용자 정의'
+        - ''
+        - '<gray>음식을 먹었을 때 플레이어에게 선택한 효과 적용'
+      params: '<potion>'
+      feedback: '%prefix% <green>음식 섭취 시 적용 효과 추가'
+    removeeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>아이템에 효과 추가</b></gradient>'
+        - '<gray><yellow><potion> </yellow>선택한 효과 지우기'
+        - ''
+        - '<gray>음식 섭취 시 플레이어에서 선택한 효과 제거'
+      params: '<potion>'
+      feedback: '%prefix% <green>음식 섭취 시 제거 효과 추가'
+    playsound:
+      description:
+        - '<gradient:#A78BFA:gold><b>아이템에 효과 추가</b></gradient>'
+        - '<gray><yellow><sound> </yellow>재생 사운드'
+        - ''
+        - '<gray>음식을 먹을 때 선택한 소리 재생'
+      params: '<sound>'
+      feedback: '%prefix% <green>음식을 먹을 때 소리가 추가되었습니다.'
+  animation:
+    description:
+      - '<gradient:#A78BFA:gold><b>먹기 애니메이션 설정</b></gradient>'
+      - '<gray><red>1.21.2+에만 해당'
+      - ''
+      - '<gray><yellow><animation> </yellow>설정할 값, 기본적으로 토글'
+      - ''
+      - '<gray>일부 애니메이션은 1인칭 시점에서만 표시되며,'
+      - '<gray> 일부 애니메이션은 3인칭 시점에서만 표시되며,'
+      - '<gray> 일부 애니메이션은 1인칭 및 3인칭 시점 모두에서 표시됩니다.'
+    params: '<animation>'
+    feedback: '%prefix% <green>애니메이션 적용'
+  canalwayseat:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템을 먹을 수 있는지 여부를 설정</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>설정할 값, 기본적으로 토글'
+      - ''
+      - '<gray>보통 음식을 먹으려면 배고픔이 필요하지만,'
+      - '<gray>설정 true은 황금 사과 동작을 모방합니다.'
+    params: '[true/false]'
+    feedback: '%prefix% <green>아이템은 항상 <yellow>%value%까지 먹을 수 있습니다.'
+  consumeparticles:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템을 먹었을 때 입자가 표시되는지 여부를 설정합니다</b></gradient>'
+      - '<gray><red>1.21.2+에만 해당'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>설정할 값, 기본적으로 토글'
+    params: '[true/false]'
+    feedback: '%prefix% <green>입자 소모량은 이제 <yellow>%value%입니다.'
+  convertto:
+    description:
+      - '<gradient:#A78BFA:gold><b>음식 섭취 시 아이템 제공을 설정</b></gradient>'
+      - '<gray><red>1.21+에만 해당'
+      - ''
+      - '<gray><yellow>[type/serveritem id] </yellow>반품할 상품'
+      - '<gray> 재료를 설정하거나'
+      - '<gray> ServerItem 저장된 아이템 중에서 아이템을 선택하세요.'
+      - ''
+      - '<gray>양동이가 있는 양동이 우유 동작을 모방합니다.'
+      - '<gray>우유 소모 시 반환'
+    params: '[type/serveritem id]'
+    feedback: '%prefix% <green>업데이트로 전환'
+  eatticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템을 먹는데 걸리는 시간을 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><ticks> </yellow>아이템을 먹는 데 걸리는 시간'
+      - '<gray>는 <yellow>1 </yellow> 이상이어야 합니다.'
+      - ''
+      - '<gray><yellow>20 </yellow>틱 = <yellow>1 </yellow>초'
+    params: '<ticks>'
+    feedback: '%prefix% <green>먹기 진드기가 <yellow>%value%로 업데이트되었습니다.'
+  help:
+    header-name: 'ItemFood'
+    description:
+      - '<gradient:#A78BFA:gold><b>쇼 ItemFood 도움말</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>도움말 페이지'
+      - '<gray><yellow>[subcommand] </yellow>하위 명령 도움말'
+    params: '[page/subcommand]'
+  info:
+    not_food: '%prefix% <dark_green>아이템에 식품 속성이 없거나 기본 속성이 있습니다.'
+    message:
+      - '%prefix% <dark_green><b>아이템 식품 속성</b>'
+      - '<green>식사 시간: <yellow>%eatseconds%<green> 초 <dark_gray>(<gray>%eatticks%<dark_gray> 틱)'
+      - '<green>배고픔 회복: <yellow>%nutrition% <dark_gray>| <green>채도: <yellow>%saturation%<green>'
+      - '<green>애니메이션: <yellow>%animation% <dark_gray>| <green>소리: <yellow>%sound% <dark_gray>| <green>입자: <yellow>%consumeparticles%'
+      - '<green>가득 차면 먹을 수 있음: <yellow>%canalwayseat% <dark_gray>| <green>먹으면 획득: <yellow>%convertto%'
+    apply_effect_prefix:
+      - '<dark_green><b>포함 <yellow>%effects%<dark_green> 가능한 물약 효과:</b>'
+    apply_effect:
+      - '<green>%index%. 유형: <yellow>%type% <dark_gray>| <green>Lv: <yellow>%level% <dark_gray>| <green>기간: <yellow>%duration_s%<green>초 <dark_gray>(<gray>%duration_ticks%<dark_gray>틱)'
+      - '<green> 입자: <yellow>%hasparticle% <dark_gray>| <green>주변: <yellow>%isambient% <dark_gray>| <green>아이콘: <yellow>%hasicon% <dark_gray>| <green>확률: <yellow>%chance_perc%<green>%'
+    consume_effect_teleport: '<green>임의 텔레포트 직경: <yellow>%diameter%'
+    consume_effect_sound: '<green>추가 소모음: <yellow>%sound%'
+    consume_effect_remove: '<green>제거된 효과: <yellow>%effects%'
+    consume_effect_clear: '<green>활성 상태 효과를 모두 지웁니다.'
+    consume_effect_unknown: '<green>기타 소비 효과: <yellow>%type%'
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템의 현재 음식 정보 설명</b></gradient>'
+    params: ''
+  nutrition:
+    description:
+      - '<gradient:#A78BFA:gold><b>영양 회복 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>배고픔 회복량'
+      - '<gray>는 <yellow>0 </yellow> 이상이어야 합니다.'
+      - ''
+      - '<gray>배고픔 막대는 <yellow>20입니다.'
+    params: '<amount>'
+    feedback: '%prefix% <green>현재 영양가치는 <yellow>%value%입니다.'
+  removeeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템에서 효과 제거</b></gradient>'
+      - ''
+      - '<gray><yellow><index> </yellow>선택한 효과 제거'
+    params: '<index>'
+    feedback: '%prefix% <green>선택한 음식 효과 제거'
+  reset:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템의 음식물 속성을 완전히 제거</b></gradient>'
+      - ''
+      - '<gray>또는 아이템이 바닐라 음식인 경우 기본값을 복원합니다.'
+    params: ''
+    feedback: '%prefix% <green>음식 속성이 제거됨'
+  reseteffects:
+    description:
+      - '<gradient:#A78BFA:gold><b>아이템에서 효과 제거</b></gradient>'
+    params: ''
+    feedback: '%prefix% <green>음식 효과가 제거되었습니다.'
+  saturation:
+    description:
+      - '<gradient:#A78BFA:gold><b>채도 회복 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>추가할 채도 양'
+      - '<gray> 음수 값이 허용됩니다.'
+      - ''
+      - '<gray>포도는 패스트푸드 수준을 조절합니다.'
+      - '<gray> (영양) 감소'
+    params: '<amount>'
+    feedback: '%prefix% <green>채도는 이제 <yellow>%value%입니다.'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>먹는 소리 설정</b></gradient>'
+      - '<gray><red>1.21.2+에만 해당'
+      - ''
+      - '<gray><yellow><sound> </yellow>설정할 값'
+    params: '<sound>'
+    feedback: '%prefix% <green>먹는소리는 이제 <yellow>%value%'
+itemeditkinetic:
+  contactcooldownticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>운동 접촉 쿨다운 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><cooldown> </yellow>접촉 쿨다운 틱'
+    params: '<delay>'
+    feedback: '%prefix% <green>접촉 쿨다운 세트'
+  damageconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>운동 피해 조건 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>최대 피해 지속 시간 틱'
+      - '<gray><yellow><min speed> </yellow>최소 속도'
+      - '<gray><yellow><min relative speed> </yellow>최소 상대 속도'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>피해 조건 설정'
+  damagemultiplier:
+    description:
+      - '<gradient:#A78BFA:gold><b>운동 피해 배율 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><multiplier> </yellow> 피해 배율'
+    params: '<delay>'
+    feedback: '%prefix% <green>운동 피해 배수 세트'
+  delayticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>운동 지연 틱 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><delay> </yellow>운동 지연 틱'
+    params: '<delay>'
+    feedback: '%prefix% <green>지연 틱 설정됨'
+  dismountconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>운동 무기로 대상을 탈것에서 떨어뜨리기 위한 조건 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>대상을 탈것에서 떨어뜨리는 최대 시간(틱 단위)'
+      - '<gray><yellow><min speed> </yellow>대상을 탈것에서 떨어뜨리는 최소 속도'
+      - '<gray><yellow><min relative speed> </yellow>대상을 탈것에서 떨어뜨리기 위한 최소 상대 속도'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>타겟을 탈것에서 떨어뜨리는 조건 세트'
+  forwardmovement:
+    description:
+      - '<gradient:#A78BFA:gold><b>운동 에너지 전진 이동 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><movement> </yellow>전진 이동량'
+    params: '<movement>'
+    feedback: '%prefix% <green>전진이동 세트'
+  help:
+    header-name: 'ItemKinetic'
+    description:
+      - '<gradient:#A78BFA:gold><b>쇼 ItemKinetic 도움말</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>도움말 페이지'
+      - '<gray><yellow>[subcommand] </yellow>하위 명령 도움말'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>이 아이템의 운동 무기 속성을 표시합니다</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>이 아이템에는 운동 무기 구성 요소가 없습니다.'
+    message:
+      - '%prefix% <dark_green><b>운동 무기</b>'
+      - '<green>접촉 쿨다운: <yellow>%contactcooldownticks% <green>틱'
+      - '<green>피해 배율: <yellow>%damagemultiplier%'
+      - '<green>지연: <yellow>%delayticks% <green>틱'
+      - '<green>전진 이동: <yellow>%forwardmovement%'
+      - '<green>타격음: <yellow>%hitsound%'
+      - '<green>소리: <yellow>%sound%'
+      - '<green>손상 조건: <yellow>%damageconditions%'
+      - '<green>대상을 탈것에서 떨어뜨리는 조건: <yellow>%dismountconditions%'
+      - '<green>밀쳐내기 조건: <yellow>%knockbackconditions%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>운동 타격음 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>설정할 값'
+    params: '<sound>'
+    feedback: '%prefix% <green>타격음은 이제 <yellow>%value%입니다.'
+  knockbackconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>키네틱 넉백 조건 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>최대 밀쳐내기 지속 시간 틱'
+      - '<gray><yellow><min speed> </yellow>밀어낼 수 있는 최소 속도'
+      - '<gray><yellow><min relative speed> </yellow>밀쳐내기에 대한 최소 상대 속도'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>밀쳐내기 조건 설정'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>운동음 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>설정할 값'
+    params: '<sound>'
+    feedback: '%prefix% <green>소리는 이제 <yellow>%value%입니다.'
+itemeditpiercing:
+  dealsknockback:
+    description:
+      - '<gradient:#A78BFA:gold><b>타격이 밀어내기를 유발하는지 여부를 설정</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 넉백 적용'
+    params: '[true/false]'
+    feedback: '%prefix% <green>밀어내기가 이제 <yellow>%value%입니다.'
+  dismounts:
+    description:
+      - '<gradient:#A78BFA:gold><b>명중 시 대상이 탈것에서 떨어질지 여부 설정</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true 대상을 탈것에서 떨어뜨리려면'
+    params: '[true/false]'
+    feedback: '%prefix% <green>대상을 탈것에서 떨어뜨리는 것이 이제 <yellow>%value%입니다.'
+  help:
+    header-name: 'ItemPiercing'
+    description:
+      - '<gradient:#A78BFA:gold><b>프로그램 ItemPiercing 도움말</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>도움말 페이지'
+      - '<gray><yellow>[subcommand] </yellow>하위 명령 도움말'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>이 아이템의 관통 무기 속성을 표시합니다</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>이 아이템에는 관통 무기 부품이 없습니다'
+    message:
+      - '%prefix% <dark_green><b>관통 무기</b>'
+      - '<green>밀어내기 효과: <yellow>%dealsknockback%'
+      - '<green>대상을 탈것에서 떨어뜨립니다: <yellow>%dismounts%'
+      - '<green>타격음: <yellow>%hitsound%'
+      - '<green>소리: <yellow>%sound%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>관통 무기의 충격음을 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>설정할 값'
+    params: '<sound>'
+    feedback: '%prefix% <green>타격음은 이제 <yellow>%value%입니다.'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>관통 무기 소리 설정</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>설정할 값'
+    params: '<sound>'
+    feedback: '%prefix% <green>소리는 이제 <yellow>%value%입니다.'
+serveritem:
+  help-header: '<gradient:#54acff:#A78BFA><bold>ServerItem</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>도움말</bold></#A78BFA>'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>획득한 <yellow>%amount% <green>/<yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][give] %player_name% 획득 %amount%/%id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>선택한 아이템을 플레이어에게 주기</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - '<gray><yellow>[amount] </yellow>줄 수 있는 아이템 수, 기본적으로 1'
+      - '<gray><yellow>[player] </yellow>아이템을 받는 사람은 기본적으로'
+      - '<gray><yellow>[silent] </yellow>true 플레이어에게 피드백을 보내지 말아야 하는 경우'
+    params: '<id> [amount] [player] [silent]'
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>획득한 <yellow>%amount% <green>/<yellow>%nick%'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets% 획득 %amount%/%id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>선택한 아이템을 모든 온라인 플레이어에게 제공</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - '<gray><yellow>[amount] </yellow>줄 수 있는 아이템 수, 기본적으로 1'
+      - '<gray><yellow>[silent] </yellow>true 플레이어에게 피드백을 보내지 말아야 하는 경우'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] 떨어졌다 %amount% ~의 %id% (%nick%) 에 %world% %x% %y% %z%'
+    description:
+      - '<gradient:#A78BFA:gold><b>선택한 아이템을 선택한 위치에 놓기</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - '<gray><yellow><amount> </yellow>드롭할 아이템 수, 1~2304'
+      - '<gray><yellow><world> </yellow> 어느 세계'
+      - '<gray><yellow><x> <y> <z> </yellow> 좌표'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>실패 <yellow>%amount% <green>/<yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][take] %player_name% 준 %amount% ~의 %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>플레이어에서 선택한 아이템 가져오기</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - '<gray><yellow>[amount] </yellow>줄 수 있는 아이템 수, 기본적으로 1'
+      - '<gray><yellow>[player] </yellow>아이템을 받는 사람은 기본적으로'
+      - '<gray><yellow>[silent] </yellow>true 플레이어에게 피드백을 보내지 말아야 하는 경우'
+    params: '<id> [amount] [player] [silent]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>아이템 <yellow>%id% <green>등록됨'
+    already_used_id: '%prefix% <red>ID가 <yellow>%id% <red>인 아이템이 이미 존재합니다. ID를 변경하거나 /si 업데이트를 수행하여 재정의하세요.'
+    description:
+      - '<gradient:#A78BFA:gold><b>손에 있는 아이템 등록</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>아이템을 식별하고 대소문자를 구분하지 않으며 식별할 수 없습니다.'
+      - '<gray> 공백이나 점이 포함되어 있으며 선택할 수 없습니다.'
+      - '<gray> 이미 사용된 ID'
+      - ''
+      - '<gold><b>팁</b></gold> <gray><yellow>/serveritem update <id></yellow>를 사용하여 기존 아이템을 변경하세요.'
+      - '<gold><b>팁</b></gold> <gray><yellow>/serveritem give <id>로 저장된 아이템을 검색하세요.'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>아이템 <yellow>%id% <green>등록되지 않음'
+    description:
+      - '<gradient:#A78BFA:gold><b>선택한 아이템 삭제</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>아이템 ID'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>아이템 <yellow>%id% <green>이 업데이트되었습니다.'
+    description:
+      - '<gradient:#A78BFA:gold><b>선택한 아이템 업데이트</b></gradient>'
+      - ''
+      - '<gray>ID에 연결된 아이템을 손 아이템으로 변경'
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - ''
+      - '<gold><b>팁</b></gold> <gray><yellow>/serveritem save <id></yellow>를 사용하여 새 아이템을 만드세요.'
+      - '<gold><b>팁</b></gold> <gray> <yellow>/serveritem delete <id></yellow>를 사용하여 아이템을 삭제하세요.'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>서버에 저장된 아이템이 있는 GUI 열기</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow> GUI 페이지, 기본적으로 1'
+    params: '[page]'
+  setnick:
+    #Holders: %id% %nick%
+    success: '%prefix% <green>아이템 <yellow>%id% <green>닉네임이 <yellow>%nick%로 업데이트되었습니다.'
+    description:
+      - '<gradient:#A78BFA:gold><b>선택한 아이템의 표시 이름 설정</b></gradient>'
+      - ''
+      - '<gray>닉은 구매/판매 메시지의 보유자 <yellow>%nick%</yellow>로 사용됩니다.'
+      - '<gray> 기본값은 아이템 이름이거나 이름이 없는 경우 아이템 유형입니다.'
+      - ''
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - '<gray><yellow>[nick] </yellow> 설정할 이름'
+      - ''
+      - '<gold><b>팁</b></gold> <gray>기본값으로 재설정하려면 <yellow>/serveritem setnick <id>를 사용하세요.'
+    params: '<id> [nick]'
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>구입했다 <yellow>%amount% <green>~의 <yellow>%nick% <green>~을 위한 <yellow>%price%'
+    #Holders: %id% %nick% %amount%
+    not-enough-space: '<red>구매할 수 있는 재고 공간이 부족합니다. <gold>%amount% <red>~의 <gold>%nick%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: '<red>당신은 가지고 있지 않습니다 <gold>%price% <red>구매 <gold>%amount% <red>~의 <gold>%nick%'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% 유급의 %price% ~을 위한 %amount% ~의 %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>플레이어에게 아이템 판매</b></gradient>'
+      - ''
+      - '<gray>Sell는 전체 금액을 판매하기 때문에 SellMax와 다릅니다.'
+      - '<gray> 플레이어에게 판매하거나 아무것도 판매하지 않음'
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - '<gray><yellow><amount> </yellow>아이템 수량'
+      - '<gray><yellow><player> </yellow> 누가 돈을 내고 아이템을 받아야 할까요?'
+      - '<gray><yellow><price> </yellow>전체 품목 가격은 양수여야 합니다.'
+      - '<gray><yellow>[silent] </yellow>true로 설정하면 플레이어에게 메시지를 보내지 않습니다'
+      - ''
+      - '<gray>돈이나 인벤토리 공간이 부족하면 거래가 실패합니다.'
+      - '<gray>  전체 수량을 받을 공간이 필요합니다: <yellow><amount>'
+      - '<gray><gold>N.B.</gold> 명령 실행기의 균형은 그대로 유지됩니다.'
+    params: '<id> <amount> <player> <price> [silent]'
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green> <yellow>%amount% <green>/<yellow>%nick% <yellow>에 <green>%price%에 판매됨'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>인벤토리에 <gold>%amount% <red>/<gold>%nick% <red>이 없습니다.'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% 판매 %amount% / %id% (%nick%) 총 %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>플레이어에게서 아이템 구매</b></gradient>'
+      - ''
+      - '<gray>Buy는 전액을 구매하기 때문에 BuyMax와 다릅니다.'
+      - '<gray> 플레이어로부터 구매하거나 아무것도 구매하지 않음'
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - '<gray><yellow><amount> </yellow>아이템 수량'
+      - '<gray><yellow><player> </yellow>아이템을 지불하고 돈을 받아야 하는 사람'
+      - '<gray><yellow><price> </yellow>전체 품목 가격은 양수여야 합니다.'
+      - '<gray><yellow>[silent] </yellow>true로 설정하면 플레이어에게 메시지를 보내지 않습니다'
+      - ''
+      - '<gray>거래하려면 최소 <yellow><amount>'
+      - '<gray>  개의 <yellow><id> </yellow>아이템이 인벤토리에 필요합니다'
+      - '<gray><gold>N.B.</gold> 명령 실행기의 균형은 그대로 유지됩니다.'
+    params: '<id> <amount> <player> <price> [silent]'
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>구입했다 <yellow>%amount% <green>~의 <yellow>%nick% <yellow>~을 위한 <green>%price%'
+    #Holders: %id% %nick%
+    not-enough-space: '<red>구매할 인벤토리 공간이 부족합니다. <gold>%nick%'
+    #Holders: %id% %nick% %price%
+    not-enough-money: '<red>넌 물건을 살 돈이 부족해 <gold>%nick% <red>~을 위한 <gold>%price% <red>각'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% 유급의 %price% ~을 위한 %amount% ~의 %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>플레이어에게 아이템 판매</b></gradient>'
+      - ''
+      - '<gray>SellMax는 Sell와 다른 점은 더 적은 수량을 판매할 수 있기 때문입니다.'
+      - '<gray> 전체를 위한 돈이나 공간이 충분하지 않은 경우 플레이어에게'
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - '<gray><yellow><amount> </yellow>아이템 수량'
+      - '<gray><yellow><player> </yellow> 누가 돈을 내고 아이템을 받아야 할까요?'
+      - '<gray><yellow><price> </yellow>전체 품목 가격은 양수여야 합니다.'
+      - '<gray><yellow>[silent] </yellow>true로 설정하면 플레이어에게 메시지를 보내지 않습니다'
+      - ''
+      - '<gray>돈이나 인벤토리 공간이 부족하면 거래가 실패합니다.'
+      - '<gray>  아이템을 최소 1개 받을 공간이 필요합니다'
+      - '<gray>일부 수량만 구매하면 가격 <yellow><price></yellow> 이 수량에 비례하여 줄어듭니다'
+      - '<gray><gold>N.B.</gold> 명령 실행기의 균형은 그대로 유지됩니다.'
+    params: '<id> <amount> <player> <price> [silent]'
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green> <yellow>%amount% <green>/<yellow>%nick% <yellow>에 <green>%price%에 판매됨'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>인벤토리에 판매할 <gold>%nick% <red>이 없습니다.'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% 판매 %amount% / %id% (%nick%) 총 %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>플레이어에게서 아이템 구매</b></gradient>'
+      - ''
+      - '<gray>BuyMax는 Buy와 달리 더 적은 양으로 구매가 가능합니다.'
+      - '<gray> 인벤토리에 있는 아이템 수보다 적은 경우 플레이어로부터'
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - '<gray><yellow><amount> </yellow>아이템 수량'
+      - '<gray><yellow><player> </yellow>아이템을 지불하고 돈을 받아야 하는 사람'
+      - '<gray><yellow><price> </yellow>전체 품목 가격은 양수여야 합니다.'
+      - '<gray><yellow>[silent] </yellow>true로 설정하면 플레이어에게 메시지를 보내지 않습니다'
+      - ''
+      - '<gray>거래하려면 인벤토리에 최소 1개의 <yellow><id> </yellow>아이템이 필요합니다'
+      - '<gray> 인벤토리에'
+      - '<gray>플레이어 판매가 <yellow><amount></yellow> 미만인 경우 가격이 조정됩니다.'
+      - '<gray><gold>N.B.</gold> 명령 실행기의 균형은 그대로 유지됩니다.'
+    params: '<id> <amount> <player> <price> [silent]'
+itemstorage:
+  help-header: '<gradient:#54acff:#A78BFA><bold>아이템 보관</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>도움말</bold></#A78BFA>'
+  get:
+    #Holders: %id% %amount%
+    success: '%prefix% <green>획득 <yellow>%amount% <green>/<yellow>%id%'
+    no-inventory-space: '%prefix% <red>인벤토리에 공간이 없습니다'
+    description:
+      - '<gradient:#A78BFA:gold><b>선택한 아이템 가져오기</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - '<gray><yellow>[amount] </yellow> 획득 금액, 기본적으로 1'
+    params: '<id> [amount]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>아이템 <yellow>%id% <green>등록됨'
+    #Holders: %limit%
+    limit-reached: '%prefix% <red>저장 가능한 최대 아이템 수에 도달했습니다(%limit%).'
+    description:
+      - '<gradient:#A78BFA:gold><b>손에 있는 아이템 등록</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>아이템을 식별하세요. 대소문자를 구분하지 않으며 식별할 수 없습니다.'
+      - '<gray> 공백이나 점이 포함되어 있으며 선택할 수 없습니다.'
+      - '<gray> 이미 사용된 ID'
+      - ''
+      - '<gold><b>팁</b></gold> <gray>을 사용하여 기존 아이템을 변경하려면 <yellow>/itemstorage update <id></yellow>'
+      - '<gold><b>팁</b></gold> <gray><yellow>/itemstorage get <id>로 저장된 아이템을 검색하세요.'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>아이템 <yellow>%id% <green>등록되지 않음'
+    description:
+      - '<gradient:#A78BFA:gold><b>선택한 아이템 삭제</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>아이템 ID'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>아이템 <yellow>%id% <green>이 업데이트되었습니다.'
+    description:
+      - '<gradient:#A78BFA:gold><b>선택한 아이템 업데이트</b></gradient>'
+      - ''
+      - '<gray>ID에 연결된 아이템을 손 아이템으로 변경'
+      - '<gray><yellow><id> </yellow>아이템 ID'
+      - ''
+      - '<gray><gold><b>팁</b></gold> <yellow>/itemstorage save <id></yellow>를 사용하여 새 아이템을 만드세요.'
+      - '<gray><gold><b>팁</b></gold> <yellow>/itemstorage delete <id></yellow>를 사용하여 아이템을 삭제하세요.'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>저장된 아이템이 포함된 GUI 열기</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] <gray> GUI 페이지, 기본적으로 1'
+    params: '[page]'
+itemeditimport:
+  help:
+    - '<green>/itemeditimport ItemEditor <dark_green>- ItemEditor 플러그인에서 아이템 가져오기'
+  itemeditor:
+    unable-to-get-item:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>아이템을 로드할 수 없습니다. <gold>%id%'
+    already-used-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>는 이미 사용되었습니다. 어쩌면 이전에 이 명령을 이미 수행했을 수도 있습니다. 그렇지 않으면 파일 이름을 바꿀 수도 있습니다. ItemEditor/items/%id%.yml'
+    invalid-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>은 허용되는 ID가 아닙니다. ItemEditor/items/%id%.yml 파일 이름을 영숫자 이름으로 바꿀 수 있습니다.'
+    import-unsuccess:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> <gold>%max% <red> 아이템을 가져오지 않았습니다. 아마도 이전에 이 명령을 이미 실행했을 수도 있습니다(?)'
+    import-success:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>수입됨 <yellow>%done% <green>~의 <yellow>%max% <green>의 아이템 ItemEditor'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>가져온 아이템: <yellow>%ids%'
+    import-empty:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>ItemEditor 가져올 아이템이 없습니다.'
+itemeditreload:
+  success: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>다시 로드됨'
+gui:
+  color:
+    title: '<blue>색상 편집기'
+  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
+    creative: '가운데 클릭'
+    other: '1번을 누르세요'
+  colorselector:
+    title: '<blue>색상 선택'
+    buttons:
+      color:
+        - '<gradient:#A78BFA:gold>색상:</gradient>'
+        - '<gray><yellow>%colors%'
+        - '<gray>[<white>오른쪽 클릭<gray>] 추가 <yellow>%color%'
+        - '<gray>[<white>왼쪽 클릭<gray>] 마지막 색상 제거'
+        - '<gray>[<white>Shift+오른쪽 클릭<gray>] 색상 지우기'
+  banner:
+    title: '<blue>배너 편집자'
+    color_selector_title: '<blue>색상 선택기'
+    pattern_selector_title: '<blue> 패턴 선택기'
+    buttons:
+      pattern_selector_info:
+        - '<gray>선택 <gold><b>%type%</b>'
+      color_selector_info:
+        - '<gray>선택 <gold><b>%color%</b>'
+      position:
+        - '<gradient:#A78BFA:gold>패턴 컨트롤러</gradient>'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] 패턴 전환'
+        - '<gray>[<white>왼쪽/오른쪽 클릭<gray>] << Move pattern >>'
+      type:
+        - '<gradient:#A78BFA:gold>유형 선택기</gradient>'
+        - '<gray>유형: <yellow>%type%'
+        - ''
+        - '<gray>[<white>클릭<gray>] 변경 유형'
+      color:
+        - '<gradient:#A78BFA:gold>색상 선택기</gradient>'
+        - '<gray>색상: <yellow>%color%'
+        - ''
+        - '<gray>[<white>클릭<gray>] 색상 변경'
+  firework:
+    title: '<blue>불꽃놀이 편집자'
+    buttons:
+      type:
+        - '<gradient:#A78BFA:gold>유형 선택기</gradient>'
+        - '<gray>유형: <yellow>%type%'
+        - ''
+        - '<gray>[<white>클릭<gray>] 변경 유형'
+      colors:
+        - '<gradient:#A78BFA:gold>색상 선택기</gradient>'
+        - '<gray>색상: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>클릭<gray>] 색상을 변경하려면'
+      fadecolors:
+        - '<gradient:#A78BFA:gold>페이드 색상 선택기</gradient>'
+        - '<gray>색 바램: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>클릭<gray>] 색상을 변경하려면'
+      flags:
+        none: '<red>활성화되지 않음'
+        trail: '<yellow>트레일 <green>활성'
+        flicker: '<yellow>깜박임 <green>활성'
+        both: '<gray><yellow>Trail</yellow> 및 <yellow>깜박임 <green>활성'
+        info:
+          - '<gradient:#A78BFA:gold>트레일 및 깜박임 활성기</gradient>'
+          - '%status%'
+          - ''
+          - '<gray>[<white>오른쪽 클릭<gray>] 깜박임 효과 전환'
+          - '<gray>[<white>왼쪽 클릭<gray>] 트레일 효과 전환'
+      position:
+        - '<gray>효과 컨트롤러'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] 효과 전환'
+        - '<gray>[<white>왼쪽/오른쪽 클릭<gray>] 이 효과 이동'
+      power:
+        - '<gray>전력: <yellow>%power%'
+        - ''
+        - '<gray>[<white>왼쪽/오른쪽 클릭<gray>] << Change >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>이전 페이지</b>'
+      - ''
+      - '<gray>[<white>클릭<gray>] 페이지로 이동 <yellow>%target_page%'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>다음 페이지</b>'
+      - ''
+      - '<gray>[<white>클릭<gray>] 페이지로 이동 <yellow>%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '<gold><b>뒤로가기</b>'
+      - ''
+      - '<gray>[<white>클릭<gray>] 이전 GUI로 이동'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '<blue>%player_name% 아이템 - 페이지 <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>페이지 <yellow>%page%</b></gradient>'
+        - '<gray>[<white>클릭<gray>] <yellow>아이템</yellow>/<yellow>ID 보기 전환'
+        - ''
+        - '<gray>아이템 클릭:'
+        - '<gray>> [<white>왼쪽 클릭<gray>] 획득 <yellow>1'
+        - '<gray>> [<white>Shift+왼쪽 클릭<gray>] 획득 <yellow>64'
+        - '<gray>> [<white>Shift+오른쪽 클릭<gray>] 아이템 삭제'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '<blue>서버 아이템 - 페이지 <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>페이지 <yellow>%page%</b></gradient>'
+        - '<gray>[<white>클릭<gray>] <yellow>아이템</yellow>/<yellow>ID 보기 전환'
+        - ''
+        - '<gray>아이템 클릭:'
+        - '<gray>> [<white>왼쪽 클릭<gray>] 획득 <yellow>1'
+        - '<gray>> [<white>Shift+왼쪽 클릭<gray>] 획득 <yellow>64'
+        - '<gray>> [<white>Shift+오른쪽 클릭<gray>] 아이템 삭제'

@@ -1,0 +1,1438 @@
+generic:
+  help:
+    player-only: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Yalnızca Oyuncular için Komut'
+    no-item-on-hand: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Elinizde bir eşya tutmanız gerekiyor'
+    lack-permission: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>İzniniz yok %permission%'
+    lack-permission-generic: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bu komutu kullanma izniniz yok'
+    blocked-by-censure: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bu metni kullanamazsınız, engellenen kelimeler içeriyor'
+    blocked-by-type-restriction: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bu öğeyi yeniden adlandıramazsınız'
+    blocked-by-type-restriction-lore: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bu öğedeki öğe açıklamasını düzenleyemezsiniz'
+    blocked-by-lore-line-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Bu öğeye daha fazla öğe açıklama satırı ekleyemezsiniz'
+    blocked-by-lore-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>%limit% karakterden daha uzun satırlar ayarlayamazsınız'
+    blocked-by-rename-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> %limit% karakterden daha uzun ad ayarlayamazsınız'
+
+    prefix: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray>'
+    header-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Yardım</bold></#A78BFA>'
+    header-sub-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <gradient:#A78BFA:#54acff><bold>%sub%</bold></gradient> <dark_gray>»</dark_gray> <#55d6ff><bold>Yardım</#55d6ff>'
+    command-format: '<gray>/%command%</gray> <#bad1ff>%sub%</#bad1ff> <#d7bbff>%params%</#d7bbff>'
+    footer-format: '%prev_clickable% <#7E9CFD><b>Yardım</b> [%page%/%max_page%]</#7E9CFD> %next_clickable%'
+    next_text: ' <light_purple><b>><st>> ></st> '
+    prev_text: ' <light_purple><b><st>< <</st>< '
+    next_void: ' <dark_gray><b>><st>> ></st> '
+    prev_void: ' <dark_gray><b><st>< <</st>< '
+    next_hover: '<gold><b>Sayfaya git %target%'
+    prev_hover: '<gold><b>Sayfaya git %target%'
+  wrong-material:
+    axolotl_bucket: '%prefix% <red>Öğe bir aksolotl kovası olmalıdır'
+    banner: '%prefix% <red>Öğe banner olmalıdır'
+    damageable: '%prefix% <red>Eşyanın aletler ve zırhlar gibi dayanıklı olması gerekir'
+    player_head: '%prefix% <red>Eşya bir oyuncu kafası olmalıdır'
+    rgb_colorable: '%prefix% <red>Eşyalar deri zırhlar, havai fişek yıldızları, iksirler veya iksir efektli oklar gibi renklendirilebilir türde olmalıdır'
+    written_book: '%prefix% <red>Öğe yazılı bir kitap olmalıdır'
+    potion_effect_applicable: '%prefix% <red>Eşya bir iksir veya iksir etkisi olan bir ok veya şüpheli bir güveç olmalıdır'
+    firework: '%prefix% <red>Eşya havai fişek olmalı'
+    spawner_egg: '%prefix% <red>Eşya bir yumurtlama yumurtası olmalıdır'
+    tropical_fish_bucket: '%prefix% <red>Eşya tropikal balık kovası olmalıdır'
+    writable_book: '%prefix% <red>Öğe yazılı bir kitap veya kitap ve tüy kalem olmalıdır'
+    compass: '%prefix% <red>Öğe pusula olmalıdır'
+    music_instrument: '%prefix% <red>Eşya keçi boynuzu olmalıdır'
+    armor: '%prefix% <red>Eşya bir zırh olmalıdır'
+    enchantment_storage: '%prefix% <red>Eşya bir kitap veya büyülü bir kitap olmalıdır'
+  wrong-alias:
+    axolotl_variant: '%prefix% <red>Yanlış Axolotl Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    potion_effect: '%prefix% <red>Yanlış Efekt Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    animations: '%prefix% <red>Yanlış Animasyon Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    sound: '%prefix% <red>Yanlış Ses Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    enchant: '%prefix% <red>Yanlış Büyü Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    flag_type: '%prefix% <red>Yanlış Bayrak Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    book_type: '%prefix% <red>Yanlış Kitap Türü Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    equip_slot: '%prefix% <red>Yanlış Ekipman Yuvası Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    banner_pattern: '%prefix% <red>Yanlış Desen Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    color: '%prefix% <red>Yanlış Renk Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    mob_type: '%prefix% <red>Yanlış Yumurta türü Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    trim_material: '%prefix% <red>Yanlış zırh kaplaması Malzeme Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    tropical_fish_pattern: '%prefix% <red>Yanlış Desen Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    trim_pattern: '%prefix% <red>Yanlış zırh kaplaması Desen Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    boolean: '%prefix% <red>Yanlış Boole Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    attribute: '%prefix% <red>Yanlış Özellik Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    operation: '%prefix% <red>Yanlış İşlem Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    itemrarity: '%prefix% <red>Yanlış Nadirlik Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    entitytype: '%prefix% <red>EntityType Değeri Yanlış! <dark_red>[<gold>buraya gelin<dark_red>]'
+    entitygroups: '%prefix% <red>Yanlış EntityGroup Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    consumable_effect: '%prefix% <red>Yanlış Sarf Malzemesi Etki Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    goat_horn_sound: '%prefix% <red>Yanlış Keçi Boynuzu Ses Değeri! <dark_red>[<gold>buraya gelin<dark_red>]'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>Takma adlar:</b></gradient>'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+itemedit:
+  amount:
+    description:
+      - '<gradient:#A78BFA:gold><b>Tutar ayarla</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>ayarlanacak miktar (127''ye kadar)'
+      - '<gold><b>İpucu</b></gold> <gray>Negatif tutarlar çıkarılır'
+      - '<gray> öğenin mevcut tutarından'
+    params: '<amount>'
+    feedback: '%prefix% <green>Eşya miktarı <yellow>%amount% olarak ayarlandı'
+    feedback-decrease: '%prefix% <green>Eşya miktarı <yellow>%amount% azaldı'
+  attribute:
+    description:
+      - '<gradient:#A78BFA:gold><b>Özellik değiştiricileri düzenle</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <attribute> <amount> [operation] [slot] </yellow><dark_gray>»</dark_gray> yeni değiştiriciler ekle'
+      - '<gray><yellow>Remove <attribute/slot> </yellow><dark_gray>»</dark_gray> bazı değiştiricileri kaldırır'
+    params: '<add/remove> [...]'
+    add:
+      params: '<attribute> <amount> [operation] [slot]'
+      description:
+        - '<gradient:#A78BFA:gold><b>Özellik değiştirici ekle</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute> </yellow>özellik türü'
+        - '<gray><yellow><amount> </yellow>ayarlanacak tutar'
+        - '<gray><yellow>[operation] </yellow>varsayılan toplamlar olarak değiştiricinin nasıl eklendiği'
+        - '<gray><yellow>[slot] </yellow>bu değiştiriciyi yalnızca öğe seçiliyken uygula'
+        - '<gray> ekipman yuvası veya seçilmemişse herhangi bir ekipman yuvası'
+      feedback: '%prefix% <green>Değiştirici eklendi'
+    remove:
+      params: '<attribute/slot>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Değiştiricileri kaldır</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute/slot> </yellow>kaldırmak için yazın, tüm değiştiriciler'
+        - '<gray> seçilen değer kaldırıldı'
+      feedback-attribute: '%prefix% <green>Özellik değiştiricileri kaldırıldı'
+      feedback-equipment: '%prefix% <green>Ekipman yuvasının değiştiricileri kaldırıldı'
+  axolotlvariant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Axolotl kovasındaki Axolotl Varyantını düzenleyin</b></gradient>'
+      - '<white><sprite:items:item/axolotl_bucket>'
+      - '<gray><yellow><type> </yellow>aksolotl türü'
+    params: '<type>'
+    feedback: '%prefix% <green>Axolotl çeşidi <yellow>%variant% olarak değiştirildi'
+  banner:
+    description:
+      - '<gradient:#A78BFA:gold><b>Banner''ı düzenle</b></gradient>'
+    params: '<add/set/remove/color> [...]'
+    set:
+      params: '<type> <color> <line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Deseni seçilen satıra yerleştirin</b></gradient>'
+      feedback: '%prefix% <green>Desen seti'
+    add:
+      params: '<type> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Desen ekle</b></gradient>'
+      feedback: '%prefix% <green>Desen eklendi'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Seçili satırdaki deseni kaldır</b></gradient>'
+      feedback: '%prefix% <green>Desen kaldırıldı'
+    color:
+      params: '<line> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Seçilen çizgideki desen rengini değiştir</b></gradient>'
+      feedback: '%prefix% <green>Desen yeniden renklendirildi'
+  bookauthor:
+    description:
+      - '<gradient:#A78BFA:gold><b>Yazarı ayarla</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>Yazar adı boşluk içerebilir ve renkli de olabilir'
+      - '<gray>Yalnızca Yazılı kitaplarda çalışır'
+    params: '<name>'
+    feedback: '%prefix% <green>Kitap yazarı güncellendi'
+    feedback-reset: '%prefix% <green>Kitap yazarını sıfırla'
+  bookenchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kitaptaki büyüleri ayarlayın</b></gradient>'
+      - '<white><sprite:items:item/enchanted_book> <sprite:items:item/book>'
+      - '<gray>enchant ile bookenchant arasındaki fark şudur:'
+      - '<gray> enchant ateş özelliğine sahip bir kitap, vurulduğunda hedefleri ateşe verir'
+      - '<gray> iken bookenchant olan bir kitap bunu yapmaz'
+      - ''
+      - '<gray><yellow><enchant> </yellow>büyü türü'
+      - '<gray><yellow>[level] </yellow>Büyü seviyesi, varsayılan olarak <yellow>1'
+      - ''
+      - '<gold><b>İpucu</b></gold> <gray>Bir büyüyü kaldırmak için <yellow>[level] </yellow>''yi <yellow>0 </yellow> olarak ayarlayın'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>Kitap büyüsü kaldırıldı <yellow>%enchant%'
+    feedback: '%prefix% <green>Uygulamalı kitap büyüsü <yellow>%enchant% <green>lv <yellow>%lv%'
+  booktype:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kitap türünü ayarla</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>Yalnızca Yazılı kitaplarda çalışır'
+    params: '<booktype>'
+    feedback: '%prefix% <green>Kitap oluşturma işlemi <yellow>%generation% olarak güncellendi'
+    feedback-reset: '%prefix% <green>Kitap oluşturmayı sıfırla'
+  color:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rengi ayarla</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/tipped_arrow_base> <sprite:items:item/firework_star> <sprite:items:item/leather_chestplate>'
+      - '<gray>İksir efektli deri zırh ve havai fişek yıldızları, iksirler ve oklar üzerinde de çalışır!'
+      - '<gray><yellow>[red] [green] [blue] </yellow>birleştirilecek her rengin miktarıdır'
+      - '<gray>Her renk 0 ile 255 arasında bir int değeridir'
+      - '<gray>Kafanız karıştıysa Google''da "<yellow>RGB renk seçici</yellow>"'
+    params: '[red] [green] [blue]'
+    feedback: '%prefix% <green>Renk güncellendi'
+  compass:
+    description:
+      - '<gradient:#A78BFA:gold><b>Pusula hedef konumunu ayarlayın</b></gradient>'
+      - '<white><sprite:items:item/compass_00>'
+      - '<gray><yellow>Set </yellow><dark_gray>»</dark_gray> konumunuzu pusula hedefi olarak ayarlayın'
+      - '<gray><yellow>Clear </yellow><dark_gray>»</dark_gray> pusula hedefini temizle'
+    params: '<set/clear>'
+    set:
+      feedback: '%prefix% <green>Pusula artık <yellow>%world% %x% %y% %z%''yi gösteriyor'
+    clear:
+      feedback: '%prefix% <green>Pusula hedefi temizlendi'
+  custommodeldata:
+    description:
+      - '<gradient:#A78BFA:gold><b>Özel model verilerini düzenleyin</b></gradient>'
+      - ''
+      - '<gray>Doku paketleri için kullanılır'
+      - '<gray><yellow>[value] </yellow>hedef veri modelinin pozitif int''si'
+      - '<gray>Not: modern sunucular kullanılır itemmodel yerine custommodeldata'
+      - '<gray> dokular için, bu komut eski istemciler içindir'
+    params: '<value>'
+    feedback: '%prefix% <green>Özel model verileri güncellendi'
+    feedback-reset: '%prefix% <green>Özel model verileri sıfırlama'
+  damage:
+    description:
+      - '<gradient:#A78BFA:gold><b>Dayanıklılığı düzenle</b></gradient>'
+      - ''
+      - '<gray><yellow><durability> </yellow>uygulanacak hasar'
+      - '<gray><gold>N.B.</gold> <yellow>0 </yellow>hasar yok, tam dayanıklılık anlamına gelir'
+    params: '<durability>'
+    feedback-reset: '%prefix% <green>Dayanıklılık yenilendi'
+    feedback: '%prefix% <green>Dayanıklılık güncellendi'
+  equipment:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğenin Ekipman özelliğini ayarlar</b></gradient>'
+      - ''
+      - '<gray><gold><b>İpucu</b></gold> /itemequip or /iee''yi kullanın'
+      - '<gray><gold>N.B.</gold> içilebilir eşyalarınız yenemez'
+    params: ''
+  enchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Büyüleri ayarla</b></gradient>'
+      - ''
+      - '<gray><yellow><enchant> </yellow>büyü türü'
+      - '<gray><yellow>[level] </yellow>Büyü seviyesi, varsayılan olarak <yellow>1'
+      - ''
+      - '<gold><b>İpucu</b></gold> <gray>Bir büyüyü kaldırmak için <yellow>[level] </yellow>''yi <yellow>0 </yellow> olarak ayarlayın'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>Büyü kaldırıldı <yellow>%enchant%'
+    feedback: '%prefix% <green>Uygulanan büyü <yellow>%enchant% <green>lv <yellow>%lv%'
+  fireresistent:
+    description:
+      - '<gradient:#A78BFA:gold><b>Eşyanın yangına/lava karşı direncini ayarlayın</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>değeri ayarlayın, varsayılan olarak geçiş yapın'
+      - ''
+      - '<gray>Yangına dayanıklı bir eşya yok olmaz'
+      - '<gray> ateşe düştüğünde ve lavın üzerinde yüzdüğünde'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Yangın direnci <yellow>%value% olarak ayarlandı'
+  fireworkpower:
+    description:
+      - '<gradient:#A78BFA:gold><b>Havai fişek gücünü ayarla</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+      - '<gray><yellow><power> </yellow>havai fişek gücü, <yellow>0 </yellow> ile <yellow>5 arasında bir değer'
+    params: '<power>'
+    feedback: '%prefix% <green>Havai fişek gücü güncellendi'
+  firework:
+    description:
+      - '<gradient:#A78BFA:gold><b>GUI ile havai fişekleri düzenleyin</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+    params: ''
+  food:
+    description:
+      - '<gradient:#A78BFA:gold><b>Ögenin yiyecek özelliğini ayarlar</b></gradient>'
+      - ''
+      - '<gray><gold><b>İpucu</b></gold> /itemfood or /if''yi kullanın'
+      - '<gray><gold>N.B.</gold> içilebilir eşyalarınız yenemez'
+    params: ''
+  glider:
+    description:
+      - '<gradient:#A78BFA:gold><b> Planör durumunu ayarla</b></gradient>'
+      - ''
+      - '<gray>Planör öğesi elytralardaki gibi kaymaya izin vermeli'
+      - '<gray><yellow>[true/false] </yellow>planör değerini ayarla, varsayılan olarak geçiş yap'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Kayma ayarı <yellow>%value% olarak güncellendi'
+  glow:
+    description:
+      - '<gradient:#A78BFA:gold><b>Büyü parlama efektini geçersiz kıl</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>değeri ayarlayın, varsayılan olarak sıfırlayın'
+      - ''
+      - '<gold><b>İpucu</b></gold> <gray><yellow>değer belirtilmedi </yellow>vanilya davranışını geri yükle'
+    params: '[true/false/default]'
+    feedback: '%prefix% <green>Işıma <yellow>%value% olarak ayarlandı'
+    feedback-reset: '%prefix% <green>Işıma değerini varsayılana sıfırla'
+  goathornsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Keçi Boynuzu sesini ayarla</b></gradient>'
+      - '<white><sprite:items:item/goat_horn>'
+      - '<gray><yellow><type> </yellow>ses türü'
+    params: '<type>'
+    feedback: '%prefix% <green>Güncellenmiş Ses'
+  hide:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bileşenleri gizle veya göster</b></gradient>'
+      - ''
+      - '<gray><yellow><flag> </yellow>düzenlenecek öğe bayrağı'
+      - '<gray><yellow>[true/false] </yellow>bayrak değerini ayarlayın, varsayılan olarak geçiş yapın'
+      - ''
+      - '<gold><b>İpucu</b></gold> <gray> potion_effects bayrağıyla banner desenlerini gizleyin'
+      - '<gold><b>İpucu</b></gold> <gray><yellow>/itemedit hideall ile tüm bayrakları aynı anda gizleyin'
+    params: '<flag> [true/false]'
+    feedback: '%prefix% <green>Bayrak artık <yellow>%value%'
+  hidetooltip:
+    description:
+      - '<gradient:#A78BFA:gold><b>Araç ipuçlarını gizle veya göster</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>bayrak değerini ayarlayın, varsayılan olarak geçiş yapın'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Araç ipucunun gizli durumu artık <yellow>%value%'
+  hideall:
+    description:
+      - '<gradient:#A78BFA:gold><b>Tüm bileşenleri gizle</b></gradient>'
+      - ''
+      - '<gray>Gizlemeler: büyüler, iksir efektleri, sancak katmanları, nitelikler ...'
+      - ''
+      - '<gold><b>İpucu</b></gold> <gray>tek bileşenleri <yellow>/itemedit hide <flag> true ile gizleyin'
+    params: ''
+    feedback: '%prefix% <green>Tüm bayrakları gizle'
+  itemmodel:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğe modelini düzenle</b></gradient>'
+      - ''
+      - '<gray><yellow><namespaced key> </yellow>doku referansını ayarlama tuşu'
+      - '<gray>Örnek: /ie itemmodel <yellow>iron_sword'
+      - '<gray>Örnek: /ie itemmodel <yellow>minecraft:iron_sword'
+      - ''
+      - '<gray><yellow><namespace></yellow>:<yellow><id></yellow> modele referans verecektir:'
+      - '  /assets/<yellow><namespace></yellow>/models/item/<yellow><id>'
+    params: '<namespaced key>'
+    feedback: '%prefix% <green>Güncellenmiş Öğe Modeli'
+    feedback-reset: '%prefix% <green>Öğe Modelini Sıfırla'
+  kinetic:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğenin kinetik özelliğini ayarlar</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gray><gold><b>İpucu</b></gold> /itemkinetic or /iek''yi kullanın'
+    params: ''
+  maxdurability:
+    description:
+      - '<gradient:#A78BFA:gold><b>Eşyanın maksimum dayanıklılığını ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><max durability> </yellow>item yeni dayanıklılık değeri,'
+      - '<gray> 1''den büyük olmalı'
+    params: '<max durability>'
+    feedback: '%prefix% <green>Maksimum dayanıklılık <yellow>%value% olarak güncellendi'
+  maxstacksize:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğe maksimum yığın boyutunu ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[1-99] </yellow>bayrak değerini ayarlayın'
+      - ''
+      - '<gray><yellow>değer yok </yellow><yellow>64 olan ortak yığın boyutunu geri yükler'
+      - "<gray> çoğu öğe için, <yellow>1</yellow> zırhlar ve aletler ve diğerleri için\nBirkaç öğe için"
+      - '<gray> değerleri'
+    params: '[1-99]'
+    feedback: '%prefix% <green>Maksimum yığın boyutu <yellow>%value% olarak güncellendi'
+    feedback-reset: '%prefix% <green>Maksimum yığın boyutunu sıfırla'
+  pierce:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğenin delici silah özelliklerini ayarlayın</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gold><b>İpucu</b></gold><gray> /itempiercing or /iep''yi kullanın'
+    params: ''
+  potioneffect:
+    itemtag-tip: '%prefix% <gray>Ortak öğelere iksir efektleri eklemeniz mi gerekiyor? >ItemTag<''i deneyin'
+    itemtag-tip-hover:
+      - '<gradient:#A78BFA:gold>Beni tıkla</gradient>'
+    description:
+      - '<gradient:#A78BFA:gold><b>İksirin efektlerini düzenleyin</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/suspicious_stew> <sprite:items:item/tipped_arrow_base>'
+      - '<gray>Herhangi bir İksir, iksir efektli oklar ve Şüpheli güveç üzerinde çalışır!'
+      - '<gray><yellow>Add <effect> <duration> [level] </yellow><dark_gray>»</dark_gray> efekt ekle'
+      - '<gray><yellow>Remove <effect> </yellow><dark_gray>»</dark_gray> seçilen efekti kaldırır'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> tüm efektleri kaldır'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
+      description:
+        - '<gradient:#A78BFA:gold><b>Seçili efekti ekler/geçersiz kılar</b></gradient>'
+        - ''
+        - '<gray><yellow><effect> </yellow>efekt türü'
+        - '<gray><yellow><duration> </yellow>saniye cinsinden süre'
+        - '<gray><yellow>[level] </yellow>Varsayılan olarak 127''ye kadar <yellow>1'
+        - '<gray><yellow>[particles] </yellow>Parçacıklar gösterilmeli mi? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[ambient] </yellow>Parçacıkların ortam bayrağı olmalı mı? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[icon] </yellow>Simge sağ üst köşede gösterilsin mi? <yellow>true</yellow>/<yellow>false'
+      feedback: '%prefix% <green>İksir efekti eklendi'
+    remove:
+      params: '<effect>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Seçili efekti kaldır</b></gradient>'
+      feedback: '%prefix% <green>İksir etkisi kaldırıldı'
+    reset:
+      feedback: '%prefix% <green>İksir efektlerini sıfırla'
+  rarity:
+    description:
+      - '<gradient:#A78BFA:gold><b>Eşya nadirliğini ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[rarity] </yellow>eşya nadirliğini ayarla'
+      - ''
+      - '<gold><b>İpucu</b><gold><gray> nadirlik değeri ayarlanmaması varsayılanı geri yükleyecektir'
+    params: '[rarity]'
+    feedback: '%prefix% <green>Nadirlik güncellendi'
+    feedback-reset: '%prefix% <green>Nadirliği Sıfırla'
+  repaircost:
+    description:
+      - '<gradient:#A78BFA:gold><b>Örs Onarım Maliyetini Düzenle</b></gradient>'
+      - ''
+      - '<gray><yellow><cost> </yellow>seviye miktarı'
+      - '<gray><gold>N.B.</gold> örs onarımı/yeniden adlandırma fiyatı her zaman en az <yellow>1'
+      - '<gray><gold>N.B.</gold> bu komut, öğenin temel onarım maliyetini belirler, örsün son seviyelerinin maliyeti ne yaptığınıza bağlıdır'
+      - '<gray>Daha fazla bilgi için <yellow>minecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<cost>'
+    feedback: '%prefix% <green>Onarım maliyeti güncellendi'
+  skullowner:
+    description:
+      - '<gradient:#A78BFA:gold><b>Oynatıcı kafa sahibini ayarlayın</b></gradient>'
+      - ''
+      - '<gray>Yalnızca oyuncu kafalarıyla çalışır'
+      - '<gray><yellow>[name] </yellow>sahibin adı'
+      - ''
+      - '<gold><b>İpucu</b></gold> <gray>Dış görünüşünü güncellemek için oynatıcının kafasını yerleştirin ve kırın'
+    params: '[name]'
+    feedback: '%prefix% <green>Oyuncu başkanı sahibi güncellendi'
+    feedback-reset: '%prefix% <green>Oyuncu başkanı sahibi sıfırlandı'
+  tooltipstyle:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğe ipucu stilini düzenle</b></gradient>'
+      - ''
+      - '<gray><yellow><style> </yellow>doku referansını ayarlama tuşu'
+      - '<gray> stili <white><namespace>:<id> tarafından oluşturulmuştur'
+      - '<gray>Örnek: /ie tooltipstyle <yellow>my_style'
+      - '<gray>Örnek: /ie tooltipstyle <yellow>minecraft:my_style'
+      - '<gray>burada <yellow>minecraft</yellow> <white><namespace></white>''dir ve'
+      - '<gray><yellow>my_style</yellow> <white><id>''dir'
+      - '<gray>ayarlandığında, bu öğe için özel spritelar kullanılabilir.'
+      - '<gray>araç ipucu arka planı ve çerçevesi.'
+      - '<gray><white><namespace>:tooltip/<id>_background'
+      - '<gray>ve <white><namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
+    feedback: '%prefix% <green>Güncellenmiş araç ipucu stili'
+    feedback-reset: '%prefix% <green>Araç ipucu stilini sıfırla'
+  armortrim:
+    description:
+      - '<gradient:#A78BFA:gold><b>Zırh Trimini Ayarla</b></gradient>'
+      - '<white><sprite:items:item/iron_chestplate>'
+      - '<gray><yellow><material> </yellow>zırh kaplama malzemesi'
+      - '<gray><yellow><pattern> </yellow>zırh kaplama deseni'
+    params: '<material> <pattern>'
+    feedback: '%prefix% <green>Zırh kaplaması güncellendi'
+    feedback-reset: '%prefix% <green>zırh kaplaması kaldırıldı'
+  tropicalfish:
+    description:
+      - '<gradient:#A78BFA:gold><b>Tropikal balık kovasının set özelliği</b></gradient>'
+      - '<white><sprite:items:item/tropical_fish_bucket>'
+      - '<gray><yellow>pattern <pattern type> </yellow><dark_gray>»</dark_gray> balık türü'
+      - '<gray><yellow>patterncolor <color> </yellow><dark_gray>»</dark_gray> balığın desen rengi'
+      - '<gray><yellow>bodycolor <color> </yellow><dark_gray>»</dark_gray> balıkların vücut rengi'
+    params: '[...]'
+    pattern:
+      params: '<type>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Tropikal balık desen türünü ayarla</b></gradient>'
+        - ''
+        - '<gray><yellow><type> </yellow>balığın desen türü'
+      feedback: '%prefix% <green>Güncellenmiş Desen'
+    patterncolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Tropikal balık desen rengini ayarla</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>balığın desen rengi'
+      feedback: '%prefix% <green>Güncellenmiş Renk'
+    bodycolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Tropikal balık gövde rengini ayarla</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>balığın vücut rengi'
+      feedback: '%prefix% <green>Güncellenmiş Renk'
+  type:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğenin türünü ayarlayın</b></gradient>'
+      - ''
+      - '<gray><gold>N.B.</gold> Hava çalışmadığından birkaç tür'
+    params: '<type>'
+    feedback: '%prefix% <green>Güncellenmiş Öğe Malzemesi'
+  unbreakable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kırılmaz durumu ayarla</b></gradient>'
+      - ''
+      - '<gray>Kırılmaz aletler ve zırhlar dayanıklılığı kaybetmez'
+      - '<gray><yellow>[true/false] </yellow>kırılmaz değeri ayarla, varsayılan olarak geçiş yap'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Kırılmaz Öğe <yellow>%value% olarak güncellendi'
+  help:
+    header-name: 'ItemEdit'
+    description:
+      - '<gradient:#A78BFA:gold><b>Gösteriler ItemEdit yardım</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Yardım sayfası'
+      - '<gray><yellow>[subcommand] </yellow>Alt komut için yardım'
+    params: '[page/subcommand]'
+  rename:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğenin adını ayarlayın</b></gradient>'
+      - ''
+      - '<gold><b>İpucu</b></gold> <gray>adı varsayılana döndürmek için <yellow>/ie rename -clear </yellow>yazın'
+      - '<gold><b>İpucu</b></gold> <gray>adı kopyalamak için <yellow>/ie rename -copy </yellow>yazın'
+      - '<gold><b>İpucu</b></gold> <gray>önceden kopyalanan değeri yapıştırmak için <yellow>/ie rename -paste </yellow>yazın'
+    params: '<name>'
+    feedback: '%prefix% <green>Öğe adı güncellendi'
+    rename-clear: '%prefix% <green>Öğe adı temizlendi'
+    rename-copy: '%prefix% <green>Öğe adı kopyalandı'
+    rename-paste-empty: '%prefix% <red>Yapıştırılacak kopyalanan öğe adı yok'
+    feedback-paste: '%prefix% <green>Kopyalanan öğe adı yapıştırıldı'
+    banned_words: '%prefix% <red>Öğe adı engellenen kelimeler içeriyor'
+  lore:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğe açıklamasını düzenle</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <text> </yellow><dark_gray>»</dark_gray> yeni bir satıra metin ekle'
+      - '<gray><yellow>Insert <line> <text> </yellow><dark_gray>»</dark_gray> seçilen satıra metin ekle'
+      - '<gray><yellow>Set <line> <text> </yellow><dark_gray>»</dark_gray> seçilen satırdaki metni ayarlayın veya değiştirin'
+      - '<gray><yellow>Remove <line> </yellow><dark_gray>»</dark_gray> seçilen satırı kaldır'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> tüm satırları kaldır'
+      - '<gray><yellow>Copy </yellow><dark_gray>»</dark_gray> daha sonra yapıştırmak için geçerli öğe öğe açıklamasını kopyalayın'
+      - '<gray><yellow>CopyBook </yellow><dark_gray>»</dark_gray> kopya ile aynı ancak kitabın sayfalarından satırlar halinde'
+      - '<gray><yellow>CopyFile <path> </yellow><dark_gray>»</dark_gray> kopyayla aynı ancak loreCopy.yml''den itibaren'
+      - '<gray><yellow>Paste </yellow><dark_gray>»</dark_gray> son kopyalanan öğe açıklamasını yapıştırın'
+      - '<gray><yellow>Replace <replaced> <replacer> </yellow><dark_gray>»</dark_gray> tüm oluşumları değiştir'
+    params: '<add/set/remove...> [...]'
+    set:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Seçili satırdaki metni ayarlayın veya değiştirin</b></gradient>'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Seçili satırı kaldır</b></gradient>'
+    insert:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Seçili satıra metin ekle</b></gradient>'
+    copy:
+      feedback: '%prefix% <green>öğe açıklaması kopyalandı'
+    copyBook:
+      feedback: '%prefix% <green>Kitap sayfaları kopyalandı ve yapıştırılmaya hazır'
+    copyFile:
+      wrong-path: '%prefix% <red>Geçersiz yol, yapılandırmayı yeniden yüklemeyi ve CaP''leri kontrol etmeyi unutmayın'
+      no-path: '%prefix% <red>Bir yol seçin /ie lore copyfile <gold><path>'
+      feedback: '%prefix% <green>Yapılandırma kopyalandı ve yapıştırılmaya hazır'
+    paste:
+      feedback: '%prefix% <green>öğe açıklaması yapıştırıldı'
+      no-copy: '%prefix% <red>Önce bir öğe açıklamasını kopyalayın'
+    replace:
+      params: '<replaced> <replacer>'
+      description:
+        - '<gold><b>Öğe açıklamasındaki tüm yerleri değiştir</b></gradient>'
+        - ''
+        - '<gray>Bir kelimeden fazlasını değiştirmeniz gerekiyorsa'
+        - '<gray> içeriden kapatmak için <yellow>{ }'
+        - ''
+        - '<gray>Örnek: <yellow>/ie lore replace New Rusty'
+        - '<gray>''<yellow>New sword</yellow>'' -> ''<yellow>Rusty sword</yellow>'''
+        - ''
+        - '<gray>Örnek 2: <yellow>/ie lore replace {Heavy} {Very light}'
+        - '<gray>''<yellow>Heavy sword</yellow>'' -> ''<yellow>Very light sword</yellow>'''
+  listaliases:
+    description:
+      - '<gradient:#A78BFA:gold><b>İzin verilen takma ad parametrelerini gösterir</b>'
+      - ''
+      - '<gray><yellow><type> </yellow>gösterilecek parametre türü'
+    params: '<type>'
+    prefix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>Takma Adlar <dark_blue>◆ ◆ ◆ ◆'
+    postfix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>Takma Adlar <dark_blue>◆ ◆ ◆ ◆'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+    hover_info: '<blue>Orijinal değeri: <yellow>%default%'
+    hover_type: '<gold>İncelemek için tıklayın'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>Takma adlar:</b></gradient>'
+itemeditequipment:
+  allowedentities:
+    invalid-type: '%prefix% <red><gold>%value% <red> değeri ne geçerli bir varlık ne de geçerli bir varlık grubudur'
+    description:
+      - '<gradient:#A78BFA:gold><b>Bu ekipmanı giymesine izin verilen varlık türlerini ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[entity] </yellow>hangi varlık türü'
+      - '<gray><yellow>[group] </yellow>hangi varlık grubu'
+      - ''
+      - '<gray>Seçilen tüm türler eklendi'
+    params: '[entity/group] [entity/group] ...'
+    feedback: '%prefix% <green>İzin verilen varlık türleri artık: <yellow>%value%'
+    feedback-reset: '%prefix% <green>İzin verilen varlık türleri sıfırlandı'
+  canshear:
+    unsupported-version: '%prefix% <red>Sunucu sürümünüz (<gold>%value%<red>) bu özelliği desteklemiyor'
+    description:
+      - '<gradient:#A78BFA:gold><b>Etkileşimde kuşanmayı ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true kesebilmek'
+      - '<gray>balkabağı gibi bir varlıktan alınan ekipman'
+      - '<gray>kardan adam için'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Can kesme özelliği artık <yellow>%value%'
+  canbesheared:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bu ekipmanın kesilip kesilemeyeceğini ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Ekipmanın kesilip kesilemeyeceği'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Kesilebilir özelliği artık <yellow>%value%'
+  cameraoverlay:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kamera katmanını ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[namespacedkey] </yellow>hangi kaplamayı istiyorsunuz'
+      - '<gray>Yer paylaşımları tek vanilya doku paketleri üzerinde ayarlanmıştır'
+      - '<gray>yer paylaşımı minecraft:misc/pumpkinblur''dir'
+    params: '[namespacedkey]'
+    feedback: '%prefix% <green>Kamera arayüzü güncellendi'
+    feedback-reset: '%prefix% <green>Kamera katmanı kaldırıldı'
+    invalid-namespacedkey: '<red>Namespacedkey <gold>%value% <red> geçersiz'
+  clear:
+    description:
+      - '<gradient:#A78BFA:gold><b>Eşyadaki ekipman özelliğini tamamen kaldırın</b></gradient>'
+      - ''
+      - '<gray>Veya öğe bir vanilya ekipmanıysa varsayılanları geri yükleyin'
+    params: ''
+    feedback: '%prefix% <green>Ekipman özellikleri varsayılana sıfırlandı'
+  damageonhurt:
+    description:
+      - '<gradient:#A78BFA:gold><b>Hasarlı ayarlar</gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true hasarla dayanıklılığı azaltmak için'
+      - ''
+      - '<gray><gold>N.B.</gold> yalnızca maksimum yığın boyutu 1 olan öğe hasar görebilir'
+      - '<gray> <yellow>/ie maxstacksize 1''yi kullanın'
+      - '<gray><gold><b>İpucu</b></gold> öğenin maksimum dayanıklılığını ayarlamayı unutmayın.'
+      - '  <yellow>/ie maxdurability <amount>'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Yaralanan mülke verilen hasar artık <yellow>%value%'
+    warning-maxstacksize: '%prefix% <red>Eşyaların hasar görmesi için maksimum yığın boyutu <gold>1 <red> olmalıdır <dark_red>[<gold>düzeltmek için tıklayın<dark_red>]'
+  dispensable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Vazgeçilebilir setler</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true dispenser ile donatmak için'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Dispensable özelliği artık <yellow>%value%'
+  equiponinteract:
+    description:
+      - '<gradient:#A78BFA:gold><b>Etkileşimde kuşanmayı ayarlar</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true etkileşimle donatmak için'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Etkileşim özelliği artık <yellow>%value%'
+  equipsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Donanım sesini ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>hangi ses çıkarılmalı'
+    params: '[sound]'
+    feedback: '%prefix% <green>Equip ses özelliği artık <yellow>%value%'
+    feedback-reset: '%prefix% <green>Equip ses özelliği varsayılana sıfırlandı'
+  help:
+    header-name: 'ItemEquipment'
+    description:
+      - '<gradient:#A78BFA:gold><b>Gösteriler ItemEditEquipment yardım</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Yardım sayfası'
+      - '<gray><yellow>[subcommand] </yellow>Alt komut için yardım'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bu öğedeki ekipman özelliklerini gösterir</b></gradient>'
+    params: ''
+    not_set: '%prefix% <gray>Bu eşyanın donatılabilir bir bileşeni yok'
+    message:
+      - '%prefix% <dark_green><b>Donatılabilir</b>'
+      - '<green>Yuva: <yellow>%slot%'
+      - '<green>Kesilebilir: <yellow>%canbesheared%'
+      - '<green>Yaralanma hasarı: <yellow>%damageonhurt%'
+      - '<green>Varsayılan: <yellow>%dispensable%'
+      - '<green>Etkileşimde donatın: <yellow>%equiponinteract%'
+      - '<green>Değiştirilebilir: <yellow>%swappable%'
+      - '<green>Sesi donat: <yellow>%equipsound%'
+      - '<green>Kesme sesi: <yellow>%shearsound%'
+      - '<green>İzin verilen varlıklar: <yellow>%allowedentities%'
+      - '<green>Kamera katmanı: <yellow>%cameraoverlay%'
+      - '<green>Varlık kimliği: <yellow>%assetid%'
+  model:
+    description:
+      - '<gradient:#A78BFA:gold><b>Doku modelini ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[key] </yellow>Donanıldığında kullanılacak ekipman modelinin ad alanlı kimliği'
+    params: '[key]'
+    feedback: '%prefix% <green>Ekipman modeli artık <yellow>%key%'
+    feedback-reset: '%prefix% <green>Ekipman modeli sıfırlandı'
+  shearsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğe makasla kaldırıldığında çıkan sesi ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>hangi ses çıkarılmalı'
+      - '<gray>kabak gibi kesilerek çıkarıldığında'
+      - '<gray>kardan adam için'
+    params: '[sound]'
+    feedback: '%prefix% <green>Kesme sesi artık <yellow>%value%'
+    feedback-reset: '%prefix% <green>Kesme sesi özelliği varsayılana sıfırlandı'
+  shearingsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğe makasla kaldırıldığında çıkan sesi ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>Hangi ses çıkarılmalı'
+      - '<gray>kardan adam için balkabağı gibi makasla kaldırıldığında'
+    params: '[sound]'
+    feedback: '%prefix% <green>Kesilme sesi artık <yellow>%value%'
+  slot:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kullanılabilir yuvayı ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><slot> </yellow>eşyanın takılabileceği yer'
+    params: '<slot>'
+    feedback: '%prefix% <green>Ekipman Yuvası artık <yellow>%value%'
+  swappable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğeyi değiştirilebilir olarak ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true öğenin değiştirilebilmesi için'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Değiştirilebilir özellik artık <yellow>%value%'
+itemeditfood:
+  addeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğeye efekt ekleme</b></gradient>'
+      - '<gray><yellow>/ief addeffect </yellow>cleareffects'
+      - '<gray><yellow>/ief addeffect </yellow>teleport <range>'
+      - '<gray><yellow>/ief addeffect </yellow>applyeffects [chance] <potion> <lv> <duration> [ambient] [particle] [icon]'
+      - '<gray><yellow>/ief addeffect </yellow>removeeffects <potion>'
+      - '<gray><yellow>/ief addeffect </yellow>playsound <sound>'
+      - ''
+    params: '[...]'
+    cleareffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Öğeye efekt ekleme</b></gradient>'
+        - ''
+        - '<gray>Oyuncu üzerindeki süt kovası gibi iksir etkilerini kaldırın'
+      params: '<potion>'
+      feedback: '%prefix% <green>Yemek yenildiğinde ışınlanma etkisi eklendi'
+    teleport:
+      description:
+        - '<gradient:#A78BFA:gold><b>Öğeye efekt ekleme</b></gradient>'
+        - '<gray><yellow><range> </yellow>oyuncuyu ne kadar uzağa ışınlayın'
+        - ''
+        - '<gray>Yemek yenildiğinde rastgele ışınlanan oyuncu'
+      params: '<range>'
+      feedback: '%prefix% <green>Yemek yenildiğinde ışınlanma etkisi eklendi'
+    applyeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Öğeye efekt ekleme</b></gradient>'
+        - '<gray><yellow>[chance] </yellow>Efekti uygulama şansı yüzde kaç?'
+        - '<gray>, <yellow>0</yellow>''den büyük olmalıdır ve daha düşük olanı <yellow>100''e eşit olmalıdır'
+        - '<gray><yellow><potion> </yellow>İksir efekt türü'
+        - '<gray><yellow><lv> </yellow>efekt düzeyi, varsayılan olarak <yellow>1</yellow>'
+        - '<gray><yellow><duration> </yellow>Etkinin saniye cinsinden süresi veya kalıcı etki için <yellow>-1 </yellow>'
+        - '<gray><yellow>[ambient] [particle] [icon] </yellow>true/false iksir efekti özelleştirmeleri'
+        - ''
+        - '<gray>Yemek yenildiğinde oynatıcıya seçilen efekti uygula'
+      params: '<potion>'
+      feedback: '%prefix% <green>Yemek yenildiğinde uygulama efekti eklendi'
+    removeeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Öğeye efekt ekleme</b></gradient>'
+        - '<gray><yellow><potion> </yellow>seçilen efekti temizle'
+        - ''
+        - '<gray>Yemek yenildiğinde seçilen efekti oynatıcıdan kaldır'
+      params: '<potion>'
+      feedback: '%prefix% <green>Yemek yenildiğinde kaldırma efekti eklendi'
+    playsound:
+      description:
+        - '<gradient:#A78BFA:gold><b>Öğeye efekt ekleme</b></gradient>'
+        - '<gray><yellow><sound> </yellow>oynamak için ses'
+        - ''
+        - '<gray>Yemek yenildiğinde seçilen sesi çal'
+      params: '<sound>'
+      feedback: '%prefix% <green>Yemek yerken ses eklendi'
+  animation:
+    description:
+      - '<gradient:#A78BFA:gold><b>Setlerin yemek animasyonu</b></gradient>'
+      - '<gray>Yalnızca <red>1.21.2+ için'
+      - ''
+      - '<gray><yellow><animation> </yellow>Ayarlanacak değer, varsayılan olarak geçiş yap'
+      - ''
+      - '<gray>Bazı animasyonlar yalnızca birinci şahıs görünümünde gösterilir,'
+      - '<gray>bazı animasyonlar yalnızca üçüncü şahıs görünümünde gösterilir,'
+      - '<gray>Bazı animasyonlar hem birinci hem de üçüncü şahıs görünümünde gösteriliyor'
+    params: '<animation>'
+    feedback: '%prefix% <green>Uygulamalı animasyon'
+  canalwayseat:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğenin yenilip yenilmeyeceğini ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Ayarlanacak değer, varsayılan geçiş olarak'
+      - ''
+      - '<gray>Genellikle yiyeceklerin yenilmesi için açlık gerekir,'
+      - '<gray>ayar true altın elma davranışını taklit edecektir'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Ürün var Her zaman yiyebilir <yellow>%value%'
+  consumeparticles:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğenin yenildiğinde parçacık gösterip göstermeyeceğini ayarlar</b></gradient>'
+      - '<gray>Yalnızca <red>1.21.2+ için'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Ayarlanacak değer, varsayılan geçiş olarak'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Parçacık tüketme artık <yellow>%value%'
+  convertto:
+    description:
+      - '<gradient:#A78BFA:gold><b>Yiyecek tüketildiğinde verilecek öğeyi ayarlar</b></gradient>'
+      - '<gray>Yalnızca <red>1,21+ için'
+      - ''
+      - '<gray><yellow>[type/serveritem id] </yellow>iade edilecek ürün'
+      - '<gray> bir Materyal ayarlayabilir veya'
+      - '<gray> kayıtlı ServerItem öğeden bir öğe seçin'
+      - ''
+      - '<gray>Bir kovanın olduğu yerde kova sütü davranışını taklit edin'
+      - '<gray>süt tüketildiğinde geri döner'
+    params: '[type/serveritem id]'
+    feedback: '%prefix% <green>Güncellenmişe dönüştür'
+  eatticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğeyi yemek için gereken süreyi ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><ticks> </yellow>Öğeyi yemek için gereken süre'
+      - '<gray> <yellow>1 </yellow> veya daha büyük olmalıdır'
+      - ''
+      - '<gray><yellow>20 </yellow>tikler = <yellow>1 </yellow>saniye'
+    params: '<ticks>'
+    feedback: '%prefix% <green>Yeme keneleri <yellow>%value% olarak güncellendi'
+  help:
+    header-name: 'ItemFood'
+    description:
+      - '<gradient:#A78BFA:gold><b>Gösteriler ItemFood yardım</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Yardım sayfası'
+      - '<gray><yellow>[subcommand] </yellow>Alt komut için yardım'
+    params: '[page/subcommand]'
+  info:
+    not_food: '%prefix% <dark_green>Item''in yiyecek özelliği yoktur veya varsayılan özelliği vardır'
+    message:
+      - '%prefix% <dark_green><b>Öğe Yiyecek Özelliği</b>'
+      - '<green>Yemek zamanı: <yellow>%eatseconds%<green> sn <dark_gray>(<gray>%eatticks%<dark_gray> tik)'
+      - '<green>Açlığı Yenileme: <yellow>%nutrition% <dark_gray>| <green>Doygunluk: <yellow>%saturation%<green>'
+      - '<green>Animasyon: <yellow>%animation% <dark_gray>| <green>Ses: <yellow>%sound% <dark_gray>| <green>Parçacıklar: <yellow>%consumeparticles%'
+      - '<green>Doyduğunda yenilebilir: <yellow>%canalwayseat% <dark_gray>| <green>Yendiğinde: <yellow>%convertto% elde edilir'
+    apply_effect_prefix:
+      - '<dark_green><b><yellow>%effects%<dark_green> olası iksir efektlerini içerir:</b>'
+    apply_effect:
+      - '<green>%index%. Tür: <yellow>%type% <dark_gray>| <green>Sv: <yellow>%level% <dark_gray>| <green>Süre: <yellow>%duration_s%<green> sn <dark_gray>(<gray>%duration_ticks%<dark_gray> tıklama)'
+      - '<green> Parçacıklar: <yellow>%hasparticle% <dark_gray>| <green>Ortam: <yellow>%isambient% <dark_gray>| <green>Simge: <yellow>%hasicon% <dark_gray>| <green>Şans: <yellow>%chance_perc%<green>%'
+    consume_effect_teleport: '<green>Rastgele ışınlanma çapı: <yellow>%diameter%'
+    consume_effect_sound: '<green>Ek tüketim sesi: <yellow>%sound%'
+    consume_effect_remove: '<green>Kaldırılan efektler: <yellow>%effects%'
+    consume_effect_clear: '<green>Tüm aktif durum efektlerini temizler'
+    consume_effect_unknown: '<green>Diğer tüketim etkisi: <yellow>%type%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğenin mevcut yiyecek bilgilerini açıklayın</b></gradient>'
+    params: ''
+  nutrition:
+    description:
+      - '<gradient:#A78BFA:gold><b>Yenilenen beslenmeyi ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>Yenilenecek açlık miktarı'
+      - '<gray> <yellow>0 </yellow>veya daha büyük olmalıdır'
+      - ''
+      - '<gray>Tam açlık barı <yellow>20'
+    params: '<amount>'
+    feedback: '%prefix% <green>Beslenme değeri artık <yellow>%value%'
+  removeeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğeden bir efekti kaldırma</b></gradient>'
+      - ''
+      - '<gray><yellow><index> </yellow>Seçilen efekti kaldır'
+    params: '<index>'
+    feedback: '%prefix% <green>Seçili yiyecek efekti kaldırıldı'
+  reset:
+    description:
+      - '<gradient:#A78BFA:gold><b>Üründeki yiyecek özelliğini tamamen kaldırın</b></gradient>'
+      - ''
+      - '<gray>Ya da öğe vanilyalı bir yiyecekse varsayılanları geri yükleyin'
+    params: ''
+    feedback: '%prefix% <green>Yiyecek özellikleri kaldırıldı'
+  reseteffects:
+    description:
+      - '<gradient:#A78BFA:gold><b>Öğeden efektleri kaldır</b></gradient>'
+    params: ''
+    feedback: '%prefix% <green>Yiyecek efektleri kaldırıldı'
+  saturation:
+    description:
+      - '<gradient:#A78BFA:gold><b>Geri kazanılan doygunluğu ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>Eklenecek doygunluk miktarı'
+      - '<gray> negatif değerlere izin verilir'
+      - ''
+      - '<gray>Doygunluk, gıda seviyesinin ne kadar hızlı olduğunu kontrol eder'
+      - '<gray> (beslenme) azalması'
+    params: '<amount>'
+    feedback: '%prefix% <green>Doygunluk artık <yellow>%value%'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Setler ses yer</b></gradient>'
+      - '<gray>Yalnızca <red>1.21.2+ için'
+      - ''
+      - '<gray><yellow><sound> </yellow>Ayarlanacak değer'
+    params: '<sound>'
+    feedback: '%prefix% <green>Yeme sesi artık <yellow>%value%'
+itemeditkinetic:
+  contactcooldownticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetik Temas bekleme süresini ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><cooldown> </yellow>temas bekleme süresi işaretleri'
+    params: '<delay>'
+    feedback: '%prefix% <green>Temas bekleme süresi seti'
+  damageconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetik Hasar koşullarını ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Maksimum hasar süresi işaretleri'
+      - '<gray><yellow><min speed> </yellow>Minimum hız'
+      - '<gray><yellow><min relative speed> </yellow>minimum bağıl hız'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>Hasar durumu ayarlandı'
+  damagemultiplier:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetik Hasar çarpanını ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><multiplier> </yellow>hasar çarpanı'
+    params: '<delay>'
+    feedback: '%prefix% <green>Kinetik hasar çarpanı seti'
+  delayticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetik Gecikme işaretlerini ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><delay> </yellow>kinetik gecikme işaretleri'
+    params: '<delay>'
+    feedback: '%prefix% <green>Gecikme işaretleri ayarlandı'
+  dismountconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetik bir silahla hedefleri bineklerinden düşürmek için koşulları ayarlayın</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Hedefleri bineklerinden düşürmek için tıklamalarla maksimum zaman aralığı'
+      - '<gray><yellow><min speed> </yellow>Bir hedefi bineğinden düşürmek için gereken minimum hız'
+      - '<gray><yellow><min relative speed> </yellow>Bir hedefi bineğinden düşürmek için gereken minimum göreceli hız'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>Hedefleri bineklerinden düşürme koşulları ayarlandı'
+  forwardmovement:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetik İleri hareketini ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><movement> </yellow>İleri hareket miktarı'
+    params: '<movement>'
+    feedback: '%prefix% <green>İleri hareket seti'
+  help:
+    header-name: 'ItemKinetic'
+    description:
+      - '<gradient:#A78BFA:gold><b>Gösteriler ItemKinetic yardım</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Yardım sayfası'
+      - '<gray><yellow>[subcommand] </yellow>Alt komut için yardım'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bu eşyanın kinetik silah özelliklerini gösterir</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>Bu öğenin kinetik silah bileşeni yoktur'
+    message:
+      - '%prefix% <dark_green><b>Kinetik Silah</b>'
+      - '<green>Temas bekleme süresi: <yellow>%contactcooldownticks% <green>tık'
+      - '<green>Hasar çarpanı: <yellow>%damagemultiplier%'
+      - '<green>Gecikme: <yellow>%delayticks% <green>tik'
+      - '<green>İleri hareket: <yellow>%forwardmovement%'
+      - '<green>Vuruş sesi: <yellow>%hitsound%'
+      - '<green>Ses: <yellow>%sound%'
+      - '<green>Hasar koşulları: <yellow>%damageconditions%'
+      - '<green>Hedefleri bineklerinden düşürme koşulları: <yellow>%dismountconditions%'
+      - '<green>Geri itme koşulları: <yellow>%knockbackconditions%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetik vuruş sesini ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Ayarlanacak değer'
+    params: '<sound>'
+    feedback: '%prefix% <green>Vuruş sesi artık <yellow>%value%'
+  knockbackconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetik Geri Tepme koşullarını ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Maksimum geri itme süresi tıklamaları'
+      - '<gray><yellow><min speed> </yellow>Geri itme için minimum hız'
+      - '<gray><yellow><min relative speed> </yellow>Geri itmeye karşı minimum göreceli hız'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>Geri tepme koşulu ayarlandı'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetik sesi ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Ayarlanacak değer'
+    params: '<sound>'
+    feedback: '%prefix% <green>Ses artık <yellow>%value%'
+itemeditpiercing:
+  dealsknockback:
+    description:
+      - '<gradient:#A78BFA:gold><b>İsabetin geri itmeye neden olup olmayacağını ayarlar</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true geri itme uygulamak için'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Geri tepme artık <yellow>%value%'
+  dismounts:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bir vuruşun hedefi bineğinden düşürüp düşürmeyeceğini ayarlayın</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true hedefi bineğinden düşürmek için'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Hedefleri bineklerinden düşürmek artık <yellow>%value%'
+  help:
+    header-name: 'ItemPiercing'
+    description:
+      - '<gradient:#A78BFA:gold><b>Gösteriler ItemPiercing yardım</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Yardım sayfası'
+      - '<gray><yellow>[subcommand] </yellow>Alt komut için yardım'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Bu eşyadaki delici silah özelliklerini gösterir</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>Bu eşyanın delici silah bileşeni yoktur'
+    message:
+      - '%prefix% <dark_green><b>Delici Silah</b>'
+      - '<green>Geri itme fırsatları: <yellow>%dealsknockback%'
+      - '<green>Hedefleri bineklerinden düşürür: <yellow>%dismounts%'
+      - '<green>Vuruş sesi: <yellow>%hitsound%'
+      - '<green>Ses: <yellow>%sound%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Delici bir silah için darbe sesini ayarlayın</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Ayarlanacak değer'
+    params: '<sound>'
+    feedback: '%prefix% <green>Vuruş sesi artık <yellow>%value%'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Delici bir silahın sesini ayarlayın</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Ayarlanacak değer'
+    params: '<sound>'
+    feedback: '%prefix% <green>Ses artık <yellow>%value%'
+serveritem:
+  help-header: '<gradient:#54acff:#A78BFA><bold>ServerItem</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Yardım</bold></#A78BFA>'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Elde edilen <yellow>%amount% <green>of <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][give] %player_name% elde edilen %amount% / %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Seçilen öğeyi oyuncuya ver</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Öğenin kimliği'
+      - '<gray><yellow>[amount] </yellow>Verilecek öğe miktarı, varsayılan olarak 1'
+      - '<gray><yellow>[player] </yellow>Öğeleri kim alır, varsayılan olarak siz'
+      - '<gray><yellow>[silent] </yellow>true oyuncuya geri bildirim gönderilmemesi gerekiyorsa'
+    params: '<id> [amount] [player] [silent]'
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Elde edilen <yellow>%amount% <green>of <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets% elde edilen %amount% / %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Seçilen öğeyi tüm çevrimiçi oyunculara ver</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Öğenin kimliği'
+      - '<gray><yellow>[amount] </yellow>Verilecek öğe miktarı, varsayılan olarak 1'
+      - '<gray><yellow>[silent] </yellow>true oyunculara geri bildirim gönderilmemesi gerekiyorsa'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] düştü %amount% ile ilgili %id% (%nick%) %world% %x% %y% %z%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Seçili öğeyi seçilen konuma bırakın</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Öğenin kimliği'
+      - '<gray><yellow><amount> </yellow>düşecek öğe miktarı, 1''den 2304''e'
+      - '<gray><yellow><world> </yellow>hangi dünya'
+      - '<gray><yellow><x> <y> <z> </yellow>koordinatlar'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Kayıp <yellow>%amount% <green>of <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][take] %player_name% verilmiş %amount% ile ilgili %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Oyuncudan seçilen öğeyi al</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Öğenin kimliği'
+      - '<gray><yellow>[amount] </yellow>Verilecek öğe miktarı, varsayılan olarak 1'
+      - '<gray><yellow>[player] </yellow>Öğeleri kim alır, varsayılan olarak siz'
+      - '<gray><yellow>[silent] </yellow>true oyuncuya geri bildirim gönderilmemesi gerekiyorsa'
+    params: '<id> [amount] [player] [silent]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>Ürün <yellow>%id% <green>kayıtlı'
+    already_used_id: '%prefix% <red>Kimliği <yellow>%id% <red> olan öğe zaten mevcut, kimliği değiştirin veya geçersiz kılmak için /si güncellemesi yapın'
+    description:
+      - '<gradient:#A78BFA:gold><b>Elinizdeki eşyayı kaydedin</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>öğeyi tanımlayın, büyük/küçük harfe duyarlı değildir ve yapılamaz'
+      - '<gray> boşluk veya nokta içerir ayrıca seçemezsiniz'
+      - '<gray> önceden kullanılmış herhangi bir kimlik'
+      - ''
+      - '<gold><b>İpucu</b></gold> <gray>Mevcut bir öğeyi değiştirmek için <yellow>/serveritem update <id></yellow> tuşunu kullanın'
+      - '<gold><b>İpucu</b></gold> <gray>kaydedilen öğeleri <yellow>/serveritem give <id> ile alın'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>Öğe <yellow>%id% <green>kayıtsız'
+    description:
+      - '<gradient:#A78BFA:gold><b>Seçili öğeyi sil</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Öğenin kimliği'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>Öğe <yellow>%id% <green>güncellendi'
+    description:
+      - '<gradient:#A78BFA:gold><b>Seçilen öğeyi güncelle</b></gradient>'
+      - ''
+      - '<gray>ID ile ilişkili öğeyi el öğenizle değiştirin'
+      - '<gray><yellow><id> </yellow>Öğenin kimliği'
+      - ''
+      - '<gold><b>İpucu</b></gold> <gray>yeni bir öğe oluşturmak için <yellow>/serveritem save <id></yellow> tuşunu kullanın'
+      - '<gold><b>İpucu</b></gold> <gray>Bir öğeyi silmek için <yellow>/serveritem delete <id></yellow> tuşunu kullanın'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>Sunucuda kayıtlı öğelerle bir GUI açın</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>gui''nin sayfası, varsayılan olarak 1'
+    params: '[page]'
+  setnick:
+    #Holders: %id% %nick%
+    success: '%prefix% <green>Item <yellow>%id% <green>nick <yellow>%nick% olarak güncellendi'
+    description:
+      - '<gradient:#A78BFA:gold><b>Seçili öğenin görünen adını ayarlayın</b></gradient>'
+      - ''
+      - '<gray>Nick, alım/satım mesajlarında <yellow>%nick%</yellow> sahibi için kullanılır.'
+      - '<gray> varsayılan öğenin adıdır veya adı yoksa öğe türüdür'
+      - ''
+      - '<gray><yellow><id> </yellow>Öğenin kimliği'
+      - '<gray><yellow>[nick] </yellow>ayarlanacak isim'
+      - ''
+      - '<gold><b>İpucu</b></gold> <gray>varsayılana sıfırlamak için sadece <yellow>/serveritem setnick <id> kullanın'
+    params: '<id> [nick]'
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Satın alınmış <yellow>%amount% <green>ile ilgili <yellow>%nick% <green>için <yellow>%price%'
+    #Holders: %id% %nick% %amount%
+    not-enough-space: '<red> <gold>%amount% <red> of <gold>%nick% satın almak için yeterli envanter alanınız yok'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: '<red>sende yok <gold>%price% <red>satın almak <gold>%amount% <red>ile ilgili <gold>%nick%'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% paralı %price% için %amount% ile ilgili %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Oyuncuya eşya sat</b></gradient>'
+      - ''
+      - '<gray>Sell tutarın tamamını sattığınız için SellMax''den farklıdır'
+      - '<gray> oyuncuya yoksa hiçbirini satmazsınız'
+      - '<gray><yellow><id> </yellow>öğenin kimliği'
+      - '<gray><yellow><amount> </yellow>öğe miktarı'
+      - '<gray><yellow><player> </yellow>kimler para ödemeli ve eşya almalı'
+      - '<gray><yellow><price> </yellow>Ürün miktarının tamamı için fiyat pozitif olmalıdır'
+      - '<gray><yellow>[silent] </yellow>true oyuncuya mesaj gönderilmesini engeller'
+      - ''
+      - '<gray>Para veya envanter alanı yetersizse işlem başarısız olur.'
+      - '<gray>  Tüm miktar için yer gereklidir: <yellow><amount>'
+      - '<gray><gold>N.B.</gold> komut uygulayıcısının bakiyesine dokunulmadı'
+    params: '<id> <amount> <player> <price> [silent]'
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Satıldı <yellow>%amount% <green>/<yellow>%nick% <yellow><green>%price% için'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>Envanterinizde <gold>%amount% <red>of <gold>%nick% <red> yok'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% satılmış %amount% ile ilgili %id% (%nick%) toplam için %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Oyuncudan eşya satın alın</b></gradient>'
+      - ''
+      - '<gray>Buy tutarın tamamını satın aldığınız için BuyMax''den farklıdır'
+      - '<gray> oyuncudan veya hiçbirini satın almazsınız'
+      - '<gray><yellow><id> </yellow>öğenin kimliği'
+      - '<gray><yellow><amount> </yellow>öğe miktarı'
+      - '<gray><yellow><player> </yellow>kimler eşya ödeyip parayı almalı'
+      - '<gray><yellow><price> </yellow>Ürün miktarının tamamı için fiyat pozitif olmalıdır'
+      - '<gray><yellow>[silent] </yellow>true oyuncuya mesaj gönderilmesini engeller'
+      - ''
+      - '<gray>İşlem için envanterde en az <yellow><amount>'
+      - '<gray>  adet <yellow><id> </yellow>bulunmalıdır'
+      - '<gray><gold>N.B.</gold> komut uygulayıcısının bakiyesine dokunulmadı'
+    params: '<id> <amount> <player> <price> [silent]'
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Satın alınmış <yellow>%amount% <green>ile ilgili <yellow>%nick% <yellow>için <green>%price%'
+    #Holders: %id% %nick%
+    not-enough-space: '<red>Hiçbir şey satın almak için yeterli envanter alanınız yok <gold>%nick%'
+    #Holders: %id% %nick% %price%
+    not-enough-money: '<red>Herhangi bir şey satın almak için yeterli paranız yok <gold>%nick% <red>için <gold>%price% <red>her biri'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% paralı %price% için %amount% ile ilgili %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Oyuncuya eşya sat</b></gradient>'
+      - ''
+      - '<gray>SellMax Sell''den farklıdır çünkü daha az miktarda satış yapabilirsiniz'
+      - '<gray> tamamı için yeterli para veya alan yoksa oyuncuya'
+      - '<gray><yellow><id> </yellow>öğenin kimliği'
+      - '<gray><yellow><amount> </yellow>öğe miktarı'
+      - '<gray><yellow><player> </yellow>kimler para ödemeli ve eşya almalı'
+      - '<gray><yellow><price> </yellow>Ürün miktarının tamamı için fiyat pozitif olmalıdır'
+      - '<gray><yellow>[silent] </yellow>true oyuncuya mesaj gönderilmesini engeller'
+      - ''
+      - '<gray>Para veya envanter alanı yetersizse işlem başarısız olur.'
+      - '<gray>  En az bir eşya için boş yer olmalıdır'
+      - '<gray>Kısmi alımlarda fiyat <yellow><price></yellow> miktarla orantılı olarak azaltılır'
+      - '<gray><gold>N.B.</gold> komut uygulayıcısının bakiyesine dokunulmadı'
+    params: '<id> <amount> <player> <price> [silent]'
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Satıldı <yellow>%amount% <green>/<yellow>%nick% <yellow><green>%price% için'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>Envanterinizde satabileceğiniz <gold>%nick% <red> yok'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% satılmış %amount% ile ilgili %id% (%nick%) toplam için %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Oyuncudan eşya satın alın</b></gradient>'
+      - ''
+      - '<gray>BuyMax Buy''den farklıdır çünkü daha az miktarda satın alabilirsiniz'
+      - '<gray> Envanterde belirtilen miktardan az eşya varsa oyuncudan'
+      - '<gray><yellow><id> </yellow>öğenin kimliği'
+      - '<gray><yellow><amount> </yellow>öğe miktarı'
+      - '<gray><yellow><player> </yellow>kimler eşya ödeyip parayı almalı'
+      - '<gray><yellow><price> </yellow>Ürün miktarının tamamı için fiyat pozitif olmalıdır'
+      - '<gray><yellow>[silent] </yellow>true oyuncuya mesaj gönderilmesini engeller'
+      - ''
+      - '<gray>İşlem için envanterde en az bir <yellow><id> </yellow>bulunmalıdır'
+      - '<gray> envanterde'
+      - '<gray>Oyuncu <yellow><amount></yellow>''den az satış yaparsa fiyat ölçeklendirilecektir'
+      - '<gray><gold>N.B.</gold> komut uygulayıcısının bakiyesine dokunulmadı'
+    params: '<id> <amount> <player> <price> [silent]'
+itemstorage:
+  help-header: '<gradient:#54acff:#A78BFA><bold>ItemStorage</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Yardım</bold></#A78BFA>'
+  get:
+    #Holders: %id% %amount%
+    success: '%prefix% <green>Elde edilen <yellow>%amount% <green>of <yellow>%id%'
+    no-inventory-space: '%prefix% <red>Envanterinizde yer yok'
+    description:
+      - '<gradient:#A78BFA:gold><b>Seçilen öğeyi al</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Öğenin kimliği'
+      - '<gray><yellow>[amount] </yellow>alınacak miktar, varsayılan olarak 1'
+    params: '<id> [amount]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>Ürün <yellow>%id% <green>kayıtlı'
+    #Holders: %limit%
+    limit-reached: '%prefix% <red>Kaydedilebilir maksimum öğe sayısına ulaştınız (%limit%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Elinizdeki eşyayı kaydedin</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>öğenizi tanımlayın, büyük/küçük harfe duyarlı değildir ve yapılamaz'
+      - '<gray> boşluk veya nokta içerir ayrıca seçemezsiniz'
+      - '<gray> önceden kullanılmış herhangi bir kimlik'
+      - ''
+      - '<gold><b>İpucu</b></gold> <gray>Mevcut bir öğeyi değiştirmek için <yellow>/itemstorage update <id></yellow> tuşunu kullanın'
+      - '<gold><b>İpucu</b></gold> <gray>kaydedilmiş öğelerinizi <yellow>/itemstorage get <id> ile alın'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>Öğe <yellow>%id% <green>kayıtsız'
+    description:
+      - '<gradient:#A78BFA:gold><b>Seçili öğeyi sil</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Öğenin kimliği'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>Öğe <yellow>%id% <green>güncellendi'
+    description:
+      - '<gradient:#A78BFA:gold><b>Seçilen öğeyi güncelle</b></gradient>'
+      - ''
+      - '<gray>ID ile ilişkili öğeyi el öğenizle değiştirin'
+      - '<gray><yellow><id> </yellow>Öğenin kimliği'
+      - ''
+      - '<gray><gold><b>İpucu</b></gold> yeni bir öğe oluşturmak için <yellow>/itemstorage save <id></yellow> tuşunu kullanın'
+      - '<gray><gold><b>İpucu</b></gold> Bir öğeyi silmek için <yellow>/itemstorage delete <id></yellow> tuşunu kullanın'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kayıtlı öğelerinizle bir GUI açın</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] <gray>gui''nin sayfası, varsayılan olarak 1'
+    params: '[page]'
+itemeditimport:
+  help:
+    - '<green>/itemeditimport ItemEditor <dark_green>- ItemEditor eklentisinden öğeleri içe aktar'
+  itemeditor:
+    unable-to-get-item:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Öğe yüklenemiyor <gold>%id%'
+    already-used-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red> zaten kullanılıyor, belki bu komutu daha önce zaten yapmışsınızdır, aksi halde dosyayı yeniden adlandırabilirsiniz ItemEditor/items/%id%.yml'
+    invalid-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>kabul edilebilir bir kimlik değil, ItemEditor/items/%id%.yml dosyasını alfasayısal bir adla yeniden adlandırabilirsiniz'
+    import-unsuccess:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red><gold>%max% <red>''nin hiçbir öğesi içe aktarılmadı, belki bu komutu daha önce yapmış olabilirsiniz(?)'
+    import-success:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>İthal <yellow>%done% <green>ile ilgili <yellow>%max% <green>gelen öğeler ItemEditor'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>İçe aktarılan öğeler: <yellow>%ids%'
+    import-empty:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>ItemEditor''nin içe aktarılacak öğesi yok'
+itemeditreload:
+  success: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Yeniden yüklendi'
+gui:
+  color:
+    title: '<blue>Renk Düzenleyici'
+  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
+    creative: 'Orta Tıklama'
+    other: '1''e basın'
+  colorselector:
+    title: '<blue>Renk seç'
+    buttons:
+      color:
+        - '<gradient:#A78BFA:gold>Renkler:</gradient>'
+        - '<gray><yellow>%colors%'
+        - '<gray>[<white>Sağ Tık<gray>] Ekle <yellow>%color%'
+        - '<gray>[<white>Sol Tık<gray>] Son rengi kaldır'
+        - '<gray>[<white>Shift+Sağ Tıklama<gray>] Renkleri temizle'
+  banner:
+    title: '<blue>Banner Düzenleyici'
+    color_selector_title: '<blue>Renk seçici'
+    pattern_selector_title: '<blue>Desen seçici'
+    buttons:
+      pattern_selector_info:
+        - '<gray><gold><b>%type%</b>''yi seçin'
+      color_selector_info:
+        - '<gray><gold><b>%color%</b>''yi seçin'
+      position:
+        - '<gradient:#A78BFA:gold>Desen Kontrol Cihazı</gradient>'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] Deseni değiştir'
+        - '<gray>[<white>Sol/Sağ Tıklama<gray>] << Move pattern >>'
+      type:
+        - '<gradient:#A78BFA:gold>Tür Seçici</gradient>'
+        - '<gray>Tür: <yellow>%type%'
+        - ''
+        - '<gray>[<white>Tıkla<gray>] Türü değiştir'
+      color:
+        - '<gradient:#A78BFA:gold>Renk Seçici</gradient>'
+        - '<gray>Renk: <yellow>%color%'
+        - ''
+        - '<gray>[<white>Tıkla<gray>] Rengi değiştir'
+  firework:
+    title: '<blue>Havai Fişek Düzenleyici'
+    buttons:
+      type:
+        - '<gradient:#A78BFA:gold>Tür Seçici</gradient>'
+        - '<gray>Tür: <yellow>%type%'
+        - ''
+        - '<gray>[<white>Tıkla<gray>] Türü değiştir'
+      colors:
+        - '<gradient:#A78BFA:gold>Renk Seçici</gradient>'
+        - '<gray>Renkler: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>Renkleri değiştirmek için<gray>''ye tıklayın'
+      fadecolors:
+        - '<gradient:#A78BFA:gold>Renkleri Soldur Seçici</gradient>'
+        - '<gray>Solan Renkler: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>Renkleri değiştirmek için<gray>''ye tıklayın'
+      flags:
+        none: '<red>Aktif hiçbir şey yok'
+        trail: '<yellow>Trail <green>Aktif'
+        flicker: '<yellow>Titreme <green>Aktif'
+        both: '<gray><yellow>Trail</yellow> ve <yellow>Titreme <green>Aktif'
+        info:
+          - '<gradient:#A78BFA:gold>Trail ve Titreşim Aktivatörü</gradient>'
+          - '%status%'
+          - ''
+          - '<gray>[<white>Sağ Tıklama<gray>] Titreme efektini aç / kapat'
+          - '<gray>[<white>Sol Tıklama<gray>] İz efektini değiştir'
+      position:
+        - '<gray>Efekt Denetleyicisi'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] Geçiş efekti'
+        - '<gray>[<white>Sol/Sağ Tıklama<gray>] Bu efekti taşı'
+      power:
+        - '<gray>Güç: <yellow>%power%'
+        - ''
+        - '<gray>[<white>Sol/Sağ Tıklama<gray>] << Change >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>Önceki Sayfa</b>'
+      - ''
+      - '<gray>[<white>Tıklayın<gray>] Sayfaya git <yellow>%target_page%'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>Sonraki Sayfa</b>'
+      - ''
+      - '<gray>[<white>Tıklayın<gray>] Sayfaya git <yellow>%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '<gold><b>Geri Git</b>'
+      - ''
+      - '<gray>[<white>Click<gray>] Önceki kullanıcı arayüzüne git'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '<blue>%player_name% öğeler - sayfa <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>Sayfa <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] <yellow>item</yellow>/<yellow>ID görünümünü değiştir'
+        - ''
+        - '<gray>Öğelere tıklayın:'
+        - '<gray>> [<white>Sol Tık<gray>] Kazanç <yellow>1'
+        - '<gray>> [<white>Shift+Sol Tıklama<gray>] Kazanç <yellow>64'
+        - '<gray>> [<white>Shift+Sağ Tık<gray>] Öğeyi sil'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '<blue>Sunucu öğeleri - sayfa <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>Sayfa <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] <yellow>item</yellow>/<yellow>ID görünümünü değiştir'
+        - ''
+        - '<gray>Öğelere tıklayın:'
+        - '<gray>> [<white>Sol Tık<gray>] Kazanç <yellow>1'
+        - '<gray>> [<white>Shift+Sol Tıklama<gray>] Kazanç <yellow>64'
+        - '<gray>> [<white>Shift+Sağ Tık<gray>] Öğeyi sil'

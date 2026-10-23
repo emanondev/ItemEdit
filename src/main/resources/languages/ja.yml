@@ -1,0 +1,1438 @@
+generic:
+  help:
+    player-only: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>プレイヤー専用コマンド'
+    no-item-on-hand: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>アイテムを手に持つ必要があります'
+    lack-permission: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>許可がありません %permission%'
+    lack-permission-generic: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> このコマンドを使用する権限がありません'
+    blocked-by-censure: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>このテキストは使用できません。ブロックされた単語が含まれています'
+    blocked-by-type-restriction: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> このアイテムの名前は変更できません'
+    blocked-by-type-restriction-lore: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> このアイテムのアイテム説明は編集できません'
+    blocked-by-lore-line-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> この商品には商品説明行を追加できません'
+    blocked-by-lore-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> %limit% 文字を超える行は設定できません'
+    blocked-by-rename-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> %limit% 文字を超える名前は設定できません'
+
+    prefix: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray>'
+    header-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>ヘルプ</bold></#A78BFA>'
+    header-sub-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <gradient:#A78BFA:#54acff><bold>%sub%</bold></gradient> <dark_gray>»</dark_gray> <#55d6ff><bold>ヘルプ</#55d6ff>'
+    command-format: '<gray>/%command%</gray> <#bad1ff>%sub%</#bad1ff> <#d7bbff>%params%</#d7bbff>'
+    footer-format: '%prev_clickable% <#7E9CFD><b>ヘルプ</b> [%page%/%max_page%]</#7E9CFD> %next_clickable%'
+    next_text: ' <light_purple><b>><st>> ></st> '
+    prev_text: ' <light_purple><b><st>< <</st>< '
+    next_void: ' <dark_gray><b>><st>> ></st> '
+    prev_void: ' <dark_gray><b><st>< <</st>< '
+    next_hover: '<gold><b>ページ%target%へ'
+    prev_hover: '<gold><b>ページ%target%へ'
+  wrong-material:
+    axolotl_bucket: '%prefix% <red>アイテムはウーパールーパー バケットである必要があります'
+    banner: '%prefix% <red>アイテムはバナーである必要があります'
+    damageable: '%prefix% <red>アイテムには道具や防具と同様の耐久性が必要です'
+    player_head: '%prefix% <red>アイテムはプレイヤーヘッドである必要があります'
+    rgb_colorable: '%prefix% <red>アイテムは、革の鎧、花火の星、ポーション、またはポーション効果のある矢などの色付け可能なタイプである必要があります'
+    written_book: '%prefix% <red>商品は書籍である必要があります'
+    potion_effect_applicable: '%prefix% <red>アイテムはポーション、ポーション効果のある矢、または怪しげなシチューである必要があります'
+    firework: '%prefix% <red>アイテムは花火でなければなりません'
+    spawner_egg: '%prefix% <red>アイテムはスポーンエッグである必要があります'
+    tropical_fish_bucket: '%prefix% <red>アイテムは熱帯魚のバケツでなければなりません'
+    writable_book: '%prefix% <red>アイテムは書かれた本、または本と羽根ペンである必要があります'
+    compass: '%prefix% <red>アイテムはコンパスである必要があります'
+    music_instrument: '%prefix% <red>アイテムはヤギの角である必要があります'
+    armor: '%prefix% <red>アイテムは防具である必要があります'
+    enchantment_storage: '%prefix% <red>アイテムは本またはエンチャントされた本である必要があります'
+  wrong-alias:
+    axolotl_variant: '%prefix% <red>ウーパールートルの値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    potion_effect: '%prefix% <red>効果値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    animations: '%prefix% <red>アニメーション値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    sound: '%prefix% <red>音価が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    enchant: '%prefix% <red>エンチャント値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    flag_type: '%prefix% <red>フラグ値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    book_type: '%prefix% <red>本の種類の値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    equip_slot: '%prefix% <red>装備スロットの値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    banner_pattern: '%prefix% <red>パターン値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    color: '%prefix% <red>色の値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    mob_type: '%prefix% <red>卵の種類の値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    trim_material: '%prefix% <red>装甲トリムのマテリアル値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    tropical_fish_pattern: '%prefix% <red>パターン値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    trim_pattern: '%prefix% <red>アーマートリムパターン値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    boolean: '%prefix% <red>ブール値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    attribute: '%prefix% <red>属性値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    operation: '%prefix% <red>演算値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    itemrarity: '%prefix% <red>レアリティ値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    entitytype: '%prefix% <red>EntityType の値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    entitygroups: '%prefix% <red>EntityGroup の値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    consumable_effect: '%prefix% <red>消耗品の効果値が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    goat_horn_sound: '%prefix% <red>ヤギの角の音価が間違っています! <dark_red>[<gold>ここにカーソルを合わせてください<dark_red>]'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>別名:</b></gradient>'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+itemedit:
+  amount:
+    description:
+      - '<gradient:#A78BFA:gold><b>設定金額</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>設定する量（最大127）'
+      - "<gold><b>チップ</b></gold> <gray>マイナスの金額は差し引かれます\nアイテム現在の金額から"
+      - '<gray>'
+    params: '<amount>'
+    feedback: '%prefix% <green>アイテム数量が<yellow>%amount%に設定されました'
+    feedback-decrease: '%prefix% <green>アイテム量が<yellow>%amount%減少しました'
+  attribute:
+    description:
+      - '<gradient:#A78BFA:gold><b>属性修飾子の編集</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <attribute> <amount> [operation] [slot] </yellow><dark_gray>»</dark_gray> 新しい修飾子を追加'
+      - '<gray><yellow>Remove <attribute/slot> </yellow><dark_gray>»</dark_gray> はいくつかの修飾子を削除します'
+    params: '<add/remove> [...]'
+    add:
+      params: '<attribute> <amount> [operation] [slot]'
+      description:
+        - '<gradient:#A78BFA:gold><b>属性修飾子を追加</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute> </yellow>属性タイプ'
+        - '<gray><yellow><amount> </yellow>設定する金額'
+        - '<gray><yellow>[operation] </yellow>修飾子の追加方法、デフォルトでは合計'
+        - '<gray><yellow>[slot] </yellow>項目が選択されている場合にのみこの修飾子を適用します'
+        - '<gray> 機器スロット、または選択されていない場合は任意の機器スロット'
+      feedback: '%prefix% <green>修飾子を追加しました'
+    remove:
+      params: '<attribute/slot>'
+      description:
+        - '<gradient:#A78BFA:gold><b>修飾子の削除</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute/slot> </yellow> を入力して削除します。修飾子はすべて削除されます'
+        - '<gray> 選択した値が削除されます'
+      feedback-attribute: '%prefix% <green>属性の修飾子を削除しました'
+      feedback-equipment: '%prefix% <green>装備スロットの修飾子を削除'
+  axolotlvariant:
+    description:
+      - '<gradient:#A78BFA:gold><b>ウーパールーパー バケットのウーパールーパー バリアントを編集</b></gradient>'
+      - '<white><sprite:items:item/axolotl_bucket>'
+      - '<gray><yellow><type> </yellow>ウーパールーパーの種類'
+    params: '<type>'
+    feedback: '%prefix% <green>ウーパールーパーのバリエーションを <yellow>%variant% に変更しました'
+  banner:
+    description:
+      - '<gradient:#A78BFA:gold><b>バナーを編集</b></gradient>'
+    params: '<add/set/remove/color> [...]'
+    set:
+      params: '<type> <color> <line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>選択した行のパターンを置き換えます</b></gradient>'
+      feedback: '%prefix% <green>パターンセット'
+    add:
+      params: '<type> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>パターンを追加</b></gradient>'
+      feedback: '%prefix% <green>パターン追加'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>選択した行のパターンを削除</b></gradient>'
+      feedback: '%prefix% <green>パターンを削除しました'
+    color:
+      params: '<line> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>選択した行のパターンの色を変更します</b></gradient>'
+      feedback: '%prefix% <green>パターンの色を変更しました'
+  bookauthor:
+    description:
+      - '<gradient:#A78BFA:gold><b>作成者を設定</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>著者名にはスペースが含まれたり、色が付けられたりする場合があります'
+      - '<gray>書かれた本のみで動作します'
+    params: '<name>'
+    feedback: '%prefix% <green>本の著者を更新しました'
+    feedback-reset: '%prefix% <green>本の著者をリセット'
+  bookenchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>本にエンチャントを設定します</b></gradient>'
+      - '<white><sprite:items:item/enchanted_book> <sprite:items:item/book>'
+      - '<gray> enchant と bookenchant の違いは'
+      - '<gray>enchant 火のアスペクトを持つ本は、命中するとターゲットに火をつけます'
+      - '<gray>一方、bookenchant の本はそうではありません'
+      - ''
+      - '<gray><yellow><enchant> </yellow>エンチャントタイプ'
+      - '<gray><yellow>[level] </yellow>エンチャントのレベル、デフォルトでは <yellow>1'
+      - ''
+      - '<gold><b>ヒント</b></gold> <gray>エンチャントを削除するには、<yellow>[level] </yellow>を<yellow>0 </yellow>に設定します'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>本のエンチャントを削除しました <yellow>%enchant%'
+    feedback: '%prefix% <green>本のエンチャントを適用 <yellow>%enchant% <green>lv <yellow>%lv%'
+  booktype:
+    description:
+      - '<gradient:#A78BFA:gold><b>セットブックタイプ</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>書かれた本のみで動作します'
+    params: '<booktype>'
+    feedback: '%prefix% <green>本の生成を <yellow>%generation% に更新しました'
+    feedback-reset: '%prefix% <green>本の生成をリセット'
+  color:
+    description:
+      - '<gradient:#A78BFA:gold><b>色を設定</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/tipped_arrow_base> <sprite:items:item/firework_star> <sprite:items:item/leather_chestplate>'
+      - '<gray>革の鎧や花火の星、ポーションやポーション効果のある矢にも使用できます。'
+      - '<gray><yellow>[red] [green] [blue] </yellow>は組み合わせる各色の量です'
+      - '<gray>各色は 0 ～ 255 の int 値です'
+      - '<gray>混乱している場合は、「<yellow>RGB カラーピッカー</yellow>」をグーグルしてください'
+    params: '[red] [green] [blue]'
+    feedback: '%prefix% <green>色を更新しました'
+  compass:
+    description:
+      - '<gradient:#A78BFA:gold><b>コンパスの目標位置を設定</b></gradient>'
+      - '<white><sprite:items:item/compass_00>'
+      - '<gray><yellow>Set </yellow><dark_gray>»</dark_gray> 現在地をコンパスの目標として設定します'
+      - '<gray><yellow>Clear </yellow><dark_gray>»</dark_gray> コンパスターゲットをクリア'
+    params: '<set/clear>'
+    set:
+      feedback: '%prefix% <green>コンパスは<yellow>%world% %x% %y% %z%を指します'
+    clear:
+      feedback: '%prefix% <green>コンパスターゲットをクリアしました'
+  custommodeldata:
+    description:
+      - '<gradient:#A78BFA:gold><b>カスタムモデルデータ編集</b></gradient>'
+      - ''
+      - '<gray>テクスチャ パックに使用されます'
+      - '<gray><yellow>[value] </yellow>対象データモデルの正の整数'
+      - '<gray>注: 最新のサーバーでは itemmodel の代わりに custommodeldata'
+      - '<gray>、このコマンドはレガシー クライアント用です'
+    params: '<value>'
+    feedback: '%prefix% <green>カスタムモデルデータを更新しました'
+    feedback-reset: '%prefix% <green>カスタムモデルデータリセット'
+  damage:
+    description:
+      - '<gradient:#A78BFA:gold><b>耐久性編集</b></gradient>'
+      - ''
+      - '<gray><yellow><durability> </yellow>ダメージを与える'
+      - '<gray><gold>N.B.</gold> <yellow>0 </yellow>は損傷がなく、完全な耐久性を意味します'
+    params: '<durability>'
+    feedback-reset: '%prefix% <green>耐久性が回復しました'
+    feedback: '%prefix% <green>耐久性を更新しました'
+  equipment:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムの装備プロパティを設定します</b></gradient>'
+      - ''
+      - '<gray><gold><b>ヒント</b></gold> /itemequip or /ieeを使用'
+      - '<gray><gold>注意</gold> 飲み物は食べられません'
+    params: ''
+  enchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>エンチャントを設定</b></gradient>'
+      - ''
+      - '<gray><yellow><enchant> </yellow>エンチャントタイプ'
+      - '<gray><yellow>[level] </yellow>エンチャントのレベル、デフォルトでは <yellow>1'
+      - ''
+      - '<gold><b>ヒント</b></gold> <gray>エンチャントを削除するには、<yellow>[level] </yellow>を<yellow>0 </yellow>に設定します'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>エンチャントを削除しました <yellow>%enchant%'
+    feedback: '%prefix% <green>適用されたエンチャント <yellow>%enchant% <green>lv <yellow>%lv%'
+  fireresistent:
+    description:
+      - '<gradient:#A78BFA:gold><b>火/溶岩に対するアイテムの耐性を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>値を設定します。デフォルトではトグルになります。'
+      - ''
+      - '<gray>耐火性のあるアイテムは壊れません'
+      - '<gray> 火の中に落ちると溶岩の上に浮かびます'
+    params: '[true/false]'
+    feedback: '%prefix% <green>耐火性を<yellow>%value%に設定'
+  fireworkpower:
+    description:
+      - '<gradient:#A78BFA:gold><b>花火パワーを設定</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+      - '<gray><yellow><power> </yellow>花火の威力、<yellow>0 </yellow>と<yellow>5の間の値'
+    params: '<power>'
+    feedback: '%prefix% <green>花火パワーを更新しました'
+  firework:
+    description:
+      - '<gradient:#A78BFA:gold><b>GUI で花火を編集</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+    params: ''
+  food:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムの食品プロパティを設定します</b></gradient>'
+      - ''
+      - '<gray><gold><b>ヒント</b></gold> /itemfood or /ifを使用'
+      - '<gray><gold>注意</gold> 飲み物は食べられません'
+    params: ''
+  glider:
+    description:
+      - '<gradient:#A78BFA:gold><b>グライダーの状態を設定</b></gradient>'
+      - ''
+      - '<gray>グライダーアイテムはエリトラのように滑空できるようにする必要があります'
+      - '<gray><yellow>[true/false] </yellow>グライダー値を設定します。デフォルトでトグルします。'
+    params: '[true/false]'
+    feedback: '%prefix% <green>グライディング設定を<yellow>%value%に更新しました'
+  glow:
+    description:
+      - '<gradient:#A78BFA:gold><b>エンチャントのグロー効果を上書き</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>値を設定、デフォルトではリセット'
+      - ''
+      - '<gold><b>ヒント</b></gold> <gray><yellow>値が指定されていません </yellow>バニラの動作を復元します'
+    params: '[true/false/default]'
+    feedback: '%prefix% <green>グローを <yellow>%value% に設定'
+    feedback-reset: '%prefix% <green>グロー値をデフォルトにリセット'
+  goathornsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>ヤギの角の音を設定します</b></gradient>'
+      - '<white><sprite:items:item/goat_horn>'
+      - '<gray><yellow><type> </yellow>音の種類'
+    params: '<type>'
+    feedback: '%prefix% <green>サウンドを更新'
+  hide:
+    description:
+      - '<gradient:#A78BFA:gold><b>コンポーネントの表示または非表示</b></gradient>'
+      - ''
+      - '<gray><yellow><flag> </yellow>編集する項目フラグ'
+      - '<gray><yellow>[true/false] </yellow>フラグ値を設定します。デフォルトではトグルします。'
+      - ''
+      - '<gold><b>ヒント</b></gold> <gray> potion_effects フラグでバナーパターンを隠す'
+      - '<gold><b>ヒント</b></gold> <gray> <yellow>/itemedit hideall ですべてのフラグを一度に非表示にします'
+    params: '<flag> [true/false]'
+    feedback: '%prefix% <green>フラグは<yellow>%value%になりました'
+  hidetooltip:
+    description:
+      - '<gradient:#A78BFA:gold><b>ツールチップの表示または非表示</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>フラグ値を設定します。デフォルトではトグルします。'
+    params: '[true/false]'
+    feedback: '%prefix% <green>ツールヒントの非表示ステータスは <yellow>%value%になりました'
+  hideall:
+    description:
+      - '<gradient:#A78BFA:gold><b>すべてのコンポーネントを非表示</b></gradient>'
+      - ''
+      - '<gray>非表示: エンチャント、ポーション効果、バナーレイヤー、属性...'
+      - ''
+      - '<gold><b>ヒント</b></gold> <gray> <yellow>/itemedit hide <flag> true で単一コンポーネントを非表示にする'
+    params: ''
+    feedback: '%prefix% <green>フラグをすべて非表示にしました'
+  itemmodel:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムモデルを編集</b></gradient>'
+      - ''
+      - '<gray><yellow><namespaced key> </yellow>テクスチャ参照を設定するキー'
+      - '<gray>例: /ie itemmodel <yellow>iron_sword'
+      - '<gray>例: /ie itemmodel <yellow>minecraft:iron_sword'
+      - ''
+      - '<gray><yellow><namespace></yellow>:<yellow><id></yellow> はモデルを参照します:'
+      - '  /assets/<yellow><namespace></yellow>/models/item/<yellow><id>'
+    params: '<namespaced key>'
+    feedback: '%prefix% <green>アイテムモデルを更新'
+    feedback-reset: '%prefix% <green>項目をリセット モデル'
+  kinetic:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムの運動特性を設定します</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gray><gold><b>ヒント</b></gold> /itemkinetic or /iekを使用'
+    params: ''
+  maxdurability:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムの最大耐久性を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><max durability> </yellow>アイテムの新しい耐久値、'
+      - '<gray> は 1 より大きくなければなりません'
+    params: '<max durability>'
+    feedback: '%prefix% <green>最大耐久性を<yellow>%value%に更新しました'
+  maxstacksize:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムの最大スタックサイズを設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[1-99] </yellow>フラグ値を設定します'
+      - ''
+      - "<gray><yellow>値なし </yellow> は、<yellow>64 の共通スタックサイズを復元します\nほとんどのアイテムは"
+      - "<gray>、防具や道具は <yellow>1</yellow>、その他\nいくつかの項目の"
+      - '<gray> の値'
+    params: '[1-99]'
+    feedback: '%prefix% <green>最大スタック サイズを <yellow>%value% に更新しました'
+    feedback-reset: '%prefix% <green>最大スタックサイズをリセット'
+  pierce:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムの貫通武器のプロパティを設定します</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gold><b>ヒント</b></gold><gray> /itempiercing or /iepを使用'
+    params: ''
+  potioneffect:
+    itemtag-tip: '%prefix% <gray>共通アイテムにポーション効果を追加する必要がありますか?試してみてください >ItemTag<'
+    itemtag-tip-hover:
+      - '<gradient:#A78BFA:gold>クリックしてください</gradient>'
+    description:
+      - '<gradient:#A78BFA:gold><b>ポーションの効果を編集</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/suspicious_stew> <sprite:items:item/tipped_arrow_base>'
+      - '<gray>あらゆるポーション、ポーション効果のある矢、そして怪しげなシチューに使えます!'
+      - '<gray><yellow>Add <effect> <duration> [level] </yellow><dark_gray>»</dark_gray> エフェクトを追加'
+      - '<gray><yellow>Remove <effect> </yellow><dark_gray>»</dark_gray> 選択した効果を削除します'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> すべての効果を削除します'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
+      description:
+        - '<gradient:#A78BFA:gold><b>選択した効果を追加/上書きします</b></gradient>'
+        - ''
+        - '<gray><yellow><effect> </yellow>エフェクトタイプ'
+        - '<gray><yellow><duration> </yellow>持続時間（秒）'
+        - '<gray><yellow>[level] </yellow>最大 127、デフォルトでは <yellow>1'
+        - '<gray><yellow>[particles] </yellow>パーティクルを表示する必要がありますか? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[ambient] </yellow>パーティクルにはアンビエント フラグが必要ですか? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[icon] </yellow>右上隅にアイコンを表示しますか? <yellow>true</yellow>/<yellow>false'
+      feedback: '%prefix% <green>ポーション効果を追加'
+    remove:
+      params: '<effect>'
+      description:
+        - '<gradient:#A78BFA:gold><b>選択した効果を削除</b></gradient>'
+      feedback: '%prefix% <green>ポーション効果を削除'
+    reset:
+      feedback: '%prefix% <green>ポーションの効果をリセット'
+  rarity:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムのレア度を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[rarity] </yellow>セットアイテムのレア度'
+      - ''
+      - '<gold><b>ヒント</b><gold><gray> レアリティ値を設定しないとデフォルトに戻ります'
+    params: '[rarity]'
+    feedback: '%prefix% <green>レアリティを更新しました'
+    feedback-reset: '%prefix% <green>レアリティをリセット'
+  repaircost:
+    description:
+      - '<gradient:#A78BFA:gold><b>アンビル修理コストを編集</b></gradient>'
+      - ''
+      - '<gray><yellow><cost> </yellow>レベル量'
+      - '<gray><gold>注</gold> アンビルの修理/名前変更の価格は常に少なくとも <yellow>1'
+      - '<gray><gold>N.B.</gold> このコマンドは、アイテムの基本修理コストを設定します。金床の最終レベルのコストは、実行内容に基づいています'
+      - '<gray>詳細は <yellow>minecraft.gamepedia.com/Anvil/Mechanics で'
+    params: '<cost>'
+    feedback: '%prefix% <green>修理費を更新しました'
+  skullowner:
+    description:
+      - '<gradient:#A78BFA:gold><b>プレイヤーヘッドの所有者を設定</b></gradient>'
+      - ''
+      - '<gray>プレーヤーヘッドでのみ動作します'
+      - '<gray><yellow>[name] </yellow>所有者の名前'
+      - ''
+      - '<gold><b>ヒント</b></gold> <gray> プレイヤーの頭を配置および破壊してスキンを更新します'
+    params: '[name]'
+    feedback: '%prefix% <green>プレイヤーヘッドオーナーが更新されました'
+    feedback-reset: '%prefix% <green>プレイヤーヘッドオーナーリセット'
+  tooltipstyle:
+    description:
+      - '<gradient:#A78BFA:gold><b>項目ツールチップのスタイルを編集</b></gradient>'
+      - ''
+      - '<gray><yellow><style> </yellow>テクスチャ参照を設定するキー'
+      - '<gray> スタイルは <white><namespace>:<id> で構成されています'
+      - '<gray>例: /ie tooltipstyle <yellow>my_style'
+      - '<gray>例: /ie tooltipstyle <yellow>minecraft:my_style'
+      - '<gray> ここで、<yellow>minecraft</yellow> は <white><namespace></white> であり、'
+      - '<gray><yellow>my_style</yellow> は <white><id> です'
+      - '<gray> 設定すると、このアイテムはカスタム スプライトを使用できます。'
+      - '<gray>そのツールチップの背景とフレーム。'
+      - '<gray><white><namespace>:tooltip/<id>_background'
+      - '<gray> と <white><namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
+    feedback: '%prefix% <green>ツールチップのスタイルを更新しました'
+    feedback-reset: '%prefix% <green>ツールチップのスタイルをリセット'
+  armortrim:
+    description:
+      - '<gradient:#A78BFA:gold><b>アーマートリムを設定</b></gradient>'
+      - '<white><sprite:items:item/iron_chestplate>'
+      - '<gray><yellow><material> </yellow>アーマートリム素材'
+      - '<gray><yellow><pattern> </yellow>アーマートリムパターン'
+    params: '<material> <pattern>'
+    feedback: '%prefix% <green>装甲トリムを更新'
+    feedback-reset: '%prefix% <green>装甲トリムを取り外した'
+  tropicalfish:
+    description:
+      - '<gradient:#A78BFA:gold><b>熱帯魚バケツのプロパティを設定</b></gradient>'
+      - '<white><sprite:items:item/tropical_fish_bucket>'
+      - '<gray><yellow>pattern <pattern type> </yellow><dark_gray>»</dark_gray> 魚の種類'
+      - '<gray><yellow>patterncolor <color> </yellow><dark_gray>»</dark_gray> 魚の模様の色'
+      - '<gray><yellow>bodycolor <color> </yellow><dark_gray>»</dark_gray> 魚の体色'
+    params: '[...]'
+    pattern:
+      params: '<type>'
+      description:
+        - '<gradient:#A78BFA:gold><b>熱帯魚柄の種類を設定</b></gradient>'
+        - ''
+        - '<gray><yellow><type> </yellow>魚のパターンの種類'
+      feedback: '%prefix% <green>更新されたパターン'
+    patterncolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>熱帯魚柄の色を設定</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>魚の模様の色'
+      feedback: '%prefix% <green>色を更新しました'
+    bodycolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>熱帯魚の体色を設定</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>魚の体色'
+      feedback: '%prefix% <green>色を更新しました'
+  type:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムの種類を設定</b></gradient>'
+      - ''
+      - '<gray><gold>注意</gold> Air は動作しないため、数種類'
+    params: '<type>'
+    feedback: '%prefix% <green>アイテム素材を更新しました'
+  unbreakable:
+    description:
+      - '<gradient:#A78BFA:gold><b>破壊不可能状態に設定</b></gradient>'
+      - ''
+      - '<gray>壊れない道具や防具は耐久性を失いません'
+      - '<gray><yellow>[true/false] </yellow>破壊不可能な値を設定します。デフォルトでトグル'
+    params: '[true/false]'
+    feedback: '%prefix% <green>アイテムアンブレイカブルを<yellow>%value%に更新'
+  help:
+    header-name: 'ItemEdit'
+    description:
+      - '<gradient:#A78BFA:gold><b> ItemEdit ヘルプ</b></gradient> を表示します'
+      - ''
+      - '<gray><yellow>[page] </yellow>ヘルプページ'
+      - '<gray><yellow>[subcommand] </yellow>サブコマンドのヘルプ'
+    params: '[page/subcommand]'
+  rename:
+    description:
+      - '<gradient:#A78BFA:gold><b>設定項目名</b></gradient>'
+      - ''
+      - '<gold><b>ヒント</b></gold> <gray>「<yellow>/ie rename -clear </yellow>」と入力して名前をデフォルトに戻します'
+      - '<gold><b>ヒント</b></gold> <gray>「<yellow>/ie rename -copy </yellow>」と入力して名前をコピーします'
+      - '<gold><b>ヒント</b></gold> <gray><yellow>/ie rename -paste </yellow>と入力して、以前にコピーした値を貼り付けます'
+    params: '<name>'
+    feedback: '%prefix% <green>項目名を更新しました'
+    rename-clear: '%prefix% <green>アイテム名をクリアしました'
+    rename-copy: '%prefix% <green>項目名をコピーしました'
+    rename-paste-empty: '%prefix% <red>貼り付けるコピー項目名がありません'
+    feedback-paste: '%prefix% <green>コピーした項目名を貼り付け'
+    banned_words: '%prefix% <red>項目名に禁止用語が含まれています'
+  lore:
+    description:
+      - '<gradient:#A78BFA:gold><b>商品説明を編集</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <text> </yellow><dark_gray>»</dark_gray> 新しい行にテキストを追加'
+      - '<gray><yellow>Insert <line> <text> </yellow><dark_gray>»</dark_gray> 選択した行にテキストを追加'
+      - '<gray><yellow>Set <line> <text> </yellow><dark_gray>»</dark_gray> 選択した行のテキストを設定または置換します'
+      - '<gray><yellow>Remove <line> </yellow><dark_gray>»</dark_gray> 選択した行を削除'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> すべての行を削除'
+      - '<gray><yellow>Copy </yellow><dark_gray>»</dark_gray> 現在のアイテムのアイテム説明をコピーして、後で貼り付けます'
+      - '<gray><yellow>CopyBook </yellow><dark_gray>»</dark_gray> コピーと同じですが、本のページを線として抜粋したものです'
+      - '<gray><yellow>CopyFile <path> </yellow><dark_gray>»</dark_gray> コピーと同じですが、loreCopy.yml から'
+      - '<gray><yellow>Paste </yellow><dark_gray>»</dark_gray> 最後にコピーした商品説明を貼り付けます'
+      - '<gray><yellow>Replace <replaced> <replacer> </yellow><dark_gray>»</dark_gray> すべての出現箇所を置き換えます'
+    params: '<add/set/remove...> [...]'
+    set:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>選択した行のテキストを設定または置換します</b></gradient>'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>選択した行を削除</b></gradient>'
+    insert:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>選択した行にテキストを追加</b></gradient>'
+    copy:
+      feedback: '%prefix% <green>商品説明をコピーしました'
+    copyBook:
+      feedback: '%prefix% <green>本のページがコピーされ、貼り付ける準備ができました'
+    copyFile:
+      wrong-path: '%prefix% <red>無効なパスです。構成をリロードして、Caps を確認してください。'
+      no-path: '%prefix% <red>パスを選択 /ie lore copyfile <gold><path>'
+      feedback: '%prefix% <green>設定がコピーされ、貼り付ける準備ができました'
+    paste:
+      feedback: '%prefix% <green>商品説明貼り付け'
+      no-copy: '%prefix% <red>最初に商品説明をコピーしてください'
+    replace:
+      params: '<replaced> <replacer>'
+      description:
+        - '<gold><b>商品説明にあるすべての箇所を置き換えます</b></gradient>'
+        - ''
+        - '<gray>複数の単語を置き換える必要がある場合'
+        - '<gray> <yellow>{ } 内で閉じます'
+        - ''
+        - '<gray>例: <yellow>/ie lore replace New Rusty'
+        - '<gray>''<yellow>New sword</yellow>'' -> ''<yellow>Rusty sword</yellow>'''
+        - ''
+        - '<gray>例 2: <yellow>/ie lore replace {Heavy} {Very light}'
+        - '<gray>''<yellow>Heavy sword</yellow>'' -> ''<yellow>Very light sword</yellow>'''
+  listaliases:
+    description:
+      - '<gradient:#A78BFA:gold><b>許可されるエイリアスパラメータを表示します</b>'
+      - ''
+      - '<gray><yellow><type> </yellow>表示するパラメータのタイプ'
+    params: '<type>'
+    prefix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>エイリアス <dark_blue>◆ ◆ ◆ ◆'
+    postfix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>エイリアス <dark_blue>◆ ◆ ◆ ◆'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+    hover_info: '<blue>元の値: <yellow>%default%'
+    hover_type: '<gold>クリックして調べてください'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>別名:</b></gradient>'
+itemeditequipment:
+  allowedentities:
+    invalid-type: '%prefix% <red>値 <gold>%value% <red> は有効なエンティティでも有効なエンティティのグループでもありません'
+    description:
+      - '<gradient:#A78BFA:gold><b>この装備の着用を許可されるエンティティ タイプを設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[entity] </yellow>エンティティ タイプ'
+      - '<gray><yellow>[group] </yellow>どのエンティティ グループか'
+      - ''
+      - '<gray>選択したすべてのタイプが追加されます'
+    params: '[entity/group] [entity/group] ...'
+    feedback: '%prefix% <green>許可されるエンティティ タイプは次のとおりです: <yellow>%value%'
+    feedback-reset: '%prefix% <green>許可されたエンティティ タイプがリセットされました'
+  canshear:
+    unsupported-version: '%prefix% <red>お使いのサーバーのバージョン (<gold>%value%<red>) はこの機能をサポートしていません'
+    description:
+      - '<gradient:#A78BFA:gold><b>インタラクション時に装備セット</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true を剪断できるようにする'
+      - '<gray>カボチャなどのエンティティからの装備'
+      - '<gray>雪だるま用'
+    params: '[true/false]'
+    feedback: '%prefix% <green>キャンシャープロパティは<yellow>%value%になりました'
+  canbesheared:
+    description:
+      - '<gradient:#A78BFA:gold><b>この装備を剪断できるかどうかを設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>機器を剪断できるかどうか'
+    params: '[true/false]'
+    feedback: '%prefix% <green>剪断できるプロパティは<yellow>%value%になりました'
+  cameraoverlay:
+    description:
+      - '<gradient:#A78BFA:gold><b>カメラオーバーレイを設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[namespacedkey] </yellow>どのオーバーレイが欲しいか'
+      - '<gray>オーバーレイは、唯一のバニラであるテクスチャパックに設定されます'
+      - '<gray> オーバーレイは minecraft:misc/pumpkinblur です'
+    params: '[namespacedkey]'
+    feedback: '%prefix% <green>カメラオーバーレイが更新されました'
+    feedback-reset: '%prefix% <green>カメラオーバーレイが削除されました'
+    invalid-namespacedkey: '<red>Namespacedkey <gold>%value% <red> が無効です'
+  clear:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテム</b></gradient>の装備プロパティを完全に削除します'
+      - ''
+      - '<gray>またはアイテムがバニラ装備の場合はデフォルトに戻します'
+    params: ''
+    feedback: '%prefix% <green>装備のプロパティがデフォルトにリセットされました'
+  damageonhurt:
+    description:
+      - '<gradient:#A78BFA:gold><b>ダメージ可能に設定</gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true ダメージによる耐久性を減少させる'
+      - ''
+      - '<gray><gold>注意</gold> 最大スタックサイズが 1 のアイテムのみがダメージを受ける可能性があります'
+      - '<gray> <yellow>/ie maxstacksize 1 を使用'
+      - '<gray><gold><b>ヒント</b></gold> でアイテムの最大耐久性を設定することを忘れないでください'
+      - '  <yellow>/ie maxdurability <amount>'
+    params: '[true/false]'
+    feedback: '%prefix% <green>物的損害は <yellow>%value% になりました'
+    warning-maxstacksize: '%prefix% <red>アイテムの最大スタックサイズは <gold>1 <red>でなければダメージを受けられません <dark_red>[<gold>クリックして修正します<dark_red>]'
+  dispensable:
+    description:
+      - '<gradient:#A78BFA:gold><b>不要セット</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true ディスペンサーを装備'
+    params: '[true/false]'
+    feedback: '%prefix% <green>必須物件は <yellow>%value% になりました'
+  equiponinteract:
+    description:
+      - '<gradient:#A78BFA:gold><b>インタラクションで装備するセット</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true インタラクションを装備するには'
+    params: '[true/false]'
+    feedback: '%prefix% <green>インタラクションプロパティの装備が<yellow>%value%になりました'
+  equipsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>装備音設定</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>どの音を出すべきか'
+    params: '[sound]'
+    feedback: '%prefix% <green>装備音プロパティが<yellow>%value%になりました'
+    feedback-reset: '%prefix% <green>装備音プロパティがデフォルトにリセットされました'
+  help:
+    header-name: 'ItemEquipment'
+    description:
+      - '<gradient:#A78BFA:gold><b> ItemEditEquipment ヘルプ</b></gradient> を表示します'
+      - ''
+      - '<gray><yellow>[page] </yellow>ヘルプページ'
+      - '<gray><yellow>[subcommand] </yellow>サブコマンドのヘルプ'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>このアイテムの装備プロパティを表示します</b></gradient>'
+    params: ''
+    not_set: '%prefix% <gray>このアイテムには装備可能なコンポーネントがありません'
+    message:
+      - '%prefix% <dark_green><b>装備可能</b>'
+      - '<green>スロット: <yellow>%slot%'
+      - '<green>剪断可能: <yellow>%canbesheared%'
+      - '<green>負傷時のダメージ: <yellow>%damageonhurt%'
+      - '<green>不要: <yellow>%dispensable%'
+      - '<green>インタラクション時に装備: <yellow>%equiponinteract%'
+      - '<green>交換可能: <yellow>%swappable%'
+      - '<green>装備音: <yellow>%equipsound%'
+      - '<green>シアー音: <yellow>%shearsound%'
+      - '<green>許可されるエンティティ: <yellow>%allowedentities%'
+      - '<green>カメラオーバーレイ: <yellow>%cameraoverlay%'
+      - '<green>アセット ID: <yellow>%assetid%'
+  model:
+    description:
+      - '<gradient:#A78BFA:gold><b>テクスチャモデルを設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[key] </yellow> 装備時に使用する機器モデルの名前空間 ID'
+    params: '[key]'
+    feedback: '%prefix% <green> 装備モデルは <yellow>%key% になりました'
+    feedback-reset: '%prefix% <green>装備モデルがリセットされました'
+  shearsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>せん断によってアイテムが除去されたときの音を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>どの音を出すべきか'
+      - '<gray>カボチャのように剪断で取り除くと'
+      - '<gray>雪だるま用'
+    params: '[sound]'
+    feedback: '%prefix% <green>シアー音は<yellow>%value%になりました'
+    feedback-reset: '%prefix% <green>せん断音プロパティがデフォルトにリセットされました'
+  shearingsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>せん断によってアイテムが除去されたときの音を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>どの音を出すべきか'
+      - '<gray>ハサミで取り除いたとき、雪だるまのカボチャのように'
+    params: '[sound]'
+    feedback: '%prefix% <green>シャーリング音は<yellow>%value%になりました'
+  slot:
+    description:
+      - '<gradient:#A78BFA:gold><b>装備可能スロットを設定</b></gradient>'
+      - ''
+      - '<gray><yellow><slot> </yellow> アイテムが装備できる場所'
+    params: '<slot>'
+    feedback: '%prefix% <green>装備スロットは<yellow>%value%になりました'
+  swappable:
+    description:
+      - "<gradient:#A78BFA:gold><b>アイテムを交換可能に設定します</b></gradient>\n交換可能なアイテムの場合は"
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true'
+    params: '[true/false]'
+    feedback: '%prefix% <green>交換可能なプロパティは <yellow>%value% になりました'
+itemeditfood:
+  addeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムにエフェクトを追加</b></gradient>'
+      - '<gray><yellow>/ief addeffect </yellow>cleareffects'
+      - '<gray><yellow>/ief addeffect </yellow>teleport <range>'
+      - '<gray><yellow>/ief addeffect </yellow>applyeffects [chance] <potion> <lv> <duration> [ambient] [particle] [icon]'
+      - '<gray><yellow>/ief addeffect </yellow>removeeffects <potion>'
+      - '<gray><yellow>/ief addeffect </yellow>playsound <sound>'
+      - ''
+    params: '[...]'
+    cleareffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>アイテムにエフェクトを追加</b></gradient>'
+        - ''
+        - '<gray>ミルクバケツなど、プレイヤーに与えられたポーション効果を削除します。'
+      params: '<potion>'
+      feedback: '%prefix% <green>食べ物を食べた時のテレポート効果を追加'
+    teleport:
+      description:
+        - '<gradient:#A78BFA:gold><b>アイテムにエフェクトを追加</b></gradient>'
+        - '<gray><yellow><range> </yellow>プレイヤーのテレポート距離'
+        - ''
+        - '<gray>食べ物を食べるとランダムにプレイヤーをテレポートします'
+      params: '<range>'
+      feedback: '%prefix% <green>食べ物を食べた時のテレポート効果を追加'
+    applyeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>アイテムにエフェクトを追加</b></gradient>'
+        - '<gray><yellow>[chance] </yellow>効果が適用される確率は何%ですか?'
+        - '<gray> は <yellow>0</yellow> より大きく、それ以下は <yellow>100 に等しい必要があります'
+        - '<gray><yellow><potion> </yellow>ポーションの効果タイプ'
+        - '<gray><yellow><lv> </yellow>エフェクトのレベル、デフォルトでは<yellow>1</yellow>'
+        - '<gray><yellow><duration> </yellow>効果の秒数としての持続時間、または永続的な効果の場合は <yellow>-1 </yellow>'
+        - '<gray><yellow>[ambient] [particle] [icon] </yellow>true/false ポーション効果のカスタマイズ'
+        - ''
+        - '<gray>食べ物を食べたときに選択した効果をプレイヤーに適用します'
+      params: '<potion>'
+      feedback: '%prefix% <green>食べ物を食べた時の適用効果を追加'
+    removeeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>アイテムにエフェクトを追加</b></gradient>'
+        - '<gray><yellow><potion> </yellow>選択したエフェクトをクリア'
+        - ''
+        - '<gray>食べ物を食べたときにプレイヤーから選択した効果を削除します'
+      params: '<potion>'
+      feedback: '%prefix% <green>食べ物を食べた時の除去効果を追加'
+    playsound:
+      description:
+        - '<gradient:#A78BFA:gold><b>アイテムにエフェクトを追加</b></gradient>'
+        - '<gray><yellow><sound> </yellow>音を再生します'
+        - ''
+        - '<gray>食べ物を食べるときに選択した音を再生します'
+      params: '<sound>'
+      feedback: '%prefix% <green>食べ物を食べるときの音を追加しました'
+  animation:
+    description:
+      - '<gradient:#A78BFA:gold><b>食べるアニメーションを設定します</b></gradient>'
+      - '<gray><red>1.21.2+のみ'
+      - ''
+      - '<gray><yellow><animation> </yellow>設定する値、デフォルトではトグル'
+      - ''
+      - '<gray>一部のアニメーションは一人称視点でのみ表示されますが、'
+      - '<gray>一部のアニメーションは三人称視点でのみ表示されますが、'
+      - '<gray>一部のアニメーションは一人称視点と三人称視点の両方で表示されます'
+    params: '<animation>'
+    feedback: '%prefix% <green>応用アニメーション'
+  canalwayseat:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムが食べられるかどうかを設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>設定する値、デフォルトではトグル'
+      - ''
+      - '<gray>通常、食べ物を食べるには空腹が必要ですが、'
+      - '<gray> 設定 true は、金のリンゴの動作を模倣します'
+    params: '[true/false]'
+    feedback: '%prefix% <green>商品には<yellow>%value%までいつでも食べられます'
+  consumeparticles:
+    description:
+      - '<gradient:#A78BFA:gold><b>食べたときにアイテムにパーティクルが表示されるかどうかを設定します</b></gradient>'
+      - '<gray><red>1.21.2+のみ'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>設定する値、デフォルトではトグル'
+    params: '[true/false]'
+    feedback: '%prefix% <green>消費パーティクルが <yellow>%value% になりました'
+  convertto:
+    description:
+      - '<gradient:#A78BFA:gold><b>食べ物を消費したときに与えるアイテムを設定します</b></gradient>'
+      - '<gray><red>1.21+のみ'
+      - ''
+      - '<gray><yellow>[type/serveritem id] </yellow>返品する商品'
+      - '<gray> マテリアルを設定することも、'
+      - '<gray> ServerItem 保存済みアイテムからアイテムを選択します'
+      - ''
+      - "<gray>バケツが置かれた場所でバケツミルクの動作をまねる\n牛乳を消費すると"
+      - '<gray> が返されます'
+    params: '[type/serveritem id]'
+    feedback: '%prefix% <green>更新済みに変換'
+  eatticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムを食べるまでの時間を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><ticks> </yellow>アイテムを食べるまでの時間'
+      - '<gray> は <yellow>1 </yellow> 以上である必要があります'
+      - ''
+      - '<gray><yellow>20 </yellow>ティック = <yellow>1 </yellow>秒'
+    params: '<ticks>'
+    feedback: '%prefix% <green>食べるダニが <yellow>%value% に更新されました'
+  help:
+    header-name: 'ItemFood'
+    description:
+      - '<gradient:#A78BFA:gold><b> ItemFood ヘルプ</b></gradient> を表示します'
+      - ''
+      - '<gray><yellow>[page] </yellow>ヘルプページ'
+      - '<gray><yellow>[subcommand] </yellow>サブコマンドのヘルプ'
+    params: '[page/subcommand]'
+  info:
+    not_food: '%prefix% <dark_green>アイテムに食品プロパティがないか、デフォルトのプロパティがあります'
+    message:
+      - '%prefix% <dark_green><b>アイテム食品プロパティ</b>'
+      - '<green>食事時間: <yellow>%eatseconds%<green> 秒 <dark_gray>(<gray>%eatticks%<dark_gray> ティック)'
+      - '<green>空腹を回復: <yellow>%nutrition% <dark_gray>| <green>彩度: <yellow>%saturation%<green>'
+      - '<green>アニメーション: <yellow>%animation% <dark_gray>| <green>サウンド: <yellow>%sound% <dark_gray>| <green>粒子: <yellow>%consumeparticles%'
+      - '<green>満腹時に食べられます: <yellow>%canalwayseat% <dark_gray>| <green>食べると: <yellow>%convertto%'
+    apply_effect_prefix:
+      - '<dark_green><b> <yellow>%effects%<dark_green> のポーション効果が含まれます:</b>'
+    apply_effect:
+      - '<green>%index%。タイプ: <yellow>%type% <dark_gray>| <green>Lv: <yellow>%level% <dark_gray>| <green>持続時間: <yellow>%duration_s%<green>秒<dark_gray>(<gray>%duration_ticks%<dark_gray>ティック)'
+      - '<green> 粒子: <yellow>%hasparticle% <dark_gray>| <green>アンビエント: <yellow>%isambient% <dark_gray>| <green>アイコン: <yellow>%hasicon% <dark_gray>| <green>確率: <yellow>%chance_perc%<green>%'
+    consume_effect_teleport: '<green>ランダムテレポート直径: <yellow>%diameter%'
+    consume_effect_sound: '<green>追加の消費音: <yellow>%sound%'
+    consume_effect_remove: '<green>削除された効果: <yellow>%effects%'
+    consume_effect_clear: '<green>アクティブなステータス効果をすべてクリアします'
+    consume_effect_unknown: '<green>その他の消費効果: <yellow>%type%'
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテム</b></gradient>の現在の食品情報を説明してください'
+    params: ''
+  nutrition:
+    description:
+      - '<gradient:#A78BFA:gold><b>回復した栄養を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>回復する空腹量'
+      - '<gray> は <yellow>0 </yellow> 以上である必要があります'
+      - ''
+      - '<gray>満腹バーは <yellow>20'
+    params: '<amount>'
+    feedback: '%prefix% <green>栄養価は<yellow>%value%になりました'
+  removeeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムから効果を削除</b></gradient>'
+      - ''
+      - '<gray><yellow><index> </yellow>選択したエフェクトを削除'
+    params: '<index>'
+    feedback: '%prefix% <green>選択した食品の効果を削除しました'
+  reset:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテム</b></gradient>の食品属性を完全に削除します'
+      - ''
+      - '<gray>またはアイテムがバニラ食品の場合はデフォルトに戻します'
+    params: ''
+    feedback: '%prefix% <green>食品プロパティが削除されました'
+  reseteffects:
+    description:
+      - '<gradient:#A78BFA:gold><b>アイテムから効果を削除</b></gradient>'
+    params: ''
+    feedback: '%prefix% <green>食品の影響を削除'
+  saturation:
+    description:
+      - '<gradient:#A78BFA:gold><b>回復された彩度を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>追加する飽和量'
+      - '<gray> 負の値は許可されます'
+      - ''
+      - '<gray>飽和度はファストフードのレベルを制御します'
+      - '<gray> (栄養) の減少'
+    params: '<amount>'
+    feedback: '%prefix% <green>飽和度は<yellow>%value%になりました'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>食べる音を設定します</b></gradient>'
+      - '<gray><red>1.21.2+のみ'
+      - ''
+      - '<gray><yellow><sound> </yellow>設定する値'
+    params: '<sound>'
+    feedback: '%prefix% <green>食べる音は<yellow>%value%になりました'
+itemeditkinetic:
+  contactcooldownticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>キネティックコンタクトのクールダウンを設定</b></gradient>'
+      - ''
+      - '<gray><yellow><cooldown> </yellow>接触クールダウンティック'
+    params: '<delay>'
+    feedback: '%prefix% <green>接触クールダウンセット'
+  damageconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>キネティックダメージ条件を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>最大ダメージ持続時間ティック'
+      - '<gray><yellow><min speed> </yellow>最低速度'
+      - '<gray><yellow><min relative speed> </yellow>最小相対速度'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>ダメージ条件設定'
+  damagemultiplier:
+    description:
+      - '<gradient:#A78BFA:gold><b>運動ダメージ乗数を設定</b></gradient>'
+      - ''
+      - '<gray><yellow><multiplier> </yellow>ダメージ倍率'
+    params: '<delay>'
+    feedback: '%prefix% <green>キネティックダメージ倍率セット'
+  delayticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetic Delay ティックを設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><delay> </yellow>運動遅延ティック'
+    params: '<delay>'
+    feedback: '%prefix% <green>遅延ティックの設定'
+  dismountconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>キネティックウェポンでターゲットを乗り物から落とすための条件を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>ターゲットを乗り物から落とすまでの最大時間枠 (ティック単位)'
+      - '<gray><yellow><min speed> </yellow>ターゲットをマウントから落とすための最低速度'
+      - '<gray><yellow><min relative speed> </yellow>ターゲットをマウントから落とすための最小相対速度'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>ターゲットを乗り物から落とすための条件が設定されました'
+  forwardmovement:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetic Forward 動作を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><movement> </yellow>前進移動量'
+    params: '<movement>'
+    feedback: '%prefix% <green>前進セット'
+  help:
+    header-name: 'ItemKinetic'
+    description:
+      - '<gradient:#A78BFA:gold><b> ItemKinetic ヘルプ</b></gradient> を表示します'
+      - ''
+      - '<gray><yellow>[page] </yellow>ヘルプページ'
+      - '<gray><yellow>[subcommand] </yellow>サブコマンドのヘルプ'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>このアイテムのキネティックウェポンのプロパティを表示します</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>このアイテムにはキネティックウェポンコンポーネントはありません'
+    message:
+      - '%prefix% <dark_green><b>キネティックウェポン</b>'
+      - '<green>接触クールダウン: <yellow>%contactcooldownticks% <green>ティック'
+      - '<green>ダメージ倍率: <yellow>%damagemultiplier%'
+      - '<green>遅延: <yellow>%delayticks% <green>ティック'
+      - '<green>前進: <yellow>%forwardmovement%'
+      - '<green>打音: <yellow>%hitsound%'
+      - '<green>サウンド: <yellow>%sound%'
+      - '<green>ダメージ条件: <yellow>%damageconditions%'
+      - '<green>ターゲットを乗り物から落とすための条件: <yellow>%dismountconditions%'
+      - '<green>ノックバック条件: <yellow>%knockbackconditions%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>キネティックヒット音を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>設定する値'
+    params: '<sound>'
+    feedback: '%prefix% <green>打音は<yellow>%value%になりました'
+  knockbackconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>キネティックノックバック条件を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>最大ノックバック持続時間ティック'
+      - '<gray><yellow><min speed> </yellow>ノックバックまでの最低速度'
+      - '<gray><yellow><min relative speed> </yellow>ノックバックまでの最小相対速度'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>ノックバック条件設定'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>キネティックサウンドを設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>設定する値'
+    params: '<sound>'
+    feedback: '%prefix% <green>音は<yellow>%value%になりました'
+itemeditpiercing:
+  dealsknockback:
+    description:
+      - '<gradient:#A78BFA:gold><b>ヒット時にノックバックを発生させるかどうかを設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true ノックバックを適用する'
+    params: '[true/false]'
+    feedback: '%prefix% <green>ノックバックが<yellow>%value%になりました'
+  dismounts:
+    description:
+      - '<gradient:#A78BFA:gold><b>ヒットでターゲットをマウントから落とすかどうかを設定します</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true ターゲットをマウントから叩き落とす'
+    params: '[true/false]'
+    feedback: '%prefix% <green>ターゲットを乗り物からノックアウトする回数が <yellow>%value% になりました'
+  help:
+    header-name: 'ItemPiercing'
+    description:
+      - '<gradient:#A78BFA:gold><b> ItemPiercing ヘルプ</b></gradient> を表示します'
+      - ''
+      - '<gray><yellow>[page] </yellow>ヘルプページ'
+      - '<gray><yellow>[subcommand] </yellow>サブコマンドのヘルプ'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>このアイテムの貫通武器の特性を表示します</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>このアイテムには貫通武器コンポーネントはありません'
+    message:
+      - '%prefix% <dark_green><b>貫通武器</b>'
+      - '<green>ノックバックを与える: <yellow>%dealsknockback%'
+      - '<green>ターゲットを乗り物から叩き落とす: <yellow>%dismounts%'
+      - '<green>打音: <yellow>%hitsound%'
+      - '<green>サウンド: <yellow>%sound%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>貫通武器の衝撃音を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>設定する値'
+    params: '<sound>'
+    feedback: '%prefix% <green>打音は<yellow>%value%になりました'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>貫通武器の音を設定します</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>設定する値'
+    params: '<sound>'
+    feedback: '%prefix% <green>音は<yellow>%value%になりました'
+serveritem:
+  help-header: '<gradient:#54acff:#A78BFA><bold>ServerItem</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>ヘルプ</bold></#A78BFA>'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>取得しました <yellow>%amount% <green>の <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][give] %player_name% 得られた %amount% の %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>選択したアイテムをプレイヤーに渡す</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - '<gray><yellow>[amount] </yellow>与えるアイテムの量、デフォルトでは 1'
+      - "<gray><yellow>[player] </yellow>アイテムを取得する人、デフォルトではあなた\nプレイヤーにフィードバックを送信しない場合は、"
+      - '<gray><yellow>[silent] </yellow>true'
+    params: '<id> [amount] [player] [silent]'
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>取得しました <yellow>%amount% <green>の <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets% 得られた %amount% の %id% (%nick%)'
+    description:
+      - "<gradient:#A78BFA:gold><b>選択したアイテムをオンラインプレイヤー全員にプレゼント</b></gradient>\nプレイヤーにフィードバックを送信しない場合は、"
+      - ''
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - '<gray><yellow>[amount] </yellow>与えるアイテムの量、デフォルトでは 1'
+      - '<gray><yellow>[silent] </yellow>true'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] 落とした %amount% の %id% (%nick%） で %world% %x% %y% %z%'
+    description:
+      - '<gradient:#A78BFA:gold><b>選択したアイテムを選択した場所にドロップします</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - '<gray><yellow><amount> </yellow>ドロップするアイテムの数、1 ～ 2304'
+      - '<gray><yellow><world> </yellow>どの世界'
+      - '<gray><yellow><x> <y> <z> </yellow>座標'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>紛失 <yellow>%amount% <green>/<yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][take] %player_name% 与えた %amount% の %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>プレイヤーから選択したアイテムを受け取ります</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - '<gray><yellow>[amount] </yellow>与えるアイテムの量、デフォルトでは 1'
+      - "<gray><yellow>[player] </yellow>アイテムを取得する人、デフォルトではあなた\nプレイヤーにフィードバックを送信しない場合は、"
+      - '<gray><yellow>[silent] </yellow>true'
+    params: '<id> [amount] [player] [silent]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>アイテム<yellow>%id% <green>登録しました'
+    already_used_id: '%prefix% <red>ID <yellow>%id% <red> の項目はすでに存在します。ID を変更するか、/si update を実行して上書きします'
+    description:
+      - '<gradient:#A78BFA:gold><b>手持ちのアイテムを登録</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>項目を識別します。大文字と小文字は区別されません。'
+      - '<gray> スペースまたはドットが含まれている場合も選択できません'
+      - '<gray> すでに使用されている ID'
+      - ''
+      - '<gold><b>ヒント</b></gold> <gray> <yellow>/serveritem update <id></yellow> を使用して、既存の項目を変更します'
+      - '<gold><b>ヒント</b></gold> <gray> <yellow>/serveritem give <id> で保存したアイテムを取得する'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>項目 <yellow>%id% <green>未登録'
+    description:
+      - '<gradient:#A78BFA:gold><b>選択した項目を削除</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>アイテムのID'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>項目 <yellow>%id% <green> が更新されました'
+    description:
+      - '<gradient:#A78BFA:gold><b>選択した項目を更新</b></gradient>'
+      - ''
+      - '<gray>IDに関連付けられたアイテムを手持ちのアイテムに変更します'
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - ''
+      - '<gold><b>ヒント</b></gold> <gray> <yellow>/serveritem save <id></yellow> を使用して新しいアイテムを作成します'
+      - '<gold><b>ヒント</b></gold> <gray><yellow>/serveritem delete <id></yellow>を使用してアイテムを削除します'
+    params: '<id>'
+  show:
+    description:
+      - "<gradient:#A78BFA:gold><b>サーバーに保存されたアイテムを含む GUI を開きます</b></gradient>\nGUI の"
+      - ''
+      - '<gray><yellow>[page] </yellow> ページ、デフォルトでは 1'
+    params: '[page]'
+  setnick:
+    #Holders: %id% %nick%
+    success: '%prefix% <green>アイテム <yellow>%id% <green> ニックが <yellow>%nick% に更新されました'
+    description:
+      - '<gradient:#A78BFA:gold><b>選択した項目の表示名を設定</b></gradient>'
+      - ''
+      - '<gray>ニックは、買い/売りメッセージのホルダー <yellow>%nick%</yellow> に使用されます。'
+      - '<gray> デフォルトはアイテムの名前、または名前がない場合はアイテムタイプです'
+      - ''
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - '<gray><yellow>[nick] </yellow>設定する名前'
+      - ''
+      - '<gold><b>ヒント</b></gold> <gray>をデフォルトにリセットするには、<yellow>/serveritem setnick <id>を使用してください'
+    params: '<id> [nick]'
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>買った <yellow>%amount% <green>の <yellow>%nick% <green>のために <yellow>%price%'
+    #Holders: %id% %nick% %amount%
+    not-enough-space: '<red>購入するのに十分な在庫スペースがありません <gold>%amount% <red>の <gold>%nick%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: '<red>あなたは持っていません <gold>%price% <red>買う <gold>%amount% <red>の <gold>%nick%'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% 支払われた %price% のために %amount% の %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>プレイヤーにアイテムを売る</b></gradient>'
+      - ''
+      - '<gray>Sell は、全額を販売するため、SellMax とは異なります'
+      - '<gray> を売らないと何も売らない'
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - '<gray><yellow><amount> </yellow>アイテム数'
+      - '<gray><yellow><player> </yellow>お金を払ってアイテムを手に入れるべき人は誰ですか'
+      - '<gray><yellow><price> </yellow>アイテム全量の価格は正の値である必要があります'
+      - '<gray><yellow>[silent] </yellow>true でプレイヤーへのメッセージを非表示にします'
+      - ''
+      - '<gray>所持金が不足しているか、インベントリに'
+      - '<gray>  指定数を受け取る空きがないと取引は失敗します：<yellow><amount>'
+      - '<gray><gold>N.B.</gold> コマンド実行者のバランスはそのままです'
+    params: '<id> <amount> <player> <price> [silent]'
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>販売済み <yellow>%amount% <green>の <yellow>%nick% <yellow>のために <green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>あなたは持っていません <gold>%amount% <red>の <gold>%nick% <red>あなたの在庫に'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% 販売済み %amount%/%id% (%nick%) 合計 %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>プレイヤーからアイテムを購入</b></gradient>'
+      - ''
+      - '<gray>Buy は全額購入するため BuyMax とは異なります'
+      - '<gray> を購入するか、何も購入しません'
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - '<gray><yellow><amount> </yellow>アイテム数'
+      - '<gray><yellow><player> </yellow>誰がアイテムを支払ってお金を受け取るべきですか'
+      - '<gray><yellow><price> </yellow>アイテム全量の価格は正の値である必要があります'
+      - '<gray><yellow>[silent] </yellow>true でプレイヤーへのメッセージを非表示にします'
+      - ''
+      - '<gray>取引には、少なくとも <yellow><amount>'
+      - '<gray>  個の <yellow><id> </yellow>がインベントリに必要です'
+      - '<gray><gold>N.B.</gold> コマンド実行者のバランスはそのままです'
+    params: '<id> <amount> <player> <price> [silent]'
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>買った <yellow>%amount% <green>の <yellow>%nick% <yellow>のために <green>%price%'
+    #Holders: %id% %nick%
+    not-enough-space: '<red> <gold>%nick% を購入するのに十分な在庫スペースがありません'
+    #Holders: %id% %nick% %price%
+    not-enough-money: '<red><gold>%nick% <red>を<gold>%price% <red>ずつ買うのに十分なお金がありません'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% 支払われた %price% のために %amount% の %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>プレイヤーにアイテムを売る</b></gradient>'
+      - ''
+      - '<gray>SellMax は Sell と異なり、より少ない金額で販売できるため'
+      - '<gray>'
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - '<gray><yellow><amount> </yellow>アイテム数'
+      - '<gray><yellow><player> </yellow>お金を払ってアイテムを手に入れるべき人は誰ですか'
+      - '<gray><yellow><price> </yellow>アイテム全量の価格は正の値である必要があります'
+      - '<gray><yellow>[silent] </yellow>true でプレイヤーへのメッセージを非表示にします'
+      - ''
+      - '<gray>所持金が不足しているか、インベントリに'
+      - '<gray>  1個も受け取る空きがないと取引は失敗します'
+      - '<gray>一部だけ購入する場合、価格 <yellow><price></yellow> は数量に応じて減額されます'
+      - '<gray><gold>N.B.</gold> コマンド実行者のバランスはそのままです'
+    params: '<id> <amount> <player> <price> [silent]'
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>販売済み <yellow>%amount% <green>の <yellow>%nick% <yellow>のために <green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>在庫に販売できる<gold>%nick% <red>がありません'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% 販売済み %amount%/%id% (%nick%) 合計 %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>プレイヤーからアイテムを購入</b></gradient>'
+      - ''
+      - '<gray>BuyMax は Buy とは異なり、購入できる金額が少なくなる可能性があります'
+      - '<gray>'
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - '<gray><yellow><amount> </yellow>アイテム数'
+      - '<gray><yellow><player> </yellow>誰がアイテムを支払ってお金を受け取るべきですか'
+      - '<gray><yellow><price> </yellow>アイテム全量の価格は正の値である必要があります'
+      - '<gray><yellow>[silent] </yellow>true でプレイヤーへのメッセージを非表示にします'
+      - ''
+      - '<gray>取引には少なくとも1個の <yellow><id> </yellow>が必要です'
+      - '<gray>'
+      - '<gray>プレイヤーの販売額が <yellow><amount></yellow> 未満の場合、価格は調整されます'
+      - '<gray><gold>N.B.</gold> コマンド実行者のバランスはそのままです'
+    params: '<id> <amount> <player> <price> [silent]'
+itemstorage:
+  help-header: '<gradient:#54acff:#A78BFA><bold>アイテム保管場所</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>ヘルプ</bold></#A78BFA>'
+  get:
+    #Holders: %id% %amount%
+    success: '%prefix% <green>取得しました <yellow>%amount% <green>の <yellow>%id%'
+    no-inventory-space: '%prefix% <red>インベントリにスペースがありません'
+    description:
+      - '<gradient:#A78BFA:gold><b>選択したアイテムを取得</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - '<gray><yellow>[amount] </yellow>取得量、デフォルトでは 1'
+    params: '<id> [amount]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>アイテム<yellow>%id% <green>登録しました'
+    #Holders: %limit%
+    limit-reached: '%prefix% <red>保存可能なアイテムの最大数 (%limit%) に達しました'
+    description:
+      - '<gradient:#A78BFA:gold><b>手持ちのアイテムを登録</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>アイテムを識別します。大文字と小文字は区別されません。'
+      - '<gray> スペースまたはドットが含まれている場合も選択できません'
+      - '<gray> すでに使用されている ID'
+      - ''
+      - '<gold><b>ヒント</b></gold> <gray> <yellow>/itemstorage update <id></yellow> を使用して、既存の項目を変更します'
+      - '<gold><b>ヒント</b></gold> <gray> <yellow>/itemstorage get <id> で保存したアイテムを取得します'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>項目 <yellow>%id% <green>未登録'
+    description:
+      - '<gradient:#A78BFA:gold><b>選択した項目を削除</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>アイテムのID'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>項目 <yellow>%id% <green> が更新されました'
+    description:
+      - '<gradient:#A78BFA:gold><b>選択した項目を更新</b></gradient>'
+      - ''
+      - '<gray>IDに関連付けられたアイテムを手持ちのアイテムに変更します'
+      - '<gray><yellow><id> </yellow>アイテムのID'
+      - ''
+      - '<gray><gold><b>ヒント</b></gold> <yellow>/itemstorage save <id></yellow> を使用して新しいアイテムを作成します'
+      - '<gray><gold><b>ヒント</b></gold> <yellow>/itemstorage delete <id></yellow> を使用してアイテムを削除します'
+    params: '<id>'
+  show:
+    description:
+      - "<gradient:#A78BFA:gold><b>保存したアイテムで GUI を開きます</b></gradient>\nGUI の"
+      - ''
+      - '<gray><yellow>[page] <gray> ページ、デフォルトでは 1'
+    params: '[page]'
+itemeditimport:
+  help:
+    - '<green>/itemeditimport ItemEditor <dark_green>- ItemEditor プラグインから項目をインポートします'
+  itemeditor:
+    unable-to-get-item:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>アイテムをロードできません <gold>%id%'
+    already-used-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red> はすでに使用されています。おそらく、このコマンドを実行する前にすでにこのコマンドを実行している可能性があります。そうでない場合は、ファイル ItemEditor/items/%id%.yml の名前を変更してください。'
+    invalid-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red> は許容される ID ではありません。ファイル ItemEditor/items/%id%.yml の名前を英数字の名前に変更できます。'
+    import-unsuccess:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> <gold>%max% <red> の項目はインポートされませんでした。もしかしたら、このコマンドを以前に実行した可能性があります (?)'
+    import-success:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>輸入品 <yellow>%done% <green>の <yellow>%max% <green>からのアイテム ItemEditor'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>輸入品: <yellow>%ids%'
+    import-empty:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>ItemEditor にはインポートするアイテムがありません'
+itemeditreload:
+  success: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>リロードしました'
+gui:
+  color:
+    title: '<blue>カラーエディター'
+  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
+    creative: '中クリック'
+    other: '1 を押します'
+  colorselector:
+    title: '<blue>色を選択してください'
+    buttons:
+      color:
+        - '<gradient:#A78BFA:gold>色:</gradient>'
+        - '<gray><yellow>%colors%'
+        - '<gray>[<white>右クリック<gray>] <yellow>%color%を追加'
+        - '<gray>[<white>左クリック<gray>] 最後の色を削除'
+        - '<gray>[<white>Shift+右クリック<gray>] カラーをクリア'
+  banner:
+    title: '<blue>バナー編集者'
+    color_selector_title: '<blue>カラーセレクター'
+    pattern_selector_title: '<blue>パターンセレクター'
+    buttons:
+      pattern_selector_info:
+        - '<gray><gold><b>%type%</b>を選択してください'
+      color_selector_info:
+        - '<gray><gold><b>%color%</b>を選択してください'
+      position:
+        - '<gradient:#A78BFA:gold>パターンコントローラー</gradient>'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] パターンの切り替え'
+        - '<gray>[<white>左/右クリック<gray>] << Move pattern >>'
+      type:
+        - '<gradient:#A78BFA:gold>タイプセレクター</gradient>'
+        - '<gray>タイプ: <yellow>%type%'
+        - ''
+        - '<gray>[<white>クリック<gray>] 種類を変更'
+      color:
+        - '<gradient:#A78BFA:gold>カラーセレクター</gradient>'
+        - '<gray>カラー: <yellow>%color%'
+        - ''
+        - '<gray>[<white>Click<gray>] 色を変更'
+  firework:
+    title: '<blue>花火エディター'
+    buttons:
+      type:
+        - '<gradient:#A78BFA:gold>タイプセレクター</gradient>'
+        - '<gray>タイプ: <yellow>%type%'
+        - ''
+        - '<gray>[<white>クリック<gray>] 種類を変更'
+      colors:
+        - '<gradient:#A78BFA:gold>カラーセレクター</gradient>'
+        - '<gray>色: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>クリック<gray>]で色を変更します'
+      fadecolors:
+        - '<gradient:#A78BFA:gold>フェードカラーセレクター</gradient>'
+        - '<gray>フェードカラー: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>クリック<gray>]で色を変更します'
+      flags:
+        none: '<red>アクティブなものはありません'
+        trail: '<yellow>トレイル <green>アクティブ'
+        flicker: '<yellow>フリッカー <green>アクティブ'
+        both: '<gray><yellow>トレイル</yellow> および <yellow>フリッカー<green>アクティブ'
+        info:
+          - '<gradient:#A78BFA:gold>トレイルとフリッカーアクティベーター</gradient>'
+          - '%status%'
+          - ''
+          - '<gray>[<white>右クリック<gray>] フリッカー効果の切り替え'
+          - '<gray>[<white>左クリック<gray>] 軌跡効果の切り替え'
+      position:
+        - '<gray>エフェクトコントローラー'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] エフェクトの切り替え'
+        - '<gray>[<white>左/右クリック<gray>] このエフェクトを移動します'
+      power:
+        - '<gray>パワー: <yellow>%power%'
+        - ''
+        - '<gray>[<white>左/右クリック<gray>] << Change >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>前のページ</b>'
+      - ''
+      - '<gray>[<white>クリック<gray>] ページ<yellow>%target_page%へ'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>次のページ</b>'
+      - ''
+      - '<gray>[<white>クリック<gray>] ページ<yellow>%target_page%へ'
+  back:
+    #Holders: %player_name%
+    description:
+      - '<gold><b>戻る</b>'
+      - ''
+      - '<gray>[<white>Click<gray>] 前の GUI に移動'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '<blue>%player_name% アイテム - ページ <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>ページ <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] <yellow>item</yellow>/<yellow>ID の表示を切り替えます'
+        - ''
+        - '<gray>項目をクリックしてください:'
+        - '<gray>> [<white>左クリック<gray>] ゲイン<yellow>1'
+        - '<gray>> [<white>Shift+左クリック<gray>] ゲイン <yellow>64'
+        - '<gray>> [<white>Shift+右クリック<gray>] 項目を削除'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '<blue>サーバーアイテム - ページ<aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>ページ <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] <yellow>item</yellow>/<yellow>ID の表示を切り替えます'
+        - ''
+        - '<gray>項目をクリックしてください:'
+        - '<gray>> [<white>左クリック<gray>] ゲイン<yellow>1'
+        - '<gray>> [<white>Shift+左クリック<gray>] ゲイン <yellow>64'
+        - '<gray>> [<white>Shift+右クリック<gray>] 項目を削除'

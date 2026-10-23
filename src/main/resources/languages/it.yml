@@ -1,0 +1,1438 @@
+generic:
+  help:
+    player-only: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Comando disponibile solo ai giocatori'
+    no-item-on-hand: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Devi tenere un oggetto in mano'
+    lack-permission: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Non hai il permesso %permission%'
+    lack-permission-generic: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Non hai il permesso di usare questo comando'
+    blocked-by-censure: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Non puoi usare questo testo: contiene parole vietate'
+    blocked-by-type-restriction: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Non puoi rinominare questo oggetto'
+    blocked-by-type-restriction-lore: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Non puoi modificare la descrizione di questo oggetto'
+    blocked-by-lore-line-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Non puoi aggiungere altre righe alla descrizione'
+    blocked-by-lore-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Non puoi impostare righe più lunghe di %limit% caratteri'
+    blocked-by-rename-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Non puoi impostare nomi più lunghi di %limit% caratteri'
+
+    prefix: "<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray>"
+    header-format: "<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Aiuto</bold></#A78BFA>"
+    header-sub-format: "<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <gradient:#A78BFA:#54acff><bold>%sub%</bold></gradient> <dark_gray>»</dark_gray> <#55d6ff><bold>Aiuto</#55d6ff>"
+    command-format: "<gray>/%command%</gray> <#bad1ff>%sub%</#bad1ff> <#d7bbff>%params%</#d7bbff>"
+    footer-format: "%prev_clickable% <#7E9CFD><b>Aiuto</b> [%page%/%max_page%]</#7E9CFD> %next_clickable%"
+    next_text: " <light_purple><b>><st>> ></st> "
+    prev_text: " <light_purple><b><st>< <</st>< "
+    next_void: " <dark_gray><b>><st>> ></st> "
+    prev_void: " <dark_gray><b><st>< <</st>< "
+    next_hover: "<gold><b>Vai alla pagina %target%"
+    prev_hover: "<gold><b>Vai alla pagina %target%"
+  wrong-material:
+    axolotl_bucket: '%prefix% <red>L''oggetto deve essere un secchio di assolotti'
+    banner: '%prefix% <red>L''oggetto deve essere uno stendardo'
+    damageable: '%prefix% <red>L''oggetto deve avere durabilità, come strumenti e armature'
+    player_head: '%prefix% <red>L''oggetto deve essere una testa di giocatore'
+    rgb_colorable: '%prefix% <red>L''oggetto deve essere colorabile, come armature di cuoio, stelle pirotecniche, pozioni o frecce imbevute'
+    written_book: '%prefix% <red>L''oggetto deve essere un libro scritto'
+    potion_effect_applicable: '%prefix% <red>L''oggetto deve essere una pozione, una freccia imbevuta o uno stufato sospetto'
+    firework: '%prefix% <red>L''oggetto deve essere un fuoco d''artificio'
+    spawner_egg: '%prefix% <red>L''oggetto deve essere un uovo generatore'
+    tropical_fish_bucket: '%prefix% <red>L''oggetto deve essere un secchio di pesci tropicali'
+    writable_book: '%prefix% <red>L''oggetto deve essere un libro scritto or book e quill'
+    compass: '%prefix% <red>L''oggetto deve essere una bussola'
+    music_instrument: '%prefix% <red>L''oggetto deve essere un corno di capra'
+    armor: '%prefix% <red>L''oggetto deve essere un''armatura'
+    enchantment_storage: '%prefix% <red>L''oggetto deve essere un libro o un libro incantato'
+  wrong-alias:
+    axolotl_variant: '%prefix% <red>Variante dell''assolotto non valida! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    potion_effect: '%prefix% <red>Effetto non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    animations: '%prefix% <red>Animazione non valida! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    sound: '%prefix% <red>Suono non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    enchant: '%prefix% <red>Incantesimo non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    flag_type: '%prefix% <red>Flag non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    book_type: '%prefix% <red>Tipo di libro non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    equip_slot: '%prefix% <red>Slot equipaggiamento non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    banner_pattern: '%prefix% <red>Motivo non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    color: '%prefix% <red>Colore non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    mob_type: '%prefix% <red>Tipo di uovo non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    trim_material: '%prefix% <red>Materiale decorativo non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    tropical_fish_pattern: '%prefix% <red>Motivo non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    trim_pattern: '%prefix% <red>Motivo decorativo non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    boolean: '%prefix% <red>Valore booleano non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    attribute: '%prefix% <red>Attributo non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    operation: '%prefix% <red>Operazione non valida! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    itemrarity: '%prefix% <red>Rarità non valida! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    entitytype: '%prefix% <red>Tipo di entità non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    entitygroups: '%prefix% <red>Gruppo di entità non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    consumable_effect: '%prefix% <red>Effetto consumabile non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    goat_horn_sound: '%prefix% <red>Suono del corno di capra non valido! <dark_red>[<gold>passa qui sopra<dark_red>]'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>Alias:</b></gradient>'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+itemedit:
+  amount:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta quantità</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>quantità da impostare (fino a 127)'
+      - '<gold><b>Suggerimento</b></gold> <gray>Le quantità negative vengono sottratte'
+      - '<gray> dalla quantità attuale dell''oggetto'
+    params: '<amount>'
+    feedback: '%prefix% <green>Quantità dell''oggetto impostata su <yellow>%amount%'
+    feedback-decrease: '%prefix% <green>Quantità dell''oggetto ridotta di <yellow>%amount%'
+  attribute:
+    description:
+      - '<gradient:#A78BFA:gold><b>Modifica i modificatori degli attributi</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <attribute> <amount> [operation] [slot] </yellow><dark_gray>»</dark_gray> aggiunge nuovi modificatori'
+      - '<gray><yellow>Remove <attribute/slot> </yellow><dark_gray>»</dark_gray> rimuove alcuni modificatori'
+    params: '<add/remove> [...]'
+    add:
+      params: '<attribute> <amount> [operation] [slot]'
+      description:
+        - '<gradient:#A78BFA:gold><b>Aggiungi modificatore attributo</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute> </yellow>tipo di attributo'
+        - '<gray><yellow><amount> </yellow>quantità da impostare'
+        - '<gray><yellow>[operation] </yellow>modalità di applicazione del modificatore; per impostazione predefinita somma'
+        - '<gray><yellow>[slot] </yellow>applica il modificatore solo quando l''oggetto si trova nello slot'
+        - '<gray>       di equipaggiamento scelto, oppure in qualsiasi slot se non specificato'
+      feedback: '%prefix% <green>Modificatore aggiunto'
+    remove:
+      params: '<attribute/slot>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Rimuovi modificatori</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute/slot> </yellow>tipo da rimuovere: verranno rimossi tutti i modificatori con'
+        - '<gray>                 il valore selezionato'
+      feedback-attribute: '%prefix% <green>Modificatori dell''attributo rimossi'
+      feedback-equipment: '%prefix% <green>Modificatori dello slot di equipaggiamento rimossi'
+  axolotlvariant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Modifica la variante dell''assolotto nel secchio</b></gradient>'
+      - '<white><sprite:items:item/axolotl_bucket>'
+      - '<gray><yellow><type> </yellow>tipo di assolotto'
+    params: '<type>'
+    feedback: '%prefix% <green>Variante dell''assolotto impostata su <yellow>%variant%'
+  banner:
+    description:
+      - '<gradient:#A78BFA:gold><b>Modifica lo stendardo</b></gradient>'
+    params: '<add/set/remove/color> [...]'
+    set:
+      params: '<type> <color> <line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Sostituisci il motivo nella riga selezionata</b></gradient>'
+      feedback: '%prefix% <green>Motivo impostato'
+    add:
+      params: '<type> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Aggiungi un motivo</b></gradient>'
+      feedback: '%prefix% <green>Motivo aggiunto'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Rimuovi il motivo dalla riga selezionata</b></gradient>'
+      feedback: '%prefix% <green>Motivo rimosso'
+    color:
+      params: '<line> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Cambia il colore del motivo nella riga selezionata</b></gradient>'
+      feedback: '%prefix% <green>Colore del motivo cambiato'
+  bookauthor:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta autore</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>Il nome dell''autore può contenere spazi e può anche essere colorato'
+      - '<gray>Funziona solo con i libri scritti'
+    params: '<name>'
+    feedback: '%prefix% <green>Autore del libro aggiornato'
+    feedback-reset: '%prefix% <green>Autore del libro ripristinato'
+  bookenchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta gli incantesimi sul libro</b></gradient>'
+      - '<white><sprite:items:item/enchanted_book> <sprite:items:item/book>'
+      - '<gray>La differenza tra enchant e bookenchant è che'
+      - '<gray>un libro con Aspetto di fuoco incendia i bersagli colpiti'
+      - '<gray>mentre un libro con bookenchant non lo fa'
+      - ''
+      - '<gray><yellow><enchant> </yellow>tipo di incantesimo'
+      - '<gray><yellow>[level] </yellow>livello dell''incantesimo; per impostazione predefinita <yellow>1'
+      - ''
+      - '<gold><b>Suggerimento</b></gold> <gray>Imposta <yellow>[level] </yellow>su <yellow>0 </yellow>per rimuovere un incantesimo'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>Incantesimo del libro rimosso: <yellow>%enchant%'
+    feedback: '%prefix% <green>Incantesimo del libro applicato: <yellow>%enchant% <green>lv <yellow>%lv%'
+  booktype:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il tipo di libro</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>Funziona solo con i libri scritti'
+    params: '<booktype>'
+    feedback: '%prefix% <green>Generazione del libro aggiornata a <yellow>%generation%'
+    feedback-reset: '%prefix% <green>Generazione del libro ripristinata'
+  color:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta colore</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/tipped_arrow_base> <sprite:items:item/firework_star> <sprite:items:item/leather_chestplate>'
+      - '<gray>Funziona anche con armature di cuoio, stelle pirotecniche, pozioni e frecce imbevute!'
+      - '<gray><yellow>[red] [green] [blue] </yellow>sono i valori dei colori da combinare'
+      - '<gray>Ogni colore è un numero intero compreso tra 0 e 255'
+      - '<gray>Se hai dubbi, cerca su Google "<yellow>RGB color picker</yellow>"'
+    params: '[red] [green] [blue]'
+    feedback: '%prefix% <green>Colore aggiornato'
+  compass:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la destinazione della bussola</b></gradient>'
+      - '<white><sprite:items:item/compass_00>'
+      - '<gray><yellow>Set </yellow><dark_gray>»</dark_gray> imposta la tua posizione come destinazione della bussola'
+      - '<gray><yellow>Clear </yellow><dark_gray>»</dark_gray> cancella la destinazione della bussola'
+    params: '<set/clear>'
+    set:
+      feedback: '%prefix% <green>La bussola ora punta a <yellow>%world% %x% %y% %z%'
+    clear:
+      feedback: '%prefix% <green>Destinazione della bussola cancellata'
+  custommodeldata:
+    description:
+      - '<gradient:#A78BFA:gold><b>Modifica i dati del modello personalizzato</b></gradient>'
+      - ''
+      - '<gray>Usato nei pacchetti di texture'
+      - '<gray><yellow>[value] </yellow>numero intero positivo del modello da impostare'
+      - '<gray>Nota: i server moderni usano itemmodel al posto di custommodeldata'
+      - '<gray> per le texture; questo comando è per i client meno recenti'
+    params: '<value>'
+    feedback: '%prefix% <green>Dati del modello personalizzato aggiornati'
+    feedback-reset: '%prefix% <green>Dati del modello personalizzato ripristinati'
+  damage:
+    description:
+      - '<gradient:#A78BFA:gold><b>Modifica la durabilità</b></gradient>'
+      - ''
+      - '<gray><yellow><durability> </yellow>danno da applicare'
+      - '<gray><gold>N.B.</gold> <yellow>0 </yellow>significa nessun danno e durabilità completa'
+    params: '<durability>'
+    feedback-reset: '%prefix% <green>Durabilità ripristinata'
+    feedback: '%prefix% <green>Durabilità aggiornata'
+  equipment:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la proprietà equipaggiamento dell''oggetto</b></gradient>'
+      - ''
+      - '<gray><gold><b>Suggerimento</b></gold> Usa /itemequip o /iee'
+      - '<gray><gold>N.B.</gold> gli oggetti da bere non possono essere mangiati'
+    params: ''
+  enchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta gli incantesimi</b></gradient>'
+      - ''
+      - '<gray><yellow><enchant> </yellow>tipo di incantesimo'
+      - '<gray><yellow>[level] </yellow>livello dell''incantesimo; per impostazione predefinita <yellow>1'
+      - ''
+      - '<gold><b>Suggerimento</b></gold> <gray>Imposta <yellow>[level] </yellow>su <yellow>0 </yellow>per rimuovere un incantesimo'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>Incantesimo rimosso: <yellow>%enchant%'
+    feedback: '%prefix% <green>Incantesimo applicato: <yellow>%enchant% <green>lv <yellow>%lv%'
+  fireresistent:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la resistenza al fuoco e alla lava</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>imposta il valore; per impostazione predefinita alterna lo stato'
+      - ''
+      - '<gray>Un oggetto resistente al fuoco non verrà distrutto'
+      - '<gray> se cade nel fuoco e galleggerà sulla lava'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Resistenza al fuoco impostata su <yellow>%value%'
+  fireworkpower:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la potenza del fuoco d''artificio</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+      - '<gray><yellow><power> </yellow>potenza del fuoco d''artificio, un valore compreso tra <yellow>0 </yellow>and <yellow>5'
+    params: '<power>'
+    feedback: '%prefix% <green>Potenza del fuoco d''artificio aggiornata'
+  firework:
+    description:
+      - '<gradient:#A78BFA:gold><b>Modifica il fuoco d''artificio tramite interfaccia</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+    params: ''
+  food:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la proprietà cibo dell''oggetto</b></gradient>'
+      - ''
+      - '<gray><gold><b>Suggerimento</b></gold> Usa /itemfood o /if'
+      - '<gray><gold>N.B.</gold> gli oggetti da bere non possono essere mangiati'
+    params: ''
+  glider:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta lo stato di planata</b></gradient>'
+      - ''
+      - '<gray>L''oggetto dovrebbe consentire di planare come con le elitre'
+      - '<gray><yellow>[true/false] </yellow>imposta il valore di planata; per impostazione predefinita alterna lo stato'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Planata impostata su <yellow>%value%'
+  glow:
+    description:
+      - '<gradient:#A78BFA:gold><b>Sovrascrive l''effetto luminoso degli incantesimi</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>imposta il valore; per impostazione predefinita ripristina'
+      - ''
+      - '<gold><b>Suggerimento</b></gold> <gray><yellow>nessun valore specificato </yellow>ripristina il comportamento predefinito'
+    params: '[true/false/default]'
+    feedback: '%prefix% <green>Luminosità impostata su <yellow>%value%'
+    feedback-reset: '%prefix% <green>Luminosità ripristinata al valore predefinito'
+  goathornsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il suono del corno di capra</b></gradient>'
+      - '<white><sprite:items:item/goat_horn>'
+      - '<gray><yellow><type> </yellow>tipo di suono'
+    params: '<type>'
+    feedback: '%prefix% <green>Suono aggiornato'
+  hide:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nascondi o mostra i componenti</b></gradient>'
+      - ''
+      - '<gray><yellow><flag> </yellow>flag dell''oggetto da modificare'
+      - '<gray><yellow>[true/false] </yellow>imposta il valore del flag; per impostazione predefinita alterna lo stato'
+      - ''
+      - '<gold><b>Suggerimento</b></gold> <gray>nascondi i motivi degli stendardi con il flag potion_effects'
+      - '<gold><b>Suggerimento</b></gold> <gray>nascondi tutti i flag insieme con <yellow>/itemedit hideall'
+    params: '<flag> [true/false]'
+    feedback: '%prefix% <green>Flag impostato su <yellow>%value%'
+  hidetooltip:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nascondi o mostra i suggerimenti</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>imposta il valore del flag; per impostazione predefinita alterna lo stato'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Visibilità dei suggerimenti impostata su <yellow>%value%'
+  hideall:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nascondi tutti i componenti</b></gradient>'
+      - ''
+      - '<gray>Nasconde: incantesimi, effetti delle pozioni, motivi degli stendardi, attributi...'
+      - ''
+      - '<gold><b>Suggerimento</b></gold> <gray>nascondi singoli componenti con <yellow>/itemedit hide <flag> true'
+    params: ''
+    feedback: '%prefix% <green>Tutti i flag sono stati nascosti'
+  itemmodel:
+    description:
+      - '<gradient:#A78BFA:gold><b>Modifica il modello dell''oggetto</b></gradient>'
+      - ''
+      - '<gray><yellow><namespaced key> </yellow>chiave da impostare come riferimento alla texture'
+      - '<gray>Esempio: /ie itemmodel <yellow>iron_sword'
+      - '<gray>Esempio: /ie itemmodel <yellow>minecraft:iron_sword'
+      - ''
+      - '<gray><yellow><namespace></yellow>:<yellow><id></yellow> farà riferimento al modello:'
+      - '  /assets/<yellow><namespace></yellow>/models/item/<yellow><id>'
+    params: '<namespaced key>'
+    feedback: '%prefix% <green>Modello dell''oggetto aggiornato'
+    feedback-reset: '%prefix% <green>Modello dell''oggetto ripristinato'
+  kinetic:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la proprietà cinetica dell''oggetto</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gray><gold><b>Suggerimento</b></gold> Usa /itemkinetic o /iek'
+    params: ''
+  maxdurability:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la durabilità massima dell''oggetto</b></gradient>'
+      - ''
+      - '<gray><yellow><max durability> </yellow>nuovo valore di durabilità dell''oggetto,'
+      - '<gray>  deve essere maggiore di 1'
+    params: '<max durability>'
+    feedback: '%prefix% <green>Durabilità massima aggiornata a <yellow>%value%'
+  maxstacksize:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la dimensione massima dello stack</b></gradient>'
+      - ''
+      - '<gray><yellow>[1-99] </yellow>set the flag value'
+      - ''
+      - '<gray><yellow>no value </yellow>ripristina la dimensione standard dello stack, pari a <yellow>64'
+      - '<gray> per la maggior parte degli oggetti, <yellow>1</yellow> per armature e strumenti; altri'
+      - '<gray> valori si applicano ad alcuni oggetti'
+    params: '[1-99]'
+    feedback: '%prefix% <green>Dimensione massima dello stack aggiornata a <yellow>%value%'
+    feedback-reset: '%prefix% <green>Dimensione massima dello stack ripristinata'
+  pierce:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la proprietà perforante dell''oggetto</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gold><b>Suggerimento</b></gold><gray> Usa /itempiercing o /iep'
+    params: ''
+  potioneffect:
+    itemtag-tip: '%prefix% <gray>Vuoi aggiungere effetti delle pozioni agli oggetti comuni? Prova >ItemTag<'
+    itemtag-tip-hover:
+      - '<gradient:#A78BFA:gold>Clicca qui</gradient>'
+    description:
+      - '<gradient:#A78BFA:gold><b>Modifica gli effetti della pozione</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/suspicious_stew> <sprite:items:item/tipped_arrow_base>'
+      - '<gray>Funziona con pozioni, frecce imbevute e stufati sospetti!'
+      - '<gray><yellow>Add <effect> <duration> [level] </yellow><dark_gray>»</dark_gray> aggiunge un effetto'
+      - '<gray><yellow>Remove <effect> </yellow><dark_gray>»</dark_gray> rimuove l''effetto selezionato'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> rimuove tutti gli effetti'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
+      description:
+        - '<gradient:#A78BFA:gold><b>Aggiunge o sostituisce l''effetto selezionato</b></gradient>'
+        - ''
+        - '<gray><yellow><effect> </yellow>tipo di effetto'
+        - '<gray><yellow><duration> </yellow>durata in secondi'
+        - '<gray><yellow>[level] </yellow>Fino a 127; per impostazione predefinita <yellow>1'
+        - '<gray><yellow>[particles] </yellow>Mostrare le particelle? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[ambient] </yellow>Le particelle devono essere ambientali? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[icon] </yellow>Mostrare l''icona nell''angolo in alto a destra? <yellow>true</yellow>/<yellow>false'
+      feedback: '%prefix% <green>Effetto pozione aggiunto'
+    remove:
+      params: '<effect>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Rimuovi l''effetto selezionato</b></gradient>'
+      feedback: '%prefix% <green>Effetto pozione rimosso'
+    reset:
+      feedback: '%prefix% <green>Effetti delle pozioni ripristinati'
+  rarity:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la rarità dell''oggetto</b></gradient>'
+      - ''
+      - '<gray><yellow>[rarity] </yellow>imposta la rarità dell''oggetto'
+      - ''
+      - '<gold><b>Suggerimento</b><gold><gray> setting no rarity value will restore default'
+    params: '[rarity]'
+    feedback: '%prefix% <green>Rarità aggiornata'
+    feedback-reset: '%prefix% <green>Rarità ripristinata'
+  repaircost:
+    description:
+      - '<gradient:#A78BFA:gold><b>Modifica il costo di riparazione dell''incudine</b></gradient>'
+      - ''
+      - '<gray><yellow><cost> </yellow>quantità di livelli'
+      - '<gray><gold>N.B.</gold> il costo di riparazione o rinomina all''incudine è sempre almeno <yellow>1'
+      - '<gray><gold>N.B.</gold> questo comando imposta il costo base di riparazione; il costo finale in livelli dipende dall''operazione'
+      - '<gray>Maggiori informazioni su <yellow>minecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<cost>'
+    feedback: '%prefix% <green>Repair cost updated'
+  skullowner:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il proprietario della testa</b></gradient>'
+      - ''
+      - '<gray>Funziona solo con le teste dei giocatori'
+      - '<gray><yellow>[name] </yellow>nome del proprietario'
+      - ''
+      - '<gold><b>Suggerimento</b></gold> <gray>Posiziona e rompi la testa per aggiornare la skin'
+    params: '[name]'
+    feedback: '%prefix% <green>Proprietario della testa aggiornato'
+    feedback-reset: '%prefix% <green>Proprietario della testa ripristinato'
+  tooltipstyle:
+    description:
+      - '<gradient:#A78BFA:gold><b>Modifica lo stile dei suggerimenti dell''oggetto</b></gradient>'
+      - ''
+      - '<gray><yellow><style> </yellow>chiave da impostare come riferimento alla texture'
+      - '<gray>  lo stile è composto da <white><namespace>:<id>'
+      - '<gray>Esempio: /ie tooltipstyle <yellow>my_style'
+      - '<gray>Esempio: /ie tooltipstyle <yellow>minecraft:my_style'
+      - '<gray>dove <yellow>minecraft</yellow> è il <white><namespace></white> e'
+      - '<gray><yellow>my_style</yellow> è il <white><id>'
+      - '<gray>dopo averlo impostato, l''oggetto può usare sprite personalizzati per'
+      - '<gray>lo sfondo e la cornice dei suggerimenti.'
+      - '<gray><white><namespace>:tooltip/<id>_background'
+      - '<gray>and <white><namespace>:tooltip/<id>_frame'
+    params: '<style/clear>'
+    feedback: '%prefix% <green>Stile dei suggerimenti aggiornato'
+    feedback-reset: '%prefix% <green>Stile dei suggerimenti ripristinato'
+  armortrim:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la decorazione dell''armatura</b></gradient>'
+      - '<white><sprite:items:item/iron_chestplate>'
+      - '<gray><yellow><material> </yellow>il materiale della decorazione'
+      - '<gray><yellow><pattern> </yellow>il motivo della decorazione'
+    params: '<material> <pattern>'
+    feedback: '%prefix% <green>Decorazione aggiornata'
+    feedback-reset: '%prefix% <green>Decorazione rimossa'
+  tropicalfish:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta le proprietà del secchio di pesci tropicali</b></gradient>'
+      - '<white><sprite:items:item/tropical_fish_bucket>'
+      - '<gray><yellow>pattern <pattern type> </yellow><dark_gray>»</dark_gray> type difish'
+      - '<gray><yellow>patterncolor <color> </yellow><dark_gray>»</dark_gray> colore del motivo del pesce'
+      - '<gray><yellow>bodycolor <color> </yellow><dark_gray>»</dark_gray> colore del corpo del pesce'
+    params: '[...]'
+    pattern:
+      params: '<type>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Imposta il motivo del pesce tropicale</b></gradient>'
+        - ''
+        - '<gray><yellow><type> </yellow>tipo di motivo del pesce'
+      feedback: '%prefix% <green>Motivo aggiornato'
+    patterncolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Imposta il colore del motivo del pesce tropicale</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>pattern color dithe fish'
+      feedback: '%prefix% <green>Colore aggiornato'
+    bodycolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Imposta il colore del corpo del pesce tropicale</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow>body color dithe fish'
+      feedback: '%prefix% <green>Colore aggiornato'
+  type:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il tipo dell''oggetto</b></gradient>'
+      - ''
+      - '<gray><gold>N.B.</gold> alcuni tipi, come Air, non sono validi'
+    params: '<type>'
+    feedback: '%prefix% <green>Materiale dell''oggetto aggiornato'
+  unbreakable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta lo stato indistruttibile</b></gradient>'
+      - ''
+      - '<gray>Gli strumenti e le armature indistruttibili non perdono durabilità'
+      - '<gray><yellow>[true/false] </yellow>imposta il valore; per impostazione predefinita alterna lo stato'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Stato indistruttibile impostato su <yellow>%value%'
+  help:
+    header-name: "ItemEdit"
+    description:
+      - '<gradient:#A78BFA:gold><b>Mostra l''aiuto di ItemEdit</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Pagina dell''aiuto'
+      - '<gray><yellow>[subcommand] </yellow>Aiuto per un sottocomando'
+    params: '[page/subcommand]'
+  rename:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il nome dell''oggetto</b></gradient>'
+      - ''
+      - '<gold><b>Suggerimento</b></gold> <gray>type <yellow>/ie rename -clear </yellow>per ripristinare il nome predefinito'
+      - '<gold><b>Suggerimento</b></gold> <gray>type <yellow>/ie rename -copy </yellow>per copiare il nome'
+      - '<gold><b>Suggerimento</b></gold> <gray>type <yellow>/ie rename -paste </yellow>per incollare il valore copiato in precedenza'
+    params: '<name>'
+    feedback: '%prefix% <green>Nome dell''oggetto aggiornato'
+    rename-clear: '%prefix% <green>Nome dell''oggetto cancellato'
+    rename-copy: '%prefix% <green>Nome dell''oggetto copiato'
+    rename-paste-empty: '%prefix% <red>Non c''è alcun nome copiato da incollare'
+    feedback-paste: '%prefix% <green>Nome copiato incollato'
+    banned_words: '%prefix% <red>Il nome contiene parole vietate'
+  lore:
+    description:
+      - '<gradient:#A78BFA:gold><b>Modifica la descrizione</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <text> </yellow><dark_gray>»</dark_gray> aggiunge testo su una nuova riga'
+      - '<gray><yellow>Insert <line> <text> </yellow><dark_gray>»</dark_gray> aggiunge testo alla riga selezionata'
+      - '<gray><yellow>Set <line> <text> </yellow><dark_gray>»</dark_gray> imposta o sostituisce il testo nella riga scelta'
+      - '<gray><yellow>Remove <line> </yellow><dark_gray>»</dark_gray> rimuove la riga scelta'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> rimuove tutte le righe'
+      - '<gray><yellow>Copy </yellow><dark_gray>»</dark_gray> copia la descrizione dell''oggetto per incollarla in seguito'
+      - '<gray><yellow>CopyBook </yellow><dark_gray>»</dark_gray> come Copy, ma copia le pagine di un libro come righe'
+      - '<gray><yellow>CopyFile <path> </yellow><dark_gray>»</dark_gray> come Copy, ma legge da loreCopy.yml'
+      - '<gray><yellow>Paste </yellow><dark_gray>»</dark_gray> incolla l''ultima descrizione copiata'
+      - '<gray><yellow>Replace <replaced> <replacer> </yellow><dark_gray>»</dark_gray> sostituisce tutte le occorrenze'
+    params: '<add/set/remove...> [...]'
+    set:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Imposta o sostituisce il testo nella riga selezionata</b></gradient>'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Rimuovi la riga selezionata</b></gradient>'
+    insert:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Aggiungi text on selected line</b></gradient>'
+    copy:
+      feedback: '%prefix% <green>Descrizione copiata'
+    copyBook:
+      feedback: '%prefix% <green>Pagine del libro copiate e pronte per essere incollate'
+    copyFile:
+      wrong-path: '%prefix% <red>Percorso non valido: ricarica la configurazione e controlla maiuscole e minuscole'
+      no-path: '%prefix% <red>Seleziona a path /ie lore copyfile <gold><path>'
+      feedback: '%prefix% <green>Configurazione copiata e pronta per essere incollata'
+    paste:
+      feedback: '%prefix% <green>Descrizione incollata'
+      no-copy: '%prefix% <red>Copia prima una descrizione'
+    replace:
+      params: '<replaced> <replacer>'
+      description:
+        - '<gold><b>Sostituisci tutte le occorrenze nella descrizione</b></gradient>'
+        - ''
+        - '<gray>Se devi sostituire più parole, racchiudile'
+        - '<gray> to close them inside <yellow>{ }'
+        - ''
+        - '<gray>Esempio: <yellow>/ie lore replace New Rusty'
+        - '<gray>''<yellow>New sword</yellow>'' -> ''<yellow>Rusty sword</yellow>'''
+        - ''
+        - '<gray>Esempio 2: <yellow>/ie lore replace {Heavy} {Very light}'
+        - '<gray>''<yellow>Heavy sword</yellow>'' -> ''<yellow>Very light sword</yellow>'''
+  listaliases:
+    description:
+      - '<gradient:#A78BFA:gold><b>Mostra gli alias consentiti per i parametri</b>'
+      - ''
+      - '<gray><yellow><type> </yellow>il tipo di parametro da mostrare'
+    params: '<type>'
+    prefix_line: '<dark_blue> ◆  ◆  ◆  ◆  <blue>Aliases  <dark_blue>◆  ◆  ◆  ◆'
+    postfix_line: '<dark_blue> ◆  ◆  ◆  ◆  <blue>Aliases  <dark_blue>◆  ◆  ◆  ◆'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+    hover_info: '<blue>Valore originale: <yellow>%default%'
+    hover_type: '<gold>Clicca per esaminare'
+    error-pre-hover: "<gradient:#A78BFA:gold><b>Alias:</b></gradient>"
+itemeditequipment:
+  allowedentities:
+    invalid-type: '%prefix% <red>Il valore <gold>%value% <red>is neither a valid entity nor a valid group dientities'
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta i tipi di entità che possono indossare questo equipaggiamento</b></gradient>'
+      - ''
+      - '<gray><yellow>[entity] </yellow>tipo di entità'
+      - '<gray><yellow>[group] </yellow>gruppo di entità'
+      - ''
+      - '<gray>Tutti i tipi selezionati verranno aggiunti'
+    params: "[entity/group] [entity/group] ..."
+    feedback: "%prefix% <green>Tipi di entità consentiti: <yellow>%value%"
+    feedback-reset: "%prefix% <green>Tipi di entità consentiti ripristinati"
+  canshear:
+    unsupported-version: '%prefix% <red>You server version (<gold>%value%<red>) non supporta questa funzione'
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta l''equipaggiamento tramite interazione</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true per poter tosare l'''
+      - '<gray>equipaggiamento da un''entità, come la zucca'
+      - '<gray>del golem di neve'
+    params: "[true/false]"
+    feedback: "%prefix% <green>Proprietà tosabile impostata su <yellow>%value%"
+  canbesheared:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta se questo equipaggiamento può essere tosato</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Indica se l''equipaggiamento può essere tosato'
+    params: '[true/false]'
+    feedback: "%prefix% <green>Proprietà tosabile impostata su <yellow>%value%"
+  cameraoverlay:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la sovrapposizione della visuale</b></gradient>'
+      - ''
+      - '<gray><yellow>[namespacedkey] </yellow>sovrapposizione desiderata'
+      - '<gray>Le sovrapposizioni si configurano nei pacchetti di texture; l''unica'
+      - '<gray>sovrapposizione predefinita è minecraft:misc/pumpkinblur'
+    params: "[namespacedkey]"
+    feedback: "%prefix% <green>Sovrapposizione della visuale aggiornata"
+    feedback-reset: "%prefix% <green>Sovrapposizione della visuale rimossa"
+    invalid-namespacedkey: "<red>Chiave con namespace <gold>%value% <red> non valida"
+  clear:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rimuove completamente la proprietà equipaggiamento dall''oggetto</b></gradient>'
+      - ''
+      - '<gray>Oppure ripristina i valori predefiniti se l''oggetto è un equipaggiamento vanilla'
+    params: ""
+    feedback: "%prefix% <green>Proprietà dell'equipaggiamento ripristinate ai valori predefiniti"
+  damageonhurt:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la possibilità di subire danni</gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true per ridurre la durabilità quando subisce danni'
+      - ''
+      - '<gray><gold>N.B.</gold> solo gli oggetti con stack massimo pari a 1 possono subire danni'
+      - '<gray>  use <yellow>/ie maxstacksize 1'
+      - '<gray><gold><b>Suggerimento</b></gold> ricordati di impostare la durabilità massima con'
+      - '  <yellow>/ie maxdurability <amount>'
+    params: "[true/false]"
+    feedback: "%prefix% <green>Proprietà danno alla ricezione di colpi impostata su <yellow>%value%"
+    warning-maxstacksize: '%prefix% <red>La dimensione massima dello stack deve essere <gold>1 <red>to be damageable <dark_red>[<gold>clicca per correggere<dark_red>]'
+  dispensable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta se può essere equipaggiato da un dispenser</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true per equipaggiare tramite dispenser'
+    params: "[true/false]"
+    feedback: "%prefix% <green>Proprietà dispenser impostata su <yellow>%value%"
+  equiponinteract:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta l''equipaggiamento tramite interazione</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true per equipaggiare tramite interazione'
+    params: "[true/false]"
+    feedback: "%prefix% <green>Proprietà equipaggiamento tramite interazione impostata su <yellow>%value%"
+  equipsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il suono dell''equipaggiamento</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>suono da riprodurre'
+    params: "[sound]"
+    feedback: "%prefix% <green>Suono equipaggiamento impostato su <yellow>%value%"
+    feedback-reset: "%prefix% <green>Suono equipaggiamento ripristinato al valore predefinito"
+  help:
+    header-name: "ItemEquipment"
+    description:
+      - '<gradient:#A78BFA:gold><b>Mostra l''aiuto di ItemEditEquipment</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Pagina dell''aiuto'
+      - '<gray><yellow>[subcommand] </yellow>Aiuto per un sottocomando'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Mostra le proprietà di equipaggiamento dell''oggetto</b></gradient>'
+    params: ''
+    not_set: '%prefix% <gray>Questo oggetto non ha proprietà di equipaggiamento'
+    message:
+      - '%prefix% <dark_green><b>Equipaggiabile</b>'
+      - '<green>Slot: <yellow>%slot%'
+      - '<green>Può essere tosato: <yellow>%canbesheared%'
+      - '<green>Danno alla ricezione di colpi: <yellow>%damageonhurt%'
+      - '<green>Equipaggiabile da dispenser: <yellow>%dispensable%'
+      - '<green>Equipaggiabile tramite interazione: <yellow>%equiponinteract%'
+      - '<green>Scambiabile: <yellow>%swappable%'
+      - '<green>Suono equipaggiamento: <yellow>%equipsound%'
+      - '<green>Suono tosatura: <yellow>%shearsound%'
+      - '<green>Entità consentite: <yellow>%allowedentities%'
+      - '<green>Sovrapposizione visuale: <yellow>%cameraoverlay%'
+      - '<green>ID risorsa: <yellow>%assetid%'
+  model:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il modello della texture</b></gradient>'
+      - ''
+      - '<gray><yellow>[key] </yellow>ID con namespace del modello da usare quando l''oggetto è equipaggiato'
+    params: "[key]"
+    feedback: "%prefix% <green>Modello equipaggiamento impostato su <yellow>%key%"
+    feedback-reset: "%prefix% <green>Modello equipaggiamento ripristinato"
+  shearsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il suono riprodotto quando l''oggetto viene rimosso con la tosatura</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>suono da riprodurre'
+      - '<gray>quando viene rimosso con la tosatura, come una zucca'
+      - '<gray>del golem di neve'
+    params: "[sound]"
+    feedback: "%prefix% <green>Suono di tosatura impostato su <yellow>%value%"
+    feedback-reset: "%prefix% <green>Suono di tosatura ripristinato al valore predefinito"
+  shearingsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il suono riprodotto quando l''oggetto viene rimosso con la tosatura</b></gradient>'
+      - ''
+      - '<gray><yellow>[sound] </yellow>Suono da riprodurre'
+      - '<gray>quando viene rimosso con la tosatura, come una zucca del golem di neve'
+    params: '[sound]'
+    feedback: "%prefix% <green>Suono di tosatura impostato su <yellow>%value%"
+  slot:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta lo slot equipaggiabile</b></gradient>'
+      - ''
+      - '<gray><yellow><slot> </yellow>slot in cui è possibile equipaggiare l'oggetto'
+    params: "<slot>"
+    feedback: "%prefix% <green>Slot equipaggiamento impostato su <yellow>%value%"
+  swappable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta se l''oggetto può essere scambiato</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true per consentire lo scambio dell''oggetto'
+    params: "[true/false]"
+    feedback: "%prefix% <green>Proprietà scambiabile impostata su <yellow>%value%"
+itemeditfood:
+  addeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>Aggiungi un effetto all''oggetto</b></gradient>'
+      - '<gray><yellow>/ief addeffect </yellow>cleareffects'
+      - '<gray><yellow>/ief addeffect </yellow>teleport <range>'
+      - '<gray><yellow>/ief addeffect </yellow>applyeffects [chance] <potion> <lv> <duration> [ambient] [particle] [icon]'
+      - '<gray><yellow>/ief addeffect </yellow>removeeffects <potion>'
+      - '<gray><yellow>/ief addeffect </yellow>playsound <sound>'
+      - ''
+    params: '[...]'
+    cleareffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Aggiungi un effetto all''oggetto</b></gradient>'
+        - ''
+        - '<gray>Rimuove dal giocatore tutti gli effetti delle pozioni, come un secchio di latte'
+      params: '<potion>'
+      feedback: "%prefix% <green>Effetto di teletrasporto aggiunto al consumo del cibo"
+    teleport:
+      description:
+        - '<gradient:#A78BFA:gold><b>Aggiungi un effetto all''oggetto</b></gradient>'
+        - '<gray><yellow><range> </yellow>distanza del teletrasporto del giocatore'
+        - ''
+        - '<gray>Teletrasporta il giocatore in una posizione casuale quando mangia'
+      params: '<range>'
+      feedback: "%prefix% <green>Effetto di teletrasporto aggiunto al consumo del cibo"
+    applyeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Aggiungi un effetto all''oggetto</b></gradient>'
+        - '<gray><yellow>[chance] </yellow>probabilità percentuale di applicare l''effetto'
+        - '<gray>  deve essere maggiore di <yellow>0</yellow> e minore o uguale a <yellow>100'
+        - '<gray><yellow><potion> </yellow>The potion tipo di effetto'
+        - '<gray><yellow><lv> </yellow>livello dell''effetto, <yellow>1</yellow> per impostazione predefinita'
+        - '<gray><yellow><duration> </yellow>Durata dell''effetto in secondi, oppure <yellow>-1 </yellow>for permanent effect'
+        - '<gray><yellow>[ambient] [particle] [icon] </yellow>opzioni dell''effetto pozione true/false'
+        - ''
+        - '<gray>Applica l''effetto selezionato al giocatore quando mangia'
+      params: '<potion>'
+      feedback: "%prefix% <green>Effetto applicato al consumo del cibo"
+    removeeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Aggiungi un effetto all''oggetto</b></gradient>'
+        - '<gray><yellow><potion> </yellow>rimuove l''effetto selezionato'
+        - ''
+        - '<gray>Rimuovi l''effetto selezionato dal giocatore quando mangia'
+      params: '<potion>'
+      feedback: "%prefix% <green>Rimozione dell'effetto aggiunta al consumo del cibo"
+    playsound:
+      description:
+        - '<gradient:#A78BFA:gold><b>Aggiungi un effetto all''oggetto</b></gradient>'
+        - '<gray><yellow><sound> </yellow>suono da riprodurre'
+        - ''
+        - '<gray>Riproduce il suono selezionato quando si mangia'
+      params: '<sound>'
+      feedback: "%prefix% <green>Suono aggiunto al consumo del cibo"
+  animation:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta l''animazione del pasto</b></gradient>'
+      - '<gray>Solo per <red>1.21.2+'
+      - ''
+      - '<gray><yellow><animation> </yellow>Il valore da impostare; per impostazione predefinita alterna lo stato'
+      - ''
+      - '<gray>Alcune animazioni sono visibili solo in prima persona,'
+      - '<gray>altre solo in terza persona,'
+      - '<gray>altre ancora sono visibili sia in prima che in terza persona'
+    params: '<animation>'
+    feedback: "%prefix% <green>Animazione applicata"
+  canalwayseat:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta se l''oggetto può essere mangiato</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Il valore da impostare; per impostazione predefinita alterna lo stato'
+      - ''
+      - '<gray>Di solito per mangiare serve avere fame;'
+      - '<gray>impostando true si replica il comportamento della mela dorata'
+    params: '[true/false]'
+    feedback: "%prefix% <green>Valore di Can always eat impostato su <yellow>%value%"
+  consumeparticles:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta se l''oggetto mostra particelle quando viene mangiato</b></gradient>'
+      - '<gray>Solo per <red>1.21.2+'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Il valore da impostare; per impostazione predefinita alterna lo stato'
+    params: '[true/false]'
+    feedback: "%prefix% <green>Particelle al consumo impostate su <yellow>%value%"
+  convertto:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta l''oggetto restituito dopo aver consumato il cibo</b></gradient>'
+      - '<gray>Solo per <red>1.21+'
+      - ''
+      - '<gray><yellow>[type/serveritem id] </yellow>oggetto da restituire'
+      - '<gray>  puoi indicare un materiale oppure'
+      - '<gray>  selezionare un oggetto salvato con ServerItem'
+      - ''
+      - '<gray>Mimic bucket milk behavior dove a bucket is'
+      - '<gray>restituito dopo aver bevuto il latte'
+    params: '[type/serveritem id]'
+    feedback: "%prefix% <green>Oggetto restituito aggiornato"
+  eatticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il tempo necessario per mangiare l''oggetto</b></gradient>'
+      - ''
+      - '<gray><yellow><ticks> </yellow>tempo necessario per mangiare l''oggetto'
+      - '<gray>  deve essere <yellow>1 </yellow>o superiore'
+      - ''
+      - '<gray><yellow>20 </yellow>tick = <yellow>1 </yellow>second'
+    params: '<ticks>'
+    feedback: "%prefix% <green>Tick necessari per mangiare impostati su <yellow>%value%"
+  help:
+    header-name: "ItemFood"
+    description:
+      - '<gradient:#A78BFA:gold><b>Mostra l''aiuto di ItemFood</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Pagina dell''aiuto'
+      - '<gray><yellow>[subcommand] </yellow>Aiuto per un sottocomando'
+    params: '[page/subcommand]'
+  info:
+    not_food: "%prefix% <dark_green>L'oggetto non ha proprietà cibo oppure usa quelle predefinite"
+    message:
+      - '%prefix% <dark_green><b>Proprietà cibo dell''oggetto</b>'
+      - '<green>Tempo per mangiare: <yellow>%eatseconds%<green> s <dark_gray>(<gray>%eatticks%<dark_gray> ticks)'
+      - '<green>Fame ripristinata: <yellow>%nutrition% <dark_gray>| <green>Saturazione: <yellow>%saturation%<green> '
+      - '<green>Animazione: <yellow>%animation% <dark_gray>| <green>Suono: <yellow>%sound% <dark_gray>| <green>Particelle: <yellow>%consumeparticles%'
+      - '<green>Si può mangiare a sazietà: <yellow>%canalwayseat% <dark_gray>| <green>Dopo il consumo si ottiene: <yellow>%convertto%'
+    apply_effect_prefix:
+      - '<dark_green><b>Contiene <yellow>%effects%<dark_green> possibili effetti pozione:</b>'
+    apply_effect:
+      - '<green>%index%. Tipo: <yellow>%type% <dark_gray>| <green>Liv.: <yellow>%level% <dark_gray>| <green>Durata: <yellow>%duration_s%<green> s <dark_gray>(<gray>%duration_ticks%<dark_gray> ticks)'
+      - '<green>   Particelle: <yellow>%hasparticle% <dark_gray>| <green>Ambientale: <yellow>%isambient% <dark_gray>| <green>Icona: <yellow>%hasicon% <dark_gray>| <green>Probabilità: <yellow>%chance_perc%<green>%'
+    consume_effect_teleport: '<green>Diametro del teletrasporto casuale: <yellow>%diameter%'
+    consume_effect_sound: '<green>Suono aggiuntivo al consumo: <yellow>%sound%'
+    consume_effect_remove: '<green>Effetti rimossi: <yellow>%effects%'
+    consume_effect_clear: '<green>Rimuove tutti gli effetti di stato attivi'
+    consume_effect_unknown: '<green>Altro effetto al consumo: <yellow>%type%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Mostra le informazioni sul cibo dell''oggetto</b></gradient>'
+    params: ''
+  nutrition:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la fame recuperata</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>quantità di fame da ripristinare'
+      - '<gray>  deve essere <yellow>0 </yellow>o superiore'
+      - ''
+      - '<gray>La barra della fame piena corrisponde a <yellow>20'
+    params: '<amount>'
+    feedback: "%prefix% <green>Valore nutrizionale impostato su <yellow>%value%"
+  removeeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rimuovi un effetto dall''oggetto</b></gradient>'
+      - ''
+      - '<gray><yellow><index> </yellow>Rimuovi l''effetto selezionato'
+    params: '<index>'
+    feedback: "%prefix% <green>Effetto cibo selezionato rimosso"
+  reset:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rimuove completamente la proprietà cibo dall''oggetto</b></gradient>'
+      - ''
+      - '<gray>Oppure ripristina i valori predefiniti se è un cibo vanilla'
+    params: ''
+    feedback: "%prefix% <green>Proprietà cibo rimosse"
+  reseteffects:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rimuovi gli effetti dall''oggetto</b></gradient>'
+    params: ''
+    feedback: "%prefix% <green>Effetti cibo rimossi"
+  saturation:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta la saturazione recuperata</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>quantità di saturazione da aggiungere'
+      - '<gray>  sono ammessi valori negativi'
+      - ''
+      - '<gray>La saturazione determina la velocità con cui il livello di fame'
+      - '<gray>  (nutrizione) diminuisce'
+    params: '<amount>'
+    feedback: "%prefix% <green>Saturazione impostata su <yellow>%value%"
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il suono del pasto</b></gradient>'
+      - '<gray>Solo per <red>1.21.2+'
+      - ''
+      - '<gray><yellow><sound> </yellow>Valore da impostare'
+    params: '<sound>'
+    feedback: "%prefix% <green>Suono del pasto impostato su <yellow>%value%"
+itemeditkinetic:
+  contactcooldownticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il tempo di ricarica del contatto cinetico</b></gradient>'
+      - ''
+      - '<gray><yellow><cooldown> </yellow>tick di ricarica del contatto'
+    params: '<delay>'
+    feedback: "%prefix% <green>Tempo di ricarica del contatto impostato"
+  damageconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta le condizioni di danno cinetico</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Durata massima del danno in tick'
+      - '<gray><yellow><min speed> </yellow>Velocità minima'
+      - '<gray><yellow><min relative speed> </yellow>Velocità relativa minima'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: "%prefix% <green>Condizioni di danno impostate"
+  damagemultiplier:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il moltiplicatore del danno cinetico</b></gradient>'
+      - ''
+      - '<gray><yellow><multiplier> </yellow>moltiplicatore del danno'
+    params: '<delay>'
+    feedback: "%prefix% <green>Kinetic moltiplicatore del danno set"
+  delayticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il ritardo cinetico in tick</b></gradient>'
+      - ''
+      - '<gray><yellow><delay> </yellow>tick di ritardo cinetico'
+    params: '<delay>'
+    feedback: "%prefix% <green>Ritardo in tick impostato"
+  dismountconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta le condizioni di disarcionamento cinetico</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Durata massima del disarcionamento in tick'
+      - '<gray><yellow><min speed> </yellow>Velocità minima to dismount'
+      - '<gray><yellow><min relative speed> </yellow>Velocità relativa minima to dismount'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: "%prefix% <green>Condizioni di disarcionamento impostate"
+  forwardmovement:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il movimento in avanti cinetico</b></gradient>'
+      - ''
+      - '<gray><yellow><movement> </yellow>Entità del movimento in avanti'
+    params: '<movement>'
+    feedback: "%prefix% <green>Movimento in avanti impostato"
+  help:
+    header-name: "ItemKinetic"
+    description:
+      - '<gradient:#A78BFA:gold><b>Mostra l''aiuto di ItemKinetic</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Pagina dell''aiuto'
+      - '<gray><yellow>[subcommand] </yellow>Aiuto per un sottocomando'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Mostra le proprietà dell''arma cinetica dell''oggetto</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>Questo oggetto non ha proprietà di arma cinetica'
+    message:
+      - '%prefix% <dark_green><b>Arma cinetica</b>'
+      - '<green>Ricarica contatto: <yellow>%contactcooldownticks% <green>ticks'
+      - '<green>Moltiplicatore danno: <yellow>%damagemultiplier%'
+      - '<green>Ritardo: <yellow>%delayticks% <green>ticks'
+      - '<green>Movimento in avanti: <yellow>%forwardmovement%'
+      - '<green>Suono all''impatto: <yellow>%hitsound%'
+      - '<green>Suono: <yellow>%sound%'
+      - '<green>Condizioni danno: <yellow>%damageconditions%'
+      - '<green>Condizioni disarcionamento: <yellow>%dismountconditions%'
+      - '<green>Condizioni respinta: <yellow>%knockbackconditions%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il suono all''impatto cinetico</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Valore da impostare'
+    params: '<sound>'
+    feedback: "%prefix% <green>Suono all'impatto impostato su <yellow>%value%"
+  knockbackconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta le condizioni di respinta cinetica</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Durata massima della respinta in tick'
+      - '<gray><yellow><min speed> </yellow>Velocità minima to knockback'
+      - '<gray><yellow><min relative speed> </yellow>Velocità relativa minima to knockback'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: "%prefix% <green>Condizioni di respinta impostate"
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il suono cinetico</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Valore da impostare'
+    params: '<sound>'
+    feedback: "%prefix% <green>Suono impostato su <yellow>%value%"
+itemeditpiercing:
+  dealsknockback:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta se il colpo provoca una respinta</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true per applicare la respinta'
+    params: "[true/false]"
+    feedback: "%prefix% <green>Respinta impostata su <yellow>%value%"
+  dismounts:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta se il colpo disarciona</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true per disarcionare'
+    params: "[true/false]"
+    feedback: "%prefix% <green>Disarcionamento impostato su <yellow>%value%"
+  help:
+    header-name: "ItemPiercing"
+    description:
+      - '<gradient:#A78BFA:gold><b>Mostra l''aiuto di ItemPiercing</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Pagina dell''aiuto'
+      - '<gray><yellow>[subcommand] </yellow>Aiuto per un sottocomando'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Mostra le proprietà dell''arma perforante dell''oggetto</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>Questo oggetto non ha proprietà di arma perforante'
+    message:
+      - '%prefix% <dark_green><b>Arma perforante</b>'
+      - '<green>Provoca respinta: <yellow>%dealsknockback%'
+      - '<green>Disarciona: <yellow>%dismounts%'
+      - '<green>Suono all''impatto: <yellow>%hitsound%'
+      - '<green>Suono: <yellow>%sound%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il suono all''impatto dell''arma perforante</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Valore da impostare'
+    params: '<sound>'
+    feedback: "%prefix% <green>Suono all'impatto impostato su <yellow>%value%"
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il suono dell''arma perforante</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Valore da impostare'
+    params: '<sound>'
+    feedback: "%prefix% <green>Suono impostato su <yellow>%value%"
+serveritem:
+  help-header: '<gradient:#54acff:#A78BFA><bold>ServerItem</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Aiuto</bold></#A78BFA>'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Ottenuti <yellow>%amount% <green>di <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][give] %player_name% ha ottenuto %amount% %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Dai l''oggetto selezionato a un giocatore</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - '<gray><yellow>[amount] </yellow>quantità di oggetti da dare; per impostazione predefinita 1'
+      - '<gray><yellow>[player] </yellow>destinatario degli oggetti; per impostazione predefinita sei tu'
+      - '<gray><yellow>[silent] </yellow>true per non inviare messaggi al giocatore'
+    params: '<id> [amount] [player] [silent]'
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Ottenuti <yellow>%amount% <green>di <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets% ha ottenuto %amount% %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Dai l''oggetto selezionato a tutti i giocatori online</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - '<gray><yellow>[amount] </yellow>quantità di oggetti da dare; per impostazione predefinita 1'
+      - '<gray><yellow>[silent] </yellow>true per non inviare messaggi al giocatores'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] ha lasciato cadere %amount% %id% (%nick%) in %world% %x% %y% %z%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Lascia cadere l''oggetto selezionato nella posizione scelta</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - '<gray><yellow><amount> </yellow>quantità di oggetti da lasciare cadere, da 1 a 2304'
+      - '<gray><yellow><world> </yellow>mondo di destinazione'
+      - '<gray><yellow><x> <y> <z> </yellow>coordinate'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Persi <yellow>%amount% <green>di <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][take] %player_name% ha ceduto %amount% %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Prendi l''oggetto selezionato dal giocatore</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - '<gray><yellow>[amount] </yellow>quantità di oggetti da dare; per impostazione predefinita 1'
+      - '<gray><yellow>[player] </yellow>destinatario degli oggetti; per impostazione predefinita sei tu'
+      - '<gray><yellow>[silent] </yellow>true per non inviare messaggi al giocatore'
+    params: '<id> [amount] [player] [silent]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>Oggetto <yellow>%id% <green>registrato'
+    already_used_id: '%prefix% <red>Oggetto con ID <yellow>%id% <red>esiste già; cambia l''ID oppure usa /si update per sovrascriverlo'
+    description:
+      - '<gradient:#A78BFA:gold><b>Registra l''oggetto che hai in mano</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>identifica l''oggetto; non distingue maiuscole e minuscole e non può'
+      - '<gray>     contenere spazi o punti; inoltre non puoi scegliere'
+      - '<gray>     un ID già utilizzato'
+      - ''
+      - '<gold><b>Suggerimento</b></gold> <gray>use <yellow>/serveritem update <id></yellow>, per modificare un oggetto esistente'
+      - '<gold><b>Suggerimento</b></gold> <gray>recupera gli oggetti salvati con <yellow>/serveritem give <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>Oggetto <yellow>%id% <green>rimosso'
+    description:
+      - '<gradient:#A78BFA:gold><b>Elimina l''oggetto selezionato</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>Oggetto <yellow>%id% <green>è stato aggiornato'
+    description:
+      - '<gradient:#A78BFA:gold><b>Aggiorna l''oggetto selezionato</b></gradient>'
+      - ''
+      - '<gray>Sostituisci l''oggetto associato all''ID con quello che hai in mano'
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - ''
+      - '<gold><b>Suggerimento</b></gold> <gray>use <yellow>/serveritem save <id></yellow>, per creare un nuovo oggetto'
+      - '<gold><b>Suggerimento</b></gold> <gray>use <yellow>/serveritem delete <id></yellow>, per eliminare un oggetto'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>Apri un''interfaccia con gli oggetti salvati sul server</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>pagina dell''interfaccia; per impostazione predefinita 1'
+    params: '[page]'
+  setnick:
+    #Holders: %id% %nick%
+    success: '%prefix% <green>Oggetto <yellow>%id% <green>soprannome aggiornato a <yellow>%nick%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Imposta il nome visualizzato dell''oggetto selezionato</b></gradient>'
+      - ''
+      - '<gray>Il soprannome è usato nel segnaposto <yellow>%nick%</yellow> nei messaggi di acquisto e vendita; per'
+      - '<gray>  impostazione predefinita è il nome dell''oggetto o, se assente, il suo tipo'
+      - ''
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - '<gray><yellow>[nick] </yellow>nome da impostare'
+      - ''
+      - '<gold><b>Suggerimento</b></gold> <gray>per ripristinare il valore predefinito usa <yellow>/serveritem setnick <id>'
+    params: '<id> [nick]'
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Acquistati <yellow>%amount% <green>di <yellow>%nick% <green>per <yellow>%price%'
+    #Holders: %id% %nick% %amount%
+    not-enough-space: '<red>Non hai abbastanza spazio nell''inventario per acquistare <gold>%amount% <red>di <gold>%nick%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: '<red>Non hai <gold>%price% <red> per acquistare <gold>%amount% <red>di <gold>%nick%'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% ha pagato %price% per %amount% %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Vendi oggetti a un giocatore</b></gradient>'
+      - ''
+      - '<gray>Sell vende l''intera quantità, a differenza di SellMax'
+      - '<gray>  al giocatore oppure non vende nulla'
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - '<gray><yellow><amount> </yellow>quantità di oggetti'
+      - '<gray><yellow><player> </yellow>chi deve pagare e ricevere gli oggetti'
+      - '<gray><yellow><price> </yellow>prezzo dell''intera quantità di oggetti; deve essere positivo'
+      - '<gray><yellow>[silent] </yellow>true per inviare un messaggio al giocatore'
+      - ''
+      - '<gray>La transazione non riesce se il giocatore non ha abbastanza denaro o'
+      - '<gray>  spazio nell''inventario per l''intera quantità di <yellow><amount>'
+      - '<gray><gold>N.B.</gold> il saldo di chi esegue il comando non viene modificato'
+    params: '<id> <amount> <player> <price> [silent]'
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Venduti <yellow>%amount% <green>di <yellow>%nick% <yellow>per <green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>Non hai <gold>%amount% <red>di <gold>%nick% <red>nel tuo inventario'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% ha venduto %amount% %id% (%nick%) per un totale di %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Acquista oggetti da un giocatore</b></gradient>'
+      - ''
+      - '<gray>Buy acquista l''intera quantità, a differenza di BuyMax'
+      - '<gray>  dal giocatore oppure non acquista nulla'
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - '<gray><yellow><amount> </yellow>quantità di oggetti'
+      - '<gray><yellow><player> </yellow>chi deve cedere gli oggetti e ricevere il denaro'
+      - '<gray><yellow><price> </yellow>prezzo dell''intera quantità di oggetti; deve essere positivo'
+      - '<gray><yellow>[silent] </yellow>true per inviare un messaggio al giocatore'
+      - ''
+      - '<gray>La transazione non riesce se il giocatore non possiede almeno <yellow><amount>'
+      - '<gray>  di <yellow><id> </yellow>items'
+      - '<gray><gold>N.B.</gold> il saldo di chi esegue il comando non viene modificato'
+    params: '<id> <amount> <player> <price> [silent]'
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Acquistati <yellow>%amount% <green>di <yellow>%nick% <yellow>per <green>%price%'
+    #Holders: %id% %nick%
+    not-enough-space: '<red>Non hai abbastanza spazio nell''inventario per acquistare alcun <gold>%nick%'
+    #Holders: %id% %nick% %price%
+    not-enough-money: '<red>Non hai abbastanza denaro  per acquistare alcun <gold>%nick% <red>per <gold>%price% <red>each'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][sell] %player_name% ha pagato %price% per %amount% %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Vendi oggetti a un giocatore</b></gradient>'
+      - ''
+      - '<gray>SellMax può vendere una quantità inferiore, a differenza di Sell'
+      - '<gray>  se mancano denaro o spazio per l''intera quantità'
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - '<gray><yellow><amount> </yellow>quantità di oggetti'
+      - '<gray><yellow><player> </yellow>chi deve pagare e ricevere gli oggetti'
+      - '<gray><yellow><price> </yellow>prezzo dell''intera quantità di oggetti; deve essere positivo'
+      - '<gray><yellow>[silent] </yellow>true per inviare un messaggio al giocatore'
+      - ''
+      - '<gray>La transazione non riesce se il giocatore non ha abbastanza denaro o'
+      - '<gray>  spazio nell''inventario per almeno un oggetto'
+      - '<gray>Se il giocatore acquista meno di <yellow><price></yellow> il prezzo pagato verrà proporzionato'
+      - '<gray><gold>N.B.</gold> il saldo di chi esegue il comando non viene modificato'
+    params: '<id> <amount> <player> <price> [silent]'
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Venduti <yellow>%amount% <green>di <yellow>%nick% <yellow>per <green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>Non hai alcun <gold>%nick% <red>da vendere nel tuo inventario'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][buy] %player_name% ha venduto %amount% %id% (%nick%) per un totale di %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Acquista oggetti da un giocatore</b></gradient>'
+      - ''
+      - '<gray>BuyMax può acquistare una quantità inferiore, a differenza di Buy'
+      - '<gray>  se il giocatore ha meno oggetti nell''inventario rispetto alla quantità richiesta'
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - '<gray><yellow><amount> </yellow>quantità di oggetti'
+      - '<gray><yellow><player> </yellow>chi deve cedere gli oggetti e ricevere il denaro'
+      - '<gray><yellow><price> </yellow>prezzo dell''intera quantità di oggetti; deve essere positivo'
+      - '<gray><yellow>[silent] </yellow>true per inviare un messaggio al giocatore'
+      - ''
+      - '<gray>La transazione non riesce se il giocatore non possiede almeno an <yellow><id> </yellow>item'
+      - '<gray>  nell''inventario'
+      - '<gray>Se il giocatore vende meno di <yellow><amount></yellow> il prezzo verrà proporzionato'
+      - '<gray><gold>N.B.</gold> il saldo di chi esegue il comando non viene modificato'
+    params: '<id> <amount> <player> <price> [silent]'
+itemstorage:
+  help-header: '<gradient:#54acff:#A78BFA><bold>ItemStorage</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Aiuto</bold></#A78BFA>'
+  get:
+    #Holders: %id% %amount%
+    success: '%prefix% <green>Ottenuti <yellow>%amount% <green>di <yellow>%id%'
+    no-inventory-space: '%prefix% <red>Non hai spazio nell''inventario'
+    description:
+      - '<gradient:#A78BFA:gold><b>Ottieni l''oggetto selezionato</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - '<gray><yellow>[amount] </yellow>quantità da ottenere; per impostazione predefinita 1'
+    params: '<id> [amount]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>Oggetto <yellow>%id% <green>registrato'
+    #Holders: %limit%
+    limit-reached: '%prefix% <red>Hai raggiunto il numero massimo di oggetti salvabili (%limit%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Registra l''oggetto che hai in mano</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>identifica l''oggetto; non distingue maiuscole e minuscole e non può'
+      - '<gray>     contenere spazi o punti; inoltre non puoi scegliere'
+      - '<gray>     un ID già utilizzato'
+      - ''
+      - '<gold><b>Suggerimento</b></gold> <gray>usa <yellow>/itemstorage update <id></yellow>, per modificare un oggetto esistente'
+      - '<gold><b>Suggerimento</b></gold> <gray>recupera gli oggetti salvati con <yellow>/itemstorage get <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>Oggetto <yellow>%id% <green>rimosso'
+    description:
+      - '<gradient:#A78BFA:gold><b>Elimina l''oggetto selezionato</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>Oggetto <yellow>%id% <green>è stato aggiornato'
+    description:
+      - '<gradient:#A78BFA:gold><b>Aggiorna l''oggetto selezionato</b></gradient>'
+      - ''
+      - '<gray>Sostituisci l''oggetto associato all''ID con quello che hai in mano'
+      - '<gray><yellow><id> </yellow>ID dell''oggetto'
+      - ''
+      - '<gray><gold><b>Suggerimento</b></gold> usa <yellow>/itemstorage save <id></yellow>, per creare un nuovo oggetto'
+      - '<gray><gold><b>Suggerimento</b></gold> usa <yellow>/itemstorage delete <id></yellow>, per eliminare un oggetto'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>Apri un''interfaccia con i tuoi oggetti salvati</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] <gray>pagina dell''interfaccia; per impostazione predefinita 1'
+    params: '[page]'
+itemeditimport:
+  help:
+    - '<green>- importa gli oggetti dal plugin ItemEditor'
+  itemeditor:
+    unable-to-get-item:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Impossibile caricare l''oggetto <gold>%id%'
+    already-used-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>è già utilizzato. Potresti aver già eseguito il comando; altrimenti rinomina ItemEditor/items/%id%.yml'
+    invalid-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>non è un ID valido. Rinomina ItemEditor/items/%id%.yml usando un nome alfanumerico'
+    import-unsuccess:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Nessuno degli oggetti su <gold>%max% <red>è stato importato. Forse hai già eseguito questo comando?'
+    import-success:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Importati <yellow>%done% <green>di <yellow>%max% <green>oggetti da ItemEditor'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Importati oggetti: <yellow>%ids%'
+    import-empty:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>ItemEditor non contiene oggetti da importare'
+itemeditreload:
+  success: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Ricaricato'
+gui:
+  color:
+    title: '<blue>Editor colori'
+  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
+    creative: 'Clic centrale'
+    other: 'Premi 1'
+  colorselector:
+    title: '<blue>Scegli i colori'
+    buttons:
+      color:
+        - '<gradient:#A78BFA:gold>Colori:</gradient>'
+        - '<gray><yellow>%colors%'
+        - '<gray>[<white>Clic destro<gray>] Aggiungi <yellow>%color%'
+        - '<gray>[<white>Clic sinistro<gray>] Rimuovi l''ultimo colore'
+        - '<gray>[<white>Shift+Clic destro<gray>] Cancella i colori'
+  banner:
+    title: '<blue>Editor stendardi'
+    color_selector_title: '<blue>Selettore colore'
+    pattern_selector_title: '<blue>Selettore motivo'
+    buttons:
+      pattern_selector_info:
+        - '<gray>Seleziona <gold><b>%type%</b>'
+      color_selector_info:
+        - '<gray>Seleziona <gold><b>%color%</b>'
+      position:
+        - '<gradient:#A78BFA:gold>Controllo motivo</gradient>'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] Attiva/disattiva motivo'
+        - '<gray>[<white>Clic sinistro/destro<gray>] << Sposta motivo >>'
+      type:
+        - '<gradient:#A78BFA:gold>Selettore tipo</gradient>'
+        - '<gray>Tipo: <yellow>%type%'
+        - ''
+        - '<gray>[<white>Clic<gray>] Cambia tipo'
+      color:
+        - '<gradient:#A78BFA:gold>Selettore colore</gradient>'
+        - '<gray>Colore: <yellow>%color%'
+        - ''
+        - '<gray>[<white>Clic<gray>] Cambia colore'
+  firework:
+    title: '<blue>Editor fuochi d''artificio'
+    buttons:
+      type:
+        - '<gradient:#A78BFA:gold>Selettore tipo</gradient>'
+        - '<gray>Tipo: <yellow>%type%'
+        - ''
+        - '<gray>[<white>Clic<gray>] Cambia tipo'
+      colors:
+        - '<gradient:#A78BFA:gold>Selettore colori</gradient>'
+        - '<gray>Colori: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>Clic<gray>] per cambiare i colori'
+      fadecolors:
+        - '<gradient:#A78BFA:gold>Fade Selettore colori</gradient>'
+        - '<gray>Fade Colori: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>Clic<gray>] per cambiare i colori'
+      flags:
+        none: '<red>Nessun effetto attivo'
+        trail: '<yellow>Scia <green>Attivo'
+        flicker: '<yellow>Scintillio <green>Attivo'
+        both: '<gray><yellow>Scia</yellow> e <yellow>Scintillio <green>Attivo'
+        info:
+          - '<gradient:#A78BFA:gold>Scia e Scintillio Activator</gradient>'
+          - '%status%'
+          - ''
+          - '<gray>[<white>Clic destro<gray>] Toggle Scintillio effect'
+          - '<gray>[<white>Clic sinistro<gray>] Toggle Scia effect'
+      position:
+        - '<gray>Controllo effetti'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] Attiva/disattiva effetto'
+        - '<gray>[<white>Clic sinistro/destro<gray>] Sposta questo effetto'
+      power:
+        - '<gray>Potenza: <yellow>%power%'
+        - ''
+        - '<gray>[<white>Clic sinistro/destro<gray>] << Cambia >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>Pagina precedente</b>'
+      - ''
+      - '<gray>[<white>Clic<gray>] Vai alla pagina <yellow>%target_page%'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>Pagina successoiva</b>'
+      - ''
+      - '<gray>[<white>Clic<gray>] Vai alla pagina <yellow>%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '<gold><b>Indietro</b>'
+      - ''
+      - '<gray>[<white>Clic<gray>] Torna all''interfaccia precedente'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '<blue>%player_name% items - pagina <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>Pagina <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Clic<gray>] Alterna la visualizzazione di <yellow>item</yellow>/<yellow>ID'
+        - ''
+        - '<gray>Clic on items:'
+        - '<gray>> [<white>Clic sinistro<gray>] Ottieni <yellow>1'
+        - '<gray>> [<white>Shift+Clic sinistro<gray>] Ottieni <yellow>64'
+        - '<gray>> [<white>Shift+Clic destro<gray>] Elimina oggetto'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '<blue>Server items - pagina <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>Pagina <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Clic<gray>] Alterna la visualizzazione di <yellow>item</yellow>/<yellow>ID'
+        - ''
+        - '<gray>Clic on items:'
+        - '<gray>> [<white>Clic sinistro<gray>] Ottieni <yellow>1'
+        - '<gray>> [<white>Shift+Clic sinistro<gray>] Ottieni <yellow>64'
+        - '<gray>> [<white>Shift+Clic destro<gray>] Elimina oggetto'
