@@ -3,13 +3,16 @@ package emanondev.itemedit.command.itemedit;
 import emanondev.itemedit.command.ItemEditCommand;
 import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
-import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Type extends SubCmd {
 
@@ -25,12 +28,13 @@ public class Type extends SubCmd {
             onFail(p, alias);
             return;
         }
-        Material mat = Material.valueOf(args[1].toUpperCase());
-        if (mat == Material.AIR) {
+        ItemType itemType = getItemType(args[1]);
+        if (itemType == null || ItemType.AIR.equals(itemType)) {
             onFail(p, alias);
             return;
         }
-        item.setType(mat);
+        ItemStack newItem = item.withType(itemType.createItemStack().getType());
+        p.getInventory().setItemInMainHand(newItem);
         updateView(p);
         onSuccess(p);
     }
@@ -38,9 +42,19 @@ public class Type extends SubCmd {
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2) {
-            return CompleteUtility.complete(args[1], Material.class, Material::isItem);
+            return CompleteUtility.completeItemTypes(args[1], itemType -> !ItemType.AIR.equals(itemType));
         }
         return List.of();
+    }
+
+
+    public ItemType getItemType(@NotNull String input) {
+        String normalizedInput = input.toLowerCase(Locale.ENGLISH);
+        if (!normalizedInput.contains(":")) {
+            normalizedInput = NamespacedKey.MINECRAFT + ":" + normalizedInput;
+        }
+        NamespacedKey key = NamespacedKey.fromString(normalizedInput);
+        return key == null ? null : Registry.ITEM.get(key);
     }
 
 }

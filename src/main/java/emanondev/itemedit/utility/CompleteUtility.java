@@ -2,6 +2,9 @@ package emanondev.itemedit.utility;
 
 import emanondev.itemedit.aliases.IAliasSet;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
+import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,7 +20,6 @@ public final class CompleteUtility {
     private static final int MAX_COMPLETES = 200;
 
     private CompleteUtility() {
-        throw new UnsupportedOperationException();
     }
 
     /**
@@ -73,6 +75,41 @@ public final class CompleteUtility {
                     return results;
                 }
             }
+        return results;
+    }
+
+    /**
+     * Completes item types using fully qualified namespaced keys. Unqualified prefixes
+     * are treated as belonging to the minecraft namespace.
+     */
+    @NotNull
+    public static List<String> completeItemTypes(@NotNull String prefix) {
+        return completeItemTypes(prefix, itemType -> true);
+    }
+
+    @NotNull
+    public static List<String> completeItemTypes(@NotNull String prefix,
+                                                 @NotNull Predicate<ItemType> predicate) {
+        String normalizedPrefix = prefix.toLowerCase(Locale.ROOT);
+
+        ArrayList<String> results = new ArrayList<>();
+        int count = 0;
+        for (ItemType itemType : Registry.ITEM) {
+            if (!predicate.test(itemType)) {
+                continue;
+            }
+            NamespacedKey key = itemType.getKey();
+            if (key.toString().startsWith(normalizedPrefix)) {
+                results.add(key.toString());
+            }
+            if (key.namespace().equals(NamespacedKey.MINECRAFT) && key.getKey().startsWith(normalizedPrefix)) {
+                results.add(key.getKey());
+            }
+            count++;
+            if (count > MAX_COMPLETES) {
+                return results;
+            }
+        }
         return results;
     }
 

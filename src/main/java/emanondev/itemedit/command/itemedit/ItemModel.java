@@ -5,14 +5,12 @@ import emanondev.itemedit.command.SubCmd;
 import emanondev.itemedit.utility.CompleteUtility;
 import emanondev.itemedit.utility.ItemBuilder;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 public class ItemModel extends SubCmd {
 
@@ -46,8 +44,7 @@ public class ItemModel extends SubCmd {
     @Override
     public List<String> onComplete(@NotNull CommandSender sender, String[] args) {
         if (args.length == 2) {
-            return CompleteUtility.complete(args[1], Registry.ITEM.stream().collect(Collectors.toList()),
-                    args[1].contains(":") ? (type) -> type.getKey().toString() : (type) -> type.getKey().getKey());
+            return CompleteUtility.completeItemTypes(args[1]);
         }
         return List.of();
     }
