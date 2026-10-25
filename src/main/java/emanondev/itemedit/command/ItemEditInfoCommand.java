@@ -55,7 +55,6 @@ public class ItemEditInfoCommand implements TabExecutor {
                     .append("<blue> Storage: <aqua>").append(plugin.getStorageType().name()).append("\n")
                     .append("<blue>ItemTag: <aqua>").append(Hooks.getPluginVersion("ItemTag", "No")).append("\n")
                     .append("<blue>PAPI: <aqua>").append(Hooks.getPluginVersion("PlaceholderAPI", "No")).append("\n")
-                    .append("<blue>NBTAPI: <aqua>").append(Hooks.getPluginVersion("NBTAPI", "No")).append("\n")
                     .append("<blue>Vault: <aqua>").append(Hooks.getPluginVersion("Vault", "No")).append("\n")
                     .append("<blue>MythicMobs: <aqua>").append(Hooks.getPluginVersion("MythicMobs", "No")).append("\n")
                     .append("<blue>ShopGuiPlus: <aqua>").append(Hooks.getPluginVersion("ShopGuiPlus", "No")).append("\n")
