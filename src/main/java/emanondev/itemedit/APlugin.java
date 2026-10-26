@@ -4,6 +4,7 @@ import emanondev.itemedit.command.AbstractCommand;
 import emanondev.itemedit.compability.Metrics;
 import emanondev.itemedit.plugin.PluginAdditionalInfo;
 import emanondev.itemedit.utility.ReflectionUtils;
+import emanondev.itemedit.utility.SchedulerUtils;
 import emanondev.itemedit.utility.Translator;
 import emanondev.itemedit.utility.VersionUtils;
 import lombok.Getter;
@@ -26,7 +27,11 @@ import org.jspecify.annotations.NonNull;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Predicate;
 
 @Slf4j
@@ -336,43 +341,70 @@ public abstract class APlugin extends JavaPlugin {
                 Predicate<Player> isAdmin = languagesMetricsIsAdmin();
                 Predicate<Player> isUser = languagesMetricsIsUser();
 
-                bstatsMetrics.addCustomChart(new Metrics.DrilldownPie("admins_languages", () -> {
-                    Map<String, Map<String, Integer>> mainMap = new HashMap<>();
-                    for (Player player : Bukkit.getOnlinePlayers()) {
-                        if (!isAdmin.test(player)) {
-                            continue;
-                        }
-                        String locale = player.locale().toString().toLowerCase(Locale.ENGLISH);
-                        String pre = locale.split("_")[0];
-                        if (!mainMap.containsKey(pre)) {
-                            mainMap.put(pre, new HashMap<>());
-                        }
-                        Map<String, Integer> subMap = mainMap.get(pre);
-                        subMap.put(locale, subMap.getOrDefault(locale, 0) + 1);
-                    }
-                    return mainMap;
-                }));
-                bstatsMetrics.addCustomChart(new Metrics.DrilldownPie("users_languages", () -> {
-                    Map<String, Map<String, Integer>> mainMap = new HashMap<>();
-                    for (Player player : Bukkit.getOnlinePlayers()) {
-                        if (!isUser.test(player)) {
-                            continue;
-                        }
-                        String locale = player.locale().toString().toLowerCase(Locale.ENGLISH);
-                        String pre = locale.split("_")[0];
-                        if (!mainMap.containsKey(pre)) {
-                            mainMap.put(pre, new HashMap<>());
-                        }
-                        Map<String, Integer> subMap = mainMap.get(pre);
-                        subMap.put(locale, subMap.getOrDefault(locale, 0) + 1);
-                    }
-                    return mainMap;
-                }));
+                bstatsMetrics.addCustomChart(new Metrics.DrilldownPie("admins_languages",
+                        () -> getLocalesMap(isAdmin)));
+                bstatsMetrics.addCustomChart(new Metrics.DrilldownPie("users_languages",
+                        () -> getLocalesMap(isUser)));
             }
         } catch (Throwable t) {
             log.warn(t.getMessage(), t);
         }
         bstatsMetrics = null;
+    }
+
+    private Map<String, Map<String, Integer>> getLocalesMap(Predicate<Player> predicate) {
+        Map<String, Map<String, Integer>> mainMap = new HashMap<>();
+
+        for (Player player : getOnlinePlayersForMetrics()) {
+            String locale = getLocaleIfMatch(predicate, player);
+            if (locale == null) {
+                continue;
+            }
+            String pre = locale.split("_")[0];
+            mainMap.putIfAbsent(pre, new HashMap<>());
+            Map<String, Integer> subMap = mainMap.get(pre);
+            subMap.put(locale, subMap.getOrDefault(locale, 0) + 1);
+        }
+        return mainMap;
+    }
+
+    private Collection<? extends Player> getOnlinePlayersForMetrics() {
+        if (!VersionUtils.hasFoliaAPI()) {
+            return Bukkit.getOnlinePlayers();
+        }
+
+        CompletableFuture<Set<Player>> future = new CompletableFuture<>();
+        try {
+            SchedulerUtils.run(this, () -> {
+                try {
+                    future.complete(new HashSet<>(Bukkit.getOnlinePlayers()));
+                } catch (RuntimeException exception) {
+                    future.complete(Set.of());
+                }
+            });
+            return future.get(1, TimeUnit.SECONDS);
+        } catch (InterruptedException | TimeoutException | ExecutionException | RuntimeException exception) {
+            return Set.of();
+        }
+    }
+
+    private String getLocaleIfMatch(Predicate<Player> predicate, Player player) {
+        if (VersionUtils.hasFoliaAPI()) {
+            CompletableFuture<String> future = new CompletableFuture<>();
+            try {
+                SchedulerUtils.run(this, player, () -> {
+                    try {
+                        future.complete(player.isOnline() && predicate.test(player) ? player.getLocale() : null);
+                    } catch (RuntimeException exception) {
+                        future.complete(null);
+                    }
+                }, () -> future.complete(null));
+                return future.get(1, TimeUnit.SECONDS);
+            } catch (InterruptedException | TimeoutException | ExecutionException | RuntimeException exception) {
+                return null;
+            }
+        }
+        return predicate.test(player) ? player.getLocale() : null;
     }
 
     private void initConfigUpdater() {
