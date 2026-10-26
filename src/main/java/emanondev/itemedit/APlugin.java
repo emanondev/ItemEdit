@@ -354,18 +354,56 @@ public abstract class APlugin extends JavaPlugin {
 
     private Map<String, Map<String, Integer>> getLocalesMap(Predicate<Player> predicate) {
         Map<String, Map<String, Integer>> mainMap = new HashMap<>();
+        Collection<? extends Player> players = getOnlinePlayersForMetrics();
 
-        for (Player player : getOnlinePlayersForMetrics()) {
-            String locale = getLocaleIfMatch(predicate, player);
-            if (locale == null) {
+        if (!VersionUtils.hasFoliaAPI()) {
+            //No Folia scenario
+            for (Player player : players) {
+                addLocaleIfMatching(mainMap, predicate, player);
+            }
+            return mainMap;
+        }
+
+        List<CompletableFuture<String>> localeFutures = new ArrayList<>(players.size());
+        for (Player player : players) {
+            localeFutures.add(getLocaleIfMatchAsync(predicate, player));
+        }
+
+        try {
+            CompletableFuture.allOf(localeFutures.toArray(CompletableFuture[]::new))
+                    .get(1, TimeUnit.SECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException ignored) {
+            // Use the player results collected before the timeout.
+        }
+
+        for (CompletableFuture<String> future : localeFutures) {
+            if (!future.isDone()) {
                 continue;
             }
-            String pre = locale.split("_")[0];
-            mainMap.putIfAbsent(pre, new HashMap<>());
-            Map<String, Integer> subMap = mainMap.get(pre);
-            subMap.put(locale, subMap.getOrDefault(locale, 0) + 1);
+            try {
+                addLocale(mainMap, future.getNow(null));
+            } catch (RuntimeException ignored) {
+                // One failed player read should not discard the other chart values.
+            }
         }
         return mainMap;
+    }
+
+    private void addLocaleIfMatching(Map<String, Map<String, Integer>> localeMap,
+                                     Predicate<Player> predicate,
+                                     Player player) {
+        if (predicate.test(player)) {
+            addLocale(localeMap, player.getLocale());
+        }
+    }
+
+    private static void addLocale(Map<String, Map<String, Integer>> localeMap, String locale) {
+        if (locale == null) {
+            return;
+        }
+        String language = locale.split("_")[0];
+        Map<String, Integer> languageMap = localeMap.computeIfAbsent(language, ignored -> new HashMap<>());
+        languageMap.merge(locale, 1, Integer::sum);
     }
 
     private Collection<? extends Player> getOnlinePlayersForMetrics() {
@@ -388,23 +426,20 @@ public abstract class APlugin extends JavaPlugin {
         }
     }
 
-    private String getLocaleIfMatch(Predicate<Player> predicate, Player player) {
-        if (VersionUtils.hasFoliaAPI()) {
-            CompletableFuture<String> future = new CompletableFuture<>();
-            try {
-                SchedulerUtils.run(this, player, () -> {
-                    try {
-                        future.complete(player.isOnline() && predicate.test(player) ? player.getLocale() : null);
-                    } catch (RuntimeException exception) {
-                        future.complete(null);
-                    }
-                }, () -> future.complete(null));
-                return future.get(1, TimeUnit.SECONDS);
-            } catch (InterruptedException | TimeoutException | ExecutionException | RuntimeException exception) {
-                return null;
-            }
+    private CompletableFuture<String> getLocaleIfMatchAsync(Predicate<Player> predicate, Player player) {
+        CompletableFuture<String> future = new CompletableFuture<>();
+        try {
+            SchedulerUtils.run(this, player, () -> {
+                try {
+                    future.complete(player.isOnline() && predicate.test(player) ? player.getLocale() : null);
+                } catch (RuntimeException exception) {
+                    future.complete(null);
+                }
+            }, () -> future.complete(null));
+        } catch (RuntimeException exception) {
+            future.complete(null);
         }
-        return predicate.test(player) ? player.getLocale() : null;
+        return future;
     }
 
     private void initConfigUpdater() {
