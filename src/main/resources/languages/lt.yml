@@ -1,0 +1,1438 @@
+generic:
+  help:
+    player-only: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Komanda tik žaidėjams'
+    no-item-on-hand: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> Daiktą reikia laikyti rankoje'
+    lack-permission: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> Neturite leidimo %permission%'
+    lack-permission-generic: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> Neturite leidimo naudoti šios komandos'
+    blocked-by-censure: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> Negalite naudoti šio teksto, jame yra užblokuotų žodžių'
+    blocked-by-type-restriction: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> Negalite pervardyti šio elemento'
+    blocked-by-type-restriction-lore: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> Negalite redaguoti šio elemento aprašo'
+    blocked-by-lore-line-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> Prie šio elemento negalite pridėti daugiau aprašo eilučių'
+    blocked-by-lore-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> Negalite nustatyti ilgesnių nei %limit% simbolių eilučių'
+    blocked-by-rename-length-limit: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> Negalite nustatyti ilgesnių nei %limit% simbolių vardų'
+
+    prefix: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray>'
+    header-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Pagalba</bold></#A78BFA>'
+    header-sub-format: '<gradient:#54acff:#A78BFA><bold>%header%</bold></gradient> <dark_gray>»</dark_gray> <gradient:#A78BFA:#54acff><bold>%sub%</bold></gradient> <dark_gray>»</dark_gray> <#55d6ff><bold>Pagalba</#55d6ff>'
+    command-format: '<gray> / %command%</gray> <#bad1ff>%sub%</#bad1ff> <#d7bbff>%params%</#d7bbff>'
+    footer-format: '%prev_clickable% <#7E9CFD><b>Pagalba</b> [%page% / %max_page%]</#7E9CFD> %next_clickable%'
+    next_text: '<light_purple><b>><st>> ></st>'
+    prev_text: '<light_purple><b><st>< <</st><'
+    next_void: '<dark_gray><b>><st>> ></st>'
+    prev_void: '<dark_gray><b><st>< <</st><'
+    next_hover: '<gold><b>Eiti į puslapį %target%'
+    prev_hover: '<gold><b>Eiti į puslapį %target%'
+  wrong-material:
+    axolotl_bucket: '%prefix% <red>Elementas turi būti aksolotlo kibiras'
+    banner: '%prefix% <red>Elementas turi būti reklamjuostė'
+    damageable: '%prefix% <red> Prekė turi būti patvari kaip įrankiai ir šarvai'
+    player_head: '%prefix% <red>Elementas turi būti žaidėjo galva'
+    rgb_colorable: '%prefix% <red>Elementas turi būti spalvoto tipo, pavyzdžiui, odiniai šarvai, fejerverkų žvaigždės, gėrimai ar strėlės antgaliais'
+    written_book: '%prefix% <red>Prekė turi būti parašyta knyga'
+    potion_effect_applicable: '%prefix% <red>Prekė turi būti gėrimas arba strėlė ant galo arba įtartinas troškinys'
+    firework: '%prefix% <red>Prekė turi būti fejerverkas'
+    spawner_egg: '%prefix% <red>Daiktas turi būti iškvietimo kiaušinis'
+    tropical_fish_bucket: '%prefix% <red>Prekė turi būti tropinės žuvies kibiras'
+    writable_book: '%prefix% <red>Prekė turi būti parašyta knyga arba knyga ir plunksna'
+    compass: '%prefix% <red>Elementas turi būti kompasas'
+    music_instrument: '%prefix% <red>Elementas turi būti ožkos ragas'
+    armor: '%prefix% <red>Prekė turi būti šarvai'
+    enchantment_storage: '%prefix% <red>Elementas turi būti knyga arba užburta knyga'
+  wrong-alias:
+    axolotl_variant: '%prefix% <red> Neteisinga „Axolotl“ vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    potion_effect: '%prefix% <red> Neteisinga efekto vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    animations: '%prefix% <red> Neteisinga animacijos vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    sound: '%prefix% <red> Neteisinga garso vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    enchant: '%prefix% <red> Netinkama užkerėjimo reikšmė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    flag_type: '%prefix% <red> Neteisinga vėliavos vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    book_type: '%prefix% <red> Netinkamas knygos tipas Vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    equip_slot: '%prefix% <red> Neteisinga įrangos lizdo vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    banner_pattern: '%prefix% <red> Neteisinga modelio vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    color: '%prefix% <red> Neteisinga spalvos vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    mob_type: '%prefix% <red> Netinkamas kiaušinio tipas Vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    trim_material: '%prefix% <red> Netinkama apdailos medžiagos vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    tropical_fish_pattern: '%prefix% <red> Neteisinga modelio vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    trim_pattern: '%prefix% <red> Neteisinga apdailos rašto vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    boolean: '%prefix% <red> Neteisinga loginė vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    attribute: '%prefix% <red> Neteisinga atributo vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    operation: '%prefix% <red> Netinkama veikimo vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    itemrarity: '%prefix% <red> Neteisinga retenybė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    entitytype: '%prefix% <red> Neteisinga objekto tipo vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    entitygroups: '%prefix% <red> Neteisinga subjekto grupės vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    consumable_effect: '%prefix% <red> Netinkama eksploatacinių medžiagų efekto vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    goat_horn_sound: '%prefix% <red> Neteisinga ožkos rago garso vertė! <dark_red>[<gold>Užveskite čia<dark_red>]'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>A slapyvardžiai: </b></gradient>'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+itemedit:
+  amount:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyta suma</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow>Nustatomas kiekis (iki 127)'
+      - '<gold><b>Patarimas</b></gold> <gray> Neigiamos sumos atimamos'
+      - '<gray> nuo prekės dabartinės sumos'
+    params: '<amount>'
+    feedback: '%prefix% <green>Elemento suma nustatyta į <yellow>%amount%'
+    feedback-decrease: '%prefix% <green>Prekės suma sumažėjo <yellow>%amount%'
+  attribute:
+    description:
+      - '<gradient:#A78BFA:gold><b>ERedaguoti atributų modifikatorius</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <attribute> <amount> [operation] [slot] </yellow><dark_gray>»</dark_gray> pridėti naujus modifikatorius'
+      - '<gray><yellow>Remove <attribute/slot> </yellow><dark_gray>»</dark_gray> pašalina kai kuriuos modifikatorius'
+    params: '<add/remove> [...]'
+    add:
+      params: '<attribute> <amount> [operation] [slot]'
+      description:
+        - '<gradient:#A78BFA:gold><b>APridėti atributo modifikatorių</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute> </yellow>atributo tipas'
+        - '<gray><yellow><amount> </yellow>yra, kurią reikia nustatyti'
+        - '<gray><yellow>[operation] </yellow>kaip pridedamas modifikatorius; pagal numatytuosius nustatymus reikšmės sumuojamos'
+        - '<gray><yellow>[slot] </yellow>taikyti šį modifikatorių tik pasirinktam lizdui'
+        - '<gray> įrangos lizdas arba bet koks įrangos lizdas, jei nepasirinktas'
+      feedback: '%prefix% <green>Apridėtas modifikatorius'
+    remove:
+      params: '<attribute/slot>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Pašalinti modifikatorius</b></gradient>'
+        - ''
+        - '<gray><yellow><attribute/slot> </yellow> tipas, kurį reikia pašalinti, bet kokie modifikatoriai su'
+        - '<gray> pasirinkta reikšmė pašalinama'
+      feedback-attribute: '%prefix% <green>Pašalinti atributo modifikatoriai'
+      feedback-equipment: '%prefix% <green> Pašalinti įrangos lizdo modifikatoriai'
+  axolotlvariant:
+    description:
+      - '<gradient:#A78BFA:gold><b>ERedaguoti Axolotl variantą ant Axolotl kaušo</b></gradient>'
+      - '<white><sprite:items:item/axolotl_bucket>'
+      - '<gray><yellow><type> </yellow> aksolotlo tipas'
+    params: '<type>'
+    feedback: '%prefix% <green> Pakeistas Axolotl variantas į <yellow>%variant%'
+  banner:
+    description:
+      - '<gradient:#A78BFA:gold><b>Eredaguoti reklamjuostę</b></gradient>'
+    params: '<add/set/remove/color> [...]'
+    set:
+      params: '<type> <color> <line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Pakeiskite šabloną pasirinktoje eilutėje</b></gradient>'
+      feedback: '%prefix% <green>Raštų rinkinys'
+    add:
+      params: '<type> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>APridėti šabloną</b></gradient>'
+      feedback: '%prefix% <green>Raštas pridėtas'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Pašalinti šabloną pasirinktoje eilutėje</b></gradient>'
+      feedback: '%prefix% <green>Raštas pašalintas'
+    color:
+      params: '<line> <color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Pakeiskite pasirinktos linijos rašto spalvą</b></gradient>'
+      feedback: '%prefix% <green> Raštas pakeistas'
+  bookauthor:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rinkinio autorius</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray>Aautorio pavadinime gali būti tarpų ir jis taip pat gali būti spalvotas'
+      - '<gray> Veikia tik su parašytomis knygomis'
+    params: '<name>'
+    feedback: '%prefix% <green>Atnaujintas knygos autorius'
+    feedback-reset: '%prefix% <green> Iš naujo nustatyti knygos autorių'
+  bookenchant:
+    description:
+      - '<gradient:#A78BFA:gold><b>Knygos užburiantis rinkinys</b></gradient>'
+      - '<white><sprite:items:item/enchanted_book> <sprite:items:item/book>'
+      - '<gray>Skirtumas tarp Enchant ir Bookenchant yra tas, kad'
+      - '<gray> knyga su užburiančiu ugnies aspektu uždega pataikytus taikinius'
+      - '<gray> nors knyga su „bookenchant“'
+      - ''
+      - '<gray><yellow><enchant> </yellow>enchant tipas'
+      - '<gray><yellow>[level] </yellow>užkerėjimo lygis; pagal numatytuosius nustatymus <yellow>1'
+      - ''
+      - '<gold><b>Patarimas</b></gold> <gray>nustatykite <yellow>[level] </yellow> į <yellow>0 </yellow>, kad pašalintumėte užkeikimą'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>Pašalintas knygos žavesys <yellow>%enchant%'
+    feedback: '%prefix% <green>A Taikomasis knygos užkeikimas <yellow>%enchant% <green>lv <yellow>%lv%'
+  booktype:
+    description:
+      - '<gradient:#A78BFA:gold><b>Knygos tipo rinkinys</b></gradient>'
+      - '<white><sprite:items:item/written_book>'
+      - '<gray> Veikia tik su parašytomis knygomis'
+    params: '<booktype>'
+    feedback: '%prefix% <green> Atnaujinta knygų generacija į <yellow>%generation%'
+    feedback-reset: '%prefix% <green> Iš naujo nustatyti knygų generavimą'
+  color:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti spalvą</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/tipped_arrow_base> <sprite:items:item/firework_star> <sprite:items:item/leather_chestplate>'
+      - '<gray> Taip pat veikia su odiniais šarvais ir fejerverkų žvaigždėmis, gėrimais ir strėlėmis!'
+      - '<gray><yellow>[raudona] [žalia] [mėlyna] </yellow> yra kiekvienos derinamos spalvos kiekis'
+      - '<gray>E kiekviena spalva yra int reikšmė tarp 0 ir 255'
+      - '<gray>Jei esate sutrikęs, google "<yellow>RGB spalvų rinkiklis</yellow>"'
+    params: '[red] [green] [blue]'
+    feedback: '%prefix% <green> Spalva atnaujinta'
+  compass:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatykite tikslinę kompaso vietą</b></gradient>'
+      - '<white><sprite:items:item/compass_00>'
+      - '<gray><yellow>Set </yellow><dark_gray>»</dark_gray> nustatykite savo vietą kaip kompaso tikslą'
+      - '<gray><yellow>Clear </yellow><dark_gray>»</dark_gray> išvalyti kompaso tikslą'
+    params: '<set/clear>'
+    set:
+      feedback: '%prefix% <green>Kompasas dabar nurodo <yellow>%world% %x% %y% %z%'
+    clear:
+      feedback: '%prefix% <green>Kompaso taikinys išvalytas'
+  custommodeldata:
+    description:
+      - '<gradient:#A78BFA:gold><b>Eredaguoti pasirinktinio modelio duomenis</b></gradient>'
+      - ''
+      - '<gray>Naudojamas tekstūros paketams'
+      - '<gray><yellow>[value] </yellow>teigiamas sveikasis skaičius tikslinio duomenų modelyje'
+      - '<gray>Pastaba: šiuolaikiniai serveriai naudoja elemento modelį, o ne custommodeldata'
+      - '<gray> tekstūroms, ši komanda skirta seniems klientams'
+    params: '<value>'
+    feedback: '%prefix% <green> Atnaujinti pasirinktinio modelio duomenys'
+    feedback-reset: '%prefix% <green>Tinkinto modelio duomenų nustatymas iš naujo'
+  damage:
+    description:
+      - '<gradient:#A78BFA:gold><b>ERedaguoti patvarumą</b></gradient>'
+      - ''
+      - '<gray><yellow><durability> </yellow> Pažeidimai'
+      - '<gray><gold>N.B.</gold> <yellow>0 </yellow> reiškia, kad nėra pažeidimų, yra visiškas patvarumas'
+    params: '<durability>'
+    feedback-reset: '%prefix% <green> Atkurtas ilgaamžiškumas'
+    feedback: '%prefix% <green> Patvarumas atnaujintas'
+  equipment:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rinkiniai Elemento įrangos savybė</b></gradient>'
+      - ''
+      - '<gray><gold><b>Patarimas</b></gold> Naudokite /itemequip arba /iee'
+      - '<gray><gold>N.B.</gold> jūsų geriamųjų daiktų negalima valgyti'
+    params: ''
+  enchant:
+    description:
+      - '<gradient:#A78BFA:gold><b> Užburiančių rinkinių</b></gradient>'
+      - ''
+      - '<gray><yellow><enchant> </yellow>enchant tipas'
+      - '<gray><yellow>[level] </yellow>užkerėjimo lygis; pagal numatytuosius nustatymus <yellow>1'
+      - ''
+      - '<gold><b>Patarimas</b></gold> <gray>nustatykite <yellow>[level] </yellow> į <yellow>0 </yellow>, kad pašalintumėte užkeikimą'
+    params: '<enchant> [level]'
+    feedback-removed: '%prefix% <green>Pašalintas žavesys <yellow>%enchant%'
+    feedback: '%prefix% <green>A Taikomasis kerėjimas <yellow>%enchant% <green>lv <yellow>%lv%'
+  fireresistent:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti elemento atsparumą ugniai/lava</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Nustatykite reikšmę, pagal numatytuosius nustatymus perjunkite'
+      - ''
+      - '<gray>A ugniai atsparus daiktas nebus sunaikintas'
+      - '<gray> kris į ugnį ir plūduriuos virš lavos'
+    params: '[true/false]'
+    feedback: '%prefix% <green> Atsparumas ugniai nustatytas į <yellow>%value%'
+  fireworkpower:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti fejerverkų galią</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+      - '<gray><yellow><power> </yellow> fejerverkų galia, vertė tarp <yellow>0 </yellow> ir <yellow>5'
+    params: '<power>'
+    feedback: '%prefix% <green> Atnaujinta fejerverkų galia'
+  firework:
+    description:
+      - '<gradient:#A78BFA:gold><b>Eredaguokite fejerverkus naudodami GUI</b></gradient>'
+      - '<white><sprite:items:item/firework_rocket>'
+    params: ''
+  food:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato elemento maisto savybes</b></gradient>'
+      - ''
+      - '<gray><gold><b>Patarimas</b></gold> Naudokite /itemfood arba /if'
+      - '<gray><gold>N.B.</gold> jūsų geriamųjų daiktų negalima valgyti'
+    params: ''
+  glider:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti sklandytuvo būseną</b></gradient>'
+      - ''
+      - '<gray> Sklandytuvo elementas turėtų leisti sklandyti kaip ant elytros'
+      - '<gray><yellow>[true/false] </yellow>nustatyti sklandytuvo vertę, pagal numatytuosius nustatymus perjungti'
+    params: '[true/false]'
+    feedback: '%prefix% <green> Atnaujintas sklandymo rinkinys į <yellow>%value%'
+  glow:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nepaisyti žavingo švytėjimo efekto</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Nustatykite reikšmę, pagal numatytuosius nustatymus iš naujo'
+      - ''
+      - '<gold><b>Patarimas</b></gold> <gray><yellow> nenurodyta vertė </yellow>Atkurti vanilės elgseną'
+    params: '[true/false/default]'
+    feedback: '%prefix% <green> Švytėjimas nustatytas į <yellow>%value%'
+    feedback-reset: '%prefix% <green>Atkurti numatytąją švytėjimo vertę'
+  goathornsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti ožkos rago garsą</b></gradient>'
+      - '<white><sprite:items:item/goat_horn>'
+      - '<gray><yellow><type> </yellow> garso tipas'
+    params: '<type>'
+    feedback: '%prefix% <green>Atnaujintas garsas'
+  hide:
+    description:
+      - '<gradient:#A78BFA:gold><b>Slėpti arba rodyti komponentus</b></gradient>'
+      - ''
+      - '<gray><yellow><flag> </yellow> Redaguotino elemento žyma'
+      - '<gray><yellow>[true/false] </yellow>nustatyti vėliavėlės reikšmę, pagal numatytuosius nustatymus perjungti'
+      - ''
+      - '<gold><b>Patarimas</b></gold> <gray> Slėpti reklamjuosčių skydelius su potion_effects vėliava'
+      - '<gold><b>Patarimas</b></gold> <gray>vienu kartu paslėpkite visus indikatorius naudodami <yellow>/itemedit hideall'
+    params: '<flag> [true/false]'
+    feedback: '%prefix% <green>Vėliava dabar yra <yellow>%value%'
+  hidetooltip:
+    description:
+      - '<gradient:#A78BFA:gold><b>Slėpti arba rodyti patarimus</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>nustatyti vėliavėlės reikšmę, pagal numatytuosius nustatymus perjungti'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Paslėpto patarimo būsena dabar yra <yellow>%value%'
+  hideall:
+    description:
+      - '<gradient:#A78BFA:gold><b>Paslėpti visus komponentus</b></gradient>'
+      - ''
+      - '<gray>Slepia: užburia, gėrimo efektus, reklamjuosčių sluoksnius, atributus...'
+      - ''
+      - '<gold><b>Patarimas</b></gold> <gray> Paslėpkite atskirus komponentus naudodami <yellow>/itemedit hide <flag> true'
+    params: ''
+    feedback: '%prefix% <green>Paslėptos visos vėliavėlės'
+  itemmodel:
+    description:
+      - '<gradient:#A78BFA:gold><b>ERedaguoti prekės modelį</b></gradient>'
+      - ''
+      - '<gray><yellow><namespaced key> </yellow> klavišas, skirtas nustatyti tekstūros nuorodai'
+      - '<gray>pavyzdys: /ie itemmodel <yellow>iron_sword'
+      - '<gray>pavyzdys: /ie itemmodel <yellow>minecraft:iron_sword'
+      - ''
+      - '<gray><yellow><namespace></yellow>:<yellow><id></yellow> nurodys modelį:'
+      - '/assets / <yellow><namespace></yellow>/models/item / <yellow><id>'
+    params: '<namespaced key>'
+    feedback: '%prefix% <green>Atnaujintas prekės modelis'
+    feedback-reset: '%prefix% <green> Iš naujo nustatyti elemento modelį'
+  kinetic:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato elemento kinetinę savybę</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gray><gold><b>Patarimas</b></gold> Naudokite /itemkinetic arba /iek'
+    params: ''
+  maxdurability:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rinktinių elementų didžiausias patvarumas</b></gradient>'
+      - ''
+      - '<gray><yellow><max durability> </yellow>naujas daikto patvarumo dydis,'
+      - '<gray> turi būti didesnis nei 1'
+    params: '<max durability>'
+    feedback: '%prefix% <green> Atnaujintas Maksimalus patvarumas iki <yellow>%value%'
+  maxstacksize:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatytas didžiausias elemento krūvos dydis</b></gradient>'
+      - ''
+      - '<gray><yellow>[1-99] </yellow>nustatyti vėliavėlės reikšmę'
+      - ''
+      - '<gray><yellow>no reikšmė </yellow> atkurs įprastą krūvos dydį, kuris yra <yellow>64'
+      - '<gray> daugumai daiktų, <yellow>1</yellow> šarvams ir įrankiams ir kt. Kelių elementų'
+      - '<gray> reikšmės'
+    params: '[1-99]'
+    feedback: '%prefix% <green>Atnaujintas maksimalus krūvos dydis į <yellow>%value%'
+    feedback-reset: '%prefix% <green>Iš naujo nustatytas maksimalus krūvos dydis'
+  pierce:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato elemento pradurimo savybę</b></gradient>'
+      - '<white><sprite:items:item/iron_spear>'
+      - '<gold><b>Patarimas</b></gold><gray> Naudokite /itempiercing arba /iep'
+    params: ''
+  potioneffect:
+    itemtag-tip: '%prefix% <gray> Turite pridėti gėrimo efektų prie įprastų elementų? pabandykite >ItemTag<'
+    itemtag-tip-hover:
+      - '<gradient:#A78BFA:gold>Spustelėkite mane</gradient>'
+    description:
+      - '<gradient:#A78BFA:gold><b>ERedaguoti gėrimo poveikį</b></gradient>'
+      - '<white><sprite:items:item/potion> <sprite:items:item/suspicious_stew> <sprite:items:item/tipped_arrow_base>'
+      - '<gray> Veikia su bet kokiu mikstūru, strėlėmis ir įtartinais troškiniais!'
+      - '<gray><yellow>Add <effect> <duration> [level] </yellow><dark_gray>»</dark_gray> pridėti efektą'
+      - '<gray><yellow>Remove <effect> </yellow><dark_gray>»</dark_gray> pašalina pasirinktą efektą'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> pašalinti visus efektus'
+    params: '<add/remove/reset> [...]'
+    add:
+      params: '<effect> <duration> [level] [particles] [ambient] [icon]'
+      description:
+        - '<gradient:#A78BFA:gold><b>Adds/Override selected efektas</b></gradient>'
+        - ''
+        - '<gray><yellow><effect> </yellow>efekto tipas'
+        - '<gray><yellow><duration> </yellow> Trukmė sekundėmis'
+        - '<gray><yellow>[level] </yellow>Iki 127; pagal numatytuosius nustatymus <yellow>1'
+        - '<gray><yellow>[particles] </yellow>ar rodyti daleles? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[ambient] </yellow>Ar dalelės turi aplinkos savybę? <yellow>true</yellow>/<yellow>false'
+        - '<gray><yellow>[icon] </yellow>ar rodyti piktogramą viršutiniame dešiniajame kampe? <yellow>true</yellow>/<yellow>false'
+      feedback: '%prefix% <green>A Pridėtas gėrimo efektas'
+    remove:
+      params: '<effect>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Pašalinti pasirinktą efektą</b></gradient>'
+      feedback: '%prefix% <green>Pašalintas gėrimo efektas'
+    reset:
+      feedback: '%prefix% <green>Atstatyti gėrimo efektus'
+  rarity:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti elementų retumas</b></gradient>'
+      - ''
+      - '<gray><yellow>[retenybė] </yellow>nustatyti elementą retenybė'
+      - ''
+      - '<gold><b>Patarimas</b><gold><gray> nenustačius retumo reikšmės bus atkurti numatytieji'
+    params: '[rarity]'
+    feedback: '%prefix% <green>Atnaujinta retenybė'
+    feedback-reset: '%prefix% <green>Iš naujo nustatytas retumas'
+  repaircost:
+    description:
+      - '<gradient:#A78BFA:gold><b>ERedaguoti priekalo remonto kainą</b></gradient>'
+      - ''
+      - '<gray><yellow><cost> </yellow> lygių suma'
+      - '<gray><gold>N.B.</gold> priekalų taisymas/rename price visada yra bent <yellow>1'
+      - '<gray><gold>N.B.</gold> ši komanda nustato bazinę prekės remonto kainą, galutinių lygių kaina priklauso nuo to, ką darote'
+      - '<gray>Daugiau informacijos adresu <yellow>minecraft.gamepedia.com/Anvil/Mechanics'
+    params: '<cost>'
+    feedback: '%prefix% <green>Remonto kaina atnaujinta'
+  skullowner:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kaukolės savininkas</b></gradient>'
+      - ''
+      - '<gray> Veikia tik žaidėjo kaukoles'
+      - '<gray><yellow>[vardas] </yellow> savininko vardas'
+      - ''
+      - '<gold><b>Patarimas</b></gold> <gray> Padėkite ir sulaužykite kaukolę, kad atnaujintumėte odą'
+    params: '[name]'
+    feedback: '%prefix% <green>Atnaujintas galvos savininkas'
+    feedback-reset: '%prefix% <green>Atstatyti galvutės savininkas'
+  tooltipstyle:
+    description:
+      - '<gradient:#A78BFA:gold><b>ERedaguoti elemento patarimo stilių</b></gradient>'
+      - ''
+      - '<gray><yellow><style> </yellow> klavišas, skirtas nustatyti tekstūros nuorodai'
+      - '<gray> stilių sudaro <white><namespace>: <id>'
+      - '<gray>pavyzdys: /ie tooltipstyle <yellow>my_style'
+      - '<gray>pavyzdys: /ie tooltipstyle <yellow>minecraft:my_style'
+      - '<gray> kur <yellow>minecraft</yellow> yra <white><namespace></white> ir'
+      - '<gray><yellow>my_style</yellow> yra <white><id>'
+      - '<gray>Kai nustatyta, šis elementas gali naudoti pasirinktinius tekstūras'
+      - '<gray> Patarimo fonas ir rėmelis.'
+      - '<gray><white><namespace>: patarimas / <id>_fonas'
+      - '<gray>ir <white><namespace>: patarimas / <id>_rėmas'
+    params: '<style/clear>'
+    feedback: '%prefix% <green>Atnaujintas patarimo stilius'
+    feedback-reset: '%prefix% <green> Iš naujo nustatyti patarimo stilių'
+  armortrim:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti šarvų apdailą</b></gradient>'
+      - '<white><sprite:items:item/iron_chestplate>'
+      - '<gray><yellow><material> </yellow>apdailos medžiaga'
+      - '<gray><yellow><pattern> </yellow> apdailos raštas'
+    params: '<material> <pattern>'
+    feedback: '%prefix% <green>Atnaujinta apdaila'
+    feedback-reset: '%prefix% <green> Apdaila pašalinta'
+  tropicalfish:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti tropinių žuvų kibiro savybę</b></gradient>'
+      - '<white><sprite:items:item/tropical_fish_bucket>'
+      - '<gray><yellow> modelis <pattern type> </yellow><dark_gray>»</dark_gray> tipo žuvys'
+      - '<gray><yellow> rašto spalva <color> </yellow><dark_gray>»</dark_gray> žuvies rašto spalva'
+      - '<gray><yellow>kūno spalva <color> </yellow><dark_gray>»</dark_gray> žuvies kūno spalva'
+    params: '[...]'
+    pattern:
+      params: '<type>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Nustatykite tropinių žuvų rašto tipą</b></gradient>'
+        - ''
+        - '<gray><yellow><type> </yellow> Žuvies modelio tipas'
+      feedback: '%prefix% <green>Atnaujintas raštas'
+    patterncolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Nustatykite atogrąžų žuvų rašto spalvą</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow> Žuvies spalvos raštas'
+      feedback: '%prefix% <green>Atnaujinta spalva'
+    bodycolor:
+      params: '<color>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Nustatyti tropinių žuvų kūno spalvą</b></gradient>'
+        - ''
+        - '<gray><yellow><color> </yellow> žuvies kūno spalva'
+      feedback: '%prefix% <green>Atnaujinta spalva'
+  type:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti elemento tipą</b></gradient>'
+      - ''
+      - '<gray><gold>N.B.</gold> keletas tipų, nes oras neveiks'
+    params: '<type>'
+    feedback: '%prefix% <green>Atnaujinta elemento medžiaga'
+  unbreakable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti nepertraukiamą būseną</b></gradient>'
+      - ''
+      - '<gray> Nedūžtantys įrankiai ir šarvai nepraras patvarumo'
+      - '<gray><yellow>[true/false] </yellow>nustatyti nepertraukiamą vertę, pagal numatytuosius nustatymus perjungti'
+    params: '[true/false]'
+    feedback: '%prefix% <green> Atnaujintas elementas nesulaužomas į <yellow>%value%'
+  help:
+    header-name: 'ItemEdit'
+    description:
+      - '<gradient:#A78BFA:gold><b>Rodo ItemEdit pagalbą</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Pagalbos puslapis'
+      - '<gray><yellow>[subcommand] </yellow>Pagalba komandai'
+    params: '[page/subcommand]'
+  rename:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti elemento pavadinimą</b></gradient>'
+      - ''
+      - '<gold><b>Patarimas</b></gold> <gray>įveskite <yellow>/ie rename -clear </yellow>, kad atkurtumėte numatytąjį pavadinimą'
+      - '<gold><b>Patarimas</b></gold> <gray>įveskite <yellow>/ie rename -copy </yellow>, kad nukopijuotumėte pavadinimą'
+      - '<gold><b>Patarimas</b></gold> <gray>įveskite <yellow>/ie rename -paste </yellow>, kad įklijuotumėte anksčiau nukopijuotą reikšmę'
+    params: '<name>'
+    feedback: '%prefix% <green>Elemento pavadinimas atnaujintas'
+    rename-clear: '%prefix% <green>Elemento pavadinimas išvalytas'
+    rename-copy: '%prefix% <green>Elemento pavadinimas nukopijuotas'
+    rename-paste-empty: '%prefix% <red>Nėra nukopijuoto elemento pavadinimo, kurį būtų galima įklijuoti'
+    feedback-paste: '%prefix% <green> Nukopijuoto elemento pavadinimas įklijuotas'
+    banned_words: '%prefix% <red>Elemento pavadinime yra užblokuotų žodžių'
+  lore:
+    description:
+      - '<gradient:#A78BFA:gold><b>ERedaguoti aprašą</b></gradient>'
+      - ''
+      - '<gray><yellow>Add <text> </yellow><dark_gray>»</dark_gray> pridėti tekstą naujoje eilutėje'
+      - '<gray><yellow>Insert <line> <text> </yellow><dark_gray>»</dark_gray> pridėti tekstą pasirinktoje eilutėje'
+      - '<gray><yellow>Set <line> <text> </yellow><dark_gray>»</dark_gray> pasirinktoje eilutėje nustatyti arba pakeisti tekstą'
+      - '<gray><yellow>Remove <line> </yellow><dark_gray>»</dark_gray> pašalinti pasirinktą eilutę'
+      - '<gray><yellow>Reset </yellow><dark_gray>»</dark_gray> pašalinti visas eilutes'
+      - '<gray><yellow>Copy </yellow><dark_gray>»</dark_gray> nukopijuokite dabartinį elementą ir įklijuokite jį vėliau'
+      - '<gray><yellow>CopyBook </yellow><dark_gray>»</dark_gray> tas pats kaip kopija, bet iš knygos puslapių kaip eilutės'
+      - '<gray><yellow>CopyFile <path> </yellow><dark_gray>»</dark_gray> tas pats kaip kopija, bet iš loreCopy.yml'
+      - '<gray><yellow>Paste </yellow><dark_gray>»</dark_gray> įklijuokite paskutinę nukopijuotą aprašą'
+      - '<gray><yellow>Replace <replaced> <replacer> </yellow><dark_gray>»</dark_gray> pakeisti visus įvykius'
+    params: '<add/set/remove...> [...]'
+    set:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Nustatykite arba pakeiskite tekstą pasirinktoje eilutėje</b></gradient>'
+    remove:
+      params: '<line>'
+      description:
+        - '<gradient:#A78BFA:gold><b>Pašalinti pasirinktą eilutę</b></gradient>'
+    insert:
+      params: '<line> <text>'
+      description:
+        - '<gradient:#A78BFA:gold><b>A Pridėti tekstą pasirinktoje eilutėje</b></gradient>'
+    copy:
+      feedback: '%prefix% <green>Lore nukopijuotas'
+    copyBook:
+      feedback: '%prefix% <green>Knygos puslapiai nukopijuoti ir paruošti įklijuoti'
+    copyFile:
+      wrong-path: '%prefix% <red>Netinkamas kelias, nepamirškite iš naujo įkelti konfigūracijos ir patikrinti CaP'
+      no-path: '%prefix% <red>Pasirinkite kelią /ie lore kopijos failas <gold><path>'
+      feedback: '%prefix% <green>Konfigūracija nukopijuota ir paruošta įklijuoti'
+    paste:
+      feedback: '%prefix% <green>Lore įklijuota'
+      no-copy: '%prefix% <red> Pirmiausia nukopijuokite aprašą'
+    replace:
+      params: '<replaced> <replacer>'
+      description:
+        - '<gold><b>Pakeiskite visus įvykius „lore“</b></gradient>'
+        - ''
+        - '<gray>Jei reikia pakeisti daugiau nei turimą žodį'
+        - '<gray>, kad uždarytumėte juos viduje <yellow>{ }'
+        - ''
+        - '<gray>Epavyzdys: <yellow>/ie lore pakeiskite naują Rusty'
+        - '<gray>''<yellow>New sword</yellow>'' -> ''<yellow>Rusty sword</yellow>'''
+        - ''
+        - '<gray>pavyzdys 2: <yellow>/ie lore pakeisti {Sunkus} {Labai lengvas}'
+        - '<gray>''<yellow>Heavy sword</yellow>'' -> ''<yellow>Very light sword</yellow>'''
+  listaliases:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rodo leidžiamus slapyvardžių parametrus</b>'
+      - ''
+      - '<gray><yellow><type> </yellow> rodomo parametro tipas'
+    params: '<type>'
+    prefix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>Aslapyvardžiai <dark_blue>◆ ◆ ◆ ◆'
+    postfix_line: '<dark_blue> ◆ ◆ ◆ ◆ <blue>Aslapyvardžiai <dark_blue>◆ ◆ ◆ ◆'
+    first_color: '<aqua>'
+    second_color: '<yellow>'
+    hover_info: '<blue>Pradinė vertė: <yellow>%default%'
+    hover_type: '<gold>Spustelėkite, kad patikrintumėte'
+    error-pre-hover: '<gradient:#A78BFA:gold><b>A slapyvardžiai: </b></gradient>'
+itemeditequipment:
+  allowedentities:
+    invalid-type: '%prefix% <red> Reikšmė <gold>%value% <red> nėra nei tinkamas subjektas, nei tinkama objektų grupė'
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato objektų tipus, kuriems leidžiama dėvėti šią įrangą</b></gradient>'
+      - ''
+      - '<gray><yellow>[objektas] </yellow>kuris subjekto tipas'
+      - '<gray><yellow>[grupė] </yellow>kuri subjektų grupė'
+      - ''
+      - '<gray>Apridedami visi pasirinkti tipai'
+    params: '[entity/group] [entity/group] ...'
+    feedback: '%prefix% <green>ALeidžiami objektų tipai dabar yra: <yellow>%value%'
+    feedback-reset: '%prefix% <green>ALeidžiami objektų tipai buvo nustatyti iš naujo'
+  canshear:
+    unsupported-version: '%prefix% <red>Jūsų serverio versija (<gold>%value%<red>) nepalaiko šios funkcijos'
+    description:
+      - '<gradient:#A78BFA:gold><b>Sąveikos komplektų įranga</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true gali kirpti'
+      - '<gray>įranga iš ir subjekto, pavyzdžiui, moliūgų'
+      - '<gray>Sniego seniui'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Skandžio šlyties savybė dabar yra <yellow>%value%'
+  canbesheared:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato, ar šią įrangą galima kirpti</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow> Ar įrangą galima kirpti'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Galima nukirpti nuosavybė dabar yra <yellow>%value%'
+  cameraoverlay:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kameros perdangos nustatymas</b></gradient>'
+      - ''
+      - '<gray><yellow>[vardo erdvės klavišas] </yellow>kurios perdangos norite'
+      - '<gray>Perdangos dedamos ant tekstūrinių pakuočių, vienintelės vanilės'
+      - '<gray>perdanga yra minecraft:misc/pumpkinblur'
+    params: '[namespacedkey]'
+    feedback: '%prefix% <green>Kameros perdanga buvo atnaujinta'
+    feedback-reset: '%prefix% <green>Kameros perdanga pašalinta'
+    invalid-namespacedkey: '<red>Vardų tarpo klavišas <gold>%value% <red> neteisingas'
+  clear:
+    description:
+      - '<gradient:#A78BFA:gold><b>Visiškai pašalinkite gaminio įrangos ypatybes</b></gradient>'
+      - ''
+      - '<gray>Arba atkurti numatytuosius nustatymus, jei elementas yra vanilės įranga'
+    params: ''
+    feedback: '%prefix% <green>EĮrangos savybės buvo iš naujo nustatytos į numatytuosius'
+  damageonhurt:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rinkiniai pažeisti</gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true, kad sumažintumėte patvarumą su pažeidimais'
+      - ''
+      - '<gray><gold>N.B.</gold> Galima sugadinti tik gaminį, kurio didžiausias krūvos dydis yra 1'
+      - '<gray> naudoti <yellow>/ie maxstacksize 1'
+      - '<gray><gold><b>Patarimas</b></gold> nepamirškite nustatyti maksimalaus gaminio patvarumo su'
+      - '<yellow>/ie maxdurability <amount>'
+    params: '[true/false]'
+    feedback: '%prefix% <green> Sužaloto turto žala dabar yra <yellow>%value%'
+    warning-maxstacksize: '%prefix% <red> Maksimalus elemento krūvos dydis turi būti <gold>1 <red>, kad būtų pažeistas <dark_red>[<gold> spustelėkite, kad pataisytumėte<dark_red>]'
+  dispensable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Padalinami rinkiniai</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true su dozatoriumi'
+    params: '[true/false]'
+    feedback: '%prefix% <green> Nepakeičiamas turtas dabar yra <yellow>%value%'
+  equiponinteract:
+    description:
+      - '<gradient:#A78BFA:gold><b>Sąveikos komplektų įranga</b>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true sąveikai užtikrinti'
+    params: '[true/false]'
+    feedback: '%prefix% <green>E sąveikos nuosavybės įranga dabar yra <yellow>%value%'
+  equipsound:
+    description:
+      - '<gradient:#A78BFA:gold><b> Garsą suteikiantys rinkiniai</b></gradient>'
+      - ''
+      - '<gray><yellow>[garsas] </yellow> koks garsas turėtų būti skleidžiamas'
+    params: '[sound]'
+    feedback: '%prefix% <green>EĮrenginio garso savybė dabar yra <yellow>%value%'
+    feedback-reset: '%prefix% <green>Equip garso savybė buvo iš naujo nustatyta į numatytuosius'
+  help:
+    header-name: 'ItemEquipment'
+    description:
+      - '<gradient:#A78BFA:gold><b>Rodo ItemEditEquipment pagalbą</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Pagalbos puslapis'
+      - '<gray><yellow>[subcommand] </yellow>Pagalba komandai'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b> Rodomos šio elemento įrangos savybės</b></gradient>'
+    params: ''
+    not_set: '%prefix% <gray>Šioje prekėje nėra komplektuojamų komponentų'
+    message:
+      - '%prefix% <dark_green><b>Eįrengiamas</b>'
+      - '<green> Lizdas: <yellow>%slot%'
+      - '<green>Galima kirpti: <yellow>%canbesheared%'
+      - '<green> Žala dėl sužalojimo: <yellow>%damageonhurt%'
+      - '<green> Būtinas: <yellow>%dispensable%'
+      - '<green>E sąveikos įranga: <yellow>%equiponinteract%'
+      - '<green> Keičiamas: <yellow>%swappable%'
+      - '<green>EĮrangos garsas: <yellow>%equipsound%'
+      - '<green>Garsas: <yellow>%shearsound%'
+      - '<green>ALeidžiami subjektai: <yellow>%allowedentities%'
+      - '<green>Kameros perdanga: <yellow>%cameraoverlay%'
+      - '<green>AĮrenginio ID: <yellow>%assetid%'
+  model:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato tekstūros modelį</b></gradient>'
+      - ''
+      - '<gray><yellow>[raktas] </yellow>Įrangos modelio ID su vardo tarpu, kurį reikia naudoti, kai yra'
+    params: '[key]'
+    feedback: '%prefix% <green>E įrangos modelis dabar yra <yellow>%key%'
+    feedback-reset: '%prefix% <green>E įrangos modelis buvo nustatytas iš naujo'
+  shearsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato garsą, kai elementas pašalinamas kirpimu</b></gradient>'
+      - ''
+      - '<gray><yellow>[garsas] </yellow> koks garsas turėtų būti skleidžiamas'
+      - '<gray> kai jis pašalinamas kirpimu, kaip moliūgas'
+      - '<gray>Sniego seniui'
+    params: '[sound]'
+    feedback: '%prefix% <green>Širties garsas dabar yra <yellow>%value%'
+    feedback-reset: '%prefix% <green>Shear garso savybė buvo iš naujo nustatyta į numatytuosius'
+  shearingsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato garsą, kai elementas pašalinamas kirpimu</b></gradient>'
+      - ''
+      - '<gray><yellow>[garsas] </yellow> Koks garsas turėtų būti skleidžiamas'
+      - '<gray> kai jis pašalinamas kirpimu, kaip moliūgas sniego seniui'
+    params: '[sound]'
+    feedback: '%prefix% <green> Garsas dabar yra <yellow>%value%'
+  slot:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rinkiniai su įrengtu lizdu</b></gradient>'
+      - ''
+      - '<gray><yellow><slot> </yellow> kur galima įrengti prekę'
+    params: '<slot>'
+    feedback: '%prefix% <green>E įrangos lizdas dabar yra <yellow>%value%'
+  swappable:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato elementą, kurį galima keisti </b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true, kad elementą būtų galima pakeisti'
+    params: '[true/false]'
+    feedback: '%prefix% <green> Keičiamas turtas dabar yra <yellow>%value%'
+itemeditfood:
+  addeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>Apridėkite efektą prie elemento</b></gradient>'
+      - '<gray><yellow>/ief addeffect </yellow>aiškūs efektai'
+      - '<gray><yellow>/ief addeffect </yellow>teleportas <range>'
+      - '<gray><yellow>/ief addeffect </yellow>taikyti efektus [tikimybė] <potion> <lv> <duration> [ambient] [dalelė] [icon]'
+      - '<gray><yellow>/ief addeffect </yellow>Pašalinkite efektus <potion>'
+      - '<gray><yellow>/ief addeffect </yellow> groja garsą <sound>'
+      - ''
+    params: '[...]'
+    cleareffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Apridėkite efektą prie elemento</b></gradient>'
+        - ''
+        - '<gray>Pašalinkite grotuvą bet kokį gėrimo poveikį, pvz., pieno kibirą'
+      params: '<potion>'
+      feedback: '%prefix% <green>A pridėtas teleporto efektas valgant maistą'
+    teleport:
+      description:
+        - '<gradient:#A78BFA:gold><b>Apridėkite efektą prie elemento</b></gradient>'
+        - '<gray><yellow><range> </yellow> kaip toli teleportuoti grotuvą'
+        - ''
+        - '<gray> Atsitiktinai teleportuokite grotuvą valgant maistą'
+      params: '<range>'
+      feedback: '%prefix% <green>A pridėtas teleporto efektas valgant maistą'
+    applyeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Apridėkite efektą prie elemento</b></gradient>'
+        - '<gray><yellow>[tikimybė] </yellow> kokia % tikimybė pritaikyti efektą?'
+        - '<gray> turi būti didesnis nei <yellow>0</yellow> ir mažesnis lygus <yellow>100'
+        - '<gray><yellow><potion> </yellow> Potion efekto tipas'
+        - '<gray><yellow><lv> </yellow> efekto lygis, <yellow>1</yellow> pagal numatytuosius nustatymus'
+        - '<gray><yellow><duration> </yellow> Efekto trukmė sekundėmis arba <yellow>-1 </yellow> nuolatiniam efektui'
+        - '<gray><yellow>[ambient] [particle] [icon] </yellow>true/false potion efekto parinktys'
+        - ''
+        - '<gray>Ataikyti pasirinktą efektą grotuvui valgant maistą'
+      params: '<potion>'
+      feedback: '%prefix% <green>A Pridėtas efektas, taikomas valgant maistą'
+    removeeffects:
+      description:
+        - '<gradient:#A78BFA:gold><b>Apridėkite efektą prie elemento</b></gradient>'
+        - '<gray><yellow><potion> </yellow> Išvalyti pasirinktą efektą'
+        - ''
+        - '<gray> Pašalinkite pasirinktą efektą iš grotuvo, kai valgote'
+      params: '<potion>'
+      feedback: '%prefix% <green>A Pridėtas pašalinimo efektas valgant maistą'
+    playsound:
+      description:
+        - '<gradient:#A78BFA:gold><b>Apridėkite efektą prie elemento</b></gradient>'
+        - '<gray><yellow><sound> </yellow>Garsas groti'
+        - ''
+        - '<gray>Atkurkite pasirinktą garsą valgant maistą'
+      params: '<sound>'
+      feedback: '%prefix% <green>Apridėtas garsas valgant maistą'
+  animation:
+    description:
+      - '<gradient:#A78BFA:gold><b>Animacijos rinkiniai</b></gradient>'
+      - '<gray>Tik <red>1.21.2+'
+      - ''
+      - '<gray><yellow><animation> </yellow> Reikšmė, kurią reikia nustatyti, pagal numatytuosius nustatymus perjungti'
+      - ''
+      - '<gray>Kai kurios animacijos rodomos tik pirmojo asmens rodinyje,'
+      - '<gray>Kai kurios animacijos rodomos tik trečiojo asmens rodinyje,'
+      - '<gray>kai kurios animacijos rodomos ir pirmojo, ir trečiojo asmens rodinyje'
+    params: '<animation>'
+    feedback: '%prefix% <green>Ataikoma animacija'
+  canalwayseat:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato, kada daiktą galima valgyti</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Nustatytina reikšmė, pagal numatytuosius nustatymus perjungti'
+      - ''
+      - '<gray>Paprastai norint suvalgyti maistą reikia alkani,'
+      - '<gray> nustatymas true imituos auksinio obuolio elgesį'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Prekė visada Gali valgyti iki <yellow>%value%'
+  consumeparticles:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato kiekvieną kartą, kai suvalgius gaminyje atsiranda dalelių</b></gradient>'
+      - '<gray>Tik <red>1.21.2+'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>Nustatytina reikšmė, pagal numatytuosius nustatymus perjungti'
+    params: '[true/false]'
+    feedback: '%prefix% <green> Vartojimo dalelės dabar yra <yellow>%value%'
+  convertto:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato daiktą, kuris suteikiamas valgant maistą</b></gradient>'
+      - '<gray>Tik <red>1.21+'
+      - ''
+      - '<gray><yellow>[tipas/serveritem id] </yellow>prekė, kurią reikia grąžinti'
+      - '<gray> galite nustatyti medžiagą arba galite'
+      - '<gray> pasirinkite elementą iš serverioItem išsaugoti elementai'
+      - ''
+      - '<gray> Pamėgdžioti kibiro pieno elgesį, kai kibiras yra'
+      - '<gray>Grąžinama, kai suvartojamas pienas'
+    params: '[type/serveritem id]'
+    feedback: '%prefix% <green>Konvertuoti į atnaujintą'
+  eatticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustato laiką, reikalingą prekei suvalgyti</b></gradient>'
+      - ''
+      - '<gray><yellow><ticks> </yellow> Prekės suvalgymo laikas'
+      - '<gray> turi būti <yellow>1 </yellow> arba didesnis'
+      - ''
+      - '<gray><yellow>20 </yellow>tukai = <yellow>1 </yellow>sekundė'
+    params: '<ticks>'
+    feedback: '%prefix% <green>E Varškės atnaujintos į <yellow>%value%'
+  help:
+    header-name: 'ItemFood'
+    description:
+      - '<gradient:#A78BFA:gold><b>Rodo elementąMaisto pagalba</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Pagalbos puslapis'
+      - '<gray><yellow>[subcommand] </yellow>Pagalba komandai'
+    params: '[page/subcommand]'
+  info:
+    not_food: '%prefix% <dark_green>Prekė neturi maisto savybių arba turi numatytąją ypatybę'
+    message:
+      - '%prefix% <dark_green><b>Prekės maisto savybės</b>'
+      - '<green>Elaikas: <yellow>%eatseconds%<green> s <dark_gray> (<gray>%eatticks%<dark_gray>)'
+      - '<green>Atkurti alkį: <yellow>%nutrition% <dark_gray>| <green>Sotumas: <yellow>%saturation%<green>'
+      - '<green>Aanimacija: <yellow>%animation% <dark_gray>| <green>Garsas: <yellow>%sound% <dark_gray>| <green>Dalelės: <yellow>%consumeparticles%'
+      - '<green>Egalima, kai pilna: <yellow>%canalwayseat% <dark_gray>| <green> Valgant gaukite: <yellow>%convertto%'
+    apply_effect_prefix:
+      - '<dark_green><b>Sudėtyje yra <yellow>%effects%<dark_green> galimas gėrimo poveikis:</b>'
+    apply_effect:
+      - '<green>%index%. Tipas: <yellow>%type% <dark_gray>| <green>Lv: <yellow>%level% <dark_gray>| <green>Trukmė: <yellow>%duration_s%<green> s <dark_gray>(<gray>%duration_ticks%<dark_gray>)'
+      - '<green> dalelės: <yellow>%hasparticle% <dark_gray>| <green>Aaplinkos: <yellow>%isambient% <dark_gray>| <green>Icon: <yellow>%hasicon% <dark_gray>| <green> Tikimybė: <yellow>%chance_perc%<green> %'
+    consume_effect_teleport: '<green> Atsitiktinis teleporto skersmuo: <yellow>%diameter%'
+    consume_effect_sound: '<green>Apapildomas sunaudojamas garsas: <yellow>%sound%'
+    consume_effect_remove: '<green>Pašalinti efektai: <yellow>%effects%'
+    consume_effect_clear: '<green>Išvalo visus aktyvios būsenos efektus'
+    consume_effect_unknown: '<green>Kitas vartojimo efektas: <yellow>%type%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Apibūdinkite dabartinę prekės informaciją apie maistą</b></gradient>'
+    params: ''
+  nutrition:
+    description:
+      - '<gradient:#A78BFA:gold><b> Atkurtos mitybos rinkiniai</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow> Kiek reikia atkurti alkį'
+      - '<gray> turi būti <yellow>0 </yellow> arba didesnis'
+      - ''
+      - '<gray>A pilnas alkio baras yra <yellow>20'
+    params: '<amount>'
+    feedback: '%prefix% <green> Maitinimo vertė dabar yra <yellow>%value%'
+  removeeffect:
+    description:
+      - '<gradient:#A78BFA:gold><b>Pašalinkite efektą iš elemento</b></gradient>'
+      - ''
+      - '<gray><yellow><index> </yellow>Pašalinti pasirinktą efektą'
+    params: '<index>'
+    feedback: '%prefix% <green>Pašalintas pasirinkto maisto efektas'
+  reset:
+    description:
+      - '<gradient:#A78BFA:gold><b>Visiškai pašalinkite maisto ypatybes nuo prekės</b></gradient>'
+      - ''
+      - '<gray>Arba atkurti numatytuosius nustatymus, jei produktas yra vanilinis maistas'
+    params: ''
+    feedback: '%prefix% <green> Pašalintos maisto savybės'
+  reseteffects:
+    description:
+      - '<gradient:#A78BFA:gold><b>Pašalinkite efektus iš elemento</b></gradient>'
+    params: ''
+    feedback: '%prefix% <green> Maisto efektai pašalinti'
+  saturation:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti atkurtas sodrumas</b></gradient>'
+      - ''
+      - '<gray><yellow><amount> </yellow> Prisotinimo kiekis, kurį reikia pridėti Leidžiamos neigiamos'
+      - '<gray> reikšmės'
+      - ''
+      - '<gray>Sotumas kontroliuoja greito maisto lygį'
+      - '<gray> (mitybos) sumažėjimas'
+    params: '<amount>'
+    feedback: '%prefix% <green>Sotumas dabar yra <yellow>%value%'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rinkiniai valgo garsą</b></gradient>'
+      - '<gray>Tik <red>1.21.2+'
+      - ''
+      - '<gray><yellow><sound> </yellow>Nustatytina reikšmė'
+    params: '<sound>'
+    feedback: '%prefix% <green>E Garsas dabar yra <yellow>%value%'
+itemeditkinetic:
+  contactcooldownticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetinių kontaktų aušinimo rinkiniai</b></gradient>'
+      - ''
+      - '<gray><yellow><cooldown> </yellow>kontaktinės aušinimo erkės'
+    params: '<delay>'
+    feedback: '%prefix% <green>Kontaktinis aušinimo komplektas'
+  damageconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetikos rinkiniai Pažeidimų sąlygos</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Didžiausia žalos trukmė'
+      - '<gray><yellow><min speed> </yellow> Minimalus greitis'
+      - '<gray><yellow><min relative speed> </yellow>minimalus santykinis greitis'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green>Pažeidimų būklė'
+  damagemultiplier:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetinių pažeidimų daugiklis</b></gradient>'
+      - ''
+      - '<gray><yellow><multiplier> </yellow>pažeidimų daugiklis'
+    params: '<delay>'
+    feedback: '%prefix% <green>Kinetinės žalos daugiklio rinkinys'
+  delayticks:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetinės delsos erkių rinkiniai</b></gradient>'
+      - ''
+      - '<gray><yellow><delay> </yellow>kinetinės vėlavimo žymės'
+    params: '<delay>'
+    feedback: '%prefix% <green> Vėlavimo erkių rinkinys'
+  dismountconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetinės išmontavimo sąlygos</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow> Maksimali išmontavimo trukmė'
+      - '<gray><yellow><min speed> </yellow> Minimalus išmontavimo greitis'
+      - '<gray><yellow><min relative speed> </yellow> Minimalus santykinis išmontavimo greitis'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green> Išmontavimo sąlygų rinkinys'
+  forwardmovement:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetinis judėjimas į priekį</b></gradient>'
+      - ''
+      - '<gray><yellow><movement> </yellow> Judėjimo pirmyn kiekis'
+    params: '<movement>'
+    feedback: '%prefix% <green> Judėjimo į priekį rinkinys'
+  help:
+    header-name: 'ItemKinetic'
+    description:
+      - '<gradient:#A78BFA:gold><b>Rodo elementąKinetinė pagalba</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Pagalbos puslapis'
+      - '<gray><yellow>[subcommand] </yellow>Pagalba komandai'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b> Rodomos šio daikto kinetinės ginklo savybės</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>Šis daiktas neturi kinetinio ginklo komponento'
+    message:
+      - '%prefix% <dark_green><b>Kinetinis ginklas</b>'
+      - '<green>Kontaktų laukimo trukmė: <yellow>%contactcooldownticks% <green>tiks'
+      - '<green>Žalos daugiklis: <yellow>%damagemultiplier%'
+      - '<green> delsa: <yellow>%delayticks% <green>ticks'
+      - '<green> Judėjimas pirmyn: <yellow>%forwardmovement%'
+      - '<green>Patikimas garsas: <yellow>%hitsound%'
+      - '<green>Garsas: <yellow>%sound%'
+      - '<green>Pažeidimų sąlygos: <yellow>%damageconditions%'
+      - '<green> Išmontavimo sąlygos: <yellow>%dismountconditions%'
+      - '<green>Atgalinės sąlygos: <yellow>%knockbackconditions%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetinio smūgio garso rinkiniai</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Nustatytina reikšmė'
+    params: '<sound>'
+    feedback: '%prefix% <green> Patikimas garsas dabar yra <yellow>%value%'
+  knockbackconditions:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetinės atmušimo sąlygos</b></gradient>'
+      - ''
+      - '<gray><yellow><max duration> </yellow>Didžiausia atmušimo trukmė'
+      - '<gray><yellow><min speed> </yellow> Minimalus atmušimo greitis'
+      - '<gray><yellow><min relative speed> </yellow> Minimalus santykinis atatrankos greitis'
+    params: '<max duration> <min speed> <min relative speed>'
+    feedback: '%prefix% <green> Atgalinės būklės rinkinys'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Kinetinio garso rinkiniai</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Nustatytina reikšmė'
+    params: '<sound>'
+    feedback: '%prefix% <green>Garsas dabar yra <yellow>%value%'
+itemeditpiercing:
+  dealsknockback:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatoma, kai smūgis sukelia atmušimą</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true, kad būtų taikomas atmušimas'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Knockback dabar yra <yellow>%value%'
+  dismounts:
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatomas kiekvieną kartą, kai smūgis sukelia išmontavimą</b></gradient>'
+      - ''
+      - '<gray><yellow>[true/false] </yellow>true išmontuoti'
+    params: '[true/false]'
+    feedback: '%prefix% <green>Dismount dabar yra <yellow>%value%'
+  help:
+    header-name: 'ItemPiercing'
+    description:
+      - '<gradient:#A78BFA:gold><b>Rodoma elemento auskarų pagalba</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>Pagalbos puslapis'
+      - '<gray><yellow>[subcommand] </yellow>Pagalba komandai'
+    params: '[page/subcommand]'
+  info:
+    description:
+      - '<gradient:#A78BFA:gold><b>Parodo šio elemento pradurto ginklo savybes</b></gradient>'
+    params: ''
+    not_set: '%prefix% <green>Šis daiktas neturi veriančio ginklo komponento'
+    message:
+      - '%prefix% <dark_green><b>Auskarų veriantis ginklas</b>'
+      - '<green>Pasiūlymai: <yellow>%dealsknockback%'
+      - '<green> Atramos: <yellow>%dismounts%'
+      - '<green>Patikimas garsas: <yellow>%hitsound%'
+      - '<green>Garsas: <yellow>%sound%'
+  hitsound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rinkiniai Auskarų smūgio garsas</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Nustatytina reikšmė'
+    params: '<sound>'
+    feedback: '%prefix% <green> Patikimas garsas dabar yra <yellow>%value%'
+  sound:
+    description:
+      - '<gradient:#A78BFA:gold><b>Rinkiniai Auskarų vėrimo garsas</b></gradient>'
+      - ''
+      - '<gray><yellow><sound> </yellow>Nustatytina reikšmė'
+    params: '<sound>'
+    feedback: '%prefix% <green>Garsas dabar yra <yellow>%value%'
+serveritem:
+  help-header: '<gradient:#54acff:#A78BFA><bold>Serverio elementas</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Pagalba</bold></#A78BFA>'
+  give:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Gauta <yellow>%amount% <green> iš <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][duoti] %player_name% gautas %amount% iš %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Duoti pasirinktą elementą žaidėjui</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id prekės'
+      - '<gray><yellow>[amount] </yellow>duodamų daiktų skaičius; pagal numatytuosius nustatymus 1'
+      - '<gray><yellow>[grotuvas] </yellow>kas gauna elementus, pagal numatytuosius nustatymus jūs'
+      - '<gray><yellow>[tylus] </yellow>true, jei žaidėjui nereikia siųsti atsiliepimų'
+    params: '<id> [amount] [player] [silent]'
+  giveall:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Gauta <yellow>%amount% <green> iš <yellow>%nick%'
+    #Holders: %id% %nick% %amount% %targets%
+    log: '[serveritem][giveall] %targets% gavo %amount% iš %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Duoti pasirinktą prekę visiems prisijungusiems žaidėjams</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id prekės'
+      - '<gray><yellow>[amount] </yellow>duodamų daiktų skaičius; pagal numatytuosius nustatymus 1'
+      - '<gray><yellow>[tylus] </yellow>true, jei žaidėjams neturėtų būti siunčiami atsiliepimai'
+    params: '<id> [amount] [silent]'
+  drop:
+    #Holders: %id% %nick% %amount% %world% %x% %y% %z%
+    log: '[serveritem][drop] atmetė %amount% iš %id% (%nick%) %world% %x% %y% %z%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Numeskite pasirinktą elementą į pasirinktą vietą</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id prekės'
+      - '<gray><yellow><amount> </yellow>emtinų elementų kiekis, 1 į 2304'
+      - '<gray><yellow><world> </yellow> kuris pasaulis'
+      - '<gray><yellow><x> <y> <z> </yellow> koordinatės'
+    params: '<id> <amount> <world> <x> <y> <z>'
+  take:
+    #Holders: %id% %nick% %amount%
+    feedback: '<green>Dingo <yellow>%amount% <green><yellow>%nick%'
+    #Holders: %id% %nick% %amount% %player_name%
+    log: '[serveritem][take] %player_name% pateikė %amount% iš %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Paimkite pasirinktą elementą iš žaidėjo</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id prekės'
+      - '<gray><yellow>[amount] </yellow>duodamų daiktų skaičius; pagal numatytuosius nustatymus 1'
+      - '<gray><yellow>[grotuvas] </yellow>kas gauna elementus, pagal numatytuosius nustatymus jūs'
+      - '<gray><yellow>[tylus] </yellow>true, jei žaidėjui nereikia siųsti atsiliepimų'
+    params: '<id> [amount] [player] [silent]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>Elementas <yellow>%id% <green>Registruotas'
+    already_used_id: '%prefix% <red>Elementas su ID <yellow>%id% <red>jau yra, pakeiskite ID arba atlikite /si update, kad nepaisytumėte'
+    description:
+      - '<gradient:#A78BFA:gold><b> Užregistruokite prekę rankoje</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>identifikuokite prekę, neskiriamos didžiosios ir mažosios raidės ir negalite'
+      - '<gray> yra tarpų arba taškų, taip pat negalite pasirinkti'
+      - '<gray> bet koks jau naudojamas ID'
+      - ''
+      - '<gold><b>Patarimas</b></gold> <gray>naudokite <yellow>/serveritem update <id></yellow> esamam elementui pakeisti'
+      - '<gold><b>Patarimas</b></gold> <gray>Gauti išsaugotus elementus naudodami <yellow>/serveritem give <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>Elementas <yellow>%id% <green>neregistruotas'
+    description:
+      - '<gradient:#A78BFA:gold><b>Ištrinti pasirinktą elementą</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id prekės'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>Elementas <yellow>%id% <green> buvo atnaujintas'
+    description:
+      - '<gradient:#A78BFA:gold><b>Atnaujinti pasirinktą elementą</b></gradient>'
+      - ''
+      - '<gray>Pakeiskite elementą, susietą su ID, su savo rankos daiktu'
+      - '<gray><yellow><id> </yellow>Id prekės'
+      - ''
+      - '<gold><b>Patarimas</b></gold> <gray>naudokite <yellow>/serveritem save <id></yellow>, kad sukurtumėte naują elementą'
+      - '<gold><b>Patarimas</b></gold> <gray>naudokite <yellow>/serveritem delete <id></yellow>, norėdami ištrinti elementą'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>Atidaryti GUI su serverio išsaugotais elementais</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] </yellow>GUI puslapis; pagal numatytuosius nustatymus 1'
+    params: '[page]'
+  setnick:
+    #Holders: %id% %nick%
+    success: '%prefix% <green>Elementas <yellow>%id% <green>nick buvo atnaujintas į <yellow>%nick%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Nustatyti pasirinkto elemento rodomą pavadinimą</b></gradient>'
+      - ''
+      - '<gray>Nickas naudojamas laikikliui <yellow>%nick%</yellow> perkant/sell messages, iki'
+      - '<gray> numatytasis yra prekės pavadinimas arba prekės tipas, jei pavadinimo nėra'
+      - ''
+      - '<gray><yellow><id> </yellow>Id prekės'
+      - '<gray><yellow>[slapyvardis] </yellow>vardas, kurį reikia nustatyti'
+      - ''
+      - '<gold><b>Patarimas</b></gold> <gray> norėdami atkurti numatytuosius nustatymus, tiesiog naudokite <yellow>/serveritem setnick <id>'
+    params: '<id> [nick]'
+  sell:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green> Nupirktas <yellow>%amount% <green><yellow>%nick% <green> skirtas <yellow>%price%'
+    #Holders: %id% %nick% %amount%
+    not-enough-space: '<red>Neturite pakankamai vietos atsargoms įsigyti <gold>%amount% <red>iš <gold>%nick%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-money: '<red> Jūs neturite <gold>%price% <red>, kad galėtumėte nusipirkti <gold>%amount% <red>iš <gold>%nick%'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveris][parduoti] %player_name% sumokėjo %price% už %amount% iš %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Parduokite prekes žaidėjui</b></gradient>'
+      - ''
+      - '<gray>Sell skiriasi nuo SellMax, nes jūs parduodate visą sumą'
+      - '<gray> grotuvui arba neparduodate nė vieno'
+      - '<gray><yellow><id> </yellow>id prekės'
+      - '<gray><yellow><amount> </yellow>prekių kiekis'
+      - '<gray><yellow><player> </yellow> kas turėtų mokėti pinigus ir gauti daiktus'
+      - '<gray><yellow><price> </yellow> Kaina už visą prekių kiekį, turi būti teigiama'
+      - '<gray><yellow>[tylus] </yellow>true siųsti atsiliepimą žaidėjui'
+      - ''
+      - '<gray> Sandoris nepavyksta, jei žaidėjas neturi pakankamai pinigų arba neturi pakankamai pinigų'
+      - '<gray> inventoriaus vieta visam <yellow><amount>'
+      - '<gray><gold>N.B.</gold> komandos vykdytojo likutis nepaliestas'
+    params: '<id> <amount> <player> <price> [silent]'
+  buy:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Parduota <yellow>%amount% <green> iš <yellow>%nick% <yellow>, skirta <green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>Jūsų atsargose nėra <gold>%amount% <red> <gold>%nick% <red>'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][pirkti] %player_name% pardavė %amount% iš %id% (%nick%) už viso %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Pirkite prekes iš žaidėjo</b></gradient>'
+      - ''
+      - '<gray>Buy skiriasi nuo BuyMax, nes perkate visą sumą'
+      - '<gray> iš grotuvo arba jo neperkate'
+      - '<gray><yellow><id> </yellow>id prekės'
+      - '<gray><yellow><amount> </yellow>prekių kiekis'
+      - '<gray><yellow><player> </yellow> kas turėtų sumokėti už prekes ir gauti pinigų'
+      - '<gray><yellow><price> </yellow> Kaina už visą prekių kiekį, turi būti teigiama'
+      - '<gray><yellow>[tylus] </yellow>true siųsti atsiliepimą žaidėjui'
+      - ''
+      - '<gray> Sandoris nepavyksta, jei žaidėjas neturi bent jau <yellow><amount>'
+      - '<gray> iš <yellow><id> </yellow>items'
+      - '<gray><gold>N.B.</gold> komandos vykdytojo likutis nepaliestas'
+    params: '<id> <amount> <player> <price> [silent]'
+  sellmax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green> Pirktas <yellow>%amount% <green> iš <yellow>%nick% <yellow> skirtas <green>%price%'
+    #Holders: %id% %nick%
+    not-enough-space: '<red>Neturite pakankamai vietos atsargoms įsigyti <gold>%nick%'
+    #Holders: %id% %nick% %price%
+    not-enough-money: '<red>Jūs neturite pakankamai pinigų, kad nusipirktumėte bet kokį <gold>%nick% <red>, skirtą <gold>%price% <red>each'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveris][parduoti] %player_name% sumokėjo %price% už %amount% iš %id% (%nick%)'
+    description:
+      - '<gradient:#A78BFA:gold><b>Parduokite prekes žaidėjui</b></gradient>'
+      - ''
+      - '<gray>SellMax skiriasi nuo pardavimo, nes galite parduoti mažesnę sumą'
+      - '<gray> žaidėjui, jei nėra pakankamai pinigų ar vietos visam'
+      - '<gray><yellow><id> </yellow>id prekės'
+      - '<gray><yellow><amount> </yellow>prekių kiekis'
+      - '<gray><yellow><player> </yellow> kas turėtų mokėti pinigus ir gauti daiktus'
+      - '<gray><yellow><price> </yellow> Kaina už visą prekių kiekį, turi būti teigiama'
+      - '<gray><yellow>[tylus] </yellow>true siųsti atsiliepimą žaidėjui'
+      - ''
+      - '<gray> Sandoris nepavyksta, jei žaidėjas neturi pakankamai pinigų arba neturi pakankamai pinigų'
+      - '<gray> atsargų erdvė mažiausiai prekė'
+      - '<gray>Jei grotuvas perkate mažiau nei <yellow><price></yellow>, mokama kaina bus sumažinta'
+      - '<gray><gold>N.B.</gold> komandos vykdytojo likutis nepaliestas'
+    params: '<id> <amount> <player> <price> [silent]'
+  buymax:
+    #Holders: %id% %nick% %amount% %price%
+    feedback: '<green>Parduota <yellow>%amount% <green> iš <yellow>%nick% <yellow>, skirta <green>%price%'
+    #Holders: %id% %nick% %amount% %price%
+    not-enough-items: '<red>Jūs neturite jokių <gold>%nick% <red> parduoti savo atsargų'
+    #Holders: %id% %nick% %amount% %player_name% %price%
+    log: '[serveritem][pirkti] %player_name% pardavė %amount% iš %id% (%nick%) už viso %price%'
+    description:
+      - '<gradient:#A78BFA:gold><b>Pirkite prekes iš žaidėjo</b></gradient>'
+      - ''
+      - '<gray>BuyMax skiriasi nuo Pirkimo, nes galite nusipirkti mažesnę sumą'
+      - '<gray> iš žaidėjo, jei jis turi mažiau nei kiekis prekių atsargose'
+      - '<gray><yellow><id> </yellow>id prekės'
+      - '<gray><yellow><amount> </yellow>prekių kiekis'
+      - '<gray><yellow><player> </yellow> kas turėtų sumokėti už prekes ir gauti pinigų'
+      - '<gray><yellow><price> </yellow> Kaina už visą prekių kiekį, turi būti teigiama'
+      - '<gray><yellow>[tylus] </yellow>true siųsti atsiliepimą žaidėjui'
+      - ''
+      - '<gray> Operacija nepavyksta, jei žaidėjas neturi bent jau <yellow><id> </yellow>'
+      - '<gray> apie atsargas'
+      - '<gray>Jei grotuvas parduos mažiau nei <yellow><amount></yellow> kaina bus padidinta'
+      - '<gray><gold>N.B.</gold> komandos vykdytojo likutis nepaliestas'
+    params: '<id> <amount> <player> <price> [silent]'
+itemstorage:
+  help-header: '<gradient:#54acff:#A78BFA><bold>ItemStorage</bold></gradient> <dark_gray>»</dark_gray> <#A78BFA><bold>Pagalba</bold></#A78BFA>'
+  get:
+    #Holders: %id% %amount%
+    success: '%prefix% <green>Gauta <yellow>%amount% <green><yellow>%id%'
+    no-inventory-space: '%prefix% <red>Jūsų atsargose nėra vietos'
+    description:
+      - '<gradient:#A78BFA:gold><b>Gauti pasirinktą prekę</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id prekės'
+      - '<gray><yellow>[amount] </yellow>gaunamų daiktų skaičius; pagal numatytuosius nustatymus 1'
+    params: '<id> [amount]'
+  save:
+    #Holders: %id%
+    success: '%prefix% <green>Elementas <yellow>%id% <green>Registruotas'
+    #Holders: %limit%
+    limit-reached: '%prefix% <red> Pasiekėte maksimalų išsaugotų elementų skaičių (%limit%)'
+    description:
+      - '<gradient:#A78BFA:gold><b> Užregistruokite prekę rankoje</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Atpažinkite savo prekę, neskiriamos didžiosios ir mažosios raidės ir negalite'
+      - '<gray> yra tarpų arba taškų, taip pat negalite pasirinkti'
+      - '<gray> bet koks jau naudojamas ID'
+      - ''
+      - '<gold><b>Patarimas</b></gold> <gray>naudokite <yellow>/itemstorage update <id></yellow> esamam elementui pakeisti'
+      - '<gold><b>Patarimas</b></gold> <gray>atsiimkite išsaugotus daiktus naudodami <yellow>/itemstorage get <id>'
+    params: '<id>'
+  delete:
+    #Holders: %id%
+    success: '%prefix% <green>Elementas <yellow>%id% <green>neregistruotas'
+    description:
+      - '<gradient:#A78BFA:gold><b>Ištrinti pasirinktą elementą</b></gradient>'
+      - ''
+      - '<gray><yellow><id> </yellow>Id prekės'
+    params: '<id>'
+  update:
+    #Holders: %id%
+    success: '%prefix% <green>Elementas <yellow>%id% <green> buvo atnaujintas'
+    description:
+      - '<gradient:#A78BFA:gold><b>Atnaujinti pasirinktą elementą</b></gradient>'
+      - ''
+      - '<gray>Pakeiskite elementą, susietą su ID, su savo rankos daiktu'
+      - '<gray><yellow><id> </yellow>Id prekės'
+      - ''
+      - '<gray><gold><b>Patarimas</b></gold> naudokite <yellow>/itemstorage save <id></yellow>, kad sukurtumėte naują elementą'
+      - '<gray><gold><b>Patarimas</b></gold> naudokite <yellow>/itemstorage delete <id></yellow>, kad ištrintumėte elementą'
+    params: '<id>'
+  show:
+    description:
+      - '<gradient:#A78BFA:gold><b>Atidarykite GUI su išsaugotais elementais</b></gradient>'
+      - ''
+      - '<gray><yellow>[page] <gray>GUI puslapis; pagal numatytuosius nustatymus 1'
+    params: '[page]'
+itemeditimport:
+  help:
+    - '<green>/itemeditimport ItemEditor <dark_green> – importuokite elementus iš ItemEditor papildinio'
+  itemeditor:
+    unable-to-get-item:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red> Nepavyko įkelti prekės <gold>%id%'
+    already-used-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red> šią komandą jau pakeitėte prieš tai, kai jau naudojote failą. ItemEditor/items/%id%.yml'
+    invalid-id:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <gold>%id% <red>, jums gali nepriimtinas pavadinimas ItemEditor/items/%id%.yml į raidinį ir skaitmeninį pavadinimą'
+    import-unsuccess:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>Nepavyko importuoti nė vieno iš <gold>%max% <red>daiktų; galbūt šią komandą jau vykdėte anksčiau'
+    import-success:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Importuota <yellow>%done% <green>iš <yellow>%max% <green>daiktų iš ItemEditor'
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green>Importuotos prekės: <yellow>%ids%'
+    import-empty:
+      - '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <red>ItemEditor nėra importuojamų elementų'
+itemeditreload:
+  success: '<dark_gray>[<gradient:#54acff:#A78BFA><bold>ItemEdit</bold></gradient><dark_gray>]</dark_gray> <green> Perkrautas'
+gui:
+  color:
+    title: '<blue>Spalvų redaktorius'
+  middleclick: #middle click can't be used unless on creative mode, an alternative to middle click is pressing hotbar button 1
+    creative: 'Vidurinis paspaudimas'
+    other: 'Paspauskite 1'
+  colorselector:
+    title: '<blue>Pasirinkite spalvas'
+    buttons:
+      color:
+        - '<gradient:#A78BFA:gold>Spalvos: </gradient>'
+        - '<gray><yellow>%colors%'
+        - '<gray>[<white>Dešiniuoju pelės mygtuku spustelėkite <gray>] Pridėti <yellow>%color%'
+        - '<gray>[<white>Kairysis spustelėjimas<gray>] Pašalinti paskutinę spalvą'
+        - '<gray>[<white>Shift + Dešinysis spustelėjimas<gray>] Aiškios spalvos'
+  banner:
+    title: '<blue> Reklamjuostės redaktorius'
+    color_selector_title: '<blue>Spalvų parinkiklis'
+    pattern_selector_title: '<blue>Rašto parinkiklis'
+    buttons:
+      pattern_selector_info:
+        - '<gray>Pasirinkite <gold><b>%type%</b>'
+      color_selector_info:
+        - '<gray>Pasirinkite <gold><b>%color%</b>'
+      position:
+        - '<gradient:#A78BFA:gold>Rašto valdiklis</gradient>'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] Perjungimo raštas'
+        - '<gray>[<white>Kairysis/Right Click<gray>] << Move pattern >>'
+      type:
+        - '<gradient:#A78BFA:gold>Tipo parinkiklis</gradient>'
+        - '<gray>Tipas: <yellow>%type%'
+        - ''
+        - '<gray>[<white>Click<gray>] Keisti tipą'
+      color:
+        - '<gradient:#A78BFA:gold>Spalvų parinkiklis</gradient>'
+        - '<gray>Spalva: <yellow>%color%'
+        - ''
+        - '<gray>[<white>Click<gray>] Keisti spalvą'
+  firework:
+    title: '<blue> Fejerverkų redaktorius'
+    buttons:
+      type:
+        - '<gradient:#A78BFA:gold>Tipo parinkiklis</gradient>'
+        - '<gray>Tipas: <yellow>%type%'
+        - ''
+        - '<gray>[<white>Click<gray>] Keisti tipą'
+      colors:
+        - '<gradient:#A78BFA:gold>Spalvų parinkiklis</gradient>'
+        - '<gray>Spalvos: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>Click<gray>], kad pakeistumėte spalvas'
+      fadecolors:
+        - '<gradient:#A78BFA:gold>Blukimo spalvų parinkiklis</gradient>'
+        - '<gray> Išblukimo spalvos: <yellow>%colors%'
+        - ''
+        - '<gray>[<white>Click<gray>], kad pakeistumėte spalvas'
+      flags:
+        none: '<red>Nieko aktyvaus'
+        trail: '<yellow>Takas <green>Aktyvus'
+        flicker: '<yellow> Mirkėjimas <green>Active'
+        both: '<gray><yellow>Trail</yellow> ir <yellow>Flicker <green>Active'
+        info:
+          - '<gradient:#A78BFA:gold>Kelio ir mirgėjimo aktyvatorius</gradient>'
+          - '%status%'
+          - ''
+          - '<gray>[<white>Dešiniuoju pelės mygtuku spustelėkite <gray>] Perjungti mirgėjimo efektą'
+          - '<gray>[<white>Kairysis spustelėjimas<gray>] Perjungti tako efektą'
+      position:
+        - '<gray>Eefektų valdiklis'
+        - ''
+        - '<gray>[<white>%middle_click%<gray>] Perjungimo efektas'
+        - '<gray>[<white>Left/Right Click<gray>] Perkelti šį efektą'
+      power:
+        - '<gray> Galia: <yellow>%power%'
+        - ''
+        - '<gray>[<white>Kairysis/Right Click<gray>] << Change >>'
+  previous-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>Ankstesnis puslapis</b>'
+      - ''
+      - '<gray>[<white>Click<gray>] Eiti į puslapį <yellow>%target_page%'
+  next-page:
+    #Holders: %player_name% %page% %target_page%
+    description:
+      - '<gold><b>Kitas puslapis</b>'
+      - ''
+      - '<gray>[<white>Click<gray>] Eiti į puslapį <yellow>%target_page%'
+  back:
+    #Holders: %player_name%
+    description:
+      - '<gold><b>Go Atgal</b>'
+      - ''
+      - '<gray>[<white>Click<gray>] Eiti į ankstesnį vadovą'
+  playeritems:
+    #Holders: %player_name% %page%
+    title: '<blue>%player_name% prekės – puslapis <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>Puslapis <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] Perjungti <yellow>item</yellow> / <yellow>ID rodinį'
+        - ''
+        - '<gray>Spustelėkite elementus:'
+        - '<gray>> [<white>Kairysis spustelėjimas<gray>] Stiprinimas <yellow>1'
+        - '<gray>> [<white>Shift + kairysis paspaudimas<gray>] Stiprinimas <yellow>64'
+        - '<gray>> [<white>Shift + Dešinysis spustelėjimas<gray>] Ištrinti elementą'
+  serveritems:
+    #Holders: %player_name% %page%
+    title: '<blue>Serverio elementai – puslapis <aqua>%page%'
+    page-info:
+      #Holders: %player_name% %page%
+      description:
+        - '<gradient:#A78BFA:gold><b>Puslapis <yellow>%page%</b></gradient>'
+        - '<gray>[<white>Click<gray>] Perjungti <yellow>item</yellow> / <yellow>ID rodinį'
+        - ''
+        - '<gray>Spustelėkite elementus:'
+        - '<gray>> [<white>Kairysis spustelėjimas<gray>] Stiprinimas <yellow>1'
+        - '<gray>> [<white>Shift + kairysis paspaudimas<gray>] Stiprinimas <yellow>64'
+        - '<gray>> [<white>Shift + Dešinysis spustelėjimas<gray>] Ištrinti elementą'
